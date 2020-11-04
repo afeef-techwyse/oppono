@@ -15,7 +15,9 @@ import {size} from '../functions/size';
 
 
 gsap.registerPlugin(SplitText);
-const Intro = ({className}) => {
+const Intro = ({className, setInitialDone}) => {
+  
+  
   const introRef = React.useRef(null);
   const ballsRef = React.useRef({});
   const skipRef = React.useRef(null);
@@ -27,6 +29,7 @@ const Intro = ({className}) => {
   
   gsap.defaults({overwrite: 'auto'});
   React.useEffect(() => {
+    window.scrollTo(0, 0);
     const balls = Object.values(ballsRef.current);
     const ballsTl = gsap.timeline()
       .set(balls, {xPercent: -50, yPercent: -50})
@@ -55,17 +58,18 @@ const Intro = ({className}) => {
       .to(logoRef.current, {autoAlpha: 1, duration: .4}, 0.02);
   
   
-    const introTransitionTl = gsap.timeline()
+    const introTransitionTl = () => gsap.timeline()
       .addLabel('intro-exit')
       .to(balls, {y: gsap.utils.wrap(['-50vh', '-50vh', '-10vh']), duration: 1.5, ease: 'power2.in'}, 'intro-exit')
       .to(logoRef.current, {y: '-70vh', duration: 1.5, ease: 'power2.in'}, 'intro-exit')
       .to(skipLine, {height: '100%', duration: 1.5, ease: 'power2.in'}, 'intro-exit')
       .to(introRef.current, {marginTop: '-100vh', duration: 1.5, ease: 'power2.in'}, 'intro-exit+=.5')
       .set(document.body, {height: 'unset', overflow: 'auto'})
+      .call(() => setInitialDone(true))
       .to(gradientRef.current, {yPercent: -100})
     ;
-    
-    
+  
+  
     const introTl = gsap.timeline()
       .addLabel('intro-start')
       .set(document.body, {height: '100%', overflow: 'hidden'})
@@ -74,6 +78,12 @@ const Intro = ({className}) => {
       .add(textTl, 'intro-start')
       .add(logoTl, '>0')
       .add(introTransitionTl, '7');
+  
+    skipRef.current.addEventListener('click', () => {
+      // introTl.paused(true);
+      introTransitionTl().play();
+    });
+  
   }, []);
   
   return (
@@ -89,7 +99,7 @@ const Intro = ({className}) => {
       <SpriteSheet paused={logoPaused} repeat={0} duration={2.5} className={'intro-logo'} ref={logoRef} imageUrl={introLogoSrc} frames={52} width={size(323)} alt={'Intro Logo'}/>
     
       <div ref={skipRef} className={'scroll-animation'}>
-        <div className={'line'}><span></span></div>
+        <div className={'line'}><span/></div>
         <p>Skip</p>
       </div>
     

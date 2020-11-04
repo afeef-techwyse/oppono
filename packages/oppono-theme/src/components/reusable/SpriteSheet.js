@@ -4,12 +4,22 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import gsap from 'gsap';
 
-const SpriteSheet = React.forwardRef(({className, frames, imageUrl, alt, isVertical = false, duration = 2, yoyo = false, repeat = -1, repeatDelay = 0, paused = false}, forwardedRef) => {
+const SpriteSheet = React.forwardRef(({className, frames, imageUrl, alt, loopStartIndex = 0, isVertical = false, duration = 2, yoyo = false, repeat = -1, repeatDelay = 5, paused = false}, forwardedRef) => {
   const image = React.useRef(null);
-  const spriteSheetRef = React.useRef(null);
+  const spriteSheetRef = React.useRef(gsap.timeline({paused}));
   
   React.useEffect(() => {
-    spriteSheetRef.current = gsap.fromTo(image.current, {xPercent: 0}, {xPercent: -100 * (frames - 1) / frames, ease: `steps(${frames - 1})`, duration, yoyo, repeat, repeatDelay, paused});
+    spriteSheetRef.current
+      .fromTo(image.current, {xPercent: 0}, {xPercent: -100 * (loopStartIndex) / frames, ease: `steps(${loopStartIndex})`, duration: duration * loopStartIndex / (frames - 1)})
+      .fromTo(image.current, {xPercent: -100 * (loopStartIndex) / frames}, {
+        xPercent: -100 * (frames - 1) / frames,
+        ease: `steps(${frames - loopStartIndex - 1})`,
+        duration: duration * 1 - (loopStartIndex / (frames - 1)),
+        yoyo,
+        repeat,
+        repeatDelay,
+        immediateRender: false,
+      });
   }, []);
   
   React.useEffect(() => {
@@ -35,6 +45,7 @@ SpriteSheet.propTypes = {
   isVertical: PropTypes.bool,
   yoyo: PropTypes.bool,
   className: PropTypes.string,
+  loopStartIndex: PropTypes.number,
   alt: PropTypes.string,
 };
 

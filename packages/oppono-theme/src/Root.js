@@ -5,7 +5,7 @@ import Styles from './styles';
 import Test from './components/Test';
 
 const Root = () => {
-  
+  const [initialDone, setInitialDone] = React.useState(false);
   React.useEffect(() => {
     fixContainer();
     window.addEventListener('resize', fixContainer);
@@ -14,8 +14,8 @@ const Root = () => {
   
   return <>
     <Styles/>
-    <Intro/>
-    <Test />
+    <Intro setInitialDone={setInitialDone}/>
+    <Test active={initialDone}/>
   </>
     ;
 };

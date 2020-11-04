@@ -1,12 +1,14 @@
-const siteUrl = 'https://codesign82.com/oppons';
+const wpSiteUrl = 'https://codesign82.com/oppono';
+const frontEndSiteUrl = 'https://oppono.vercel.app';
+// const frontEndSiteUrl = 'http://localhost:3000/';
 
 const settings = {
   'name': 'oppono-frontity',
   'state': {
     'frontity': {
-      'url': 'https://oppono.vercel.app/',
-      'title': 'Test Frontity Blog',
-      'description': 'WordPress installation for Frontity development',
+      'url': frontEndSiteUrl,
+      'title': 'Oppono',
+      'description': '',
     },
   },
   'packages': [
@@ -17,10 +19,11 @@ const settings = {
       },
     },
     {
+      
       'name': '@frontity/wp-source',
       'state': {
         'source': {
-          'api': `${siteUrl}/wp-json`,
+          'api': `${wpSiteUrl}/wp-json`,
         },
       },
     },

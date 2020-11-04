@@ -28,7 +28,8 @@
     "gsap": "npm:@gsap/shockingly@^3.5.1",
     "normalize.css": "^8.0.1",
     "oppono-theme": "file:packages/oppono-theme",
-    "react": "^17.0.1"
+    "react": "^17.0.1",
+    "swiper": "^6.3.4"
   },
   "devDependencies": {
     "@svgr/cli": "^5.4.0",
