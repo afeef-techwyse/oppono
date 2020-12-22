@@ -11,7 +11,7 @@ const SwiperStyle = () => <Global styles={css`
   list-style: none;
   padding: 0;
   /* Fix of Webkit flickering */
-  z-index: 1;
+  z-index: 5;
 }
 .swiper-container-vertical > .swiper-wrapper {
   flex-direction: column;

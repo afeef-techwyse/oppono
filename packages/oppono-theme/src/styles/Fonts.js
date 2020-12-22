@@ -17,7 +17,7 @@ const Fonts = () => <Global styles={css`
 }
 @font-face {
   font-family: "Suisse Int 'l";
-  src: url(${book});
+  src: url(${light});
   font-weight: 300;
   font-style: normal;
   font-display: swap;

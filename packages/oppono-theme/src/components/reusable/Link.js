@@ -1,18 +1,38 @@
-import {connect} from 'frontity';
+import React from 'react';
+import {connect, styled} from 'frontity';
+import Button from '../form-components/Button';
+import {size} from '../../functions/size';
 
-export default connect(Link);
+export default styled(connect(Link))`
+&:focus{
+//outline: none;
+//text-decoration: underline;
+  ${Button}{
+    background: #fe412d;
+    text-decoration: none !important;
+    .text{
+      text-decoration: none !important;
+    }
+    svg{
+      width: ${size(13)};
+    }
+  }
+}
+`;
 
 function Link({onClick: click, libraries, actions, state, children, href, target, className = ''}) {
   const newHref = !!href ? href : '#';
-  const isInternal = newHref.startsWith(state.source.api.replace('/wp-json', '')) || newHref.startsWith('/') || newHref.startsWith('#') || newHref.startsWith(state.frontity.url);
-  let pathname = isInternal ? libraries.source.normalize(newHref) : newHref;
+  const isInternal = newHref.startsWith(state.source.api.replace('/wp-json', '')) || newHref.startsWith('/') || newHref.startsWith('#') || newHref.startsWith('tel:') || newHref.startsWith('mailto:') || newHref.startsWith(state.frontity.url);
+  let pathname = isInternal && !newHref.startsWith('tel:') && !newHref.startsWith('mailto:')? libraries.source.normalize(newHref) : newHref;
   let current = state.router.link === pathname;
   
   const onClick = event => {
     if ((!target || target === '_self') && isInternal) {
       window.scrollTo(0, 0);
-      event.preventDefault();
-      actions.router.set(pathname);
+      if (!newHref.startsWith('tel:') && !newHref.startsWith('mailto:')) {
+        event.preventDefault();
+        actions.router.set(pathname);
+      }
     }
     click && click();
   };

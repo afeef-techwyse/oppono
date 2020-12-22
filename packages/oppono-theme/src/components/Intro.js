@@ -17,6 +17,10 @@ import {size} from '../functions/size';
 gsap.registerPlugin(SplitText);
 const Intro = ({className, setInitialDone}) => {
   
+  const skipped = React.useRef(false);
+  
+  const introTransitionTl = React.useRef(null);
+  
   
   const introRef = React.useRef(null);
   const ballsRef = React.useRef({});
@@ -58,15 +62,17 @@ const Intro = ({className, setInitialDone}) => {
       .to(logoRef.current, {autoAlpha: 1, duration: .4}, 0.02);
   
   
-    const introTransitionTl = () => gsap.timeline()
+    introTransitionTl.current = () => skipped.current ? gsap.timeline() : gsap.timeline()
       .addLabel('intro-exit')
       .to(balls, {y: gsap.utils.wrap(['-50vh', '-50vh', '-10vh']), duration: 1.5, ease: 'power2.in'}, 'intro-exit')
       .to(logoRef.current, {y: '-70vh', duration: 1.5, ease: 'power2.in'}, 'intro-exit')
       .to(skipLine, {height: '100%', duration: 1.5, ease: 'power2.in'}, 'intro-exit')
       .to(introRef.current, {marginTop: '-100vh', duration: 1.5, ease: 'power2.in'}, 'intro-exit+=.5')
-      .set(document.body, {height: 'unset', overflow: 'auto'})
+      .set(document.body, {height: '100%', overflow: 'visible'})
       .call(() => setInitialDone(true))
       .to(gradientRef.current, {yPercent: -100})
+      .set(introRef.current, {display: 'none'})
+      .timeScale(.7)
     ;
   
   
@@ -77,18 +83,13 @@ const Intro = ({className, setInitialDone}) => {
       .add(skipTl, 'intro-start')
       .add(textTl, 'intro-start')
       .add(logoTl, '>0')
-      .add(introTransitionTl, '7');
-  
-    skipRef.current.addEventListener('click', () => {
-      // introTl.paused(true);
-      introTransitionTl().play();
-    });
+      .call(introTransitionTl.current, null, '7');
   
   }, []);
   
   return (
     <div ref={introRef} className={className}>
-    
+  
       <div className="balls-wrapper">
         <img ref={el => ballsRef.current.ball1 = el} className={'floating-ball intro-ball-1'} src={intro_ball_1} alt="{'Floating Ball'}"/>
         <img ref={el => ballsRef.current.ball2 = el} className={'floating-ball intro-ball-2'} src={intro_ball_3} alt="{'Floating Ball'}"/>
@@ -96,13 +97,19 @@ const Intro = ({className, setInitialDone}) => {
       </div>
       <p className={'intro-text'} ref={textRef}>Your non-traditional mortgage lender.
         Lorem ipsum dolor sit amet.</p>
-      <SpriteSheet paused={logoPaused} repeat={0} duration={2.5} className={'intro-logo'} ref={logoRef} imageUrl={introLogoSrc} frames={52} width={size(323)} alt={'Intro Logo'}/>
-    
-      <div ref={skipRef} className={'scroll-animation'}>
+      <SpriteSheet paused={logoPaused} repeat={0} duration={2.5} className={'intro-logo'} ref={logoRef} imageUrl={introLogoSrc} frames={52} width={size(323)} alt={'Intro Logo'} frame_x={653}
+                   frame_y={500}/>
+  
+      <div ref={skipRef} className={'scroll-animation'} onClick={() => {
+        if (!skipped.current) {
+          introTransitionTl.current().play();
+          skipped.current = true;
+        }
+      }}>
         <div className={'line'}><span/></div>
         <p>Skip</p>
       </div>
-    
+  
       <div ref={gradientRef} className={'intro-bottom-gradient'}/>
     </div>
   );
@@ -213,6 +220,7 @@ margin-bottom: -1px;
   bottom: ${size(93)};
   left: 50%;
   transform: translateX(-50%);
+  cursor: pointer;
   div.line{
     position: relative;
     width: ${size(1)};
