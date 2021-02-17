@@ -1,29 +1,28 @@
 import React from 'react';
-import {css, Global, styled, connect, useConnect} from 'frontity';
+import {connect, css, Global, styled} from 'frontity';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import gsap from 'gsap';
 import {ScrollToPlugin} from 'gsap/ScrollToPlugin';
-import useCombinedRefs from '../../hooks/useCombinedRefs';
 import {size} from '../../functions/size';
 import FormStep from './FormStep';
 import StepsProgress from './StepsProgress';
 
 gsap.registerPlugin(ScrollToPlugin);
-const Form = React.forwardRef(({className, children, wide}, forwardedRef) => {
+const Form = ({className, children, wide, actions, state, endPoint}) => {
   const innerRef = React.useRef(null);
-  const combinedRef = useCombinedRefs(forwardedRef, innerRef);
   const [activeStep, setActiveStep] = React.useState(0);
+  const [loading, setLoading] = React.useState(false);
   const initial = React.useRef(true);
   const reversed = React.useRef(true);
-  const {actions, state} = useConnect();
-  
+  const allStepsNames = React.useRef([]);
   
   const resetCallback = () => {
     reversed.current = true;
     setActiveStep(0);
   };
   const nextCallback = () => {
+    console.log('next');
     initial.current = false;
     reversed.current = false;
     setActiveStep(prevState => prevState + 1);
@@ -39,36 +38,43 @@ const Form = React.forwardRef(({className, children, wide}, forwardedRef) => {
   
   
   React.useEffect(() => {
-    combinedRef.current.querySelector('input:not([type=hidden]), select')?.focus();
+    // innerRef.current.querySelector('input:not([type=hidden]), select')?.focus();
     let stepsCounter = 0;
     React.Children.forEach(children, (child) => {
-      child.type === FormStep && stepsCounter++;
+      if (child.type === FormStep) {
+        stepsCounter++;
+        allStepsNames.current.push(child.props.stepName);
+      }
     });
     actions?.theme.setActiveStep({total: stepsCounter});
   
   }, []);
   return (<>
       <Global styles={css`html{overflow-y: scroll}`}/>
-      <div ref={combinedRef} className={classnames(className, {wide})}>
+      <div ref={innerRef} className={classnames(className, {wide})}>
         {state.theme.activeStep.total > 1 ? <StepsProgress/> : null}
         {React.Children.map(children, (child, index) => {
-          return index === activeStep || true ? React.cloneElement(child,
-            {
-              ...child.props,
-              active: activeStep === index,
-              stepIndex: index,
-              initial: initial.current,
-              nextCallback,
-              prevCallback,
-              resetCallback,
-            }) : null;
+            return index === activeStep || true ? React.cloneElement(child,
+              {
+                ...child.props,
+                endPoint: child.props.endPoint === undefined ? endPoint : child.props.endPoint,
+                active: activeStep === index,
+                stepIndex: index,
+                initial: initial.current,
+                nextCallback,
+                prevCallback,
+                resetCallback,
+                setLoading,
+                allStepsNames: allStepsNames.current,
+              }) : null;
           },
         )}
       </div>
+      <div className={classnames('waiting-screen', {active: loading})}>Loading...</div>
     </>
-   
+
   );
-});
+};
 
 Form.propTypes = {
   className: PropTypes.string,
@@ -97,6 +103,14 @@ ${StepsProgress}{
   @media(max-width: 575.98px){
     display: none;
   }
+  
 }
-
+.error-message{
+  color: red;
+  font-size: ${size(16)};
+  font-weight: 500;
+  margin-top: ${size(50)};
+  text-align: center;
+  display: block;
+}
 `;

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import gsap from 'gsap';
 import useCombinedRefs from '../../hooks/useCombinedRefs';
-import SwiperCore, {Navigation, Pagination, Keyboard, Mousewheel, A11y} from 'swiper';
+import SwiperCore, {A11y, Keyboard, Mousewheel, Navigation, Pagination} from 'swiper';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import {size} from '../../functions/size';
 import useMedia from '../../hooks/useMedia';

@@ -1,7 +1,4 @@
 import React from 'react';
-import intro_ball_1 from '../../assets/images/flying-1.png';
-import {Li, Ol, Span} from './StyledComponent';
-import Button from './Button';
 import {size} from '../../functions/size';
 import {styled} from 'frontity';
 import Container from '../reusable/Container';

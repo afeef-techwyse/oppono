@@ -6,10 +6,10 @@ import classnames from 'classnames';
 
 const Appraiser = ({className, children, wide}) => {
   return (
-    <div className={classnames('radio-input', className, {'appraiser-wide':wide})}>
-      {wide?<Container>
-          {children}
-      </Container>:<>{children}</>}
+    <div className={classnames('radio-input', className, {'appraiser-wide': wide})}>
+      {wide ? <Container>
+        {children}
+      </Container> : <>{children}</>}
     </div>
   );
 };

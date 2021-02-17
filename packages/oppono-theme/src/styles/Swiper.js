@@ -1,5 +1,5 @@
 import React from 'react';
-import {Global, css} from 'frontity';
+import {css, Global} from 'frontity';
 
 
 const SwiperStyle = () => <Global styles={css`

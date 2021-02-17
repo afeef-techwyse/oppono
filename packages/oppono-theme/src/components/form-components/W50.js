@@ -19,8 +19,14 @@ justify-content: space-between;
 margin-right: ${size(-30)};
 margin-left: ${size(-30)};
 flex-wrap: wrap;
-align-items: flex-start;
+align-items: stretch;
 align-content: flex-start;
+label{
+  height: 100%;
+  input{
+   margin-top: auto;
+  }
+}
 @media(max-width: 991.98px){
   margin: 0 auto;
   flex-direction: column;
@@ -35,6 +41,7 @@ align-content: flex-start;
   @media(max-width: 991.98px){
      width: 100%;
      padding: 0;
+     margin-left: 0;
   }
 }
 `;

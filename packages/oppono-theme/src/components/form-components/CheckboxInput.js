@@ -8,7 +8,6 @@ import {DrawSVGPlugin} from 'gsap/DrawSVGPlugin';
 import {CustomEase} from 'gsap/CustomEase';
 import useCombinedRefs from '../../hooks/useCombinedRefs';
 import {size} from '../../functions/size';
-import Form from './Form';
 import Link from '../reusable/Link';
 
 gsap.registerPlugin(ScrollToPlugin);

@@ -2,9 +2,7 @@ import React from 'react';
 import Form from '../../form-components/Form';
 import Input from '../../form-components/Input';
 import {styled} from 'frontity';
-import Container from '../../reusable/Container';
 import {size} from '../../../functions/size';
-import missing from '../../../assets/images/missing.png';
 import Select from '../../form-components/Select';
 import RadioInput from '../../form-components/RadioInput';
 import RadioGroup from '../../form-components/RadioGroup';
@@ -21,7 +19,7 @@ import intro_ball_4 from '../../../assets/images/fly-image-3.png';
 import {numberToOrdinal} from '../../../functions/numberToOrdinal';
 import ProductsTable from '../../form-components/ProductsTable';
 import FormFilter from '../../form-components/FormFilter';
-import {Li, Ol, Ul} from '../../form-components/StyledComponent';
+import {Li, Ol} from '../../form-components/StyledComponent';
 
 const SecondExample = (props) => {
   
@@ -113,10 +111,10 @@ const SecondExample = (props) => {
                 </tr>
                 <tr className={'head'}>
                   <td scope={'row'} className={'dark'}>LTV</td>
-                  <td className={'details'} data-label="Dark">Up to 75%</td>
-                  <td className={'details'} data-label="Dark">Up to 75%</td>
-                  <td className={'details'} data-label="Dark">Up to 75%</td>
-                  <td className={'details'} data-label="Dark">Up to 80%</td>
+                  <td className={'details'} data-label="LTV">Up to 75%</td>
+                  <td className={'details'} data-label="LTV">Up to 75%</td>
+                  <td className={'details'} data-label="LTV">Up to 75%</td>
+                  <td className={'details'} data-label="LTV">Up to 80%</td>
                 </tr>
                 <tr className={'head last-head'}>
                   <td scope={'row'} className={'dark'}>Credit Score</td>
@@ -415,10 +413,10 @@ const SecondExample = (props) => {
                 </tr>
                 <tr className={'head'}>
                   <td scope={'row'} className={'dark'}>LTV</td>
-                  <td className={'details'} data-label="Dark">Up to 75%</td>
-                  <td className={'details'} data-label="Dark">Up to 75%</td>
-                  <td className={'details'} data-label="Dark">Up to 75%</td>
-                  <td className={'details'} data-label="Dark">Up to 80%</td>
+                  <td className={'details'} data-label="LTV">Up to 75%</td>
+                  <td className={'details'} data-label="LTV">Up to 75%</td>
+                  <td className={'details'} data-label="LTV">Up to 75%</td>
+                  <td className={'details'} data-label="LTV">Up to 80%</td>
                 </tr>
                 <tr className={'head last-head'}>
                   <td scope={'row'} className={'dark'}>Credit Score</td>
@@ -670,7 +668,7 @@ const SecondExample = (props) => {
           }]}/>
         <div className="form-text-wrapper">
           <h1 className={'form-headline-1 text-left'}>Okay, just 6 more easy questions</h1>
-          <h2 className={'form-headline-2'}>Let’s get you that home equity line of credit!</h2>
+          <h2 className={'form-headline-2 primary'}>Let’s get you that home equity line of credit!</h2>
         </div>
         <Input type={'text'} placeholder={'Address'} label={'What’s the address'} required={true}/>
         <W50>
@@ -697,25 +695,25 @@ const SecondExample = (props) => {
         </div>
         <Input type={'text'} placeholder={'eg $780,000'} label={'What is the estimated value of your home?'} required={true}/>
         <RadioGroup radioText={'Do you have an Appraisal Report?'}>
-          <RadioInput label={'Yes'} value={'yes'} name={'Appraisal'} type={'radio'}/>
-          <RadioInput label={'No'} value={'no'} name={'Appraisal'} type={'radio'}/>
+          <RadioInput label={'Yes'} value={'1'} name={'Appraisal'} type={'radio'}/>
+          <RadioInput label={'No'} value={'0'} name={'Appraisal'} type={'radio'}/>
         </RadioGroup>
         <RadioGroup radioText={'Do you have any mortgages on your house?'}>
-          <RadioInput label={'Yes'} value={'yes'} name={'mortgages'} type={'radio'}/>
-          <RadioInput label={'No'} value={'no'} name={'mortgages'} type={'radio'}/>
+          <RadioInput label={'Yes'} value={'1'} name={'mortgages'} type={'radio'}/>
+          <RadioInput label={'No'} value={'0'} name={'mortgages'} type={'radio'}/>
         </RadioGroup>
         <Input type={'text'} placeholder={'eg $380,000'} label={'First mortgage amount'} required={true}/>
   
         <RadioGroup radioText={'Do you have a 2nd mortgage on your house?'}>
-          <RadioInput label={'Yes'} value={'yes'} name={'house'} type={'radio'}/>
-          <RadioInput label={'No'} value={'no'} name={'house'} type={'radio'}/>
+          <RadioInput label={'Yes'} value={'1'} name={'house'} type={'radio'}/>
+          <RadioInput label={'No'} value={'0'} name={'house'} type={'radio'}/>
         </RadioGroup>
   
         <Input type={'text'} placeholder={'eg $15,000'} label={'2nd mortgage amount'} required={true}/>
   
         <RadioGroup radioText={'Do you have any other outstanding amounts?'}>
-          <RadioInput label={'Yes'} value={'yes'} name={'outstanding'} type={'radio'}/>
-          <RadioInput label={'No'} value={'no'} name={'outstanding'} type={'radio'}/>
+          <RadioInput label={'Yes'} value={'1'} name={'outstanding'} type={'radio'}/>
+          <RadioInput label={'No'} value={'0'} name={'outstanding'} type={'radio'}/>
         </RadioGroup>
         <Input type={'text'} placeholder={'eg $5,000'} label={'Outstanding balance'} required={true}/>
         <div className="btn-group">
@@ -726,7 +724,7 @@ const SecondExample = (props) => {
       <FormStep activeTheme={'gray-theme'} stepName={'third'}>
         <div className="form-text-wrapper">
           <h1 className={'form-headline-1 text-left'}>Just one more thing…</h1>
-          <h1 className={'form-headline-2'}>Who are the borrower(s)?</h1>
+          <h1 className={'form-headline-2 primary'}>Who are the borrower(s)?</h1>
         </div>
         
         <RadioGroup checked={1} radioText={'How many people are on the title for this mortgage?'}>
@@ -753,7 +751,7 @@ const SecondExample = (props) => {
       </FormStep>
       <FormStep activeTheme={'gray-theme'} stepName={'fourth'}>
         <div className="form-text-wrapper">
-          <h1 className={'form-headline-1'}>You qualify for a max of</h1>
+          <h1 className={'form-headline-1 primary'}>You qualify for a max of</h1>
           <div className={'biggest-number'}><p><sup>$</sup>400,000</p></div>
         </div>
         <FlyingObjsContainer childrenList={
@@ -777,8 +775,8 @@ const SecondExample = (props) => {
               alt: 'alt',
             }]}/>
         <RadioGroup radioText={'Is this amount you would like to request?'}>
-          <RadioInput label={'Yes'} value={'yes'} name={'amount'} type={'radio'}/>
-          <RadioInput label={'No'} value={'no'} name={'amount'} type={'radio'}/>
+          <RadioInput label={'Yes'} value={'1'} name={'amount'} type={'radio'}/>
+          <RadioInput label={'No'} value={'0'} name={'amount'} type={'radio'}/>
         </RadioGroup>
         <Input type={'text'} placeholder={'eg $300,000'} label={'Enter the amount you want'} required={true}/>
   
@@ -794,11 +792,11 @@ const SecondExample = (props) => {
         </div>
   
         <RadioGroup radioText={'Do you have an appraisal report?'}>
-          <RadioInput label={'Yes'} value={'yes'} name={'report'} type={'radio'}/>
-          <RadioInput label={'No'} value={'no'} name={'report'} type={'radio'}/>
+          <RadioInput label={'Yes'} value={'1'} name={'report'} type={'radio'}/>
+          <RadioInput label={'No'} value={'0'} name={'report'} type={'radio'}/>
         </RadioGroup>
   
-        <FileInput label={'Appraisal report'} acceptText={'PDF, JPG, or PNG'}/>
+        <FileInput name='appraisal_report_file' label={'Appraisal report'} acceptText={'PDF, JPG, or PNG'}/>
         <hr/>
         <TextArea label={'Have anything else we need to know?'}/>
   

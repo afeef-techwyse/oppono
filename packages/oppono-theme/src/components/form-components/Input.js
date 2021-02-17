@@ -1,17 +1,66 @@
 import React from 'react';
-import {styled} from 'frontity';
+import {connect, styled} from 'frontity';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import gsap from 'gsap';
 import {ScrollToPlugin} from 'gsap/ScrollToPlugin';
 import useCombinedRefs from '../../hooks/useCombinedRefs';
 import {size} from '../../functions/size';
-import missing from '../../assets/images/missing.png';
+import missing from '../../assets/images/missing.svg';
 
 gsap.registerPlugin(ScrollToPlugin);
 
 
-const Input = React.forwardRef(({className, name, type, value: initialValue, placeholder, pattern, required, readOnly, disabled, min, max, label, onChange}, forwardedRef) => {
+const Label = styled(connect(({className, children, state, error, fieldName, invalid}) => {
+  const errorMessage = error || state.theme.errors?.[fieldName]?.code;
+  return <label className={classnames(className, {invalid: invalid || state.theme.errors?.[fieldName]})} error-message={errorMessage}>
+    {children}
+  </label>;
+}))`
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+position: relative;
+
+.label-text{
+    color: #bfb6b4;
+    font-size: ${size(16)};
+    font-weight: 500;
+    text-align: left;
+    margin-bottom: ${size(7)};
+    .dark{
+        color: rgba(191, 182, 180, 0.5);
+    }
+}
+&.invalid{
+  &:after{
+      content:'';
+      background: url(${missing});
+      background-size: contain;
+      position: absolute;
+      top: calc(100% + ${size(18)});
+      left: 0;
+      transform: translateY(-50%);
+      width: ${size(18)};
+      height: ${size(18)};
+  }
+  &:before{
+      content: attr(error-message);
+      position: absolute;
+      top: calc(100% + ${size(18)});
+      left: ${size(31)};
+      transform: translateY(-50%);
+      color: #bfb6b4;
+      font-size: ${size(14)};
+      font-weight: 300;
+  }
+   input{
+        border-bottom: 1px solid #bfb6b4;
+    }
+}
+`;
+
+const Input = React.forwardRef(({className, name, type, value: initialValue, placeholder, pattern, required, readOnly, disabled, min, max, label, onChange, defaultValue}, forwardedRef) => {
   const innerRef = React.useRef(null);
   const combinedRef = useCombinedRefs(forwardedRef, innerRef);
   const inputRef = React.useRef(null);
@@ -21,24 +70,29 @@ const Input = React.forwardRef(({className, name, type, value: initialValue, pla
   const [visited, setVisited] = React.useState(false);
   const [invalid, setInvalid] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState('');
+  const validateInput = () => {
+    inputRef.current.validity.valid ? setErrorMessage('') : setErrorMessage('This Input is Invalid');
+    inputRef.current.validity.typeMismatch && setErrorMessage('Please Add Valid Value');
+    inputRef.current.validity.valueMissing && setErrorMessage('Required');
+    inputRef.current.validity.patternMismatch && setErrorMessage('Mismatch');
+    visited && setInvalid(!inputRef.current.validity.valid);
+  };
   
   React.useEffect(() => {
     validateInput();
   }, [visited]);
+  React.useEffect(() => {
+    setValue(initialValue);
+    setTimeout(() => visited && validateInput(), 0);
+  }, [initialValue]);
   
-  const validateInput = () => {
-    inputRef.current.validity.typeMismatch && setErrorMessage('Please Add Valid Value');
-    inputRef.current.validity.valueMissing && setErrorMessage('Required');
-    inputRef.current.validity.patternMismatch && setErrorMessage('Mismatch');
-    inputRef.current.validity.valid && setErrorMessage('');
-    visited && setInvalid(!inputRef.current.validity.valid);
-  };
   
   return (
     <div ref={combinedRef} className={classnames('form-group primary-input ', className, {focused, invalid})}>
-      <label error-message={errorMessage}>
+      <Label error={errorMessage} fieldName={name} invalid={invalid}>
         <div className="label-text">{label}</div>
         <input
+          defaultValue={defaultValue}
           ref={inputRef}
           name={name}
           className={'normal-input'}
@@ -64,34 +118,21 @@ const Input = React.forwardRef(({className, name, type, value: initialValue, pla
             setVisited(true);
           }}
           onChange={(event) => {
+            event.persist();
             visited && validateInput();
             setValue(event.target.value);
             onChange?.(event);
+            const selection = inputRef.current.selectionStart;
+            requestAnimationFrame(() => inputRef.current.setSelectionRange(selection, selection));
           }}
         />
-      </label>
+      </Label>
     </div>);
 });
 
 export default styled(Input)`
 position: relative;
 transition: margin-bottom 400ms;
-
-label{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    .label-text{
-        color: #bfb6b4;
-        font-size: ${size(16)};
-        font-weight: 500;
-        text-align: center;
-        margin-bottom: ${size(7)};
-        .dark{
-            color: rgba(191, 182, 180, 0.5);
-        }
-    }
-}
 
 .normal-input{
     width: 100%;
@@ -115,7 +156,7 @@ label{
     }
     &::placeholder{
         color: rgba(191, 182, 180);
-        opacity: .1;
+        opacity: .4;
         font-size: ${size(40)};
         font-weight: 300;
         text-align: left;
@@ -126,51 +167,24 @@ label{
     }
 }
 
-&.invalid{
-  &:after{
-    background-color: #fe412d;
+  &.invalid {
+    &:after {
+      background-color: #fe412d;
+    }
   }
-    .normal-input{
-        border-bottom: 1px solid #bfb6b4;
-    }
-    label{
-      position: relative;
 
-      &:after{
-          content:'';
-          background: url(${missing});
-          background-size: contain;
-          position: absolute;
-          top: calc(100% + ${size(18)});
-          left: 0;
-          transform: translateY(-50%);
-          width: ${size(22)};
-          height: ${size(22)};
-      }
-      &:before{
-          content: attr(error-message);
-          position: absolute;
-          top: calc(100% + ${size(18)});
-          left: ${size(31)};
-          transform: translateY(-50%);
-          color: #bfb6b4;
-          font-size: ${size(14)};
-          font-weight: 300;
-      }
+  &.big-input {
+    ${Label} {
+      align-items: center;
     }
-}
 
-&.big-input{
-    label{
-        align-items: center;
-    }
-    .normal-input{
-        height: ${size(131)};
-        font-size: ${size(100)};
-        text-align: center;
-        border-bottom-color:transparent;
-        @media(max-width: 991.98px){
-            height: auto;
+    .normal-input {
+      height: ${size(131)};
+      font-size: ${size(100)};
+      text-align: center;
+      border-bottom-color: transparent;
+      @media (max-width: 991.98px) {
+        height: auto;
             font-size: ${size(26)};
             border-bottom-color:rgba(191, 182, 180, 0.1);
         }

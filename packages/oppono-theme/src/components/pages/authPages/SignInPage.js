@@ -1,30 +1,21 @@
 import React from 'react';
 import Form from '../../form-components/Form';
 import Input from '../../form-components/Input';
-import {styled, connect} from 'frontity';
+import {connect, styled} from 'frontity';
 import Container from '../../reusable/Container';
 import {size} from '../../../functions/size';
-import missing from '../../../assets/images/missing.png';
-import Select from 'react-select';
-import RadioInput from '../../form-components/RadioInput';
-import RadioGroup from '../../form-components/RadioGroup';
 import Button from '../../form-components/Button';
-import floating_ball_1 from '../../../assets/images/intro_ball_1.png';
-import floating_ball_2 from '../../../assets/images/intro_ball_2.png';
-import gsap from 'gsap';
-import FormStep from '../../form-components/FormStep';
-import FlyingObjsContainer from '../../reusable/FlyingObjsContainer';
 import intro_ball_1 from '../../../assets/images/intro_ball_1.png';
 import intro_ball_2 from '../../../assets/images/intro_ball_2.png';
+import FormStep from '../../form-components/FormStep';
+import FlyingObjsContainer from '../../reusable/FlyingObjsContainer';
 import Link from '../../reusable/Link';
-import useStoredFormValue from '../../../hooks/useStoredFormValue';
 
 
 const SignInPage = ({className, state, actions}) => {
   const pageName = 'sign-in';
   const data = state.source.get(state.router.link);
   const formData = data.isReady && !data.isError ? state.source[data.type][data.id].acf : {};
-  console.log(formData);
   
   React.useEffect(() => {
     actions.theme.setSubHeader(formData.sub_header);
@@ -33,7 +24,7 @@ const SignInPage = ({className, state, actions}) => {
   return <div className={className}>
     <Container>
       <Form>
-        <FormStep pageName={pageName} activeTheme={formData.section_1?.section_theme} stepName={formData.section_1?.section_name}>
+        <FormStep endPoint={'/signin'} pageName={pageName} isSignIn activeTheme={formData.section_1?.section_theme} stepName={formData.section_1?.section_name}>
           <div className="form-text-wrapper">
             <h1 className={'form-headline-1 text-center'}>{formData.section_1?.title}</h1>
             <h2 className={'form-sub-text'}>Not a member yet? <Link href={'/create-account/'}>Sign up now!</Link></h2>
@@ -57,18 +48,25 @@ const SignInPage = ({className, state, actions}) => {
               width: 5,
               alt: 'alt',
             }]}/>
-          <Input type={'text'} name={'username'} {...formData.section_1?.user_name_input}/>
-          
-          <Input type={'password'} name={'password'} {...formData.section_1?.password_input}/>
+          <Input type={'text'} pattern={'^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$'} name={'username'} {...formData.section_1?.user_name_input}/>
+  
+          <Input type={'password'} className={'password-field'} name={'password'} {...formData.section_1?.password_input}/>
           <Link className={'forgot-password'} href="">I forgot my password</Link>
-          
+  
           <div className="agree-checkbox">
             <input type="checkbox"/>
             <span className="checkmark"/>
             <span className={'text'}>I agree the <Link href="#">terms and conditions</Link></span>
           </div>
-          
-          <Link href={'/dashboard/'}><Button focusable={false} label={'Enter'}/></Link>
+          {
+            state.theme.errors?.general_error
+              ?
+              <p className={'error-message'}>
+                {state.theme.errors?.general_error.code}
+              </p>
+              : null
+          }
+          <Button className={'next-step'} label={'Enter'}/>
         </FormStep>
       </Form>
     </Container>
@@ -84,6 +82,9 @@ position: relative;
   }
 }
 
+.password-field.invalid + .forgot-password{
+margin-top: ${size(35)};
+}
 .forgot-password{
   color: rgba(191, 182, 180, 0.5);
   font-size: ${size(18)};
@@ -91,5 +92,6 @@ position: relative;
   line-height: ${size(25)};
   margin-top: ${size(17)};
   display: block;
+  transition:margin .3s;
 }
 `;

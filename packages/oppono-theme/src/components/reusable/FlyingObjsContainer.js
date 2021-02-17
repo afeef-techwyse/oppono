@@ -1,5 +1,5 @@
 import React from 'react';
-import {css, styled} from 'frontity';
+import {styled} from 'frontity';
 import PropTypes from 'prop-types';
 import gsap from 'gsap';
 import useCombinedRefs from '../../hooks/useCombinedRefs';
@@ -10,12 +10,14 @@ const FlyingObjsContainer = React.forwardRef(({className, childrenList}, forward
   const innerRef = React.useRef(null);
   const combinedRef = useCombinedRefs(forwardedRef, innerRef);
   
+  const [disableFloating, setDisableFloating] = React.useState(true);
+  
   React.useEffect(() => {
-    gsap.from(combinedRef.current.children, {y: (_, target) => `+=${window.innerHeight * Math.abs(+target.dataset.level)}`});
+    gsap.from(combinedRef.current.children, {duration: 1.5, y: (_, target) => `+=${window.innerHeight * Math.abs(+target.dataset.level)}`, onComplete: () => setDisableFloating(false)});
   }, []);
   return (
     <div ref={combinedRef} className={`flying-objs-container ${className}`}>
-      {childrenList.map((child, childIndex) => <FlyingObj key={childIndex} {...child}/>)}
+      {childrenList.map((child, childIndex) => <FlyingObj disableFloating={disableFloating} key={childIndex} {...child}/>)}
     </div>
   );
 });

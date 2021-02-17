@@ -13,7 +13,7 @@ import Link from '../reusable/Link';
 gsap.registerPlugin(ScrollToPlugin);
 gsap.registerPlugin(DrawSVGPlugin);
 gsap.registerPlugin(CustomEase);
-const RadioInputVertical = React.forwardRef(({className, type = 'radio', value, required, readOnly, disabled, label,number, name, checked = false, onChange}, forwardedRef) => {
+const RadioInputVertical = React.forwardRef(({className, type = 'radio', value, required, readOnly, disabled, label, number, name, checked = false, onChange}, forwardedRef) => {
   const innerRef = React.useRef(null);
   const combinedRef = useCombinedRefs(forwardedRef, innerRef);
   const [focused, setFocused] = React.useState(false);

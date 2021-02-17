@@ -21,7 +21,7 @@ margin: ${size(50)} 0;
      margin-top: ${size(25)};
   }
 }
-.invalid{
+${Input}{
   margin-bottom: ${size(40)};
 }
 `;
@@ -54,20 +54,20 @@ const FormRepeatableInput = ({question, number = 1, initial = 1, fixedNumber, ch
                     {
                       ...child.props,
                       onChange: onChangeHandler(child),
-                      name: child.props.name.replace(find, repeat + 1),
-                      label: child.props.label.replace(find, numberToOrdinal(repeat + 1)),
+                      name: child.props.name?.replace(find, repeat + 1),
+                      label: child.props.label?.replace(find, numberToOrdinal(repeat + 1)),
                     });
                 }
                 else if (child.type === RadioGroup) {
                   return React.cloneElement(child,
                     {
                       ...child.props,
-                      radioText: child.props.radioText.replace(find, numberToOrdinal(repeat + 1)),
+                      radioText: child.props.radioText?.replace(find, numberToOrdinal(repeat + 1)),
                       children: React.Children.map(child.props.children, radioGroupChild => {
                           return React.cloneElement(radioGroupChild,
                             {
                               ...radioGroupChild.props,
-                              name: radioGroupChild.props.name.replace(find, repeat + 1),
+                              name: radioGroupChild.props.name?.replace(find, repeat + 1),
                               onChange: onChangeHandler(radioGroupChild),
                             });
                         },
@@ -82,8 +82,8 @@ const FormRepeatableInput = ({question, number = 1, initial = 1, fixedNumber, ch
                           return React.cloneElement(inputChild, {
                             ...inputChild.props,
                             onChange: onChangeHandler(inputChild),
-                            name: inputChild.props.name.replace(find, repeat + 1),
-                            label: inputChild.props.label.replace(find, numberToOrdinal(repeat + 1)),
+                            name: inputChild.props.name?.replace(find, repeat + 1),
+                            label: inputChild.props.label?.replace(find, numberToOrdinal(repeat + 1)),
                           });
                         },
                       ),

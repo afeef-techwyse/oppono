@@ -6,8 +6,6 @@ import chat_1 from '../../../assets/images/chat-obj-1.png';
 import chat_2 from '../../../assets/images/chat-obj-2.png';
 import chatbox from '../../../assets/images/chatbox.png';
 import FlyingObjsContainer from '../../reusable/FlyingObjsContainer';
-import ProductsFeature from '../../ProductsFeature';
-import featureImg from '../../../assets/images/product-feature-1.png';
 
 const Chat = (props) => {
   React.useEffect(() => {
@@ -44,22 +42,23 @@ const Chat = (props) => {
 };
 
 export default styled(connect(Chat))`
-width: 100%;
-height: 100%;
-padding-top: ${size(200)};
-@media(max-width: 575.98px){
-padding-top: ${size(113)};
+  width: 100%;
+  height: 100%;
+  padding-top: ${size(200)};
+  @media (max-width: 575.98px) {
+    padding-top: ${size(113)};
   }
-.chatbox{
-margin-left: auto;
-display: block;
-object-fit: contain;
-max-width: 100%;
-@media(max-width: 991.98px){
+
+  .chatbox {
+    margin-left: auto;
+    display: block;
+    object-fit: contain;
+    max-width: 100%;
+    @media (max-width: 991.98px) {
       margin: ${size(78)} auto 0;
     }
-    @media(max-width: 991.98px){
+    @media (max-width: 991.98px) {
       margin: ${size(47)} auto 0;
     }
-}
+  }
 `;

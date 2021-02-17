@@ -2,16 +2,11 @@ import React from 'react';
 import Form from '../../form-components/Form';
 import Input from '../../form-components/Input';
 import {styled} from 'frontity';
-import Container from '../../reusable/Container';
-import {size} from '../../../functions/size';
-import missing from '../../../assets/images/missing.png';
-import Select from 'react-select';
 import RadioInput from '../../form-components/RadioInput';
 import RadioGroup from '../../form-components/RadioGroup';
 import FormStep from '../../form-components/FormStep';
 import Button from '../../form-components/Button';
 import FileInput from '../../form-components/FileInput';
-import W50 from '../../form-components/W50';
 import TextArea from '../../form-components/TextArea';
 import FlyingObjsContainer from '../../reusable/FlyingObjsContainer';
 import upload from '../../../assets/images/upload.png';
@@ -30,22 +25,11 @@ const ThirdExample = (props) => {
     <Form>
       <FormStep activeTheme={'green-theme'} stepName={'Appraiser & upload'}>
         <div className="upload-step-wrapper">
-          <FlyingObjsContainer childrenList={
-            [
-              {
-                imageUrl: upload,
-                left: '40%',
-                level: 1,
-                top: '7%',
-                type: 'image',
-                width: 8,
-                alt: 'alt',
-              },
-             ]}/>
+          <img src={upload}/>
           <h1 className={'form-headline-1 text-left'}>Let’s get this done!<br/>
             Upload your documents.</h1>
-          <FormConditionalInput label={'Do you have an appraisal report?'} name={'mortgages_1'} showOn={'yes'} checked={'yes'}>
-            <FileInput label={'Appraisal report'} acceptText={'PDF, JPG, or PNG'}/>
+          <FormConditionalInput label={'Do you have an appraisal report?'} name={'mortgages_1'} showOn={'1'} checked={'0'}>
+            <FileInput name='appraisal_report_file' label={'Appraisal report'} acceptText={'PDF, JPG, or PNG'}/>
             <Appraiser>
               <P.D>Select an appraiser</P.D>
               <div className="row">
@@ -104,9 +88,9 @@ const ThirdExample = (props) => {
         <LastStep>
           <img src={last_step} alt="flying obj"/>
           <div style={{flexBasis: '45%'}} className="text tablet-center">
-            <h1 className={'form-headline-1'}>We’ve emailed your
+            <h1 className={'form-headline-1 primary'}>We’ve emailed your
               selected appraiser!</h1>
-            <p className={'form-headline-3'}>They will be in touch shortly.</p>
+            <p className={'form-headline-3 primary'}>They will be in touch shortly.</p>
             <div className="btn-group">
               <Button className={'wide bordered reset-form'} label={'Back to the dashboard'}/>
             </div>
@@ -116,7 +100,7 @@ const ThirdExample = (props) => {
           <img src={intro_ball_1} alt="flying obj"/>
           <div style={{flexBasis: '20%'}} className="text">
             <h1 className={'form-headline-1 text-left'}>Great news, we’ve got your app!</h1>
-            <p className={'form-headline-3'}>You’re almost done… for a quicker turnaround, follow the 4 easy steps below</p>
+            <p className={'form-headline-3 primary'}>You’re almost done… for a quicker turnaround, follow the 4 easy steps below</p>
             <Ol>
               <Li>Login into your <Span.Green>Filogix</Span.Green> Expert account</Li>
               <Li>Select your <Span.White>Client</Span.White> and click <Span.Green>Lender Submit</Span.Green> in the left side panel.</Li>
@@ -155,7 +139,7 @@ const ThirdExample = (props) => {
             }]}/>
         <div className="form-text-wrapper">
           <h1 className={'form-headline-1 text-left'}>What are you looking to get?</h1>
-          <h2 className={'form-headline-2'}>What is your house value?</h2>
+          <h2 className={'form-headline-2 primary'}>What is your house value?</h2>
         </div>
         <Input className={'big-input'} type={'text'} value={'$780,000'} placeholder={'$380,000'} required={true}/>
         <Button icon={true} className={'next-step'} label={'Next'}/>

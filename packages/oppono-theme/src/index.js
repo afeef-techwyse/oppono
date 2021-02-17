@@ -1,10 +1,39 @@
 import Root from './Root';
-import StepsProgress from './components/form-components/StepsProgress';
+import ThemeLoading from './components/ThemeLoading';
+import axios from 'axios';
+import {cookies} from './functions/cookies';
+import {gsap} from 'gsap';
+
+axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
+
+const userCookieKey = '104ab42f11';
+
+const appraisersMapHandler = {
+  name: 'appraisersMapHandler',
+  pattern: 'appraisers-map-lookup',
+  func: async ({link, state, libraries}) => {
+    // 1. Get ACF option page from REST API.
+    const response = await axios.post(`${state.source.api}/oppono/v1/appraiser-lookup`);
+    
+    const appraisers = {};
+    
+    for (const appraiser of response.data) {
+      appraisers[appraiser.title] = appraiser;
+    }
+    
+    // 2. Add data to `source`.
+    const data = state.source.get(link);
+    Object.assign(data, {data: appraisers, isAppraisersMap: true});
+  },
+};
+
+gsap.config({nullTargetWarn: false});
 
 export default {
   name: 'oppono-theme',
   roots: {
     theme: Root,
+    themeLoading: ThemeLoading,
   },
   state: {
     theme: {
@@ -12,6 +41,25 @@ export default {
       selectedValues: {},
       subHeader: {part_1: '', part_2: ''},
       activeStep: {stepName: 'activeStepName', total: 1000, current: 0},
+      user: {
+        logged: false,
+      },
+      appraiser: null,
+      errors: {},
+      leadId: null,
+      stepResponse: {},
+      validateAndNextCallback: 0,
+    },
+    source: {
+      postTypes: [
+        {
+          type: 'appraiser',
+          endpoint: 'appraiser',
+        },
+      ],
+    },
+    themeLoading: {
+      loading: false,
     },
   },
   actions: {
@@ -22,6 +70,42 @@ export default {
       setSelectedValues: ({state}) => value => state.theme.selectedValues = {...state.theme.selectedValues, ...value},
       setSubHeader: ({state}) => value => state.theme.subHeader = {...state.theme.subHeader, ...value},
       setActiveStep: ({state}) => value => state.theme.activeStep = {...state.theme.activeStep, ...value},
+      init: ({libraries, actions, state}) => {
+        libraries.source.handlers.push(
+          appraisersMapHandler,
+        );
+        state.frontity.rendering === 'csr' && actions.theme.checkUser();
+      },
+      afterCSR: ({actions, state}) => {
+        state.frontity.rendering === 'csr' && actions.theme.checkUser();
+      },
+      setUser: ({state}) => (user = {}, setCookie = true) => {
+        const hours = 1;
+  
+        state.theme.user = {...state.theme.user, ...user};
+        setCookie && cookies.setItem(userCookieKey, JSON.stringify(state.theme.user), hours * 60 * 60, '/'); //fixme just update the value
+      },
+      removeUser: ({state}) => {
+        cookies.removeItem(userCookieKey, '/');
+        state.theme.user = {logged: false};
+      },
+      checkUser: ({actions}) => {
+        const user = cookies.getItem(userCookieKey);
+        user ? actions.theme.setUser({...JSON.parse(user)}, false) : actions.theme.removeUser();
+      },
+      setAppraiser: ({state}) => value => state.theme.appraiser = value,
+      setErrors: ({state}) => value => state.theme.errors = value,
+      setLeadId: ({state}) => value => state.theme.leadId = value,
+      setStepResponse: ({state}) => value => {
+        console.log(state.theme.stepResponse === value);
+        state.theme.stepResponse = {...value};
+      },
+      setValidateAndNextCallback: ({state}) => value => state.theme.validateAndNextCallback = value,
+    },
+    themeLoading: {
+      animationStart: ({state}) => state.themeLoading.loading = true,
+      animationDone: ({state}) => state.themeLoading.loading = false,
+  
     },
   },
 };

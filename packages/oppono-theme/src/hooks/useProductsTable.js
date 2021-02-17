@@ -1,0 +1,31 @@
+import React from 'react';
+
+export default function useProductsTable(stepResponse = {}, productsTableInitialState = {}, productsFilterInitialState = {'*': 'All'}) {
+  const [productsTable, setProductsTable] = React.useState(productsTableInitialState);
+  const [productsFilter, setProductsFilter] = React.useState(productsFilterInitialState);
+  
+  React.useEffect(() => {
+    try {
+      const data = stepResponse.data?.data;
+      if (data) {
+        const specifications = Object.entries(data).reduce((combinedSpecifications, [type, {products}]) => {
+          combinedSpecifications[type] || (combinedSpecifications[type] = {});
+          return products.reduce((typeSpecifications, product) =>
+              product.fields.specifications.reduce((typeSpecifications, specification) =>
+                  typeSpecifications[specification.term_id]
+                    ? (typeSpecifications[specification.term_id].specificationProducts.push(product.ID) && typeSpecifications)
+                    : (typeSpecifications[specification.term_id] = {name: specification.name, specificationProducts: [product.ID]}) && typeSpecifications
+                , typeSpecifications)
+            , combinedSpecifications[type]) && combinedSpecifications;
+        }, {});
+        setProductsTable(specifications);
+        const filters = {'*': 'All'};
+        Object.entries(data).map(([type]) => filters[type] = type);
+        setProductsFilter(filters);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }, [stepResponse]);
+  return [productsTable, productsFilter];
+}

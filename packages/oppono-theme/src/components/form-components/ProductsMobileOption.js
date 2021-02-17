@@ -1,11 +1,7 @@
 import React from 'react';
 import {styled} from 'frontity';
-import Container from '../reusable/Container';
 import {size} from '../../functions/size';
 import gsap from 'gsap';
-import classnames from 'classnames';
-import useMedia from '../../hooks/useMedia';
-import Button from './Button';
 
 
 const ProductsMobileOption = ({className, children}) => {

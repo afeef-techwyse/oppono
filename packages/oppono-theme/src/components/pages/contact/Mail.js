@@ -5,7 +5,6 @@ import {size} from '../../../functions/size';
 import contact_obj from '../../../assets/images/contact-obj.png';
 import FlyingObjsContainer from '../../reusable/FlyingObjsContainer';
 import Input from '../../form-components/Input';
-import W50 from '../../form-components/W50';
 import TextArea from '../../form-components/TextArea';
 import Button from '../../form-components/Button';
 
@@ -30,18 +29,18 @@ const Mail = (props) => {
       <Container>
         <h1 className={'contact-title'}>Take your time,</h1>
         <h2 className={'contact-sub-title'}>We’ll get back to you asap</h2>
-        <img className={'contact-obj'} src={contact_obj} alt={'Contact Icon'} />
+        <img className={'contact-obj'} src={contact_obj} alt={'Contact Icon'}/>
         <div className="contact-row">
           <div className="col-4">
             <Input label={'Name'} type={'text'} placeholder={'eg. Danny'}/>
             <Input label={'Email'} type={'text'} placeholder={'e.g. john.s@gmail.com'}/>
-            <Input label={'Phone'} type={'number'} placeholder={'e.g. 416-555-6578'}/>
+            <Input label={'Phone'} type={'text'} placeholder={'e.g. 416-555-6578'}/>
           </div>
           <div className="col-auto">
             <TextArea label={'Questions?'}/>
           </div>
         </div>
-        <Button className={'wide'} label={'I’m ready to send'} />
+        <Button className={'wide'} label={'I’m ready to send'}/>
       </Container>
     </div>
   );

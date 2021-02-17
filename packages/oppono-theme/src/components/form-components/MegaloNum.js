@@ -3,7 +3,7 @@ import {styled} from 'frontity';
 import {size} from '../../functions/size';
 
 
-const MegaloNum = ({className,children}) => {
+const MegaloNum = ({className, children}) => {
   return (
     <div className={className}>
       {children}

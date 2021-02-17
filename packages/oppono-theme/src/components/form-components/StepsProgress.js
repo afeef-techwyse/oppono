@@ -1,7 +1,6 @@
 import React from 'react';
-import {styled, connect} from 'frontity';
+import {connect, styled} from 'frontity';
 import {size} from '../../functions/size';
-import PropTypes from 'prop-types';
 
 
 const StepsProgress = styled(connect(({className, state, horizontal = false}) =>

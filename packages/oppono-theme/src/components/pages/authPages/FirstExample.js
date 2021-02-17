@@ -1,10 +1,8 @@
 import React from 'react';
 import Form from '../../form-components/Form';
 import Input from '../../form-components/Input';
-import {connect, styled} from 'frontity';
-import Container from '../../reusable/Container';
+import {styled} from 'frontity';
 import {size} from '../../../functions/size';
-import missing from '../../../assets/images/missing.png';
 import Select from '../../form-components/Select';
 import RadioInput from '../../form-components/RadioInput';
 import RadioGroup from '../../form-components/RadioGroup';
@@ -30,7 +28,7 @@ const FirstExample = (props) => {
   </svg>;
   return <div className={props.className}>
     <Form>
-
+  
       <FormStep activeTheme={'gray-theme'} stepName={'first'}>
         <FlyingObjsContainer childrenList={
           [
@@ -54,7 +52,7 @@ const FirstExample = (props) => {
             }]}/>
         <div className="form-text-wrapper">
           <h1 className={'form-headline-1 text-left'}>Okay, just 6 more easy questions</h1>
-          <h2 className={'form-headline-2'}>Let’s refinance that house!</h2>
+          <h2 className={'form-headline-2 primary'}>Let’s refinance that house!</h2>
         </div>
         <Input type={'text'} placeholder={'Address'} label={'What’s the address'} required={true}/>
         <W50>
@@ -78,9 +76,9 @@ const FirstExample = (props) => {
       <FormStep activeTheme={'gray-theme'} stepName={'zero_3'}>
         <div className="form-text-wrapper">
           <h1 className={'form-headline-1 text-left'}>Okay, just 6 more easy questions</h1>
-          <h2 className={'form-headline-2'}>Let’s refinance that house!</h2>
+          <h2 className={'form-headline-2 primary'}>Let’s refinance that house!</h2>
         </div>
-        <FormConditionalInput label={'do you have another number?'} name={'another'} showOn={'yes'} checked={'yes'}>
+        <FormConditionalInput label={'do you have another number?'} name={'another'} showOn={'1'} checked={'0'}>
           <Input label={'add the number'}/>
         </FormConditionalInput>
         <Finalize>
@@ -103,7 +101,7 @@ const FirstExample = (props) => {
                   </tr>
                 </FinalizeTable>
               </FinalizeChild>}
-        
+  
             <FinalizeChild order={1}>
               <P.Dark>*Variable Rate
                 *Payment interest based on balance</P.Dark>
@@ -111,7 +109,7 @@ const FirstExample = (props) => {
               <Button label={'I’m good to go'}/>
             </FinalizeChild>
             <FinalizeChild order={2} className={'wide'}>
-              <Button className={'bordered '} label={'No, edit the details'}/>
+              <Button className={'bordered reset-form'} label={'No, edit the details'}/>
             </FinalizeChild>
             {/*<FinalizeChild order=1>*/}
             {/*  <P.Dark>*Admin and commitment fees apply</P.Dark>*/}
@@ -140,7 +138,7 @@ const FirstExample = (props) => {
                   </tr>
                 </FinalizeTable>
               </FinalizeChild>}
-        
+  
             <FinalizeChild order={2} className={'full m-border'}>
               <FinalizeTable>
                 <tr>
@@ -179,7 +177,7 @@ const FirstExample = (props) => {
       <FormStep activeTheme={'gray-theme'} stepName={'zero_2'}>
         <div className="form-text-wrapper">
           <h1 className={'form-headline-1 text-left'}>Okay, just 6 more easy questions</h1>
-          <h2 className={'form-headline-2'}>Let’s refinance that house!</h2>
+          <h2 className={'form-headline-2 primary'}>Let’s refinance that house!</h2>
         </div>
         <Alert>
           <div className="col-4">
@@ -238,7 +236,7 @@ const FirstExample = (props) => {
       <FormStep activeTheme={'gray-theme'} stepName={'zero'}>
         <div className="form-text-wrapper">
           <h1 className={'form-headline-1 text-left'}>Okay, just 6 more easy questions</h1>
-          <h2 className={'form-headline-2'}>Let’s refinance that house!</h2>
+          <h2 className={'form-headline-2 primary'}>Let’s refinance that house!</h2>
         </div>
         <ProductsTable>
           <table>
@@ -308,10 +306,10 @@ const FirstExample = (props) => {
             </tr>
             <tr className={'head'}>
               <td scope={'row'} className={'dark'}>LTV</td>
-              <td className={'details'} data-label="Dark">Up to 75%</td>
-              <td className={'details'} data-label="Dark">Up to 75%</td>
-              <td className={'details'} data-label="Dark">Up to 75%</td>
-              <td className={'details'} data-label="Dark">Up to 80%</td>
+              <td className={'details'} data-label="LTV">Up to 75%</td>
+              <td className={'details'} data-label="LTV">Up to 75%</td>
+              <td className={'details'} data-label="LTV">Up to 75%</td>
+              <td className={'details'} data-label="LTV">Up to 80%</td>
             </tr>
             <tr className={'head last-head'}>
               <td scope={'row'} className={'dark'}>Credit Score</td>
@@ -547,25 +545,25 @@ const FirstExample = (props) => {
         </div>
         <Input type={'text'} placeholder={'eg $780,000'} label={'What is the estimated value of your home?'} required={true}/>
         <RadioGroup radioText={'Do you have an Appraisal Report?'}>
-          <RadioInput label={'Yes'} value={'yes'} name={'Appraisal'} type={'radio'}/>
-          <RadioInput label={'No'} value={'no'} name={'Appraisal'} type={'radio'}/>
+          <RadioInput label={'Yes'} value={'1'} name={'Appraisal'} type={'radio'}/>
+          <RadioInput label={'No'} value={'0'} name={'Appraisal'} type={'radio'}/>
         </RadioGroup>
         <RadioGroup radioText={'Do you have any mortgages on your house?'}>
-          <RadioInput label={'Yes'} value={'yes'} name={'mortgages'} type={'radio'}/>
-          <RadioInput label={'No'} value={'no'} name={'mortgages'} type={'radio'}/>
+          <RadioInput label={'Yes'} value={'1'} name={'mortgages'} type={'radio'}/>
+          <RadioInput label={'No'} value={'0'} name={'mortgages'} type={'radio'}/>
         </RadioGroup>
         <Input type={'text'} placeholder={'eg $380,000'} label={'First mortgage amount'} required={true}/>
-        
+  
         <RadioGroup radioText={'Do you have a 2nd mortgage on your house?'}>
-          <RadioInput label={'Yes'} value={'yes'} name={'house'} type={'radio'}/>
-          <RadioInput label={'No'} value={'no'} name={'house'} type={'radio'}/>
+          <RadioInput label={'Yes'} value={'1'} name={'house'} type={'radio'}/>
+          <RadioInput label={'No'} value={'0'} name={'house'} type={'radio'}/>
         </RadioGroup>
         
         <Input type={'text'} placeholder={'eg $15,000'} label={'2nd mortgage amount'} required={true}/>
-        
+  
         <RadioGroup radioText={'Do you have any other outstanding amounts?'}>
-          <RadioInput label={'Yes'} value={'yes'} name={'outstanding'} type={'radio'}/>
-          <RadioInput label={'No'} value={'no'} name={'outstanding'} type={'radio'}/>
+          <RadioInput label={'Yes'} value={'1'} name={'outstanding'} type={'radio'}/>
+          <RadioInput label={'No'} value={'0'} name={'outstanding'} type={'radio'}/>
         </RadioGroup>
         <Input type={'text'} placeholder={'eg $5,000'} label={'Outstanding balance'} required={true}/>
         <div className="btn-group">
@@ -576,7 +574,7 @@ const FirstExample = (props) => {
       <FormStep activeTheme={'gray-theme'} stepName={'third'}>
         <div className="form-text-wrapper">
           <h1 className={'form-headline-1 text-left'}>Just one more thing…</h1>
-          <h1 className={'form-headline-2'}>Who are the borrower(s)?</h1>
+          <h1 className={'form-headline-2 primary'}>Who are the borrower(s)?</h1>
         </div>
         
         <RadioGroup radioText={'How many people are on the title for this mortgage?'}>
@@ -612,13 +610,13 @@ const FirstExample = (props) => {
           <h1 className={'form-headline-1 text-left'}>Let’s get this done!<br/>
             Upload your documents.</h1>
         </div>
-        
+  
         <RadioGroup radioText={'Do you have an appraisal report?'}>
-          <RadioInput label={'Yes'} value={'yes'} name={'report'} type={'radio'}/>
-          <RadioInput label={'No'} value={'no'} name={'report'} type={'radio'}/>
+          <RadioInput label={'Yes'} value={'1'} name={'report'} type={'radio'}/>
+          <RadioInput label={'No'} value={'0'} name={'report'} type={'radio'}/>
         </RadioGroup>
         
-        <FileInput label={'Appraisal report'} acceptText={'PDF, JPG, or PNG'}/>
+        <FileInput name='appraisal_report_file' label={'Appraisal report'} acceptText={'PDF, JPG, or PNG'}/>
         <hr/>
         <TextArea label={'Have anything else we need to know?'}/>
         

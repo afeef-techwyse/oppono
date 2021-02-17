@@ -23,15 +23,20 @@ export default styled(connect(Link))`
 function Link({onClick: click, libraries, actions, state, children, href, target, className = ''}) {
   const newHref = !!href ? href : '#';
   const isInternal = newHref.startsWith(state.source.api.replace('/wp-json', '')) || newHref.startsWith('/') || newHref.startsWith('#') || newHref.startsWith('tel:') || newHref.startsWith('mailto:') || newHref.startsWith(state.frontity.url);
-  let pathname = isInternal && !newHref.startsWith('tel:') && !newHref.startsWith('mailto:')? libraries.source.normalize(newHref) : newHref;
+  let pathname = isInternal && !newHref.startsWith('tel:') && !newHref.startsWith('mailto:') ? libraries.source.normalize(newHref) : newHref;
   let current = state.router.link === pathname;
   
   const onClick = event => {
+    if ((!target || target === '_self') && isInternal && !newHref.startsWith('tel:') && !newHref.startsWith('mailto:')) {
+      event.preventDefault();
+    }
+    
     if ((!target || target === '_self') && isInternal) {
       window.scrollTo(0, 0);
-      if (!newHref.startsWith('tel:') && !newHref.startsWith('mailto:')) {
-        event.preventDefault();
-        actions.router.set(pathname);
+      if (!newHref.startsWith('tel:') && !newHref.startsWith('mailto:') && pathname !== state.router.link) {
+        // actions.themeLoading.animationStart();
+        setTimeout(() => actions.router.set(pathname), 100);
+        
       }
     }
     click && click();

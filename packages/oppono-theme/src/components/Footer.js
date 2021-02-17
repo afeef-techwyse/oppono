@@ -1,39 +1,43 @@
 import React from 'react';
-import {css, styled} from 'frontity';
+import {styled} from 'frontity';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
-import gsap from 'gsap';
 import Container from './reusable/Container';
 import {size} from '../functions/size';
 import Link from './reusable/Link';
 
 const FooterRight = styled.div`
-     display: flex;
-    justify-content: space-between;
-    align-items: center;
-        @media(max-width: 991.98px){
-            margin-left: ${size(-17)};
-            margin-right: ${size(-17)};
-        }
-        a{
-          color: #b5d2ff;
-          font-size: ${size(16)};
-          font-weight: 500;
-          margin-left: ${size(36)};
-          display: flex;
-          @media(max-width: 991.98px){
-            margin-left: ${size(17)};
-            margin-right: ${size(17)};
-            margin-top: ${size(17)};
-             font-size: ${size(14)};
-        }
-          svg{
-             margin-left: ${size(6)};
-             width: ${size(18)};
-             height: ${size(18)};
-            }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  opacity: 1;
+  transition: opacity 500ms;
+
+  @media (max-width: 991.98px) {
+    margin-left: ${size(-17)};
+    margin-right: ${size(-17)};
+  }
+
+  a {
+    color: #b5d2ff;
+    font-size: ${size(16)};
+    font-weight: 500;
+    margin-left: ${size(36)};
+    display: flex;
+    @media (max-width: 991.98px) {
+      margin-left: ${size(17)};
+      margin-right: ${size(17)};
+      margin-top: ${size(17)};
+      font-size: ${size(14)};
+    }
+
+    svg {
+      margin-left: ${size(6)};
+      width: ${size(18)};
+      height: ${size(18)};
+    }
 `;
-const Footer = React.forwardRef(({className},forwardRef) => {
+const Footer = React.forwardRef(({className}, forwardRef) => {
   return (
     <footer ref={forwardRef} className={className + ' footer'}>
       <Container>
@@ -62,7 +66,7 @@ const Footer = React.forwardRef(({className},forwardRef) => {
           </div>
           <FooterRight className={'footer-right'}>
             <Link className={'primary'} href="/contacts/">Contact us</Link>
-            <Link className={'primary'} href="tel:+201023456395">Call us</Link>
+            <Link className={'primary'} href="tel:19058865352">Call us</Link>
             <Link className={'primary primary-fill'} href="/contact/chat/">Chat with us
               <svg viewBox="0 0 12 12">
                 <path className={'primary-fill'} fill="#b5d2ff"
@@ -82,50 +86,56 @@ Footer.propTypes = {
 };
 
 export default styled(Footer)`
-position: fixed;
-bottom: ${size(10)};
-width: 100%;
-@media(max-width: 991.98px){
-   bottom: ${size(24)};
-}
-  .footer-content{
+  position: fixed;
+  bottom: ${size(10)};
+  width: 100%;
+  @media (max-width: 991.98px) {
+    bottom: ${size(24)};
+  }
+
+  .footer-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    @media(max-width: 991.98px){
-           justify-content: center;
-        }
-    
-     .footer-left{
-     display: flex;
-        @media(max-width: 991.98px){
-     display: none;
-  }
-        .guid{
+    @media (max-width: 991.98px) {
+      justify-content: center;
+    }
+
+    .footer-left {
+      display: flex;
+      @media (max-width: 991.98px) {
+        display: none;
+      }
+
+      .guid {
         display: flex;
-          &:first-of-top{
-            margin-right: ${size(38)};
-          }
-          &.select{
-            svg{
-             width: ${size(63)};
-             height: ${size(20)};
-            }
-          }
-          &.nav{
-            svg{
-             width: ${size(54)};
-             height: ${size(20)};
-            }
-          }
-          h4{
-            color: #b5d2ff;
-            opacity: .7;
-            font-size: ${size(16)};
-            font-weight: 500;
-            margin-right: ${size(18)};
+
+        &:first-of-type {
+          margin-right: ${size(38)};
+        }
+
+        &.select {
+          svg {
+            width: ${size(63)};
+            height: ${size(20)};
           }
         }
-     }
+
+        &.nav {
+          svg {
+            width: ${size(54)};
+            height: ${size(20)};
+          }
+        }
+
+        h4 {
+          color: #b5d2ff;
+          opacity: .7;
+          font-size: ${size(16)};
+          font-weight: 500;
+          margin-right: ${size(18)};
+        }
+      }
+    }
   }
 `;

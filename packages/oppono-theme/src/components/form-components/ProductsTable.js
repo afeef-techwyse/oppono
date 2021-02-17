@@ -7,49 +7,53 @@ import classnames from 'classnames';
 import useMedia from '../../hooks/useMedia';
 
 
-const ProductsTable = ({className, children, dataFilter}) => {
+const ProductsTable = ({className, children, dataFilter, products}) => {
   const tableRef = React.useRef(null);
   const tablePages = React.useRef(0);
   const elements = React.useRef({});
   const [currentTablePage, setCurrentTablePage] = React.useState(0);
   const media = useMedia();
+  const numberPerPage = media === 'desktop' ? 3 : 2;
   React.useEffect(() => {
     elements.current.table = tableRef.current.querySelector('table');
     if (elements.current.table) {
-      elements.current.columns = [...elements.current.table.querySelector('thead tr').children].map((column, columnIndex) => elements.current.table.querySelectorAll(`tr >:nth-of-type(${columnIndex + 1})`)).slice(1);
+      elements.current.columns = [...elements.current.table.querySelector('thead tr').children];
       elements.current.prevArrow = elements.current.table.querySelector('.table-arrows .prev');
       elements.current.nextArrow = elements.current.table.querySelector('.table-arrows .next');
       elements.current.currentPage = elements.current.table.querySelector('.table-arrows .current-page');
       elements.current.totalPages = elements.current.table.querySelector('.table-arrows .total-pages');
-      tablePages.current = Math.ceil((elements.current.columns.length) / 2);
       const handlePrev = () => elements.current.prevArrow?.classList.contains('disabled') || setCurrentTablePage(prevState => prevState - 1);
       const handleNext = () => elements.current.nextArrow?.classList.contains('disabled') || setCurrentTablePage(prevState => prevState + 1);
   
       elements.current.prevArrow?.addEventListener('click', handlePrev);
       elements.current.nextArrow?.addEventListener('click', handleNext);
-  
-      elements.current.totalPages?.innerText && (elements.current.totalPages.innerText = tablePages.current);
-  
+      
       return () => {
         elements.current.prevArrow?.removeEventListener('click', handlePrev);
         elements.current.nextArrow?.removeEventListener('click', handleNext);
       };
-  
+      
     }
   }, []);
   
   React.useEffect(() => {
+    tablePages.current = Math.ceil((elements.current.columns.length - 1) / numberPerPage);
+    setCurrentTablePage(0);
+    elements.current.totalPages?.innerText && (elements.current.totalPages.innerText = tablePages.current);
+  }, [media, products]);
+  
+  React.useEffect(() => {
     if (elements.current.table) {
-      if (media === 'tablet') {
+      if (media !== 'mobile') {
         gsap.timeline()
-          .set(elements.current.columns.flat(), {display: 'none'})
-          .set(elements.current.columns.slice(currentTablePage * 2, currentTablePage * 2 + 2).flat(), {display: 'table-cell'});
+          .set(elements.current.columns.map((column, columnIndex) => elements.current.table.querySelectorAll(`tr >:nth-of-type(${columnIndex + 1})`)).slice(1).flat(), {display: 'none'})
+          .set(elements.current.columns.map((column, columnIndex) => elements.current.table.querySelectorAll(`tr >:nth-of-type(${columnIndex + 1})`)).slice(1).slice(currentTablePage * numberPerPage, numberPerPage * (currentTablePage + 1)).flat(), {display: 'table-cell'});
         elements.current.prevArrow?.classList.toggle('disabled', currentTablePage <= 0);
         elements.current.nextArrow?.classList.toggle('disabled', currentTablePage >= tablePages.current - 1);
         elements.current.currentPage?.innerText && (elements.current.currentPage.innerText = currentTablePage + 1);
       }
       else {
-        gsap.set(elements.current.columns.flat(), {display: 'table-cell'});
+        gsap.set(elements.current.columns.map((column, columnIndex) => elements.current.table.querySelectorAll(`tr >:nth-of-type(${columnIndex + 1})`)).slice(1).flat(), {display: 'table-cell'});
       }
     }
   }, [media, currentTablePage]);
@@ -166,51 +170,7 @@ table{
       }
     }
   }
-  .table-arrows{
-    display: none;
-  }
-  @media(max-width: 991.98px) {
-    margin-bottom: ${size(104)};
-    thead{
-      th{
-        min-width: ${size(185)};
-        &:first-of-type{
-          min-width: ${size(340)};
-          vertical-align: bottom;
-        }
-        p{
-          font-size: ${size(14)};
-          &.circle{
-            width: ${size(27)};
-            height: ${size(27)};
-            border-radius: ${size(27)};
-            margin-bottom: ${size(7)};
-          }
-          &.number{
-            font-size: ${size(40)};
-            margin-top: ${size(9)};
-          }
-          &.small{
-            display: none;
-          }
-        }
-        button.small{
-          margin-top: ${size(21)};
-        }
-        
-      }
-    }
-    
-    tbody{
-      tr{
-        .table-checkmark{
-          width: ${size(16)};
-          height: ${size(11)};
-        }
-      }
-    }
-    
-    .table-arrows{
+     .table-arrows{
       margin-top: ${size(10)};
       display: flex;
       align-items: center;
@@ -258,6 +218,47 @@ table{
         .slash{
           margin-left: ${size(9)};
           margin-right: ${size(5)};
+        }
+      }
+    }
+
+  @media(max-width: 991.98px) {
+    margin-bottom: ${size(104)};
+    thead{
+      th{
+        min-width: ${size(185)};
+        &:first-of-type{
+          min-width: ${size(340)};
+          vertical-align: bottom;
+        }
+        p{
+          font-size: ${size(14)};
+          &.circle{
+            width: ${size(27)};
+            height: ${size(27)};
+            border-radius: ${size(27)};
+            margin-bottom: ${size(7)};
+          }
+          &.number{
+            font-size: ${size(40)};
+            margin-top: ${size(9)};
+          }
+          &.small{
+            display: none;
+          }
+        }
+        button.small{
+          margin-top: ${size(21)};
+        }
+        
+      }
+    }
+    
+    tbody{
+      tr{
+        .table-checkmark{
+          width: ${size(16)};
+          height: ${size(11)};
         }
       }
     }

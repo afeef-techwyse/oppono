@@ -25,7 +25,7 @@ font-size: ${size(40)};
 font-weight: 300;
 line-height: ${size(64)};
 `;
-P.F29= styled(P.D)`
+P.F29 = styled(P.D)`
 font-size: ${size(29)};
 line-height: ${size(40)};
 font-weight: 400;
@@ -41,8 +41,9 @@ P.Border = styled(P.D)`
 padding-top: ${size(24)};
 padding-bottom: ${size(24)};
 border-bottom: ${size(1)} solid rgba(191, 182, 180, 0.1);
+font-weight: 400;
 `;
-P.Circle= styled(P.D)`
+P.Circle = styled(P.D)`
   width: ${size(34)};
   height: ${size(34)};
   border: ${size(1)} solid rgba(191, 182, 180, 0.5);

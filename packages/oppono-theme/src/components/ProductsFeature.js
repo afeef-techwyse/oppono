@@ -1,7 +1,6 @@
 import React from 'react';
 import {styled} from 'frontity';
 import {size} from '../functions/size';
-import Container from './reusable/Container';
 
 const Col = styled.div`
 width: 50%;

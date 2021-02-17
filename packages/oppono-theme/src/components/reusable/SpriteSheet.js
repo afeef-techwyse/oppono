@@ -1,11 +1,23 @@
 import React from 'react';
 import {styled} from 'frontity';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
-import gsap from 'gsap';
 import useCombinedRefs from '../../hooks/useCombinedRefs';
 
-const SpriteSheet = React.forwardRef(({className, frames, frame_x, frame_y, imageUrl, alt, loop_start_index = 0, is_vertical = false, duration = 2, initial_duration = 0, yoyo = false, repeat = -1, repeatDelay = 5, paused = false}, forwardedRef) => {
+const SpriteSheet = React.forwardRef(({
+                                        className,
+                                        frames,
+                                        frame_x,
+                                        frame_y,
+                                        imageUrl,
+                                        alt,
+                                        loop_start_index = 0,
+                                        duration = 2,
+                                        initial_duration = 0,
+                                        repeat = -1,
+                                        repeatDelay = 0,
+                                        paused = false,
+                                        reset,
+                                      }, forwardedRef) => {
   const image = React.useRef(null);
   const currentIndex = React.useRef(0);
   const [gridSize, setGridSize] = React.useState({init: false});
@@ -18,6 +30,9 @@ const SpriteSheet = React.forwardRef(({className, frames, frame_x, frame_y, imag
   const remainingRepeat = React.useRef(repeat);
   const stopInterval = React.useRef(false);
   
+  React.useEffect(() => {
+    currentIndex.current = 0;
+  }, [reset]);
   
   React.useEffect(() => {
     image.current.complete ? setImageLoaded(true) : (image.current.onload = () => setImageLoaded(true));
@@ -45,26 +60,27 @@ const SpriteSheet = React.forwardRef(({className, frames, frame_x, frame_y, imag
       });
     }
   }, [imageMetaLoaded]);
-  const intervals = React.useRef({interval: null, initialInterval: null});
   
   React.useEffect(() => {
-    let interval, initialInterval;
+    let interval, initialInterval, repeatDelaySetTimeout;
     const createInterval = () => {
       let stop = false;
       return setInterval(
         () => {
           if (stop) return;
           currentIndex.current++;
-      
+  
           image.current.style.transform = `translate(${((currentIndex.current % frames) % (gridSize.x)) / -gridSize.x * 100}%,${((~~((currentIndex.current % frames) / gridSize.x)) % (gridSize.y)) / -gridSize.y * 100}%)`;
-      
+  
           if (currentIndex.current + 1 >= frames) {
             stop = true;
             clearInterval(interval);
             if (remainingRepeat.current !== 0) {
-              currentIndex.current = loop_start_index - 1;
-              remainingRepeat.current--;
-              interval = createInterval();
+              repeatDelaySetTimeout = setTimeout(() => {
+                currentIndex.current = loop_start_index - 1;
+                remainingRepeat.current--;
+                interval = createInterval();
+              }, repeatDelay * 1000);
             }
           }
         },
@@ -87,12 +103,13 @@ const SpriteSheet = React.forwardRef(({className, frames, frame_x, frame_y, imag
         );
       }
       setTimeout(() => interval = createInterval(), loop_start_index ? initial_duration : 0);
-    
-    
+  
+  
     }
     return () => {
       clearInterval(initialInterval);
       clearInterval(interval);
+      clearTimeout(repeatDelaySetTimeout);
     };
   
   }, [paused, imageLoaded]);

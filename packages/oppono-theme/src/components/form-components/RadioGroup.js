@@ -17,15 +17,15 @@ const RadioGroup = React.forwardRef(({className, radioText, children, checked}, 
       <div className="label-text">{radioText}</div>
       <div className="radio-group">
         {React.Children.map(children, child => {
-          return React.cloneElement(child, {
-            ...child.props,
-            checked: child.props.value === checkedValue,
-            onChange: event => {
-              child.props.onChange?.(event);
-              setCheckedValue(child.props.value);
-            }, className: `${child.props.className}`,
-          });
-          }
+            return React.cloneElement(child, {
+              ...child.props,
+              checked: child.props.value === checkedValue,
+              onChange: event => {
+                child.props.onChange?.(event);
+                setCheckedValue(child.props.value);
+              }, className: `${child.props.className}`,
+            });
+          },
         )}
       </div>
     </div>

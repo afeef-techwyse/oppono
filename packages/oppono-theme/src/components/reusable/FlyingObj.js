@@ -18,18 +18,54 @@ const randomTime = random(12, 20);
 const randomTime2 = random(30, 60);
 const randomAngle = random(56, 84);
 
-const FlyingObj = React.forwardRef(({className, type, frames, imageUrl, alt, frame_x, frame_y, duration = 2, initial_duration = 0, yoyo = false, repeat = -1, repeatDelay = 0, paused = false, left, top, width, level, timelineAddCallback, isStart, isEnd, loop_start_index = 0}, forwardedRef) => {
+const FlyingObj = React.forwardRef(({
+                                      className,
+                                      type,
+                                      frames,
+                                      imageUrl,
+                                      alt,
+                                      frame_x,
+                                      frame_y,
+                                      duration = 2,
+                                      initial_duration = 0,
+                                      yoyo = false,
+                                      repeat = -1,
+                                      repeatDelay = 0,
+                                      paused = false,
+                                      left,
+                                      top,
+                                      width,
+                                      level,
+                                      timelineAddCallback,
+                                      isStart,
+                                      isEnd,
+                                      loop_start_index = 0,
+                                      disableFloating,
+                                    }, forwardedRef) => {
   const innerRef = React.useRef(null);
   const combinedRef = useCombinedRefs(forwardedRef, innerRef);
   
   React.useEffect(() => {
-    combinedRef.current.dataset.leve = level;
+    combinedRef.current.dataset.level = level;
+    
+    if (!timelineAddCallback) return;
+    //fixme check for memory leak on the main objects slider
+    if (isStart) {
+      timelineAddCallback?.(gsap.fromTo(combinedRef.current, {left}, {left: `+=${-level * 30}%`, ease: 'linear', duration: .25, immediateRender: true}));
+    }
+    else if (isEnd) {
+      timelineAddCallback?.(gsap.fromTo(combinedRef.current, {left: `-=${-level * 30}%`}, {left, ease: 'linear', duration: .25, immediateRender: true}));
+    }
+    else {
+      timelineAddCallback?.(gsap.fromTo(combinedRef.current, {left: `-=${-level * 30}%`}, {left: `+=${-level * 60}%`, ease: 'linear', duration: .5, immediateRender: true}));
+    }
+  }, []);
+  React.useEffect(() => {
     if (type === 'image') {
-      
       
       function rotate(target, direction) {
         
-        gsap.to(target, {
+        target.current && gsap.to(target.current, {
           delay: randomDelay(),
           duration: randomTime2(),
           rotation: randomAngle(direction),
@@ -41,7 +77,7 @@ const FlyingObj = React.forwardRef(({className, type, frames, imageUrl, alt, fra
       
       function moveX(target, direction) {
         
-        gsap.to(target, {
+        target.current && gsap.to(target.current, {
           duration: randomTime(),
           x: randomX(direction),
           ease: 'sine.inOut',
@@ -51,8 +87,7 @@ const FlyingObj = React.forwardRef(({className, type, frames, imageUrl, alt, fra
       }
       
       function moveY(target, direction) {
-        
-        gsap.to(target, {
+        target.current && gsap.to(target.current, {
           duration: randomTime(),
           y: randomY(direction),
           ease: 'sine.inOut',
@@ -61,23 +96,14 @@ const FlyingObj = React.forwardRef(({className, type, frames, imageUrl, alt, fra
         });
       }
       
-      
-      moveX(combinedRef.current, Math.random() < 0.5 ? -1 : 1);
-      moveY(combinedRef.current, Math.random() < 0.5 ? -1 : 1);
-      rotate(combinedRef.current, Math.random() < 0.5 ? -1 : 1);
+      if (!disableFloating) {
+        moveX(combinedRef, Math.random() < 0.5 ? -1 : 1);
+        moveY(combinedRef, Math.random() < 0.5 ? -1 : 1);
+        rotate(combinedRef, Math.random() < 0.5 ? -1 : 1);
+      }
     }
-    
-    if (!timelineAddCallback) return;
-    if (isStart) {
-      timelineAddCallback?.(gsap.fromTo(combinedRef.current, {left}, {left: `+=${-level * 30}%`, ease: 'linear', duration: .25, immediateRender: true}));
-    }
-    else if (isEnd) {
-      timelineAddCallback?.(gsap.fromTo(combinedRef.current, {left: `-=${-level * 30}%`}, {left, ease: 'linear', duration: .25, immediateRender: true}));
-    }
-    else {
-      timelineAddCallback?.(gsap.fromTo(combinedRef.current, {left: `-=${-level * 30}%`}, {left: `+=${-level * 60}%`, ease: 'linear', duration: .5, immediateRender: true}));
-    }
-  }, []);
+  }, [disableFloating]);
+  
   return (
     type === 'image' ?
       <div ref={combinedRef} className={className} style={{width: typeof width === 'string' ? width : (width + '%'), top, left}}>

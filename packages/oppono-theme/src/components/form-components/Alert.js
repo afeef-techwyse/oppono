@@ -2,7 +2,6 @@ import React from 'react';
 import {styled} from 'frontity';
 import Container from '../reusable/Container';
 import {size} from '../../functions/size';
-import W50 from './W50';
 import {P} from './StyledComponent';
 
 
@@ -28,7 +27,7 @@ margin-bottom: ${size(80)};
    }
  }
  .form-group{
-    margin-top: 55px;
+    margin-top: ${size(55)};
     @media(max-width: 991.98px){
       margin-bottom: 40px;
     }

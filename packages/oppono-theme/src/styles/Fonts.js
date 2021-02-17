@@ -1,7 +1,6 @@
 import React from 'react';
-import {Global, css} from 'frontity';
+import {css, Global} from 'frontity';
 import bold from '../assets/fonts/suisseIntl-bold.woff';
-import book from '../assets/fonts/suisseIntl-book.woff';
 import light from '../assets/fonts/suisseIntl-light.woff';
 import lightItalic from '../assets/fonts/suisseIntl-lightItalic.woff';
 import medium from '../assets/fonts/suisseIntl-medium.woff';

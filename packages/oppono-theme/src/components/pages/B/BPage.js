@@ -2,9 +2,7 @@ import React from 'react';
 import Form from '../../form-components/Form';
 import Input from '../../form-components/Input';
 import {connect, styled} from 'frontity';
-import Container from '../../reusable/Container';
 import {size} from '../../../functions/size';
-import missing from '../../../assets/images/missing.png';
 import Select from '../../form-components/Select';
 import RadioInput from '../../form-components/RadioInput';
 import RadioGroup from '../../form-components/RadioGroup';
@@ -16,43 +14,53 @@ import TextArea from '../../form-components/TextArea';
 import intro_ball_1 from '../../../assets/images/form_1_img.png';
 import intro_ball_2 from '../../../assets/images/form_2_img.png';
 import FlyingObjsContainer from '../../reusable/FlyingObjsContainer';
-import ProductsTable from '../../form-components/ProductsTable';
 import {Li, Ol, P, Span} from '../../form-components/StyledComponent';
 import Alert from '../../form-components/Alert';
 import Finalize, {Bottom, FinalizeChild, FinalizeTable, Top} from '../../form-components/Finalize';
 import useMedia from '../../../hooks/useMedia';
 import FormConditionalInput from '../../form-components/FormConditionalInput';
-import {numberToOrdinal} from '../../../functions/numberToOrdinal';
-import FormFilter from '../../form-components/FormFilter';
 import FormRepeatableInput from '../../form-components/FormRepeatableInput';
-import ProductsMobileOption from '../../form-components/ProductsMobileOption';
 import LastStep from '../../form-components/LastStep';
 import upload from '../../../assets/images/upload.png';
 import Appraiser from '../../form-components/Appraiser';
-import RadioInputVertical from '../../form-components/RadioInputVertical';
-import last_step from '../../../assets/images/last-step.png';
 import useStoredFormValue from '../../../hooks/useStoredFormValue';
-import intro_ball_3 from '../../../assets/images/fly-image-4.png';
-import intro_ball_4 from '../../../assets/images/fly-image-3.png';
+import useFlowAppraisers from '../../../hooks/useFlowAppraisers';
+import AppraiserInput from '../../AppraiserInput';
 
 const pageName = 'b';
 const BPage = ({className, state, actions}) => {
-  const getBValues = useStoredFormValue(pageName);
   const data = state.source.get(state.router.link);
   const formData = data.isReady && !data.isError ? state.source[data.type][data.id].acf : {};
-  const [section1Values, section2Values, section3Values, section4Values] = [getBValues(formData.section_1?.section_name), getBValues(formData.section_2?.section_name), getBValues(formData.section_3?.section_name), getBValues(formData.section_4?.section_name)];
+  const getBValues = useStoredFormValue(pageName);
+  const
+    section1Values = getBValues(formData.section_1?.section_name),
+    section2Values = getBValues(formData.section_2?.section_name),
+    section3Values = getBValues(formData.section_4?.section_name),
+    section4Values = getBValues(formData.section_5?.section_name);
   
   const media = useMedia();
   
   React.useEffect(() => {
     actions.theme.setSubHeader(formData.sub_header);
   }, [formData]);
-  const CheckMark = () => <svg className="table-checkmark" viewBox="0 0 18 12">
-    <path fill="none" stroke="#d2f5e9" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="20" strokeWidth="2" d="M1 5.167v0L6.895 11 17 1"/>
-  </svg>;
+  
+  React.useEffect(() => {
+    actions.theme.setLeadId();
+    actions.theme.setStepResponse({});
+  }, []);
+  
+  React.useEffect(() => {
+    actions.theme.checkUser();
+  }, [state.theme.user.logged]);
+  const [appraiser, postalCodeOnChange] = useFlowAppraisers();
+  const [businessAppraiser, businessPostalCodeOnChange] = useFlowAppraisers();
+  const getAppraiser = () => section2Values('business_address_same_as_property') === '1' ? businessAppraiser : appraiser;
+  const mortgage = ((+section3Values('purchase_price')) - (+section3Values('down_payment'))) || 0;
+  const firstProduct = state.theme.stepResponse.data?.data?.beloc.products[0] || {};
+  
   return <div className={className}>
-    <Form>
-      <FormStep pageName={pageName} activeTheme={formData.section_1?.section_theme} stepName={formData.section_1?.section_name}>
+    <Form endPoint={'/beloc'}>
+      <FormStep apiStepNumber={1} pageName={pageName} activeTheme={formData.section_1?.section_theme} stepName={formData.section_1?.section_name}>
         <FlyingObjsContainer childrenList={[
           {
             imageUrl: intro_ball_2,
@@ -74,21 +82,23 @@ const BPage = ({className, state, actions}) => {
           }]}/>
         <div className="form-text-wrapper">
           <h1 className={'form-headline-1 text-left'}>{formData.section_1?.title}</h1>
-          <h2 className={'form-headline-2'}>{formData.section_1?.subtitle}</h2>
+          <h2 className={'form-headline-2 primary'}>{formData.section_1?.subtitle}</h2>
         </div>
-        <Input type={'text'} name={'business_name'} {...formData.section_1?.business_name_input}/>
+        <Input type={'text'} name={'business_name'} {...formData.section_1?.legal_business_name_input}/>
         <Select
           name={'business_type'}
-          {...formData.section_1?.business_type_dropdown}/>
+          {...formData.section_1?.type_of_business_dropdown}/>
         
         <Input type={'text'} name={'business_address'} {...formData.section_1?.address_input}/>
         <W50>
-          <Input type={'text'} name={'business_city'} {...formData.section_1?.city_input}/>
-          <Input type={'text'} name={'business_postal_code'} {...formData.section_1?.postal_code_input}/>
+          <Input value={businessAppraiser?.title} type={'text'} name={'business_city'} {...formData.section_1?.city_input}/>
+          <Input onChange={businessPostalCodeOnChange()} type={'text'} name={'business_postal_code'} {...formData.section_1?.postal_code_input}/>
+        
         </W50>
+        
         <Button icon={true} className={'next-step'} label={'Next'}/>
       </FormStep>
-      <FormStep pageName={pageName} activeTheme={formData.section_2?.section_theme} stepName={formData.section_2?.section_name}>
+      <FormStep apiStepNumber={2} pageName={pageName} activeTheme={formData.section_2?.section_theme} stepName={formData.section_2?.section_name}>
         <FlyingObjsContainer childrenList={[
           {
             imageUrl: intro_ball_2,
@@ -111,15 +121,17 @@ const BPage = ({className, state, actions}) => {
         <div className="form-text-wrapper">
           <h1 className={'form-headline-1 text-left'}>{formData.section_2?.title}</h1>
         </div>
-        <FormConditionalInput name={'business_address_same_as_property'} showOn={'no'} checked={'yes'} {...formData.section_2?.same_business_address_yes_no}>
-          <Input type={'text'} name={'address'} {...formData.section_2?.address_input}/>
-          <W50>
-            <Input type={'text'} name={'city'} {...formData.section_2?.city_input}/>
-            <Input type={'text'} name={'postal_code'} {...formData.section_2?.postal_code_input}/>
-          </W50>
+        <FormConditionalInput name={'business_address_same_as_property'} showOn={'0'} checked={'0'} {...formData.section_2?.same_business_address_yes_no}>
+          <>
+            <Input type={'text'} name={'address'} {...formData.section_2?.address_input}/>
+            <W50>
+              <Input type={'text'} serverErrorMessage={state.theme.errors?.['city']} name={'city'} value={appraiser?.title} {...formData.section_1?.city_input}/>
+              <Input type={'text'} serverErrorMessage={state.theme.errors?.['postal_code']} name={'postal_code'} {...formData.section_1?.postal_code_input} onChange={postalCodeOnChange}/>
+            </W50>
+          </>
         </FormConditionalInput>
         <Select
-          name={'property'}
+          name={'property_type'}
           {...formData.section_2?.property_dropdown}/>
         <Select
           name={'property_details_1'}
@@ -129,42 +141,46 @@ const BPage = ({className, state, actions}) => {
           {...formData.section_2?.property_details_2_dropdown}/>
         <Button icon={true} className={'next-step'} label={'Next'}/>
       </FormStep>
-      <FormStep pageName={pageName} activeTheme={formData.section_3?.section_theme} stepName={formData.section_3?.section_name}>
+      <FormStep apiStepNumber={3} pageName={pageName} activeTheme={formData.section_3?.section_theme} stepName={formData.section_3?.section_name}>
         <div className="form-text-wrapper">
           <h1 className={'form-headline-1 text-left'}>{formData.section_3?.title}</h1>
         </div>
-        
+  
         <W50>
-          <Input type={'text'} name={'purchase_price'} {...formData.section_3?.purchase_price}/>
-          <Input type={'text'} name={'down_payment'} {...formData.section_3?.down_payment}/>
+          <Input type={'text'} pattern={'[0-9]+'} name={'purchase_price'} {...formData.section_3?.purchase_price_input}/>
+          <Input type={'text'} pattern={'[0-9]+'} name={'down_payment'} {...formData.section_3?.down_payment_input}/>
         </W50>
-        
-        <RadioGroup radioText={formData.section_3?.appraisal_report_yes_no.label}>
-          <RadioInput label={formData.section_3?.appraisal_report_yes_no.yes} value={'yes'} name={'have_appraisal_report'} type={'radio'}/>
-          <RadioInput label={formData.section_3?.appraisal_report_yes_no.no} value={'no'} name={'have_appraisal_report'} type={'radio'}/>
+  
+        <RadioGroup radioText={formData.section_3?.appraisal_report_yes_no.label} checked={'1'}>
+          <RadioInput label={formData.section_3?.appraisal_report_yes_no.yes} value={'1'} name={'have_appraisal_report'} type={'radio'}/>
+          <RadioInput label={formData.section_3?.appraisal_report_yes_no.no} value={'0'} name={'have_appraisal_report'} type={'radio'}/>
         </RadioGroup>
-        
+  
         <div className="btn-group">
           <Button className={'bordered prev-step'} label={'Back'}/>
           <Button icon={true} className={'next-step'} label={'Next'}/>
         </div>
       </FormStep>
-      <FormStep pageName={pageName} activeTheme={formData.section_4?.section_theme} stepName={formData.section_4?.section_name}>
+      <FormStep sendSteps={[
+        formData.section_1?.section_name,
+        formData.section_2?.section_name,
+        formData.section_3?.section_name,
+      ]} apiStepNumber={4} pageName={pageName} activeTheme={formData.section_4?.section_theme} stepName={formData.section_4?.section_name}>
         <div className="form-text-wrapper">
           <h1 className={'form-headline-1 text-left'}>{formData.section_4?.title}</h1>
-          <h1 className={'form-headline-2'}>{formData.section_4?.subtitle}</h1>
+          <h1 className={'form-headline-2 primary'}>{formData.section_4?.subtitle}</h1>
         </div>
         <FormRepeatableInput question={formData.section_4?.applicant_amount_label} number={4} initial={1} name={'applicants_number'}>
           <W50>
             <Input type={'text'} name={'applicant_fname_{{number}}'} {...formData.section_4?.applicant.first_name_input}/>
             <Input type={'text'} name={'applicant_lname_{{number}}'} {...formData.section_4?.applicant.last_name_input}/>
-            <Input type={'email'} name={'applicant_mail_{{number}}'} {...formData.section_4?.applicant.email_input}/>
+            <Input type={'text'} pattern={'^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$'} name={'applicant_mail_{{number}}'} {...formData.section_4?.applicant.email_input}/>
             <Input type={'phone'} name={'applicant_phone_{{number}}'} {...formData.section_4?.applicant.phone_input}/>
           </W50>
           <RadioGroup radioText={formData.section_4?.applicant.score_label} checked={'650+'}>
-            <RadioInput label={'<650'} value={'<650'} name={`applicant_score_{{number}}`} type={'radio'}/>
-            <RadioInput label={'650+'} value={'650+'} name={`applicant_score_{{number}}`} type={'radio'}/>
-            <RadioInput label={'680+'} value={'680+'} name={`applicant_score_{{number}}`} type={'radio'}/>
+            <RadioInput label={'<650'} value={'<650'} serverErrorMessage={state.theme.errors?.['applicant_score_{{number}}']} name={`applicant_score_{{number}}`} type={'radio'}/>
+            <RadioInput label={'650+'} value={'650+'} serverErrorMessage={state.theme.errors?.['applicant_score_{{number}}']} name={`applicant_score_{{number}}`} type={'radio'}/>
+            <RadioInput label={'680+'} value={'680+'} serverErrorMessage={state.theme.errors?.['applicant_score_{{number}}']} name={`applicant_score_{{number}}`} type={'radio'}/>
           </RadioGroup>
         </FormRepeatableInput>
         <div className="btn-group">
@@ -172,13 +188,14 @@ const BPage = ({className, state, actions}) => {
           <Button icon={true} label={'Next'} className={'next-step'}/>
         </div>
       </FormStep>
-      <FormStep pageName={pageName} activeTheme={formData.section_5?.section_theme} stepName={formData.section_5?.section_name}>
+      <FormStep apiStepNumber={5} pageName={pageName} activeTheme={formData.section_5?.section_theme} stepName={formData.section_5?.section_name}>
+        <input type={'hidden'} name={`product_name`} value={firstProduct.title}/>
         <div className="form-text-wrapper wide-text">
           <h1 className={'form-headline-1 text-left'}>{formData.section_5?.title}</h1>
-          <h2 className={'form-headline-2'}>{formData.section_5?.subtitle}</h2>
-          <h2 className={'form-headline-3'}>
+          <h2 className={'form-headline-2 primary'}>{formData.section_5?.subtitle}</h2>
+          <h2 className={'form-headline-3 primary'}>
             You are requesting a secured business equity line of credit against your {section2Values('property')}, {section2Values('property_details_1')} home which is located
-            at <br/> {section2Values('business_address_same_as_property') === 'yes' ? section1Values('business_address') : section2Values('address')}, {section2Values('business_address_same_as_property') === 'yes' ? section1Values('business_city') : section2Values('city')}, {section2Values('business_address_same_as_property') === 'yes' ? section1Values('business_postal_code') : section2Values('postal_code')}
+            at <br/> {section2Values('business_address_same_as_property') === '1' ? section1Values('business_address') : section2Values('address')}, {section2Values('business_address_same_as_property') === '1' ? section1Values('business_city') : section2Values('city')}, {section2Values('business_address_same_as_property') === '1' ? section1Values('business_postal_code') : section2Values('postal_code')}
           </h2>
         </div>
         <Finalize>
@@ -190,7 +207,7 @@ const BPage = ({className, state, actions}) => {
                     const applicantFName = section4Values(`applicant_fname_${index + 1}`);
                     const applicantLName = section4Values(`applicant_lname_${index + 1}`);
                     const applicantScore = section4Values(`applicant_score_${index + 1}`);
-                    return <P.D key={`person-desktop-${personIndex}`}>{applicantFName} {applicantLName} {applicantScore}</P.D>;
+                  return <P.D key={`person-desktop-${personIndex}`}>{applicantFName} {applicantLName} {applicantScore}</P.D>;
                   },
                 )}
               </FinalizeChild>
@@ -214,7 +231,7 @@ const BPage = ({className, state, actions}) => {
             <FinalizeChild order={1}>
               <P.Dark>*Variable Rate</P.Dark>
               <P.Dark>*Payment interest based on balance</P.Dark>
-              <P.Num>9.99%</P.Num>
+              <P.Num>{firstProduct.fields?.rate}%</P.Num>
               <Button label={'I’m good to go'} className={'next-step'}/>
             </FinalizeChild>
             <FinalizeChild order={2} className={'wide'}>
@@ -224,24 +241,24 @@ const BPage = ({className, state, actions}) => {
           <Bottom>
             {media !== 'mobile'
               ? <FinalizeChild order={1}>
-                <P.D>Your HELOC request is for ${+section2Values('purchase_price') - (+section2Values('down_payment') || 0)}</P.D>
-                <P.D>Your property value is ${+section2Values('purchase_price')}</P.D>
-                <P.D>Your LTV is {(+section2Values('purchase_price') - (+section2Values('down_payment') || 0)) * 100}%</P.D>
+                <P.D>Your HELOC request is for ${mortgage}</P.D>
+                <P.D>Your property value is ${+section2Values('home_value')}</P.D>
+                <P.D>Your LTV is {((mortgage) / +section2Values('home_value') * 100).toFixed(1)}%</P.D>
               </FinalizeChild>
               : <FinalizeChild className={'full'} order={1}>
                 <FinalizeTable>
                   <tbody>
                   <tr>
                     <P.Dark as={'td'}>HELOC Request</P.Dark>
-                    <P.D as={'td'}>${+section2Values('purchase_price') - (+section2Values('down_payment') || 0)}</P.D>
+                    <P.D as={'td'}>${mortgage}</P.D>
                   </tr>
                   <tr>
                     <P.Dark as={'td'}>Property Value</P.Dark>
-                    <P.D as={'td'}>${+section2Values('purchase_price')}</P.D>
+                    <P.D as={'td'}>${+section2Values('home_value')}</P.D>
                   </tr>
                   <tr>
                     <P.Dark as={'td'}>LTV</P.Dark>
-                    <P.D as={'td'}>{(+section2Values('purchase_price') - (+section2Values('down_payment') || 0)) * 100}%</P.D>
+                    <P.D as={'td'}>{((mortgage) / +section2Values('home_value') * 100).toFixed(1)}%</P.D>
                   </tr>
                   </tbody>
                 </FinalizeTable>
@@ -252,25 +269,17 @@ const BPage = ({className, state, actions}) => {
                 <tbody>
                 <tr>
                   <P.Dark as={'td'}>Lender Fee</P.Dark>
-                  <P.D as={'td'}>2.00%</P.D>
+                  <P.D as={'td'}>{firstProduct.fields?.fee}%</P.D>
                 </tr>
                 <tr>
                   <P.Dark as={'td'}>Credit Score</P.Dark>
-                  <P.D as={'td'}>680+</P.D>
+                  <P.D as={'td'}>{firstProduct.fields?.beacon_score}</P.D>
                 </tr>
                 </tbody>
               </FinalizeTable>
             </FinalizeChild>
             <FinalizeChild order={3} className={'wide m-pr-40'}>
-              <P.Border>Lower than 75% LTV or $150,000 on single family homes</P.Border>
-              <P.Border>Interest paid only on outstanding loan balance</P.Border>
-              <P.Border>Pay off at anytime prior to maurity</P.Border>
-              <P.Border>Type of properties will follow existing credit policies</P.Border>
-              <P.Border>Fully open - No Prepayment penalty</P.Border>
-              <P.Border>Minimum Draw - $2,500.00</P.Border>
-              <P.Border>Admin Fees on Each Draw - $75.00</P.Border>
-              <P.Border>Draws must be paid to same bank account</P.Border>
-              <P.Border>No income verification</P.Border>
+              {firstProduct.fields?.specifications.map(({term_id, name}) => <P.Border key={term_id}>{name}</P.Border>)}
             </FinalizeChild>
           </Bottom>
         </Finalize>
@@ -279,37 +288,23 @@ const BPage = ({className, state, actions}) => {
           <Button className={'bordered reset-form small'} label={'No, edit the details'}/>
         </div>
       </FormStep>
-      <FormStep pageName={pageName} activeTheme={formData.section_6?.section_theme} stepName={formData.section_6?.section_name}>
+      <FormStep apiStepNumber={6} pageName={pageName} activeTheme={formData.section_6?.section_theme} stepName={formData.section_6?.section_name}>
         <div className="upload-step-wrapper">
-          <FlyingObjsContainer childrenList={[
-            {
-              imageUrl: upload,
-              left: '40%',
-              level: 1,
-              top: '7%',
-              type: 'image',
-              width: 8,
-              alt: 'alt',
-            },
-          ]}/>
+          <img src={upload}/>
           <h1 className={'form-headline-1 text-left'}>{formData.section_6?.title}</h1>
-          <FormConditionalInput name={'mortgages_1'} showOn={'yes'} checked={'yes'} {...formData.section_6?.have_appraisal_report_yes_no}>
-            <FileInput label={formData.section_6?.appraisal_report_upload_label} acceptText={'PDF, JPG, or PNG'}/>
+          <FormConditionalInput name={'mortgages_1'} showOn={'1'} checked={'0'} {...formData.section_6?.have_appraisal_report_yes_no}>
+            <FileInput name='appraisal_report_file' label={formData.section_6?.appraisal_report_upload_label} acceptText={'PDF, JPG, or PNG'}/>
             <Appraiser>
               <P.D>Select an appraiser</P.D>
               <div className="row">
                 <div className="col-left">
-                  <p className={'form-headline-1 text-left'}>
-                    Halton<br/>
-                    Region
-                  </p>
+                  <p className={'form-headline-1 text-left'} dangerouslySetInnerHTML={{__html: getAppraiser()?.fields.bdm.name}}/>
                 </div>
                 <div className="col-right">
                   <RadioGroup className={'vertical-radio'} radioText={'*Click to call'}>
-                    <RadioInputVertical value={'(416) 652-3456'} name={'call'} label={'Cross-town Appraisal Ltd.'} number={'(416) 652-3456'}/>
-                    <RadioInputVertical value={'(905) 479-4400'} name={'call'} label={'Metrowide Appraisal Services Inc.'} number={'(905) 479-4400'}/>
-                    <RadioInputVertical value={'(416) 871-9224'} name={'call'} label={'Home Value Inc.'} number={'(416) 871-9224'}/>
-                    <RadioInputVertical value={'(905) 639-0235'} name={'call'} label={'Walker & Walker Appraisal Limited'} number={'(905) 639-0235'}/>
+                    {getAppraiser()?.fields.preferred_appraisal_company.map(({post_name}, index) => {
+                      return <AppraiserInput key={index} appraiserName={post_name}/>;
+                    })}
                   </RadioGroup>
                   <P.Dark>*Disclaimer - If the city you are looking for is not listed please contact your BDM directly or email us at info@oppono.com</P.Dark>
                   <Button label={'Alert'}/>
@@ -329,7 +324,7 @@ const BPage = ({className, state, actions}) => {
           <img src={formData.section_7?.image.url} alt={formData.section_7?.image.alt}/>
           <div style={{flexBasis: '20%'}} className="text">
             <h1 className={'form-headline-1 text-left'}>{formData.section_7?.title}</h1>
-            <p className={'form-headline-3'}>{formData.section_7?.subtitle}</p>
+            <p className={'form-headline-3 primary'}>{formData.section_7?.subtitle}</p>
             
             <Ol>
               <Li>Login into your <Span.Green>Filogix</Span.Green> Expert account</Li>

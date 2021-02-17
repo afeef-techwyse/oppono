@@ -6,7 +6,7 @@ import gsap from 'gsap';
 import {size} from '../../functions/size';
 import SelectTwo, {components} from 'react-select';
 import useCombinedRefs from '../../hooks/useCombinedRefs';
-import missing from '../../assets/images/missing.png';
+import missing from '../../assets/images/missing.svg';
 
 
 const DropdownIndicator = props => {
@@ -21,7 +21,7 @@ const DropdownIndicator = props => {
   );
 };
 
-const Select = React.forwardRef(({className, name, required, label, ...props}, forwardedRef) => {
+const Select = React.forwardRef(({className, name, required, label, onChange, serverErrorMessage, ...props}, forwardedRef) => {
   const innerRef = React.useRef(null);
   const combinedRef = useCombinedRefs(forwardedRef, innerRef);
   const [focused, setFocused] = React.useState(false);
@@ -57,7 +57,7 @@ const Select = React.forwardRef(({className, name, required, label, ...props}, f
         required={required}
         onChange={() => {}}
       />
-      <label error-message={errorMessage}>
+      <label error-message={serverErrorMessage || errorMessage}>
         <div className="label-text">{label}</div>
         <SelectTwo
           ref={selectRef}
@@ -75,13 +75,15 @@ const Select = React.forwardRef(({className, name, required, label, ...props}, f
             setFocused(false);
             setVisited(true);
           }}
-          onChange={({value}) => {
-            
-            setValue(value);
+          onChange={(event) => {
+            setValue(event.value);
             inputRef.current.dispatchEvent(new Event('change'));
             setInvalid(false);
+            onChange?.(event);
           }}
-          className='oppono-select' classNamePrefix="oppono-select" components={{DropdownIndicator}}/>
+          className='oppono-select'
+          classNamePrefix="oppono-select"
+          components={{DropdownIndicator}}/>
       </label>
     </div>
   );
@@ -121,7 +123,7 @@ export default styled(Select)`
       height: ${size(13)};
     }
   }
-  &__single-value{
+  &__single-value,&__input{
     color: #bfb6b4;
     font-size: ${size(40)};
     font-weight: 300;
@@ -141,7 +143,7 @@ export default styled(Select)`
     }
   }
   &__menu{
-    background: black;
+    background: #373851;
     z-index: 1000000000;
   }
   &__option{
@@ -165,7 +167,7 @@ transition: margin-bottom 400ms;
       color: #bfb6b4;
       font-size: ${size(16)};
       font-weight: 500;
-      text-align: center;
+      text-align: left;
       margin-bottom: ${size(7)};
       .dark{
         color: rgba(191, 182, 180, 0.5);

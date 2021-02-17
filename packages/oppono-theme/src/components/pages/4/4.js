@@ -1,10 +1,7 @@
 import React from 'react';
 import Form from '../../form-components/Form';
 import Input from '../../form-components/Input';
-import {connect, styled} from 'frontity';
-import Container from '../../reusable/Container';
-import {size} from '../../../functions/size';
-import missing from '../../../assets/images/missing.png';
+import {styled} from 'frontity';
 import Select from '../../form-components/Select';
 import RadioInput from '../../form-components/RadioInput';
 import RadioGroup from '../../form-components/RadioGroup';
@@ -16,21 +13,16 @@ import TextArea from '../../form-components/TextArea';
 import intro_ball_1 from '../../../assets/images/form_1_img.png';
 import intro_ball_2 from '../../../assets/images/form_2_img.png';
 import FlyingObjsContainer from '../../reusable/FlyingObjsContainer';
-import ProductsTable from '../../form-components/ProductsTable';
 import {Li, Ol, P, Span} from '../../form-components/StyledComponent';
 import Alert from '../../form-components/Alert';
 import Finalize, {Bottom, FinalizeChild, FinalizeTable, Top} from '../../form-components/Finalize';
 import useMedia from '../../../hooks/useMedia';
 import FormConditionalInput from '../../form-components/FormConditionalInput';
-import {numberToOrdinal} from '../../../functions/numberToOrdinal';
-import FormFilter from '../../form-components/FormFilter';
 import FormRepeatableInput from '../../form-components/FormRepeatableInput';
-import ProductsMobileOption from '../../form-components/ProductsMobileOption';
 import upload from '../../../assets/images/upload.png';
 import Appraiser from '../../form-components/Appraiser';
 import RadioInputVertical from '../../form-components/RadioInputVertical';
 import LastStep from '../../form-components/LastStep';
-import last_step from '../../../assets/images/last-step.png';
 
 const FourPage = (props) => {
   const media = useMedia();
@@ -63,7 +55,7 @@ const FourPage = (props) => {
             }]}/>
         <div className="form-text-wrapper">
           <h1 className={'form-headline-1 text-left'}>Okay, just 5 more easy questions</h1>
-          <h2 className={'form-headline-2'}>Let’s get you that secured business line of credit!</h2>
+          <h2 className={'form-headline-2 primary'}>Let’s get you that secured business line of credit!</h2>
         </div>
         <Input type={'text'} label={'Legal business name'} name={'business_name'} required={true}/>
         <Select options={[
@@ -78,7 +70,7 @@ const FourPage = (props) => {
           <Input type={'text'} placeholder={'e.g. Toronto'} label={'City'} name={'city'} required={true}/>
           <Input type={'text'} placeholder={'e.g. M5H 3S4'} label={'Postal Code'} name={'postal_code'} required={true}/>
         </W50>
-      
+  
         <Button icon={true} className={'next-step'} label={'Next'}/>
       </FormStep>
       <FormStep activeTheme={'gray-theme'} stepName={'b-2'}>
@@ -105,12 +97,14 @@ const FourPage = (props) => {
         <div className="form-text-wrapper">
           <h1 className={'form-headline-1 text-left'}>What’s the address of the property <br/>you want to secure the line of credit to?</h1>
         </div>
-        <FormConditionalInput label={'Is it the same as your business address?'} name={'property_same_address'} showOn={'yes'} checked={'yes'}>
-          <Input type={'text'} placeholder={'Address'} label={'What’s the address'} name={'property_address'} required={true}/>
-          <W50>
-            <Input type={'text'} placeholder={'e.g. Toronto'} label={'City'} name={'property_city'} required={true}/>
-            <Input type={'text'} placeholder={'e.g. M5H 3S4'} label={'Postal Code'} name={'property_postal_code'} required={true}/>
-          </W50>
+        <FormConditionalInput label={'Is it the same as your business address?'} name={'property_same_address'} showOn={'1'} checked={'0'}>
+          <>
+            <Input type={'text'} placeholder={'Address'} label={'What’s the address'} name={'property_address'} required={true}/>
+            <W50>
+              <Input type={'text'} placeholder={'e.g. Toronto'} label={'City'} name={'property_city'} required={true}/>
+              <Input type={'text'} placeholder={'e.g. M5H 3S4'} label={'Postal Code'} name={'property_postal_code'} required={true}/>
+            </W50>
+          </>
         </FormConditionalInput>
         <Select options={[
           {value: 'Residential', label: 'Residential'},
@@ -140,12 +134,12 @@ const FourPage = (props) => {
           <h1 className={'form-headline-1 text-left'}>Let’s talk numbers</h1>
         </div>
         <W50>
-          <Input type={'number'} placeholder={'e.g. $380,000'} label={'What is your purchase price?'} name={'purchase_price'} required={true}/>
-          <Input type={'number'} placeholder={'e.g. $380,000'} label={'What is your down payment?'} name={'down_payment'} required={true}/>
+          <Input type={'text'} pattern={'[0-9]+'} placeholder={'e.g. $380,000'} label={'What is your purchase price?'} name={'purchase_price'} required={true}/>
+          <Input type={'text'} pattern={'[0-9]+'} placeholder={'e.g. $380,000'} label={'What is your down payment?'} name={'down_payment'} required={true}/>
         </W50>
         <RadioGroup radioText={'Do you have an Appraisal Report?'}>
-          <RadioInput label={'Yes'} value={'yes'} name={'Appraisal'} type={'radio'}/>
-          <RadioInput label={'No'} value={'no'} name={'Appraisal'} type={'radio'}/>
+          <RadioInput label={'Yes'} value={'1'} name={'Appraisal'} type={'radio'}/>
+          <RadioInput label={'No'} value={'0'} name={'Appraisal'} type={'radio'}/>
         </RadioGroup>
         <div className="btn-group">
           <Button className={'bordered prev-step'} label={'Back'}/>
@@ -155,7 +149,7 @@ const FourPage = (props) => {
       <FormStep activeTheme={'gray-theme'} stepName={'b-4'}>
         <div className="form-text-wrapper">
           <h1 className={'form-headline-1 text-left'}>Just one more thing…</h1>
-          <h1 className={'form-headline-2'}>Who are the borrower(s)?</h1>
+          <h1 className={'form-headline-2 primary'}>Who are the borrower(s)?</h1>
         </div>
         <FormRepeatableInput question={'How many people are on the title for this mortgage?'} number={4} initial={1} name={'people'}>
           <W50>
@@ -163,7 +157,7 @@ const FourPage = (props) => {
             <Input type={'text'} placeholder={'e.g. Smith'} label={'Last Name'} name={'{{number}}_last_name'} required={true}/>
           </W50>
           <W50>
-            <Input type={'email'} label={'email'} name={'{{number}}_email'} required={true}/>
+            <Input type={'text'} pattern={'^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$'} label={'email'} name={'{{number}}_email'} required={true}/>
             <Input type={'phone'} label={'Phone Number'} name={'{{number}}_phone_number'} required={true}/>
           </W50>
           <RadioGroup radioText={`What’s the {{number}} applicant’s credit score?`}>
@@ -180,8 +174,9 @@ const FourPage = (props) => {
       <FormStep activeTheme={'gray-theme'} stepName={'b-5'}>
         <div className="form-text-wrapper wide-text">
           <h1 className={'form-headline-1 text-left'}>Let’s finalize this deal</h1>
-          <h2 className={'form-headline-2'}>Here’s a quick look at what we can offer</h2>
-          <h2 className={'form-headline-3'}>You are requesting a secured business equity line of credit against your residential, <br/>detached home which is located at<br/><br/> 444 Horner Ave,
+          <h2 className={'form-headline-2 primary'}>Here’s a quick look at what we can offer</h2>
+          <h2 className={'form-headline-3 primary'}>You are requesting a secured business equity line of credit against your residential, <br/>detached home which is located at<br/><br/> 444 Horner
+            Ave,
             Toronto, M5H 3S4</h2>
         </div>
         <Finalize>
@@ -206,7 +201,7 @@ const FourPage = (props) => {
                   </tbody>
                 </FinalizeTable>
               </FinalizeChild>}
-          
+      
             <FinalizeChild order={1}>
               <P.Dark>*Variable Rate</P.Dark>
               <P.Dark>*Payment interest based on balance</P.Dark>
@@ -242,7 +237,7 @@ const FourPage = (props) => {
                   </tbody>
                 </FinalizeTable>
               </FinalizeChild>}
-          
+  
             <FinalizeChild order={2} className={'full m-border'}>
               <FinalizeTable>
                 <tbody>
@@ -273,22 +268,11 @@ const FourPage = (props) => {
       </FormStep>
       <FormStep activeTheme={'green-theme'} stepName={'a-iii-6'}>
         <div className="upload-step-wrapper">
-          <FlyingObjsContainer childrenList={
-            [
-              {
-                imageUrl: upload,
-                left: '40%',
-                level: 1,
-                top: '7%',
-                type: 'image',
-                width: 8,
-                alt: 'alt',
-              },
-            ]}/>
+          <img src={upload}/>
           <h1 className={'form-headline-1 text-left'}>Let’s get this done!<br/>
             Upload your documents.</h1>
-          <FormConditionalInput label={'Do you have an appraisal report?'} name={'mortgages_1'} showOn={'yes'} checked={'yes'}>
-            <FileInput label={'Appraisal report'} acceptText={'PDF, JPG, or PNG'}/>
+          <FormConditionalInput label={'Do you have an appraisal report?'} name={'mortgages_1'} showOn={'1'} checked={'0'}>
+            <FileInput name='appraisal_report_file' label={'Appraisal report'} acceptText={'PDF, JPG, or PNG'}/>
             <Appraiser>
               <P.D>Select an appraiser</P.D>
               <div className="row">
@@ -323,7 +307,7 @@ const FourPage = (props) => {
           <img src={intro_ball_1} alt="flying obj"/>
           <div style={{flexBasis: '20%'}} className="text">
             <h1 className={'form-headline-1 text-left'}>Great news, we’ve got your app!</h1>
-            <p className={'form-headline-3'}>You’re almost done… for a quicker turnaround, follow the 4 easy steps below</p>
+            <p className={'form-headline-3 primary'}>You’re almost done… for a quicker turnaround, follow the 4 easy steps below</p>
             <Ol>
               <Li>Login into your <Span.Green>Filogix</Span.Green> Expert account</Li>
               <Li>Select your <Span.White>Client</Span.White> and click <Span.Green>Lender Submit</Span.Green> in the left side panel.</Li>

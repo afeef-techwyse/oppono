@@ -99,11 +99,14 @@ display: flex;
 margin: 0 ${size(-10)};
 padding-top: 23px;
 flex-wrap: wrap;
- @media(max-width: 575.98px){
-  padding-top: 0;
-  }
+>div{
+ & > *{
+    padding-top: 2.4rem;
+ }
+}
 @media(max-width: 575.98px){
   flex-direction: column;
+  padding-top: 0;
   flex-wrap: nowrap;
   align-items: center;
 }

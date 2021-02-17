@@ -1,32 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import useStateWithRef from '../../hooks/useStateWithRef';
 import {P} from './StyledComponent';
 
-import {styled, css, connect} from 'frontity';
+import {connect, styled} from 'frontity';
 import classnames from 'classnames';
-
-
-import noiseSrc from '../../assets/images/noise.png';
-import img1 from '../../assets/images/fly-image-1.png';
-import img2 from '../../assets/images/fly-image-2.png';
-import img3 from '../../assets/images/fly-image-3.png';
-import img4 from '../../assets/images/fly-image-4.png';
-import img5 from '../../assets/images/fly-image-5.png';
-import img6 from '../../assets/images/fly-image-6.png';
-import img7 from '../../assets/images/fly-image-7.png';
-import img8 from '../../assets/images/fly-image-8.png';
-import sprite1 from '../../assets/sprite-sheets/sprite-slide-1.png';
-import sprite2 from '../../assets/sprite-sheets/sprite-slide-2.png';
-import homeSprite1 from '../../assets/sprite-sheets/home-slider/home_slide_01.png';
-import homeSprite2 from '../../assets/sprite-sheets/home-slider/home_slide_02.png';
-import homeSprite3 from '../../assets/sprite-sheets/home-slider/home_slide_03.png';
-import homeSprite4 from '../../assets/sprite-sheets/home-slider/home_slide_04.png';
-import homeSprite5 from '../../assets/sprite-sheets/home-slider/home_slide_05.png';
-import homeSprite6 from '../../assets/sprite-sheets/home-slider/home_slide_06.png';
-import homeSprite7 from '../../assets/sprite-sheets/home-slider/home_slide_07.png';
-import vertical from '../../assets/sprite-sheets/home-slider/vertical.png';
-import vertical2 from '../../assets/sprite-sheets/home-slider/vertival2.png';
 
 
 import gsap from 'gsap';
@@ -34,122 +11,125 @@ import SplitText from 'gsap/SplitText';
 import DrawSVGPlugin from 'gsap/DrawSVGPlugin';
 import CustomEase from 'gsap/CustomEase';
 
-import SwiperCore, {Navigation, Pagination, Keyboard, Mousewheel, A11y, Controller, Thumbs} from 'swiper';
+import SwiperCore, {A11y, Controller, Keyboard, Mousewheel, Navigation, Pagination, Thumbs} from 'swiper';
 import {Swiper, SwiperSlide} from 'swiper/react';
 
 import {size} from '../../functions/size';
 
 import Container from '../reusable/Container';
-import SpriteSheet from '../reusable/SpriteSheet';
 import FlyingObj from '../reusable/FlyingObj';
 import Link from '../reusable/Link';
-import useMedia from '../../hooks/useMedia';
 import MegaloNum from './MegaloNum';
 import Button from './Button';
-import ProductsFeature from '../ProductsFeature';
-import featureImg from '../../assets/images/product-feature-1.png';
-import ProductsTable from './ProductsTable';
+import Header from '../Header';
+import Footer from '../Footer';
 
 SwiperCore.use([Navigation, Pagination, Keyboard, Mousewheel, A11y, Controller, Thumbs]);
 gsap.registerPlugin(SplitText, DrawSVGPlugin, CustomEase);
 
 const Slider = styled(Swiper)`
-z-index: 5;
-width: 100%;
-position: relative;
-overflow: visible !important;
-.swiper-wrapper, .swiper-slide{
-  //transition: none !important;
-}
-.title-wrapper{
+  z-index: 5;
+  width: 100%;
   position: relative;
-   @media(max-width: 991.98px){
-    margin-left: ${size(32)};
+  overflow: visible !important;
+
+  .swiper-wrapper, .swiper-slide {
+    //transition: none !important;
   }
-  @media(max-width: 575.98px){
+
+  .title-wrapper {
+    position: relative;
+    @media (max-width: 991.98px) {
+      margin-left: ${size(32)};
+    }
+    @media (max-width: 575.98px) {
       margin-left: 2.85vh;
       margin-top: 4vh;
+    }
+
+    .slide-number {
+      color: #b5d2ff;
+      font-size: ${size(10)};
+      font-weight: 700;
+      width: ${size(23)};
+      height: ${size(23)};
+      border: 1px solid rgba(181, 210, 255, 0.4);
+      border-radius: 50%;
+      position: absolute;
+      left: ${size(-35)};
+      top: ${size(30)};
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @media (max-width: 575.98px) {
+        font-size: ${size(8)};
+        left: ${size(-24)};
+        width: ${size(16)};
+        top: ${size(12)};
+        height: ${size(16)};
+      }
+    }
+
+    .title {
+      color: #b5d2ff;
+      font-size: ${size(80)};
+      font-weight: 400;
+      font-style: normal;
+      letter-spacing: normal;
+      line-height: ${size(95)};
+      text-align: left;
+      white-space: pre-wrap;
+      @media (max-width: 991.98px) {
+        font-size: ${size(60)};
+        line-height: ${size(70)};
+      }
+      @media (max-width: 575.98px) {
+        font-size: 3.94vh;
+        line-height: 4.43vh;
+      }
+    }
   }
-    .slide-number{
-    color: #b5d2ff;
-    font-size: ${size(10)};
-    font-weight: 700;
-    width: ${size(23)};
-    height: ${size(23)};
-    border: 1px solid rgba(181, 210, 255, 0.4);
-    border-radius: 50%;
-    position: absolute;
-    left: ${size(-35)};
-    top: ${size(30)};
+
+  .btn {
+    width: auto;
+    max-width: fit-content;
+    padding: 0 ${size(32)};
+    height: ${size(64)};
     display: flex;
     align-items: center;
     justify-content: center;
-    @media(max-width: 575.98px){
-      font-size: ${size(8)};
-      left: ${size(-24)};
-      width: ${size(16)};
-      top: ${size(12)};
-      height: ${size(16)};
+    border-radius: ${size(32)};
+    background-color: #fe412d;
+    color: #ffffff;
+    font-size: ${size(16)};
+    font-weight: 500;
+    text-decoration: none;
+    margin-top: ${size(24)};
+    cursor: pointer;
+    white-space: nowrap;
+
+    &:hover, &:active, &:focus {
+      text-decoration: none;
+    }
+
+    svg {
+      width: ${size(13)};
+      height: ${size(13)};
+      margin-left: ${size(8)};
+    }
+
+    @media (max-width: 991.98px) {
+      margin-left: ${size(32)};
+      height: ${size(56)};
+    }
+    @media (max-width: 575.98px) {
+      display: none;
     }
   }
-.title{
-  color: #b5d2ff;
-  font-size: ${size(80)};
-  font-weight: 400;
-  font-style: normal;
-  letter-spacing: normal;
-  line-height: ${size(95)};
-  text-align: left;
-  white-space: pre-wrap;
-  @media(max-width: 991.98px){
-    font-size: ${size(60)};
-    line-height: ${size(70)};
-  }
-  @media(max-width: 575.98px){
-      font-size: 3.94vh;
-      line-height: 4.43vh;
-  }
-}
-}
 
-.btn{
-  width: auto;
-  max-width: fit-content;
-  padding: 0 ${size(32)};
-  height: ${size(64)};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: ${size(32)};
-  background-color: #fe412d;
-  color: #ffffff;
-  font-size: ${size(16)};
-  font-weight: 500;
-  text-decoration: none;
-  margin-top: ${size(24)};
-  cursor: pointer;
-  white-space: nowrap;
-  &:hover, &:active, &:focus{
-    text-decoration: none;
-  }
-  
-  svg{
-    width: ${size(13)};
-    height: ${size(13)};
-    margin-left: ${size(8)};
-  }
-  @media(max-width: 991.98px){
-    margin-left: ${size(32)};
-    height: ${size(56)};
-  }
-  @media(max-width: 575.98px){
-    display: none;
-  }
-}
-
-@media (max-width: 575.98px){
+  @media (max-width: 575.98px) {
     padding-bottom: ${size(22)};
-}
+  }
 `;
 
 const createSlideAnimation = (slide, paused = true, initial = false) => {
@@ -177,8 +157,8 @@ const createSlideAnimation = (slide, paused = true, initial = false) => {
 };
 
 const ProductFeaturesContainer = styled.div`
->div:nth-of-type(even){
-    flex-direction:row-reverse;
+  > div:nth-of-type(even) {
+    flex-direction: row-reverse;
   }
 `;
 const ProductsSlider = ({className, active = false, state, actions}) => {
@@ -199,7 +179,6 @@ const ProductsSlider = ({className, active = false, state, actions}) => {
   const flyingObjectsAnimation = React.useRef(gsap.timeline({paused: true}));
   
   
-  const [currentSlide, setCurrentSlide, currentSlideRef] = useStateWithRef(0);
   React.useEffect(() => {
     actions.theme.setActiveTheme(page_theme);
   
@@ -247,14 +226,28 @@ const ProductsSlider = ({className, active = false, state, actions}) => {
     initialTimeline.current.paused(!active);
   }, [active]);
   
+  React.useEffect(() => {
+    actions.theme.checkUser();
+  }, [state.theme.user.logged]);
+  
+  const SignUpLink = connect(({state}) => state.theme.user.logged
+    ?
+    <Link href={'/dashboard/'} className={'cta-btn'}><Button className={'wide'} label={'Go to Dashboard'}/></Link>
+    
+    : <Link href={'/create-account/'} className={'cta-btn'}><Button className={'wide'} label={'Sign up to check all products & rates'}/></Link>
+    ,
+  );
+  
   return (
-    <>
+    <div className={page_theme}>
+      <Header/>
       <div className={className}>
         <div ref={flyingWrapperRef} className="flying-obj-wrapper">
           {
             slidesObj.map((slide, slideIndex) => slide.flying_objects.desktop?.map((obj, objIndex) => {
                 return <FlyingObj
                   // ref={el => obj.ref = el}
+                  disableFloating
                   key={`slide-${slideIndex}-obj-${objIndex}-${state.router.link}`}
                   width={+obj.width}
                   imageUrl={obj.image.url}
@@ -315,7 +308,6 @@ const ProductsSlider = ({className, active = false, state, actions}) => {
               slidesAnimation.current[realIndex].progress(0).play();
               slidesAnimation.current[previousIndex].progress(1).paused(true).progress(0);
             }, 750);
-            setCurrentSlide(realIndex);
             setTimeout(() => setSlideFlyingObjectsPlaying(prevState => {
               const newState = [...prevState];
               newState[realIndex] = true;
@@ -337,7 +329,7 @@ const ProductsSlider = ({className, active = false, state, actions}) => {
                 </svg>
               </span>
           </Container>
-  
+          
           {
             slidesObj.map((slide, slideIndex) =>
               <SwiperSlide key={`slide-${slideIndex}`}>
@@ -408,274 +400,278 @@ const ProductsSlider = ({className, active = false, state, actions}) => {
               />)}
           </Swiper>
         </Container>
-        <Link href={'/dashboard/'} className={'cta-btn'}><Button className={'wide'} label={'Sign up to check all products & rates'}/></Link>
+        
+        <SignUpLink/>
         <div className="terms-text">Terms and conditions apply to all rates & products</div>
       </div>
-      <Container>
-        <ProductFeaturesContainer>
-          <ProductsFeature
-            title={'No beacon score asked, no income verification.'}
-            description={'Our common-sense approach to lending means our decisions are not based on a set of nonnegotiable criteria. Instead, we look at the borrowers’ unique situation and measure their ability to meet their obligations, accompanied by an appropriate loan-to-value ratio. If the investment makes sense, we will fund it!'}
-            imageUrl={featureImg}
-            alt={'feature-image'}
-          />
-          <ProductsFeature
-            title={'No beacon score asked, no income verification.'}
-            description={'Our common-sense approach to lending means our decisions are not based on a set of nonnegotiable criteria. Instead, we look at the borrowers’ unique situation and measure their ability to meet their obligations, accompanied by an appropriate loan-to-value ratio. If the investment makes sense, we will fund it!'}
-            imageUrl={featureImg}
-            alt={'feature-image'}
-          />
-          <ProductsFeature
-            title={'No beacon score asked, no income verification.'}
-            description={'Our common-sense approach to lending means our decisions are not based on a set of nonnegotiable criteria. Instead, we look at the borrowers’ unique situation and measure their ability to meet their obligations, accompanied by an appropriate loan-to-value ratio. If the investment makes sense, we will fund it!'}
-            imageUrl={featureImg}
-            alt={'feature-image'}
-          />
-          <ProductsFeature
-            title={'No beacon score asked, no income verification.'}
-            description={'Our common-sense approach to lending means our decisions are not based on a set of nonnegotiable criteria. Instead, we look at the borrowers’ unique situation and measure their ability to meet their obligations, accompanied by an appropriate loan-to-value ratio. If the investment makes sense, we will fund it!'}
-            imageUrl={featureImg}
-            alt={'feature-image'}
-          />
-        </ProductFeaturesContainer>
-      </Container>
-    </>
+      <Footer/>
+    </div>
+  
   );
 };
 ProductsSlider.prototype = {
   className: PropTypes.string,
 };
 export default styled(connect(ProductsSlider))`
-position: relative;
-width: 100%;
-overflow: hidden;
-padding-top: ${size(165)};
- margin-bottom: ${size(119)};
- @media(max-width: 991.98px){
-    padding-top: ${size(189)};
-  }
-  @media(max-width: 575.98px){
-    padding-top: ${size(105)};
-  }
-${MegaloNum}{
-  margin-bottom: 0;
-  text-align: center;
-  .number{
-    display: inline-block;
-    position: relative;
-    letter-spacing: ${size(-11)};
-    font-size: ${size(250)};
-    &:before{
-    content: '%';
-    position: absolute;
-    right: ${size(-20)};
-    top: ${size(20)};
-    color: #d2f5e9;
-    font-size: ${size(25)};
-    font-weight: 400;
-    line-height: ${size(34)};
-  }
-    @media(max-width: 991.98px){
-    font-size: ${size(140)};
-    line-height: ${size(180)};
-    }
-    @media(max-width: 575.98px){
-    font-size: ${size(120)};
+  height: 100vh;
+  position: relative;
+  width: 100%;
+  overflow-x: hidden;
+  margin-bottom: ${size(119)};
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  ${MegaloNum} {
+    margin-bottom: 0;
+    text-align: center;
+
+    .number {
+      display: inline-block;
+      position: relative;
+      letter-spacing: ${size(-11)};
+      font-size: ${size(250)};
+
+      &:before {
+        content: '%';
+        position: absolute;
+        right: ${size(-20)};
+        top: ${size(20)};
+        color: #d2f5e9;
+        font-size: ${size(25)};
+        font-weight: 400;
+        line-height: ${size(34)};
+      }
+
+      @media (max-width: 991.98px) {
+        font-size: ${size(140)};
+        line-height: ${size(180)};
+      }
+      @media (max-width: 575.98px) {
+        font-size: ${size(120)};
         line-height: ${size(140)};
 
+      }
     }
   }
-}
-table{
-position: absolute;
-right: ${size(250)};
-top: ${size(65)};
-  td:first-of-type{
-    padding-right: ${size(34)};
-     @media(max-width: 575.98px){
-    padding-right: 0;
-    width: 50%;
-    text-align: left;
+
+  table {
+    position: absolute;
+    right: ${size(250)};
+    top: ${size(65)};
+
+    td:first-of-type {
+      padding-right: ${size(34)};
+      @media (max-width: 575.98px) {
+        padding-right: 0;
+        width: 50%;
+        text-align: left;
+      }
+    }
+
+    @media (max-width: 991.98px) {
+      right: ${size(55)};
+      top: ${size(40)};
+    }
+    @media (max-width: 575.98px) {
+      position: unset;
+      margin: ${size(22)} auto 0;
+      width: 100%;
+    }
   }
+
+  ${Button} {
+    @media (max-width: 991.98px) {
+      padding: ${size(10)} ${size(26)} !important;
+    }
+    @media (max-width: 575.98px) {
+      padding: ${size(18)} ${size(20)} !important;
+      white-space: normal;
+    }
   }
-    @media(max-width: 991.98px){
-  right: ${size(55)};
-top: ${size(40)};
-  }
-  @media(max-width: 575.98px){
-    position: unset;
-    margin: ${size(22)} auto 0;
-    width: 100%;
-  }
-}
-${Button}{
-  @media(max-width: 991.98px){
-    padding: ${size(10)} ${size(26)}!important;
-  }
-   @media(max-width: 575.98px){
-    padding: ${size(18)} ${size(20)}!important;
-    white-space: normal;
-  }
-}
-.swiper-arrows-container{
-position: absolute;
+
+  .swiper-arrows-container {
+    position: absolute;
     height: 100%;
     left: 50%;
     top: 0;
     transform: translateX(-50%);
     z-index: 9;
-  //@media(max-width: 575.98px){
-  //  display: none;
-  //}
-  &${Container}{
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    
-@media (max-width: 575.98px){
-    &:after{
-      content: '';
-      height: ${size(1)};
-      width: 100%;
-      background-color: #d2f5e9;
-      margin-top: auto;
+    //@media(max-width: 575.98px){
+    //  display: none;
+    //}
+    &${Container} {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+      @media (max-width: 575.98px) {
+        &:after {
+          content: '';
+          height: ${size(1)};
+          width: 100%;
+          background-color: #d2f5e9;
+          margin-top: auto;
+        }
+      }
     }
-}
-  }
-  .prev,.next{
-    cursor: pointer;
-    transition: margin .4s ease, width .4s ease,opacity .4s ease;
-    overflow: hidden;
-    width: ${size(99)};
-    height: ${size(30)};
-    display: flex;
-    align-items: center;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    @media(max-width: 575.98px){
-          width: ${size(25)};
-          top: 30%;
-    }
-    svg{
-      position:absolute;
+
+    .prev, .next {
+      cursor: pointer;
+      transition: margin .4s ease, width .4s ease, opacity .4s ease;
+      overflow: hidden;
       width: ${size(99)};
-      height: ${size(10)};
-    }
-    &.swiper-button-disabled{
-    cursor: not-allowed;
-      opacity: .4;
-      width: ${size(50)};
-      @media(max-width: 575.98px){
+      height: ${size(30)};
+      display: flex;
+      align-items: center;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      @media (max-width: 575.98px) {
+        width: ${size(25)};
+        top: 30%;
+      }
+
+      svg {
+        position: absolute;
+        width: ${size(99)};
+        height: ${size(10)};
+      }
+
+      &.swiper-button-disabled {
+        cursor: not-allowed;
+        opacity: .4;
+        width: ${size(50)};
+        @media (max-width: 575.98px) {
           width: ${size(20)};
+        }
+      }
     }
-    }
-  }
-  .prev{
-  left: 0;
-       @media(max-width: 991.98px){
-  left: ${size(32)};
-  }
-    svg{
+
+    .prev {
       left: 0;
+      @media (max-width: 991.98px) {
+        left: ${size(32)};
+      }
+
+      svg {
+        left: 0;
+      }
     }
-  }
-  .next{
-  right: 0;
-   @media(max-width: 991.98px){
-  right: ${size(32)};
-  }
-    svg{
+
+    .next {
       right: 0;
+      @media (max-width: 991.98px) {
+        right: ${size(32)};
+      }
+
+      svg {
+        right: 0;
+      }
+
+      &.swiper-button-disabled {
+        margin-right: ${size(49)};
+      }
     }
-    &.swiper-button-disabled{
-      margin-right: ${size(49)};
-    }
+
+
   }
 
-
-}
-.swiper-pagination-bullets {
-  position: relative;
-  display: flex;
-  z-index: 9;
-      justify-content: center;
+  .swiper-pagination-bullets {
+    position: relative;
+    display: flex;
+    z-index: 9;
+    justify-content: center;
     align-items: center;
-     margin-top: ${size(40)};
-     margin-bottom: ${size(31)};
-  @media(max-width: 991.98px){
-    max-width: 90%;
-    margin-right: auto;
-    margin-left: auto;
+    margin-top: ${size(40)};
+    margin-bottom: ${size(31)};
+    @media (max-width: 991.98px) {
+      max-width: 90%;
+      margin-right: auto;
+      margin-left: auto;
+    }
   }
-}
-.thumbs-container{
-  @media(min-width:922px){
-    max-width: 100%;
-    width: 100%;
+
+  .thumbs-container {
+    @media (min-width: 922px) {
+      max-width: 100%;
+      width: 100%;
+    }
+    @media (max-width: 575.98px) {
+      max-width: 100%;
+      width: 100%;
+    }
   }
-  @media(max-width:575.98px){
-    max-width: 100%;
-    width: 100%;
+
+  .thumbs-swiper {
+    margin-top: ${size(68)};
+    max-width: 67%;
+    @media (max-width: 991.98px) {
+      max-width: 100%;
+    }
+    @media (max-width: 575.98px) {
+      margin-top: ${size(10)};
+    }
   }
-}
-.thumbs-swiper{
-  margin-top: ${size(68)};
-  max-width:  67%;
-  @media(max-width: 991.98px){
-    max-width: 100%;
+
+  .swiper-slide-thumb {
+    width: ${size(230)};
+      //height: ${size(50)};
+    padding-top: ${size(14)};
+    cursor: pointer;
+    transition: opacity 400ms ease;
+    opacity: .4;
+    color: #d2f5e9;
+    font-size: ${size(12)};
+    font-weight: 400;
+    letter-spacing: ${size(.48)};
+    line-height: ${size(16)};
+    border-top: 1px solid #d2f5e9;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &.active {
+      opacity: 1;
+    }
+
+    @media (max-width: 575.98px) {
+      border-top: none;
+      text-align: center;
+      br {
+        display: none;
+      }
+    }
+
   }
-  @media(max-width: 575.98px){
-    margin-top: ${size(10)};
-  }
-}
-.swiper-slide-thumb{
-  width: ${size(230)};
-  //height: ${size(50)};
-  padding-top: ${size(14)};
-  cursor: pointer;
-  transition: opacity 400ms ease;
-  opacity: .4;
-  color: #d2f5e9;
-  font-size: ${size(12)};
-  font-weight: 400;
-  letter-spacing: ${size(.48)};
-  line-height: ${size(16)};
-  border-top: 1px solid #d2f5e9;
-  &:hover{
-    opacity: 1;
-  }
-  &.active{
-    opacity: 1;
-  }
-  @media(max-width: 575.98px){
-    border-top: none;
+
+  .terms-text {
+    color: rgba(210, 245, 233, 0.4);
+    font-size: ${size(14)};
+    font-weight: 500;
     text-align: center;
-    br{
+    margin-top: ${size(32)};
+    @media (max-width: 991.98px) {
+      margin-top: ${size(10)};
+    }
+  }
+
+  .flying-obj-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 0;
+    height: 100%;
+    @media (max-width: 575.98px) {
       display: none;
     }
   }
-  
-}
-.terms-text{
-  color: rgba(210, 245, 233, 0.4);
-  font-size: ${size(14)};
-  font-weight: 500;
-  text-align: center;
-   margin-top: ${size(32)};
-      @media(max-width: 991.98px){
- margin-top: ${size(10)};
-   }
-}
-.flying-obj-wrapper{
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: -1;
-  height: 100%;
-  @media(max-width: 575.98px){
-    display: none;
+
+  .cta-btn {
+    position: relative;
+    z-index: 1;
   }
-}
 `;

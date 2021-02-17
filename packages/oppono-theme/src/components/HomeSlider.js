@@ -1,29 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import useStateWithRef from '../hooks/useStateWithRef';
+import classnames from 'classnames';
 
-import {styled, css, connect} from 'frontity';
-
-import noiseSrc from '../assets/images/noise.png';
-import img1 from '../assets/images/fly-image-1.png';
-import img2 from '../assets/images/fly-image-2.png';
-import img3 from '../assets/images/fly-image-3.png';
-import img4 from '../assets/images/fly-image-4.png';
-import img5 from '../assets/images/fly-image-5.png';
-import img6 from '../assets/images/fly-image-6.png';
-import img7 from '../assets/images/fly-image-7.png';
-import img8 from '../assets/images/fly-image-8.png';
-import sprite1 from '../assets/sprite-sheets/sprite-slide-1.png';
-import sprite2 from '../assets/sprite-sheets/sprite-slide-2.png';
-import homeSprite1 from '../assets/sprite-sheets/home-slider/home_slide_01.png';
-import homeSprite2 from '../assets/sprite-sheets/home-slider/home_slide_02.png';
-import homeSprite3 from '../assets/sprite-sheets/home-slider/home_slide_03.png';
-import homeSprite4 from '../assets/sprite-sheets/home-slider/home_slide_04.png';
-import homeSprite5 from '../assets/sprite-sheets/home-slider/home_slide_05.png';
-import homeSprite6 from '../assets/sprite-sheets/home-slider/home_slide_06.png';
-import homeSprite7 from '../assets/sprite-sheets/home-slider/home_slide_07.png';
-import vertical from '../assets/sprite-sheets/home-slider/vertical.png';
-import vertical2 from '../assets/sprite-sheets/home-slider/vertival2.png';
+import {connect, styled} from 'frontity';
 
 
 import gsap from 'gsap';
@@ -31,13 +11,12 @@ import SplitText from 'gsap/SplitText';
 import DrawSVGPlugin from 'gsap/DrawSVGPlugin';
 import CustomEase from 'gsap/CustomEase';
 
-import SwiperCore, {Navigation, Pagination, Keyboard, Mousewheel, A11y} from 'swiper';
+import SwiperCore, {A11y, Keyboard, Mousewheel, Navigation, Pagination} from 'swiper';
 import {Swiper, SwiperSlide} from 'swiper/react';
 
 import {size} from '../functions/size';
 
 import Container from './reusable/Container';
-import SpriteSheet from './reusable/SpriteSheet';
 import Header from './Header';
 import Footer from './Footer';
 import FlyingObj from './reusable/FlyingObj';
@@ -48,117 +27,123 @@ SwiperCore.use([Navigation, Pagination, Keyboard, Mousewheel, A11y]);
 gsap.registerPlugin(SplitText, DrawSVGPlugin, CustomEase);
 
 const Slider = styled(Swiper)`
-z-index: 5;
-width: 100%;
-position: relative;
-overflow: visible !important;
-.swiper-wrapper, .swiper-slide{
-  //transition: none !important;
-}
-.title-wrapper{
+  z-index: 5;
+  width: 100%;
   position: relative;
-   @media(max-width: 991.98px){
-    margin-left: ${size(32)};
+  overflow: visible !important;
+
+  .swiper-wrapper, .swiper-slide {
+    //transition: none !important;
   }
-  @media(max-width: 575.98px){
+
+  .title-wrapper {
+    position: relative;
+    @media (max-width: 991.98px) {
+      margin-left: ${size(32)};
+    }
+    @media (max-width: 575.98px) {
       margin-left: 2.85vh;
       margin-top: 4vh;
+    }
+
+    .slide-number {
+      color: #b5d2ff;
+      font-size: ${size(10)};
+      font-weight: 700;
+      width: ${size(23)};
+      height: ${size(23)};
+      border: 1px solid rgba(181, 210, 255, 0.4);
+      border-radius: 50%;
+      position: absolute;
+      left: ${size(-35)};
+      top: ${size(30)};
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @media (max-width: 575.98px) {
+        font-size: ${size(8)};
+        left: ${size(-24)};
+        width: ${size(16)};
+        top: ${size(12)};
+        height: ${size(16)};
+      }
+    }
+
+    .title {
+      color: #b5d2ff;
+      font-size: ${size(80)};
+      font-weight: 400;
+      font-style: normal;
+      letter-spacing: normal;
+      line-height: ${size(95)};
+      text-align: left;
+      white-space: pre-wrap;
+      @media (max-width: 991.98px) {
+        font-size: ${size(60)};
+        line-height: ${size(70)};
+      }
+      @media (max-width: 575.98px) {
+        font-size: 3.94vh;
+        line-height: 4.43vh;
+      }
+    }
   }
-    .slide-number{
-    color: #b5d2ff;
-    font-size: ${size(10)};
-    font-weight: 700;
-    width: ${size(23)};
-    height: ${size(23)};
-    border: 1px solid rgba(181, 210, 255, 0.4);
-    border-radius: 50%;
-    position: absolute;
-    left: ${size(-35)};
-    top: ${size(30)};
+
+  .btn {
+    width: auto;
+    max-width: fit-content;
+    padding: 0 ${size(32)};
+    height: ${size(64)};
     display: flex;
     align-items: center;
     justify-content: center;
-    @media(max-width: 575.98px){
-      font-size: ${size(8)};
-      left: ${size(-24)};
-      width: ${size(16)};
-      top: ${size(12)};
-      height: ${size(16)};
+    border-radius: ${size(32)};
+    background-color: #fe412d;
+    color: #ffffff;
+    font-size: ${size(16)};
+    font-weight: 500;
+    text-decoration: none;
+    margin-top: ${size(24)};
+    cursor: pointer;
+    white-space: nowrap;
+
+    &:hover, &:active, &:focus {
+      text-decoration: none;
+    }
+
+    svg {
+      width: ${size(13)};
+      height: ${size(13)};
+      margin-left: ${size(8)};
+    }
+
+    @media (max-width: 991.98px) {
+      margin-left: ${size(32)};
+      height: ${size(56)};
+    }
+    @media (max-width: 575.98px) {
+      display: none;
     }
   }
-.title{
-  color: #b5d2ff;
-  font-size: ${size(80)};
-  font-weight: 400;
-  font-style: normal;
-  letter-spacing: normal;
-  line-height: ${size(95)};
-  text-align: left;
-  white-space: pre-wrap;
-  @media(max-width: 991.98px){
-    font-size: ${size(60)};
-    line-height: ${size(70)};
-  }
-  @media(max-width: 575.98px){
-      font-size: 3.94vh;
-      line-height: 4.43vh;
-  }
-}
-}
-
-.btn{
-  width: auto;
-  max-width: fit-content;
-  padding: 0 ${size(32)};
-  height: ${size(64)};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: ${size(32)};
-  background-color: #fe412d;
-  color: #ffffff;
-  font-size: ${size(16)};
-  font-weight: 500;
-  text-decoration: none;
-  margin-top: ${size(24)};
-  cursor: pointer;
-  white-space: nowrap;
-  &:hover, &:active, &:focus{
-    text-decoration: none;
-  }
-  
-  svg{
-    width: ${size(13)};
-    height: ${size(13)};
-    margin-left: ${size(8)};
-  }
-  @media(max-width: 991.98px){
-    margin-left: ${size(32)};
-    height: ${size(56)};
-  }
-  @media(max-width: 575.98px){
-    display: none;
-  }
-}
 
 `;
 
 const createSlideAnimation = (slide, paused = true) => {
   if (!slide) return;
   const
-    slideAnimationTl = gsap.timeline({paused}),
+    slideAnimationTl = gsap.timeline({paused}).timeScale(2),
     title = slide.querySelector('.title'),
     btn = slide.querySelector('.btn'),
     slideNumber = slide.querySelector('.slide-number'),
-    btnText = btn.querySelector('.text'),
-    btnEnter = btn.querySelectorAll('.enter-arrow path');
+    btnText = btn?.querySelector('.text'),
+    btnEnter = btn?.querySelectorAll('.enter-arrow path');
   let splitted = false;
   if (title.classList.contains('splitted')) splitted = true;
   const titleWords = !splitted && new SplitText(title, {type: 'words'}),
     btnChars = !splitted && new SplitText(btnText, {type: 'chars'});
   
   title.classList.add('splitted');
-  btnText.classList.add('splitted');
+  btnText?.classList.add('splitted');
   
   slideAnimationTl
     .fromTo(splitted ? title.children : titleWords.words, {autoAlpha: 0, y: 20}, {autoAlpha: 1, y: 0, stagger: 0.06})
@@ -168,16 +153,17 @@ const createSlideAnimation = (slide, paused = true) => {
     .fromTo(btn, {width: 0}, {width: 'auto', ease: 'power2.in'}, '-=.3')
     .fromTo(slideNumber, {autoAlpha: 0, scale: 0}, {autoAlpha: 1, scale: 1}, '<')
     
-    .fromTo(splitted ? btnText.children : btnChars.chars, {autoAlpha: 0, y: 10}, {autoAlpha: 1, y: 0, stagger: 0.05, duration: .3}, '-=.1')
+    .fromTo(splitted ? btnText?.children : btnChars.chars, {autoAlpha: 0, y: 10}, {autoAlpha: 1, y: 0, stagger: 0.05, duration: .3}, '-=.1')
     .fromTo(btnEnter, {drawSVG: 0}, {drawSVG: '100%', stagger: .3}, '-=.1');
   return slideAnimationTl;
 };
 
 
-const HomeSlider = ({className, active = false, state, actions}) => {
-  const data = state.source.get(state.router.link);
+const HomeSlider = ({className, active = false, state, actions, link}) => {
+  const data = state.source.get(link);
   const slidesObj = data.isReady && !data.isError ? state.source[data.type][data.id].acf.slider : [];
-  const {page_theme,slider_top_subtitle,slider_top_title} = data.isReady && !data.isError ? state.source[data.type][data.id].acf:{};
+  const {page_theme, slider_top_subtitle, slider_top_title} = data.isReady && !data.isError ? state.source[data.type][data.id].acf : {};
+  const media = useMedia();
   const nextBtnRef = React.useRef(null);
   const prevBtnRef = React.useRef(null);
   const paginationRef = React.useRef(null);
@@ -186,19 +172,13 @@ const HomeSlider = ({className, active = false, state, actions}) => {
   const footer = React.useRef(null);
   const header = React.useRef(null);
   const welcomeMessage = React.useRef(null);
-  const media = useMedia();
-  const [swiperRef, setSwiperRef] = React.useState(null);
-  const [slideFlyingObjectsPlaying, setSlideFlyingObjectsPlaying] = React.useState([]);
   const slidesAnimation = React.useRef({});
   const slidesTransition = React.useRef(0);
   const initialTimeline = React.useRef(gsap.timeline({paused: false}));
   const flyingObjectsAnimation = React.useRef(gsap.timeline({paused: true}));
-  
+  const [swiperRef, setSwiperRef] = React.useState(null);
+  const [slideFlyingObjectsPlaying, setSlideFlyingObjectsPlaying] = React.useState([]);
   const [currentSlide, setCurrentSlide, currentSlideRef] = useStateWithRef(0);
-  React.useEffect(() => {
-    actions.theme.setActiveTheme(page_theme);
-    
-  }, [page_theme]);
   
   const resetSlider = () => {
     swiperRef?.slideTo(0);
@@ -206,9 +186,6 @@ const HomeSlider = ({className, active = false, state, actions}) => {
     
     setSlideFlyingObjectsPlaying([]);
   };
-  React.useEffect(() => {
-    resetSlider();
-  }, [state.router.link]);
   const swiperInit = (swiper) => {
     
     
@@ -220,252 +197,6 @@ const HomeSlider = ({className, active = false, state, actions}) => {
     }
     setSwiperRef(swiper);
   };
-  
-  
-  const sliderObj = [
-    {
-      title: 'I’ve got everything,<br/>I just want to apply',
-      btn: {
-        text: 'Let\'s Go',
-        link: '#',
-      },
-      flyingObjects: [
-        {
-          type: 'spriteSheet',
-          imageUrl: homeSprite1,
-          frames: 211,
-          loopStartIndex: 29,
-          repeat: -1,
-          yoyo: false,
-          width: 25,
-          duration: 6,
-          top: '38%',
-          left: 70,
-          alt: '',
-          level: 2,
-        }, {
-          type: 'spriteSheet',
-          imageUrl: vertical2,
-          frames: 91,
-          repeat: -1,
-          yoyo: false,
-          width: 25,
-          duration: 6,
-          top: '38%',
-          left: 20,
-          alt: '',
-          level: 2,
-          isVertical: true,
-        },
-      ],
-      mobileObj: {
-        type: 'spriteSheet',
-        imageUrl: homeSprite1,
-        frames: 211,
-        loopStartIndex: 29,
-        repeat: -1,
-        yoyo: false,
-        width: 60,
-        duration: 6,
-      },
-    },
-    {
-      title: 'want to know what<br/>my client qualifies for',
-      btn: {
-        text: 'Let\'s Go',
-        link: '#',
-      },
-      flyingObjects: [
-        {
-          type: 'spriteSheet',
-          imageUrl: homeSprite2,
-          frames: 91,
-          repeat: -1,
-          yoyo: false,
-          width: 20,
-          duration: 3,
-          top: '57%',
-          left: 72,
-          alt: '',
-          level: 2,
-        },
-      ],
-      mobileObj: {
-        type: 'spriteSheet',
-        imageUrl: homeSprite2,
-        frames: 91,
-        repeat: -1,
-        yoyo: false,
-        width: 60,
-        duration: 3,
-      },
-    },
-    {
-      title: 'What do I<br/>qualify for?',
-      btn: {
-        text: 'Let\'s Go',
-        link: '#',
-      },
-      flyingObjects: [
-        {
-          type: 'spriteSheet',
-          imageUrl: homeSprite3,
-          frames: 230,
-          repeat: -1,
-          yoyo: false,
-          width: 30,
-          duration: 6,
-          top: '26%',
-          left: 62,
-          alt: '',
-          level: 2,
-        },
-      ],
-      mobileObj: {
-        type: 'spriteSheet',
-        imageUrl: homeSprite3,
-        frames: 230,
-        repeat: -1,
-        yoyo: false,
-        width: 60,
-        duration: 6,
-      },
-    },
-    {
-      title: 'I want to see Oppono’s<br/>lending areas',
-      btn: {
-        text: 'Let\'s Go',
-        link: '#',
-      },
-      flyingObjects: [
-        {
-          type: 'spriteSheet',
-          imageUrl: homeSprite4,
-          frames: 181,
-          loopStartIndex: 31,
-          repeat: -1,
-          yoyo: false,
-          width: 25,
-          duration: 6,
-          top: '45%',
-          left: 80,
-          alt: '',
-          level: 2,
-        },
-      ],
-      mobileObj: {
-        type: 'spriteSheet',
-        imageUrl: homeSprite4,
-        frames: 181,
-        loopStartIndex: 29,
-        repeat: -1,
-        yoyo: false,
-        width: 47,
-        duration: 6,
-      },
-    },
-    {
-      title: 'Just browse through<br/>the rates & products',
-      btn: {
-        text: 'Let\'s Go',
-        link: '#',
-      },
-      flyingObjects: [
-        {
-          type: 'spriteSheet',
-          imageUrl: homeSprite5,
-          frames: 151,
-          repeat: -1,
-          yoyo: false,
-          width: 20,
-          duration: 6,
-          top: '45%',
-          left: 70,
-          alt: '',
-          level: 2,
-        },
-      ],
-      mobileObj: {
-        type: 'spriteSheet',
-        imageUrl: homeSprite5,
-        frames: 151,
-        repeat: -1,
-        yoyo: false,
-        width: 40,
-        duration: 6,
-      },
-    },
-    {
-      title: 'I’m looking for a secured<br/>business line of credit',
-      btn: {
-        text: 'Let\'s Go',
-        link: '#',
-      },
-      flyingObjects: [
-        {
-          type: 'spriteSheet',
-          imageUrl: homeSprite6,
-          frames: 133,
-          repeat: -1,
-          yoyo: false,
-          width: 12,
-          duration: 6,
-          top: '45%',
-          left: 80,
-          alt: '',
-          level: 2,
-        },
-      ],
-      mobileObj: {
-        type: 'spriteSheet',
-        imageUrl: homeSprite6,
-        frames: 133,
-        repeat: -1,
-        yoyo: false,
-        width: 28,
-        duration: 6,
-      },
-    },
-    {
-      title: 'I’m looking for a secured<br/>business line of credit',
-      btn: {
-        text: 'Let\'s Go',
-        link: '#',
-      },
-      flyingObjects: [
-        {
-          type: 'spriteSheet',
-          imageUrl: homeSprite7,
-          frames: 151,
-          loopStartIndex: 60,
-          repeat: -1,
-          yoyo: false,
-          width: 25,
-          duration: 3,
-          top: '45%',
-          left: 70,
-          alt: '',
-          level: 2,
-        },
-      ],
-      mobileObj: {
-        type: 'spriteSheet',
-        imageUrl: homeSprite7,
-        frames: 151,
-        loopStartIndex: 60,
-        repeat: -1,
-        yoyo: false,
-        width: 60,
-        duration: 3,
-      },
-    },
-  ];
-  // const flyingWrapperPositionHandler = () => {
-  //   flyingWrapperRef.current.style.top = '0px';
-  //   flyingWrapperRef.current.style.top = -flyingWrapperRef.current.getBoundingClientRect().top + 'px';
-  //   flyingWrapperRef.current.style.height = window.innerHeight + 'px';
-  // };
-  
   
   React.useEffect(() => {
     actions.source.fetch(state.router.link);
@@ -521,23 +252,32 @@ const HomeSlider = ({className, active = false, state, actions}) => {
       window.removeEventListener('keydown', keyHandler);
     };
   }, [swiperRef]);
-  
   React.useEffect(() => {
     initialTimeline.current.paused(!active);
   }, [active]);
+  React.useEffect(() => {
+    actions.theme.setActiveTheme(page_theme);
+    
+  }, [page_theme]);
+  React.useEffect(() => {
+    actions.theme.checkUser();
+    state.theme.user.logged
+      ? (state.router.link === '/' || state.router.link === '/dashboard') && actions.router.set('/dashboard')
+      : (state.router.link !== '/' && actions.router.set('/sign-in/'));
+  }, [state.theme.user.logged, state.router.link]);
   
   return (
-    <div className={className}>
+    <div className={classnames(className, page_theme)}>
       <Header hasSubMenu={false} ref={header}/>
       <div ref={flyingWrapperRef} className="flying-obj-wrapper">
         {
           slidesObj.map((slide, slideIndex) => slide.flying_objects.desktop?.map((obj, objIndex) => {
-              return <FlyingObj
-                // ref={el => obj.ref = el}
-                key={`slide-${slideIndex}-obj-${objIndex}-${state.router.link}`}
-                width={+obj.width}
-                imageUrl={obj.image.url}
-                frames={+obj.frames}
+            return <FlyingObj
+              // ref={el => obj.ref = el}
+              key={`slide-${slideIndex}-obj-${objIndex}-${state.router.link}`}
+              width={+obj.width}
+              imageUrl={obj.image.url}
+              frames={+obj.frames}
                 duration={+obj.duration}
                 initial_duration={+obj.initial_duration}
                 frame_x={+obj.frame_x}
@@ -562,12 +302,13 @@ const HomeSlider = ({className, active = false, state, actions}) => {
       <div className="vertical-center">
         <Container>
           <div ref={welcomeMessage} className="welcome-text">
-            <h3 className={'title'}>{slider_top_title?slider_top_title:'Thanks for choosing us.'}</h3>
-            <h2 className={'subtitle'}>{slider_top_subtitle?slider_top_subtitle:'Select an option:'}</h2>
+            <h3 className={'title'}>{(slider_top_title ? slider_top_title : 'Welcome back {{name}}').replace('{{name}}', state.theme.user.user_fname)}</h3>
+            <h2 className={'subtitle'}>{slider_top_subtitle ? slider_top_subtitle : 'Select an option:'}</h2>
           </div>
         </Container>
         <Slider
-          speed={1500}
+          speed={900}
+          threshold={15}
           a11y
           spaceBetween={0}
           slidesPerView={1}
@@ -596,6 +337,9 @@ const HomeSlider = ({className, active = false, state, actions}) => {
               ease: CustomEase.create('custom', 'M0,0 C0.25,0.1 0.25,1 1,1 '),
             });
           }}
+          onMomentumBounce={(swiper) => {
+            console.log(swiper);
+          }}
           onTransitionEnd={(swiper) => {
             // const {realIndex, previousIndex} = swiper;
             // if (realIndex === currentSlideRef.current) return;
@@ -606,13 +350,13 @@ const HomeSlider = ({className, active = false, state, actions}) => {
             setTimeout(() => {
               slidesAnimation.current[realIndex].progress(0).play();
               slidesAnimation.current[previousIndex].progress(1).paused(true).progress(0);
-            }, 1500);
+            }, 900);
             setCurrentSlide(realIndex);
             setTimeout(() => setSlideFlyingObjectsPlaying(prevState => {
               const newState = [...prevState];
               newState[realIndex] = true;
               return newState;
-            }), 1000);
+            }), 600);
           }}
         >
           <div className={'swiper-arrows'} slot={'container-start'}>
@@ -661,9 +405,9 @@ const HomeSlider = ({className, active = false, state, actions}) => {
                   </div>
                   {media !== 'mobile' ? <Link className={'btn slide-cta'} target={slide.button.target} href={slide.button.url}>
                     <span className="text">{slide.button.title}</span>
-                    <svg className={'enter-arrow'} viewBox="0 0 13 13">
-                      <path stroke="white" strokeWidth="2.5" fill="none" d="M11.8 0V7.8H1.0"/>
-                      <path stroke="white" strokeWidth="2.5" fill="none" d="M6.4 3 L1.8 7.8 6.4 12.3"/>
+                    <svg className={'right-arrow'} viewBox="0 0 22 10">
+                      <path fill="none" stroke="#fff" d="M0 5h22"/>
+                      <path fill="none" stroke="#fff" d="M17 10v0l5-5-5-5"/>
                     </svg>
                   </Link> : null}
                 </Container>
@@ -690,199 +434,233 @@ HomeSlider.prototype = {
 };
 export default styled(connect(HomeSlider))`
 
-position: relative;
-//background:#061a61;
-//background: radial-gradient(circle at top center, #1852a8 ,#061a61);
-height: 100vh;
-width: 100%;
-overflow: hidden;
-.vertical-center{
   position: relative;
-  display: flex;
+  height: 100vh;
   width: 100%;
-  justify-content: center;
-  align-items: stretch;
-  height: 100%;
-  flex-direction: column;
-  z-index: 0;
-  @media(max-width: 575.98px){
-    justify-content: flex-start;
-    padding-top: 13.54vh;
-  }
-  .container{
-    @media(min-width: 992px){
-      padding-left: ${size(120)};
-    }
-  }
-}
-.welcome-text{
-z-index: 4;
-position: relative;
-  margin-bottom: ${size(45)};
-  @media(max-width: 991.98px){
-    margin-bottom: ${size(128)};
-  }
-  @media(max-width: 575.98px){
-    margin-bottom: 5.2vh;
-  }
-  .title{
-    color: #b5d2ff;
-    font-size: ${size(40)};
-    font-weight: 400;
-    @media(max-width: 991.98px){
-      font-size: ${size(35)};
-    }
-    @media(max-width: 575.98px){
-       font-size: 3.2vh;
-    }
-  }
-  .subtitle{
-    color: rgba(181, 210, 255, 0.4);
-    font-size: ${size(29)};
-    font-weight: 400;
-    @media(max-width: 991.98px){
-     font-size: ${size(24)};
-    }
-    @media(max-width: 575.98px){
-      font-size: 2.46vh;
-    }
-  }
-}
-.swiper-arrows{
-  position: absolute;
-  width: 100%;
-  bottom: 100%;
-  right: 0;
-  z-index: 5;
-  @media(max-width: 575.98px){
-    display: none;
-  }
-  ${Container}{
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-  }
-  .prev,.next{
-    cursor: pointer;
-    transition: margin .4s ease, width .4s ease,opacity .4s ease;
-    overflow: hidden;
-    width: ${size(99)};
+  overflow: hidden;
+
+  .vertical-center {
     position: relative;
-    height: ${size(30)};
     display: flex;
-    align-items: center;
-    svg{
-      position:absolute;
+    width: 100%;
+    justify-content: center;
+    align-items: stretch;
+    height: 100%;
+    flex-direction: column;
+    z-index: 0;
+    @media (max-width: 575.98px) {
+      justify-content: flex-start;
+      padding-top: 13.54vh;
+    }
+
+    .container {
+      @media (min-width: 992px) {
+        padding-left: ${size(120)};
+      }
+    }
+  }
+
+  .welcome-text {
+    z-index: 4;
+    position: relative;
+    margin-bottom: ${size(45)};
+    @media (max-width: 991.98px) {
+      margin-bottom: ${size(128)};
+    }
+    @media (max-width: 575.98px) {
+      margin-bottom: 5.2vh;
+    }
+
+    .title {
+      color: #b5d2ff;
+      font-size: ${size(40)};
+      font-weight: 400;
+      @media (max-width: 991.98px) {
+        font-size: ${size(35)};
+      }
+      @media (max-width: 575.98px) {
+        font-size: 3.2vh;
+      }
+    }
+
+    .subtitle {
+      color: rgba(181, 210, 255, 0.4);
+      font-size: ${size(29)};
+      font-weight: 400;
+      @media (max-width: 991.98px) {
+        font-size: ${size(24)};
+      }
+      @media (max-width: 575.98px) {
+        font-size: 2.46vh;
+      }
+    }
+  }
+
+  .swiper-arrows {
+    position: absolute;
+    width: 100%;
+    bottom: 100%;
+    right: 0;
+    z-index: 5;
+    @media (max-width: 575.98px) {
+      display: none;
+    }
+
+    ${Container} {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .prev, .next {
+      cursor: pointer;
+      transition: margin .4s ease, width .4s ease, opacity .4s ease;
+      overflow: hidden;
       width: ${size(99)};
-      height: ${size(10)};
+      position: relative;
+      height: ${size(30)};
+      display: flex;
+      align-items: center;
+
+      svg {
+        position: absolute;
+        width: ${size(99)};
+        height: ${size(10)};
+      }
+
+      &.swiper-button-disabled {
+        cursor: not-allowed;
+        opacity: .4;
+        width: ${size(50)};
+      }
     }
-    &.swiper-button-disabled{
-    cursor: not-allowed;
-      opacity: .4;
-      width: ${size(50)};
+
+    .prev {
+      svg {
+        left: 0;
+      }
     }
-  }
-  .prev{
-    svg{
-      left: 0;
+
+    .next {
+      svg {
+        right: 0;
+      }
+
+      &.swiper-button-disabled {
+        margin-right: ${size(49)};
+      }
     }
-  }
-  .next{
-    svg{
-      right: 0;
-    }
-    &.swiper-button-disabled{
-      margin-right: ${size(49)};
-    }
-  }
-  
-  
-  .slides-numbers{
-    color: #b5d2ff;
-    font-size: ${size(12)};
-    font-weight: 500;
-    font-style: normal;
-    letter-spacing: normal;
-    line-height: ${size(95)};
-    text-align: left;
-    margin: 0 ${size(15)};
-    span{
-      margin-left: ${size(9)};
-      margin-right: ${size(5)};
-    }
-  }
-}
-.swiper-pagination-bullets {
-  position: absolute;
-  bottom: ${size(80)};
-  left: 50%;
-  display: flex;
-  z-index: 9;
-  @media(max-width: 991.98px){
-     bottom: ${size(70)};
-  }
-  @media(max-width: 575.98px){
-   bottom: 20.68vh;
-  }
-  .swiper-pagination-bullet{
-    width: ${size(8)};
-    height: ${size(8)};
-    @media(max-width: 575.98px){
-      width: 2.58vh;
-      height: 2.58vh;
-      margin: 0 1.23vh;
-     }
-    border-radius: 50%;
-    background-color: rgba(181, 210, 255, 0.4);
-    margin: 0 ${size(5)};
-    cursor: pointer;
-    transition: 400ms ease;
-    &:hover{
-      background-color: rgba(181, 210, 255, 0.7);
-    }
-    &.swiper-pagination-bullet-active{
-      background-color: #b5d2ff;
+
+
+    .slides-numbers {
+      color: #b5d2ff;
+      font-size: ${size(12)};
+      font-weight: 500;
+      font-style: normal;
+      letter-spacing: normal;
+      line-height: ${size(95)};
+      text-align: left;
+      margin: 0 ${size(15)};
+
+      span {
+        margin-left: ${size(9)};
+        margin-right: ${size(5)};
+      }
     }
   }
-}
-.btn-mobile-container{
- position: absolute;
+
+  .swiper-pagination-bullets {
+    position: absolute;
+    bottom: ${size(80)};
+    left: 50%;
+    display: flex;
+    z-index: 9;
+    @media (max-width: 991.98px) {
+      bottom: ${size(70)};
+    }
+    @media (max-width: 575.98px) {
+      bottom: 20.68vh;
+    }
+
+    .swiper-pagination-bullet {
+      width: ${size(8)};
+      height: ${size(8)};
+      @media (max-width: 575.98px) {
+        width: 2.58vh;
+        height: 2.58vh;
+        margin: 0 1.23vh;
+      }
+      border-radius: 50%;
+      background-color: rgba(181, 210, 255, 0.4);
+      margin: 0 ${size(5)};
+      cursor: pointer;
+      transition: 400ms ease;
+
+      &:hover {
+        background-color: rgba(181, 210, 255, 0.7);
+      }
+
+      &.swiper-pagination-bullet-active {
+        background-color: #b5d2ff;
+      }
+    }
+  }
+
+  .btn-mobile-container {
+    position: absolute;
     bottom: 9.1vh;
     z-index: 9;
-  @media(min-width: 576px){
-     display: none;
-  }
-  .btn-mobile{
-    width: 100%;
-    height: 6.89vh;
-    border-radius:  3.94vh;
-    background-color: #fe412d;
-    font-size:  1.97vh;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-  }
-}
-.mobile-icon{
-  @media(min-width: 576px){
-    display: none;
-  }
-     position: relative;
-      margin: 0 auto;
-      display: block;
-      
-}
+    @media (min-width: 576px) {
+      display: none;
+    }
 
-.flying-obj-wrapper{
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  @media(max-width: 575.98px){
-    display: none;
+    .btn-mobile {
+      width: 100%;
+      height: 6.89vh;
+      border-radius: 3.94vh;
+      background-color: #fe412d;
+      font-size: 1.97vh;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
   }
-}
+
+  .mobile-icon {
+    @media (min-width: 576px) {
+      display: none;
+    }
+    position: relative;
+    margin: 0 auto;
+    display: block;
+
+  }
+
+  .slide-cta {
+    &:hover {
+      .right-arrow {
+        width: ${size(22)};
+      }
+    }
+
+    .right-arrow {
+      width: 0;
+      height: auto;
+      stroke-width: 1;
+      transition: width .4s;
+    }
+  }
+
+  .flying-obj-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    @media (max-width: 575.98px) {
+      display: none;
+    }
+  }
 `;

@@ -95,8 +95,7 @@ const Intro = ({className, setInitialDone}) => {
         <img ref={el => ballsRef.current.ball2 = el} className={'floating-ball intro-ball-2'} src={intro_ball_3} alt="{'Floating Ball'}"/>
         <img ref={el => ballsRef.current.ball3 = el} className={'floating-ball intro-ball-3'} src={intro_ball_2} alt="{'Floating Ball'}"/>
       </div>
-      <p className={'intro-text'} ref={textRef}>Your non-traditional mortgage lender.
-        Lorem ipsum dolor sit amet.</p>
+      <p className={'intro-text'} ref={textRef}>Welcome to Oppono lending, committed to funding.</p>
       <SpriteSheet paused={logoPaused} repeat={0} duration={2.5} className={'intro-logo'} ref={logoRef} imageUrl={introLogoSrc} frames={52} width={size(323)} alt={'Intro Logo'} frame_x={653}
                    frame_y={500}/>
   
@@ -119,131 +118,139 @@ Intro.prototype = {
   className: PropTypes.string,
 };
 export default styled(Intro)`
-position: relative;
-background: #20212C;
-background: radial-gradient(circle at top left, #000000 ,#20212C 40%);
-height: 100vh;
-width: 100%;
-display: flex;
-align-items: center;
-justify-content: center;
-z-index: 1;
-margin-bottom: -1px;
-
-.intro-bottom-gradient{
-  position: absolute;
-  top: 100%;
-  background: linear-gradient(to bottom, #20212C, transparent);
-  height: 40vh;
+  position: relative;
+  background: #20212C;
+  background: radial-gradient(circle at top left, #000000, #20212C 40%);
+  height: 100vh;
   width: 100%;
-}
-
-.intro-text{
-  opacity: 0;
-  color: #bfb6b4;
-  font-size: ${size(29)};
-  font-weight: 400;
-  font-style: normal;
-  letter-spacing: normal;
-  line-height: ${size(40)};
-  text-align: center;
-  max-width: ${size(495)};
-  z-index: 1;
-  @media(max-width: 575px){
-    max-width: 80%;
-    font-size: ${size(22)};
-    line-height: ${size(34)};
-  }
-}
-
-.intro-logo{
-  opacity: 0;
-  position: absolute;
-  visibility: hidden;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  //background: rgba(255,255,255,.4);
-}
-
-.balls-wrapper{
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  @media(min-width: 1920px){
-    max-width: 1920px;
-  }
-  .floating-ball{
-    position:absolute;
-    opacity: 0;
-    &.intro-ball-1{
-      top: 71.2179487%;
-      left: ${size(1151.5)};
-      width: ${size(117)};
-      transform: rotate(320deg);
-      @media(max-width: 991px){
-        width: ${size(57)};
-        top: 80%;
-        left: 95%;
-      }
-    }
-    &.intro-ball-2{
-      top: 33.2051282%;
-      left: ${size(322)};
-      width: ${size(184)};
-      transform: rotate(200deg);
-      @media(max-width: 991px){
-        width: ${size(92)};
-        top: 30%;
-        left: 15%;
-      }
-    }
-    &.intro-ball-3{
-      top: 42.6923077%;
-      left:${size(943)};
-      width: ${size(96)};
-      @media(max-width: 991px){
-        width: ${size(48)};
-        left: 85%;
-      }
-    }
-   
-  }
-}
-.scroll-animation{
-  opacity: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  position: absolute;
-  bottom: ${size(93)};
-  left: 50%;
-  transform: translateX(-50%);
-  cursor: pointer;
-  div.line{
-    position: relative;
-    width: ${size(1)};
-    height: ${size(101)};
-    background: rgba(191, 182, 180, 0.1);
-    span{
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: ${size(1)};
-      height: ${size(22)};
-      background: #bfb6b4;
-    }
+  z-index: 1;
+  margin-bottom: -1px;
+
+  .intro-bottom-gradient {
+    position: absolute;
+    top: 100%;
+    background: linear-gradient(to bottom, #20212C, transparent);
+    height: 40vh;
+    width: 100%;
   }
-  p{
+
+  .intro-text {
+    opacity: 0;
     color: #bfb6b4;
-    font-size: ${size(14)};
-    font-weight: 500;
+    font-size: ${size(29)};
+    font-weight: 400;
     font-style: normal;
     letter-spacing: normal;
-    line-height: ${size(16)};
+    line-height: ${size(40)};
     text-align: center;
-    margin-top: ${size(24)};
+    max-width: ${size(495)};
+    z-index: 1;
+    @media (max-width: 575px) {
+      max-width: 80%;
+      font-size: ${size(22)};
+      line-height: ${size(34)};
+    }
   }
-}
+
+  .intro-logo {
+    opacity: 0;
+    position: absolute;
+    visibility: hidden;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    //background: rgba(255,255,255,.4);
+  }
+
+  .balls-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    @media (min-width: 1920px) {
+      max-width: 1920px;
+    }
+
+    .floating-ball {
+      position: absolute;
+      opacity: 0;
+
+      &.intro-ball-1 {
+        top: 71.2179487%;
+        left: ${size(1151.5)};
+        width: ${size(117)};
+        transform: rotate(320deg);
+        @media (max-width: 991px) {
+          width: ${size(57)};
+          top: 80%;
+          left: 95%;
+        }
+      }
+
+      &.intro-ball-2 {
+        top: 33.2051282%;
+        left: ${size(322)};
+        width: ${size(184)};
+        transform: rotate(200deg);
+        @media (max-width: 991px) {
+          width: ${size(92)};
+          top: 30%;
+          left: 15%;
+        }
+      }
+
+      &.intro-ball-3 {
+        top: 42.6923077%;
+        left: ${size(943)};
+        width: ${size(96)};
+        @media (max-width: 991px) {
+          width: ${size(48)};
+          left: 85%;
+        }
+      }
+
+    }
+  }
+
+  .scroll-animation {
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: absolute;
+    bottom: ${size(93)};
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+
+    div.line {
+      position: relative;
+      width: ${size(1)};
+      height: ${size(101)};
+      background: rgba(191, 182, 180, 0.1);
+
+      span {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: ${size(1)};
+        height: ${size(22)};
+        background: #bfb6b4;
+      }
+    }
+
+    p {
+      color: #bfb6b4;
+      font-size: ${size(14)};
+      font-weight: 500;
+      font-style: normal;
+      letter-spacing: normal;
+      line-height: ${size(16)};
+      text-align: center;
+      margin-top: ${size(24)};
+    }
+  }
 `;

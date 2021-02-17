@@ -1,5 +1,6 @@
 // const wpSiteUrl = 'https://codesign82.com/oppono';
-const wpSiteUrl = 'https://master-7rqtwti-oer23r2mz66wc.ca-1.platformsh.site';
+// const wpSiteUrl = 'https://master-7rqtwti-oer23r2mz66wc.ca-1.platformsh.site';
+const wpSiteUrl = 'https://oppono-app.com';
 const frontEndSiteUrl = 'https://oppono.vercel.app';
 // const frontEndSiteUrl = 'http://localhost:3000';
 
@@ -14,9 +15,7 @@ const settings = {
     },
   },
   'packages': [
-    {
-      'name': 'oppono-theme',
-    },
+
     {
       
       'name': '@frontity/wp-source',
@@ -31,6 +30,9 @@ const settings = {
     '@frontity/tiny-router',
     '@frontity/html2react',
     '@frontity/head-tags',
+    {
+      'name': 'oppono-theme',
+    },
   ],
 };
 
