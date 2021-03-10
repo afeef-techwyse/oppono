@@ -11,6 +11,7 @@ import Button from '../../components/form-components/Button';
 const Mail = ({className, state, actions}) => {
   const data = state.source.get(state.router.link);
   const pageData = data.isReady && !data.isError ? state.source[data.type][data.id].acf : {};
+  console.log(pageData);
   React.useEffect(() => {
     actions.theme.setSubHeader(pageData.sub_header);
   }, [pageData]);
@@ -30,15 +31,15 @@ const Mail = ({className, state, actions}) => {
           },
         ]}/>
       <Container>
-        {pageData.section_1.title ? <h1 className={'contact-title'}>{pageData.section_1.title}</h1> : null}
-        {pageData.section_1.subtitle ? <h2 className={'contact-title'}>{pageData.section_1.subtitle}</h2> : null}
-        
+        {pageData.section_1?.title ? <h1 className={'contact-title'}>{pageData.section_1?.title}</h1> : null}
+        {pageData.section_1?.sub_title ? <h2 className={'contact-title'}>{pageData.section_1?.sub_title}</h2> : null}
+    
         <img className={'contact-obj'} src={contact_obj} alt={'Contact Icon'}/>
         <div className="contact-row">
           <div className="col-4">
-            <Input label={'Name'} type={'text'} {...pageData.section_1.name_input}/>
-            <Input label={'Email'} type={'text'} {...pageData.section_1.email_input}/>
-            <Input label={'Phone'} type={'text'} {...pageData.section_1.phone_input}/>
+            <Input type={'text'} {...pageData.section_1?.name_input}/>
+            <Input type={'text'} {...pageData.section_1?.email_input}/>
+            <Input type={'text'} {...pageData.section_1?.phone_input}/>
           </div>
           <div className="col-auto">
             <TextArea label={'Questions?'}/>

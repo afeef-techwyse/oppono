@@ -13,7 +13,7 @@ const ContactPage = ({className, state}) =>
     <Header/>
     <Switch>
       {/*<Chat when={state.router.link.startsWith('/contact/chat/')}/>*/}
-      <Mail when={state.router.link.startsWith('/contact/mail/')}/>
+      <Mail when={state.router.link.startsWith('/mail/')}/>
     </Switch>
     <Footer/>
   </div>
