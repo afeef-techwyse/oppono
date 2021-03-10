@@ -60,7 +60,7 @@ position: relative;
 }
 `;
 
-const Input = React.forwardRef(({className, name, type, value: initialValue, placeholder, pattern, required, readOnly, disabled, min, max, label, onChange, defaultValue}, forwardedRef) => {
+const Input = React.forwardRef(({className, name, type, value: initialValue, placeholder, pattern, required, readOnly, disabled, min, max, label, onChange, defaultValue, error}, forwardedRef) => {
   const innerRef = React.useRef(null);
   const combinedRef = useCombinedRefs(forwardedRef, innerRef);
   const inputRef = React.useRef(null);
@@ -69,13 +69,16 @@ const Input = React.forwardRef(({className, name, type, value: initialValue, pla
   const [focused, setFocused] = React.useState(false);
   const [visited, setVisited] = React.useState(false);
   const [invalid, setInvalid] = React.useState(false);
-  const [errorMessage, setErrorMessage] = React.useState('');
+  const [errorMessage, setErrorMessage] = React.useState(error);
   const validateInput = () => {
-    inputRef.current.validity.valid ? setErrorMessage('') : setErrorMessage('This Input is Invalid');
+    console.log(error);
+    inputRef.current.validity.valid
+      ? error || setErrorMessage('')
+      : setErrorMessage('This Input is Invalid');
     inputRef.current.validity.typeMismatch && setErrorMessage('Please Add Valid Value');
     inputRef.current.validity.valueMissing && setErrorMessage('Required');
-    inputRef.current.validity.patternMismatch && setErrorMessage('Mismatch');
-    visited && setInvalid(!inputRef.current.validity.valid);
+    inputRef.current.validity.patternMismatch && setErrorMessage('Incorrect Format');
+    visited && setInvalid(!inputRef.current.validity.valid || error);
   };
   
   React.useEffect(() => {
@@ -83,8 +86,10 @@ const Input = React.forwardRef(({className, name, type, value: initialValue, pla
   }, [visited]);
   React.useEffect(() => {
     setValue(initialValue);
+    setErrorMessage(error);
+    error && setVisited(true);
     setTimeout(() => visited && validateInput(), 0);
-  }, [initialValue]);
+  }, [initialValue, error]);
   
   
   return (

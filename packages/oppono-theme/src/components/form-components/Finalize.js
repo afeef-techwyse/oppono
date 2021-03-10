@@ -11,19 +11,20 @@ ${P.Dark}{
 }
 `;
 export const FinalizeChild = styled.div`
-flex: 0 1 28%;
-width: 28%;
-padding: 0 ${size(10)};
-&.wide{
-  flex-basis: 44%;
-  width: 44%;
-  @media(max-width: 575.98px){
-   flex-basis: 100%!important;
-   width: 100%!important;
-    &.full{
-      width: 100%;
-      flex-basis: 100%;
-    }
+  flex: 0 1 28%;
+  width: 28%;
+  padding: ${size(24)} ${size(10)} 0;
+
+  &.wide {
+    flex-basis: 44%;
+    width: 44%;
+    @media (max-width: 575.98px) {
+      flex-basis: 100% !important;
+      width: 100% !important;
+      &.full {
+        width: 100%;
+        flex-basis: 100%;
+      }
   }
 }
 

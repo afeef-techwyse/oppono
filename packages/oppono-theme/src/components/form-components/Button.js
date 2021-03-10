@@ -7,9 +7,9 @@ const Button = React.forwardRef(({className, label, href, icon = false, onClick,
   return (
     <button tabIndex={focusable ? null : -1} className={`oppono-btn ${className}`} type={'button'} onClick={onClick} disabled={disabled} aria-disabled={disabled}>
       <span className="text">{label}</span>
-      {icon ? <svg className={'enter-arrow'} viewBox="0 0 13 13">
-        <path stroke="white" strokeWidth="2.5" fill="none" d="M11.8 0V7.8H1.0"/>
-        <path stroke="white" strokeWidth="2.5" fill="none" d="M6.4 3 L1.8 7.8 6.4 12.3"/>
+      {icon ? <svg className={'right-arrow'} viewBox="0 0 22 10">
+        <path fill="none" stroke="#fff" d="M0 5h22"/>
+        <path fill="none" stroke="#fff" d="M17 10v0l5-5-5-5"/>
       </svg> : null}
     </button>
   );
@@ -42,26 +42,39 @@ export default styled(Button)`
   cursor: pointer;
   white-space: nowrap;
   transition: background-color 400ms, border-color 400ms, color 400ms, opacity 400ms;
-  .text{
+
+  .text {
     text-decoration: none;
   }
-  @media(max-width: 575.98px){
+
+  @media (max-width: 575.98px) {
     width: 80%;
     max-width: unset;
   }
-  &:hover, &:active, &:focus{
+
+  .right-arrow {
+    width: 0;
+    height: auto;
+    stroke-width: 1;
+    transition: width .4s;
+  }
+
+  &:hover, &:active, &:focus {
     background: #fe412d;
     border-color: #fe412d !important;
     color: #ffffff !important;
-    svg{
-      width: ${size(13)};
+
+    .right-arrow {
+      width: ${size(22)};
     }
   }
-  &.filled{
-   background: #fe412d;
+
+  &.filled {
+    background: #fe412d;
     border-color: #fe412d !important;
     color: #ffffff !important;
-    &:hover{
+
+    &:hover {
       background: transparent;
       border: 1px solid #fe412d;
     }

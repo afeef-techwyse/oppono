@@ -18,7 +18,9 @@ const ProductFeaturesContainer = styled.div`
   }
 `;
 const AboutUsPage = ({className, state, actions}) => {
-  const data = state.source.get(state.router.link);
+  const data = state.source.get('/about-us/');
+  const page = data.isReady && !data.isError ? state.source[data.type][data.id].acf : {};
+  
   React.useEffect(() => {
     actions.theme.setSubHeader({});
   }, []);
@@ -27,30 +29,15 @@ const AboutUsPage = ({className, state, actions}) => {
       <Header/>
       <Container>
         <ProductFeaturesContainer>
-          <ProductsFeature
-            title={'No beacon score asked, no income verification.'}
-            description={'Our common-sense approach to lending means our decisions are not based on a set of nonnegotiable criteria. Instead, we look at the borrowers’ unique situation and measure their ability to meet their obligations, accompanied by an appropriate loan-to-value ratio. If the investment makes sense, we will fund it!'}
-            imageUrl={featureImg}
-            alt={'feature-image'}
-          />
-          <ProductsFeature
-            title={'No beacon score asked, no income verification.'}
-            description={'Our common-sense approach to lending means our decisions are not based on a set of nonnegotiable criteria. Instead, we look at the borrowers’ unique situation and measure their ability to meet their obligations, accompanied by an appropriate loan-to-value ratio. If the investment makes sense, we will fund it!'}
-            imageUrl={featureImg}
-            alt={'feature-image'}
-          />
-          <ProductsFeature
-            title={'No beacon score asked, no income verification.'}
-            description={'Our common-sense approach to lending means our decisions are not based on a set of nonnegotiable criteria. Instead, we look at the borrowers’ unique situation and measure their ability to meet their obligations, accompanied by an appropriate loan-to-value ratio. If the investment makes sense, we will fund it!'}
-            imageUrl={featureImg}
-            alt={'feature-image'}
-          />
-          <ProductsFeature
-            title={'No beacon score asked, no income verification.'}
-            description={'Our common-sense approach to lending means our decisions are not based on a set of nonnegotiable criteria. Instead, we look at the borrowers’ unique situation and measure their ability to meet their obligations, accompanied by an appropriate loan-to-value ratio. If the investment makes sense, we will fund it!'}
-            imageUrl={featureImg}
-            alt={'feature-image'}
-          />
+          {page.cards.map((card, index) =>
+            <ProductsFeature
+              key={index}
+              title={card.title}
+              description={card.description}
+              imageUrl={card.image.url}
+              alt={card.image.alt}
+            />,
+          )}
         </ProductFeaturesContainer>
         <ProductsPortion/>
       </Container>

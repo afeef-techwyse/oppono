@@ -5,14 +5,15 @@ import {fixContainer} from './functions/fix-container';
 import Intro from './components/Intro';
 import Styles from './styles';
 import HomeSlider from './components/HomeSlider';
-import FormsPage from './components/pages/FormsPage';
-import ContactPage from './components/pages/ContactPage';
-import MapPage from './components/pages/MapPage';
-import Missing404 from './components/pages/Missing404';
+import FormsPage from './pages/FormsPage';
+import ContactPage from './pages/ContactPage';
+import MapPage from './pages/MapPage';
+import Missing404 from './pages/Missing404';
 import {Transition, TransitionGroup} from 'react-transition-group';
 import gsap from 'gsap';
-import ProductsSlider from './components/form-components/ProductsSlider';
+import ProductsSlider from './components/ProductsSlider';
 import AboutUsPage from './components/form-components/AboutUsPage';
+import TermsPage from './pages/TermsPage';
 
 const isDeveloping = false;
 
@@ -28,7 +29,7 @@ const Root = ({state}) => {
     return () => window.removeEventListener('resize', fixContainer);
   }, []);
   console.log(state.router.link, page);
-  const duration = 2;
+  const duration = 1;
   return <>
     <Styles/>
     {data.isHome && !(isDeveloping || initialDone) ? <Intro setInitialDone={setInitialDone}/> : null}
@@ -39,7 +40,6 @@ const Root = ({state}) => {
         timeout={duration * 1000}
         
         onEnter={node => {
-          console.log(node);
           gsap.killTweensOf(node);
           gsap.set(node, {
             position: 'fixed',
@@ -48,9 +48,11 @@ const Root = ({state}) => {
             left: 0,
             width: '100vw',
             height: '100vh',
+            zIndex: 1,
           });
           gsap.to(node, {
             duration,
+            ease: 'power2.in',
             yPercent: 0,
             onComplete: () => {
               gsap.set(node, {clearProps: 'all'});
@@ -73,7 +75,7 @@ const Root = ({state}) => {
           });
           gsap.to(node, {
             duration,
-            position: 'fixed',
+            ease: 'power2.in',
             yPercent: -100,
           });
           requestAnimationFrame(() => node.classList.add('animation'));
@@ -81,7 +83,7 @@ const Root = ({state}) => {
       >
         <Switch>
           <div className={'loading-page'} when={data.isFetching}/>
-          
+  
           <AboutUsPage when={state.router.link.startsWith('/about-us/')}/>
           <ContactPage when={state.router.link.startsWith('/contact/')}/>
           <HomeSlider
@@ -89,9 +91,12 @@ const Root = ({state}) => {
             active={!data.isHome || isDeveloping || initialDone}
             when={page.template === 'page-templates/slider-template.php'}
           />
-          <FormsPage when={page.template === 'page-templates/form-template.php' || state.router.link.startsWith('/d/')}/>
-          <ProductsSlider when={state.router.link.startsWith('/products/')}/>
+          <FormsPage
+            link={data.link}
+            when={page.template === 'page-templates/form-template.php' || state.router.link.startsWith('/d/')}/>
+          <ProductsSlider link={data.link} active={true} when={state.router.link.startsWith('/products/')}/>
           <MapPage when={state.router.link.startsWith('/map/')}/>
+          <TermsPage when={state.router.link.startsWith('/terms/')}/>
           <Missing404 when={data.is404}/>
         </Switch>
       </Transition>

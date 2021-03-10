@@ -38,7 +38,7 @@ const SpriteSheet = React.forwardRef(({
     image.current.complete ? setImageLoaded(true) : (image.current.onload = () => setImageLoaded(true));
     
     const checkImageDimensions = setInterval(function () {
-      if (image.current.naturalWidth) {
+      if (image.current?.naturalWidth) {
         clearInterval(checkImageDimensions);
         setImageMetaLoaded(true);
       }
@@ -55,13 +55,14 @@ const SpriteSheet = React.forwardRef(({
       setGridSize({
         imageUrl,
         init: true,
-        x: image.current.naturalWidth / frame_x,
-        y: image.current.naturalHeight / frame_y,
+        x: image.current?.naturalWidth / frame_x,
+        y: image.current?.naturalHeight / frame_y,
       });
     }
   }, [imageMetaLoaded]);
   
   React.useEffect(() => {
+    currentIndex.current = 0;
     let interval, initialInterval, repeatDelaySetTimeout;
     const createInterval = () => {
       let stop = false;
@@ -89,6 +90,8 @@ const SpriteSheet = React.forwardRef(({
     };
     if (!paused && imageLoaded) {
       if (loop_start_index !== 0) {
+        console.log('555555555', currentIndex.current, loop_start_index, initialInterval, imageUrl);
+  
         initialInterval = setInterval(
           () => {
             if (stopInterval.current) return;
@@ -97,23 +100,24 @@ const SpriteSheet = React.forwardRef(({
             if (currentIndex.current + 1 >= loop_start_index) {
               stopInterval.current = true;
               clearInterval(initialInterval);
+              console.log(currentIndex.current, loop_start_index, initialInterval, imageUrl);
             }
           },
           initial_duration * 1000 / loop_start_index,
         );
       }
       setTimeout(() => interval = createInterval(), loop_start_index ? initial_duration : 0);
-  
-  
     }
+    console.log(paused, imageLoaded, !paused && imageLoaded, initialInterval, initial_duration, image.current, imageUrl, new Date().getUTCMilliseconds());
     return () => {
+      console.log('3333333333333333', initialInterval, imageUrl);
       clearInterval(initialInterval);
       clearInterval(interval);
       clearTimeout(repeatDelaySetTimeout);
+      initialInterval;
     };
   
   }, [paused, imageLoaded]);
-  
   return (
     <div ref={combinedRef} className={className}>
       <div className="aspect-ratio">

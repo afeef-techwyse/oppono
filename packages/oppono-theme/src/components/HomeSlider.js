@@ -179,7 +179,7 @@ const HomeSlider = ({className, active = false, state, actions, link}) => {
   const [swiperRef, setSwiperRef] = React.useState(null);
   const [slideFlyingObjectsPlaying, setSlideFlyingObjectsPlaying] = React.useState([]);
   const [currentSlide, setCurrentSlide, currentSlideRef] = useStateWithRef(0);
-  
+  console.log(slideFlyingObjectsPlaying[0]);
   const resetSlider = () => {
     swiperRef?.slideTo(0);
     
@@ -200,7 +200,7 @@ const HomeSlider = ({className, active = false, state, actions, link}) => {
   
   React.useEffect(() => {
     actions.source.fetch(state.router.link);
-    flyingObjectsAnimation.current.progress(1).progress(0);
+    // flyingObjectsAnimation.current.progress(1).progress(0);
   }, []);
   React.useEffect(() => {
     const slideAnimationTl = createSlideAnimation(swiperRef?.slides[0], false);
@@ -257,14 +257,14 @@ const HomeSlider = ({className, active = false, state, actions, link}) => {
   }, [active]);
   React.useEffect(() => {
     actions.theme.setActiveTheme(page_theme);
-    
+  
   }, [page_theme]);
   React.useEffect(() => {
     actions.theme.checkUser();
     state.theme.user.logged
-      ? (state.router.link === '/' || state.router.link === '/dashboard') && actions.router.set('/dashboard')
-      : (state.router.link !== '/' && actions.router.set('/sign-in/'));
-  }, [state.theme.user.logged, state.router.link]);
+      ? (state.router.link === '/' || state.router.link === '/dashboard') && actions.router.set('/dashboard', {method: 'replace'})
+      : ((state.router.link === '/' || state.router.link === '/contacts/') || actions.router.set('/sign-in/', {method: 'replace'}));
+  }, [state.theme.user.logged, link]);
   
   return (
     <div className={classnames(className, page_theme)}>

@@ -9,6 +9,7 @@ import opponoApi from '../../opponoApi';
 
 const FormStep = ({
                     activeTheme,
+                    setCurrentTheme,
                     pageName,
                     stepName,
                     className,
@@ -85,7 +86,7 @@ const FormStep = ({
             .catch(error => {
               if (+error.response?.status === 403) {
                 actions.theme.removeUser();
-                actions.router.set('/sign-in/');
+                actions.router.set('/sign-in/', {method: 'replace'});
               }
               console.log(error);
             });
@@ -121,7 +122,7 @@ const FormStep = ({
               .catch(error => {
                 if (+error.response?.status === 403) {
                   actions.theme.removeUser();
-                  actions.router.set('/sign-in/');
+                  actions.router.set('/sign-in/', {method: 'replace'});
                 }
                 console.log(error);
               });
@@ -154,7 +155,7 @@ const FormStep = ({
               .catch(error => {
                 if (+error.response?.status === 403) {
                   actions.theme.removeUser();
-                  actions.router.set('/sign-in/');
+                  actions.router.set('/sign-in/', {method: 'replace'});
                 }
   
                 console.log(+error.response?.status, error);
@@ -242,7 +243,7 @@ const FormStep = ({
       }
     }
     active && actions.theme.setActiveStep({stepName, current: stepIndex});
-    active && actions.theme.setActiveTheme(activeTheme);
+    active && setCurrentTheme(activeTheme);
   }, [active]);
   
   

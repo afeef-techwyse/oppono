@@ -46,17 +46,17 @@ const ProductsTable = ({className, children, dataFilter, products}) => {
     if (elements.current.table) {
       if (media !== 'mobile') {
         gsap.timeline()
-          .set(elements.current.columns.map((column, columnIndex) => elements.current.table.querySelectorAll(`tr >:nth-of-type(${columnIndex + 1})`)).slice(1).flat(), {display: 'none'})
-          .set(elements.current.columns.map((column, columnIndex) => elements.current.table.querySelectorAll(`tr >:nth-of-type(${columnIndex + 1})`)).slice(1).slice(currentTablePage * numberPerPage, numberPerPage * (currentTablePage + 1)).flat(), {display: 'table-cell'});
+          .set(elements.current.columns.map((column, columnIndex) => elements.current.table.querySelectorAll(`tr > :nth-of-type(${columnIndex + 1})`)).slice(1).flat(), {display: 'none'})
+          .set(elements.current.columns.map((column, columnIndex) => elements.current.table.querySelectorAll(`tr > :nth-of-type(${columnIndex + 1})`)).slice(1).slice(currentTablePage * numberPerPage, numberPerPage * (currentTablePage + 1)).flat(), {display: 'table-cell'});
         elements.current.prevArrow?.classList.toggle('disabled', currentTablePage <= 0);
         elements.current.nextArrow?.classList.toggle('disabled', currentTablePage >= tablePages.current - 1);
         elements.current.currentPage?.innerText && (elements.current.currentPage.innerText = currentTablePage + 1);
       }
       else {
-        gsap.set(elements.current.columns.map((column, columnIndex) => elements.current.table.querySelectorAll(`tr >:nth-of-type(${columnIndex + 1})`)).slice(1).flat(), {display: 'table-cell'});
+        gsap.set(elements.current.columns.map((column, columnIndex) => elements.current.table.querySelectorAll(`tr > :nth-of-type(${columnIndex + 1})`)).slice(1).flat(), {display: 'table-cell'});
       }
     }
-  }, [media, currentTablePage]);
+  }, [media, currentTablePage, products]);
   return (
     <div data-filter={dataFilter} ref={tableRef} className={classnames('form-wide-container', className)}>
       <Container>

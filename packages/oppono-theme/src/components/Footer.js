@@ -67,12 +67,6 @@ const Footer = React.forwardRef(({className}, forwardRef) => {
           <FooterRight className={'footer-right'}>
             <Link className={'primary'} href="/contacts/">Contact us</Link>
             <Link className={'primary'} href="tel:19058865352">Call us</Link>
-            <Link className={'primary primary-fill'} href="/contact/chat/">Chat with us
-              <svg viewBox="0 0 12 12">
-                <path className={'primary-fill'} fill="#b5d2ff"
-                      d="M7.2 0H4.8c-.87 0-1.68.23-2.42.68A4.76 4.76 0 0 0 .66 2.44C.22 3.2 0 4.03 0 4.92c0 .9.22 1.73.66 2.49.42.74 1 1.32 1.72 1.76.74.45 1.55.68 2.42.68V12c.99-.41 1.79-.76 2.39-1.06.92-.47 1.7-.95 2.34-1.44.77-.61 1.35-1.26 1.76-1.96.47-.8.71-1.67.71-2.62 0-.89-.22-1.72-.66-2.48-.42-.74-1-1.33-1.72-1.76C8.88.23 8.07 0 7.2 0z"/>
-              </svg>
-            </Link>
           </FooterRight>
         </div>
       </Container>
@@ -89,6 +83,7 @@ export default styled(Footer)`
   position: fixed;
   bottom: ${size(10)};
   width: 100%;
+  z-index: 100;
   @media (max-width: 991.98px) {
     bottom: ${size(24)};
   }

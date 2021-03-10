@@ -9,7 +9,7 @@ import FormStep from './FormStep';
 import StepsProgress from './StepsProgress';
 
 gsap.registerPlugin(ScrollToPlugin);
-const Form = ({className, children, wide, actions, state, endPoint}) => {
+const Form = ({className, children, wide, actions, state, endPoint, setCurrentTheme}) => {
   const innerRef = React.useRef(null);
   const [activeStep, setActiveStep] = React.useState(0);
   const [loading, setLoading] = React.useState(false);
@@ -54,19 +54,20 @@ const Form = ({className, children, wide, actions, state, endPoint}) => {
       <div ref={innerRef} className={classnames(className, {wide})}>
         {state.theme.activeStep.total > 1 ? <StepsProgress/> : null}
         {React.Children.map(children, (child, index) => {
-            return index === activeStep || true ? React.cloneElement(child,
-              {
-                ...child.props,
-                endPoint: child.props.endPoint === undefined ? endPoint : child.props.endPoint,
-                active: activeStep === index,
-                stepIndex: index,
-                initial: initial.current,
-                nextCallback,
-                prevCallback,
-                resetCallback,
-                setLoading,
-                allStepsNames: allStepsNames.current,
-              }) : null;
+          return React.cloneElement(child,
+            {
+              ...child.props,
+              endPoint: child.props.endPoint === undefined ? endPoint : child.props.endPoint,
+              active: activeStep === index,
+              stepIndex: index,
+              initial: initial.current,
+              setCurrentTheme,
+              nextCallback,
+              prevCallback,
+              resetCallback,
+              setLoading,
+              allStepsNames: allStepsNames.current,
+            });
           },
         )}
       </div>

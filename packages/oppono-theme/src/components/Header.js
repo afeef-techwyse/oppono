@@ -17,7 +17,7 @@ const SubHeader = styled(connect(({state, className}) => {
         <path fill="none" className={'primary-stroke'} stroke="#b5d2ff" strokeMiterlimit="20" d="M3 8V0"/>
         <path fill="none" className={'primary-stroke'} stroke="#b5d2ff" strokeMiterlimit="20" d="M6 3v0L3 0 0 3"/>
       </svg>
-      <Link className={'primary'} href={'/'}>Back To Home</Link>
+      <Link className={'primary'} href={'/'}>Back To Dashboard</Link>
     </p>
   
     <div>
@@ -77,14 +77,13 @@ const SubHeader = styled(connect(({state, className}) => {
     }
   `;
 
-const RightPart = connect(({state}) => state.theme.user.logged
+const RightPart = connect(({state, actions}) => state.theme.user.logged
   ? <>
     <div className="links primary">welcome {state.theme.user.user_fname}</div>
+    <Link onClick={() => actions.theme.removeUser()} className={'links primary'} href={'/'}>Log out</Link>
   </>
   : <>
-    <div className="links">
-      <Link className={'primary'} href={'/sign-in/'}>I’m a member</Link>
-    </div>
+    <Link className={'links primary'} href={'/sign-in/'}>I’m a member</Link>
     <Link className={'signup-btn'} href={'/create-account/'}><Button className={'primary-border primary'} focusable={false} label={'Sign up'}/></Link>
   </>,
 );
@@ -168,7 +167,7 @@ const Header = React.forwardRef(({className, hasSubMenu = true, hasProgress = fa
           <div className="links">
             <Link onClick={() => menuHandler(false)} className={'primary'} href="/">Home</Link>
             <Link onClick={() => menuHandler(false)} className={'primary'} href={'/products/'}>Products & Rates</Link>
-            <Link onClick={() => menuHandler(false)} className={'primary'} href={'/form/e/'}>Lending Areas</Link>
+            <Link onClick={() => menuHandler(false)} className={'primary'} href={'/map/'}>Lending Areas</Link>
             <Link onClick={() => menuHandler(false)} className={'primary'} href={'/sign-in/'}>Member Login</Link>
             <Link onClick={() => menuHandler(false)} className={'primary'} href="/about-us/">About Us</Link>
             <Link onClick={() => menuHandler(false)} className={'primary'} href={'/contacts/'}>Get in Touch</Link>
@@ -186,10 +185,11 @@ Header.propTypes = {
 };
 
 export default styled(Header)`
-  position: fixed;
+  position: fixed !important;
   z-index: 100;
   width: 100%;
   opacity: 1;
+  top: 0;
   transition: opacity 500ms;
 
   .menu-content {

@@ -42,7 +42,10 @@ function Link({onClick: click, libraries, actions, state, children, href, target
     click && click();
   };
   return (
-    <a href={pathname} target={target ? target : (isInternal ? undefined : '_blank')} className={`${current ? 'current ' : ''}${className}`} onClick={onClick}>
+    <a
+      onFocus={() => actions.source.fetch(pathname)}
+      onMouseEnter={() => actions.source.fetch(pathname)}
+      href={pathname} target={target ? target : (isInternal ? undefined : '_blank')} className={`${current ? 'current ' : ''}${className}`} onClick={onClick}>
       {children}
     </a>
   );
