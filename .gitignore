@@ -2,3 +2,5 @@ build/
 node_modules/
 \.idea/
 /helping_files/
+Dockerfile
+docker-compose.yml
