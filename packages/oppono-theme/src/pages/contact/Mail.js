@@ -32,7 +32,7 @@ const Mail = ({className, state, actions}) => {
         ]}/>
       <Container>
         {pageData.section_1?.title ? <h1 className={'contact-title'}>{pageData.section_1?.title}</h1> : null}
-        {pageData.section_1?.sub_title ? <h2 className={'contact-title'}>{pageData.section_1?.sub_title}</h2> : null}
+        {pageData.section_1?.sub_title ? <h2 className={'contact-sub-title'}>{pageData.section_1?.sub_title}</h2> : null}
     
         <img className={'contact-obj'} src={contact_obj} alt={'Contact Icon'}/>
         <div className="contact-row">

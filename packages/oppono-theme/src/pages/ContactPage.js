@@ -8,15 +8,18 @@ import Footer from '../components/Footer';
 import Mail from './contact/Mail';
 import classnames from 'classnames';
 
-const ContactPage = ({className, state}) =>
-  <div className={classnames(className, 'gray-theme')}>
-    <Header/>
-    <Switch>
-      {/*<Chat when={state.router.link.startsWith('/contact/chat/')}/>*/}
-      <Mail when={state.router.link.startsWith('/mail/')}/>
-    </Switch>
-    <Footer/>
-  </div>
+const ContactPage = ({className, state}) => {
+    const data = state.source.get(state.router.link);
+    const pageData = data.isReady && !data.isError ? state.source[data.type][data.id].acf : {};
+    return <div className={classnames(className, pageData.section_1?.section_theme || 'gray-theme')}>
+      <Header/>
+      <Switch>
+        {/*<Chat when={state.router.link.startsWith('/contact/chat/')}/>*/}
+        <Mail when={state.router.link.startsWith('/mail/')}/>
+      </Switch>
+      <Footer/>
+    </div>;
+  }
 ;
 
 export default styled(connect(ContactPage))`
