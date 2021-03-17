@@ -228,7 +228,7 @@ const ProductsSlider = ({className, active = false, link, state, actions}) => {
   
   const SignUpLink = connect(({state}) => state.theme.user.logged
     ?
-    <Link href={'/dashboard/'} className={'cta-btn'}><Button className={'wide'} label={'Go to Dashboard'}/></Link>
+    <Link href={'/d/'} className={'cta-btn'}><Button className={'wide'} label={'See All Products'}/></Link>
     
     : <Link href={'/create-account/'} className={'cta-btn'}><Button className={'wide'} label={'Sign up to check all products & rates'}/></Link>
     ,

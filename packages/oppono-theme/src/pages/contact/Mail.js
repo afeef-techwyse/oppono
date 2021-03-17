@@ -11,7 +11,6 @@ import Button from '../../components/form-components/Button';
 const Mail = ({className, state, actions}) => {
   const data = state.source.get(state.router.link);
   const pageData = data.isReady && !data.isError ? state.source[data.type][data.id].acf : {};
-  console.log(pageData);
   React.useEffect(() => {
     actions.theme.setSubHeader(pageData.sub_header);
   }, [pageData]);

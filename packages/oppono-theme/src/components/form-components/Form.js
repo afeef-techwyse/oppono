@@ -22,7 +22,6 @@ const Form = ({className, children, wide, actions, state, endPoint, setCurrentTh
     setActiveStep(0);
   };
   const nextCallback = () => {
-    console.log('next');
     initial.current = false;
     reversed.current = false;
     setActiveStep(prevState => prevState + 1);

@@ -179,7 +179,6 @@ const HomeSlider = ({className, active = false, state, actions, link}) => {
   const [swiperRef, setSwiperRef] = React.useState(null);
   const [slideFlyingObjectsPlaying, setSlideFlyingObjectsPlaying] = React.useState([]);
   const [currentSlide, setCurrentSlide, currentSlideRef] = useStateWithRef(0);
-  console.log(slideFlyingObjectsPlaying[0]);
   const resetSlider = () => {
     swiperRef?.slideTo(0);
     
@@ -338,7 +337,6 @@ const HomeSlider = ({className, active = false, state, actions, link}) => {
             });
           }}
           onMomentumBounce={(swiper) => {
-            console.log(swiper);
           }}
           onTransitionEnd={(swiper) => {
             // const {realIndex, previousIndex} = swiper;

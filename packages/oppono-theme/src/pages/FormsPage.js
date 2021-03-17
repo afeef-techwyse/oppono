@@ -27,7 +27,6 @@ const FormsPage = ({className, state, actions, link}) => {
     const [currentTheme, setCurrentTheme] = React.useState('gray-theme');
     const page = data.isReady && !data.isError ? state.source[data.type][data.id] : {};
     React.useEffect(() => {
-      console.log('check');
   
       actions.theme.setErrors({});
       actions.theme.checkUser();
@@ -37,20 +36,20 @@ const FormsPage = ({className, state, actions, link}) => {
       <Header hasProgress={state.theme.activeStep.total > 1}/>
       <Switch>
         <DPage setCurrentTheme={setCurrentTheme} when={state.router.link.startsWith('/d/')}/>
-        <SignInPage setCurrentTheme={setCurrentTheme} when={page.slug === 'sign-in'}/>
-        <SignUpPage setCurrentTheme={setCurrentTheme} when={page.slug === 'create-account'}/>
-        <A1Page setCurrentTheme={setCurrentTheme} when={page.slug === 'a-i'}/>
-        <A2Page setCurrentTheme={setCurrentTheme} when={page.slug === 'a-ii'}/>
-        <A3Page setCurrentTheme={setCurrentTheme} when={page.slug === 'a-iii'}/>
-        <BPage setCurrentTheme={setCurrentTheme} when={page.slug === 'b'}/>
-        <C1Page setCurrentTheme={setCurrentTheme} when={page.slug === 'c-i'}/>
-        <C2Page setCurrentTheme={setCurrentTheme} when={page.slug === 'c-ii'}/>
-        <C3Page setCurrentTheme={setCurrentTheme} when={page.slug === 'c-iii'}/>
-        <D1Page setCurrentTheme={setCurrentTheme} when={page.slug === 'd-i'}/>
-        <D2Page setCurrentTheme={setCurrentTheme} when={page.slug === 'd-ii'}/>
-        <D3Page setCurrentTheme={setCurrentTheme} when={page.slug === 'd-iii'}/>
-        <EPage setCurrentTheme={setCurrentTheme} when={page.slug === 'e'}/>
-        <ThreePage setCurrentTheme={setCurrentTheme} when={page.slug === 'qualifyfor'}/>
+        <SignInPage setCurrentTheme={setCurrentTheme} when={page.slug === 'sign-in'} formData={page.acf}/>
+        <SignUpPage setCurrentTheme={setCurrentTheme} when={page.slug === 'create-account'} formData={page.acf}/>
+        <A1Page setCurrentTheme={setCurrentTheme} when={page.slug === 'a-i'} formData={page.acf}/>
+        <A2Page setCurrentTheme={setCurrentTheme} when={page.slug === 'a-ii'} formData={page.acf}/>
+        <A3Page setCurrentTheme={setCurrentTheme} when={page.slug === 'a-iii'} formData={page.acf}/>
+        <BPage setCurrentTheme={setCurrentTheme} when={page.slug === 'b'} formData={page.acf}/>
+        <C1Page setCurrentTheme={setCurrentTheme} when={page.slug === 'c-i'} formData={page.acf}/>
+        <C2Page setCurrentTheme={setCurrentTheme} when={page.slug === 'c-ii'} formData={page.acf}/>
+        <C3Page setCurrentTheme={setCurrentTheme} when={page.slug === 'c-iii'} formData={page.acf}/>
+        <D1Page setCurrentTheme={setCurrentTheme} when={page.slug === 'd-i'} formData={page.acf}/>
+        <D2Page setCurrentTheme={setCurrentTheme} when={page.slug === 'd-ii'} formData={page.acf}/>
+        <D3Page setCurrentTheme={setCurrentTheme} when={page.slug === 'd-iii'} formData={page.acf}/>
+        <EPage setCurrentTheme={setCurrentTheme} when={page.slug === 'e'} formData={page.acf}/>
+        <ThreePage setCurrentTheme={setCurrentTheme} when={page.slug === 'qualifyfor'} formData={page.acf}/>
       </Switch>
       <Footer/>
     </div>;

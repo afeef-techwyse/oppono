@@ -10,6 +10,9 @@ import ProductsMobileOption from '../../components/form-components/ProductsMobil
 import useProductsTable from '../../hooks/useProductsTable';
 import opponoApi from '../../opponoApi';
 import CheckMark from '../../components/reusable/CheckMark';
+import {size} from '../../functions/size';
+import Link from '../../components/reusable/Link';
+
 
 const DPage = ({className, setCurrentTheme, state, actions}) => {
   const media = useMedia();
@@ -36,8 +39,9 @@ const DPage = ({className, setCurrentTheme, state, actions}) => {
         {state.theme.stepResponse.data?.data
           ? media !== 'mobile'
             ? <FormFilter className={'form-wide-container'} filters={productsFilter}>
+              <div className={'want-deal'} data-filter={'*'}><Link href={'/qualifyfor/'}><Button className={'small next-step'} label={'See if I qualify'}/></Link></div>
               {Object.entries(state.theme.stepResponse.data?.data).map(([type, {products}], index) =>
-                <ProductsTable key={type} dataFilter={type}>
+                <ProductsTable key={type} dataFilter={type} products={productsTable}>
                   <thead>
                   <tr>
                     <th scope={'col'}>
@@ -68,10 +72,6 @@ const DPage = ({className, setCurrentTheme, state, actions}) => {
                       products.map(({ID, title, fields: {rate}}) =>
                         <th scope={'col'} key={ID}>
                           <p className={'number'}>{rate}%</p>
-                          <Button onClick={() => {
-                            selectedProduct.current.value = title;
-                            setTimeout(() => actions.theme.setValidateAndNextCallback(new Date().getTime()), 100);
-                          }} className={'small next-step'} label={'I want this deal'}/>
                         </th>,
                       )
                     }
@@ -107,6 +107,7 @@ const DPage = ({className, setCurrentTheme, state, actions}) => {
             </FormFilter>
             : <div className="mortgage-options-mobile">
               <FormFilter filters={productsFilter}>
+                <div className={'want-deal'} data-filter={'*'}><Link href={'/qualifyfor/'}><Button className={'small next-step'} label={'See if I qualify'}/></Link></div>
                 {Object.entries(state.theme.stepResponse.data?.data).map(([type, {products}, index]) =>
                   <div key={type} data-filter={type}>
                     {
@@ -119,10 +120,6 @@ const DPage = ({className, setCurrentTheme, state, actions}) => {
                           </div>
                           <div className="mortgage-head">
                             <p className={'number'}>{rate}%</p>
-                            <Button onClick={() => {
-                              selectedProduct.current.value = title;
-                              setTimeout(() => actions.theme.setValidateAndNextCallback(new Date().getTime()), 100);
-                            }} className={'small next-step'} label={'I want this deal'}/>
                           </div>
                           <div className="mortgage-body">
                             <div className={'m-row m-head'}>
@@ -190,4 +187,18 @@ const DPage = ({className, setCurrentTheme, state, actions}) => {
 export default styled(connect(DPage))`
   width: 100%;
   height: 100%;
+
+  .want-deal {
+    ${Button} {
+      margin: ${size(70)} auto;
+    }
+  }
+
+  .filters {
+    margin-bottom: 0;
+  }
+
+  .form-text-wrapper {
+    margin-bottom: ${size(20)};
+  }
 `;

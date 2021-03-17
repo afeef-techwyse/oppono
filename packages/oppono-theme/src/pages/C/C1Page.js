@@ -15,7 +15,7 @@ import intro_ball_1 from '../../assets/images/form_1_img.png';
 import intro_ball_2 from '../../assets/images/form_2_img.png';
 import FlyingObjsContainer from '../../components/reusable/FlyingObjsContainer';
 import ProductsTable from '../../components/form-components/ProductsTable';
-import {Li, Ol, P, Span} from '../../components/form-components/StyledComponent';
+import {Li, Ol, P, Span, Wysiwyg} from '../../components/form-components/StyledComponent';
 import Alert from '../../components/form-components/Alert';
 import Finalize, {Bottom, FinalizeChild, FinalizeTable, Top} from '../../components/form-components/Finalize';
 import useMedia from '../../hooks/useMedia';
@@ -37,9 +37,8 @@ import {numberWithCommas} from '../../functions/numberWithCommas';
 import Link from '../../components/reusable/Link';
 
 const pageName = 'c-1';
-const C1Page = ({className, setCurrentTheme, state, actions}) => {
-  const data = state.source.get(state.router.link);
-  const formData = data.isReady && !data.isError ? state.source[data.type][data.id].acf : {};
+const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
+  
   const getC1Values = useStoredFormValue(pageName);
   const
     section1Values = getC1Values(formData.section_1?.section_name),
@@ -77,6 +76,9 @@ const C1Page = ({className, setCurrentTheme, state, actions}) => {
   const [productsTable, productsFilter] = useProductsTable(state.theme.stepResponse);
   const mortgage = ((+section5Values('mortgage_value_1') || 0) + (+section5Values('mortgage_value_2') || 0) + (+section5Values('outstanding_amount_value') || 0)) || 0;
   const firstProduct = state.theme.stepResponse.data?.data ? Object.values(state.theme.stepResponse.data?.data)[0].products[0] : {};
+  
+  const refNumber = state.theme.stepResponse.data?.['sf-lead-id'] || '';
+  
   return <div className={className}>
     <Form setCurrentTheme={setCurrentTheme} endPoint={'/refinance'}>
       <FormStep endPoint={null} pageName={pageName} activeTheme={formData.section_1?.section_theme} stepName={formData.section_1?.section_name}>
@@ -321,12 +323,6 @@ const C1Page = ({className, setCurrentTheme, state, actions}) => {
           <h1 className={'form-headline-1 text-left'}>{formData.section_5?.title}</h1>
         </div>
         <input type={'hidden'} name={`home_value`} value={section1Values('home_value')}/>
-        <RadioGroup radioText={formData.section_5?.appraisal_report_yes_no.label}>
-          <RadioInput label={formData.section_5?.appraisal_report_yes_no.yes} value={'1'} serverErrorMessage={state.theme.errors?.['have_appraisal_report']} name={'have_appraisal_report'}
-                      type={'radio'}/>
-          <RadioInput label={formData.section_5?.appraisal_report_yes_no.no} value={'0'} serverErrorMessage={state.theme.errors?.['have_appraisal_report']} name={'have_appraisal_report'}
-                      type={'radio'}/>
-        </RadioGroup>
   
         <FormConditionalInput serverErrorMessage={state.theme.errors?.['have_mortgage_1']} name={'have_mortgage_1'} showOn={'1'} checked={'0'} {...formData.section_5?.any_mortgage_yes_no}>
           <Input type={'number'} serverErrorMessage={state.theme.errors?.['mortgage_value_1']} name={'mortgage_value_1'} {...formData.section_5?.first_mortgage_amount_input}/>
@@ -518,20 +514,17 @@ const C1Page = ({className, setCurrentTheme, state, actions}) => {
       <FormStep pageName={pageName} activeTheme={formData.section_9?.section_theme} stepName={formData.section_9?.section_name}>
         <LastStep>
           <img src={formData.section_9?.image.url} alt={formData.section_9?.image.alt}/>
-          <div style={{flexBasis: '20%'}} className="text">
+          <div style={{flexBasis: '60%'}} className="text">
             <h1 className={'form-headline-1 text-left'}>{formData.section_9?.title}</h1>
             <p className={'form-headline-3 primary'}>{formData.section_9?.subtitle}</p>
-            
-            <Ol>
-              <Li>Login into your <Span.Green>Filogix</Span.Green> Expert account</Li>
-              <Li>Select your <Span.White>Client</Span.White> and click <Span.Green>Lender Submit</Span.Green> in the left side panel.</Li>
-              <Li>Choose <Span.White>Private</Span.White> under <Span.Green>Lender Type</Span.Green>, <Span.White>Oppono</Span.White> under <Span.Green>Lender</Span.Green>,
-                and <Span.White>Electronic</Span.White> under <Span.Green>Submission Method.</Span.Green></Li>
-              <Li>Copy your reference number <Span.White>#034933</Span.White> into the <Span.Green>Lender Notes</Span.Green> section then press <Span.Green>Submit.</Span.Green></Li>
-            </Ol>
+            <Wysiwyg dangerouslySetInnerHTML={{__html: formData.section_9?.steps.replace('{{number}}', refNumber)}}/>
             <div className="btn-group">
-              <Button className={'wide'} label={'Connect to Filogix'}/>
-              <Link className={'wide bordered'} href={'/dashboard'}>back to Dashboard</Link>
+              <Link className={'wide bordered'} href={'https://expert.filogix.com/expert/view/SignOn'}>
+                <Button className={'wide filled'} label={'Connect to Filogix'}/>
+              </Link>
+              <Link className={'wide bordered'} href={'/dashboard'}>
+                <Button className={'wide bordered'} label={'back to Dashboard'}/>
+              </Link>
             </div>
           </div>
         </LastStep>

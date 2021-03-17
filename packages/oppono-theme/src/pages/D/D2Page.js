@@ -14,7 +14,7 @@ import TextArea from '../../components/form-components/TextArea';
 import intro_ball_1 from '../../assets/images/form_1_img.png';
 import intro_ball_2 from '../../assets/images/form_2_img.png';
 import FlyingObjsContainer from '../../components/reusable/FlyingObjsContainer';
-import {Li, Ol, P, Span} from '../../components/form-components/StyledComponent';
+import {Li, Ol, P, Span, Wysiwyg} from '../../components/form-components/StyledComponent';
 import Alert from '../../components/form-components/Alert';
 import Finalize, {Bottom, FinalizeChild, FinalizeTable, Top} from '../../components/form-components/Finalize';
 import useMedia from '../../hooks/useMedia';
@@ -31,9 +31,8 @@ import {numberWithCommas} from '../../functions/numberWithCommas';
 import Link from '../../components/reusable/Link';
 
 const pageName = 'd-2';
-const D2Page = ({className, setCurrentTheme, state, actions}) => {
-  const data = state.source.get(state.router.link);
-  const formData = data.isReady && !data.isError ? state.source[data.type][data.id].acf : {};
+const D2Page = ({className, setCurrentTheme, state, actions, formData}) => {
+  
   const getD2Values = useStoredFormValue(pageName);
   const
     section1Values = getD2Values(formData.section_1?.section_name),
@@ -54,10 +53,12 @@ const D2Page = ({className, setCurrentTheme, state, actions}) => {
   }, [state.theme.user.logged]);
   const [appraiser, postalCodeOnChange] = useFlowAppraisers();
   
-  const mortgage = ((+section2Values('home_value')) - (+section2Values('down_payment'))) || 0;
+  const mortgage = ((+section2Values('mortgage_value_1') || 0) + (+section2Values('mortgage_value_2') || 0) + (+section2Values('outstanding_amount_value')) || 0) || 0;
   const firstProduct = state.theme.stepResponse.data?.data ? Object.values(state.theme.stepResponse.data?.data)[0].products[0] : {};
+  const refNumber = state.theme.stepResponse.data?.['sf-lead-id'] || '';
+  
   return <div className={className}>
-    <Form setCurrentTheme={setCurrentTheme} endPoint={'/purchase'}>
+    <Form setCurrentTheme={setCurrentTheme} endPoint={'/refinance'}>
       <FormStep apiStepNumber={1} pageName={pageName} activeTheme={formData.section_1?.section_theme} stepName={formData.section_1?.section_name}>
         <FlyingObjsContainer childrenList={[
           {
@@ -82,19 +83,19 @@ const D2Page = ({className, setCurrentTheme, state, actions}) => {
           <h1 className={'form-headline-1 text-left'}>{formData.section_1?.title}</h1>
           <h2 className={'form-headline-2 primary'}>{formData.section_1?.subtitle}</h2>
         </div>
-        <Input type={'text'} name={'address'} {...formData.section_1?.address_input}/>
+        <Input type={'text'} serverErrorMessage={state.theme.errors?.['address']} name={'address'} {...formData.section_1?.address_input}/>
         <W50>
-          <Input value={appraiser?.title} type={'text'} name={'city'} {...formData.section_1?.city_input}/>
-          <Input onChange={postalCodeOnChange} type={'text'} name={'postal_code'} {...formData.section_1?.postal_code_input}/>
+          <Input type={'text'} serverErrorMessage={state.theme.errors?.['city']} name={'city'} value={appraiser?.title} {...formData.section_1?.city_input}/>
+          <Input type={'text'} serverErrorMessage={state.theme.errors?.['postal_code']} name={'postal_code'} {...formData.section_1?.postal_code_input} onChange={postalCodeOnChange}/>
         </W50>
         <Select
-          name={'property_type'}
+          serverErrorMessage={state.theme.errors?.['property_type']} name={'property_type'}
           {...formData.section_1?.property_dropdown}/>
         <Select
-          name={'property_details_1'}
+          serverErrorMessage={state.theme.errors?.['property_details_1']} name={'property_details_1'}
           {...formData.section_1?.property_details_1_dropdown}/>
         <Select
-          name={'property_details_2'}
+          serverErrorMessage={state.theme.errors?.['property_details_2']} name={'property_details_2'}
           {...formData.section_1?.property_details_2_dropdown}/>
         <Button icon={true} className={'next-step'} label={'Next'}/>
       </FormStep>
@@ -102,33 +103,43 @@ const D2Page = ({className, setCurrentTheme, state, actions}) => {
         <div className="form-text-wrapper">
           <h1 className={'form-headline-1 text-left'}>{formData.section_2?.title}</h1>
         </div>
-        <Input type={'number'} name={'home_value'} {...formData.section_2?.estimated_value_input}/>
-        <Input type={'number'} name={'down_payment'} {...formData.section_2?.down_payment_input}/>
-        <RadioGroup radioText={formData.section_2?.appraisal_report_yes_no.label} checked={'1'}>
-          <RadioInput label={formData.section_2?.appraisal_report_yes_no.yes} value={'1'} name={'have_appraisal_report'} type={'radio'}/>
-          <RadioInput label={formData.section_2?.appraisal_report_yes_no.no} value={'0'} name={'have_appraisal_report'} type={'radio'}/>
-        </RadioGroup>
+        <Input type={'number'} serverErrorMessage={state.theme.errors?.['home_value']} name={'home_value'} {...formData.section_2?.estimated_value_input}/>
+        
+        <FormConditionalInput serverErrorMessage={state.theme.errors?.['have_mortgage_1']} name={'have_mortgage_1'} showOn={'1'} checked={'0'} {...formData.section_2?.any_mortgage_yes_no}>
+          <Input type={'number'} serverErrorMessage={state.theme.errors?.['mortgage_value_1']} name={'mortgage_value_1'} {...formData.section_2?.first_mortgage_amount_input}/>
+        </FormConditionalInput>
+        
+        <FormConditionalInput serverErrorMessage={state.theme.errors?.['have_mortgage_2']} name={'have_mortgage_2'} showOn={'1'} checked={'0'} {...formData.section_2?.second_mortgage_yes_no}>
+          <Input type={'number'} serverErrorMessage={state.theme.errors?.['mortgage_value_2']} name={'mortgage_value_2'} {...formData.section_2?.second_mortgage_amount_input}/>
+        </FormConditionalInput>
+        
+        <FormConditionalInput serverErrorMessage={state.theme.errors?.['have_outstanding_amount']} name={'have_outstanding_amount'} showOn={'1'}
+                              checked={'0'} {...formData.section_2?.outstanding_balance_yes_no}>
+          <Input type={'number'} serverErrorMessage={state.theme.errors?.['outstanding_amount_value']}
+                 name={'outstanding_amount_value'} {...formData.section_2?.outstanding_balance_amount_input}/>
+        </FormConditionalInput>
+        
         <div className="btn-group">
           <Button className={'bordered prev-step'} label={'Back'}/>
           <Button icon={true} className={'next-step'} label={'Next'}/>
         </div>
       </FormStep>
-      <FormStep
-        sendSteps={[
-          formData.section_1?.section_name,
-          formData.section_2?.section_name,
-          formData.section_3?.section_name,
-        ]} apiStepNumber={3} pageName={pageName} activeTheme={formData.section_3?.section_theme} stepName={formData.section_3?.section_name}>
+      <FormStep apiStepNumber={3} pageName={pageName} activeTheme={formData.section_3?.section_theme} stepName={formData.section_3?.section_name} sendSteps={[
+        formData.section_1?.section_name,
+        formData.section_2?.section_name,
+        formData.section_3?.section_name,
+      ]}>
         <div className="form-text-wrapper">
           <h1 className={'form-headline-1 text-left'}>{formData.section_3?.title}</h1>
           <h1 className={'form-headline-2 primary'}>{formData.section_3?.subtitle}</h1>
         </div>
-        <FormRepeatableInput question={formData.section_3?.applicant_amount_label} number={4} initial={1} name={'applicants_number'}>
+        <FormRepeatableInput question={formData.section_3?.applicant_amount_label} number={4} initial={1} serverErrorMessage={state.theme.errors?.['applicants_number']} name={'applicants_number'}>
           <W50>
-            <Input type={'text'} name={'applicant_fname_{{number}}'} {...formData.section_3?.applicant.first_name_input}/>
-            <Input type={'text'} name={'applicant_lname_{{number}}'} {...formData.section_3?.applicant.last_name_input}/>
-            <Input type={'text'} pattern={'^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$'} name={'applicant_mail_{{number}}'} {...formData.section_3?.applicant.email_input}/>
-            <Input type={'phone'} name={'applicant_phone_{{number}}'} {...formData.section_3?.applicant.phone_input}/>
+            <Input type={'text'} serverErrorMessage={state.theme.errors?.['applicant_fname_{{number}}']} name={'applicant_fname_{{number}}'} {...formData.section_3?.applicant.first_name_input}/>
+            <Input type={'text'} serverErrorMessage={state.theme.errors?.['applicant_lname_{{number}}']} name={'applicant_lname_{{number}}'} {...formData.section_3?.applicant.last_name_input}/>
+            <Input type={'text'} pattern={'^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$'} serverErrorMessage={state.theme.errors?.['applicant_mail_{{number}}']}
+                   name={'applicant_mail_{{number}}'} {...formData.section_3?.applicant.email_input}/>
+            <Input type={'phone'} serverErrorMessage={state.theme.errors?.['applicant_phone_{{number}}']} name={'applicant_phone_{{number}}'} {...formData.section_3?.applicant.phone_input}/>
           </W50>
           <RadioGroup radioText={formData.section_3?.applicant.score_label} checked={'650+'}>
             <RadioInput label={'<650'} value={'<650'} serverErrorMessage={state.theme.errors?.['applicant_score_{{number}}']} name={`applicant_score_{{number}}`} type={'radio'}/>
@@ -184,7 +195,7 @@ const D2Page = ({className, setCurrentTheme, state, actions}) => {
                 <P.D>Your mortgage request is {mortgage}</P.D>
                 <P.D>You could qualify up to {numberWithCommas(Math.round(+section2Values('home_value') * firstProduct.fields?.maximum_ltv / 100))}</P.D>
                 <P.D>Your property value is ${numberWithCommas(+section2Values('home_value'))}</P.D>
-                <P.D>Your down payment is ${numberWithCommas(+section2Values('down_payment'))}</P.D>
+                <P.D>Your down payment is ${numberWithCommas(+section2Values('home_value') - mortgage)}</P.D>
                 <P.D>Your LTV is {(mortgage / +section2Values('home_value') * 100).toFixed(1)}%</P.D>
               </FinalizeChild>
               : <FinalizeChild className={'full'} order={1}>
@@ -214,7 +225,7 @@ const D2Page = ({className, setCurrentTheme, state, actions}) => {
                   </tr>
                   <tr>
                     <P.Dark as={'td'}>Down Payment</P.Dark>
-                    <P.D as={'td'}>${numberWithCommas(+section2Values('down_payment'))}</P.D></tr>
+                    <P.D as={'td'}>${numberWithCommas(+section2Values('home_value') - mortgage)}</P.D></tr>
                   <tr>
                     <P.Dark as={'td'}>LTV</P.Dark>
                     <P.D as={'td'}>{(mortgage / +section2Values('home_value') * 100).toFixed(1)}%</P.D>
@@ -255,7 +266,7 @@ const D2Page = ({className, setCurrentTheme, state, actions}) => {
         <div className="upload-step-wrapper">
           <img src={upload}/>
           <h1 className={'form-headline-1 text-left'}>{formData.section_5?.title}</h1>
-          <FormConditionalInput name={'mortgages_1'} showOn={'1'} checked={'0'} {...formData.section_5?.have_appraisal_report_yes_no}>
+          <FormConditionalInput serverErrorMessage={state.theme.errors?.['mortgages_1']} name={'mortgages_1'} showOn={'1'} checked={'0'} {...formData.section_5?.have_appraisal_report_yes_no}>
             <FileInput name='appraisal_report_file' label={formData.section_5?.appraisal_report_upload_label} acceptText={'PDF, JPG, or PNG'}/>
             <Appraiser>
               <P.D>Select an appraiser</P.D>
@@ -276,7 +287,7 @@ const D2Page = ({className, setCurrentTheme, state, actions}) => {
             </Appraiser>
           </FormConditionalInput>
           <hr/>
-          <TextArea name={'additional_notes'} {...formData.section_5?.additional_notes_input}/>
+          <TextArea serverErrorMessage={state.theme.errors?.['additional_notes']} name={'additional_notes'} {...formData.section_5?.additional_notes_input}/>
           <div className="btn-group">
             <Button className={'next-step'} label={'I want my pre-approval'}/>
           </div>
@@ -285,20 +296,17 @@ const D2Page = ({className, setCurrentTheme, state, actions}) => {
       <FormStep pageName={pageName} activeTheme={formData.section_6?.section_theme} stepName={formData.section_6?.section_name}>
         <LastStep>
           <img src={formData.section_6?.image.url} alt={formData.section_6?.image.alt}/>
-          <div style={{flexBasis: '20%'}} className="text">
+          <div style={{flexBasis: '60%'}} className="text">
             <h1 className={'form-headline-1 text-left'}>{formData.section_6?.title}</h1>
             <p className={'form-headline-3 primary'}>{formData.section_6?.subtitle}</p>
-            
-            <Ol>
-              <Li>Login into your <Span.Green>Filogix</Span.Green> Expert account</Li>
-              <Li>Select your <Span.White>Client</Span.White> and click <Span.Green>Lender Submit</Span.Green> in the left side panel.</Li>
-              <Li>Choose <Span.White>Private</Span.White> under <Span.Green>Lender Type</Span.Green>, <Span.White>Oppono</Span.White> under <Span.Green>Lender</Span.Green>,
-                and <Span.White>Electronic</Span.White> under <Span.Green>Submission Method.</Span.Green></Li>
-              <Li>Copy your reference number <Span.White>#034933</Span.White> into the <Span.Green>Lender Notes</Span.Green> section then press <Span.Green>Submit.</Span.Green></Li>
-            </Ol>
+            <Wysiwyg dangerouslySetInnerHTML={{__html: formData.section_6?.steps.replace('{{number}}', refNumber)}}/>
             <div className="btn-group">
-              <Button className={'wide'} label={'Connect to Filogix'}/>
-              <Link className={'wide bordered'} href={'/dashboard'}>back to Dashboard</Link>
+              <Link className={'wide bordered'} href={'https://expert.filogix.com/expert/view/SignOn'}>
+                <Button className={'wide filled'} label={'Connect to Filogix'}/>
+              </Link>
+              <Link className={'wide bordered'} href={'/dashboard'}>
+                <Button className={'wide bordered'} label={'back to Dashboard'}/>
+              </Link>
             </div>
           </div>
         </LastStep>
@@ -308,30 +316,34 @@ const D2Page = ({className, setCurrentTheme, state, actions}) => {
 };
 
 export default styled(connect(D2Page))`
-width: 100%;
-height: 100%;
-${Bottom}{
-  padding-top: 0;
-  .full{
-    @media(max-width: 991px){
-    flex-basis: 72%;
-    width: 72%;
-    margin-left: auto;
-    }
-    @media(max-width: 575px){
+  width: 100%;
+  height: 100%;
+
+  ${Bottom} {
+    padding-top: 0;
+
+    .full {
+      @media (max-width: 991px) {
+        flex-basis: 72%;
+        width: 72%;
+        margin-left: auto;
+      }
+      @media (max-width: 575px) {
         flex-basis: 100%;
-    width: 100%;
+        width: 100%;
+      }
     }
   }
-}
-.wide-text{
-  max-width: ${size(800)};
-  .form-headline-3{
-    max-width: ${size(400)};
-    @media(max-width: 575.98px){
-      max-width: 90%;
+
+  .wide-text {
+    max-width: ${size(800)};
+
+    .form-headline-3 {
+      max-width: ${size(400)};
+      @media (max-width: 575.98px) {
+        max-width: 90%;
+      }
     }
   }
-}
 
 `;

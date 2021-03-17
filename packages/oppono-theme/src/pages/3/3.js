@@ -24,13 +24,9 @@ import MegaloNum from '../../components/form-components/MegaloNum';
 import useStoredFormValue from '../../hooks/useStoredFormValue';
 import NeedHelp from '../../components/reusable/NeedHelp';
 
-const ThreePage = ({className, setCurrentTheme, state, actions}) => {
+const ThreePage = ({className, setCurrentTheme, state, actions, formData}) => {
   const pageName = '3';
   const get3Values = useStoredFormValue(pageName);
-  const data = state.source.get(state.router.link);
-  
-  
-  const formData = data.isReady && !data.isError ? state.source[data.type][data.id].acf : {};
   
   const [section1Values, section2Values, section3Values, section4Values] = [get3Values(formData.section_1?.section_name), get3Values(formData.section_2?.section_name), get3Values(formData.section_3?.section_name), get3Values(formData.section_4?.section_name)];
   
@@ -63,8 +59,8 @@ const ThreePage = ({className, setCurrentTheme, state, actions}) => {
             alt: 'alt',
           }]}/>
         <div className="form-text-wrapper">
-          <h1 className={'form-headline-1 text-left'}>{formData.section_1?.title_input}</h1>
-          <h2 className={'form-headline-2 primary'}>{formData.section_1?.subtitle_input}</h2>
+          <h1 className={'form-headline-1 text-left'}>{formData.section_1?.title}</h1>
+          <h2 className={'form-headline-2 primary'}>{formData.section_1?.subtitle}</h2>
         </div>
         <Input className={'big-input'} type={'number'} name={'home_value'} {...formData.section_1?.home_value_input}/>
         <Button icon={true} className={'next-step wide'} label={'Next'}/>
@@ -252,7 +248,9 @@ const ThreePage = ({className, setCurrentTheme, state, actions}) => {
             alt: 'alt',
           }]}/>
         <div className="btn-group megalonum">
-          <Link href={'/d/'}><Button focusable={false} className={'next-step wide-vertical'} label={'I want this deal'}/></Link>
+          {state.theme.user.logged
+            ? <Link href={'/dashboard/d/'}><Button focusable={false} className={'wide-vertical'} label={'I want this deal'}/></Link>
+            : <Link href={'/sign-in/'}><Button focusable={false} className={'wide-vertical'} label={'Sign in to get this deal'}/></Link>}
           <Link href={'/d/'}><Button focusable={false} className={'next-step bordered wide-vertical'} label={'No, let’s see the full list'}/></Link>
         </div>
         <Finalize className={'mt-0'}>

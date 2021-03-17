@@ -90,7 +90,6 @@ const SpriteSheet = React.forwardRef(({
     };
     if (!paused && imageLoaded) {
       if (loop_start_index !== 0) {
-        console.log('555555555', currentIndex.current, loop_start_index, initialInterval, imageUrl);
   
         initialInterval = setInterval(
           () => {
@@ -100,7 +99,6 @@ const SpriteSheet = React.forwardRef(({
             if (currentIndex.current + 1 >= loop_start_index) {
               stopInterval.current = true;
               clearInterval(initialInterval);
-              console.log(currentIndex.current, loop_start_index, initialInterval, imageUrl);
             }
           },
           initial_duration * 1000 / loop_start_index,
@@ -108,9 +106,7 @@ const SpriteSheet = React.forwardRef(({
       }
       setTimeout(() => interval = createInterval(), loop_start_index ? initial_duration : 0);
     }
-    console.log(paused, imageLoaded, !paused && imageLoaded, initialInterval, initial_duration, image.current, imageUrl, new Date().getUTCMilliseconds());
     return () => {
-      console.log('3333333333333333', initialInterval, imageUrl);
       clearInterval(initialInterval);
       clearInterval(interval);
       clearTimeout(repeatDelaySetTimeout);

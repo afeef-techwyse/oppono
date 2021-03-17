@@ -13,7 +13,13 @@ const FlyingObjsContainer = React.forwardRef(({className, childrenList}, forward
   const [disableFloating, setDisableFloating] = React.useState(true);
   
   React.useEffect(() => {
-    gsap.from(combinedRef.current.children, {duration: 1.5, y: (_, target) => `+=${window.innerHeight * Math.abs(+target.dataset.level)}`, onComplete: () => setDisableFloating(false)});
+    gsap.from(combinedRef.current.children, {
+      duration: 1,
+      y: (_, target) => `+=${window.innerHeight * Math.abs(+target.dataset.level)}`,
+      onComplete: () => setDisableFloating(false),
+      delay: 1,
+      ease: 'power3.out',
+    });
   }, []);
   return (
     <div ref={combinedRef} className={`flying-objs-container ${className}`}>

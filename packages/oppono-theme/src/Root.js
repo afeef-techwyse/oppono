@@ -28,8 +28,7 @@ const Root = ({state}) => {
     window.addEventListener('resize', fixContainer);
     return () => window.removeEventListener('resize', fixContainer);
   }, []);
-  console.log(state.router.link, page);
-  const duration = 1;
+  const duration = .75;
   return <>
     <Styles/>
     {data.isHome && !(isDeveloping || initialDone) ? <Intro setInitialDone={setInitialDone}/> : null}

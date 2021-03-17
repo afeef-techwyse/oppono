@@ -79,8 +79,8 @@ const SubHeader = styled(connect(({state, className}) => {
 
 const RightPart = connect(({state, actions}) => state.theme.user.logged
   ? <>
-    <div className="links primary">welcome {state.theme.user.user_fname}</div>
-    <Link onClick={() => actions.theme.removeUser()} className={'links primary'} href={'/'}>Log out</Link>
+    <div className="links primary">Welcome {state.theme.user.user_fname}</div>
+    <Link onClick={() => actions.theme.removeUser()} className={'links primary'} href={'/'}>Log Out</Link>
   </>
   : <>
     <Link className={'links primary'} href={'/sign-in/'}>I’m a member</Link>
@@ -230,6 +230,8 @@ export default styled(Header)`
         font-weight: 500;
         font-style: normal;
         margin-left: ${size(30)};
+        text-transform: capitalize;
+
       }
 
       .signup-btn {
@@ -325,6 +327,8 @@ export default styled(Header)`
       display: flex;
       flex-direction: column;
       align-items: center;
+      text-transform: capitalize;
+
 
       a {
         color: #b5d2ff;

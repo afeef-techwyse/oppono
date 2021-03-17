@@ -23,14 +23,12 @@ import debounce from '../../functions/debounce';
 import opponoApi from '../../opponoApi';
 
 const pageName = 'e';
-const EPage = ({className, setCurrentTheme, actions, state}) => {
-  const data = state.source.get(state.router.link);
-  const formData = data.isReady && !data.isError ? state.source[data.type][data.id].acf : {};
+const EPage = ({className, setCurrentTheme, actions, state, formData}) => {
+  
   const getEValues = useStoredFormValue(pageName);
   const section1Values = getEValues(formData.section_1?.section_name);
   const appraiser = state.theme.appraiser;
   const [postalCodeErrorMessage, setPostalCodeErrorMessage] = React.useState('');
-  console.log(appraiser);
   
   React.useEffect(() => {
     actions.theme.setSubHeader(formData.sub_header);
@@ -38,6 +36,7 @@ const EPage = ({className, setCurrentTheme, actions, state}) => {
   React.useEffect(() => {
     actions.theme.setLeadId();
   }, []);
+  
   return <div className={className}>
     <Form setCurrentTheme={setCurrentTheme}>
       <FormStep pageName={pageName} activeTheme={formData.section_1?.section_theme} stepName={formData.section_1?.section_name}>
@@ -202,6 +201,7 @@ const EPage = ({className, setCurrentTheme, actions, state}) => {
               <Link href={'/dashboard/'}><Button focusable={false} className={'wide bordered reset-form'} label={'Back to the dashboard'}/></Link>
             </div>
           </div>
+
         </LastStep>
       </FormStep>
     </Form>

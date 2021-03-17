@@ -7,7 +7,6 @@ export const cookies = {
     if (!sKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) { return false; }
     let sExpires = '';
     if (vEnd) {
-      console.log(vEnd);
       switch (vEnd.constructor) {
         case Number:
           sExpires = vEnd === Infinity ? '; expires=Fri, 31 Dec 9999 23:59:59 GMT' : '; max-age=' + vEnd;

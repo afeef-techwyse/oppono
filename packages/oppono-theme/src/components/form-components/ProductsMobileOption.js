@@ -23,16 +23,20 @@ const ProductsMobileOption = ({className, children}) => {
 };
 
 export default styled(ProductsMobileOption)`
-.mortgage-title{
-  p{
-    color: #bfb6b4;
-    font-size: ${size(20)};
-    font-weight: 500;
-    line-height: ${size(24)};
-    text-align: center;
-    &.circle{
-      width: ${size(34)};
-      height: ${size(34)};
+  .mortgage-title {
+    margin-top: ${size(100)};
+    margin-bottom: ${size(72)};
+
+    p {
+      color: #bfb6b4;
+      font-size: ${size(20)};
+      font-weight: 500;
+      line-height: ${size(24)};
+      text-align: center;
+
+      &.circle {
+        width: ${size(34)};
+        height: ${size(34)};
       border: ${size(1)} solid rgba(191, 182, 180, 0.5);
       border-radius: ${size(34)};
       margin: 0 auto ${size(5)};
@@ -46,7 +50,6 @@ export default styled(ProductsMobileOption)`
       font-size: ${size(16)};
     }
   }
-  margin-bottom: ${size(72)};
 }
 .mortgage-head{
   p{

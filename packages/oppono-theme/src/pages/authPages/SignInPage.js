@@ -12,10 +12,8 @@ import FlyingObjsContainer from '../../components/reusable/FlyingObjsContainer';
 import Link from '../../components/reusable/Link';
 
 
-const SignInPage = ({className, setCurrentTheme, state, actions}) => {
+const SignInPage = ({className, setCurrentTheme, state, actions, formData}) => {
   const pageName = 'sign-in';
-  const data = state.source.get(state.router.link);
-  const formData = data.isReady && !data.isError ? state.source[data.type][data.id].acf : {};
   
   React.useEffect(() => {
     actions.theme.setSubHeader(formData.sub_header);

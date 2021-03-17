@@ -97,7 +97,6 @@ export default {
       setErrors: ({state}) => value => state.theme.errors = value,
       setLeadId: ({state}) => value => state.theme.leadId = value,
       setStepResponse: ({state}) => value => {
-        console.log(state.theme.stepResponse === value);
         state.theme.stepResponse = {...value};
       },
       setValidateAndNextCallback: ({state}) => value => state.theme.validateAndNextCallback = value,

@@ -2,44 +2,39 @@ import React from 'react';
 import Form from '../../components/form-components/Form';
 import {connect, styled} from 'frontity';
 import {size} from '../../functions/size';
-import RadioGroup from '../../components/form-components/RadioGroup';
 import FormStep from '../../components/form-components/FormStep';
 import Button from '../../components/form-components/Button';
-import FileInput from '../../components/form-components/FileInput';
-import TextArea from '../../components/form-components/TextArea';
 import FlyingObjsContainer from '../../components/reusable/FlyingObjsContainer';
-import ProductsTable from '../../components/form-components/ProductsTable';
-import {Li, Ol, P, Span} from '../../components/form-components/StyledComponent';
-import Alert from '../../components/form-components/Alert';
+import {Wysiwyg, P} from '../../components/form-components/StyledComponent';
 import Input from '../../components/form-components/Input';
 import Select from '../../components/form-components/Select';
-import RadioInput from '../../components/form-components/RadioInput';
 import W50 from '../../components/form-components/W50';
-import FormRepeatableInput from '../../components/form-components/FormRepeatableInput';
 import intro_ball_1 from '../../assets/images/form_1_img.png';
 import intro_ball_2 from '../../assets/images/form_2_img.png';
 import Finalize, {Bottom, FinalizeChild, FinalizeTable, Top} from '../../components/form-components/Finalize';
 import useMedia from '../../hooks/useMedia';
-import FormConditionalInput from '../../components/form-components/FormConditionalInput';
-import FormFilter from '../../components/form-components/FormFilter';
-import ProductsMobileOption from '../../components/form-components/ProductsMobileOption';
 import LastStep from '../../components/form-components/LastStep';
-import upload from '../../assets/images/upload.png';
-import Appraiser from '../../components/form-components/Appraiser';
 import useStoredFormValue from '../../hooks/useStoredFormValue';
 import useProductsTable from '../../hooks/useProductsTable';
-import CheckMark from '../../components/reusable/CheckMark';
-import {monthlyPayments} from '../../functions/monthlyPayment';
-import AppraiserInput from '../../components/AppraiserInput';
 import useFlowAppraisers from '../../hooks/useFlowAppraisers';
-import {numberWithCommas} from '../../functions/numberWithCommas';
 import Link from '../../components/reusable/Link';
+import RadioGroup from '../../components/form-components/RadioGroup';
+import RadioInput from '../../components/form-components/RadioInput';
+import FormConditionalInput from '../../components/form-components/FormConditionalInput';
+import FormRepeatableInput from '../../components/form-components/FormRepeatableInput';
+import ProductsTable from '../../components/form-components/ProductsTable';
+import FormFilter from '../../components/form-components/FormFilter';
+import ProductsMobileOption from '../../components/form-components/ProductsMobileOption';
+import FileInput from '../../components/form-components/FileInput';
+import Appraiser from '../../components/form-components/Appraiser';
+import {numberWithCommas} from '../../functions/numberWithCommas';
+import upload from '../../assets/images/upload.png';
+import TextArea from '../../components/form-components/TextArea';
 
 
 const pageName = 'a-1';
-const A1Page = ({className, setCurrentTheme, state, actions}) => {
-  const data = state.source.get(state.router.link);
-  const formData = data.isReady && !data.isError ? state.source[data.type][data.id].acf : {};
+const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
+  
   const getA1Values = useStoredFormValue(pageName);
   const
     section1Values = getA1Values(formData.section_1?.section_name),
@@ -65,6 +60,7 @@ const A1Page = ({className, setCurrentTheme, state, actions}) => {
   const selectedProduct = React.useRef('');
   const [productsTable, productsFilter] = useProductsTable(state.theme.stepResponse);
   const mortgage = ((+section2Values('mortgage_value_1') || 0) + (+section2Values('mortgage_value_2') || 0) + (+section2Values('outstanding_amount_value')) || 0) || 0;
+  const refNumber = state.theme.stepResponse.data?.['sf-lead-id'] || '';
   return <div className={className}>
     <Form setCurrentTheme={setCurrentTheme} endPoint={'/refinance'}>
       <FormStep apiStepNumber={1} pageName={pageName} activeTheme={formData.section_1?.section_theme} stepName={formData.section_1?.section_name}>
@@ -112,12 +108,6 @@ const A1Page = ({className, setCurrentTheme, state, actions}) => {
           <h1 className={'form-headline-1 text-left'}>{formData.section_2?.title}</h1>
         </div>
         <Input type={'number'} name={'home_value'} serverErrorMessage={state.theme.errors?.['home_value']} {...formData.section_2?.estimated_value_input}/>
-        <RadioGroup radioText={formData.section_2?.appraisal_report_yes_no.label} checked={'1'}>
-          <RadioInput label={formData.section_2?.appraisal_report_yes_no.yes} value={'1'} name={'have_appraisal_report'} serverErrorMessage={state.theme.errors?.['have_appraisal_report']}
-                      type={'radio'}/>
-          <RadioInput label={formData.section_2?.appraisal_report_yes_no.no} value={'0'} name={'have_appraisal_report'} serverErrorMessage={state.theme.errors?.['have_appraisal_report']}
-                      type={'radio'}/>
-        </RadioGroup>
   
         <FormConditionalInput name={'have_mortgage_1'} serverErrorMessage={state.theme.errors?.['have_mortgage_1']} showOn={'1'} checked={'0'} {...formData.section_2?.any_mortgage_yes_no}>
           <Input type={'number'} name={'mortgage_value_1'} serverErrorMessage={state.theme.errors?.['mortgage_value_1']} {...formData.section_2?.first_mortgage_amount_input}/>
@@ -215,7 +205,7 @@ const A1Page = ({className, setCurrentTheme, state, actions}) => {
               ? null : <FinalizeChild order={1}>
               </FinalizeChild>}
             <FinalizeChild order={3} className={'m-pr-40 full m-border'}>
-              <P.Border>Your mortgage request is $numberWithCommas({mortgage})</P.Border>
+              <P.Border>Your mortgage request is ${numberWithCommas({mortgage})}</P.Border>
               <P.Border>Your property value is ${numberWithCommas(+section2Values('home_value'))}</P.Border>
             </FinalizeChild>
             <FinalizeChild order={3} className={'wide m-pr-40'}>
@@ -424,19 +414,17 @@ const A1Page = ({className, setCurrentTheme, state, actions}) => {
       <FormStep pageName={pageName} activeTheme={formData.section_7?.section_theme} stepName={formData.section_7?.section_name}>
         <LastStep>
           <img src={formData.section_7?.image.url} alt={formData.section_7?.image.alt}/>
-          <div style={{flexBasis: '20%'}} className="text">
+          <div style={{flexBasis: '60%'}} className="text">
             <h1 className={'form-headline-1 text-left'}>{formData.section_7?.title}</h1>
             <p className={'form-headline-3 primary'}>{formData.section_7?.subtitle}</p>
-            <Ol>
-              <Li>Login into your <Span.White className={'underline'}>Filogix</Span.White> Expert account</Li>
-              <Li>Select your <Span.White>Client</Span.White> and click <Span.White>Lender Submit</Span.White> in the left side panel.</Li>
-              <Li>Choose <Span.White>Private</Span.White> under <Span.White>Lender Type</Span.White>, <Span.White>Oppono</Span.White> under <Span.White>Lender</Span.White>,
-                and <Span.White>Electronic</Span.White> under <Span.White>Submission Method.</Span.White></Li>
-              <Li>Copy your reference number <Span.White>#034933</Span.White> into the <Span.White>Lender Notes</Span.White> section then press <Span.White>Submit.</Span.White></Li>
-            </Ol>
+            <Wysiwyg dangerouslySetInnerHTML={{__html: formData.section_7?.steps.replace('{{number}}', refNumber)}}/>
             <div className="btn-group">
-              <Button className={'wide filled'} label={'Connect to Filogix'}/>
-              <Link className={'wide bordered'} href={'/dashboard'}>back to Dashboard</Link>
+              <Link className={'wide bordered'} href={'https://expert.filogix.com/expert/view/SignOn'}>
+                <Button className={'wide filled'} label={'Connect to Filogix'}/>
+              </Link>
+              <Link className={'wide bordered'} href={'/dashboard'}>
+                <Button className={'wide bordered'} label={'back to Dashboard'}/>
+              </Link>
             </div>
           </div>
         </LastStep>

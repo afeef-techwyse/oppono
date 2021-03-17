@@ -135,7 +135,7 @@ const MapPage = ({className, actions, state}) => {
           <div className="col-left">
             <div className="text-wrapper">
               <h1 className={'headline-1'}>We’re proud to serve the GTA</h1>
-              <h2 className={'headline-2 dark'}>Looking within a specific city or region?</h2>
+              {/*<h2 className={'headline-2 dark'}>Looking within a specific city or region?</h2>*/}
             </div>
             <div className="inputs-group">
               <Select
@@ -158,7 +158,7 @@ const MapPage = ({className, actions, state}) => {
                 }}
                 noOptionsMessage={() => 'No City Found'}
                 options={sortedCities} name={'city'}
-                label={'Type in your city'}
+                label={'Select a city'}
                 value={cities.filter(city => city.name === appraiser?.title)}
               />
               <p>OR</p>
@@ -169,7 +169,7 @@ const MapPage = ({className, actions, state}) => {
                      placeholder={'L5H 3S4'}
                      label={'Type in your Postal Code'}/>
             </div>
-        
+  
             {appraiser
               ? <div className="btn-group">
                 {/*<Button label={'Search'}/>*/}
@@ -177,7 +177,7 @@ const MapPage = ({className, actions, state}) => {
                   actions.theme.setAppraiser({...appraiser, ...postal_city.current});
                   actions.router.set('/dashboard/e');
                 }}/>
-          
+    
               </div>
               : null}
           </div>
@@ -240,8 +240,8 @@ export default styled(connect(MapPage))`
     z-index: 6;
     @media (max-width: 991.98px) {
       flex-direction: column;
-      padding-top: ${size(145)};
-      padding-bottom: ${size(200)};
+      margin-top: ${size(145)};
+      margin-bottom: ${size(200)};
     }
 
     .col-left {
@@ -414,13 +414,22 @@ export default styled(connect(MapPage))`
     z-index: 5;
   }
 
-  ${Select} {
-    .oppono-select {
-      &__option {
-        font-size: ${size(25)};
+  ${Input} {
+    .normal-input {
+      font-size: ${size(30)};
+
+      &::placeholder {
+        font-size: ${size(30)};
       }
     }
+  }
 
+  ${Select} {
+    .oppono-select {
+      &__option, &__single-value, &__input, &__control {
+        font-size: ${size(30)};
+      }
+    }
   }
 
   ${Container}.flex {

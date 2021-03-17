@@ -12,11 +12,9 @@ import LastStep from '../../components/form-components/LastStep';
 import last_step from '../../assets/images/last-step.png';
 import opponoApi from '../../opponoApi';
 
-const SignUpPage = ({className, setCurrentTheme, state, actions}) => {
+const SignUpPage = ({className, setCurrentTheme, state, actions, formData}) => {
   
   const pageName = 'sign-up';
-  const data = state.source.get(state.router.link);
-  const formData = data.isReady && !data.isError ? state.source[data.type][data.id].acf : {};
   const section1Values = useStoredFormValue(pageName)(formData.section_1?.section_name);
   const [password, setPassword] = React.useState('');
   React.useEffect(() => {
