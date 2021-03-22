@@ -1,3 +1,4 @@
+import gsap from "gsap";
 import React from 'react';
 import {styled} from 'frontity';
 import {size} from '../functions/size';
@@ -75,12 +76,50 @@ const AspectRation = styled.picture`
 `;
 
 const ProductsFeature = ({className, imageUrl, alt, title, description}) => {
+  const imageRef = React.useRef(null);
+  
+  
+  function random(min, max) {
+    const delta = max - min;
+    return (direction = 1) => (min + delta * Math.random()) * direction;
+  }
+  
+  const randomX = random(30, 60);
+  const randomY = random(30, 60);
+  const randomTime = random(9, 14);
+  
+  React.useEffect(() => {
+    function moveX(target, direction) {
+      target.current && gsap.to(target.current, {
+        duration: randomTime(),
+        x: randomX(direction),
+        ease: 'sine.inOut',
+        onComplete: moveX,
+        onCompleteParams: [target, direction * -1],
+      });
+    }
+    function moveY(target, direction) {
+      target.current && gsap.to(target.current, {
+        duration: randomTime(),
+        y: randomY(direction),
+        ease: 'sine.inOut',
+        onComplete: moveY,
+        onCompleteParams: [target, direction * -1],
+      });
+    }
+    
+    moveX(imageRef, Math.random() < 0.5 ? -1 : 1);
+    moveY(imageRef, Math.random() < 0.5 ? -1 : 1);
+  }, []);
+  
   return (
     <div className={className}>
       <Col className={'image'}>
-        <AspectRation ratio={1}>
-          <img src={imageUrl} alt={alt}/>
-        </AspectRation>
+        <div style={{width:'70%', margin:'0 auto'}}>
+          <AspectRation ratio={1}>
+            <img ref={imageRef} src={imageUrl} alt={alt}/>
+          </AspectRation>
+        </div>
       </Col>
       <Col>
         <Title className={'primary'}>{title}</Title>
