@@ -1,6 +1,7 @@
 import React from 'react';
 import Form from '../../components/form-components/Form';
 import {connect, styled} from 'frontity';
+import {monthlyPayments} from "../../functions/monthlyPayment";
 import {size} from '../../functions/size';
 import FormStep from '../../components/form-components/FormStep';
 import Button from '../../components/form-components/Button';
