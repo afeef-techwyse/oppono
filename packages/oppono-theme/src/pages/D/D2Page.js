@@ -106,11 +106,13 @@ const D2Page = ({className, setCurrentTheme, state, actions, formData}) => {
         <Input type={'number'} name={'home_value'} {...formData.section_2?.estimated_value_input}/>
     
         <FormConditionalInput name={'have_mortgage_1'} showOn={'1'} checked={'0'} {...formData.section_2?.any_mortgage_yes_no}>
+          <>
           <Input type={'number'} name={'mortgage_value_1'} {...formData.section_2?.first_mortgage_amount_input}/>
-        </FormConditionalInput>
-    
-        <FormConditionalInput name={'have_mortgage_2'} showOn={'1'} checked={'0'} {...formData.section_2?.second_mortgage_yes_no}>
-          <Input type={'number'} name={'mortgage_value_2'} {...formData.section_2?.second_mortgage_amount_input}/>
+            <FormConditionalInput name={'have_mortgage_2'} showOn={'1'} checked={'0'} {...formData.section_2?.second_mortgage_yes_no}>
+              <Input type={'number'} name={'mortgage_value_2'} {...formData.section_2?.second_mortgage_amount_input}/>
+            </FormConditionalInput>
+          </>
+          
         </FormConditionalInput>
     
         <FormConditionalInput name={'have_outstanding_amount'} showOn={'1'}

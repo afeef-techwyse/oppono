@@ -328,12 +328,15 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
         <Input type={'number'} name={'home_value'} {...formData.section_5?.estimated_value_input} value={section1Values('home_value')}/>
         
         <FormConditionalInput name={'have_mortgage_1'} showOn={'1'} checked={'0'} {...formData.section_5?.any_mortgage_yes_no}>
-          <Input type={'number'} name={'mortgage_value_1'} {...formData.section_5?.first_mortgage_amount_input}/>
+          <>
+            <Input type={'number'} name={'mortgage_value_1'} {...formData.section_5?.first_mortgage_amount_input}/>
+            <FormConditionalInput name={'have_mortgage_2'} showOn={'1'} checked={'0'} {...formData.section_5?.second_mortgage_yes_no}>
+              <Input type={'number'} name={'mortgage_value_2'} {...formData.section_5?.second_mortgage_amount_input}/>
+            </FormConditionalInput>
+            </>
         </FormConditionalInput>
         
-        <FormConditionalInput name={'have_mortgage_2'} showOn={'1'} checked={'0'} {...formData.section_5?.second_mortgage_yes_no}>
-          <Input type={'number'} name={'mortgage_value_2'} {...formData.section_5?.second_mortgage_amount_input}/>
-        </FormConditionalInput>
+     
         
         <FormConditionalInput name={'have_outstanding_amount'} showOn={'1'}
                               checked={'0'} {...formData.section_5?.outstanding_balance_yes_no}>
