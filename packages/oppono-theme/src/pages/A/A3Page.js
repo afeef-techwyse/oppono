@@ -275,7 +275,7 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
                 </tr>
                 <tr>
                   <P.Dark as={'td'}>Credit Score</P.Dark>
-                  <P.D as={'td'}>{firstProduct.fields?.beacon_score}</P.D>
+                  <P.D as={'td'}>{firstProduct.fields?.beacon_score[0].split('-')[0]+(firstProduct.fields?.beacon_score.length>1?'+':'')}</P.D>
                 </tr>
                 </tbody>
               </FinalizeTable>

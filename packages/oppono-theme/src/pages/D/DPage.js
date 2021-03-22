@@ -97,7 +97,7 @@ const DPage = ({className, setCurrentTheme, state, actions}) => {
                   </tr>
                   <tr className={'head last-head'}>
                     <td scope={'row'} className={'dark'}>Credit Score</td>
-                    {products.map(({ID, fields: {beacon_score}}) => <td key={ID} className={'details'} data-label="beacon_score">{beacon_score}</td>)}
+                    {products.map(({ID, fields: {beacon_score}}) => <td key={ID} className={'details'} data-label="beacon_score">{beacon_score[0].split('-')[0]+(beacon_score.length>1?'+':'')}</td>)}
                   </tr>
                   
                   {
@@ -141,7 +141,7 @@ const DPage = ({className, setCurrentTheme, state, actions}) => {
                             </div>
                             <div className={'m-row m-head  m-head last-head'}>
                               <p>Credit Score</p>
-                              <p>{beacon_score}</p>
+                              <p>{beacon_score[0].split('-')[0]+(beacon_score.length>1?'+':'')}</p>
                             </div>
                             {
                               specifications.slice(0, 4).map(({term_id, name}) =>

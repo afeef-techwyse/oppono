@@ -360,7 +360,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                             </div>
                             <div className={'m-row m-head  m-head last-head'}>
                               <p>Credit Score</p>
-                              <p>{beacon_score}</p>
+                              <p>{beacon_score[0].split('-')[0]+(beacon_score.length>1?'+':'')}</p>
                             </div>
                             {
                               specifications.slice(0, 4).map(({term_id, name}) =>
