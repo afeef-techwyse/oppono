@@ -59,6 +59,8 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
   const [appraiser, postalCodeOnChange] = useFlowAppraisers();
   
   const selectedProduct = React.useRef('');
+  const maxMortgage = React.useRef('');
+  
   const [productsTable, productsFilter] = useProductsTable(state.theme.stepResponse);
   const mortgage = ((+section2Values('mortgage_value_1') || 0) + (+section2Values('mortgage_value_2') || 0) + (+section2Values('outstanding_amount_value')) + (+section2Values('sm_amount')) + (+section2Values('fm_amount')) || 0) || 0;
   const refNumber = state.theme.stepResponse.data?.['reference-number'] || '';
@@ -237,7 +239,8 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
       <FormStep apiStepNumber={4} pageName={pageName} activeTheme={formData.section_5?.section_theme} stepName={formData.section_5?.section_name}>
         
         <input ref={selectedProduct} type={'hidden'} name={`product_name`}/>
-        
+        <input ref={maxMortgage} type={'hidden'} name={`maximum_mortgage`}/>
+  
         <div className="form-text-wrapper wide-text">
           <h1 className={'form-headline-1 text-left'}>{formData.section_5?.title}</h1>
           <h2 className={'form-headline-3 primary'}>{formData.section_5?.subtitle}</h2>
@@ -275,12 +278,14 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                       </div>
                     </th>
                     {
-                      products.map(({ID, title, fields: {rate}}) =>
+                      products.map(({ID, title, fields: {rate,maximum_ltv}}) =>
                         <th scope={'col'} key={ID}>
                           <p>${numberWithCommas(monthlyPayments(mortgage, rate / 100))} / month</p>
                           <p className={'number'}>{rate}%</p>
                           <Button onClick={() => {
                             selectedProduct.current.value = title;
+                            maxMortgage.current.value = Math.round(+section2Values('home_value') * maximum_ltv / 100);
+  
                             setTimeout(() => actions.theme.setValidateAndNextCallback(new Date().getTime()), 100);
                           }} className={'small next-step'} label={'I want this deal'}/>
                         </th>,

@@ -142,6 +142,8 @@ const D1Page = ({className, setCurrentTheme, state, actions, formData}) => {
       </FormStep>
       <FormStep apiStepNumber={4} pageName={pageName} activeTheme={formData.section_4?.section_theme} stepName={formData.section_4?.section_name}>
         <input type={'hidden'} name={`product_name`} value={firstProduct.title}/>
+        <input type={'hidden'} name={`maximun_mortgage`} value={Math.round(+section2Values('home_value') * firstProduct.fields?.maximum_ltv / 100)}/>
+  
         <div className="form-text-wrapper wide-text">
           <h1 className={'form-headline-1 text-left'}>{formData.section_4?.title}</h1>
           <h2 className={'form-headline-3 primary'}>

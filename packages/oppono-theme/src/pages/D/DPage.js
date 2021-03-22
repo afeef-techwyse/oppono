@@ -39,7 +39,11 @@ const DPage = ({className, setCurrentTheme, state, actions}) => {
         {state.theme.stepResponse.data?.data
           ? media !== 'mobile'
             ? <FormFilter className={'form-wide-container'} filters={productsFilter}>
-              <div className={'want-deal'} data-filter={'*'}><Link href={'/qualifyfor/'}><Button className={'small next-step'} label={'See if I qualify'}/></Link></div>
+              <div className={'want-deal'} data-filter={'*'}>
+                <Link href={'/qualifyfor/'}>
+                  <Button className={'small next-step'} label={'See if I qualify'}/>
+                </Link>
+              </div>
               {Object.entries(state.theme.stepResponse.data?.data).map(([type, {products}], index) =>
                 <ProductsTable key={type} dataFilter={type} products={productsTable}>
                   <thead>
@@ -190,7 +194,9 @@ export default styled(connect(DPage))`
 
   .want-deal {
     ${Button} {
-      margin: ${size(70)} auto;
+      margin: ${size(50)} auto;
+      padding: ${size(20)} ${size(40)};
+      font-size: ${size(30)};
     }
   }
 

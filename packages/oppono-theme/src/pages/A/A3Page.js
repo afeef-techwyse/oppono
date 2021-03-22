@@ -196,6 +196,8 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
             at <br/> {section1Values('address')}, {section1Values('city')}, {section1Values('postal_code')}</h2>
         </div>
         <input type={'hidden'} name={`product_name`} value={firstProduct.title}/>
+        <input type={'hidden'} name={`maximun_mortgage`} value={Math.round(+section2Values('home_value') * firstProduct.fields?.maximum_ltv / 100)}/>
+  
         <Finalize>
           <Top>
             {media !== 'mobile'

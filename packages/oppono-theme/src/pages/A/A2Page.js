@@ -42,6 +42,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
   
   const media = useMedia();
   const selectedProduct = React.useRef('');
+  const maxMortgage = React.useRef('');
   
   React.useEffect(() => {
     actions.theme.setSubHeader(formData.sub_header);
@@ -220,8 +221,8 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
           <h3 className={'form-headline-1 text-left'}>{formData.section_5?.choose_one}</h3>
         </div>
         <input ref={selectedProduct} type={'hidden'} name={`product_name`}/>
-        {/*<input ref={selectedProduct} type={'hidden'} name={`maximum_mortgage`} value={}/>*/}
-        {/*fixme calculate maximum_mortgage value*/}
+  
+        <input ref={maxMortgage} type={'hidden'} name={`maximum_mortgage`}/>
         {section2Values('looking_for')
           ? state.theme.stepResponse.data?.data?.[section2Values('looking_for')]?.products.map((product, index) => <Finalize key={product.ID}>
             <Top>
@@ -234,6 +235,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 <P.Num>{product.fields?.rate}%</P.Num>
                 <Button onClick={() => {
                   selectedProduct.current.value = product.title;
+                  maxMortgage.current.value = Math.round(+section2Values('purchase_price') * product.fields?.maximum_ltv / 100);
                   setTimeout(() => actions.theme.setValidateAndNextCallback(new Date().getTime()), 100);
                 }} className={'bordered next-step'} label={'I want this deal'}/>
               </FinalizeChild>
