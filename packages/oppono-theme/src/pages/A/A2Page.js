@@ -57,7 +57,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
   const [appraiser, postalCodeOnChange] = useFlowAppraisers();
   
   const mortgage = ((+section2Values('purchase_price')) - (+section2Values('down_payment'))) || 0;
-  const refNumber = state.theme.stepResponse.data?.['sf-lead-id'] || '';
+  const refNumber = state.theme.stepResponse.data?.['reference-number'] || '';
   
   return <div className={className}>
     <Form setCurrentTheme={setCurrentTheme} endPoint={'/purchase'}>
@@ -137,10 +137,12 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
             <Input type={'text'} pattern={'^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$'} name={'applicant_mail_{{number}}'} {...formData.section_3?.applicant.email_input}/>
             <Input type={'phone'} name={'applicant_phone_{{number}}'} {...formData.section_3?.applicant.phone_input}/>
           </W50>
-          <RadioGroup radioText={formData.section_3?.applicant.score_label} checked={'650+'}>
-            <RadioInput label={'<650'} value={'<650'} serverErrorMessage={state.theme.errors?.['applicant_score_{{number}}']} name={`applicant_score_{{number}}`} type={'radio'}/>
-            <RadioInput label={'650+'} value={'650+'} serverErrorMessage={state.theme.errors?.['applicant_score_{{number}}']} name={`applicant_score_{{number}}`} type={'radio'}/>
-            <RadioInput label={'680+'} value={'680+'} serverErrorMessage={state.theme.errors?.['applicant_score_{{number}}']} name={`applicant_score_{{number}}`} type={'radio'}/>
+          <RadioGroup radioText={formData.section_3?.applicant.score_label} checked={'<650'}>
+            <RadioInput label={'<650'} value={'<650'} name={`applicant_score_{{number}}`} type={'radio'}/>
+            <RadioInput label={'650-679'} value={'650-679'} name={`applicant_score_{{number}}`} type={'radio'}/>
+            <RadioInput label={'680-749'} value={'680-749'} name={`applicant_score_{{number}}`} type={'radio'}/>
+            <RadioInput label={'750-799'} value={'750-799'} name={`applicant_score_{{number}}`} type={'radio'}/>
+            <RadioInput label={'800'} value={'800'} name={`applicant_score_{{number}}`} type={'radio'}/>
           </RadioGroup>
         </FormRepeatableInput>
         <div className="btn-group">
@@ -196,7 +198,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
               ? null : <FinalizeChild order={1}>
               </FinalizeChild>}
             <FinalizeChild order={3} className={'m-pr-40 full m-border'}>
-              <P.Border>Your mortgage request is ${numberWithCommas({mortgage})}</P.Border>
+              <P.Border>Your mortgage request is ${numberWithCommas(mortgage)}</P.Border>
               <P.Border>Your property value is ${numberWithCommas(+section2Values('purchase_price'))}</P.Border>
             </FinalizeChild>
             <FinalizeChild order={3} className={'wide m-pr-40'}>

@@ -49,6 +49,7 @@ export default {
       leadId: null,
       stepResponse: {},
       validateAndNextCallback: 0,
+      redirectTo: '',
     },
     source: {
       postTypes: [
@@ -64,8 +65,12 @@ export default {
   },
   actions: {
     theme: {
+      setRedirectTo: ({state}) => value => state.theme.redirectTo = value || '',
       setActiveTheme: ({state}) => value => {
-        value && (state.theme.activeTheme = value);
+        if (value) {
+          (state.theme.activeTheme = value);
+          document.body.className = value;
+        }
       },
       setSelectedValues: ({state}) => value => state.theme.selectedValues = {...state.theme.selectedValues, ...value},
       setSubHeader: ({state}) => value => state.theme.subHeader = {...state.theme.subHeader, ...value},

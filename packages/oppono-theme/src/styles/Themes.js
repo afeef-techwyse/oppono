@@ -32,14 +32,18 @@ const Themes = () => <>
       height: 0;
     }
 
-    [class*="-theme"], body, .loading-page, .floating-menu, ${Header} {
+    body, .loading-page, .floating-menu, ${Header} {
       background-size: 100% 100% !important;
       background-repeat: no-repeat !important;
       background-position: top center !important;
       background-attachment: fixed !important;
       background-image: var(--oppono-bg-image) !important;
-      transition: background-image 400ms;
+      transition: background-image 750ms;
       position: relative;
+    }
+
+    ${Header} {
+      transition: background-image 0ms;
     }
 
     .loading-page {

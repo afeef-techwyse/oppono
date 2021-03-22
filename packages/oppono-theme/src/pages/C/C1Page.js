@@ -74,10 +74,11 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
   
   
   const [productsTable, productsFilter] = useProductsTable(state.theme.stepResponse);
-  const mortgage = ((+section5Values('mortgage_value_1') || 0) + (+section5Values('mortgage_value_2') || 0) + (+section5Values('outstanding_amount_value') || 0)) || 0;
+  const mortgage = ((+section5Values('mortgage_value_1') || 0) + (+section5Values('mortgage_value_2') || 0) + (+section5Values('outstanding_amount_value')) + (+section5Values('sm_amount')) + (+section5Values('fm_amount')) || 0) || 0;
+  
   const firstProduct = state.theme.stepResponse.data?.data ? Object.values(state.theme.stepResponse.data?.data)[0].products[0] : {};
   
-  const refNumber = state.theme.stepResponse.data?.['sf-lead-id'] || '';
+  const refNumber = state.theme.stepResponse.data?.['reference-number'] || '';
   
   return <div className={className}>
     <Form setCurrentTheme={setCurrentTheme} endPoint={'/refinance'}>
@@ -114,11 +115,13 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
         <div className="form-text-wrapper">
           <h1 className={'form-headline-1 text-left'}>{formData.section_2?.title}</h1>
         </div>
-        <FormRepeatableInput question={formData.section_2?.applicant_amount_label} number={4} initial={1} serverErrorMessage={state.theme.errors?.['applicants_number']} name={'applicants_number'}>
-          <RadioGroup radioText={formData.section_2?.applicant.score_label} checked={'650+'}>
-            <RadioInput label={'<650'} value={'<650'} serverErrorMessage={state.theme.errors?.['applicant_score_{{number}}']} name={`applicant_score_{{number}}`} type={'radio'}/>
-            <RadioInput label={'650+'} value={'650+'} serverErrorMessage={state.theme.errors?.['applicant_score_{{number}}']} name={`applicant_score_{{number}}`} type={'radio'}/>
-            <RadioInput label={'680+'} value={'680+'} serverErrorMessage={state.theme.errors?.['applicant_score_{{number}}']} name={`applicant_score_{{number}}`} type={'radio'}/>
+        <FormRepeatableInput question={formData.section_2?.applicant_amount_label} number={4} initial={1} name={'applicants_number'}>
+          <RadioGroup radioText={formData.section_2?.applicant.score_label} checked={'<650'}>
+            <RadioInput label={'<650'} value={'<650'} name={`applicant_score_{{number}}`} type={'radio'}/>
+            <RadioInput label={'650-679'} value={'650-679'} name={`applicant_score_{{number}}`} type={'radio'}/>
+            <RadioInput label={'680-749'} value={'680-749'} name={`applicant_score_{{number}}`} type={'radio'}/>
+            <RadioInput label={'750-799'} value={'750-799'} name={`applicant_score_{{number}}`} type={'radio'}/>
+            <RadioInput label={'800'} value={'800'} name={`applicant_score_{{number}}`} type={'radio'}/>
           </RadioGroup>
         </FormRepeatableInput>
         <div className="btn-group">
@@ -302,19 +305,19 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
           <h1 className={'form-headline-1 text-left'}>{formData.section_4?.title}</h1>
           <h2 className={'form-headline-2 primary'}>{formData.section_4?.subtitle}</h2>
         </div>
-        <Input type={'text'} serverErrorMessage={state.theme.errors?.['address']} name={'address'} {...formData.section_4?.address_input}/>
+        <Input type={'text'} name={'address'} {...formData.section_4?.address_input}/>
         <W50>
-          <Input value={appraiser?.title} type={'text'} serverErrorMessage={state.theme.errors?.['city']} name={'city'} {...formData.section_4?.city_input}/>
-          <Input type={'text'} serverErrorMessage={state.theme.errors?.['postal_code']} name={'postal_code'} {...formData.section_4?.postal_code_input} onChange={postalCodeOnChange}/>
+          <Input value={appraiser?.title} type={'text'} name={'city'} {...formData.section_4?.city_input}/>
+          <Input type={'text'} name={'postal_code'} {...formData.section_4?.postal_code_input} onChange={postalCodeOnChange}/>
         </W50>
         <Select
-          serverErrorMessage={state.theme.errors?.['property_type']} name={'property_type'}
+          name={'property_type'}
           {...formData.section_4?.property_dropdown}/>
         <Select
-          serverErrorMessage={state.theme.errors?.['property_details_1']} name={'property_details_1'}
+          name={'property_details_1'}
           {...formData.section_4?.property_details_1_dropdown}/>
         <Select
-          serverErrorMessage={state.theme.errors?.['property_details_2']} name={'property_details_2'}
+          name={'property_details_2'}
           {...formData.section_4?.property_details_2_dropdown}/>
         <Button icon={true} className={'next-step'} label={'Next'}/>
       </FormStep>
@@ -322,20 +325,32 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
         <div className="form-text-wrapper">
           <h1 className={'form-headline-1 text-left'}>{formData.section_5?.title}</h1>
         </div>
-        <input type={'hidden'} name={`home_value`} value={section1Values('home_value')}/>
-  
-        <FormConditionalInput serverErrorMessage={state.theme.errors?.['have_mortgage_1']} name={'have_mortgage_1'} showOn={'1'} checked={'0'} {...formData.section_5?.any_mortgage_yes_no}>
-          <Input type={'number'} serverErrorMessage={state.theme.errors?.['mortgage_value_1']} name={'mortgage_value_1'} {...formData.section_5?.first_mortgage_amount_input}/>
+        <Input type={'number'} name={'home_value'} {...formData.section_5?.estimated_value_input} value={section1Values('home_value')}/>
+        
+        <FormConditionalInput name={'have_mortgage_1'} showOn={'1'} checked={'0'} {...formData.section_5?.any_mortgage_yes_no}>
+          <Input type={'number'} name={'mortgage_value_1'} {...formData.section_5?.first_mortgage_amount_input}/>
         </FormConditionalInput>
-  
-        <FormConditionalInput serverErrorMessage={state.theme.errors?.['have_mortgage_2']} name={'have_mortgage_2'} showOn={'1'} checked={'0'} {...formData.section_5?.second_mortgage_yes_no}>
-          <Input type={'number'} serverErrorMessage={state.theme.errors?.['mortgage_value_2']} name={'mortgage_value_2'} {...formData.section_5?.second_mortgage_amount_input}/>
+        
+        <FormConditionalInput name={'have_mortgage_2'} showOn={'1'} checked={'0'} {...formData.section_5?.second_mortgage_yes_no}>
+          <Input type={'number'} name={'mortgage_value_2'} {...formData.section_5?.second_mortgage_amount_input}/>
         </FormConditionalInput>
-  
-        <FormConditionalInput serverErrorMessage={state.theme.errors?.['have_outstanding_amount']} name={'have_outstanding_amount'} showOn={'1'}
+        
+        <FormConditionalInput name={'have_outstanding_amount'} showOn={'1'}
                               checked={'0'} {...formData.section_5?.outstanding_balance_yes_no}>
-          <Input type={'number'} serverErrorMessage={state.theme.errors?.['outstanding_amount_value']}
-                 name={'outstanding_amount_value'} {...formData.section_5?.outstanding_balance_amount_input}/>
+          <Input type={'number'} name={'outstanding_amount_value'}
+                 {...formData.section_5?.outstanding_balance_amount_input}/>
+        </FormConditionalInput>
+        
+        <FormConditionalInput name={'add_mortgage_2'} showOn={'0'} checked={'0'}
+                              {...formData.section_5?.add_mortgage_yes_no}>
+          
+          <FormConditionalInput name={'increase_mortgage_1'} showOn={'1'} checked={'0'}
+                                {...formData.section_5?.increase_mortgage_yes_no}>
+            <Input type={'number'} name={'fm_amount'}
+                   {...formData.section_5?.increase_mortgage_amount_input}/>
+          </FormConditionalInput>
+          <Input type={'number'} name={'sm_amount'}
+                 {...formData.section_5?.add_mortgage_amount_input}/>
         </FormConditionalInput>
   
         <div className="btn-group">
@@ -356,11 +371,11 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
         </div>
         <FormRepeatableInput fixedNumber={+section2Values('applicants_number') || 1}>
           <W50>
-            <Input type={'text'} serverErrorMessage={state.theme.errors?.['applicant_fname_{{number}}']} name={'applicant_fname_{{number}}'} {...formData.section_6?.applicant.first_name_input}/>
-            <Input type={'text'} serverErrorMessage={state.theme.errors?.['applicant_lname_{{number}}']} name={'applicant_lname_{{number}}'} {...formData.section_6?.applicant.last_name_input}/>
-            <Input type={'text'} pattern={'^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$'} serverErrorMessage={state.theme.errors?.['applicant_mail_{{number}}']}
+            <Input type={'text'} name={'applicant_fname_{{number}}'} {...formData.section_6?.applicant.first_name_input}/>
+            <Input type={'text'} name={'applicant_lname_{{number}}'} {...formData.section_6?.applicant.last_name_input}/>
+            <Input type={'text'} pattern={'^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$'}
                    name={'applicant_mail_{{number}}'} {...formData.section_6?.applicant.email_input}/>
-            <Input type={'phone'} serverErrorMessage={state.theme.errors?.['applicant_phone_{{number}}']} name={'applicant_phone_{{number}}'} {...formData.section_6?.applicant.phone_input}/>
+            <Input type={'phone'} name={'applicant_phone_{{number}}'} {...formData.section_6?.applicant.phone_input}/>
           </W50>
         </FormRepeatableInput>
         {[...Array(+section2Values('applicants_number') || 1).keys()].map(i => <input key={i} type="hidden" name={`applicant_score_${i + 1}`} value={section2Values(`applicant_score_${i + 1}`)}/>)}
@@ -410,8 +425,8 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                     return <P.D key={`person-desktop-${personIndex}`}>{applicantFName} {applicantLName} {applicantScore}</P.D>;
                   },
                 )}
-                <P.D>Your mortgage request is {mortgage}</P.D>
-                <P.D>You could qualify up to {Math.round(+section1Values('home_value') * firstProduct.fields?.maximum_ltv / 100)}</P.D>
+                <P.D>Your mortgage request is {numberWithCommas(mortgage)}</P.D>
+                <P.D>You could qualify up to {numberWithCommas(Math.round(+section1Values('home_value') * firstProduct.fields?.maximum_ltv / 100))}</P.D>
                 <P.D>Your property value is ${numberWithCommas(+section1Values('home_value'))}</P.D>
                 <P.D>Your down payment is ${numberWithCommas(+section1Values('home_value') - mortgage)}</P.D>
                 <P.D>Your LTV is {(mortgage / +section1Values('home_value') * 100).toFixed(1)}%</P.D>
@@ -431,11 +446,11 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   )}
                   <tr>
                     <P.Dark as={'td'}>Mortgage request</P.Dark>
-                    <P.D as={'td'}>{mortgage}</P.D>
+                    <P.D as={'td'}>{numberWithCommas(mortgage)}</P.D>
                   </tr>
                   <tr>
                     <P.Dark as={'td'}>You could qualify up to</P.Dark>
-                    <P.D as={'td'}>{Math.round(+section1Values('home_value') * firstProduct.fields?.maximum_ltv / 100)}</P.D>
+                    <P.D as={'td'}>{numberWithCommas(Math.round(+section1Values('home_value') * firstProduct.fields?.maximum_ltv / 100))}</P.D>
                   </tr>
                   <tr>
                     <P.Dark as={'td'}>Property Value</P.Dark>
@@ -484,7 +499,7 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
         <div className="upload-step-wrapper">
           <img src={upload}/>
           <h1 className={'form-headline-1 text-left'}>{formData.section_8?.title}</h1>
-          <FormConditionalInput serverErrorMessage={state.theme.errors?.['mortgages_1']} name={'mortgages_1'} showOn={'1'} checked={'0'} {...formData.section_8?.have_appraisal_report_yes_no}>
+          <FormConditionalInput name={'mortgages_1'} showOn={'1'} checked={'0'} {...formData.section_8?.have_appraisal_report_yes_no}>
             <FileInput name='appraisal_report_file' label={formData.section_8?.appraisal_report_upload_label} acceptText={'PDF, JPG, or PNG'}/>
             <Appraiser>
               <P.D>Select an appraiser</P.D>
@@ -505,7 +520,7 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
             </Appraiser>
           </FormConditionalInput>
           <hr/>
-          <TextArea serverErrorMessage={state.theme.errors?.['additional_notes']} name={'additional_notes'} {...formData.section_8?.additional_notes_input}/>
+          <TextArea name={'additional_notes'} {...formData.section_8?.additional_notes_input}/>
           <div className="btn-group">
             <Button className={'next-step'} label={'I want my pre-approval'}/>
           </div>

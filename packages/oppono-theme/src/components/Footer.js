@@ -16,6 +16,7 @@ const FooterRight = styled.div`
   @media (max-width: 991.98px) {
     margin-left: ${size(-17)};
     margin-right: ${size(-17)};
+    flex-wrap: wrap;
   }
 
   a {
@@ -65,6 +66,8 @@ const Footer = React.forwardRef(({className}, forwardRef) => {
             </div>
           </div>
           <FooterRight className={'footer-right'}>
+            <Link className={'primary'} href="/terms/">Terms And Conditions</Link>
+            <Link className={'primary'} href="/privacy-policy/">Privacy Policy</Link>
             <Link className={'primary'} href="/contacts/">Contact us</Link>
             <Link className={'primary'} href="tel:19058865352">Call us</Link>
           </FooterRight>

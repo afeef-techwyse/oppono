@@ -55,7 +55,7 @@ const D1Page = ({className, setCurrentTheme, state, actions, formData}) => {
   
   const mortgage = ((+section2Values('home_value')) - (+section2Values('down_payment'))) || 0;
   const firstProduct = state.theme.stepResponse.data?.data ? Object.values(state.theme.stepResponse.data?.data)[0].products[0] : {};
-  const refNumber = state.theme.stepResponse.data?.['sf-lead-id'] || '';
+  const refNumber = state.theme.stepResponse.data?.['reference-number'] || '';
   
   return <div className={className}>
     <Form setCurrentTheme={setCurrentTheme} endPoint={'/purchase'}>
@@ -127,10 +127,12 @@ const D1Page = ({className, setCurrentTheme, state, actions, formData}) => {
             <Input type={'text'} pattern={'^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$'} name={'applicant_mail_{{number}}'} {...formData.section_3?.applicant.email_input}/>
             <Input type={'phone'} name={'applicant_phone_{{number}}'} {...formData.section_3?.applicant.phone_input}/>
           </W50>
-          <RadioGroup radioText={formData.section_3?.applicant.score_label} checked={'650+'}>
-            <RadioInput label={'<650'} value={'<650'} serverErrorMessage={state.theme.errors?.['applicant_score_{{number}}']} name={`applicant_score_{{number}}`} type={'radio'}/>
-            <RadioInput label={'650+'} value={'650+'} serverErrorMessage={state.theme.errors?.['applicant_score_{{number}}']} name={`applicant_score_{{number}}`} type={'radio'}/>
-            <RadioInput label={'680+'} value={'680+'} serverErrorMessage={state.theme.errors?.['applicant_score_{{number}}']} name={`applicant_score_{{number}}`} type={'radio'}/>
+          <RadioGroup radioText={formData.section_3?.applicant.score_label} checked={'<650'}>
+            <RadioInput label={'<650'} value={'<650'} name={`applicant_score_{{number}}`} type={'radio'}/>
+            <RadioInput label={'650-679'} value={'650-679'} name={`applicant_score_{{number}}`} type={'radio'}/>
+            <RadioInput label={'680-749'} value={'680-749'} name={`applicant_score_{{number}}`} type={'radio'}/>
+            <RadioInput label={'750-799'} value={'750-799'} name={`applicant_score_{{number}}`} type={'radio'}/>
+            <RadioInput label={'800'} value={'800'} name={`applicant_score_{{number}}`} type={'radio'}/>
           </RadioGroup>
         </FormRepeatableInput>
         <div className="btn-group">
@@ -178,7 +180,7 @@ const D1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                     return <P.D key={`person-desktop-${personIndex}`}>{applicantFName} {applicantLName} {applicantScore}</P.D>;
                   },
                 )}
-                <P.D>Your mortgage request is {mortgage}</P.D>
+                <P.D>Your mortgage request is {numberWithCommas(mortgage)}</P.D>
                 <P.D>You could qualify up to {numberWithCommas(Math.round(+section2Values('home_value') * firstProduct.fields?.maximum_ltv / 100))}</P.D>
                 <P.D>Your property value is ${numberWithCommas(+section2Values('home_value'))}</P.D>
                 <P.D>Your down payment is ${numberWithCommas(+section2Values('down_payment'))}</P.D>
@@ -199,7 +201,7 @@ const D1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   )}
                   <tr>
                     <P.Dark as={'td'}>Mortgage request</P.Dark>
-                    <P.D as={'td'}>{mortgage}</P.D>
+                    <P.D as={'td'}>{numberWithCommas(mortgage)}</P.D>
                   </tr>
                   <tr>
                     <P.Dark as={'td'}>You could qualify up to</P.Dark>

@@ -2,11 +2,11 @@ import React from 'react';
 import RadioGroup from './RadioGroup';
 import RadioInput from './RadioInput';
 import PropTypes from 'prop-types';
-import {numberToOrdinal} from '../../functions/numberToOrdinal';
 import Input from './Input';
 import W50 from './W50';
 import {styled} from 'frontity';
 import {size} from '../../functions/size';
+import {numberToLetters} from '../../functions/numberToletters';
 
 const find = new RegExp('{{number}}', 'g');
 
@@ -55,14 +55,14 @@ const FormRepeatableInput = ({question, number = 1, initial = 1, fixedNumber, ch
                       ...child.props,
                       onChange: onChangeHandler(child),
                       name: child.props.name?.replace(find, repeat + 1),
-                      label: child.props.label?.replace(find, numberToOrdinal(repeat + 1)),
+                      label: child.props.label?.replace(find, numberToLetters(repeat + 1)),
                     });
                 }
                 else if (child.type === RadioGroup) {
                   return React.cloneElement(child,
                     {
                       ...child.props,
-                      radioText: child.props.radioText?.replace(find, numberToOrdinal(repeat + 1)),
+                      radioText: child.props.radioText?.replace(find, numberToLetters(repeat + 1)),
                       children: React.Children.map(child.props.children, radioGroupChild => {
                           return React.cloneElement(radioGroupChild,
                             {
@@ -83,7 +83,7 @@ const FormRepeatableInput = ({question, number = 1, initial = 1, fixedNumber, ch
                             ...inputChild.props,
                             onChange: onChangeHandler(inputChild),
                             name: inputChild.props.name?.replace(find, repeat + 1),
-                            label: inputChild.props.label?.replace(find, numberToOrdinal(repeat + 1)),
+                            label: inputChild.props.label?.replace(find, numberToLetters(repeat + 1)),
                           });
                         },
                       ),

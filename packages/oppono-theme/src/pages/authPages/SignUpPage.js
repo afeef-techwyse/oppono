@@ -31,7 +31,7 @@ const SignUpPage = ({className, setCurrentTheme, state, actions, formData}) => {
         <Input type={'text'} name={'first_name'} {...formData.section_1?.first_name_input}/>
         <Input type={'text'} name={'last_name'} {...formData.section_1?.last_name_input}/>
         <Input type={'text'} name={'pref_name'} {...formData.section_1?.preferred_name_input}/>
-        <Input serverErrorMessage={state.theme.errors?.mortgage_license?.code} pattern={'^[Mm](\\d){8}$'} type={'text'}
+        <Input pattern={'^[Mm](\\d){8}$'} type={'text'}
                name={'mortgage_license'} {...formData.section_1?.mortgage_agent_license_input}/>
         <Input type={'text'} name={'brokerage_license'} pattern={'^(\\d){5}$'} {...formData.section_1?.brokerage_license_input}/>
         <Button className={'bordered a7a-btn mt-80 next-step'} label={'Next: let’s create your account'}/>
@@ -55,7 +55,7 @@ const SignUpPage = ({className, setCurrentTheme, state, actions, formData}) => {
         <div className="agree-checkbox mt-80">
           <input name={'agree'} type="checkbox" required={'required'}/>
           <span className="checkmark"/>
-          <span className={'text'}>I agree the <a href="/terms" target={'_blank'}>terms and conditions</a></span>
+          <span className={'text'}>I agree the <Link href="/terms" target={'_blank'}>terms and conditions</Link></span>
         </div>
         {
           state.theme.errors?.general_error

@@ -374,6 +374,7 @@ const GeneralStyles = (props) =>
     }
 
     .animation ${Header}, .animation ${Footer} {
+      background: none !important;
       opacity: 0 !important;
     }
   `}/>

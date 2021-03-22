@@ -58,7 +58,7 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
   
   const mortgage = ((+section2Values('mortgage_value_1') || 0) + (+section2Values('mortgage_value_2') || 0) + (+section2Values('outstanding_amount_value')) || 0) || 0;
   const firstProduct = state.theme.stepResponse.data?.data?.heloc.products[0] || {};
-  const refNumber = state.theme.stepResponse.data?.['sf-lead-id'] || '';
+  const refNumber = state.theme.stepResponse.data?.['reference-number'] || '';
   return <div className={className}>
     <Form setCurrentTheme={setCurrentTheme} endPoint={'/heloc'}>
       <FormStep apiStepNumber={1} pageName={pageName} activeTheme={formData.section_1?.section_theme} stepName={formData.section_1?.section_name}>
@@ -136,10 +136,12 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
             <Input type={'text'} pattern={'^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$'} name={'applicant_mail_{{number}}'} {...formData.section_3?.applicant.email_input}/>
             <Input type={'phone'} name={'applicant_phone_{{number}}'} {...formData.section_3?.applicant.phone_input}/>
           </W50>
-          <RadioGroup radioText={formData.section_3?.applicant.score_label} checked={'650+'}>
-            <RadioInput label={'<650'} value={'<650'} serverErrorMessage={state.theme.errors?.['applicant_score_{{number}}']} name={`applicant_score_{{number}}`} type={'radio'}/>
-            <RadioInput label={'650+'} value={'650+'} serverErrorMessage={state.theme.errors?.['applicant_score_{{number}}']} name={`applicant_score_{{number}}`} type={'radio'}/>
-            <RadioInput label={'680+'} value={'680+'} serverErrorMessage={state.theme.errors?.['applicant_score_{{number}}']} name={`applicant_score_{{number}}`} type={'radio'}/>
+          <RadioGroup radioText={formData.section_3?.applicant.score_label} checked={'<650'}>
+            <RadioInput label={'<650'} value={'<650'} name={`applicant_score_{{number}}`} type={'radio'}/>
+            <RadioInput label={'650-679'} value={'650-679'} name={`applicant_score_{{number}}`} type={'radio'}/>
+            <RadioInput label={'680-749'} value={'680-749'} name={`applicant_score_{{number}}`} type={'radio'}/>
+            <RadioInput label={'750-799'} value={'750-799'} name={`applicant_score_{{number}}`} type={'radio'}/>
+            <RadioInput label={'800'} value={'800'} name={`applicant_score_{{number}}`} type={'radio'}/>
           </RadioGroup>
         </FormRepeatableInput>
         <div className="btn-group">

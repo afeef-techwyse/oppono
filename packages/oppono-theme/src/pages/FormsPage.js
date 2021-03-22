@@ -23,26 +23,32 @@ import classnames from 'classnames';
 
 
 const FormsPage = ({className, state, actions, link}) => {
-    const data = state.source.get(link);
-    const [currentTheme, setCurrentTheme] = React.useState('gray-theme');
-    const page = data.isReady && !data.isError ? state.source[data.type][data.id] : {};
-    React.useEffect(() => {
-  
-      actions.theme.setErrors({});
-      actions.theme.checkUser();
-      !state.theme.user.logged && !(/sign-in|create-account|qualifyfor/.test(page.slug) || state.router.link.startsWith('/d/')) && actions.router.set('/sign-in/', {method: 'replace'});
-    }, [state.theme.user.logged, link]);
-    return <div className={classnames(className, currentTheme)}>
-      <Header hasProgress={state.theme.activeStep.total > 1}/>
-      <Switch>
-        <DPage setCurrentTheme={setCurrentTheme} when={state.router.link.startsWith('/d/')}/>
-        <SignInPage setCurrentTheme={setCurrentTheme} when={page.slug === 'sign-in'} formData={page.acf}/>
-        <SignUpPage setCurrentTheme={setCurrentTheme} when={page.slug === 'create-account'} formData={page.acf}/>
-        <A1Page setCurrentTheme={setCurrentTheme} when={page.slug === 'a-i'} formData={page.acf}/>
-        <A2Page setCurrentTheme={setCurrentTheme} when={page.slug === 'a-ii'} formData={page.acf}/>
-        <A3Page setCurrentTheme={setCurrentTheme} when={page.slug === 'a-iii'} formData={page.acf}/>
-        <BPage setCurrentTheme={setCurrentTheme} when={page.slug === 'b'} formData={page.acf}/>
-        <C1Page setCurrentTheme={setCurrentTheme} when={page.slug === 'c-i'} formData={page.acf}/>
+  const data = state.source.get(link);
+  const [currentTheme, setCurrentTheme] = React.useState('gray-theme');
+  const page = data.isReady && !data.isError ? state.source[data.type][data.id] : {};
+  React.useEffect(() => {
+    actions.theme.setActiveTheme(currentTheme);
+  }, [currentTheme]);
+  React.useEffect(() => {
+    
+    actions.theme.setErrors({});
+    actions.theme.checkUser();
+    if (!state.theme.user.logged && !(/sign-in|create-account|qualifyfor/.test(page.slug) || state.router.link.startsWith('/d/'))) {
+      actions.theme.setRedirectTo(state.router.link);
+      actions.router.set('/sign-in/', {method: 'replace'});
+    }
+  }, [state.theme.user.logged, link]);
+  return <div className={classnames(className)}>
+    <Header hasProgress={state.theme.activeStep.total > 1}/>
+    <Switch>
+      <DPage setCurrentTheme={setCurrentTheme} when={state.router.link.startsWith('/d/')}/>
+      <SignInPage setCurrentTheme={setCurrentTheme} when={page.slug === 'sign-in'} formData={page.acf}/>
+      <SignUpPage setCurrentTheme={setCurrentTheme} when={page.slug === 'create-account'} formData={page.acf}/>
+      <A1Page setCurrentTheme={setCurrentTheme} when={page.slug === 'a-i'} formData={page.acf}/>
+      <A2Page setCurrentTheme={setCurrentTheme} when={page.slug === 'a-ii'} formData={page.acf}/>
+      <A3Page setCurrentTheme={setCurrentTheme} when={page.slug === 'a-iii'} formData={page.acf}/>
+      <BPage setCurrentTheme={setCurrentTheme} when={page.slug === 'b'} formData={page.acf}/>
+      <C1Page setCurrentTheme={setCurrentTheme} when={page.slug === 'c-i'} formData={page.acf}/>
         <C2Page setCurrentTheme={setCurrentTheme} when={page.slug === 'c-ii'} formData={page.acf}/>
         <C3Page setCurrentTheme={setCurrentTheme} when={page.slug === 'c-iii'} formData={page.acf}/>
         <D1Page setCurrentTheme={setCurrentTheme} when={page.slug === 'd-i'} formData={page.acf}/>

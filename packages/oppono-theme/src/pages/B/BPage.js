@@ -58,7 +58,7 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
   const getAppraiser = () => section2Values('business_address_same_as_property') === '1' ? businessAppraiser : appraiser;
   const mortgage = ((+section3Values('purchase_price')) - (+section3Values('down_payment'))) || 0;
   const firstProduct = state.theme.stepResponse.data?.data?.beloc.products[0] || {};
-  const refNumber = state.theme.stepResponse.data?.['sf-lead-id'] || '';
+  const refNumber = state.theme.stepResponse.data?.['reference-number'] || '';
   
   return <div className={className}>
     <Form setCurrentTheme={setCurrentTheme} endPoint={'/beloc'}>
@@ -127,8 +127,8 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
           <>
             <Input type={'text'} name={'address'} {...formData.section_2?.address_input}/>
             <W50>
-              <Input type={'text'} serverErrorMessage={state.theme.errors?.['city']} name={'city'} value={appraiser?.title} {...formData.section_1?.city_input}/>
-              <Input type={'text'} serverErrorMessage={state.theme.errors?.['postal_code']} name={'postal_code'} {...formData.section_1?.postal_code_input} onChange={postalCodeOnChange}/>
+              <Input type={'text'} name={'city'} value={appraiser?.title} {...formData.section_1?.city_input}/>
+              <Input type={'text'} name={'postal_code'} {...formData.section_1?.postal_code_input} onChange={postalCodeOnChange}/>
             </W50>
           </>
         </FormConditionalInput>
@@ -174,10 +174,12 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
             <Input type={'text'} pattern={'^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$'} name={'applicant_mail_{{number}}'} {...formData.section_4?.applicant.email_input}/>
             <Input type={'phone'} name={'applicant_phone_{{number}}'} {...formData.section_4?.applicant.phone_input}/>
           </W50>
-          <RadioGroup radioText={formData.section_4?.applicant.score_label} checked={'650+'}>
-            <RadioInput label={'<650'} value={'<650'} serverErrorMessage={state.theme.errors?.['applicant_score_{{number}}']} name={`applicant_score_{{number}}`} type={'radio'}/>
-            <RadioInput label={'650+'} value={'650+'} serverErrorMessage={state.theme.errors?.['applicant_score_{{number}}']} name={`applicant_score_{{number}}`} type={'radio'}/>
-            <RadioInput label={'680+'} value={'680+'} serverErrorMessage={state.theme.errors?.['applicant_score_{{number}}']} name={`applicant_score_{{number}}`} type={'radio'}/>
+          <RadioGroup radioText={formData.section_4?.applicant.score_label} checked={'<650'}>
+            <RadioInput label={'<650'} value={'<650'} name={`applicant_score_{{number}}`} type={'radio'}/>
+            <RadioInput label={'650-679'} value={'650-679'} name={`applicant_score_{{number}}`} type={'radio'}/>
+            <RadioInput label={'680-749'} value={'680-749'} name={`applicant_score_{{number}}`} type={'radio'}/>
+            <RadioInput label={'750-799'} value={'750-799'} name={`applicant_score_{{number}}`} type={'radio'}/>
+            <RadioInput label={'800'} value={'800'} name={`applicant_score_{{number}}`} type={'radio'}/>
           </RadioGroup>
         </FormRepeatableInput>
         <div className="btn-group">
@@ -238,7 +240,7 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
           <Bottom>
             {media !== 'mobile'
               ? <FinalizeChild order={1}>
-                <P.D>Your BELOC request is for ${numberWithCommas({mortgage})}</P.D>
+                <P.D>Your BELOC request is for ${numberWithCommas(mortgage)}</P.D>
                 <P.D>Your property value is ${numberWithCommas(+section3Values('purchase_price'))}</P.D>
                 <P.D>Your LTV is {((mortgage) / +section3Values('purchase_price') * 100).toFixed(1)}%</P.D>
               </FinalizeChild>

@@ -62,7 +62,7 @@ const ThreePage = ({className, setCurrentTheme, state, actions, formData}) => {
           <h1 className={'form-headline-1 text-left'}>{formData.section_1?.title}</h1>
           <h2 className={'form-headline-2 primary'}>{formData.section_1?.subtitle}</h2>
         </div>
-        <Input className={'big-input'} type={'number'} name={'home_value'} {...formData.section_1?.home_value_input}/>
+        <Input noScroll className={'big-input'} type={'number'} name={'home_value'} {...formData.section_1?.home_value_input}/>
         <Button icon={true} className={'next-step wide'} label={'Next'}/>
   
         <NeedHelp lineOne={'Need help?'} lineTwo={'Contact us'} link={'/contacts/'}/>
@@ -80,10 +80,12 @@ const ThreePage = ({className, setCurrentTheme, state, actions, formData}) => {
             <Input type={'text'} pattern={'^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$'} name={'applicant_mail_{{number}}'} {...formData.section_2?.applicant.email_input}/>
             <Input type={'phone'} name={'applicant_phone_{{number}}'} {...formData.section_2?.applicant.phone_input}/>
           </W50>
-          <RadioGroup radioText={formData.section_2?.applicant.score_label} checked={'650+'}>
-            <RadioInput label={'<650'} value={'<650'} serverErrorMessage={state.theme.errors?.['applicant_score_{{number}}']} name={`applicant_score_{{number}}`} type={'radio'}/>
-            <RadioInput label={'650+'} value={'650+'} serverErrorMessage={state.theme.errors?.['applicant_score_{{number}}']} name={`applicant_score_{{number}}`} type={'radio'}/>
-            <RadioInput label={'680+'} value={'680+'} serverErrorMessage={state.theme.errors?.['applicant_score_{{number}}']} name={`applicant_score_{{number}}`} type={'radio'}/>
+          <RadioGroup radioText={formData.section_2?.applicant.score_label} checked={'<650'}>
+            <RadioInput label={'<650'} value={'<650'} name={`applicant_score_{{number}}`} type={'radio'}/>
+            <RadioInput label={'650-679'} value={'650-679'} name={`applicant_score_{{number}}`} type={'radio'}/>
+            <RadioInput label={'680-749'} value={'680-749'} name={`applicant_score_{{number}}`} type={'radio'}/>
+            <RadioInput label={'750-799'} value={'750-799'} name={`applicant_score_{{number}}`} type={'radio'}/>
+            <RadioInput label={'800'} value={'800'} name={`applicant_score_{{number}}`} type={'radio'}/>
           </RadioGroup>
         </FormRepeatableInput>
         <div className="btn-group">
@@ -248,9 +250,8 @@ const ThreePage = ({className, setCurrentTheme, state, actions, formData}) => {
             alt: 'alt',
           }]}/>
         <div className="btn-group megalonum">
-          {state.theme.user.logged
-            ? <Link href={'/dashboard/d/'}><Button focusable={false} className={'wide-vertical'} label={'I want this deal'}/></Link>
-            : <Link href={'/sign-in/'}><Button focusable={false} className={'wide-vertical'} label={'Sign in to get this deal'}/></Link>}
+          <Link href={'/dashboard/d/'}><Button focusable={false} className={'wide-vertical'} label={state.theme.user.logged ? 'I want this deal' : 'Sign in to get this deal'}/></Link>
+    
           <Link href={'/d/'}><Button focusable={false} className={'next-step bordered wide-vertical'} label={'No, let’s see the full list'}/></Link>
         </div>
         <Finalize className={'mt-0'}>
@@ -302,7 +303,7 @@ const ThreePage = ({className, setCurrentTheme, state, actions, formData}) => {
                   </tbody>
                 </FinalizeTable>
               </FinalizeChild>}
-  
+      
             <FinalizeChild order={3} className={'wide m-pr-40'}>
               <P.Border>Home must be fully Owner Occupied</P.Border>
               <P.Border>Purchase or refinance</P.Border>
@@ -321,26 +322,30 @@ const ThreePage = ({className, setCurrentTheme, state, actions, formData}) => {
 };
 
 export default styled(connect(ThreePage))`
-width: 100%;
-height: 100%;
-${Finalize}.mt-0{
-  margin-top: 0;
-  ${Bottom}{
-  @media(max-width: 575.98px){
-      margin-top: ${size(20)};
-    }
-  }
-}
-.btn-group.megalonum{
-  ${Link}:first-of-type{
-    margin-right: ${size(55)};
-  }
-  button{
+  width: 100%;
+  height: 100%;
+
+  ${Finalize}.mt-0 {
     margin-top: 0;
-    margin-right: 0;
-    @media(max-width: 575.98px){
-      margin-bottom: ${size(20)};
+
+    ${Bottom} {
+      @media (max-width: 575.98px) {
+        margin-top: ${size(20)};
+      }
     }
   }
-}
+
+  .btn-group.megalonum {
+    ${Link}:first-of-type {
+      margin-right: ${size(55)};
+    }
+
+    button {
+      margin-top: 0;
+      margin-right: 0;
+      @media (max-width: 575.98px) {
+        margin-bottom: ${size(20)};
+      }
+    }
+  }
 `;

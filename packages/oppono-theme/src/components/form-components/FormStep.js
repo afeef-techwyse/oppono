@@ -85,6 +85,7 @@ const FormStep = ({
             .catch(error => {
               if (+error.response?.status === 403) {
                 actions.theme.removeUser();
+                actions.theme.setRedirectTo(state.router.link);
                 actions.router.set('/sign-in/', {method: 'replace'});
               }
               console.log(error);
@@ -116,11 +117,18 @@ const FormStep = ({
   
                 const {token, user_id, user_email, user_nicename: user_name, user_sf_contact, user_sf_account, user_fname} = response.data;
                 actions.theme.setUser({token, logged: true, user_id, user_email, user_password: formData.get('password'), user_name, user_sf_contact, user_sf_account, user_fname});
-                actions.router.set('/dashboard/');
+                if (state.theme.redirectTo) {
+                  actions.router.set(state.theme.redirectTo, {method: 'replace'});
+                  actions.theme.setRedirectTo();
+                }
+                else {
+                  actions.router.set('/dashboard/');
+                }
               })
               .catch(error => {
                 if (+error.response?.status === 403) {
                   actions.theme.removeUser();
+                  actions.theme.setRedirectTo(state.router.link);
                   actions.router.set('/sign-in/', {method: 'replace'});
                 }
                 console.log(error);
@@ -154,6 +162,7 @@ const FormStep = ({
               .catch(error => {
                 if (+error.response?.status === 403) {
                   actions.theme.removeUser();
+                  actions.theme.setRedirectTo(state.router.link);
                   actions.router.set('/sign-in/', {method: 'replace'});
                 }
   

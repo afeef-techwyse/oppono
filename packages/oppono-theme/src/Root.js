@@ -10,10 +10,14 @@ import ContactPage from './pages/ContactPage';
 import MapPage from './pages/MapPage';
 import Missing404 from './pages/Missing404';
 import {Transition, TransitionGroup} from 'react-transition-group';
-import gsap from 'gsap';
+import {gsap} from 'gsap';
+import ScrollToPlugin from 'gsap/ScrollToPlugin';
 import ProductsSlider from './components/ProductsSlider';
-import AboutUsPage from './components/form-components/AboutUsPage';
+import AboutUsPage from './pages/AboutUsPage';
 import TermsPage from './pages/TermsPage';
+import PrivacyPage from './pages/PrivacyPage';
+
+gsap.registerPlugin(ScrollToPlugin);
 
 const isDeveloping = false;
 
@@ -46,8 +50,8 @@ const Root = ({state}) => {
             top: 0,
             left: 0,
             width: '100vw',
-            height: '100vh',
             zIndex: 1,
+            scrollTo: 0,
           });
           gsap.to(node, {
             duration,
@@ -71,6 +75,7 @@ const Root = ({state}) => {
             zIndex: 10,
             width: '100vw',
             height: '100vh',
+            overflow: 'hidden',
           });
           gsap.to(node, {
             duration,
@@ -95,7 +100,8 @@ const Root = ({state}) => {
             when={page.template === 'page-templates/form-template.php' || state.router.link.startsWith('/d/')}/>
           <ProductsSlider link={data.link} active={true} when={state.router.link.startsWith('/products/')}/>
           <MapPage when={state.router.link.startsWith('/map/')}/>
-          <TermsPage when={state.router.link.startsWith('/terms/')}/>
+          <TermsPage link={data.link} when={state.router.link.startsWith('/terms/')}/>
+          <PrivacyPage link={data.link} when={state.router.link.startsWith('/privacy-policy/')}/>
           <Missing404 when={data.is404}/>
         </Switch>
       </Transition>

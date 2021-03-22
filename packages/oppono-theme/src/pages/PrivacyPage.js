@@ -27,7 +27,7 @@ const TermsPage = ({className, link, libraries, actions, state}) => {
         <div className={classnames(className)}>
             <Header hasSubMenu={false}/>
             <Container>
-                {/*<h1 className={'primary'}>Terms And Conditions</h1>*/}
+                {/*<h1 className={'primary'}>Privacy Policy</h1>*/}
                 <Html2React html={post.content.rendered}/>
             </Container>
             <Footer/>
@@ -48,6 +48,7 @@ export default styled(connect(TermsPage))`
   ${Header}, ${Footer} {
     background: transparent;
   }
+
 
   h1 {
     font-size: ${size(50)};
@@ -73,9 +74,7 @@ export default styled(connect(TermsPage))`
   h6 {
     font-size: ${size(18)};
   }
-  b {
-    font-weight: 500;
-  }
+
   .container {
     max-width: 75%;
     margin: 0 auto;
@@ -84,14 +83,14 @@ export default styled(connect(TermsPage))`
       max-width: 97%;
     }
   }
-
+  b {
+    font-weight: 500;
+  }
   p, li {
     font-size: 2rem;
     font-weight: 300;
     font-style: normal;
     text-transform: capitalize;
-    color: rgb(191, 182, 180) !important;
     margin-top: 2rem;
   }
-
 `;

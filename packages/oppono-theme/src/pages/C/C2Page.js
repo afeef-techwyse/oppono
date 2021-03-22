@@ -72,7 +72,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
   const [productsTable, productsFilter] = useProductsTable(state.theme.stepResponse);
   const mortgage = ((+section1Values('home_value')) - (+section5Values('down_payment'))) || 0;
   const firstProduct = state.theme.stepResponse.data?.data ? Object.values(state.theme.stepResponse.data?.data)[0].products[0] : {};
-  const refNumber = state.theme.stepResponse.data?.['sf-lead-id'] || '';
+  const refNumber = state.theme.stepResponse.data?.['reference-number'] || '';
   
   return <div className={className}>
     <Form setCurrentTheme={setCurrentTheme} endPoint={'/purchase'}>
@@ -109,11 +109,13 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
         <div className="form-text-wrapper">
           <h1 className={'form-headline-1 text-left'}>{formData.section_2?.title}</h1>
         </div>
-        <FormRepeatableInput question={formData.section_2?.applicant_amount_label} number={4} initial={1} serverErrorMessage={state.theme.errors?.['applicants_number']} name={'applicants_number'}>
-          <RadioGroup radioText={formData.section_2?.applicant.score_label} checked={'650+'}>
-            <RadioInput label={'<650'} value={'<650'} serverErrorMessage={state.theme.errors?.['applicant_score_{{number}}']} name={`applicant_score_{{number}}`} type={'radio'}/>
-            <RadioInput label={'650+'} value={'650+'} serverErrorMessage={state.theme.errors?.['applicant_score_{{number}}']} name={`applicant_score_{{number}}`} type={'radio'}/>
-            <RadioInput label={'680+'} value={'680+'} serverErrorMessage={state.theme.errors?.['applicant_score_{{number}}']} name={`applicant_score_{{number}}`} type={'radio'}/>
+        <FormRepeatableInput question={formData.section_2?.applicant_amount_label} number={4} initial={1} name={'applicants_number'}>
+          <RadioGroup radioText={formData.section_2?.applicant.score_label} checked={'<650'}>
+            <RadioInput label={'<650'} value={'<650'} name={`applicant_score_{{number}}`} type={'radio'}/>
+            <RadioInput label={'650-679'} value={'650-679'} name={`applicant_score_{{number}}`} type={'radio'}/>
+            <RadioInput label={'680-749'} value={'680-749'} name={`applicant_score_{{number}}`} type={'radio'}/>
+            <RadioInput label={'750-799'} value={'750-799'} name={`applicant_score_{{number}}`} type={'radio'}/>
+            <RadioInput label={'800'} value={'800'} name={`applicant_score_{{number}}`} type={'radio'}/>
           </RadioGroup>
         </FormRepeatableInput>
         <div className="btn-group">
@@ -299,8 +301,8 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
         </div>
         <Input type={'text'} name={'address'} {...formData.section_4?.address_input}/>
         <W50>
-          <Input value={appraiser?.title} type={'text'} serverErrorMessage={state.theme.errors?.['city']} name={'city'} {...formData.section_4?.city_input}/>
-          <Input type={'text'} serverErrorMessage={state.theme.errors?.['postal_code']} name={'postal_code'} {...formData.section_4?.postal_code_input} onChange={postalCodeOnChange}/>
+          <Input value={appraiser?.title} type={'text'} name={'city'} {...formData.section_4?.city_input}/>
+          <Input type={'text'} name={'postal_code'} {...formData.section_4?.postal_code_input} onChange={postalCodeOnChange}/>
         </W50>
         <Select
           name={'property_type'}
@@ -389,8 +391,8 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                     return <P.D key={`person-desktop-${personIndex}`}>{applicantFName} {applicantLName} {applicantScore}</P.D>;
                   },
                 )}
-                <P.D>Your mortgage request is {mortgage}</P.D>
-                <P.D>You could qualify up to {Math.round(+section1Values('home_value') * firstProduct.fields?.maximum_ltv / 100)}</P.D>
+                <P.D>Your mortgage request is {numberWithCommas(mortgage)}</P.D>
+                <P.D>You could qualify up to {numberWithCommas(Math.round(+section1Values('home_value') * firstProduct.fields?.maximum_ltv / 100))}</P.D>
                 <P.D>Your property value is ${numberWithCommas(+section1Values('home_value'))}</P.D>
                 <P.D>Your down payment is ${numberWithCommas(+section1Values('home_value') - mortgage)}</P.D>
                 <P.D>Your LTV is {(mortgage / +section1Values('home_value') * 100).toFixed(1)}%</P.D>
@@ -410,11 +412,11 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   )}
                   <tr>
                     <P.Dark as={'td'}>Mortgage request</P.Dark>
-                    <P.D as={'td'}>{mortgage}</P.D>
+                    <P.D as={'td'}>{numberWithCommas(mortgage)}</P.D>
                   </tr>
                   <tr>
                     <P.Dark as={'td'}>You could qualify up to</P.Dark>
-                    <P.D as={'td'}>{Math.round(+section1Values('home_value') * firstProduct.fields?.maximum_ltv / 100)}</P.D>
+                    <P.D as={'td'}>{numberWithCommas(Math.round(+section1Values('home_value') * firstProduct.fields?.maximum_ltv / 100))}</P.D>
                   </tr>
                   <tr>
                     <P.Dark as={'td'}>Property Value</P.Dark>

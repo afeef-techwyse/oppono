@@ -179,12 +179,7 @@ const HomeSlider = ({className, active = false, state, actions, link}) => {
   const [swiperRef, setSwiperRef] = React.useState(null);
   const [slideFlyingObjectsPlaying, setSlideFlyingObjectsPlaying] = React.useState([]);
   const [currentSlide, setCurrentSlide, currentSlideRef] = useStateWithRef(0);
-  const resetSlider = () => {
-    swiperRef?.slideTo(0);
-    
-    
-    setSlideFlyingObjectsPlaying([]);
-  };
+  
   const swiperInit = (swiper) => {
     
     
@@ -225,13 +220,7 @@ const HomeSlider = ({className, active = false, state, actions, link}) => {
       .fromTo(header.current, {autoAlpha: 0}, {autoAlpha: 1})
       .fromTo(slidesNumbers.current, {autoAlpha: 0, scale: 0}, {autoAlpha: 1, scale: 1}, 'initial-slide')
       .fromTo(headerLinks, {autoAlpha: 0, y: 10}, {autoAlpha: 1, y: 0, stagger: 0.05}, '1')
-      .call(() => {
-        setSlideFlyingObjectsPlaying(prevState => {
-          const newState = [...prevState];
-          newState[0] = true;
-          return newState;
-        });
-      }, null, 'initial-slide-=1')
+      .call(() => setTimeout(() => setSlideFlyingObjectsPlaying([true]), 100), null, 'initial-slide-=1.1')
       .fromTo(nextArrow, {drawSVG: 0}, {drawSVG: '100%', stagger: 0.5}, 'initial-slide+=.5')
       .fromTo(prevArrow, {drawSVG: 0}, {drawSVG: '100%', stagger: 0.5}, 'initial-slide+=.5')
       .fromTo(footerLeft, {autoAlpha: 0, y: 10}, {autoAlpha: 1, y: 0, stagger: 0.1}, 'initial-slide+=1')
@@ -239,6 +228,7 @@ const HomeSlider = ({className, active = false, state, actions, link}) => {
       .fromTo(paginationRef.current, {autoAlpha: 0, y: 10, xPercent: -50}, {autoAlpha: 1, y: 0, stagger: 0.1}, '<')
       .call(() => initialTimeline.current.remove(slideAnimationTl))
       .add(slideAnimationTl, 'initial-slide')
+      .call(() => initialTimeline.current.remove(slideAnimationTl))
     ;
     const keyHandler = event => {
       if (event.key === 'Enter' && !event.repeat) {
@@ -256,28 +246,33 @@ const HomeSlider = ({className, active = false, state, actions, link}) => {
   }, [active]);
   React.useEffect(() => {
     actions.theme.setActiveTheme(page_theme);
-  
   }, [page_theme]);
   React.useEffect(() => {
     actions.theme.checkUser();
-    state.theme.user.logged
-      ? (state.router.link === '/' || state.router.link === '/dashboard') && actions.router.set('/dashboard', {method: 'replace'})
-      : ((state.router.link === '/' || state.router.link === '/contacts/') || actions.router.set('/sign-in/', {method: 'replace'}));
+    if (state.theme.user.logged) {
+      (state.router.link === '/' || state.router.link === '/dashboard') && actions.router.set('/dashboard', {method: 'replace'});
+    }
+    else {
+      if (!(state.router.link === '/' || state.router.link === '/contacts/')) {
+        actions.theme.setRedirectTo(state.router.link);
+        actions.router.set('/sign-in/', {method: 'replace'});
+      }
+    }
+  
   }, [state.theme.user.logged, link]);
   
   return (
-    <div className={classnames(className, page_theme)}>
+    <div className={className}>
       <Header hasSubMenu={false} ref={header}/>
       <div ref={flyingWrapperRef} className="flying-obj-wrapper">
         {
           slidesObj.map((slide, slideIndex) => slide.flying_objects.desktop?.map((obj, objIndex) => {
             return <FlyingObj
-              // ref={el => obj.ref = el}
               key={`slide-${slideIndex}-obj-${objIndex}-${state.router.link}`}
               width={+obj.width}
               imageUrl={obj.image.url}
               frames={+obj.frames}
-                duration={+obj.duration}
+              duration={+obj.duration}
                 initial_duration={+obj.initial_duration}
                 frame_x={+obj.frame_x}
                 frame_y={+obj.frame_y}

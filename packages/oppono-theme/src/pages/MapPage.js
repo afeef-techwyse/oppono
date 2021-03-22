@@ -126,8 +126,11 @@ const MapPage = ({className, actions, state}) => {
         }
       });
   }, 1000);
+  React.useEffect(() => {
+    actions.theme.setActiveTheme('gray-theme');
+  }, []);
   return (
-    <div className={classnames(className, 'gray-theme')}>
+    <div className={classnames(className)}>
       <div className="map" ref={mapRef}/>
       <Header hasSubMenu={false}/>
       <Container className={classnames({flex: !appraiser?.fields})}>

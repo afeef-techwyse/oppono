@@ -8,10 +8,13 @@ import Footer from '../components/Footer';
 import Mail from './contact/Mail';
 import classnames from 'classnames';
 
-const ContactPage = ({className, state}) => {
+const ContactPage = ({className, state, actions}) => {
     const data = state.source.get(state.router.link);
     const pageData = data.isReady && !data.isError ? state.source[data.type][data.id].acf : {};
-    return <div className={classnames(className, pageData.section_1?.section_theme || 'gray-theme')}>
+    React.useEffect(() => {
+      actions.theme.setActiveTheme(pageData.section_1?.section_theme || 'gray-theme');
+    }, []);
+    return <div className={classnames(className)}>
       <Header/>
       <Switch>
         {/*<Chat when={state.router.link.startsWith('/contact/chat/')}/>*/}

@@ -9,9 +9,12 @@ import FlyingObj from '../components/reusable/FlyingObj';
 import classnames from 'classnames';
 
 
-const Missing404 = ({className, state}) => {
+const Missing404 = ({className, state, actions}) => {
+  React.useEffect(() => {
+    actions.theme.setActiveTheme('blue-theme');
+  }, []);
   return (
-    <div className={classnames(className, 'blue-theme')}>
+    <div className={classnames(className)}>
       <Header hasSubMenu={false}/>
       <div className="wrapper-404">
         {[

@@ -60,7 +60,24 @@ position: relative;
 }
 `;
 
-const Input = React.forwardRef(({className, name, type, value: initialValue, placeholder, pattern, required, readOnly, disabled, min, max, label, onChange, defaultValue, error}, forwardedRef) => {
+const Input = React.forwardRef(({
+                                  className,
+                                  name,
+                                  type,
+                                  value: initialValue,
+                                  placeholder,
+                                  pattern,
+                                  required,
+                                  readOnly,
+                                  disabled,
+                                  min,
+                                  max,
+                                  label,
+                                  onChange,
+                                  defaultValue,
+                                  error,
+                                  noScroll,
+                                }, forwardedRef) => {
   const innerRef = React.useRef(null);
   const combinedRef = useCombinedRefs(forwardedRef, innerRef);
   const inputRef = React.useRef(null);
@@ -71,7 +88,6 @@ const Input = React.forwardRef(({className, name, type, value: initialValue, pla
   const [invalid, setInvalid] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState(error);
   const validateInput = () => {
-    console.log(error);
     inputRef.current.validity.valid
       ? error || setErrorMessage('')
       : setErrorMessage('This Input is Invalid');
@@ -101,7 +117,7 @@ const Input = React.forwardRef(({className, name, type, value: initialValue, pla
           ref={inputRef}
           name={name}
           className={'normal-input'}
-          type={type}
+          type={type === 'number' ? 'text' : type}
           value={value}
           placeholder={placeholder}
           required={required}
@@ -112,7 +128,7 @@ const Input = React.forwardRef(({className, name, type, value: initialValue, pla
           pattern={pattern}
           onInvalid={() => setVisited(true)}
           onFocus={(e) => {
-            gsap.to(window, {
+            noScroll || gsap.to(window, {
               duration: .5,
               scrollTo: {y: combinedRef.current, offsetY: (window.innerHeight - combinedRef.current.getBoundingClientRect().height) / 2},
             });
@@ -124,6 +140,13 @@ const Input = React.forwardRef(({className, name, type, value: initialValue, pla
           }}
           onChange={(event) => {
             event.persist();
+            console.log(/^\d+$/.test(event.target.value));
+            if (!/^\d+$/.test(event.target.value)) {
+              setErrorMessage('numbers only is allowed');
+              setVisited(true);
+              setInvalid(true);
+              return;
+            }
             visited && validateInput();
             setValue(event.target.value);
             onChange?.(event);
@@ -252,4 +275,5 @@ Input.propTypes = {
   min: PropTypes.number,
   max: PropTypes.number,
   pattern: PropTypes.string,
+  noScroll: PropTypes.bool,
 };
