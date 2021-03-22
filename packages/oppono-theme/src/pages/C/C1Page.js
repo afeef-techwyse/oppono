@@ -79,7 +79,8 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
   
   const firstProduct = state.theme.stepResponse.data?.data ? Object.values(state.theme.stepResponse.data?.data)[0].products[0] : {};
   
-  const refNumber = state.theme.stepResponse.data?.['reference-number'] || '';
+    const  refNumber = React.useRef('');
+  state.theme.stepResponse.data?.['reference-number']&&(refNumber.current=state.theme.stepResponse.data?.['reference-number'])
   
   return <div className={className}>
     <Form setCurrentTheme={setCurrentTheme} endPoint={'/refinance'}>
@@ -538,7 +539,7 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
           <div style={{flexBasis: '60%'}} className="text">
             <h1 className={'form-headline-1 text-left'}>{formData.section_9?.title}</h1>
             <p className={'form-headline-3 primary'}>{formData.section_9?.subtitle}</p>
-            <Wysiwyg dangerouslySetInnerHTML={{__html: formData.section_9?.steps.replace('{{number}}', refNumber)}}/>
+            <Wysiwyg dangerouslySetInnerHTML={{__html: formData.section_9?.steps.replace('{{number}}', refNumber.current)}}/>
             <div className="btn-group">
               <Link className={'wide bordered'} href={'https://expert.filogix.com/expert/view/SignOn'}>
                 <Button className={'wide filled'} label={'Connect to Filogix'}/>

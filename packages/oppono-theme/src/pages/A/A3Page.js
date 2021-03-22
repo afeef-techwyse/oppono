@@ -58,7 +58,8 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
   
   const mortgage = ((+section2Values('mortgage_value_1') || 0) + (+section2Values('mortgage_value_2') || 0) + (+section2Values('outstanding_amount_value')) || 0) || 0;
   const firstProduct = state.theme.stepResponse.data?.data?.heloc.products[0] || {};
-  const refNumber = state.theme.stepResponse.data?.['reference-number'] || '';
+    const  refNumber = React.useRef('');
+  state.theme.stepResponse.data?.['reference-number']&&(refNumber.current=state.theme.stepResponse.data?.['reference-number'])
   return <div className={className}>
     <Form setCurrentTheme={setCurrentTheme} endPoint={'/heloc'}>
       <FormStep apiStepNumber={1} pageName={pageName} activeTheme={formData.section_1?.section_theme} stepName={formData.section_1?.section_name}>
@@ -323,7 +324,7 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
           <div style={{flexBasis: '60%'}} className="text">
             <h1 className={'form-headline-1 text-left'}>{formData.section_7?.title}</h1>
             <p className={'form-headline-3 primary'}>{formData.section_7?.subtitle}</p>
-            <Wysiwyg dangerouslySetInnerHTML={{__html: formData.section_7?.steps.replace('{{number}}', refNumber)}}/>
+            <Wysiwyg dangerouslySetInnerHTML={{__html: formData.section_7?.steps.replace('{{number}}', refNumber.current)}}/>
             <div className="btn-group">
               <Link className={'wide bordered'} href={'https://expert.filogix.com/expert/view/SignOn'}>
                 <Button className={'wide filled'} label={'Connect to Filogix'}/>
