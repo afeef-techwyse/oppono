@@ -4,6 +4,7 @@ import {connect, styled} from 'frontity';
 import FormStep from '../../components/form-components/FormStep';
 import Button from '../../components/form-components/Button';
 import ProductsTable from '../../components/form-components/ProductsTable';
+import {productTypeToFullName} from "../../functions/productTypeToFullName";
 import useMedia from '../../hooks/useMedia';
 import FormFilter from '../../components/form-components/FormFilter';
 import ProductsMobileOption from '../../components/form-components/ProductsMobileOption';
@@ -50,7 +51,7 @@ const DPage = ({className, setCurrentTheme, state, actions}) => {
                   <tr>
                     <th scope={'col'}>
                       <p className={'circle'}>{index + 1}</p>
-                      <p>{type}</p>
+                      <p>{productTypeToFullName(type)}</p>
                       <p className={'dark'}>Variable rates</p>
                       <div className="table-arrows">
                     <span className={'prev disabled'}>
@@ -119,7 +120,7 @@ const DPage = ({className, setCurrentTheme, state, actions}) => {
                         <ProductsMobileOption key={ID}>
                           <div className="mortgage-title">
                             <p className={'circle'}>{productIndex + 1}</p>
-                            <p>{type}</p>
+                            <p>{productTypeToFullName(type)}</p>
                             <p className={'dark'}>Variable rates</p>
                           </div>
                           <div className="mortgage-head">

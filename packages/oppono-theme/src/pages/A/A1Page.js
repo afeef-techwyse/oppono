@@ -2,6 +2,7 @@ import React from 'react';
 import Form from '../../components/form-components/Form';
 import {connect, styled} from 'frontity';
 import {monthlyPayments} from "../../functions/monthlyPayment";
+import {productTypeToFullName} from "../../functions/productTypeToFullName";
 import {size} from '../../functions/size';
 import FormStep from '../../components/form-components/FormStep';
 import Button from '../../components/form-components/Button';
@@ -258,7 +259,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   <tr>
                     <th scope={'col'}>
                       <p className={'circle'}>{index + 1}</p>
-                      <p>{type}</p>
+                      <p>{productTypeToFullName(type)}</p>
                       <p className={'dark'}>Variable rates</p>
                       <div className="table-arrows">
                     <span className={'prev disabled'}>
@@ -333,7 +334,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                         <ProductsMobileOption key={ID}>
                           <div className="mortgage-title">
                             <p className={'circle'}>{productIndex + 1}</p>
-                            <p>{type}</p>
+                            <p>{productTypeToFullName(type)}</p>
                             <p className={'dark'}>Variable rates</p>
                           </div>
                           <div className="mortgage-head">

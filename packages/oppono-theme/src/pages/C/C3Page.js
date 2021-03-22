@@ -2,6 +2,7 @@ import React from 'react';
 import Form from '../../components/form-components/Form';
 import Input from '../../components/form-components/Input';
 import {connect, css, styled} from 'frontity';
+import {productTypeToFullName} from "../../functions/productTypeToFullName";
 import {size} from '../../functions/size';
 import Select from '../../components/form-components/Select';
 import RadioInput from '../../components/form-components/RadioInput';
@@ -142,7 +143,7 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   <tr>
                     <th scope={'col'}>
                       <p className={'circle'}>{index + 1}</p>
-                      <p>{type}</p>
+                      <p>{productTypeToFullName(type)}</p>
                       <p className={'dark'}>Variable rates</p>
                       <div className="table-arrows">
                     <span className={'prev disabled'}>
@@ -213,7 +214,7 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
                         <ProductsMobileOption key={ID}>
                           <div className="mortgage-title">
                             <p className={'circle'}>{productIndex + 1}</p>
-                            <p>{type}</p>
+                            <p>{productTypeToFullName(type)}</p>
                             <p className={'dark'}>Variable rates</p>
                           </div>
                           <div className="mortgage-head">
