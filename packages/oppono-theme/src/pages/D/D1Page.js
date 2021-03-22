@@ -182,8 +182,8 @@ const D1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                     return <P.D key={`person-desktop-${personIndex}`}>{applicantFName} {applicantLName} {applicantScore}</P.D>;
                   },
                 )}
-                <P.D>Your mortgage request is {numberWithCommas(mortgage)}</P.D>
-                <P.D>You could qualify up to {numberWithCommas(Math.round(+section2Values('home_value') * firstProduct.fields?.maximum_ltv / 100))}</P.D>
+                <P.D>Your mortgage request is ${numberWithCommas(mortgage)}</P.D>
+                <P.D>You could qualify up to ${numberWithCommas(Math.round(+section2Values('home_value') * firstProduct.fields?.maximum_ltv / 100))}</P.D>
                 <P.D>Your property value is ${numberWithCommas(+section2Values('home_value'))}</P.D>
                 <P.D>Your down payment is ${numberWithCommas(+section2Values('down_payment'))}</P.D>
                 <P.D>Your LTV is {(mortgage / +section2Values('home_value') * 100).toFixed(1)}%</P.D>
