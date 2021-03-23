@@ -93,4 +93,8 @@ export default styled(connect(TermsPage))`
     text-transform: capitalize;
     margin-top: 2rem;
   }
+  a {
+    color: #0e9564;
+    text-decoration: underline;
+  }
 `;

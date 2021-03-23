@@ -93,5 +93,9 @@ export default styled(connect(TermsPage))`
     color: rgb(191, 182, 180) !important;
     margin-top: 2rem;
   }
+  a {
+    color: #0e9564;
+    text-decoration: underline;
+  }
 
 `;
