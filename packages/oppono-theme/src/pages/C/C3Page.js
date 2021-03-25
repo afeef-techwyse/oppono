@@ -513,11 +513,11 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
               <P.D>Select an appraiser</P.D>
               <div className="row">
                 <div className="col-left">
-                  <p className={'form-headline-1 text-left'} dangerouslySetInnerHTML={{__html: appraiser?.fields.bdm.name}}/>
+                  <p className={'form-headline-1 text-left'} dangerouslySetInnerHTML={{__html: appraiser?.fields?.bdm.name}}/>
                 </div>
                 <div className="col-right">
                   <RadioGroup className={'vertical-radio'} radioText={'*Click to call'}>
-                    {appraiser?.fields.preferred_appraisal_company.map(({post_name}, index) => {
+                    {appraiser?.fields?.preferred_appraisal_company.map(({post_name}, index) => {
                       return <AppraiserInput key={index} appraiserName={post_name}/>;
                     })}
                   </RadioGroup>
