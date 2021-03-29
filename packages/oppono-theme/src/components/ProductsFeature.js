@@ -46,13 +46,12 @@ font-size: ${size(18)};
 font-weight: 400;
 line-height: ${size(25)};
 text-align: left;
-padding: 0 ${size(115)};
+padding: 0 ${size(55)};
 margin-top: ${size(23)};
 @media(max-width:991.98px){
   font-size: ${size(16)};
   margin-top: ${size(16)};
   padding: 0;
-
 }
 @media(max-width:575.98px){
   font-size: ${size(18)};
@@ -72,6 +71,7 @@ const AspectRation = styled.picture`
   height: 100%;
   top: 0;
   left: 0;
+   object-fit: contain;
  }
 `;
 
