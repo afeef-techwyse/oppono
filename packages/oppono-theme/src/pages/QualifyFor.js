@@ -1,31 +1,31 @@
 import React from 'react';
-import Form from '../../components/form-components/Form';
-import Input from '../../components/form-components/Input';
+import Form from '../components/form-components/Form';
+import Input from '../components/form-components/Input';
 import {connect, styled} from 'frontity';
-import {size} from '../../functions/size';
-import RadioInput from '../../components/form-components/RadioInput';
-import RadioGroup from '../../components/form-components/RadioGroup';
-import FormStep from '../../components/form-components/FormStep';
-import Button from '../../components/form-components/Button';
-import W50 from '../../components/form-components/W50';
-import intro_ball_1 from '../../assets/images/form_1_img.png';
-import intro_ball_2 from '../../assets/images/form_2_img.png';
-import MegaloNum_1 from '../../assets/images/flying-1.png';
-import MegaloNum_2 from '../../assets/images/last-step.png';
-import FlyingObjsContainer from '../../components/reusable/FlyingObjsContainer';
-import ProductsTable from '../../components/form-components/ProductsTable';
-import {P} from '../../components/form-components/StyledComponent';
-import Finalize, {Bottom, FinalizeChild, FinalizeTable, Top} from '../../components/form-components/Finalize';
-import useMedia from '../../hooks/useMedia';
-import FormRepeatableInput from '../../components/form-components/FormRepeatableInput';
-import ProductsMobileOption from '../../components/form-components/ProductsMobileOption';
-import Link from '../../components/reusable/Link';
-import MegaloNum from '../../components/form-components/MegaloNum';
-import useStoredFormValue from '../../hooks/useStoredFormValue';
-import NeedHelp from '../../components/reusable/NeedHelp';
+import {size} from '../functions/size';
+import RadioInput from '../components/form-components/RadioInput';
+import RadioGroup from '../components/form-components/RadioGroup';
+import FormStep from '../components/form-components/FormStep';
+import Button from '../components/form-components/Button';
+import W50 from '../components/form-components/W50';
+import intro_ball_1 from '../assets/images/form_1_img.png';
+import intro_ball_2 from '../assets/images/form_2_img.png';
+import MegaloNum_1 from '../assets/images/flying-1.png';
+import MegaloNum_2 from '../assets/images/last-step.png';
+import FlyingObjsContainer from '../components/reusable/FlyingObjsContainer';
+import ProductsTable from '../components/form-components/ProductsTable';
+import {P} from '../components/form-components/StyledComponent';
+import Finalize, {Bottom, FinalizeChild, FinalizeTable, Top} from '../components/form-components/Finalize';
+import useMedia from '../hooks/useMedia';
+import FormRepeatableInput from '../components/form-components/FormRepeatableInput';
+import ProductsMobileOption from '../components/form-components/ProductsMobileOption';
+import Link from '../components/reusable/Link';
+import MegaloNum from '../components/form-components/MegaloNum';
+import useStoredFormValue from '../hooks/useStoredFormValue';
+import NeedHelp from '../components/reusable/NeedHelp';
 
-const ThreePage = ({className, setCurrentTheme, state, actions, formData}) => {
-  const pageName = '3';
+const QualifyFor = ({className, setCurrentTheme, state, actions, formData}) => {
+  const pageName = 'qualify-for';
   const get3Values = useStoredFormValue(pageName);
   
   const [section1Values, section2Values, section3Values, section4Values] = [get3Values(formData.section_1?.section_name), get3Values(formData.section_2?.section_name), get3Values(formData.section_3?.section_name), get3Values(formData.section_4?.section_name)];
@@ -321,7 +321,7 @@ const ThreePage = ({className, setCurrentTheme, state, actions, formData}) => {
   </div>;
 };
 
-export default styled(connect(ThreePage))`
+export default styled(connect(QualifyFor))`
   width: 100%;
   height: 100%;
 

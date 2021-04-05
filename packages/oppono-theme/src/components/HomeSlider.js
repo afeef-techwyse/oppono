@@ -220,7 +220,7 @@ const HomeSlider = ({className, active = false, state, actions, link}) => {
       .fromTo(header.current, {autoAlpha: 0}, {autoAlpha: 1})
       .fromTo(slidesNumbers.current, {autoAlpha: 0, scale: 0}, {autoAlpha: 1, scale: 1}, 'initial-slide')
       .fromTo(headerLinks, {autoAlpha: 0, y: 10}, {autoAlpha: 1, y: 0, stagger: 0.05}, '1')
-      .call(() => setTimeout(() => setSlideFlyingObjectsPlaying([true]), 100), null, 'initial-slide-=1.1')
+      .call(() => setTimeout(() => setSlideFlyingObjectsPlaying([true]), 10), null, 'initial-slide-=1.1')
       .fromTo(nextArrow, {drawSVG: 0}, {drawSVG: '100%', stagger: 0.5}, 'initial-slide+=.5')
       .fromTo(prevArrow, {drawSVG: 0}, {drawSVG: '100%', stagger: 0.5}, 'initial-slide+=.5')
       .fromTo(footerLeft, {autoAlpha: 0, y: 10}, {autoAlpha: 1, y: 0, stagger: 0.1}, 'initial-slide+=1')

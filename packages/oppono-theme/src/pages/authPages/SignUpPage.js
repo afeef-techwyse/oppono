@@ -28,7 +28,7 @@ const SignUpPage = ({className, setCurrentTheme, state, actions, formData}) => {
           <h1 className={'form-headline-1 text-center'}>{formData.section_1?.title}</h1>
           <h2 className={'form-sub-text'}>Already a member? <Link href='/sign-in/'> Sign in</Link></h2>
         </div>
-        <Input type={'text'} name={'first_name'} {...formData.section_1?.first_name_input}/>
+        <Input noScroll type={'text'} name={'first_name'} {...formData.section_1?.first_name_input}/>
         <Input type={'text'} name={'last_name'} {...formData.section_1?.last_name_input}/>
         <Input type={'text'} name={'pref_name'} {...formData.section_1?.preferred_name_input}/>
         <Input pattern={'^[Mm](\\d){8}$'} type={'text'}
@@ -42,7 +42,7 @@ const SignUpPage = ({className, setCurrentTheme, state, actions, formData}) => {
               dangerouslySetInnerHTML={{__html: formData.section_2?.title.replace('{{name}}', section1Values('first_name'))}}
           />
         </div>
-        <Input type={'text'} pattern={'^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$'} name={'email'} {...formData.section_2?.email_input}/>
+        <Input noScroll type={'text'} pattern={'^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$'} name={'email'} {...formData.section_2?.email_input}/>
         <Input type={'text'} name={'phone'} {...formData.section_2?.phone_input}/>
   
         <Input type={'password'} name={'password'} onChange={e => setPassword(e.target.value)} {...formData.section_2?.password_input}/>

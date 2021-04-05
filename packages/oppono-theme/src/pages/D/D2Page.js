@@ -84,7 +84,7 @@ const D2Page = ({className, setCurrentTheme, state, actions, formData}) => {
           <h1 className={'form-headline-1 text-left'}>{formData.section_1?.title}</h1>
           <h2 className={'form-headline-2 primary'}>{formData.section_1?.subtitle}</h2>
         </div>
-        <Input type={'text'} name={'address'} {...formData.section_1?.address_input}/>
+        <Input noScroll type={'text'} name={'address'} {...formData.section_1?.address_input}/>
         <W50>
           <Input type={'text'} name={'city'} value={appraiser?.title} {...formData.section_1?.city_input}/>
           <Input type={'text'} name={'postal_code'} {...formData.section_1?.postal_code_input} onChange={postalCodeOnChange}/>

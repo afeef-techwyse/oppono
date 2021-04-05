@@ -108,7 +108,7 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
           <h1 className={'form-headline-1 text-left'}>{formData.section_1?.title}</h1>
           <h2 className={'form-headline-2 primary'}>{formData.section_1?.subtitle}</h2>
         </div>
-        <Input onChange={e => setStep1Valid(e.target.validity.valid)} className={'big-input'} type={'number'} name={'home_value'} {...formData.section_1?.home_value_input}/>
+        <Input noScroll onChange={e => setStep1Valid(e.target.validity.valid)} className={'big-input'} type={'number'} name={'home_value'} {...formData.section_1?.home_value_input}/>
         <Button
           css={css`opacity: ${step1Valid ? 1 : 0};visibility: ${step1Valid ? 'visible' : 'hidden'};`}
           icon={true} className={'next-step'} label={'Next'}/>

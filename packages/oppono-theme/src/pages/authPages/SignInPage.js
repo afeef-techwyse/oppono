@@ -46,7 +46,7 @@ const SignInPage = ({className, setCurrentTheme, state, actions, formData}) => {
               width: 5,
               alt: 'alt',
             }]}/>
-          <Input type={'text'} pattern={'^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$'} name={'username'} {...formData.section_1?.user_name_input}/>
+          <Input noScroll type={'text'} pattern={'^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$'} name={'username'} {...formData.section_1?.user_name_input}/>
   
           <Input type={'password'} className={'password-field'} name={'password'} {...formData.section_1?.password_input}/>
           <Link className={'forgot-password'} href="">I forgot my password</Link>

@@ -86,7 +86,7 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
           <h1 className={'form-headline-1 text-left'}>{formData.section_1?.title}</h1>
           <h2 className={'form-headline-2 primary'}>{formData.section_1?.subtitle}</h2>
         </div>
-        <Input type={'text'} name={'address'} {...formData.section_1?.address_input}/>
+        <Input noScroll type={'text'} name={'address'} {...formData.section_1?.address_input}/>
         <W50>
           <Input value={appraiser?.title} type={'text'} name={'city'} {...formData.section_1?.city_input}/>
           <Input onChange={postalCodeOnChange} type={'text'} name={'postal_code'} {...formData.section_1?.postal_code_input}/>
@@ -106,7 +106,7 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
         <div className="form-text-wrapper">
           <h1 className={'form-headline-1 text-left'}>{formData.section_2?.title}</h1>
         </div>
-        <Input type={'number'} name={'home_value'} {...formData.section_2?.estimated_value_input}/>
+        <Input noScroll type={'number'} name={'home_value'} {...formData.section_2?.estimated_value_input}/>
   
         <FormConditionalInput name={'have_mortgage_1'} showOn={'1'} checked={'0'} {...formData.section_2?.any_mortgage_yes_no}>
           <>

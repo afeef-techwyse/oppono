@@ -45,7 +45,7 @@ const SpriteSheet = React.forwardRef(({
     }, 10);
     
     return () => {
-      image.current.onload = null;
+      image.current&&(image.current.onload = null);
       clearInterval(checkImageDimensions);
     };
   }, []);

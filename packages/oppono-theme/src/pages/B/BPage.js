@@ -87,7 +87,7 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
           <h1 className={'form-headline-1 text-left'}>{formData.section_1?.title}</h1>
           <h2 className={'form-headline-2 primary'}>{formData.section_1?.subtitle}</h2>
         </div>
-        <Input type={'text'} name={'business_name'} {...formData.section_1?.legal_business_name_input}/>
+        <Input noScroll type={'text'} name={'business_name'} {...formData.section_1?.legal_business_name_input}/>
         <Select
           name={'business_type'}
           {...formData.section_1?.type_of_business_dropdown}/>
