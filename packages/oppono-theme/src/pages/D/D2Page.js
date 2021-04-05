@@ -51,7 +51,7 @@ const D2Page = ({className, setCurrentTheme, state, actions, formData}) => {
   React.useEffect(() => {
     actions.theme.checkUser();
   }, [state.theme.user.logged]);
-  const [appraiser, postalCodeOnChange] = useFlowAppraisers();
+  const [[appraiser], postalCodeOnChange] = useFlowAppraisers();
   const mortgage = ((+section2Values('mortgage_value_1') || 0) + (+section2Values('mortgage_value_2') || 0) + (+section2Values('outstanding_amount_value')) + (+section2Values('sm_amount')) + (+section2Values('fm_amount')) || 0) || 0;
   
   const firstProduct = state.theme.stepResponse.data?.data ? Object.values(state.theme.stepResponse.data?.data)[0].products[0] : {};

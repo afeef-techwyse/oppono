@@ -2,7 +2,6 @@ import React from 'react';
 import {connect, styled} from 'frontity';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-// import map from '../../assets/images/map-bg.png';
 import mapInfo from '../assets/images/map-info-bg.png';
 import Input from '../components/form-components/Input';
 import Button from '../components/form-components/Button';
@@ -100,12 +99,12 @@ const MapPage = ({className, actions, state}) => {
   }, []);
   
   // const windowSize = useWindowSize();
-  const [appraiser, setAppraiser] = React.useState(null);
+  const [appraiser, setAppraiser] = React.useState([{}]);
   const postal_city = React.useRef({postalCode: '', city: ''});
   const appraisersLookup = state.source.get('appraisers-map-lookup');
   const postalCodeGetAppraiser = debounce((postalCode) => {
     if (postalCode.length < 3) {
-      setAppraiser({});
+      setAppraiser([{}]);
       setPostalCodeErrorMessage('no appraisers found for this postal code');
       return;
     }
@@ -113,12 +112,12 @@ const MapPage = ({className, actions, state}) => {
     data.append('postal_code', postalCode.trim().slice(0, 3));
     opponoApi.post('/appraiser-lookup', data)
       .then(response => {
-        if (response.data.length !== 1) {
-          setAppraiser({});
+        if (response.data.length >2) {
+          setAppraiser([{}]);
           setPostalCodeErrorMessage('no appraisers found for this postal code');
         }
         else {
-          setAppraiser(response.data[0]);
+          setAppraiser(response.data);
           setPostalCodeErrorMessage('');
           const {coordinates} = cities.filter(city => city.name === response.data[0]?.title)[0];
           polygonAPIRef.current.setPaths(coordinates);
@@ -133,7 +132,7 @@ const MapPage = ({className, actions, state}) => {
     <div className={classnames(className)}>
       <div className="map" ref={mapRef}/>
       <Header hasSubMenu={false}/>
-      <Container className={classnames({flex: !appraiser?.fields})}>
+      <Container className={classnames({flex: !appraiser[0]?.fields})}>
         <div className="map-wrapper">
           <div className="col-left">
             <div className="text-wrapper">
@@ -162,7 +161,7 @@ const MapPage = ({className, actions, state}) => {
                 noOptionsMessage={() => 'No City Found'}
                 options={sortedCities} name={'city'}
                 label={'Select a city'}
-                value={cities.filter(city => city.name === appraiser?.title)}
+                value={cities.filter(city => city.name === appraiser[0]?.title)}
               />
               <p>OR</p>
               <Input type={'text'} name={'postal_code'} error={postalCodeErrorMessage} onChange={e => {
@@ -173,11 +172,11 @@ const MapPage = ({className, actions, state}) => {
                      label={'Type in your Postal Code'}/>
             </div>
   
-            {appraiser
+            {appraiser[0]
               ? <div className="btn-group">
                 {/*<Button label={'Search'}/>*/}
-                <Button disabled={!appraiser} label={'Find Appraisers in the Area'} onClick={() => {
-                  actions.theme.setAppraiser({...appraiser, ...postal_city.current});
+                <Button disabled={!appraiser[0]} label={'Find Appraisers in the Area'} onClick={() => {
+                  actions.theme.setAppraiser({...appraiser[0], ...postal_city.current});
                   actions.router.set('/dashboard/e');
                 }}/>
     
@@ -185,21 +184,23 @@ const MapPage = ({className, actions, state}) => {
               : null}
           </div>
           <div className="col-right">
-            {appraiser?.fields
-              ? <div className="appraisal-block">
-                <h3>{appraiser.fields.bdm.name}</h3>
-                <p className="text">{appraiser.fields.bdm.phone}</p>
-                <p className="text">{appraiser.fields.bdm.email}</p>
-                <hr/>
-                <p className="text">{appraiser.fields.city}</p>
-                <p className="ltv">{appraiser.fields.ltv}% LTV</p>
-  
-              </div>
+            {appraiser[0]?.fields
+              ? appraiser.map(a=>
+                    a.fields?
+                    <div key={a.ID} className="appraisal-block">
+                  <h3>{a.fields.bdm?.name}</h3>
+                  <p className="text">{a.fields.bdm?.phone}</p>
+                  <p className="text">{a.fields.bdm?.email}</p>
+                  <hr/>
+                  <p className="text">{a.fields.city}</p>
+                  <p className="ltv">{a.fields.ltv}% LTV</p>
+                    </div>
+                :null)
               : null
             }
-            {appraiser?.fields
+            {appraiser[0]?.fields
               ? <Button label={'Find Appraisers in the Area'} onClick={() => {
-                actions.theme.setAppraiser({...appraiser, ...postal_city.current});
+                actions.theme.setAppraiser({...appraiser[0], ...postal_city.current});
                 actions.router.set('/dashboard/e');
               }}/>
               : null}
@@ -354,7 +355,9 @@ export default styled(connect(MapPage))`
         max-width: 45rem;
         @media (max-width: 575.98px) {
           padding: ${size(51)} ${size(38)} ${size(38)};
-
+        }
+        &:first-of-type:not(:only-of-type) {
+          margin-bottom: 5vh;
         }
       }
 

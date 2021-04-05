@@ -69,7 +69,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
   React.useEffect(() => {
     actions.theme.checkUser();
   }, [state.theme.user.logged]);
-  const [appraiser, postalCodeOnChange] = useFlowAppraisers();
+  const [[appraiser], postalCodeOnChange] = useFlowAppraisers();
   const [productsTable, productsFilter] = useProductsTable(state.theme.stepResponse);
   const mortgage = ((+section1Values('home_value')) - (+section5Values('down_payment'))) || 0;
   const firstProduct = state.theme.stepResponse.data?.data ? Object.values(state.theme.stepResponse.data?.data)[0].products[0] : {};

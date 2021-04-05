@@ -71,7 +71,7 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
   React.useEffect(() => {
     actions.theme.checkUser();
   }, [state.theme.user.logged]);
-  const [appraiser, postalCodeOnChange] = useFlowAppraisers();
+  const [[appraiser], postalCodeOnChange] = useFlowAppraisers();
   
   
   const [productsTable, productsFilter] = useProductsTable(state.theme.stepResponse);

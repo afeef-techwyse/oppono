@@ -55,7 +55,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
   React.useEffect(() => {
     actions.theme.checkUser();
   }, [state.theme.user.logged]);
-  const [appraiser, postalCodeOnChange] = useFlowAppraisers();
+  const [[appraiser], postalCodeOnChange] = useFlowAppraisers();
   
   const mortgage = ((+section2Values('purchase_price')) - (+section2Values('down_payment'))) || 0;
     const  refNumber = React.useRef('');

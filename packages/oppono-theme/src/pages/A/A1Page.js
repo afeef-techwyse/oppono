@@ -59,8 +59,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
   React.useEffect(() => {
     actions.theme.checkUser();
   }, [state.theme.user.logged]);
-  const [appraiser, postalCodeOnChange] = useFlowAppraisers();
-  
+  const [[appraiser], postalCodeOnChange] = useFlowAppraisers();
   const selectedProduct = React.useRef('');
   const maxMortgage = React.useRef('');
   

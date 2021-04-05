@@ -53,7 +53,7 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
   React.useEffect(() => {
     actions.theme.checkUser();
   }, [state.theme.user.logged]);
-  const [appraiser, postalCodeOnChange] = useFlowAppraisers();
+  const [[appraiser], postalCodeOnChange] = useFlowAppraisers();
   const [businessAppraiser, businessPostalCodeOnChange] = useFlowAppraisers();
   const getAppraiser = () => section2Values('business_address_same_as_property') === '1' ? businessAppraiser : appraiser;
   const mortgage = ((+section3Values('purchase_price')) - (+section3Values('down_payment'))) || 0;
