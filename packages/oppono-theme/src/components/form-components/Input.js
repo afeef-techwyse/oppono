@@ -140,13 +140,16 @@ const Input = React.forwardRef(({
           }}
           onChange={(event) => {
             event.persist();
-            console.log(/^\d+$/.test(event.target.value));
-            // if (!/^\d+$/.test(event.target.value)) {
-            //   setErrorMessage('numbers only is allowed');
-            //   setVisited(true);
-            //   setInvalid(true);
-            //   return;
-            // }
+            console.log(/^\d*$/.test(event.target.value));
+            if (type==='number' && !/^\d*$/.test(event.target.value)) {
+              setErrorMessage('numbers only is allowed');
+              const selection = inputRef.current.selectionStart-1;
+              requestAnimationFrame(() => inputRef.current.setSelectionRange(selection, selection));
+              event.target.value = value??'';
+              setVisited(true);
+              setInvalid(true);
+              return;
+            }
             visited && validateInput();
             setValue(event.target.value);
             onChange?.(event);

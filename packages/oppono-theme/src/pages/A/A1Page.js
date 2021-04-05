@@ -232,7 +232,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
               <P.Border>Your property value is ${numberWithCommas(+section2Values('home_value'))}</P.Border>
             </FinalizeChild>
             <FinalizeChild order={3} className={'wide m-pr-40'}>
-              <P.Border>Your down payment is ${numberWithCommas(+section2Values('home_value')) - mortgage}</P.Border>
+              <P.Border>Your down payment is ${numberWithCommas(+section2Values('home_value') - mortgage)}</P.Border>
               <P.Border>Your LTV is {(mortgage / +section2Values('home_value') * 100).toFixed(1)}%</P.Border>
             </FinalizeChild>
           </Bottom>
