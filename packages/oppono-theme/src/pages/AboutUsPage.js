@@ -18,7 +18,7 @@ const ProductFeaturesContainer = styled.div`
   }
 `;
 const AboutUsPage = ({className, state, actions}) => {
-  const data = state.source.get('/about-us/');
+  const data = state.source.get('/what-we-do/');
   const page = data.isReady && !data.isError ? state.source[data.type][data.id].acf : {};
   
   React.useEffect(() => {
