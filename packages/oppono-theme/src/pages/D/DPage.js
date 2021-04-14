@@ -85,7 +85,7 @@ const DPage = ({className, setCurrentTheme, state, actions}) => {
                   <tbody>
                   <tr className={'head'}>
                     <td scope={'row'} className={'dark'}>Fixed Rate</td>
-                    {products.map(({ID, fields: {rate}}) => <td key={ID} className={'details'} data-label="Fixed Rate">{(rate * 1.25).toFixed(2)}%</td>)}
+                    {products.map(({ID, fields: {rate}}) => <td key={ID} className={'details'} data-label="Fixed Rate">{(rate * 1.025).toFixed(2)}%</td>)}
                   </tr>
                   <tr className={'head'}>
                     <td scope={'row'} className={'dark'}>Lender Fee</td>
@@ -129,7 +129,7 @@ const DPage = ({className, setCurrentTheme, state, actions}) => {
                           <div className="mortgage-body">
                             <div className={'m-row m-head'}>
                               <p>Fixed Rate</p>
-                              <p>{(rate * 1.25).toFixed(2)}%</p>
+                              <p>{(rate * 1.025).toFixed(2)}%</p>
                             </div>
                             <div className={'m-row m-head'}>
                               <p>Lender Fee</p>
