@@ -169,7 +169,7 @@ const Header = React.forwardRef(({className, hasSubMenu = true, hasProgress = fa
             <Link onClick={() => menuHandler(false)} className={'primary'} href={'/products/'}>Products & Rates</Link>
             <Link onClick={() => menuHandler(false)} className={'primary'} href={'/map/'}>Lending Areas</Link>
             <Link onClick={() => menuHandler(false)} className={'primary'} href={'/sign-in/'}>Member Login</Link>
-            <Link onClick={() => menuHandler(false)} className={'primary'} href="/what-we-do/">About Us</Link>
+            <Link onClick={() => menuHandler(false)} className={'primary'} href="/what-we-do/">What We Do</Link>
             <Link onClick={() => menuHandler(false)} className={'primary'} href={'/get-in-touch/'}>Get in Touch</Link>
           </div>
         </Container>
