@@ -181,13 +181,13 @@ const D2Page = ({className, setCurrentTheme, state, actions, formData}) => {
           <Top>
             {media !== 'mobile'
               ? <FinalizeChild>
-                <P.Num>{(firstProduct.fields?.rate * 1.025).toFixed(2)}%</P.Num>
-                <P.Dark>*Fixed Rate</P.Dark>
+                <P.Num>{(firstProduct.fields?.rate).toFixed(2)}%</P.Num>
+                <P.Dark>*Variable Rate</P.Dark>
               </FinalizeChild>
               : <FinalizeChild className={'full'} order={1}>
-                <P.Dark>*Fixed Rate</P.Dark>
+                <P.Dark>*Variable Rate</P.Dark>
                 <P.Dark>*Payment interest based on balance</P.Dark>
-                <P.Num>{(firstProduct.fields?.rate * 1.025).toFixed(2)}%</P.Num>
+                <P.Num>{(firstProduct.fields?.rate).toFixed(2)}%</P.Num>
               </FinalizeChild>}
             
             <FinalizeChild order={2}>

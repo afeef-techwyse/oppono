@@ -138,14 +138,15 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
         {state.theme.stepResponse.data?.data
           ? media !== 'mobile'
             ? <FormFilter className={'form-wide-container'} filters={productsFilter}>
-              {Object.entries(state.theme.stepResponse.data?.data).map(([type, {products}], index) =>
-                <ProductsTable products={productsTable} key={type} dataFilter={type}>
+              {Object.entries(state.theme.stepResponse.data?.data).map(([type, {products}], index) => {
+                const hasVariable = type === 'first' || type === 'second';
+                return <ProductsTable products={productsTable} key={type} dataFilter={type}>
                   <thead>
                   <tr>
                     <th scope={'col'}>
                       <p className={'circle'}>{index + 1}</p>
                       <p>{productTypeToFullName(type)}</p>
-                      <p className={'dark'}>Variable rates</p>
+                      <p className={'dark'}>{hasVariable ? 'Variable' : 'Fixed'} rates</p>
                       <div className="table-arrows">
                     <span className={'prev disabled'}>
                       <svg viewBox="0 0 49 16">
@@ -168,115 +169,130 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
                     </th>
                     {
                       products.map(({ID, fields: {rate, maximum_ltv}}) =>
-                        <th scope={'col'} key={ID}>
-                          <p>${numberWithCommas(+section1Values('home_value') * maximum_ltv / 100)} max</p>
-                          <p>${numberWithCommas(monthlyPayments(+section1Values('home_value') * maximum_ltv / 100, rate / 100))} / month</p>
-                          <p className={'number'}>{rate}%</p>
-                          <Button onClick={() => actions.theme.setValidateAndNextCallback(new Date().getTime())} className={'small next-step'} label={'I want this deal'}/>
-                        </th>,
+                          <th scope={'col'} key={ID}>
+                            <p>${numberWithCommas(+section1Values('home_value') * maximum_ltv / 100)} max</p>
+                            <p>${numberWithCommas(monthlyPayments(+section1Values('home_value') * maximum_ltv / 100, rate / 100))} /
+                              month</p>
+                            <p className={'number'}>{rate}%</p>
+                            <Button onClick={() => actions.theme.setValidateAndNextCallback(new Date().getTime())} className={'small next-step'} label={'I want this deal'}/>
+                          </th>,
                       )
                     }
                   </tr>
                   </thead>
                   <tbody>
-                  <tr className={'head'}>
+                  {!hasVariable?null:<tr className={'head'}>
                     <td scope={'row'} className={'dark'}>Fixed Rate</td>
-                    {products.map(({ID, fields: {rate}}) => <td key={ID} className={'details'} data-label="Fixed Rate">{(rate * 1.025).toFixed(2)}%</td>)}
-                  </tr>
+                    {products.map(({ID, fields: {rate}}) =>
+                        <td key={ID} className={'details'} data-label="Fixed Rate">{(rate * 1.025).toFixed(2)}%</td>)}
+                  </tr>}
                   <tr className={'head'}>
                     <td scope={'row'} className={'dark'}>Lender Fee</td>
-                    {products.map(({ID, fields: {fee}}) => <td key={ID} className={'details'} data-label="Lender Fee">{fee}%</td>)}
+                    {products.map(({ID, fields: {fee}}) =>
+                        <td key={ID} className={'details'} data-label="Lender Fee">{fee}%</td>)}
                   </tr>
                   <tr className={'head'}>
                     <td scope={'row'} className={'dark'}>LTV</td>
-                    {products.map(({ID, fields: {maximum_ltv}}) => <td key={ID} className={'details'} data-label="LTV">{maximum_ltv}%</td>)}
+                    {products.map(({ID, fields: {maximum_ltv}}) =>
+                        <td key={ID} className={'details'} data-label="LTV">{maximum_ltv}%</td>)}
                   </tr>
                   <tr className={'head last-head'}>
                     <td scope={'row'} className={'dark'}>Credit Score</td>
-                    {products.map(({ID, fields: {beacon_score}}) => <td key={ID} className={'details'} data-label="beacon_score">{beacon_score}</td>)}
+                    {products.map(({ID, fields: {beacon_score}}) =>
+                        <td key={ID} className={'details'} data-label="beacon_score">{beacon_score}</td>)}
                   </tr>
-                  
+    
                   {
-                    productsTable[type] && Object.entries(productsTable[type]).map(([id, {name, specificationProducts}]) =>
-                      <tr key={id}>
-                        <td scope={'row'}>{name}</td>
-                        {products.map(({ID}) => specificationProducts.indexOf(ID) >= 0 ? <td key={ID}><CheckMark/></td> : <td key={ID}/>)}
-                      </tr>)
+                    productsTable[type] && Object.entries(productsTable[type]).map(([id, {
+                      name,
+                      specificationProducts
+                    }]) =>
+                        <tr key={id}>
+                          <td scope={'row'}>{name}</td>
+                          {products.map(({ID}) => specificationProducts.indexOf(ID) >= 0 ?
+                              <td key={ID}><CheckMark/></td> : <td key={ID}/>)}
+                        </tr>)
                   }
                   </tbody>
-                </ProductsTable>)}
+                </ProductsTable>;
+              })}
             </FormFilter>
             : <div className="mortgage-options-mobile">
               <FormFilter filters={productsFilter}>
-                {Object.entries(state.theme.stepResponse.data?.data).map(([type, {products}, index]) =>
-                  <div key={type} data-filter={type}>
-                    {
-                      products.map(({ID, fields: {rate, fee, maximum_ltv, beacon_score, specifications}}, productIndex) =>
-                        <ProductsMobileOption key={ID}>
-                          <div className="mortgage-title">
-                            <p className={'circle'}>{productIndex + 1}</p>
-                            <p>{productTypeToFullName(type)}</p>
-                            <p className={'dark'}>Variable rates</p>
-                          </div>
-                          <div className="mortgage-head">
-                            <p className={'number'}>{rate}%</p>
-                            <p>${numberWithCommas(monthlyPayments(mortgage, rate / 100))} / month</p>
-                            <p>${numberWithCommas(+section1Values('home_value') * maximum_ltv / 100)} max</p>
-                            <Button onClick={() => actions.theme.setValidateAndNextCallback(new Date().getTime())} className={'small next-step'} label={'I want this deal'}/>
-                          </div>
-                          <div className="mortgage-body">
-                            <div className={'m-row m-head'}>
-                              <p>Fixed Rate</p>
-                              <p>{(rate * 1.025).toFixed(2)}%</p>
-                            </div>
-                            <div className={'m-row m-head'}>
-                              <p>Lender Fee</p>
-                              <p>{fee}%</p>
-                            </div>
-                            <div className={'m-row m-head  m-head'}>
-                              <p>LTV</p>
-                              <p>{maximum_ltv}%</p>
-                            </div>
-                            <div className={'m-row m-head  m-head last-head'}>
-                              <p>Credit Score</p>
-                              <p>{beacon_score[0].split('-')[0]+(beacon_score.length>1?'+':'')}</p>
-                            </div>
-                            {
-                              specifications.slice(0, 4).map(({term_id, name}) =>
-                                <div key={term_id} className={'m-row'}>
-                                  <p>{name}</p>
-                                  <p><CheckMark/></p>
-                                </div>,
-                              )
-                            }
-                            {
-                              specifications.length > 4
-                                ? <>
-                                  <div className={'show-all-specs'}>
-                                    Show all specifications
-                                    <svg viewBox="0 0 8 4">
-                                      <path fill="none" stroke="#d2f5e9" strokeMiterlimit="20" d="M1 .5v0l3 3c1.172-1.17 1.828-1.83 3-3"/>
-                                    </svg>
+                {Object.entries(state.theme.stepResponse.data?.data).map(([type, {products}, index]) => {
+                  const hasVariable = type === 'first' || type === 'second';
+                  return <div key={type} data-filter={type}>
+                        {
+                          products.map(({
+                                          ID,
+                                          fields: {rate, fee, maximum_ltv, beacon_score, specifications}
+                                        }, productIndex) =>
+                              <ProductsMobileOption key={ID}>
+                                <div className="mortgage-title">
+                                  <p className={'circle'}>{productIndex + 1}</p>
+                                  <p>{productTypeToFullName(type)}</p>
+                                  <p className={'dark'}>{hasVariable ? 'Variable' : 'Fixed'} rates</p>
+                                </div>
+                                <div className="mortgage-head">
+                                  <p className={'number'}>{rate}%</p>
+                                  <p>${numberWithCommas(monthlyPayments(mortgage, rate / 100))} / month</p>
+                                  <p>${numberWithCommas(+section1Values('home_value') * maximum_ltv / 100)} max</p>
+                                  <Button onClick={() => actions.theme.setValidateAndNextCallback(new Date().getTime())} className={'small next-step'} label={'I want this deal'}/>
+                                </div>
+                                <div className="mortgage-body">
+                                  {!hasVariable ? null : <div className={'m-row m-head'}>
+                                    <p>Fixed Rate</p>
+                                    <p>{(rate * 1.025).toFixed(2)}%</p>
+                                  </div>}
+                                  <div className={'m-row m-head'}>
+                                    <p>Lender Fee</p>
+                                    <p>{fee}%</p>
                                   </div>
-                                  <div className="remaining-specs">
-                                    {
-                                      specifications.slice(4).map(({term_id, name}) =>
+                                  <div className={'m-row m-head  m-head'}>
+                                    <p>LTV</p>
+                                    <p>{maximum_ltv}%</p>
+                                  </div>
+                                  <div className={'m-row m-head  m-head last-head'}>
+                                    <p>Credit Score</p>
+                                    <p>{beacon_score[0].split('-')[0] + (beacon_score.length > 1 ? '+' : '')}</p>
+                                  </div>
+                                  {
+                                    specifications.slice(0, 4).map(({term_id, name}) =>
                                         <div key={term_id} className={'m-row'}>
                                           <p>{name}</p>
                                           <p><CheckMark/></p>
                                         </div>,
-                                      )
-                                    }
-                                  </div>
-                                </>
-                                : null
-                            }
-                          
-                          </div>
-                        </ProductsMobileOption>,
-                      )
-                    }
-                  </div>,
+                                    )
+                                  }
+                                  {
+                                    specifications.length > 4
+                                        ? <>
+                                          <div className={'show-all-specs'}>
+                                            Show all specifications
+                                            <svg viewBox="0 0 8 4">
+                                              <path fill="none" stroke="#d2f5e9" strokeMiterlimit="20" d="M1 .5v0l3 3c1.172-1.17 1.828-1.83 3-3"/>
+                                            </svg>
+                                          </div>
+                                          <div className="remaining-specs">
+                                            {
+                                              specifications.slice(4).map(({term_id, name}) =>
+                                                  <div key={term_id} className={'m-row'}>
+                                                    <p>{name}</p>
+                                                    <p><CheckMark/></p>
+                                                  </div>,
+                                              )
+                                            }
+                                          </div>
+                                        </>
+                                        : null
+                                  }
+                
+                                </div>
+                              </ProductsMobileOption>,
+                          )
+                        }
+                      </div>;
+                    },
                 )}
               </FormFilter>
             </div>
@@ -448,9 +464,9 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
               </FinalizeChild>}
             
             <FinalizeChild order={1}>
-              <P.Dark>*Variable Rate</P.Dark>
+              <P.Dark>*Fixed Rate</P.Dark>
               <P.Dark>*Payment interest based on balance</P.Dark>
-              <P.Num>{firstProduct.fields?.rate}%</P.Num>
+              <P.Num>{(firstProduct.fields?.rate).toFixed(2)}%</P.Num>
               <Button label={'I’m good to go'} className={'next-step'}/>
             </FinalizeChild>
             <FinalizeChild order={2} className={'wide'}>

@@ -323,9 +323,9 @@ const D3Page = ({state, setCurrentTheme, actions, className, formData}) => {
         <LastStep>
           <img src={formData.section_7?.image.url} alt={formData.section_7?.image.alt}/>
           <div style={{flexBasis: '60%'}} className="text">
-            <h1 className={'form-headline-1 text-left'}>{formData.section_6?.title}</h1>
-            <p className={'form-headline-3 primary'}>{formData.section_6?.subtitle}</p>
-            <Wysiwyg dangerouslySetInnerHTML={{__html: formData.section_6?.steps.replace('{{number}}', refNumber.current)}}/>
+            <h1 className={'form-headline-1 text-left'}>{formData.section_7?.title}</h1>
+            <p className={'form-headline-3 primary'}>{formData.section_7?.subtitle}</p>
+            <Wysiwyg dangerouslySetInnerHTML={{__html: formData.section_7?.steps.replace('{{number}}', refNumber.current)}}/>
             <div className="btn-group">
               <Link className={'wide bordered'} href={'https://expert.filogix.com/expert/view/SignOn'}>
                 <Button className={'wide filled'} label={'Connect to Filogix'}/>
