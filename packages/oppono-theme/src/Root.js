@@ -89,7 +89,7 @@ const Root = ({state}) => {
           <div className={'loading-page'} when={data.isFetching}/>
   
           <AboutUsPage when={state.router.link.startsWith('/what-we-do/')}/>
-          <ContactPage when={/mail/.test(page.slug)}/>
+          <ContactPage when={/get-in-touch/.test(page.slug)}/>
           <HomeSlider
             link={data.link}
             active={!data.isHome || isDeveloping || initialDone}
