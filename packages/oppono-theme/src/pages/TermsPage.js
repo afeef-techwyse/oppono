@@ -16,66 +16,40 @@ import classnames from 'classnames';
 
 
 const TermsPage = ({className, link, libraries, actions, state}) => {
-    const data = state.source.get(link);
-    const post = state.source[data.type][data.id];
-
-    const Html2React = libraries.html2react.Component;
-    React.useEffect(() => {
-        actions.theme.setActiveTheme('gray-theme');
-    }, []);
-    return (
-        <div className={classnames(className)}>
-            <Header hasSubMenu={false}/>
-            <Container>
-                {/*<h1 className={'primary'}>Terms And Conditions</h1>*/}
-                <Html2React html={post.content.rendered}/>
-            </Container>
-            <Footer/>
-        </div>
-    );
+  const data = state.source.get(link);
+  const post = state.source[data.type][data.id];
+  
+  const Html2React = libraries.html2react.Component;
+  React.useEffect(() => {
+    actions.theme.setActiveTheme('gray-theme');
+  }, []);
+  return (
+      <div className={classnames(className)}>
+        <Header hasSubMenu={false}/>
+        <Container className={'terms-page-wrapper'}>
+          {/*<h1 className={'primary'}>Terms And Conditions</h1>*/}
+          <Html2React html={post.content.rendered}/>
+        </Container>
+        <Footer/>
+      </div>
+  );
 };
 
 export default styled(connect(TermsPage))`
   padding-top: ${size(120)};
   padding-bottom: ${size(120)};
-
+  
   min-height: 100vh;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-
+  
   ${Header}, ${Footer} {
     background: transparent;
   }
-
-  h1 {
-    font-size: ${size(50)};
-    text-align: center;
-  }
-
-  h2 {
-    font-size: ${size(42)};
-  }
-
-  h3 {
-    font-size: ${size(35)};
-  }
-
-  h4 {
-    font-size: ${size(30)};
-  }
-
-  h5 {
-    font-size: ${size(25)};
-  }
-
-  h6 {
-    font-size: ${size(18)};
-  }
-  b {
-    font-weight: 500;
-  }
+  
+  
   .container {
     max-width: 75%;
     margin: 0 auto;
@@ -84,18 +58,49 @@ export default styled(connect(TermsPage))`
       max-width: 97%;
     }
   }
-
-  p, li {
-    font-size: 2rem;
-    font-weight: 300;
-    font-style: normal;
-    text-transform: capitalize;
-    color: rgb(191, 182, 180) !important;
-    margin-top: 2rem;
+  
+  .terms-page-wrapper {
+    h1 {
+      font-size: ${size(50)};
+      text-align: center;
+    }
+    
+    h2 {
+      font-size: ${size(42)};
+    }
+    
+    h3 {
+      font-size: ${size(35)};
+    }
+    
+    h4 {
+      font-size: ${size(30)};
+    }
+    
+    h5 {
+      font-size: ${size(25)};
+    }
+    
+    h6 {
+      font-size: ${size(18)};
+    }
+    
+    b {
+      font-weight: 500;
+    }
+    
+    p, li {
+      font-size: 2rem;
+      font-weight: 300;
+      font-style: normal;
+      text-transform: capitalize;
+      color: rgb(191, 182, 180) !important;
+      margin-top: 2rem;
+    }
+    
+    a {
+      color: #0e9564;
+      text-decoration: underline;
+    }
   }
-  a {
-    color: #0e9564;
-    text-decoration: underline;
-  }
-
 `;

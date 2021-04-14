@@ -27,7 +27,7 @@ font-size: ${size(40)};
 font-weight: 400;
 line-height: ${size(48)};
 text-align: left;
-padding: 0 ${size(115)};
+padding: 0 ${size(55)};
 @media(max-width:991.98px){
   font-size: ${size(28)};
   line-height: ${size(34)};
