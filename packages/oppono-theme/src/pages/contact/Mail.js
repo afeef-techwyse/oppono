@@ -93,15 +93,16 @@ const Mail = ({className, state, actions}) => {
           {/*<img className={'contact-obj'} src={contact_obj} alt={'Contact Icon'}/>*/}
           <div className="contact-row">
             <div className="col-4">
-              <Input type={'text'} {...pageData.section_1?.name_input}/>
-              <Input type={'text'} {...pageData.section_1?.email_input}/>
-              <Input type={'text'} {...pageData.section_1?.phone_input}/>
-              <Select
-                  name={'discuss'}
-                  {...pageData.section_1?.discuss_dropdown}/>
+              <Input className={'primary-input'} type={'text'} {...pageData.section_1?.name_input}/>
+              <Input className={'primary-input'} type={'text'} {...pageData.section_1?.email_input}/>
+              <Input className={'primary-input'} type={'text'} {...pageData.section_1?.phone_input}/>
+             
             </div>
             <div className="col-auto">
-              <TextArea label={'Questions?'}/>
+              <Select className={'primary-select'}
+                  name={'discuss'}
+                  {...pageData.section_1?.discuss_dropdown}/>
+              <TextArea className={'primary-input'} label={'Questions?'}/>
             </div>
           </div>
           <Button className={'wide'} label={'I’m ready to send'}/>
@@ -126,7 +127,7 @@ export default styled(connect(Mail))`
   //
   .contact-row {
     display: flex;
-    align-items: flex-end;
+    align-items: flex-start;
     @media (max-width: 991.98px) {
       flex-direction: column;
       margin-top: ${size(25)};
@@ -135,8 +136,6 @@ export default styled(connect(Mail))`
     @media (max-width: 575.98px) {
       max-width: ${size(400)};
       //margin: 0 auto;
-    }
-    @media (max-width: 575.98px) {
       margin-top: 0;
     }
     
@@ -162,6 +161,9 @@ export default styled(connect(Mail))`
   }
   
   ${Input} {
+    //&:first-of-type{
+    //  margin-top: 0;
+    //}
     .normal-input {
       font-size: ${size(28)};
       height: ${size(36)};
@@ -197,7 +199,6 @@ export default styled(connect(Mail))`
   
   .contact-info-wrapper {
     position: relative;
-    bottom: -${size(100)};
     left: ${size(50)};
     @media (max-width: 991.98px) {
       bottom: 0;
