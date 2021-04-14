@@ -195,7 +195,7 @@ const D2Page = ({className, setCurrentTheme, state, actions, formData}) => {
               <P.Dark>*mortgage amount</P.Dark>
             </FinalizeChild>
             <FinalizeChild className={'wide'} order={3}>
-              <P.Cost>${numberWithCommas(monthlyPayments(mortgage, firstProduct.fields?.rate / 100))}</P.Cost>
+              <P.Cost>${numberWithCommas(monthlyPayments(mortgage, firstProduct.fields?.rate * 1.025 / 100))}</P.Cost>
               <P.Dark>*Monthly mortgage payment</P.Dark>
             </FinalizeChild>
           </Top>
