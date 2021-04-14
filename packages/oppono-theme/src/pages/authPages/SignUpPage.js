@@ -72,7 +72,7 @@ const SignUpPage = ({className, setCurrentTheme, state, actions, formData}) => {
           <img src={last_step} alt="flying obj"/>
           <div style={{flexBasis: '45%'}} className="text tablet-center">
             <h1 className={'form-headline-1 primary'}>An email has been sent to your inbox, click on the link to activate your account.</h1>
-            <p className={'form-headline-3 primary'}>Didn’t receive any email? Check your spams or <Link className={'white-color'} href={'/contacts'}>Contact Us</Link>.</p>
+            <p className={'form-headline-3 primary'}>Didn’t receive any email? Check your spams or <Link className={'white-color'} href={'/mail'}>Contact Us</Link>.</p>
             <div className="btn-group">
               <Button className={'wide bordered'} label={'Back to the dashboard'}
                       onClick={() => {

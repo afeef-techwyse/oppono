@@ -65,7 +65,7 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData}) => {
         <Input noScroll className={'big-input'} type={'number'} name={'home_value'} {...formData.section_1?.home_value_input}/>
         <Button icon={true} className={'next-step wide'} label={'Next'}/>
   
-        <NeedHelp lineOne={'Need help?'} lineTwo={'Contact us'} link={'/contacts/'}/>
+        <NeedHelp lineOne={'Need help?'} lineTwo={'Contact us'} link={'/get-in-touch/'}/>
 
       </FormStep>
       <FormStep pageName={pageName} activeTheme={formData.section_2?.section_theme} stepName={formData.section_2?.section_name}>

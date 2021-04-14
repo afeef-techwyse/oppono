@@ -18,7 +18,7 @@ const ContactPage = ({className, state, actions}) => {
       <Header/>
       <Switch>
         {/*<Chat when={state.router.link.startsWith('/contact/chat/')}/>*/}
-        <Mail when={state.router.link.startsWith('/mail/')}/>
+        <Mail when={state.router.link.startsWith('/get-in-touch/')}/>
       </Switch>
       <Footer/>
     </div>;

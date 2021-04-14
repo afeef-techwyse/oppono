@@ -30,7 +30,7 @@ const DPage = ({className, setCurrentTheme, state, actions}) => {
   }, []);
   
   const [productsTable, productsFilter] = useProductsTable(state.theme.stepResponse);
-  
+  console.log(productsTable);
   return <div className={className}>
     <Form setCurrentTheme={setCurrentTheme}>
       <FormStep activeTheme={'gray-theme'} stepName={'d'}>
@@ -45,14 +45,15 @@ const DPage = ({className, setCurrentTheme, state, actions}) => {
                   <Button className={'small next-step'} label={'See if I qualify'}/>
                 </Link>
               </div>
-              {Object.entries(state.theme.stepResponse.data?.data).map(([type, {products}], index) =>
-                <ProductsTable key={type} dataFilter={type} products={productsTable}>
+              {Object.entries(state.theme.stepResponse.data?.data).map(([type, {products}], index) => {
+                const hasVariable = type === 'first' || type === 'second';
+                return <ProductsTable key={type} dataFilter={type} products={productsTable}>
                   <thead>
                   <tr>
                     <th scope={'col'}>
                       <p className={'circle'}>{index + 1}</p>
                       <p>{productTypeToFullName(type)}</p>
-                      <p className={'dark'}>Variable rates</p>
+                      <p className={'dark'}>{hasVariable?'Variable':'Fixed'} rates</p>
                       <div className="table-arrows">
                     <span className={'prev disabled'}>
                       <svg viewBox="0 0 49 16">
@@ -75,110 +76,126 @@ const DPage = ({className, setCurrentTheme, state, actions}) => {
                     </th>
                     {
                       products.map(({ID, title, fields: {rate}}) =>
-                        <th scope={'col'} key={ID}>
-                          <p className={'number'}>{rate}%</p>
-                        </th>,
+                          <th scope={'col'} key={ID}>
+                            <p className={'number'}>{(rate * (hasVariable?1:1.025)).toFixed(2)}%</p>
+                          </th>,
                       )
                     }
                   </tr>
                   </thead>
                   <tbody>
-                  <tr className={'head'}>
+                  {!hasVariable?null:<tr className={'head'}>
                     <td scope={'row'} className={'dark'}>Fixed Rate</td>
-                    {products.map(({ID, fields: {rate}}) => <td key={ID} className={'details'} data-label="Fixed Rate">{(rate * 1.25).toFixed(2)}%</td>)}
-                  </tr>
+                    {products.map(({ID, fields: {rate}}) =>
+                        <td key={ID} className={'details'} data-label="Fixed Rate">{(rate * 1.025).toFixed(2)}%</td>)}
+                  </tr>}
                   <tr className={'head'}>
                     <td scope={'row'} className={'dark'}>Lender Fee</td>
-                    {products.map(({ID, fields: {fee}}) => <td key={ID} className={'details'} data-label="Lender Fee">{fee}%</td>)}
+                    {products.map(({ID, fields: {fee}}) =>
+                        <td key={ID} className={'details'} data-label="Lender Fee">{fee}%</td>)}
                   </tr>
                   <tr className={'head'}>
                     <td scope={'row'} className={'dark'}>LTV</td>
-                    {products.map(({ID, fields: {maximum_ltv}}) => <td key={ID} className={'details'} data-label="LTV">{maximum_ltv}%</td>)}
+                    {products.map(({ID, fields: {maximum_ltv}}) =>
+                        <td key={ID} className={'details'} data-label="LTV">{maximum_ltv}%</td>)}
                   </tr>
                   <tr className={'head last-head'}>
                     <td scope={'row'} className={'dark'}>Credit Score</td>
-                    {products.map(({ID, fields: {beacon_score}}) => <td key={ID} className={'details'} data-label="beacon_score">{beacon_score[0].split('-')[0]+(beacon_score.length>1?'+':'')}</td>)}
+                    {products.map(({ID, fields: {beacon_score}}) =>
+                        <td key={ID} className={'details'} data-label="beacon_score">{beacon_score[0].split('-')[0] + (beacon_score.length > 1 ? '+' : '')}</td>)}
                   </tr>
-                  
+    
                   {
-                    productsTable[type] && Object.entries(productsTable[type]).map(([id, {name, specificationProducts}]) =>
-                      <tr key={id}>
-                        <td scope={'row'}>{name}</td>
-                        {products.map(({ID}) => specificationProducts.indexOf(ID) >= 0 ? <td key={ID}><CheckMark/></td> : <td key={ID}/>)}
-                      </tr>)
+                    productsTable[type] && Object.entries(productsTable[type]).map(([id, {
+                      name,
+                      specificationProducts
+                    }]) =>
+                        <tr key={id}>
+                          <td scope={'row'}>{name}</td>
+                          {products.map(({ID}) => specificationProducts.indexOf(ID) >= 0 ?
+                              <td key={ID}><CheckMark/></td> : <td key={ID}/>)}
+                        </tr>)
                   }
                   </tbody>
-                </ProductsTable>)}
+                </ProductsTable>;
+              })}
             </FormFilter>
             : <div className="mortgage-options-mobile">
               <FormFilter filters={productsFilter}>
                 <div className={'want-deal'} data-filter={'*'}><Link href={'/qualifyfor/'}><Button className={'small next-step'} label={'See if I qualify'}/></Link></div>
-                {Object.entries(state.theme.stepResponse.data?.data).map(([type, {products}, index]) =>
-                  <div key={type} data-filter={type}>
-                    {
-                      products.map(({ID, title, fields: {rate, fee, maximum_ltv, beacon_score, specifications}}, productIndex) =>
-                        <ProductsMobileOption key={ID}>
-                          <div className="mortgage-title">
-                            <p className={'circle'}>{productIndex + 1}</p>
-                            <p>{productTypeToFullName(type)}</p>
-                            <p className={'dark'}>Variable rates</p>
-                          </div>
-                          <div className="mortgage-head">
-                            <p className={'number'}>{rate}%</p>
-                          </div>
-                          <div className="mortgage-body">
-                            <div className={'m-row m-head'}>
-                              <p>Fixed Rate</p>
-                              <p>{(rate * 1.25).toFixed(2)}%</p>
-                            </div>
-                            <div className={'m-row m-head'}>
-                              <p>Lender Fee</p>
-                              <p>{fee}%</p>
-                            </div>
-                            <div className={'m-row m-head  m-head'}>
-                              <p>LTV</p>
-                              <p>{maximum_ltv}%</p>
-                            </div>
-                            <div className={'m-row m-head  m-head last-head'}>
-                              <p>Credit Score</p>
-                              <p>{beacon_score[0].split('-')[0]+(beacon_score.length>1?'+':'')}</p>
-                            </div>
-                            {
-                              specifications.slice(0, 4).map(({term_id, name}) =>
-                                <div key={term_id} className={'m-row'}>
-                                  <p>{name}</p>
-                                  <p><CheckMark/></p>
-                                </div>,
-                              )
-                            }
-                            {
-                              specifications.length > 4
-                                ? <>
-                                  <div className={'show-all-specs'}>
-                                    Show all specifications
-                                    <svg viewBox="0 0 8 4">
-                                      <path fill="none" stroke="#d2f5e9" strokeMiterlimit="20" d="M1 .5v0l3 3c1.172-1.17 1.828-1.83 3-3"/>
-                                    </svg>
+                {Object.entries(state.theme.stepResponse.data?.data).map(([type, {products}, index]) => {
+                  const hasVariable = type === 'first' || type === 'second';
+  
+                  return <div key={type} data-filter={type}>
+                        {
+                          products.map(({
+                                          ID,
+                                          title,
+                                          fields: {rate, fee, maximum_ltv, beacon_score, specifications}
+                                        }, productIndex) =>
+                              <ProductsMobileOption key={ID}>
+                                <div className="mortgage-title">
+                                  <p className={'circle'}>{productIndex + 1}</p>
+                                  <p>{productTypeToFullName(type)}</p>
+                                  <p className={'dark'}>{hasVariable ? 'Variable' : 'Fixed'} rates</p>
+                                </div>
+                                <div className="mortgage-head">
+                                  <p className={'number'}>{(rate * (hasVariable?1:1.025)).toFixed(2)}%</p>
+                                </div>
+                                <div className="mortgage-body">
+                                  {!hasVariable?null:<div className={'m-row m-head'}>
+                                    <p>Fixed Rate</p>
+                                    <p>{(rate * 1.025).toFixed(2)}%</p>
+                                  </div>}
+                                  <div className={'m-row m-head'}>
+                                    <p>Lender Fee</p>
+                                    <p>{fee}%</p>
                                   </div>
-                                  <div className="remaining-specs">
-                                    {
-                                      specifications.slice(4).map(({term_id, name}) =>
+                                  <div className={'m-row m-head  m-head'}>
+                                    <p>LTV</p>
+                                    <p>{maximum_ltv}%</p>
+                                  </div>
+                                  <div className={'m-row m-head  m-head last-head'}>
+                                    <p>Credit Score</p>
+                                    <p>{beacon_score[0].split('-')[0] + (beacon_score.length > 1 ? '+' : '')}</p>
+                                  </div>
+                                  {
+                                    specifications.slice(0, 4).map(({term_id, name}) =>
                                         <div key={term_id} className={'m-row'}>
                                           <p>{name}</p>
                                           <p><CheckMark/></p>
                                         </div>,
-                                      )
-                                    }
-                                  </div>
-                                </>
-                                : null
-                            }
-                          
-                          </div>
-                        </ProductsMobileOption>,
-                      )
-                    }
-                  </div>,
+                                    )
+                                  }
+                                  {
+                                    specifications.length > 4
+                                        ? <>
+                                          <div className={'show-all-specs'}>
+                                            Show all specifications
+                                            <svg viewBox="0 0 8 4">
+                                              <path fill="none" stroke="#d2f5e9" strokeMiterlimit="20" d="M1 .5v0l3 3c1.172-1.17 1.828-1.83 3-3"/>
+                                            </svg>
+                                          </div>
+                                          <div className="remaining-specs">
+                                            {
+                                              specifications.slice(4).map(({term_id, name}) =>
+                                                  <div key={term_id} className={'m-row'}>
+                                                    <p>{name}</p>
+                                                    <p><CheckMark/></p>
+                                                  </div>,
+                                              )
+                                            }
+                                          </div>
+                                        </>
+                                        : null
+                                  }
+                
+                                </div>
+                              </ProductsMobileOption>,
+                          )
+                        }
+                      </div>;
+                    },
                 )}
               </FormFilter>
             </div>

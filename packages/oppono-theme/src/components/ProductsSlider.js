@@ -338,15 +338,15 @@ const ProductsSlider = ({className, active = false, link, state, actions}) => {
                   <table>
                     <tbody>
                     <tr>
-                      <td><P.D as={'span'} className={'animate-number'} data-to-fixed={2}>5.99</P.D><P.D as={'span'}>%</P.D></td>
+                      <td><P.D as={'span'} className={'animate-number'} data-to-fixed={2}>{slide.fixed_rate}</P.D><P.D as={'span'}>%</P.D></td>
                       <td><P.Dark>Fixed Rate</P.Dark></td>
                     </tr>
                     <tr>
-                      <td><P.D as={'span'} className={'animate-number'} data-to-fixed={2}>1.49</P.D><P.D as={'span'}>%</P.D></td>
+                      <td><P.D as={'span'} className={'animate-number'} data-to-fixed={2}>{slide.lender_fee}</P.D><P.D as={'span'}>%</P.D></td>
                       <td><P.Dark>Lender Fee</P.Dark></td>
                     </tr>
                     <tr>
-                      <td><P.D as={'span'} className={'animate-number'} data-to-fixed={0}>75</P.D><P.D as={'span'}>%</P.D></td>
+                      <td><P.D as={'span'} className={'animate-number'} data-to-fixed={0}>{slide.ltv}</P.D><P.D as={'span'}>%</P.D></td>
                       <td><P.Dark>LTV</P.Dark></td>
                     </tr>
                     </tbody>
