@@ -144,7 +144,8 @@ const MapPage = ({className, actions, state}) => {
                 onChange={({name, coordinates, zoom, center}) => {
                   postal_city.current.city = name;
                   // setMap(generateMap({windowSize, name, enc, zoom}));
-                  setAppraiser(appraisersLookup.data[name] || {title: name});
+                  console.log(appraisersLookup.data[name]);
+                  setAppraiser([appraisersLookup.data[name] || {title: name}]);
                   polygonAPIRef.current.setPaths(coordinates);
                   mapAPIRef.current.fitBounds(polygonAPIRef.current.getBounds());
                   // mapAPIRef.current?.setCenter(center);
@@ -194,6 +195,8 @@ const MapPage = ({className, actions, state}) => {
                   <hr/>
                   <p className="text">{a.fields.city}</p>
                   <p className="ltv">{a.fields.ltv}% LTV</p>
+                      <p className="text">{a.fields.preferred_appraisal_company?.map?.(c=>c.post_title).join(', ')}</p>
+
                     </div>
                 :null)
               : null
