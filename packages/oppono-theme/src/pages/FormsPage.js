@@ -55,7 +55,7 @@ const FormsPage = ({className, state, actions, link}) => {
           <D2Page setCurrentTheme={setCurrentTheme} when={page.slug === 'd-ii'} formData={page.acf}/>
           <D3Page setCurrentTheme={setCurrentTheme} when={page.slug === 'd-iii'} formData={page.acf}/>
           <EPage setCurrentTheme={setCurrentTheme} when={page.slug === 'e'} formData={page.acf}/>
-          <QualifyFor setCurrentTheme={setCurrentTheme} when={page.slug === 'qualifyfor'} formData={page.acf}/>
+          <QualifyFor setCurrentTheme={setCurrentTheme} when={state.router.link.startsWith('/qualifyfor/')} formData={page.acf}/>
         </Switch>
         <Footer/>
       </div>;

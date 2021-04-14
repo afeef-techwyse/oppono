@@ -233,9 +233,9 @@ const D3Page = ({state, setCurrentTheme, actions, className, formData}) => {
               </FinalizeChild>}
             
             <FinalizeChild order={1}>
-              <P.Dark>*Variable Rate</P.Dark>
+              <P.Dark>*Fixed Rate</P.Dark>
               <P.Dark>*Payment interest based on balance</P.Dark>
-              <P.Num>{firstProduct.fields?.rate}%</P.Num>
+              <P.Num>{(firstProduct.fields?.rate * 1.025).toFixed(2)}%</P.Num>
               <Button label={'I’m good to go'} className={'next-step'}/>
             </FinalizeChild>
             <FinalizeChild order={2} className={'wide'}>

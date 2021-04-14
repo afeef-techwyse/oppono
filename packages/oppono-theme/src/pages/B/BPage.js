@@ -34,10 +34,10 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
   
   const getBValues = useStoredFormValue(pageName);
   const
-    section1Values = getBValues(formData.section_1?.section_name),
-    section2Values = getBValues(formData.section_2?.section_name),
-    section3Values = getBValues(formData.section_4?.section_name),
-    section4Values = getBValues(formData.section_5?.section_name);
+      section1Values = getBValues(formData.section_1?.section_name),
+      section2Values = getBValues(formData.section_2?.section_name),
+      section3Values = getBValues(formData.section_4?.section_name),
+      section4Values = getBValues(formData.section_5?.section_name);
   
   const media = useMedia();
   
@@ -58,8 +58,8 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
   const getAppraiser = () => section2Values('business_address_same_as_property') === '1' ? businessAppraiser : appraiser;
   const mortgage = ((+section3Values('purchase_price')) - (+section3Values('down_payment'))) || 0;
   const firstProduct = state.theme.stepResponse.data?.data?.beloc.products[0] || {};
-    const  refNumber = React.useRef('');
-  state.theme.stepResponse.data?.['reference-number']&&(refNumber.current=state.theme.stepResponse.data?.['reference-number'])
+  const refNumber = React.useRef('');
+  state.theme.stepResponse.data?.['reference-number'] && (refNumber.current = state.theme.stepResponse.data?.['reference-number'])
   
   return <div className={className}>
     <Form setCurrentTheme={setCurrentTheme} endPoint={'/beloc'}>
@@ -89,8 +89,8 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
         </div>
         <Input noScroll type={'text'} name={'business_name'} {...formData.section_1?.legal_business_name_input}/>
         <Select
-          name={'business_type'}
-          {...formData.section_1?.type_of_business_dropdown}/>
+            name={'business_type'}
+            {...formData.section_1?.type_of_business_dropdown}/>
         
         <Input type={'text'} name={'business_address'} {...formData.section_1?.address_input}/>
         <W50>
@@ -134,26 +134,26 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
           </>
         </FormConditionalInput>
         <Select
-          name={'property_type'}
-          {...formData.section_2?.property_dropdown}/>
+            name={'property_type'}
+            {...formData.section_2?.property_dropdown}/>
         <Select
-          name={'property_details_1'}
-          {...formData.section_2?.property_details_1_dropdown}/>
+            name={'property_details_1'}
+            {...formData.section_2?.property_details_1_dropdown}/>
         <Select
-          name={'property_details_2'}
-          {...formData.section_2?.property_details_2_dropdown}/>
+            name={'property_details_2'}
+            {...formData.section_2?.property_details_2_dropdown}/>
         <Button icon={true} className={'next-step'} label={'Next'}/>
       </FormStep>
       <FormStep apiStepNumber={3} pageName={pageName} activeTheme={formData.section_3?.section_theme} stepName={formData.section_3?.section_name}>
         <div className="form-text-wrapper">
           <h1 className={'form-headline-1 text-left'}>{formData.section_3?.title}</h1>
         </div>
-  
+        
         <W50>
           <Input type={'number'} name={'purchase_price'} {...formData.section_3?.purchase_price_input}/>
           <Input type={'number'} name={'down_payment'} {...formData.section_3?.down_payment_input}/>
         </W50>
-  
+        
         <div className="btn-group">
           <Button className={'bordered prev-step'} label={'Back'}/>
           <Button icon={true} className={'next-step'} label={'Next'}/>
@@ -191,49 +191,50 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
       <FormStep apiStepNumber={5} pageName={pageName} activeTheme={formData.section_5?.section_theme} stepName={formData.section_5?.section_name}>
         <input type={'hidden'} name={`product_name`} value={firstProduct.title}/>
         <input type={'hidden'} name={`maximun_mortgage`} value={Math.round(+section3Values('purchase_price') * firstProduct.fields?.maximum_ltv / 100)}/>
-  
+        
         <div className="form-text-wrapper wide-text">
           <h1 className={'form-headline-1 text-left'}>{formData.section_5?.title}</h1>
           <h2 className={'form-headline-2 primary'}>{formData.section_5?.subtitle}</h2>
           <h2 className={'form-headline-3 primary'}>
-            You are requesting a secured business equity line of credit against your {section2Values('property')}, {section2Values('property_details_1')} home which is located
+            You are requesting a secured business equity line of credit against
+            your {section2Values('property')}, {section2Values('property_details_1')} home which is located
             at <br/> {section2Values('business_address_same_as_property') === '1' ? section1Values('business_address') : section2Values('address')}, {section2Values('business_address_same_as_property') === '1' ? section1Values('business_city') : section2Values('city')}, {section2Values('business_address_same_as_property') === '1' ? section1Values('business_postal_code') : section2Values('postal_code')}
           </h2>
         </div>
         <Finalize>
           <Top>
             {media !== 'mobile'
-              ? <FinalizeChild>
-                <P.D>Your Info</P.D>
-                {[...Array(+section4Values('applicants_number') || 0).keys()].map((index, personIndex) => {
-                    const applicantFName = section4Values(`applicant_fname_${index + 1}`);
-                    const applicantLName = section4Values(`applicant_lname_${index + 1}`);
-                    const applicantScore = section4Values(`applicant_score_${index + 1}`);
-                  return <P.D key={`person-desktop-${personIndex}`}>{applicantFName} {applicantLName} {applicantScore}</P.D>;
-                  },
-                )}
-              </FinalizeChild>
-              : <FinalizeChild className={'full m-mt-24'} order={3}>
-                <FinalizeTable>
-                  <tbody>
+                ? <FinalizeChild>
+                  <P.D>Your Info</P.D>
                   {[...Array(+section4Values('applicants_number') || 0).keys()].map((index, personIndex) => {
-                      const applicantFName = section4Values(`applicant_fname_${index + 1}`);
-                      const applicantLName = section4Values(`applicant_lname_${index + 1}`);
-                      const applicantScore = section4Values(`applicant_score_${index + 1}`);
-                      return <tr key={`person-mobile-${personIndex}`}>
-                        <P.Dark as={'td'}>{applicantFName} {applicantLName}</P.Dark>
-                        <P.D as={'td'}> {applicantScore}</P.D>
-                      </tr>;
-                    },
+                        const applicantFName = section4Values(`applicant_fname_${index + 1}`);
+                        const applicantLName = section4Values(`applicant_lname_${index + 1}`);
+                        const applicantScore = section4Values(`applicant_score_${index + 1}`);
+                        return <P.D key={`person-desktop-${personIndex}`}>{applicantFName} {applicantLName} {applicantScore}</P.D>;
+                      },
                   )}
-                  </tbody>
-                </FinalizeTable>
-              </FinalizeChild>}
+                </FinalizeChild>
+                : <FinalizeChild className={'full m-mt-24'} order={3}>
+                  <FinalizeTable>
+                    <tbody>
+                    {[...Array(+section4Values('applicants_number') || 0).keys()].map((index, personIndex) => {
+                          const applicantFName = section4Values(`applicant_fname_${index + 1}`);
+                          const applicantLName = section4Values(`applicant_lname_${index + 1}`);
+                          const applicantScore = section4Values(`applicant_score_${index + 1}`);
+                          return <tr key={`person-mobile-${personIndex}`}>
+                            <P.Dark as={'td'}>{applicantFName} {applicantLName}</P.Dark>
+                            <P.D as={'td'}> {applicantScore}</P.D>
+                          </tr>;
+                        },
+                    )}
+                    </tbody>
+                  </FinalizeTable>
+                </FinalizeChild>}
             
             <FinalizeChild order={1}>
-              <P.Dark>*Variable Rate</P.Dark>
+              <P.Dark>*Fixed Rate</P.Dark>
               <P.Dark>*Payment interest based on balance</P.Dark>
-              <P.Num>{firstProduct.fields?.rate}%</P.Num>
+              <P.Num>{(firstProduct.fields?.rate * 1.025).toFixed(2)}%</P.Num>
               <Button label={'I’m good to go'} className={'next-step'}/>
             </FinalizeChild>
             <FinalizeChild order={2} className={'wide'}>
@@ -242,30 +243,30 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
           </Top>
           <Bottom>
             {media !== 'mobile'
-              ? <FinalizeChild order={1}>
-                <P.D>Your BELOC request is for ${numberWithCommas(mortgage)}</P.D>
-                <P.D>Your property value is ${numberWithCommas(+section3Values('purchase_price'))}</P.D>
-                <P.D>Your LTV is {((mortgage) / +section3Values('purchase_price') * 100).toFixed(1)}%</P.D>
-              </FinalizeChild>
-              : <FinalizeChild className={'full'} order={1}>
-                <FinalizeTable>
-                  <tbody>
-                  <tr>
-                    <P.Dark as={'td'}>BELOC Request</P.Dark>
-                    <P.D as={'td'}>${numberWithCommas(mortgage)}</P.D>
-                  </tr>
-                  <tr>
-                    <P.Dark as={'td'}>Property Value</P.Dark>
-                    <P.D as={'td'}>${numberWithCommas(+section3Values('purchase_price'))}</P.D>
-                  </tr>
-                  <tr>
-                    <P.Dark as={'td'}>LTV</P.Dark>
-                    <P.D as={'td'}>{((mortgage) / +section3Values('purchase_price') * 100).toFixed(1)}%</P.D>
-                  </tr>
-                  </tbody>
-                </FinalizeTable>
-              </FinalizeChild>}
-  
+                ? <FinalizeChild order={1}>
+                  <P.D>Your BELOC request is for ${numberWithCommas(mortgage)}</P.D>
+                  <P.D>Your property value is ${numberWithCommas(+section3Values('purchase_price'))}</P.D>
+                  <P.D>Your LTV is {((mortgage) / +section3Values('purchase_price') * 100).toFixed(1)}%</P.D>
+                </FinalizeChild>
+                : <FinalizeChild className={'full'} order={1}>
+                  <FinalizeTable>
+                    <tbody>
+                    <tr>
+                      <P.Dark as={'td'}>BELOC Request</P.Dark>
+                      <P.D as={'td'}>${numberWithCommas(mortgage)}</P.D>
+                    </tr>
+                    <tr>
+                      <P.Dark as={'td'}>Property Value</P.Dark>
+                      <P.D as={'td'}>${numberWithCommas(+section3Values('purchase_price'))}</P.D>
+                    </tr>
+                    <tr>
+                      <P.Dark as={'td'}>LTV</P.Dark>
+                      <P.D as={'td'}>{((mortgage) / +section3Values('purchase_price') * 100).toFixed(1)}%</P.D>
+                    </tr>
+                    </tbody>
+                  </FinalizeTable>
+                </FinalizeChild>}
+            
             <FinalizeChild order={2} className={'full m-border'}>
               <FinalizeTable>
                 <tbody>
@@ -275,7 +276,7 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
                 </tr>
                 <tr>
                   <P.Dark as={'td'}>Credit Score</P.Dark>
-                  <P.D as={'td'}>{firstProduct.fields?.beacon_score[0].split('-')[0]+(firstProduct.fields?.beacon_score.length>1?'+':'')}</P.D>
+                  <P.D as={'td'}>{firstProduct.fields?.beacon_score[0].split('-')[0] + (firstProduct.fields?.beacon_score.length > 1 ? '+' : '')}</P.D>
                 </tr>
                 </tbody>
               </FinalizeTable>
@@ -308,7 +309,8 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
                       return <AppraiserInput key={index} appraiserName={post_name}/>;
                     })}
                   </RadioGroup>
-                  <P.Dark>*Disclaimer - If the city you are looking for is not listed please contact your BDM directly or email us at info@oppono.com</P.Dark>
+                  <P.Dark>*Disclaimer - If the city you are looking for is not listed please contact your BDM directly
+                    or email us at info@oppono.com</P.Dark>
                   <Button label={'Alert'}/>
                 </div>
               </div>
@@ -344,30 +346,34 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
 };
 
 export default styled(connect(BPage))`
-width: 100%;
-height: 100%;
-${Bottom}{
-  padding-top: 0;
-  .full{
-    @media(max-width: 991px){
-    flex-basis: 72%;
-    width: 72%;
-    margin-left: auto;
-    }
-    @media(max-width: 575px){
+  width: 100%;
+  height: 100%;
+  
+  ${Bottom} {
+    padding-top: 0;
+    
+    .full {
+      @media (max-width: 991px) {
+        flex-basis: 72%;
+        width: 72%;
+        margin-left: auto;
+      }
+      @media (max-width: 575px) {
         flex-basis: 100%;
-    width: 100%;
+        width: 100%;
+      }
     }
   }
-}
-.wide-text{
-  max-width: ${size(800)};
-  .form-headline-3{
-    max-width: ${size(400)};
-    @media(max-width: 575.98px){
-      max-width: 90%;
+  
+  .wide-text {
+    max-width: ${size(800)};
+    
+    .form-headline-3 {
+      max-width: ${size(400)};
+      @media (max-width: 575.98px) {
+        max-width: 90%;
+      }
     }
   }
-}
 
 `;
