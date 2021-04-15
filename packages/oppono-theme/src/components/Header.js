@@ -79,11 +79,9 @@ const SubHeader = styled(connect(({state, className}) => {
 
 const RightPart = connect(({state, actions}) => state.theme.user.logged
   ? <>
-    <div className="links primary">Welcome {state.theme.user.user_fname}</div>
     <Link onClick={() => actions.theme.removeUser()} className={'links primary'} href={'/'}>Log Out</Link>
   </>
   : <>
-    <Link className={'links primary'} href={'/sign-in/'}>I’m a member</Link>
     <Link className={'signup-btn'} href={'/create-account/'}><Button className={'primary-border primary'} focusable={false} label={'Sign up'}/></Link>
   </>,
 );
