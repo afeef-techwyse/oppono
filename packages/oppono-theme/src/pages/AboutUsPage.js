@@ -57,6 +57,7 @@ export default styled(connect(AboutUsPage))`
     h1{
       font-size: ${size(50)};
       text-align: center;
+      margin: 2rem 1rem;
     }
     
     .html2react{
@@ -66,12 +67,16 @@ export default styled(connect(AboutUsPage))`
       color: rgba(210,245,233,0.6);
       line-height: 2.5rem;
       padding: 0 5.5rem;
-      margin-top: 2.3rem;
+      margin-top: 1rem;
       @media(max-width: 768px){
         padding: 0;
       }
       &.bottom-copy{
         margin-bottom: ${size(150)};
+      }
+
+      > p {
+        margin-bottom: 1rem;
       }
     }
   
