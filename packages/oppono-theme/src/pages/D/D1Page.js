@@ -155,13 +155,13 @@ const D1Page = ({className, setCurrentTheme, state, actions, formData}) => {
           <Top>
             {media !== 'mobile'
               ? <FinalizeChild>
-                <P.Num>{(firstProduct.fields?.rate).toFixed(2)}%</P.Num>
+                <P.Num>{firstProduct.fields?.rate}%</P.Num>
                 <P.Dark>*Variable Rate</P.Dark>
               </FinalizeChild>
               : <FinalizeChild className={'full'} order={1}>
                 <P.Dark>*Variable Rate</P.Dark>
                 <P.Dark>*Payment interest based on balance</P.Dark>
-                <P.Num>{(firstProduct.fields?.rate).toFixed(2)}%</P.Num>
+                <P.Num>{firstProduct.fields?.rate}%</P.Num>
               </FinalizeChild>}
             
             <FinalizeChild order={2}>

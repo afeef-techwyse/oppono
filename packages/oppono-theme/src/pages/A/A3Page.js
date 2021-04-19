@@ -59,6 +59,7 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
   const mortgage = ((+section2Values('mortgage_value_1') || 0) + (+section2Values('mortgage_value_2') || 0) + (+section2Values('outstanding_amount_value')) || 0) || 0;
   const firstProduct = state.theme.stepResponse.data?.data?.heloc.products[0] || {};
     const  refNumber = React.useRef('');
+  console.log(firstProduct);
   state.theme.stepResponse.data?.['reference-number']&&(refNumber.current=state.theme.stepResponse.data?.['reference-number'])
   return <div className={className}>
     <Form setCurrentTheme={setCurrentTheme} endPoint={'/heloc'}>
@@ -234,7 +235,7 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
             <FinalizeChild order={1}>
               <P.Dark>*Fixed Rate</P.Dark>
               <P.Dark>*Payment interest based on balance</P.Dark>
-              <P.Num>{(firstProduct.fields?.rate).toFixed(2)}%</P.Num>
+              <P.Num>{firstProduct.fields?.rate}%</P.Num>
               <Button label={'I’m good to go'} className={'next-step'}/>
             </FinalizeChild>
             <FinalizeChild order={2} className={'wide'}>
@@ -366,5 +367,4 @@ ${Bottom}{
     }
   }
 }
-
 `;

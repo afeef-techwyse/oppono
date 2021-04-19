@@ -466,7 +466,7 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
             <FinalizeChild order={1}>
               <P.Dark>*Fixed Rate</P.Dark>
               <P.Dark>*Payment interest based on balance</P.Dark>
-              <P.Num>{(firstProduct.fields?.rate).toFixed(2)}%</P.Num>
+              <P.Num>{firstProduct.fields?.rate}%</P.Num>
               <Button label={'I’m good to go'} className={'next-step'}/>
             </FinalizeChild>
             <FinalizeChild order={2} className={'wide'}>

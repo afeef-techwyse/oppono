@@ -6,8 +6,8 @@ export default function useFlowAppraisers() {
   const [appraiser, setAppraiser] = React.useState([{}]);
   
   const onChange = debounce((event) => {
-    const postalCode = event.target.value;
-    if (postalCode.length < 3) {
+    const postalCode = event?.target?.value;
+    if (!postalCode || postalCode.length < 3) {
       setAppraiser([{}]);
       return;
     }
