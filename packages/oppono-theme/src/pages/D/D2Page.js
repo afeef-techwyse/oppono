@@ -213,7 +213,7 @@ const D2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 <P.D>You could qualify up to ${numberWithCommas(Math.round(+section2Values('home_value') * firstProduct.fields?.maximum_ltv / 100))}</P.D>
                 <P.D>Your property value is ${numberWithCommas(+section2Values('home_value'))}</P.D>
                 <P.D>Your down payment is ${numberWithCommas(+section2Values('home_value') - mortgage)}</P.D>
-                <P.D>Your LTV is {(mortgage / +section2Values('home_value') * 100).toFixed(1)}%</P.D>
+                <P.D>Your LTV is {(mortgage / +section2Values('home_value') * 100).toFixed?.(1)}%</P.D>
               </FinalizeChild>
               : <FinalizeChild className={'full'} order={1}>
                 <FinalizeTable>
@@ -245,7 +245,7 @@ const D2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                     <P.D as={'td'}>${numberWithCommas(+section2Values('home_value') - mortgage)}</P.D></tr>
                   <tr>
                     <P.Dark as={'td'}>LTV</P.Dark>
-                    <P.D as={'td'}>{(mortgage / +section2Values('home_value') * 100).toFixed(1)}%</P.D>
+                    <P.D as={'td'}>{(mortgage / +section2Values('home_value') * 100).toFixed?.(1)}%</P.D>
                   </tr>
                   </tbody>
                 </FinalizeTable>

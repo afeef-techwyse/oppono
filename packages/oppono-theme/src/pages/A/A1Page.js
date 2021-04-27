@@ -41,9 +41,9 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
   
   const getA1Values = useStoredFormValue(pageName);
   const
-    section1Values = getA1Values(formData.section_1?.section_name),
-    section2Values = getA1Values(formData.section_2?.section_name),
-    section3Values = getA1Values(formData.section_3?.section_name);
+      section1Values = getA1Values(formData.section_1?.section_name),
+      section2Values = getA1Values(formData.section_2?.section_name),
+      section3Values = getA1Values(formData.section_3?.section_name);
   
   const media = useMedia();
   
@@ -65,8 +65,8 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
   
   const [productsTable, productsFilter] = useProductsTable(state.theme.stepResponse);
   const mortgage = ((+section2Values('mortgage_value_1') || 0) + (+section2Values('mortgage_value_2') || 0) + (+section2Values('outstanding_amount_value')) + (+section2Values('sm_amount')) + (+section2Values('fm_amount')) || 0) || 0;
-    const  refNumber = React.useRef('');
-  state.theme.stepResponse.data?.['reference-number']&&(refNumber.current=state.theme.stepResponse.data?.['reference-number'])
+  const refNumber = React.useRef('');
+  state.theme.stepResponse.data?.['reference-number'] && (refNumber.current = state.theme.stepResponse.data?.['reference-number'])
   return <div className={className}>
     <Form setCurrentTheme={setCurrentTheme} endPoint={'/refinance'}>
       <FormStep apiStepNumber={1} pageName={pageName} activeTheme={formData.section_1?.section_theme} stepName={formData.section_1?.section_name}>
@@ -114,7 +114,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
           <h1 className={'form-headline-1 text-left'}>{formData.section_2?.title}</h1>
         </div>
         <Input noScroll type={'number'} name={'home_value'} {...formData.section_2?.estimated_value_input}/>
-    
+        
         <FormConditionalInput name={'have_mortgage_1'} showOn={'1'} checked={'0'} {...formData.section_2?.any_mortgage_yes_no}>
           <>
             <Input type={'number'} name={'mortgage_value_1'} {...formData.section_2?.first_mortgage_amount_input}/>
@@ -123,17 +123,17 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
             </FormConditionalInput>
           </>
         </FormConditionalInput>
-    
-    
+        
+        
         <FormConditionalInput name={'have_outstanding_amount'} showOn={'1'}
                               checked={'0'} {...formData.section_2?.outstanding_balance_yes_no}>
           <Input type={'number'} name={'outstanding_amount_value'}
                  {...formData.section_2?.outstanding_balance_amount_input}/>
         </FormConditionalInput>
-    
+        
         <FormConditionalInput name={'add_mortgage_2'} showOn={'0'} checked={'0'}
                               {...formData.section_2?.add_mortgage_yes_no}>
-      
+          
           <FormConditionalInput name={'increase_mortgage_1'} showOn={'1'} checked={'0'}
                                 {...formData.section_2?.increase_mortgage_yes_no}>
             <Input type={'number'} name={'fm_amount'}
@@ -142,7 +142,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
           <Input type={'number'} name={'sm_amount'}
                  {...formData.section_2?.add_mortgage_amount_input}/>
         </FormConditionalInput>
-    
+        
         <div className="btn-group">
           <Button className={'bordered prev-step'} label={'Back'}/>
           <Button icon={true} className={'next-step'} label={'Next'}/>
@@ -185,7 +185,8 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
         <div className="form-text-wrapper wide-text">
           <h1 className={'form-headline-1 text-left'}>{formData.section_4?.title}</h1>
           <h2 className={'form-headline-3 primary'}>
-            You are refinancing your {section1Values('property')}, {section1Values('property_details_1')} home which is located
+            You are refinancing your {section1Values('property')}, {section1Values('property_details_1')} home which is
+            located
             at <br/> {section1Values('address')}, {section1Values('city')}, {section1Values('postal_code')}</h2>
         </div>
         <Finalize>
@@ -217,7 +218,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                     </tbody>
                   </FinalizeTable>
                 </FinalizeChild>}
-        
+            
             <FinalizeChild className={'wide'} order={1}>
               <P.D>Summary</P.D>
             </FinalizeChild>
@@ -232,7 +233,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
             </FinalizeChild>
             <FinalizeChild order={3} className={'wide m-pr-40'}>
               <P.Border>Your down payment is ${numberWithCommas(+section2Values('home_value') - mortgage)}</P.Border>
-              <P.Border>Your LTV is {(mortgage / +section2Values('home_value') * 100).toFixed(1)}%</P.Border>
+              <P.Border>Your LTV is {(mortgage / +section2Values('home_value') * 100).toFixed?.(1)}%</P.Border>
             </FinalizeChild>
           </Bottom>
         </Finalize>
@@ -242,15 +243,15 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
         </div>
       </FormStep>
       <FormStep apiStepNumber={4} pageName={pageName} activeTheme={formData.section_5?.section_theme} stepName={formData.section_5?.section_name}>
-    
+        
         <input ref={selectedProduct} type={'hidden'} name={`product_name`}/>
         <input ref={maxMortgage} type={'hidden'} name={`maximum_mortgage`}/>
-    
+        
         <div className="form-text-wrapper wide-text">
           <h1 className={'form-headline-1 text-left'}>{formData.section_5?.title}</h1>
           <h2 className={'form-headline-3 primary'}>{formData.section_5?.subtitle}</h2>
         </div>
-    
+        
         {state.theme.stepResponse.data?.data
             ? media !== 'mobile'
                 ? <FormFilter className={'form-wide-container'} filters={productsFilter}>
@@ -283,14 +284,14 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                             </div>
                           </th>
                           {
-                            products.map(({ID, title, fields: {rate,maximum_ltv}}) =>
+                            products.map(({ID, title, fields: {rate, maximum_ltv}}) =>
                                 <th scope={'col'} key={ID}>
                                   <p>${numberWithCommas(monthlyPayments(mortgage, rate / 100))} / month</p>
                                   <p className={'number'}>{rate}%</p>
                                   <Button onClick={() => {
                                     selectedProduct.current.value = title;
                                     maxMortgage.current.value = Math.round(+section2Values('home_value') * maximum_ltv / 100);
-                                
+                                    
                                     setTimeout(() => actions.theme.setValidateAndNextCallback(new Date().getTime()), 100);
                                   }} className={'small next-step'} label={'I want this deal'}/>
                                 </th>,
@@ -301,26 +302,34 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                         <tbody>
                         <tr className={'head'}>
                           <td scope={'row'} className={'dark'}>Fixed Rate</td>
-                          {products.map(({ID, fields: {rate}}) => <td key={ID} className={'details'} data-label="Fixed Rate">{(rate + 0.25).toFixed(2)}%</td>)}
+                          {products.map(({ID, fields: {rate}}) =>
+                              <td key={ID} className={'details'} data-label="Fixed Rate">{(rate + 0.25).toFixed?.(2)}%</td>)}
                         </tr>
                         <tr className={'head'}>
                           <td scope={'row'} className={'dark'}>Lender Fee</td>
-                          {products.map(({ID, fields: {fee}}) => <td key={ID} className={'details'} data-label="Lender Fee">{fee}%</td>)}
+                          {products.map(({ID, fields: {fee}}) =>
+                              <td key={ID} className={'details'} data-label="Lender Fee">{fee}%</td>)}
                         </tr>
                         <tr className={'head'}>
                           <td scope={'row'} className={'dark'}>LTV</td>
-                          {products.map(({ID, fields: {maximum_ltv}}) => <td key={ID} className={'details'} data-label="LTV">{maximum_ltv}%</td>)}
+                          {products.map(({ID, fields: {maximum_ltv}}) =>
+                              <td key={ID} className={'details'} data-label="LTV">{maximum_ltv}%</td>)}
                         </tr>
                         <tr className={'head last-head'}>
                           <td scope={'row'} className={'dark'}>Credit Score</td>
-                          {products.map(({ID, fields: {beacon_score}}) => <td key={ID} className={'details'} data-label="beacon_score">{beacon_score}</td>)}
+                          {products.map(({ID, fields: {beacon_score}}) =>
+                              <td key={ID} className={'details'} data-label="beacon_score">{beacon_score}</td>)}
                         </tr>
-                    
+                        
                         {
-                          productsTable[type] && Object.entries(productsTable[type]).map(([id, {name, specificationProducts}]) =>
+                          productsTable[type] && Object.entries(productsTable[type]).map(([id, {
+                            name,
+                            specificationProducts
+                          }]) =>
                               <tr key={id}>
                                 <td scope={'row'}>{name}</td>
-                                {products.map(({ID}) => specificationProducts.indexOf(ID) >= 0 ? <td key={ID}><CheckMark/></td> : <td key={ID}/>)}
+                                {products.map(({ID}) => specificationProducts.indexOf(ID) >= 0 ?
+                                    <td key={ID}><CheckMark/></td> : <td key={ID}/>)}
                               </tr>)
                         }
                         </tbody>
@@ -331,7 +340,11 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                     {Object.entries(state.theme.stepResponse.data?.data).map(([type, {products}, index]) =>
                         <div key={type} data-filter={type}>
                           {
-                            products.map(({ID, title, fields: {rate, fee, maximum_ltv, beacon_score, specifications}}, productIndex) =>
+                            products.map(({
+                                            ID,
+                                            title,
+                                            fields: {rate, fee, maximum_ltv, beacon_score, specifications}
+                                          }, productIndex) =>
                                 <ProductsMobileOption key={ID}>
                                   <div className="mortgage-title">
                                     <p className={'circle'}>{productIndex + 1}</p>
@@ -349,7 +362,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                   <div className="mortgage-body">
                                     <div className={'m-row m-head'}>
                                       <p>Fixed Rate</p>
-                                      <p>{(rate + 0.25).toFixed(2)}%</p>
+                                      <p>{(rate + 0.25).toFixed?.(2)}%</p>
                                     </div>
                                     <div className={'m-row m-head'}>
                                       <p>Lender Fee</p>
@@ -361,7 +374,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                     </div>
                                     <div className={'m-row m-head  m-head last-head'}>
                                       <p>Credit Score</p>
-                                      <p>{beacon_score[0].split('-')[0]+(beacon_score.length>1?'+':'')}</p>
+                                      <p>{beacon_score[0].split('-')[0] + (beacon_score.length > 1 ? '+' : '')}</p>
                                     </div>
                                     {
                                       specifications.slice(0, 4).map(({term_id, name}) =>
@@ -393,7 +406,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                           </>
                                           : null
                                     }
-                              
+                                  
                                   </div>
                                 </ProductsMobileOption>,
                             )
@@ -423,7 +436,8 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                       return <AppraiserInput key={index} appraiserName={post_name}/>;
                     })}
                   </RadioGroup>
-                  <P.Dark>*Disclaimer - If the city you are looking for is not listed please contact your BDM directly or email us at info@oppono.com</P.Dark>
+                  <P.Dark>*Disclaimer - If the city you are looking for is not listed please contact your BDM directly
+                    or email us at info@oppono.com</P.Dark>
                   <Button label={'Alert'}/>
                 </div>
               </div>
@@ -461,10 +475,10 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 export default styled(connect(A1Page))`
   width: 100%;
   height: 100%;
-
+  
   ${Bottom} {
     padding-top: 0;
-
+    
     .full {
       @media (max-width: 991px) {
         flex-basis: 72%;
@@ -477,10 +491,10 @@ export default styled(connect(A1Page))`
       }
     }
   }
-
+  
   .wide-text {
     max-width: ${size(800)};
-
+    
     .form-headline-3 {
       max-width: ${size(400)};
       @media (max-width: 575.98px) {
@@ -488,11 +502,11 @@ export default styled(connect(A1Page))`
       }
     }
   }
-
+  
   hr {
     max-width: 100% !important;
   }
-
+  
   .underline {
     text-decoration: underline;
   }

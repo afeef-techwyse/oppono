@@ -205,7 +205,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
             </FinalizeChild>
             <FinalizeChild order={3} className={'wide m-pr-40'}>
               <P.Border>Your down payment is ${numberWithCommas(+section2Values('down_payment'))}</P.Border>
-              <P.Border>Your LTV is {((mortgage) / +section2Values('purchase_price') * 100).toFixed(1)}%</P.Border>
+              <P.Border>Your LTV is {((mortgage) / +section2Values('purchase_price') * 100).toFixed?.(1)}%</P.Border>
             </FinalizeChild>
           </Bottom>
         </Finalize>
@@ -254,7 +254,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                     <tbody>
                     <tr>
                       <P.Dark as={'td'}>Fixed Fee</P.Dark>
-                      <P.D as={'td'}>{(product.fields?.rate + 0.25).toFixed(2)}%</P.D>
+                      <P.D as={'td'}>{(product.fields?.rate + 0.25).toFixed?.(2)}%</P.D>
                     </tr>
                     <tr>
                       <P.Dark as={'td'}>Lender Fee</P.Dark>
@@ -276,7 +276,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                     <tbody>
                     <tr>
                       <P.Dark as={'td'}>Fixed Fee</P.Dark>
-                      <P.D as={'td'}>{(product.fields?.rate + 0.25).toFixed(2)}%</P.D>
+                      <P.D as={'td'}>{(product.fields?.rate + 0.25).toFixed?.(2)}%</P.D>
                     </tr>
                     <tr>
                       <P.Dark as={'td'}>Lender Fee</P.Dark>

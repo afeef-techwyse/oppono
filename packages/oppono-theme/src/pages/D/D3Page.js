@@ -235,7 +235,7 @@ const D3Page = ({state, setCurrentTheme, actions, className, formData}) => {
             <FinalizeChild order={1}>
               <P.Dark>*Fixed Rate</P.Dark>
               <P.Dark>*Payment interest based on balance</P.Dark>
-              <P.Num>{(firstProduct.fields?.rate + 0.25).toFixed(2)}%</P.Num>
+              <P.Num>{(firstProduct.fields?.rate + 0.25).toFixed?.(2)}%</P.Num>
               <Button label={'I’m good to go'} className={'next-step'}/>
             </FinalizeChild>
             <FinalizeChild order={2} className={'wide'}>
@@ -247,7 +247,7 @@ const D3Page = ({state, setCurrentTheme, actions, className, formData}) => {
               ? <FinalizeChild order={1}>
                 <P.D>Your HELOC request is for ${numberWithCommas(section4Values('confirm_qualify_amount') === '0' ? +section4Values('amount_wanted') : mortgage)}</P.D>
                 <P.D>Your property value is ${numberWithCommas(+section2Values('home_value'))}</P.D>
-                <P.D>Your LTV is {((section4Values('confirm_qualify_amount') === '0' ? +section4Values('amount_wanted') : mortgage) / +section2Values('home_value') * 100).toFixed(1)}%</P.D>
+                <P.D>Your LTV is {((section4Values('confirm_qualify_amount') === '0' ? +section4Values('amount_wanted') : mortgage) / +section2Values('home_value') * 100).toFixed?.(1)}%</P.D>
               </FinalizeChild>
               : <FinalizeChild className={'full'} order={1}>
                 <FinalizeTable>
@@ -262,7 +262,7 @@ const D3Page = ({state, setCurrentTheme, actions, className, formData}) => {
                   </tr>
                   <tr>
                     <P.Dark as={'td'}>LTV</P.Dark>
-                    <P.D as={'td'}>{((section4Values('confirm_qualify_amount') === '0' ? +section4Values('amount_wanted') : mortgage) / +section2Values('home_value') * 100).toFixed(1)}%</P.D>
+                    <P.D as={'td'}>{((section4Values('confirm_qualify_amount') === '0' ? +section4Values('amount_wanted') : mortgage) / +section2Values('home_value') * 100).toFixed?.(1)}%</P.D>
                   </tr>
                   </tbody>
                 </FinalizeTable>

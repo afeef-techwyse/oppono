@@ -247,7 +247,7 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
               ? <FinalizeChild order={1}>
                 <P.D>Your HELOC request is for ${numberWithCommas(section4Values('confirm_qualify_amount') === '0' ? +section4Values('amount_wanted') : mortgage)}</P.D>
                 <P.D>Your property value is ${numberWithCommas(+section2Values('home_value'))}</P.D>
-                <P.D>Your LTV is {((section4Values('confirm_qualify_amount') === '0' ? +section4Values('amount_wanted') : mortgage) / +section2Values('home_value') * 100).toFixed(1)}%</P.D>
+                <P.D>Your LTV is {((section4Values('confirm_qualify_amount') === '0' ? +section4Values('amount_wanted') : mortgage) / +section2Values('home_value') * 100).toFixed?.(1)}%</P.D>
               </FinalizeChild>
               : <FinalizeChild className={'full'} order={1}>
                 <FinalizeTable>
@@ -262,7 +262,7 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
                   </tr>
                   <tr>
                     <P.Dark as={'td'}>LTV</P.Dark>
-                    <P.D as={'td'}>{((section4Values('confirm_qualify_amount') === '0' ? +section4Values('amount_wanted') : mortgage) / +section2Values('home_value') * 100).toFixed(1)}%</P.D>
+                    <P.D as={'td'}>{((section4Values('confirm_qualify_amount') === '0' ? +section4Values('amount_wanted') : mortgage) / +section2Values('home_value') * 100).toFixed?.(1)}%</P.D>
                   </tr>
                   </tbody>
                 </FinalizeTable>
