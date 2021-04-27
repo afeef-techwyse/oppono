@@ -32,7 +32,7 @@ const MapPage = ({className, actions, state}) => {
   const generateMap = ({windowSize, name, coordinates, enc, zoom}) => {
     let link = `https://maps.googleapis.com/maps/api/staticmap?map_id=3a82b8043ec69e1&zoom=${zoom || 7}&key=AIzaSyD9Q58YYqhsWqlGn1p-GzPWv3iyCZ2iTss&size=${windowSize?.width || 1920}x${windowSize?.height || 1080}`;
     link += name ? `&center=canada+ontario+${name.replaceAll(' ', '+')}` : '&center=canada+toronto';
-    link += coordinates ? `&path=color:0x0E9564FF|weight:2|fillcolor:0x26D69634|${coordinates.map(a => a[0].toFixed(3) + ',' + a[1].toFixed(3)).join('|')}` : '';
+    link += coordinates ? `&path=color:0x0E9564FF|weight:2|fillcolor:0x26D69634|${coordinates.map(a => a[0].toFixed?.(3) + ',' + a[1].toFixed?.(3)).join('|')}` : '';
     link += enc ? `&path=color:0x0E9564FF|weight:2|fillcolor:0x26D69634|enc:${enc}` : '';
     return link;
   };

@@ -213,7 +213,7 @@ const D2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 <P.D>You could qualify up to ${numberWithCommas(Math.round(+section2Values('home_value') * firstProduct.fields?.maximum_ltv / 100))}</P.D>
                 <P.D>Your property value is ${numberWithCommas(+section2Values('home_value'))}</P.D>
                 <P.D>Your down payment is ${numberWithCommas(+section2Values('home_value') - mortgage)}</P.D>
-                <P.D>Your LTV is {(mortgage / +section2Values('home_value') * 100).toFixed(1)}%</P.D>
+                <P.D>Your LTV is {(mortgage / +section2Values('home_value') * 100).toFixed?.(1)}%</P.D>
               </FinalizeChild>
               : <FinalizeChild className={'full'} order={1}>
                 <FinalizeTable>
@@ -245,7 +245,7 @@ const D2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                     <P.D as={'td'}>${numberWithCommas(+section2Values('home_value') - mortgage)}</P.D></tr>
                   <tr>
                     <P.Dark as={'td'}>LTV</P.Dark>
-                    <P.D as={'td'}>{(mortgage / +section2Values('home_value') * 100).toFixed(1)}%</P.D>
+                    <P.D as={'td'}>{(mortgage / +section2Values('home_value') * 100).toFixed?.(1)}%</P.D>
                   </tr>
                   </tbody>
                 </FinalizeTable>
@@ -283,7 +283,7 @@ const D2Page = ({className, setCurrentTheme, state, actions, formData}) => {
         <div className="upload-step-wrapper">
           <img src={upload}/>
           <h1 className={'form-headline-1 text-left'}>{formData.section_5?.title}</h1>
-          <FormConditionalInput name={'mortgages_1'} showOn={'1'} checked={'0'} {...formData.section_5?.have_appraisal_report_yes_no}>
+          <FormConditionalInput noScroll name={'mortgages_1'} showOn={'1'} checked={'0'} {...formData.section_5?.have_appraisal_report_yes_no}>
             <FileInput name='appraisal_report_file' label={formData.section_5?.appraisal_report_upload_label} acceptText={'PDF, JPG, or PNG'}/>
             <Appraiser>
               <P.D>Select an appraiser</P.D>

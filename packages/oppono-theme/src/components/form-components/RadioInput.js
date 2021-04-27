@@ -12,7 +12,20 @@ import {size} from '../../functions/size';
 gsap.registerPlugin(ScrollToPlugin);
 gsap.registerPlugin(DrawSVGPlugin);
 gsap.registerPlugin(CustomEase);
-const RadioInput = React.forwardRef(({className, type = 'radio', value, required, readOnly, disabled, label, name, checked = false, onChange, noInput}, forwardedRef) => {
+const RadioInput = React.forwardRef(({
+                                       className,
+                                       type = 'radio',
+                                       value,
+                                       required,
+                                       readOnly,
+                                       disabled,
+                                       label,
+                                       name,
+                                       checked = false,
+                                       onChange,
+                                       noScroll,
+                                       noInput
+                                     }, forwardedRef) => {
   const innerRef = React.useRef(null);
   const combinedRef = useCombinedRefs(forwardedRef, innerRef);
   const [focused, setFocused] = React.useState(false);
@@ -38,42 +51,45 @@ const RadioInput = React.forwardRef(({className, type = 'radio', value, required
   
   
   return (
-    <div ref={combinedRef} className={classnames('radio-input', className, {focused, checked})}>
-      <svg preserveAspectRatio={'none'} className={'btn-stroke'} viewBox="0 0 286 125">
-        <path className={'gray'} ref={el => svgBorder.current.gray = el}
-              d="M15.27 1.421c.28-.27.65-.421 1.04-.421H283.5c.83 0 1.5.672 1.5 1.5v120a1.5 1.5 0 0 1-1.5 1.5H2.5a1.5 1.5 0 0 1-1.5-1.5V15.848c0-.406.17-.796.46-1.078z"/>
-        <path className={'blue'} ref={el => svgBorder.current.blue = el}
-              d="M15.27 1.421c.28-.27.65-.421 1.04-.421H283.5c.83 0 1.5.672 1.5 1.5v120a1.5 1.5 0 0 1-1.5 1.5H2.5a1.5 1.5 0 0 1-1.5-1.5V15.848c0-.406.17-.796.46-1.078z"/>
-      </svg>
-      <svg className='btn-enter' viewBox="0 0 286 125">
-        <path fill="#bfb6b4" d="M12.532 22.312l4.928 4.96 1.152-1.2-2.912-2.88h8.928v-8.176h-1.68v6.464h-7.28l2.944-2.896-1.152-1.232z"/>
-      </svg>
-      <label>
-        <div className="radio-text" ref={labelRef}>{label}</div>
-        {noInput ? null :
-          <input
-            type={type}
-            value={value}
-            name={name}
-            checked={checked}
-            required={required}
-            readOnly={readOnly}
-            disabled={disabled}
-            onFocus={() => {
-              gsap.to(window, {
-                duration: .5,
-                scrollTo: {y: combinedRef.current, offsetY: (window.innerHeight - combinedRef.current.getBoundingClientRect().height) / 2},
-              });
-              setFocused(true);
-            }}
-            onBlur={() => {
-              setFocused(false);
-            }}
-            onChange={onChange}
-          />
-        }
-      </label>
-    </div>
+      <div ref={combinedRef} className={classnames('radio-input', className, {focused, checked})}>
+        <svg preserveAspectRatio={'none'} className={'btn-stroke'} viewBox="0 0 286 125">
+          <path className={'gray'} ref={el => svgBorder.current.gray = el}
+                d="M15.27 1.421c.28-.27.65-.421 1.04-.421H283.5c.83 0 1.5.672 1.5 1.5v120a1.5 1.5 0 0 1-1.5 1.5H2.5a1.5 1.5 0 0 1-1.5-1.5V15.848c0-.406.17-.796.46-1.078z"/>
+          <path className={'blue'} ref={el => svgBorder.current.blue = el}
+                d="M15.27 1.421c.28-.27.65-.421 1.04-.421H283.5c.83 0 1.5.672 1.5 1.5v120a1.5 1.5 0 0 1-1.5 1.5H2.5a1.5 1.5 0 0 1-1.5-1.5V15.848c0-.406.17-.796.46-1.078z"/>
+        </svg>
+        <svg className='btn-enter' viewBox="0 0 286 125">
+          <path fill="#bfb6b4" d="M12.532 22.312l4.928 4.96 1.152-1.2-2.912-2.88h8.928v-8.176h-1.68v6.464h-7.28l2.944-2.896-1.152-1.232z"/>
+        </svg>
+        <label>
+          <div className="radio-text" ref={labelRef}>{label}</div>
+          {noInput ? null :
+              <input
+                  type={type}
+                  value={value}
+                  name={name}
+                  checked={checked}
+                  required={required}
+                  readOnly={readOnly}
+                  disabled={disabled}
+                  onFocus={() => {
+                    noScroll || gsap.to(window, {
+                      duration: .5,
+                      scrollTo: {
+                        y: combinedRef.current,
+                        offsetY: (window.innerHeight - combinedRef.current.getBoundingClientRect().height) / 2
+                      },
+                    });
+                    setFocused(true);
+                  }}
+                  onBlur={() => {
+                    setFocused(false);
+                  }}
+                  onChange={onChange}
+              />
+          }
+        </label>
+      </div>
   );
 });
 
@@ -88,11 +104,12 @@ RadioInput.propTypes = {
   readOnly: PropTypes.bool,
   disabled: PropTypes.bool,
   checked: PropTypes.bool,
+  noScroll: PropTypes.bool,
   onChange: PropTypes.func,
 };
 
 export default styled(RadioInput)`
-  border:none;
+  border: none;
   outline: none;
   cursor: pointer;
   background: transparent;
@@ -104,102 +121,113 @@ export default styled(RadioInput)`
   min-width: ${size(80)};
   height: ${size(44)};
   margin-right: ${size(36)};
-  @media(max-width: 575.98px){
+  @media (max-width: 575.98px) {
     width: calc(50% - 1.8rem);
     height: ${size(48)};
-    &:nth-of-type(even){
+    &:nth-of-type(even) {
       margin-right: 0;
     }
   }
-  &.small-margin{
+  
+  &.small-margin {
     margin-right: ${size(20.25)};
-     @media(max-width: 575.98px){
-     margin-right: ${size(36)};
-    width: calc(50% - 1.8rem);
-    &:nth-of-type(even){
-      margin-right: 0;
+    @media (max-width: 575.98px) {
+      margin-right: ${size(36)};
+      width: calc(50% - 1.8rem);
+      &:nth-of-type(even) {
+        margin-right: 0;
+      }
     }
   }
+  
+  &.big-radio {
+    width: ${size(285)};
+    height: ${size(124)};
+    margin-right: ${size(20)};
+    padding: 0;
+    
+    .radio-text {
+      font-size: ${size(40)};
+      font-weight: 300;
+      line-height: ${size(48)};
+    }
   }
-&.big-radio{ width: ${size(285)};
-  height: ${size(124)};
-  margin-right: ${size(20)};
-  padding: 0;
-  .radio-text{
-    font-size: ${size(40)};
-    font-weight: 300;
-    line-height: ${size(48)};
+  
+  .radio-text {
+    font-size: ${size(16)};
+    font-weight: 500;
+    line-height: ${size(23)};
+    cursor: pointer;
   }
-}
-.radio-text{
-  font-size: ${size(16)};
-  font-weight: 500;
-  line-height: ${size(23)};
-  cursor: pointer;
-}
-input{
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-}
-
-svg{
+  
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  svg {
     width: 100%;
     height: 100%;
     position: absolute;
     left: 0;
     top: 0;
-    &.btn-enter{
+    
+    &.btn-enter {
       display: none;
     }
-    &.btn-stroke path{
+    
+    &.btn-stroke path {
       transition: stroke 400ms;
-      &.gray{
+      
+      &.gray {
         stroke: rgba(191, 182, 180, 0.5);
       }
-      &.blue{
+      
+      &.blue {
         stroke: #297fff;
-      fill: transparent;
+        fill: transparent;
       }
     }
   }
   
-label{
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  padding-left: ${size(30)};
-  padding-right: ${size(30)};
-}
-
-&:hover{
-  .btn-stroke path.gray{
-    stroke: #297fff;
+  label {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding-left: ${size(30)};
+    padding-right: ${size(30)};
   }
-}
-
-&.focused{
-    .btn-enter{
-      path{
+  
+  &:hover {
+    .btn-stroke path.gray {
+      stroke: #297fff;
+    }
+  }
+  
+  &.focused {
+    .btn-enter {
+      path {
         display: block;
       }
     }
-}
-
-&.checked{
-    .btn-enter{
+  }
+  
+  &.checked {
+    .btn-enter {
       display: none;
     }
-    .btn-stroke path.gray{
+    
+    .btn-stroke path.gray {
       stroke: none;
     }
-}
+  }
 
 
 `;

@@ -149,9 +149,9 @@ const createSlideAnimation = (slide, paused = true, initial = false) => {
   
   
   slideAnimationTl
-    .from(number, {innerHTML: 0, duration: 1, ease: 'power2.out', modifiers: {innerHTML: (value, target) => value.toFixed(target.dataset.toFixed ?? 0)}, stagger: 0.2}, '<+=0.5')
+    .from(number, {innerHTML: 0, duration: 1, ease: 'power2.out', modifiers: {innerHTML: (value, target) => value.toFixed?.(target.dataset.toFixed ?? 0)}, stagger: 0.2}, '<+=0.5')
     .fromTo(trs, {yPercent: 30, autoAlpha: 0}, {yPercent: 0, autoAlpha: 1, stagger, duration: 1})
-    .from(tableNumbers, {innerHTML: 0, duration: 1, ease: 'power2.out', modifiers: {innerHTML: (value, target) => value.toFixed(target.dataset.toFixed ?? 0)}, stagger: 0.2}, '<+=0.5')
+    .from(tableNumbers, {innerHTML: 0, duration: 1, ease: 'power2.out', modifiers: {innerHTML: (value, target) => value.toFixed?.(target.dataset.toFixed ?? 0)}, stagger: 0.2}, '<+=0.5')
   ;
   return slideAnimationTl;
 };

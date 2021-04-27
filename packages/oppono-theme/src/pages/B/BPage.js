@@ -275,7 +275,7 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
             <FinalizeChild order={1}>
               <P.Dark>*Fixed Rate</P.Dark>
               <P.Dark>*Payment interest based on balance</P.Dark>
-              <P.Num>{(firstProduct.fields?.rate + 0.25).toFixed(2)}%</P.Num>
+              <P.Num>{(firstProduct.fields?.rate + 0.25).toFixed?.(2)}%</P.Num>
               <Button label={'I’m good to go'} className={'next-step'}/>
             </FinalizeChild>
             <FinalizeChild order={2} className={'wide'}>
@@ -287,7 +287,7 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
                 ? <FinalizeChild order={1}>
                   <P.D>Your BELOC request is for ${numberWithCommas(mortgage)}</P.D>
                   <P.D>Your property value is ${numberWithCommas(+section3Values('purchase_price'))}</P.D>
-                  <P.D>Your LTV is {((mortgage) / +section3Values('purchase_price') * 100).toFixed(1)}%</P.D>
+                  <P.D>Your LTV is {((mortgage) / +section3Values('purchase_price') * 100).toFixed?.(1)}%</P.D>
                 </FinalizeChild>
                 : <FinalizeChild className={'full'} order={1}>
                   <FinalizeTable>
@@ -302,7 +302,7 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
                     </tr>
                     <tr>
                       <P.Dark as={'td'}>LTV</P.Dark>
-                      <P.D as={'td'}>{((mortgage) / +section3Values('purchase_price') * 100).toFixed(1)}%</P.D>
+                      <P.D as={'td'}>{((mortgage) / +section3Values('purchase_price') * 100).toFixed?.(1)}%</P.D>
                     </tr>
                     </tbody>
                   </FinalizeTable>
@@ -336,7 +336,7 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
         <div className="upload-step-wrapper">
           <img src={upload}/>
           <h1 className={'form-headline-1 text-left'}>{formData.section_6?.title}</h1>
-          <FormConditionalInput name={'mortgages_1'} showOn={'1'} checked={'0'} {...formData.section_6?.have_appraisal_report_yes_no}>
+          <FormConditionalInput noScroll name={'mortgages_1'} showOn={'1'} checked={'0'} {...formData.section_6?.have_appraisal_report_yes_no}>
             <FileInput name='appraisal_report_file' label={formData.section_6?.appraisal_report_upload_label} acceptText={'PDF, JPG, or PNG'}/>
             <Appraiser>
               <P.D>Select an appraiser</P.D>

@@ -272,7 +272,7 @@ const FourPage = (props) => {
           <img src={upload}/>
           <h1 className={'form-headline-1 text-left'}>Let’s get this done!<br/>
             Upload your documents.</h1>
-          <FormConditionalInput label={'Do you have an appraisal report?'} name={'mortgages_1'} showOn={'1'} checked={'0'}>
+          <FormConditionalInput noScroll label={'Do you have an appraisal report?'} name={'mortgages_1'} showOn={'1'} checked={'0'}>
             <FileInput name='appraisal_report_file' label={'Appraisal report'} acceptText={'PDF, JPG, or PNG'}/>
             <Appraiser>
               <P.D>Select an appraiser</P.D>

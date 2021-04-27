@@ -184,7 +184,7 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   {!hasVariable?null:<tr className={'head'}>
                     <td scope={'row'} className={'dark'}>Fixed Rate</td>
                     {products.map(({ID, fields: {rate}}) =>
-                        <td key={ID} className={'details'} data-label="Fixed Rate">{(rate + 0.25).toFixed(2)}%</td>)}
+                        <td key={ID} className={'details'} data-label="Fixed Rate">{(rate + 0.25).toFixed?.(2)}%</td>)}
                   </tr>}
                   <tr className={'head'}>
                     <td scope={'row'} className={'dark'}>Lender Fee</td>
@@ -235,14 +235,14 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                 </div>
                                 <div className="mortgage-head">
                                   <p className={'number'}>{rate}%</p>
-                                  <p>${numberWithCommas(monthlyPayments(mortgage, rate / 100))} / month</p>
+                                  <p>${numberWithCommas(monthlyPayments(+section1Values('home_value') * maximum_ltv / 100, rate / 100))} / month</p>
                                   <p>${numberWithCommas(+section1Values('home_value') * maximum_ltv / 100)} max</p>
                                   <Button onClick={() => actions.theme.setValidateAndNextCallback(new Date().getTime())} className={'small next-step'} label={'I want this deal'}/>
                                 </div>
                                 <div className="mortgage-body">
                                   {!hasVariable ? null : <div className={'m-row m-head'}>
                                     <p>Fixed Rate</p>
-                                    <p>{(rate + 0.25).toFixed(2)}%</p>
+                                    <p>{(rate + 0.25).toFixed?.(2)}%</p>
                                   </div>}
                                   <div className={'m-row m-head'}>
                                     <p>Lender Fee</p>
@@ -478,7 +478,7 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
               ? <FinalizeChild order={1}>
                 <P.D>Your HELOC request is for ${numberWithCommas(section7Values('confirm_qualify_amount') === '0' ? +section7Values('amount_wanted') : mortgage)}</P.D>
                 <P.D>Your property value is ${numberWithCommas(+section1Values('home_value'))}</P.D>
-                <P.D>Your LTV is {((section7Values('confirm_qualify_amount') === '0' ? +section7Values('amount_wanted') : mortgage) / +section1Values('home_value') * 100).toFixed(1)}%</P.D>
+                <P.D>Your LTV is {((section7Values('confirm_qualify_amount') === '0' ? +section7Values('amount_wanted') : mortgage) / +section1Values('home_value') * 100).toFixed?.(1)}%</P.D>
               </FinalizeChild>
               : <FinalizeChild className={'full'} order={1}>
                 <FinalizeTable>
@@ -493,7 +493,7 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   </tr>
                   <tr>
                     <P.Dark as={'td'}>LTV</P.Dark>
-                    <P.D as={'td'}>{((section7Values('confirm_qualify_amount') === '0' ? +section7Values('amount_wanted') : mortgage) / +section1Values('home_value') * 100).toFixed(1)}%</P.D>
+                    <P.D as={'td'}>{((section7Values('confirm_qualify_amount') === '0' ? +section7Values('amount_wanted') : mortgage) / +section1Values('home_value') * 100).toFixed?.(1)}%</P.D>
                   </tr>
                   </tbody>
                 </FinalizeTable>
@@ -523,7 +523,7 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
         <div className="upload-step-wrapper">
           <img src={upload}/>
           <h1 className={'form-headline-1 text-left'}>{formData.section_9?.title}</h1>
-          <FormConditionalInput name={'mortgages_1'} showOn={'1'} checked={'0'} {...formData.section_9?.have_appraisal_report_yes_no}>
+          <FormConditionalInput noScroll name={'mortgages_1'} showOn={'1'} checked={'0'} {...formData.section_9?.have_appraisal_report_yes_no}>
             <FileInput name='appraisal_report_file' label={formData.section_9?.appraisal_report_upload_label} acceptText={'PDF, JPG, or PNG'}/>
             <Appraiser>
               <P.D>Select an appraiser</P.D>
