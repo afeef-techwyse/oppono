@@ -311,4 +311,12 @@ export default styled(connect(Mail))`
     }
   }
 
+  ${Select} {
+    .oppono-select {
+      &__option, &__single-value, &__input, &__control {
+        font-size: ${size(28)};
+      }
+    }
+  }
+
 `;
