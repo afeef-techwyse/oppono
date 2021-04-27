@@ -59,10 +59,13 @@ export default styled(connect(TermsPage))`
   }
   
   .privacy-page-wrapper {
-    
+    word-break: break-word;
     h1 {
       font-size: ${size(50)};
       text-align: center;
+      @media(max-width: 575.98px){
+        font-size: ${size(35)};
+      }
     }
     
     h2 {
