@@ -49,9 +49,9 @@ const Form = ({className, children, wide, actions, state, endPoint, setCurrentTh
   
   }, []);
   return (<>
-        <Head>
-          <script type="text/javascript" src="https://ws1.postescanada-canadapost.ca/js/addresscomplete-2.30.js?key=tr28-mh11-ud79-br91&app=14466&culture=en"/>
-        </Head>
+        {/*<Head>*/}
+        {/*  <script type="text/javascript" src="https://ws1.postescanada-canadapost.ca/js/addresscomplete-2.30.js?key=tr28-mh11-ud79-br91&app=14466&culture=en"/>*/}
+        {/*</Head>*/}
       <Global styles={css`html{overflow-y: scroll}`}/>
       <div ref={innerRef} className={classnames(className, {wide})}>
         {state.theme.activeStep.total > 1 ? <StepsProgress/> : null}

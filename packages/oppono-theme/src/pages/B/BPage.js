@@ -98,7 +98,7 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
         requestAnimationFrame(setForm);
       }
     }
-    requestAnimationFrame(setForm)
+    // requestAnimationFrame(setForm)
     
   }, []);
   
