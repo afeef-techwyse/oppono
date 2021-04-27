@@ -84,11 +84,12 @@ Footer.propTypes = {
 
 export default styled(Footer)`
   position: fixed;
-  bottom: ${size(10)};
+  bottom: 0;
+  padding-bottom: ${size(10)};
   width: 100%;
   z-index: 100;
   @media (max-width: 991.98px) {
-    bottom: ${size(24)};
+    padding-bottom: ${size(18)};
   }
 
   .footer-content {

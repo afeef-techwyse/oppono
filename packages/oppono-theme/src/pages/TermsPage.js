@@ -60,6 +60,7 @@ export default styled(connect(TermsPage))`
   }
   
   .terms-page-wrapper {
+    word-break: break-word;
     h1 {
       font-size: ${size(50)};
       text-align: center;

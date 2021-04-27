@@ -218,6 +218,7 @@ const HomeSlider = ({className, active = false, state, actions, link}) => {
       .fromTo(welcomeSubtitleWords.words, {autoAlpha: 0, y: 10}, {autoAlpha: 1, y: 0, stagger: 0.06}, '>-=.35')
       .addLabel('initial-slide')
       .fromTo(header.current, {autoAlpha: 0}, {autoAlpha: 1})
+      .fromTo(footer.current, {autoAlpha: 0}, {autoAlpha: 1})
       .fromTo(slidesNumbers.current, {autoAlpha: 0, scale: 0}, {autoAlpha: 1, scale: 1}, 'initial-slide')
       .fromTo(headerLinks, {autoAlpha: 0, y: 10}, {autoAlpha: 1, y: 0, stagger: 0.05}, '1')
       .call(() => setTimeout(() => setSlideFlyingObjectsPlaying([true]), 10), null, 'initial-slide-=1.1')
@@ -603,7 +604,7 @@ export default styled(connect(HomeSlider))`
 
   .btn-mobile-container {
     position: absolute;
-    bottom: 9.1vh;
+    bottom: 10.8vh;
     z-index: 9;
     @media (min-width: 576px) {
       display: none;
