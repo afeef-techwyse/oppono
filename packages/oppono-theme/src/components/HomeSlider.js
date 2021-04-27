@@ -193,7 +193,7 @@ const HomeSlider = ({className, active = false, state, actions, link}) => {
   };
   
   React.useEffect(() => {
-    actions.source.fetch(state.router.link);
+    actions.source.fetch(link);
     // flyingObjectsAnimation.current.progress(1).progress(0);
   }, []);
   React.useEffect(() => {
@@ -258,8 +258,10 @@ const HomeSlider = ({className, active = false, state, actions, link}) => {
         actions.router.set('/sign-in/', {method: 'replace'});
       }
     }
-  
   }, [state.theme.user.logged, link]);
+  React.useEffect(() => {
+    flyingWrapperRef.current.classList.toggle('hide',link !== state.router.link)
+  }, [state.router.link]);
   
   return (
     <div className={className}>
@@ -654,6 +656,10 @@ export default styled(connect(HomeSlider))`
     height: 100%;
     @media (max-width: 575.98px) {
       display: none;
+    }
+    
+    &.hide{
+      opacity: 0;
     }
   }
 `;
