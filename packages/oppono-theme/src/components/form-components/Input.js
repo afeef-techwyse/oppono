@@ -140,7 +140,6 @@ const Input = React.forwardRef(({
           }}
           onChange={(event) => {
             event.persist();
-            console.log(/^\d*$/.test(event.target.value));
             if (type==='number' && !/^\d*$/.test(event.target.value)) {
               setErrorMessage('numbers only is allowed');
               const selection = inputRef.current.selectionStart-1;
