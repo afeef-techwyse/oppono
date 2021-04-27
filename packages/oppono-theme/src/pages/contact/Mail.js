@@ -9,7 +9,6 @@ import TextArea from '../../components/form-components/TextArea';
 import Button from '../../components/form-components/Button';
 import Link from "../../components/reusable/Link";
 import Select from "../../components/form-components/Select";
-import FormStep from "../../components/form-components/FormStep";
 
 const Mail = ({className, state, actions}) => {
   const data = state.source.get(state.router.link);
@@ -20,18 +19,6 @@ const Mail = ({className, state, actions}) => {
   
   return (
       <div className={className}>
-        {/*<FlyingObjsContainer childrenList={*/}
-        {/*  [*/}
-        {/*    {*/}
-        {/*      imageUrl: contact_obj,*/}
-        {/*      left: '60%',*/}
-        {/*      level: 1,*/}
-        {/*      top: '28%',*/}
-        {/*      type: 'image',*/}
-        {/*      width: 18,*/}
-        {/*      alt: 'alt',*/}
-        {/*    },*/}
-        {/*  ]}/>*/}
         <Container>
           <div className="d-flex">
             <div className="title-wrapper">
@@ -89,6 +76,21 @@ const Mail = ({className, state, actions}) => {
             </div>
             {pageData.section_1?.sub_title ?
                 <h2 className={'contact-sub-title mobile-only'}>{pageData.section_1?.sub_title}</h2> : null}
+            
+            <div className="floating-obj">
+              <FlyingObjsContainer childrenList={
+                [
+                  {
+                    imageUrl: contact_obj,
+                    left: '60%',
+                    level: 1,
+                    top: '28%',
+                    type: 'image',
+                    width: 18,
+                    alt: 'alt',
+                  },
+                ]}/>
+            </div>
           </div>
           {/*<img className={'contact-obj'} src={contact_obj} alt={'Contact Icon'}/>*/}
           <div className="contact-row">
@@ -96,12 +98,12 @@ const Mail = ({className, state, actions}) => {
               <Input className={'primary-input'} type={'text'} {...pageData.section_1?.name_input}/>
               <Input className={'primary-input'} type={'text'} {...pageData.section_1?.email_input}/>
               <Input className={'primary-input'} type={'text'} {...pageData.section_1?.phone_input}/>
-             
+            
             </div>
             <div className="col-auto">
               <Select className={'primary-select'}
-                  name={'discuss'}
-                  {...pageData.section_1?.discuss_dropdown}/>
+                      name={'discuss'}
+                      {...pageData.section_1?.discuss_dropdown}/>
               <TextArea className={'primary-input'} label={'Questions?'}/>
             </div>
           </div>
@@ -291,6 +293,21 @@ export default styled(connect(Mail))`
   .mobile-only {
     @media (min-width: 992px) {
       display: none;
+    }
+  }
+  
+  .floating-obj{
+    position: relative;
+    width: 25%;
+    height: 100%;
+    
+    .flying-objs-container{
+      top: 0!important;
+      > div{
+        width: 100%!important;
+        left: 15%!important;
+        top: 0!important;
+      }
     }
   }
 
