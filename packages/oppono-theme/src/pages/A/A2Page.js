@@ -304,7 +304,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
         <div className="upload-step-wrapper">
           <img src={upload}/>
           <h1 className={'form-headline-1 text-left'}>{formData.section_6?.title}</h1>
-          <FormConditionalInput name={'mortgages_1'} showOn={'1'} checked={'0'} {...formData.section_6?.have_appraisal_report_yes_no}>
+          <FormConditionalInput noScroll name={'mortgages_1'} showOn={'1'} checked={'0'} {...formData.section_6?.have_appraisal_report_yes_no}>
             <FileInput name='appraisal_report_file' label={formData.section_6?.appraisal_report_upload_label} acceptText={'PDF, JPG, or PNG'}/>
             <Appraiser>
               <P.D>Select an appraiser</P.D>
