@@ -167,40 +167,41 @@ const ProductsSlider = ({className, active = false, link, state, actions}) => {
   const [swiperRef, setSwiperRef] = React.useState(null);
   const [thumbsSwiper, setThumbsSwiper] = React.useState(0);
   const [slideFlyingObjectsPlaying, setSlideFlyingObjectsPlaying] = React.useState([]);
-  
   const slidesAnimation = React.useRef({});
   const slidesTransition = React.useRef(0);
   const initialTimeline = React.useRef(gsap.timeline({paused: false}));
   const flyingObjectsAnimation = React.useRef(gsap.timeline({paused: true}));
+  const allProductsFetched = React.useRef([]);
   
-  
+
   React.useEffect(() => {
     actions.theme.setActiveTheme(page_theme);
-  
   }, [page_theme]);
-  const swiperInit = (swiper) => {
-    
-    
+  const swiperInit = async (swiper) => {
+  
+    await Promise.all(allProductsFetched.current);
+  setTimeout(()=>{
     const {slides} = swiper;
     for (let i = 0; i < slides?.length; i++) {
       slidesAnimation.current[i] = createSlideAnimation(slides[i]);
     }
     setSwiperRef(swiper);
+  },100)
+  
   };
-  // const keyHandler = event => {
-  //   if (event.key === 'Enter' && !event.repeat) {
-  //     ctaRef.current.click();
-  //   }
-  // };
-  // window.addEventListener('keydown', keyHandler);
-  
-  
+
   React.useEffect(() => {
     actions.source.fetch(state.router.link);
     flyingObjectsAnimation.current.progress(1).progress(0);
     // window.removeEventListener('keydown', keyHandler);
     actions.theme.setSubHeader({});
   }, []);
+  
+  React.useEffect(() => {
+    allProductsFetched.current=slidesObj.map(slide=>{
+      return actions.source.fetch('/'+slide.product.post_type+'/'+slide.product.post_name)
+    })
+  }, [data.isReady]);
   
   React.useEffect(() => {
     const
@@ -269,47 +270,48 @@ const ProductsSlider = ({className, active = false, link, state, actions}) => {
             ))
           }
         </div>
-        <Slider
-          speed={1500}
-          a11y
-          spaceBetween={0}
-          slidesPerView={1}
-          navigation={{
-            prevEl: prevBtnRef.current,
-            nextEl: nextBtnRef.current,
-          }}
-          onSwiper={swiperInit}
-          keyboard
-          mousewheel
-          virtualTranslate
-          onSetTransition={(swiper, transition) => {
-            slidesTransition.current = transition / 1000;
-          }}
-          onSetTranslate={(swiper, translate) => {
-            gsap.set(swiper.$wrapperEl, {x: translate});
-            gsap.to(flyingWrapperRef.current, {
-              x: translate,
-              duration: slidesTransition.current,
-              ease: CustomEase.create('custom', 'M0,0 C0.25,0.1 0.25,1 1,1 '),
-            });
-            gsap.to(flyingObjectsAnimation.current, {
-              progress: -translate / (swiper.virtualSize - window.innerWidth),
-              duration: slidesTransition.current,
-              ease: CustomEase.create('custom', 'M0,0 C0.25,0.1 0.25,1 1,1 '),
-            });
-          }}
-          thumbs={{swiper: thumbsSwiper}}
-          onSlideChange={({realIndex, previousIndex}) => {
-            setTimeout(() => {
-              slidesAnimation.current[realIndex].progress(0).play();
-              slidesAnimation.current[previousIndex].progress(1).paused(true).progress(0);
-            }, 750);
-            setTimeout(() => setSlideFlyingObjectsPlaying(prevState => {
-              const newState = [...prevState];
-              newState[realIndex] = true;
-              return newState;
-            }), 1000);
-          }}
+  
+        {data.isReady&&<Slider
+            speed={1500}
+            a11y
+            spaceBetween={0}
+            slidesPerView={1}
+            navigation={{
+              prevEl: prevBtnRef.current,
+              nextEl: nextBtnRef.current,
+            }}
+            onSwiper={swiperInit}
+            keyboard
+            mousewheel
+            virtualTranslate
+            onSetTransition={(swiper, transition) => {
+              slidesTransition.current = transition / 1000;
+            }}
+            onSetTranslate={(swiper, translate) => {
+              gsap.set(swiper.$wrapperEl, {x: translate});
+              gsap.to(flyingWrapperRef.current, {
+                x: translate,
+                duration: slidesTransition.current,
+                ease: CustomEase.create('custom', 'M0,0 C0.25,0.1 0.25,1 1,1 '),
+              });
+              gsap.to(flyingObjectsAnimation.current, {
+                progress: -translate / (swiper.virtualSize - window.innerWidth),
+                duration: slidesTransition.current,
+                ease: CustomEase.create('custom', 'M0,0 C0.25,0.1 0.25,1 1,1 '),
+              });
+            }}
+            thumbs={{swiper: thumbsSwiper}}
+            onSlideChange={({realIndex, previousIndex}) => {
+              setTimeout(() => {
+                slidesAnimation.current[realIndex].progress(0).play();
+                slidesAnimation.current[previousIndex].progress(1).paused(true).progress(0);
+              }, 750);
+              setTimeout(() => setSlideFlyingObjectsPlaying(prevState => {
+                const newState = [...prevState];
+                newState[realIndex] = true;
+                return newState;
+              }), 1000);
+            }}
         >
           <Container className={'swiper-arrows-container'}>
               <span className={'prev'} ref={prevBtnRef}>
@@ -325,37 +327,45 @@ const ProductsSlider = ({className, active = false, link, state, actions}) => {
                 </svg>
               </span>
           </Container>
-          
+    
           {
-            slidesObj.map((slide, slideIndex) =>
-              <SwiperSlide key={`slide-${slideIndex}`}>
-                <Container>
-                  <MegaloNum>
-                    <div className={'form-headline-1 title'} dangerouslySetInnerHTML={{__html: slide.title}}/>
-                    <p animateNumber className={'number'} data-number={slide.number} data-to-fixed={2}>{slide.number}</p>
-                    <div className={'form-headline-1 subtitle'} dangerouslySetInnerHTML={{__html: slide.subtitle}}/>
-                  </MegaloNum>
-                  <table>
-                    <tbody>
-                    <tr>
-                      <td><P.D as={'span'} className={'animate-number'} data-to-fixed={2}>{slide.fixed_rate}</P.D><P.D as={'span'}>%</P.D></td>
-                      <td><P.Dark>Fixed Rate</P.Dark></td>
-                    </tr>
-                    <tr>
-                      <td><P.D as={'span'} className={'animate-number'} data-to-fixed={2}>{slide.lender_fee}</P.D><P.D as={'span'}>%</P.D></td>
-                      <td><P.Dark>Lender Fee</P.Dark></td>
-                    </tr>
-                    <tr>
-                      <td><P.D as={'span'} className={'animate-number'} data-to-fixed={0}>{slide.ltv}</P.D><P.D as={'span'}>%</P.D></td>
-                      <td><P.Dark>LTV</P.Dark></td>
-                    </tr>
-                    </tbody>
-                  </table>
-                </Container>
-              </SwiperSlide>,
+            slidesObj.map((slide, slideIndex) => {
+              const product = state.source[slide.product.post_type]?.[slide.product.ID]
+                  return <SwiperSlide key={`slide-${slideIndex}`}>
+                    <Container>
+                      <MegaloNum>
+                        <div className={'form-headline-1 title'} dangerouslySetInnerHTML={{__html: slide.title}}/>
+                        <p animateNumber className={'number'} data-number={product?.acf?.rate} data-to-fixed={2}>{product?.acf?.rate}</p>
+                        <div className={'form-headline-1 subtitle'} dangerouslySetInnerHTML={{__html: slide.subtitle}}/>
+                      </MegaloNum>
+                      <table>
+                        <tbody>
+                        <tr>
+                          <td>
+                            <P.D as={'span'} className={'animate-number'} data-to-fixed={2}>{0.25 + (+product?.acf?.rate)}</P.D><P.D as={'span'}>%</P.D>
+                          </td>
+                          <td><P.Dark>Fixed Rate</P.Dark></td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <P.D as={'span'} className={'animate-number'} data-to-fixed={2}>{product?.acf?.fee}</P.D><P.D as={'span'}>%</P.D>
+                          </td>
+                          <td><P.Dark>Lender Fee</P.Dark></td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <P.D as={'span'} className={'animate-number'} data-to-fixed={0}>{product?.acf?.maximum_ltv}</P.D><P.D as={'span'}>%</P.D>
+                          </td>
+                          <td><P.Dark>LTV</P.Dark></td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </Container>
+                  </SwiperSlide>;
+                },
             )
           }
-        </Slider>
+        </Slider>}
         <Container className={'thumbs-container'}>
           <Swiper
             className={'thumbs-swiper'}

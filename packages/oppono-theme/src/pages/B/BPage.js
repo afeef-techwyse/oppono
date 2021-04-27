@@ -61,6 +61,47 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
   const refNumber = React.useRef('');
   state.theme.stepResponse.data?.['reference-number'] && (refNumber.current = state.theme.stepResponse.data?.['reference-number'])
   
+  const control = React.useRef(null);
+  
+  
+  React.useEffect(() => {
+    var fields = [
+          { element: "search", field: "", mode: pca.fieldMode.SEARCH },
+        
+          // { element: "street-address", field: "Line1", mode: pca.fieldMode.POPULATE },
+          // { element: "street-address2", field: "Line2", mode: pca.fieldMode.POPULATE },
+          // { element: "city", field: "City", mode: pca.fieldMode.POPULATE },
+          // { element: "state", field: "ProvinceName", mode: pca.fieldMode.POPULATE },
+          // { element: "postcode", field: "PostalCode" },
+          // { element: "country", field: "CountryName", mode: pca.fieldMode.COUNTRY },
+          //
+          // { element: "multi-unit", field: "{AcMua}", mode: pca.fieldMode.POPULATE },
+          // { element: "residential-business", field: "{AcRbdi}", mode: pca.fieldMode.POPULATE }
+        ],
+        options = {
+          key: "EG91-MA35-KW64-JT49"
+        };
+        
+        const setForm = ()=>{
+      if (window.pca&&window.addressComplete) {
+        // console.log(control.current);
+        window.addressComplete.listen('load', function(control) {
+          console.log(control);
+          control.listen("populate", function (address) {
+            //add custom code here
+            console.log('hi');
+          });
+        });
+        control.current = new window.pca.Address(fields, options);
+      }
+      else {
+        requestAnimationFrame(setForm);
+      }
+    }
+    requestAnimationFrame(setForm)
+    
+  }, []);
+  
   return <div className={className}>
     <Form setCurrentTheme={setCurrentTheme} endPoint={'/beloc'}>
       <FormStep apiStepNumber={1} pageName={pageName} activeTheme={formData.section_1?.section_theme} stepName={formData.section_1?.section_name}>
@@ -92,7 +133,7 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
             name={'business_type'}
             {...formData.section_1?.type_of_business_dropdown}/>
         
-        <Input type={'text'} name={'business_address'} {...formData.section_1?.address_input}/>
+        <Input type={'text'} id={'search'} name={'business_address'} {...formData.section_1?.address_input}/>
         <W50>
           <Input value={businessAppraiser?.title} type={'text'} name={'business_city'} {...formData.section_1?.city_input}/>
           <Input onChange={businessPostalCodeOnChange()} type={'text'} name={'business_postal_code'} {...formData.section_1?.postal_code_input}/>
@@ -234,7 +275,7 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
             <FinalizeChild order={1}>
               <P.Dark>*Fixed Rate</P.Dark>
               <P.Dark>*Payment interest based on balance</P.Dark>
-              <P.Num>{(firstProduct.fields?.rate * 1.025).toFixed(2)}%</P.Num>
+              <P.Num>{(firstProduct.fields?.rate + 0.25).toFixed(2)}%</P.Num>
               <Button label={'I’m good to go'} className={'next-step'}/>
             </FinalizeChild>
             <FinalizeChild order={2} className={'wide'}>

@@ -57,6 +57,10 @@ export default {
           type: 'appraiser',
           endpoint: 'appraiser',
         },
+        {
+          type: 'mortgage-product',
+          endpoint: 'mortgage-product',
+        },
       ],
     },
     themeLoading: {
