@@ -235,7 +235,7 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
             <FinalizeChild order={1}>
               <P.Dark>*Fixed Rate</P.Dark>
               <P.Dark>*Payment interest based on balance</P.Dark>
-              <P.Num>{firstProduct.fields?.rate}%</P.Num>
+              <P.Num>{+firstProduct.fields?.rate + 0.25}%</P.Num>
               <Button label={'I’m good to go'} className={'next-step'}/>
             </FinalizeChild>
             <FinalizeChild order={2} className={'wide'}>

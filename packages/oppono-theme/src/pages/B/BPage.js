@@ -66,7 +66,7 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
   
   React.useEffect(() => {
     var fields = [
-          { element: "search", field: "", mode: pca.fieldMode.SEARCH },
+          // { element: "search", field: "", mode: pca.fieldMode.SEARCH },
         
           // { element: "street-address", field: "Line1", mode: pca.fieldMode.POPULATE },
           // { element: "street-address2", field: "Line2", mode: pca.fieldMode.POPULATE },
@@ -275,7 +275,7 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
             <FinalizeChild order={1}>
               <P.Dark>*Fixed Rate</P.Dark>
               <P.Dark>*Payment interest based on balance</P.Dark>
-              <P.Num>{(firstProduct.fields?.rate + 0.25).toFixed?.(2)}%</P.Num>
+              <P.Num>{(+firstProduct.fields?.rate + 0.25).toFixed?.(2)}%</P.Num>
               <Button label={'I’m good to go'} className={'next-step'}/>
             </FinalizeChild>
             <FinalizeChild order={2} className={'wide'}>
