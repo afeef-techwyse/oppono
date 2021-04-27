@@ -1,5 +1,5 @@
 import React from 'react';
-import {connect, css, Global, styled} from 'frontity';
+import {connect, css, Global, styled, Head} from 'frontity';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import gsap from 'gsap';
@@ -49,6 +49,9 @@ const Form = ({className, children, wide, actions, state, endPoint, setCurrentTh
   
   }, []);
   return (<>
+        <Head>
+          <script type="text/javascript" src="https://ws1.postescanada-canadapost.ca/js/addresscomplete-2.30.js?key=tr28-mh11-ud79-br91&app=14466&culture=en"/>
+        </Head>
       <Global styles={css`html{overflow-y: scroll}`}/>
       <div ref={innerRef} className={classnames(className, {wide})}>
         {state.theme.activeStep.total > 1 ? <StepsProgress/> : null}
