@@ -57,7 +57,6 @@ const D1Page = ({className, setCurrentTheme, state, actions, formData}) => {
   const firstProduct = state.theme.stepResponse.data?.data ? Object.values(state.theme.stepResponse.data?.data)[0].products[0] : {};
     const  refNumber = React.useRef('');
   state.theme.stepResponse.data?.['reference-number']&&(refNumber.current=state.theme.stepResponse.data?.['reference-number'])
-  
   return <div className={className}>
     <Form setCurrentTheme={setCurrentTheme} endPoint={'/purchase'}>
       <FormStep apiStepNumber={1} pageName={pageName} activeTheme={formData.section_1?.section_theme} stepName={formData.section_1?.section_name}>
@@ -155,13 +154,13 @@ const D1Page = ({className, setCurrentTheme, state, actions, formData}) => {
           <Top>
             {media !== 'mobile'
               ? <FinalizeChild>
-                <P.Num>{firstProduct.fields?.rate}%</P.Num>
-                <P.Dark>*Variable Rate</P.Dark>
+                <P.Num>{+firstProduct.fields?.rate + 0.25}%</P.Num>
+                <P.Dark>*Fixed Rate</P.Dark>
               </FinalizeChild>
               : <FinalizeChild className={'full'} order={1}>
-                <P.Dark>*Variable Rate</P.Dark>
+                <P.Dark>*Fixed Rate</P.Dark>
                 <P.Dark>*Payment interest based on balance</P.Dark>
-                <P.Num>{firstProduct.fields?.rate}%</P.Num>
+                <P.Num>{+firstProduct.fields?.rate + 0.25}%</P.Num>
               </FinalizeChild>}
             
             <FinalizeChild order={2}>
@@ -169,7 +168,7 @@ const D1Page = ({className, setCurrentTheme, state, actions, formData}) => {
               <P.Dark>*mortgage amount</P.Dark>
             </FinalizeChild>
             <FinalizeChild className={'wide'} order={3}>
-              <P.Cost>${numberWithCommas(monthlyPayments(mortgage, (firstProduct.fields?.rate + 0.25) / 100))}</P.Cost>
+              <P.Cost>${numberWithCommas(monthlyPayments(mortgage, (+firstProduct.fields?.rate + 0.25) / 100))}</P.Cost>
               <P.Dark>*Monthly mortgage payment</P.Dark>
             </FinalizeChild>
           </Top>

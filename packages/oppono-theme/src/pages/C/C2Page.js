@@ -175,7 +175,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   <tbody>
                   <tr className={'head'}>
                     <td scope={'row'} className={'dark'}>Fixed Rate</td>
-                    {products.map(({ID, fields: {rate}}) => <td key={ID} className={'details'} data-label="Fixed Rate">{(rate + 0.25).toFixed?.(2)}%</td>)}
+                    {products.map(({ID, fields: {rate}}) => <td key={ID} className={'details'} data-label="Fixed Rate">{(+rate + 0.25).toFixed?.(2)}%</td>)}
                   </tr>
                   <tr className={'head'}>
                     <td scope={'row'} className={'dark'}>Lender Fee</td>
@@ -221,7 +221,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                           <div className="mortgage-body">
                             <div className={'m-row m-head'}>
                               <p>Fixed Rate</p>
-                              <p>{(rate + 0.25).toFixed?.(2)}%</p>
+                              <p>{(+rate + 0.25).toFixed?.(2)}%</p>
                             </div>
                             <div className={'m-row m-head'}>
                               <p>Lender Fee</p>

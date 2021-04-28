@@ -171,9 +171,9 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
                       products.map(({ID, fields: {rate, maximum_ltv}}) =>
                           <th scope={'col'} key={ID}>
                             <p>${numberWithCommas(+section1Values('home_value') * maximum_ltv / 100)} max</p>
-                            <p>${numberWithCommas(monthlyPayments(+section1Values('home_value') * maximum_ltv / 100, rate / 100))} /
+                            <p>${numberWithCommas(monthlyPayments(+section1Values('home_value') * maximum_ltv / 100, (+rate + hasVariable?0:0.25) / 100))} /
                               month</p>
-                            <p className={'number'}>{rate}%</p>
+                            <p className={'number'}>{(+rate + hasVariable?0:0.25)}%</p>
                             <Button onClick={() => actions.theme.setValidateAndNextCallback(new Date().getTime())} className={'small next-step'} label={'I want this deal'}/>
                           </th>,
                       )
@@ -184,7 +184,7 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   {!hasVariable?null:<tr className={'head'}>
                     <td scope={'row'} className={'dark'}>Fixed Rate</td>
                     {products.map(({ID, fields: {rate}}) =>
-                        <td key={ID} className={'details'} data-label="Fixed Rate">{(rate + 0.25).toFixed?.(2)}%</td>)}
+                        <td key={ID} className={'details'} data-label="Fixed Rate">{(+rate + 0.25).toFixed?.(2)}%</td>)}
                   </tr>}
                   <tr className={'head'}>
                     <td scope={'row'} className={'dark'}>Lender Fee</td>
@@ -234,15 +234,15 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                   <p className={'dark'}>{hasVariable ? 'Variable' : 'Fixed'} rates</p>
                                 </div>
                                 <div className="mortgage-head">
-                                  <p className={'number'}>{rate}%</p>
-                                  <p>${numberWithCommas(monthlyPayments(+section1Values('home_value') * maximum_ltv / 100, rate / 100))} / month</p>
+                                  <p className={'number'}>{(+rate + hasVariable?0:0.25)}%</p>
+                                  <p>${numberWithCommas(monthlyPayments(+section1Values('home_value') * maximum_ltv / 100, (+rate + hasVariable?0:0.25) / 100))} / month</p>
                                   <p>${numberWithCommas(+section1Values('home_value') * maximum_ltv / 100)} max</p>
                                   <Button onClick={() => actions.theme.setValidateAndNextCallback(new Date().getTime())} className={'small next-step'} label={'I want this deal'}/>
                                 </div>
                                 <div className="mortgage-body">
                                   {!hasVariable ? null : <div className={'m-row m-head'}>
                                     <p>Fixed Rate</p>
-                                    <p>{(rate + 0.25).toFixed?.(2)}%</p>
+                                    <p>{(+rate + 0.25).toFixed?.(2)}%</p>
                                   </div>}
                                   <div className={'m-row m-head'}>
                                     <p>Lender Fee</p>
@@ -466,7 +466,7 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
             <FinalizeChild order={1}>
               <P.Dark>*Fixed Rate</P.Dark>
               <P.Dark>*Payment interest based on balance</P.Dark>
-              <P.Num>{firstProduct.fields?.rate}%</P.Num>
+              <P.Num>{+firstProduct.fields?.rate +0.25}%</P.Num>
               <Button label={'I’m good to go'} className={'next-step'}/>
             </FinalizeChild>
             <FinalizeChild order={2} className={'wide'}>
