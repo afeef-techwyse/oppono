@@ -168,7 +168,7 @@ const MapPage = ({className, actions, state}) => {
                   postalCodeGetAppraiser(e.target.value);
                 }}
                        placeholder={'L5H 3S4'}
-                       label={'Type in your Postal Code'}/>
+                       label={'Type in your postal code'}/>
               </div>
               
               {appraiser[0]

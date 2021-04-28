@@ -94,7 +94,6 @@ export default styled(connect(TermsPage))`
       font-size: 2rem;
       font-weight: 300;
       font-style: normal;
-      text-transform: capitalize;
       color: rgb(191, 182, 180) !important;
       margin-top: 2rem;
     }
