@@ -152,6 +152,9 @@ const GeneralStyles = (props) =>
             margin-right: 0;
             margin-bottom: 0;
           }
+          &:not(:first-of-type){
+            margin-top: ${size(20)}!important;
+          }
         }
       }
     }
