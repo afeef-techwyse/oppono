@@ -427,15 +427,15 @@ export default styled(connect(ProductsSlider))`
   align-items: center;
     
     
-    // ${Header}, ${Footer} {
-  //   background: none !important;
-  // }
+    ${Header}, ${Footer} {
+    background: none !important;
+  }
   
   .product-slider {
     position: relative;
     width: 100%;
     overflow-x: hidden;
-    padding-top: ${size(50)};
+    padding-top: ${size(25)};
     // padding-bottom: ${size(140)};
   }
   
@@ -707,7 +707,7 @@ export default styled(connect(ProductsSlider))`
   @media (max-width: 575.98px) {
     ${P.D}, ${P.Dark}, .oppono-btn {
       font-size: 1.4rem;
-      line-height: 1.4rem;
+      line-height: 2rem;
     }
   }
 `;
