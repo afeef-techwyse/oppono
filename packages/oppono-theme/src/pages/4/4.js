@@ -318,7 +318,7 @@ const FourPage = (props) => {
             </Ol>
             <div className="btn-group">
               <Button className={'wide'} label={'Connect to Filogix'}/>
-              <Link className={'wide bordered'} href={'/dashboard'}>back to Dashboard</Link>
+              <Link className={'wide bordered'} href={'/dashboard'}>Back to Dashboard</Link>
             </div>
           </div>
         </LastStep>

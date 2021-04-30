@@ -331,7 +331,7 @@ const D3Page = ({state, setCurrentTheme, actions, className, formData}) => {
                 <Button className={'wide filled'} label={'Connect to Filogix'}/>
               </Link>
               <Link className={'wide bordered'} href={'/dashboard'}>
-                <Button className={'wide bordered'} label={'back to Dashboard'}/>
+                <Button className={'wide bordered'} label={'Back to Dashboard'}/>
               </Link>
             </div>
           </div>
