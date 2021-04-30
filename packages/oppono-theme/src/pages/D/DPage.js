@@ -4,6 +4,7 @@ import {connect, styled} from 'frontity';
 import FormStep from '../../components/form-components/FormStep';
 import Button from '../../components/form-components/Button';
 import ProductsTable from '../../components/form-components/ProductsTable';
+import {beaconScore} from "../../functions/beaconScore";
 import {productTypeToFullName} from "../../functions/productTypeToFullName";
 import useMedia from '../../hooks/useMedia';
 import FormFilter from '../../components/form-components/FormFilter';
@@ -102,7 +103,7 @@ const DPage = ({className, setCurrentTheme, state, actions}) => {
                   <tr className={'head last-head'}>
                     <td scope={'row'} className={'dark'}>Credit Score</td>
                     {products.map(({ID, fields: {beacon_score}}) =>
-                        <td key={ID} className={'details'} data-label="beacon_score">{beacon_score[0].split('-')[0] + (beacon_score.length > 1 ? '+' : '')}</td>)}
+                        <td key={ID} className={'details'} data-label="beacon_score">{beaconScore(beacon_score)}</td>)}
                   </tr>
     
                   {
@@ -157,7 +158,7 @@ const DPage = ({className, setCurrentTheme, state, actions}) => {
                                   </div>
                                   <div className={'m-row m-head  m-head last-head'}>
                                     <p>Credit Score</p>
-                                    <p>{beacon_score[0].split('-')[0] + (beacon_score.length > 1 ? '+' : '')}</p>
+                                    <p>{beaconScore(beacon_score)}</p>
                                   </div>
                                   {
                                     specifications.slice(0, 4).map(({term_id, name}) =>

@@ -2,6 +2,7 @@ import React from 'react';
 import Form from '../../components/form-components/Form';
 import {connect, styled} from 'frontity';
 import CheckMark from "../../components/reusable/CheckMark";
+import {beaconScore} from "../../functions/beaconScore";
 import {monthlyPayments} from "../../functions/monthlyPayment";
 import {productTypeToFullName} from "../../functions/productTypeToFullName";
 import {size} from '../../functions/size';
@@ -318,7 +319,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                         <tr className={'head last-head'}>
                           <td scope={'row'} className={'dark'}>Credit Score</td>
                           {products.map(({ID, fields: {beacon_score}}) =>
-                              <td key={ID} className={'details'} data-label="beacon_score">{beacon_score}</td>)}
+                              <td key={ID} className={'details'} data-label="beacon_score">{beaconScore(beacon_score)}</td>)}
                         </tr>
                         
                         {
@@ -374,7 +375,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                     </div>
                                     <div className={'m-row m-head  m-head last-head'}>
                                       <p>Credit Score</p>
-                                      <p>{beacon_score[0].split('-')[0] + (beacon_score.length > 1 ? '+' : '')}</p>
+                                      <p>{beaconScore(beacon_score)}</p>
                                     </div>
                                     {
                                       specifications.slice(0, 4).map(({term_id, name}) =>

@@ -2,6 +2,7 @@ import React from 'react';
 import Form from '../../components/form-components/Form';
 import Input from '../../components/form-components/Input';
 import {connect, styled} from 'frontity';
+import {beaconScore} from "../../functions/beaconScore";
 import {size} from '../../functions/size';
 import Select from '../../components/form-components/Select';
 import RadioInput from '../../components/form-components/RadioInput';
@@ -277,7 +278,7 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
                 </tr>
                 <tr>
                   <P.Dark as={'td'}>Credit Score</P.Dark>
-                  <P.D as={'td'}>{firstProduct.fields?.beacon_score[0].split('-')[0]+(firstProduct.fields?.beacon_score.length>1?'+':'')}</P.D>
+                  <P.D as={'td'}>{beaconScore(firstProduct.fields?.beacon_score)}</P.D>
                 </tr>
                 </tbody>
               </FinalizeTable>
