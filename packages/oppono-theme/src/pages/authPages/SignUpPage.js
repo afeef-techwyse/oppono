@@ -146,7 +146,17 @@ export default styled(connect(SignUpPage))`
     img {
       margin-bottom: ${size(20)};
       width: 35%;
+        @media (max-width: 575.98px) {
+            width: 20%;
+        }
     }
+      @media (max-width: 575.98px) {
+         .btn-group{
+             button{
+                 margin-top: ${size(15)};
+             }
+         }
+      }
   }
 
   .white-color {

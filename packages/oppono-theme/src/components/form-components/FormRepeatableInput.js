@@ -11,7 +11,7 @@ import {numberToLetters} from '../../functions/numberToletters';
 const find = new RegExp('{{number}}', 'g');
 
 const RepeatedUnit = styled.div`
-margin: ${size(50)} 0;
+margin: ${size(50)} 0 0;
 .form-group{
   margin-top: ${size(25)};
   @media(max-width: 991.98px){
