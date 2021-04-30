@@ -170,7 +170,7 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                       products.map(({ID, fields: {rate, maximum_ltv}}) =>
                         <th scope={'col'} key={ID}>
                           <p>${numberWithCommas(+section1Values('home_value') * maximum_ltv / 100)} max</p>
-                          <p>${numberWithCommas(monthlyPayments(+section1Values('home_value') * maximum_ltv / 100, rate / 100))} / month</p>
+                          <p>${numberWithCommas(monthlyPayments(+section1Values('home_value') * maximum_ltv / 100, +rate / 100))} / month</p>
                           <p className={'number'}>{rate}%</p>
                           <Button onClick={() => actions.theme.setValidateAndNextCallback(new Date().getTime())} className={'small next-step'} label={'I want this deal'}/>
                         </th>,
@@ -221,7 +221,7 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                           </div>
                           <div className="mortgage-head">
                             <p className={'number'}>{rate}%</p>
-                            <p>${numberWithCommas(monthlyPayments(+section1Values('home_value') * maximum_ltv / 100, rate / 100))} / month</p>
+                            <p>${numberWithCommas(monthlyPayments(+section1Values('home_value') * maximum_ltv / 100, +rate / 100))} / month</p>
                             <p>${numberWithCommas(+section1Values('home_value') * maximum_ltv / 100)} max</p>
                             <Button onClick={() => actions.theme.setValidateAndNextCallback(new Date().getTime())} className={'small next-step'} label={'I want this deal'}/>
                           </div>
@@ -419,7 +419,7 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
               <P.Dark>*mortgage amount</P.Dark>
             </FinalizeChild>
             <FinalizeChild className={'wide'} order={3}>
-              <P.Cost>${numberWithCommas(monthlyPayments(mortgage, firstProduct.fields?.rate / 100))}</P.Cost>
+              <P.Cost>${numberWithCommas(monthlyPayments(mortgage, +firstProduct.fields?.rate / 100))}</P.Cost>
               <P.Dark>*Monthly mortgage payment</P.Dark>
             </FinalizeChild>
           </Top>

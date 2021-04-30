@@ -133,6 +133,7 @@ const Slider = styled(Swiper)`
 `;
 
 const createSlideAnimation = (slide, paused = true, initial = false) => {
+  console.log(slide);
   if (!slide) return;
   const
     title = slide.querySelector('.title'),
@@ -141,18 +142,19 @@ const createSlideAnimation = (slide, paused = true, initial = false) => {
     table = slide.querySelector('table'),
     trs = table.querySelectorAll('tr'),
     tableNumbers = table.querySelectorAll('.animate-number'),
-    slideAnimationTl = gsap.timeline({paused});
-  const stagger = 0.2;
+    slideAnimationTl = gsap.timeline({paused}),
+      stagger = 0.2;
   if (initial) {
     return gsap.fromTo([title, number, subtitle], {autoAlpha: 0, y: 100}, {autoAlpha: 1, y: 0, duration: 1, stagger: .3, overwrite: 'auto'});
   }
   
   
   slideAnimationTl
-    .from(number, {innerHTML: 0, duration: 1, ease: 'power2.out', modifiers: {innerHTML: (value, target) => value.toFixed?.(target.dataset.toFixed ?? 0)}, stagger: 0.2}, '<+=0.5')
+    .fromTo(number, {innerHTML: 0},{innerHTML:(_,element)=>+element.dataset.number, duration: 1, ease: 'power2.out',
+      modifiers: {innerHTML: (value, target) => value.toFixed?.(target.dataset.toFixed ?? 0)},
+      stagger: 0.2, immediateRender:true}, '<+=0.5')
     .fromTo(trs, {yPercent: 30, autoAlpha: 0}, {yPercent: 0, autoAlpha: 1, stagger, duration: 1})
-    .from(tableNumbers, {innerHTML: 0, duration: 1, ease: 'power2.out', modifiers: {innerHTML: (value, target) => value.toFixed?.(target.dataset.toFixed ?? 0)}, stagger: 0.2}, '<+=0.5')
-  ;
+    .fromTo(tableNumbers, {innerHTML: 0,},{innerHTML:(_,element)=>+element.dataset.number, duration: 1, ease: 'power2.out', modifiers: {innerHTML: (value, target) => value.toFixed?.(target.dataset.toFixed ?? 0)}, stagger: 0.2}, '<+=0.5')
   return slideAnimationTl;
 };
 
@@ -185,8 +187,9 @@ const ProductsSlider = ({className, active = false, link, state, actions}) => {
     for (let i = 0; i < slides?.length; i++) {
       slidesAnimation.current[i] = createSlideAnimation(slides[i]);
     }
+    console.log('wait')
     setSwiperRef(swiper);
-  },100)
+  },500)
   
   };
 
@@ -198,12 +201,18 @@ const ProductsSlider = ({className, active = false, link, state, actions}) => {
   }, []);
   
   React.useEffect(() => {
+    console.log('data.ready==========================')
     allProductsFetched.current=slidesObj.map(slide=>{
       return actions.source.fetch('/'+slide.product.post_type+'/'+slide.product.post_name)
     })
   }, [data.isReady]);
   
   React.useEffect(() => {
+    console.log('swiper.ready=========================')
+    if (!swiperRef) {
+      return
+    }
+    console.log(slidesAnimation.current[0]);
     const
       nextArrow = nextBtnRef.current.querySelectorAll('svg path'),
       prevArrow = prevBtnRef.current.querySelectorAll('svg path');
@@ -212,7 +221,9 @@ const ProductsSlider = ({className, active = false, link, state, actions}) => {
       .fromTo(flyingWrapperRef.current, {y: 0, yPercent: 100}, {y: 0, yPercent: 0})
       .addLabel('initial-slide')
       .call(() => createSlideAnimation(swiperRef?.slides?.[0], false, true))
-      .call(() => slidesAnimation.current[0]?.play(0), null, '<+.3')
+      .call(() => {
+        setTimeout(()=>slidesAnimation.current[0]?.play(),300)
+      }, null)
       .fromTo(nextArrow, {drawSVG: 0}, {drawSVG: '100%', stagger: 0.5}, 'initial-slide+=.5')
       .fromTo(prevArrow, {drawSVG: 0}, {drawSVG: '100%', stagger: 0.5}, 'initial-slide+=.5')
       .from('.swiper-slide-thumb', {y: 30, autoAlpha: 0, stagger: 0.15, duration: 1, clearProps: 'all'}, 'initial-slide')
@@ -335,26 +346,26 @@ const ProductsSlider = ({className, active = false, link, state, actions}) => {
                     <Container>
                       <MegaloNum>
                         <div className={'form-headline-1 title'} dangerouslySetInnerHTML={{__html: slide.title}}/>
-                        <p animateNumber className={'number'} data-number={product?.acf?.rate} data-to-fixed={2}>{product?.acf?.rate}</p>
+                        <p animate-number className={'number'} data-number={product?.acf?.rate} data-to-fixed={2}>0.00</p>
                         <div className={'form-headline-1 subtitle'} dangerouslySetInnerHTML={{__html: slide.subtitle}}/>
                       </MegaloNum>
                       <table>
                         <tbody>
                         <tr>
                           <td>
-                            <P.D as={'span'} className={'animate-number'} data-to-fixed={2}>{0.25 + (+product?.acf?.rate)}</P.D><P.D as={'span'}>%</P.D>
+                            <P.D as={'span'} className={'animate-number'} data-to-fixed={2} data-number={0.25 + (+product?.acf?.rate)}>0</P.D><P.D as={'span'}>%</P.D>
                           </td>
                           <td><P.Dark>Fixed Rate</P.Dark></td>
                         </tr>
                         <tr>
                           <td>
-                            <P.D as={'span'} className={'animate-number'} data-to-fixed={2}>{product?.acf?.fee}</P.D><P.D as={'span'}>%</P.D>
+                            <P.D as={'span'} className={'animate-number'} data-to-fixed={2} data-number={product?.acf?.fee}>0</P.D><P.D as={'span'}>%</P.D>
                           </td>
                           <td><P.Dark>Lender Fee</P.Dark></td>
                         </tr>
                         <tr>
                           <td>
-                            <P.D as={'span'} className={'animate-number'} data-to-fixed={0}>{product?.acf?.maximum_ltv}</P.D><P.D as={'span'}>%</P.D>
+                            <P.D as={'span'} className={'animate-number'} data-to-fixed={0} data-number={product?.acf?.maximum_ltv}>0</P.D><P.D as={'span'}>%</P.D>
                           </td>
                           <td><P.Dark>LTV</P.Dark></td>
                         </tr>

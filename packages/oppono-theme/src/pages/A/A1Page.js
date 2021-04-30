@@ -286,7 +286,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                           {
                             products.map(({ID, title, fields: {rate, maximum_ltv}}) =>
                                 <th scope={'col'} key={ID}>
-                                  <p>${numberWithCommas(monthlyPayments(mortgage, rate / 100))} / month</p>
+                                  <p>${numberWithCommas(monthlyPayments(mortgage, +rate / 100))} / month</p>
                                   <p className={'number'}>{rate}%</p>
                                   <Button onClick={() => {
                                     selectedProduct.current.value = title;
@@ -353,7 +353,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                   </div>
                                   <div className="mortgage-head">
                                     <p className={'number'}>{rate}%</p>
-                                    <p>${numberWithCommas(monthlyPayments(mortgage, rate / 100))} / month</p>
+                                    <p>${numberWithCommas(monthlyPayments(mortgage, +rate / 100))} / month</p>
                                     <Button onClick={() => {
                                       selectedProduct.current.value = title;
                                       setTimeout(() => actions.theme.setValidateAndNextCallback(new Date().getTime()), 100);
