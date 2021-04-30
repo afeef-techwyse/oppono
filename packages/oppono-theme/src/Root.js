@@ -35,16 +35,17 @@ const Root = ({state}) => {
       // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
       let vh = window.innerHeight * 0.01;
 // Then we set the value in the --vh custom property to the root of the document
-      document.documentElement.style.setProperty('--vh', `${vh}px`);
+//       document.documentElement.style.setProperty('--vh', `${vh}px`);
+      document.documentElement.style.setProperty('--vh', `1vh`);
     }
     getHeightOfViewPort()
     const debounced = debounce(function () {
       getHeightOfViewPort()
     } , 500)
-    window.addEventListener('resize', debounced);
+    // window.addEventListener('resize', debounced);
     return () => {
       window.removeEventListener('resize', fixContainer);
-      window.removeEventListener('resize', debounced);
+      // window.removeEventListener('resize', debounced);
   
     }
   }, []);
