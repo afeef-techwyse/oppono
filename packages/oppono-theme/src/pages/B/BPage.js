@@ -1,4 +1,5 @@
 import React from 'react';
+import {Address} from "../../components/form-components/Address";
 import Form from '../../components/form-components/Form';
 import Input from '../../components/form-components/Input';
 import {connect, styled} from 'frontity';
@@ -54,8 +55,8 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
   React.useEffect(() => {
     actions.theme.checkUser();
   }, [state.theme.user.logged]);
-  const [[appraiser], postalCodeOnChange] = useFlowAppraisers();
-  const [businessAppraiser, businessPostalCodeOnChange] = useFlowAppraisers();
+  const [appraiser, setAppraiser] = React.useState([{}]);
+  const [businessAppraiser, setBusinessAppraiser] = React.useState([{}]);
   const getAppraiser = () => section2Values('business_address_same_as_property') === '1' ? businessAppraiser : appraiser;
   const mortgage = ((+section3Values('purchase_price')) - (+section3Values('down_payment'))) || 0;
   const firstProduct = state.theme.stepResponse.data?.data?.beloc.products[0] || {};
@@ -66,40 +67,8 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
   
   
   React.useEffect(() => {
-    var fields = [
-          // { element: "search", field: "", mode: pca.fieldMode.SEARCH },
-        
-          // { element: "street-address", field: "Line1", mode: pca.fieldMode.POPULATE },
-          // { element: "street-address2", field: "Line2", mode: pca.fieldMode.POPULATE },
-          // { element: "city", field: "City", mode: pca.fieldMode.POPULATE },
-          // { element: "state", field: "ProvinceName", mode: pca.fieldMode.POPULATE },
-          // { element: "postcode", field: "PostalCode" },
-          // { element: "country", field: "CountryName", mode: pca.fieldMode.COUNTRY },
-          //
-          // { element: "multi-unit", field: "{AcMua}", mode: pca.fieldMode.POPULATE },
-          // { element: "residential-business", field: "{AcRbdi}", mode: pca.fieldMode.POPULATE }
-        ],
-        options = {
-          key: "EG91-MA35-KW64-JT49"
-        };
-        
-        const setForm = ()=>{
-      if (window.pca&&window.addressComplete) {
-        // console.log(control.current);
-        window.addressComplete.listen('load', function(control) {
-          console.log(control);
-          control.listen("populate", function (address) {
-            //add custom code here
-            console.log('hi');
-          });
-        });
-        control.current = new window.pca.Address(fields, options);
-      }
-      else {
-        requestAnimationFrame(setForm);
-      }
-    }
-    // requestAnimationFrame(setForm)
+    // "EG91-MA35-KW64-JT49"
+    
     
   }, []);
   
@@ -134,13 +103,12 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
             name={'business_type'}
             {...formData.section_1?.type_of_business_dropdown}/>
         
-        <Input type={'text'} id={'search'} name={'business_address'} {...formData.section_1?.address_input}/>
-        <W50>
-          <Input value={businessAppraiser?.title} type={'text'} name={'business_city'} {...formData.section_1?.city_input}/>
-          <Input onChange={businessPostalCodeOnChange()} type={'text'} name={'business_postal_code'} {...formData.section_1?.postal_code_input}/>
-        
-        </W50>
-        
+        <Address
+            address={{name: 'business_address', ...formData.section_1?.address_input}}
+            city={{name: 'business_city', ...formData.section_1?.city_input}}
+            postalCode={{name: 'business_postal_code', ...formData.section_1?.postal_code_input}}
+            setAppraiser={setBusinessAppraiser}
+        />
         <Button icon={true} className={'next-step'} label={'Next'}/>
       </FormStep>
       <FormStep apiStepNumber={2} pageName={pageName} activeTheme={formData.section_2?.section_theme} stepName={formData.section_2?.section_name}>
@@ -168,11 +136,12 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
         </div>
         <FormConditionalInput name={'business_address_same_as_property'} showOn={'0'} checked={'0'} {...formData.section_2?.same_business_address_yes_no}>
           <>
-            <Input type={'text'} name={'address'} {...formData.section_2?.address_input}/>
-            <W50>
-              <Input type={'text'} name={'city'} value={appraiser?.title} {...formData.section_1?.city_input}/>
-              <Input type={'text'} name={'postal_code'} {...formData.section_1?.postal_code_input} onChange={postalCodeOnChange}/>
-            </W50>
+            <Address
+                address={{name: 'address', ...formData.section_2?.address_input}}
+                city={{name: 'city', ...formData.section_2?.city_input}}
+                postalCode={{name: 'postal_code', ...formData.section_2?.postal_code_input}}
+                setAppraiser={setAppraiser}
+            />
           </>
         </FormConditionalInput>
         <Select

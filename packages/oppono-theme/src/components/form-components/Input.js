@@ -74,6 +74,7 @@ const Input = React.forwardRef(({
                                   max,
                                   label,
                                   onChange,
+                                  onKeyUp,
                                   defaultValue,
                                   error,
                                   noScroll,
@@ -155,6 +156,7 @@ const Input = React.forwardRef(({
             const selection = inputRef.current.selectionStart;
             requestAnimationFrame(() => inputRef.current.setSelectionRange(selection, selection));
           }}
+          onKeyUp={onKeyUp}
         />
       </Label>
     </div>);
