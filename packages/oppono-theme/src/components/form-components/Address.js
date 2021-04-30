@@ -50,7 +50,6 @@ export const Address = ({address, city, postalCode, setAppraiser}) => {
     //
   
     // return Items.map(item => ({...item, label: item.Text, value: item.Id}))
-    console.log(Items[7].FormattedValue);
     setCityValue(Items[7].FormattedValue);
     setPostalCodeValue(Items[12].FormattedValue);
     
