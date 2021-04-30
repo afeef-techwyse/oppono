@@ -1,9 +1,9 @@
-import React from 'react';
-import {styled} from 'frontity';
-import Container from '../reusable/Container';
-import Button from './Button';
-import {size} from '../../functions/size';
-import {P} from './StyledComponent';
+import React from "react";
+import { styled } from "frontity";
+import Container from "../reusable/Container";
+import Button from "./Button";
+import { size } from "../../functions/size";
+import { P } from "./StyledComponent";
 
 export const FinalizeTable = styled.table`
   ${P.Dark} {
@@ -29,10 +29,11 @@ export const FinalizeChild = styled.div`
   }
 
   @media (max-width: 575.98px) {
-    order: ${({order}) => order};
+    order: ${({ order }) => order};
     flex-basis: auto;
     width: auto;
-    padding: 0 ${size(10)} 0!important;
+    margin-bottom: 1rem;
+    padding: 0 ${size(10)} 0 !important;
     &.full {
       width: 100%;
       flex-basis: 100%;
@@ -52,7 +53,6 @@ export const FinalizeChild = styled.div`
   }
 `;
 
-
 export const Top = styled.div`
   display: flex;
   align-items: flex-end;
@@ -64,7 +64,7 @@ export const Top = styled.div`
   }
 
   &:after {
-    content: '';
+    content: "";
     height: ${size(1)};
     background: #bfb6b4;
     width: calc(100% - ${size(20)});
@@ -140,7 +140,7 @@ export const Bottom = styled.div`
         padding-top: 15px;
 
         &:after {
-          content: '';
+          content: "";
           height: ${size(1)};
           background: #bfb6b4;
           width: calc(100% - ${size(20)});
@@ -149,19 +149,16 @@ export const Bottom = styled.div`
           left: 50%;
           transform: translateX(-50%);
         }
-
       }
     }
   }
 `;
-const Finalize = ({className, children}) => {
-    return (
-        <div className={[className + ' form-wide-container']}>
-            <Container>
-                {children}
-            </Container>
-        </div>
-    );
+const Finalize = ({ className, children }) => {
+  return (
+    <div className={[className + " form-wide-container"]}>
+      <Container>{children}</Container>
+    </div>
+  );
 };
 
 export default styled(Finalize)`
