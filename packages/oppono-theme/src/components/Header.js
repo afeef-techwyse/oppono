@@ -290,7 +290,7 @@ export default styled(Header)`
         padding-top: ${size(160)};
       }
       @media (max-width: 575.98px) {
-        padding-top: ${size(133)};
+        padding-top: ${size(83)};
       }
     }
 
@@ -352,6 +352,10 @@ export default styled(Header)`
           font-size: ${size(32)};
           margin-bottom: ${size(40)};
         }
+          @media (max-width: 575.98px) {
+          font-size: ${size(22)};
+          margin-bottom: ${size(30)};
+        }
 
         &.member-login {
           width: auto;
@@ -371,6 +375,10 @@ export default styled(Header)`
             font-size: ${size(28)};
             border-radius: ${size(32)};
           }
+            @media (max-width: 575.98px) {
+                font-size: ${size(18)};
+                margin-bottom: ${size(20)};
+            }
         }
       }
     }

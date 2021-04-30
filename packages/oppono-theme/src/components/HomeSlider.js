@@ -575,7 +575,7 @@ export default styled(connect(HomeSlider))`
       bottom: ${size(70)};
     }
     @media (max-width: 575.98px) {
-      bottom: 20.68vh;
+      bottom: 26vh;
     }
 
     .swiper-pagination-bullet {
@@ -604,7 +604,7 @@ export default styled(connect(HomeSlider))`
 
   .btn-mobile-container {
     position: absolute;
-    bottom: 10.8vh;
+    bottom: 17vh;
     z-index: 9;
     @media (min-width: 576px) {
       display: none;
@@ -631,7 +631,6 @@ export default styled(connect(HomeSlider))`
     position: relative;
     margin: 0 auto;
     display: block;
-
   }
 
   .slide-cta {
