@@ -35,7 +35,7 @@ const RadioInputVertical = React.forwardRef(({className, type = 'radio', value, 
           onFocus={() => {
             gsap.to(window, {
               duration: .5,
-              scrollTo: {y: combinedRef.current, offsetY: (window.innerHeight - combinedRef.current.getBoundingClientRect().height) / 2},
+              scrollTo: {y: combinedRef.current, offsetY: window.innerWidth<768?100: (window.innerHeight - combinedRef.current.getBoundingClientRect().height) / 2},
             });
             setFocused(true);
           }}

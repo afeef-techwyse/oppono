@@ -66,7 +66,7 @@ const FormStep = ({
                 const firstInvalidInput = stepRef.current.querySelector(`[name="${Object.keys(response.data?.errors)[0]}"]`);
                 gsap.to(window, {
                   duration: .5,
-                  scrollTo: {y: firstInvalidInput, offsetY: (window.innerHeight - firstInvalidInput.getBoundingClientRect().height) / 2},
+                  scrollTo: {y: firstInvalidInput, offsetY: window.innerWidth<768?100: (window.innerHeight - firstInvalidInput.getBoundingClientRect().height) / 2},
                 });
                 stepLoading.current = false;
                 setLoading(false);
@@ -102,7 +102,7 @@ const FormStep = ({
                   const firstInvalidInput = stepRef.current.querySelector(`[name="${Object.keys(response.data?.errors)[0]}"]`);
                   gsap.to(window, {
                     duration: .5,
-                    scrollTo: {y: firstInvalidInput, offsetY: (window.innerHeight - firstInvalidInput.getBoundingClientRect().height) / 2},
+                    scrollTo: {y: firstInvalidInput, offsetY: window.innerWidth<768?100: (window.innerHeight - firstInvalidInput.getBoundingClientRect().height) / 2},
                   });
                   stepLoading.current = false;
                   setLoading(false);
@@ -183,7 +183,7 @@ const FormStep = ({
       const firstInvalidInput = stepRef.current.querySelector(':invalid');
       gsap.to(window, {
         duration: .5,
-        scrollTo: {y: firstInvalidInput, offsetY: (window.innerHeight - firstInvalidInput.getBoundingClientRect().height) / 2},
+        scrollTo: {y: firstInvalidInput, offsetY: window.innerWidth<768?100: (window.innerHeight - firstInvalidInput.getBoundingClientRect().height) / 2},
       });
       stepLoading.current = false;
       setLoading(false);

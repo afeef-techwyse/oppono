@@ -130,7 +130,7 @@ const Input = React.forwardRef(({
           onFocus={(e) => {
             noScroll || gsap.to(window, {
               duration: .5,
-              scrollTo: {y: combinedRef.current, offsetY: (window.innerHeight - combinedRef.current.getBoundingClientRect().height) / 2},
+              scrollTo: {y: combinedRef.current, offsetY: window.innerWidth<768?100: (window.innerHeight - combinedRef.current.getBoundingClientRect().height) / 2},
             });
             setFocused(true);
           }}
