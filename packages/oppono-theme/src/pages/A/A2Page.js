@@ -159,7 +159,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
         <div className="form-text-wrapper wide-text">
           <h1 className={'form-headline-1 text-left'}>{formData.section_4?.title}</h1>
           <h2 className={'form-headline-3 primary'}>
-            You are applying for a {section2Values('looking_for')} mortgage on your {section1Values('property')}, {section1Values('property_details_1')} home which is located
+            You are applying for a {section2Values('looking_for')} mortgage on your {section1Values('property_type')}, {section1Values('property_details_1')} home which is located
             at <br/> {section1Values('address')}, {section1Values('city')}, {section1Values('postal_code')}</h2>
         </div>
         <Finalize>
