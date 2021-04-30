@@ -83,7 +83,7 @@ Footer.propTypes = {
 };
 
 export default styled(Footer)`
-  position: fixed;
+  position: fixed!important;
   bottom: 0;
   padding-bottom: ${size(10)};
   width: 100%;
