@@ -85,11 +85,11 @@ const Select = React.forwardRef(({className, name, required, label, onChange, se
             setFocused(false);
             setVisited(true);
           }}
-          onChange={(event) => {
-            setValue(event.value);
+          onChange={(option,state) => {
+            setValue(option.value);
             inputRef.current.dispatchEvent(new Event('change'));
             setInvalid(false);
-            onChange?.(event);
+            onChange?.(option,state);
           }}
           className='oppono-select'
           classNamePrefix="oppono-select"
