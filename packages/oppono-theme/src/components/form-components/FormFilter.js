@@ -125,7 +125,7 @@ export default styled(FormFilter)`
     .swiper-wrapper .filter {
       flex: 50%;
       margin-right: 0 !important;
-      margin-bottom: 5px;
+      margin-bottom: 6px;
     }
     .swiper-wrapper .filter .radio-input {
       width: 95%;
