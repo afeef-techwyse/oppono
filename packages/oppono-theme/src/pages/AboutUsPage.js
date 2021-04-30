@@ -61,15 +61,21 @@ export default styled(connect(AboutUsPage))`
     }
     
     .html2react{
-      font-size: 2rem;
-      font-weight: 400;
-      font-style: normal;
-      color: rgba(210,245,233,0.6);
-      line-height: 2.5rem;
-      padding: 0 5.5rem;
       margin-top: 1rem;
+      color: rgba(210, 245, 233, 0.6);
+      font-size: ${size(18)};
+      font-weight: 400;
+      line-height: ${size(25)};
+      text-align: left;
+      padding: 0 ${size(55)};
+      @media(max-width:991.98px){
+        font-size: ${size(16)};
+      }
       @media(max-width: 768px){
         padding: 0;
+      }
+      @media(max-width:575.98px){
+        font-size: ${size(18)};
       }
       &.bottom-copy{
         margin-bottom: ${size(150)};
