@@ -45,11 +45,6 @@ export default styled(connect(TermsPage))`
   justify-content: center;
   align-items: center;
   
-  ${Header}, ${Footer} {
-    background: transparent;
-  }
-  
-  
   .container {
     max-width: 75%;
     margin: 0 auto;
