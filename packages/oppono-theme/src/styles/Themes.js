@@ -33,6 +33,7 @@ const Themes = () => <>
       width: 100%;
       height: 100vh;
       transition: opacity 750ms;
+      z-index: -1;
     }
     
     body {
