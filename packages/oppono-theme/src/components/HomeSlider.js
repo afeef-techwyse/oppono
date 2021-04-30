@@ -629,7 +629,7 @@ export default styled(connect(HomeSlider))`
       display: none;
     }
     position: relative;
-    margin: 0 auto;
+    margin: 0 auto;;
     display: block;
   }
 
