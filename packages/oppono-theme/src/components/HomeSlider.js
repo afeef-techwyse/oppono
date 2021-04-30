@@ -431,7 +431,7 @@ HomeSlider.prototype = {
 export default styled(connect(HomeSlider))`
 
   position: relative;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   width: 100%;
   overflow: hidden;
 

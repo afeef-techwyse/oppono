@@ -39,7 +39,7 @@ export default styled(connect(TermsPage))`
   padding-top: ${size(120)};
   padding-bottom: ${size(120)};
   
-  min-height: 100vh;
+  min-height: calc(var(--vh, 1vh) * 100);
   position: relative;
   display: flex;
   justify-content: center;

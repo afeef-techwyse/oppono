@@ -216,7 +216,7 @@ const MapPage = ({className, actions, state}) => {
 
 export default styled(connect(MapPage))`
   
-  min-height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   background-size: cover;
   background-position: center;
   position: relative;

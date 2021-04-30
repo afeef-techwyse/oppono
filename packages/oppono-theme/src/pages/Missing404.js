@@ -54,7 +54,7 @@ const Missing404 = ({className, state, actions}) => {
 };
 
 export default styled(connect(Missing404))`
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   background-size: cover;
   background-position: center;
 

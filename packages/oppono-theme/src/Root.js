@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'frontity';
 import Switch from '@frontity/components/switch';
+import debounce from "./functions/debounce";
 import {fixContainer} from './functions/fix-container';
 import Intro from './components/Intro';
 import Styles from './styles';
@@ -30,7 +31,22 @@ const Root = ({state}) => {
     fixContainer();
     state.router.link !== '/' && setInitialDone(true);
     window.addEventListener('resize', fixContainer);
-    return () => window.removeEventListener('resize', fixContainer);
+    function getHeightOfViewPort() {
+      // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
+      let vh = window.innerHeight * 0.01;
+// Then we set the value in the --vh custom property to the root of the document
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+    getHeightOfViewPort()
+    const debounced = debounce(function () {
+      getHeightOfViewPort()
+    } , 500)
+    window.addEventListener('resize', debounced);
+    return () => {
+      window.removeEventListener('resize', fixContainer);
+      window.removeEventListener('resize', debounced);
+  
+    }
   }, []);
   const duration = .75;
   return <>
@@ -74,7 +90,7 @@ const Root = ({state}) => {
             left: 0,
             zIndex: 10,
             width: '100vw',
-            height: '100vh',
+            height: 'calc(var(--vh, 1vh) * 100)',
             overflow: 'hidden',
           });
           gsap.to(node, {
