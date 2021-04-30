@@ -285,7 +285,7 @@ export default styled(connect(Mail))`
   }
   
   .desktop-only {
-    @media (max-width: 991px) {
+    @media (max-width: 991.98px) {
       display: none;
     }
   }
@@ -299,7 +299,15 @@ export default styled(connect(Mail))`
   .floating-obj{
     position: relative;
     width: 25%;
-    height: 100%;
+    height: 200px;
+    
+    @media(max-width: 991.98px){
+      position: absolute;
+      width: 25%;
+      height: 25%;
+      right: 10%;
+      top: 25%;
+    }
     
     .flying-objs-container{
       top: 0!important;
