@@ -12,8 +12,9 @@ import FlyingObjsContainer from '../../components/reusable/FlyingObjsContainer';
 import Link from '../../components/reusable/Link';
 
 
-const SignInPage = ({className, setCurrentTheme, state, actions, formData}) => {
+const SignInPage = ({className, setCurrentTheme, state, actions, formData, libraries}) => {
   const pageName = 'sign-in';
+  const Html2React = libraries.html2react.Component;
   
   React.useEffect(() => {
     actions.theme.setSubHeader(formData.sub_header);
@@ -54,7 +55,7 @@ const SignInPage = ({className, setCurrentTheme, state, actions, formData}) => {
             state.theme.errors?.general_error
               ?
               <p className={'error-message'}>
-                {state.theme.errors?.general_error.code}
+                <Html2React html={state.theme.errors?.general_error.code}/>
               </p>
               : null
           }
