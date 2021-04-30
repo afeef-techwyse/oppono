@@ -24,7 +24,7 @@ import MegaloNum from '../components/form-components/MegaloNum';
 import useStoredFormValue from '../hooks/useStoredFormValue';
 import NeedHelp from '../components/reusable/NeedHelp';
 
-const QualifyFor = ({className, setCurrentTheme, state, actions, formData}) => {
+const QualifyFor = ({className, setCurrentTheme, state, actions, formData={}}) => {
   const pageName = 'qualify-for';
   const get3Values = useStoredFormValue(pageName);
   
