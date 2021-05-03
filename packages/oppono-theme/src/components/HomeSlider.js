@@ -709,8 +709,9 @@ export default styled(connect(HomeSlider))`
 
   .btn-mobile-container {
     z-index: 15;
-    @media (min-width: 998px) {
-      display: none;
+    display: none;
+    @media only screen and (max-width: 768px) {
+      display: block;
     }
 
     .btn-mobile {
@@ -727,6 +728,7 @@ export default styled(connect(HomeSlider))`
       color: #fff;
 
       @media (max-width: 576px) {
+        display: block;
         height: auto;
         width: 220px;
         padding: 1.2rem;
