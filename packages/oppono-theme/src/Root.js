@@ -1,5 +1,5 @@
 import React from 'react';
-import {connect} from 'frontity';
+import {connect, styled} from 'frontity';
 import Switch from '@frontity/components/switch';
 import debounce from "./functions/debounce";
 import {fixContainer} from './functions/fix-container';
@@ -123,6 +123,30 @@ const Root = ({state}) => {
       </Transition>
     
     </TransitionGroup>
+    
+    <Overlay/>
   </>;
 };
 export default connect(Root);
+
+
+const Overlay = styled(({className})=>{
+  const ref = React.useRef(null);
+  
+  React.useEffect(() => {
+    ref.current.style.opacity=0;
+  }, []);
+  
+  return <div ref={ref} className={className}/>
+})`
+  z-index: 10000;
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  pointer-events: none;
+  transition: opacity 400ms;
+`
