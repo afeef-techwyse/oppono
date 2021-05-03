@@ -1,27 +1,32 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import useStateWithRef from '../hooks/useStateWithRef';
-import classnames from 'classnames';
+import React from "react";
+import PropTypes from "prop-types";
+import useStateWithRef from "../hooks/useStateWithRef";
+import classnames from "classnames";
 
-import {connect, styled} from 'frontity';
+import { connect, styled } from "frontity";
 
+import gsap from "gsap";
+import SplitText from "gsap/SplitText";
+import DrawSVGPlugin from "gsap/DrawSVGPlugin";
+import CustomEase from "gsap/CustomEase";
 
-import gsap from 'gsap';
-import SplitText from 'gsap/SplitText';
-import DrawSVGPlugin from 'gsap/DrawSVGPlugin';
-import CustomEase from 'gsap/CustomEase';
+import SwiperCore, {
+  A11y,
+  Keyboard,
+  Mousewheel,
+  Navigation,
+  Pagination,
+} from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 
-import SwiperCore, {A11y, Keyboard, Mousewheel, Navigation, Pagination} from 'swiper';
-import {Swiper, SwiperSlide} from 'swiper/react';
+import { size } from "../functions/size";
 
-import {size} from '../functions/size';
-
-import Container from './reusable/Container';
-import Header from './Header';
-import Footer from './Footer';
-import FlyingObj from './reusable/FlyingObj';
-import Link from './reusable/Link';
-import useMedia from '../hooks/useMedia';
+import Container from "./reusable/Container";
+import Header from "./Header";
+import Footer from "./Footer";
+import FlyingObj from "./reusable/FlyingObj";
+import Link from "./reusable/Link";
+import useMedia from "../hooks/useMedia";
 
 SwiperCore.use([Navigation, Pagination, Keyboard, Mousewheel, A11y]);
 gsap.registerPlugin(SplitText, DrawSVGPlugin, CustomEase);
@@ -32,7 +37,8 @@ const Slider = styled(Swiper)`
   position: relative;
   overflow: visible !important;
 
-  .swiper-wrapper, .swiper-slide {
+  .swiper-wrapper,
+  .swiper-slide {
     //transition: none !important;
   }
 
@@ -83,8 +89,8 @@ const Slider = styled(Swiper)`
         line-height: ${size(70)};
       }
       @media (max-width: 575.98px) {
-        font-size: 3.94vh;
-        line-height: 4.43vh;
+        font-size: 2.94vh;
+        line-height: 1.2;
       }
     }
   }
@@ -107,7 +113,9 @@ const Slider = styled(Swiper)`
     cursor: pointer;
     white-space: nowrap;
 
-    &:hover, &:active, &:focus {
+    &:hover,
+    &:active,
+    &:focus {
       text-decoration: none;
     }
 
@@ -125,44 +133,64 @@ const Slider = styled(Swiper)`
       display: none;
     }
   }
-
 `;
 
 const createSlideAnimation = (slide, paused = true) => {
   if (!slide) return;
-  const
-    slideAnimationTl = gsap.timeline({paused}).timeScale(2),
-    title = slide.querySelector('.title'),
-    btn = slide.querySelector('.btn'),
-    slideNumber = slide.querySelector('.slide-number'),
-    btnText = btn?.querySelector('.text'),
-    btnEnter = btn?.querySelectorAll('.enter-arrow path');
+  const slideAnimationTl = gsap.timeline({ paused }).timeScale(2),
+    title = slide.querySelector(".title"),
+    btn = slide.querySelector(".btn"),
+    slideNumber = slide.querySelector(".slide-number"),
+    btnText = btn?.querySelector(".text"),
+    btnEnter = btn?.querySelectorAll(".enter-arrow path");
   let splitted = false;
-  if (title.classList.contains('splitted')) splitted = true;
-  const titleWords = !splitted && new SplitText(title, {type: 'words'}),
-    btnChars = !splitted && new SplitText(btnText, {type: 'chars'});
-  
-  title.classList.add('splitted');
-  btnText?.classList.add('splitted');
-  
+  if (title.classList.contains("splitted")) splitted = true;
+  const titleWords = !splitted && new SplitText(title, { type: "words" }),
+    btnChars = !splitted && new SplitText(btnText, { type: "chars" });
+
+  title.classList.add("splitted");
+  btnText?.classList.add("splitted");
+
   slideAnimationTl
-    .fromTo(splitted ? title.children : titleWords.words, {autoAlpha: 0, y: 20}, {autoAlpha: 1, y: 0, stagger: 0.06})
-    
-    .fromTo(btn, {autoAlpha: 0, y: 10}, {autoAlpha: 1, y: 0}, '-=.4')
-    
-    .fromTo(btn, {width: 0}, {width: 'auto', ease: 'power2.in'}, '-=.3')
-    .fromTo(slideNumber, {autoAlpha: 0, scale: 0}, {autoAlpha: 1, scale: 1}, '<')
-    
-    .fromTo(splitted ? btnText?.children : btnChars.chars, {autoAlpha: 0, y: 10}, {autoAlpha: 1, y: 0, stagger: 0.05, duration: .3}, '-=.1')
-    .fromTo(btnEnter, {drawSVG: 0}, {drawSVG: '100%', stagger: .3}, '-=.1');
+    .fromTo(
+      splitted ? title.children : titleWords.words,
+      { autoAlpha: 0, y: 20 },
+      { autoAlpha: 1, y: 0, stagger: 0.06 }
+    )
+
+    .fromTo(btn, { autoAlpha: 0, y: 10 }, { autoAlpha: 1, y: 0 }, "-=.4")
+
+    .fromTo(btn, { width: 0 }, { width: "auto", ease: "power2.in" }, "-=.3")
+    .fromTo(
+      slideNumber,
+      { autoAlpha: 0, scale: 0 },
+      { autoAlpha: 1, scale: 1 },
+      "<"
+    )
+
+    .fromTo(
+      splitted ? btnText?.children : btnChars.chars,
+      { autoAlpha: 0, y: 10 },
+      { autoAlpha: 1, y: 0, stagger: 0.05, duration: 0.3 },
+      "-=.1"
+    )
+    .fromTo(
+      btnEnter,
+      { drawSVG: 0 },
+      { drawSVG: "100%", stagger: 0.3 },
+      "-=.1"
+    );
   return slideAnimationTl;
 };
 
-
-const HomeSlider = ({className, active = false, state, actions, link}) => {
+const HomeSlider = ({ className, active = false, state, actions, link }) => {
   const data = state.source.get(link);
-  const slidesObj = data.isReady && !data.isError ? state.source[data.type][data.id].acf.slider : [];
-  const {page_theme, slider_top_subtitle, slider_top_title} = data.isReady && !data.isError ? state.source[data.type][data.id].acf : {};
+  const slidesObj =
+    data.isReady && !data.isError
+      ? state.source[data.type][data.id].acf.slider
+      : [];
+  const { page_theme, slider_top_subtitle, slider_top_title } =
+    data.isReady && !data.isError ? state.source[data.type][data.id].acf : {};
   const media = useMedia();
   const nextBtnRef = React.useRef(null);
   const prevBtnRef = React.useRef(null);
@@ -174,24 +202,23 @@ const HomeSlider = ({className, active = false, state, actions, link}) => {
   const welcomeMessage = React.useRef(null);
   const slidesAnimation = React.useRef({});
   const slidesTransition = React.useRef(0);
-  const initialTimeline = React.useRef(gsap.timeline({paused: false}));
-  const flyingObjectsAnimation = React.useRef(gsap.timeline({paused: true}));
+  const initialTimeline = React.useRef(gsap.timeline({ paused: false }));
+  const flyingObjectsAnimation = React.useRef(gsap.timeline({ paused: true }));
   const [swiperRef, setSwiperRef] = React.useState(null);
-  const [slideFlyingObjectsPlaying, setSlideFlyingObjectsPlaying] = React.useState([]);
+  const [
+    slideFlyingObjectsPlaying,
+    setSlideFlyingObjectsPlaying,
+  ] = React.useState([]);
   const [currentSlide, setCurrentSlide, currentSlideRef] = useStateWithRef(0);
-  
+
   const swiperInit = (swiper) => {
-    
-    
-    const {slides} = swiper;
+    const { slides } = swiper;
     for (let i = 0; i < slides?.length; i++) {
-      
       slidesAnimation.current[i] = createSlideAnimation(slides[i]);
-      
     }
     setSwiperRef(swiper);
   };
-  
+
   React.useEffect(() => {
     actions.source.fetch(link);
     // flyingObjectsAnimation.current.progress(1).progress(0);
@@ -199,47 +226,95 @@ const HomeSlider = ({className, active = false, state, actions, link}) => {
   React.useEffect(() => {
     const slideAnimationTl = createSlideAnimation(swiperRef?.slides[0], false);
     if (!slideAnimationTl) return;
-    const
-      nextArrow = nextBtnRef.current.querySelectorAll('svg path'),
-      prevArrow = prevBtnRef.current.querySelectorAll('svg path'),
-      footerLeft = footer.current.querySelectorAll('.footer-left .guid'),
-      headerLinks = header.current.querySelector('.menu-right'),
-      footerRight = footer.current.querySelectorAll('.footer-right a'),
+    const nextArrow = nextBtnRef.current.querySelectorAll("svg path"),
+      prevArrow = prevBtnRef.current.querySelectorAll("svg path"),
+      footerLeft = footer.current.querySelectorAll(".footer-left .guid"),
+      headerLinks = header.current.querySelector(".menu-right"),
+      footerRight = footer.current.querySelectorAll(".footer-right a"),
       // paginationDots = paginationRef.current.querySelectorAll('.swiper-pagination-bullet'),
-      welcomeTitle = welcomeMessage.current.querySelectorAll('.title'),
-      welcomeSubtitle = welcomeMessage.current.querySelectorAll('.subtitle'),
-      welcomeTitleWords = new SplitText(welcomeTitle, {type: 'words'}),
-      welcomeSubtitleWords = new SplitText(welcomeSubtitle, {type: 'words'})
-    ;
+      welcomeTitle = welcomeMessage.current.querySelectorAll(".title"),
+      welcomeSubtitle = welcomeMessage.current.querySelectorAll(".subtitle"),
+      welcomeTitleWords = new SplitText(welcomeTitle, { type: "words" }),
+      welcomeSubtitleWords = new SplitText(welcomeSubtitle, { type: "words" });
     initialTimeline.current.clear();
     initialTimeline.current
-      .fromTo(flyingWrapperRef.current, {yPercent: 100}, {yPercent: 0})
-      .fromTo(welcomeTitleWords.words, {autoAlpha: 0, y: 10}, {autoAlpha: 1, y: 0, stagger: 0.06}, '0')
-      .fromTo(welcomeSubtitleWords.words, {autoAlpha: 0, y: 10}, {autoAlpha: 1, y: 0, stagger: 0.06}, '>-=.35')
-      .addLabel('initial-slide')
-      .fromTo(header.current, {autoAlpha: 0}, {autoAlpha: 1})
-      .fromTo(footer.current, {autoAlpha: 0}, {autoAlpha: 1})
-      .fromTo(slidesNumbers.current, {autoAlpha: 0, scale: 0}, {autoAlpha: 1, scale: 1}, 'initial-slide')
-      .fromTo(headerLinks, {autoAlpha: 0, y: 10}, {autoAlpha: 1, y: 0, stagger: 0.05}, '1')
-      .call(() => setTimeout(() => setSlideFlyingObjectsPlaying([true]), 10), null, 'initial-slide-=1.1')
-      .fromTo(nextArrow, {drawSVG: 0}, {drawSVG: '100%', stagger: 0.5}, 'initial-slide+=.5')
-      .fromTo(prevArrow, {drawSVG: 0}, {drawSVG: '100%', stagger: 0.5}, 'initial-slide+=.5')
-      .fromTo(footerLeft, {autoAlpha: 0, y: 10}, {autoAlpha: 1, y: 0, stagger: 0.1}, 'initial-slide+=1')
-      .fromTo(footerRight, {autoAlpha: 0, y: 10}, {autoAlpha: 1, y: 0, stagger: 0.1}, '>-=.35')
-      .fromTo(paginationRef.current, {autoAlpha: 0, y: 10, xPercent: -50}, {autoAlpha: 1, y: 0, stagger: 0.1}, '<')
+      .fromTo(flyingWrapperRef.current, { yPercent: 100 }, { yPercent: 0 })
+      .fromTo(
+        welcomeTitleWords.words,
+        { autoAlpha: 0, y: 10 },
+        { autoAlpha: 1, y: 0, stagger: 0.06 },
+        "0"
+      )
+      .fromTo(
+        welcomeSubtitleWords.words,
+        { autoAlpha: 0, y: 10 },
+        { autoAlpha: 1, y: 0, stagger: 0.06 },
+        ">-=.35"
+      )
+      .addLabel("initial-slide")
+      .fromTo(header.current, { autoAlpha: 0 }, { autoAlpha: 1 })
+      .fromTo(footer.current, { autoAlpha: 0 }, { autoAlpha: 1 })
+      .fromTo(
+        slidesNumbers.current,
+        { autoAlpha: 0, scale: 0 },
+        { autoAlpha: 1, scale: 1 },
+        "initial-slide"
+      )
+      .fromTo(
+        headerLinks,
+        { autoAlpha: 0, y: 10 },
+        { autoAlpha: 1, y: 0, stagger: 0.05 },
+        "1"
+      )
+      .call(
+        () => setTimeout(() => setSlideFlyingObjectsPlaying([true]), 10),
+        null,
+        "initial-slide-=1.1"
+      )
+      .fromTo(
+        nextArrow,
+        { drawSVG: 0 },
+        { drawSVG: "100%", stagger: 0.5 },
+        "initial-slide+=.5"
+      )
+      .fromTo(
+        prevArrow,
+        { drawSVG: 0 },
+        { drawSVG: "100%", stagger: 0.5 },
+        "initial-slide+=.5"
+      )
+      .fromTo(
+        footerLeft,
+        { autoAlpha: 0, y: 10 },
+        { autoAlpha: 1, y: 0, stagger: 0.1 },
+        "initial-slide+=1"
+      )
+      .fromTo(
+        footerRight,
+        { autoAlpha: 0, y: 10 },
+        { autoAlpha: 1, y: 0, stagger: 0.1 },
+        ">-=.35"
+      )
+      .fromTo(
+        paginationRef.current,
+        { autoAlpha: 0, y: 10, xPercent: -50 },
+        { autoAlpha: 1, y: 0, stagger: 0.1 },
+        "<"
+      )
       .call(() => initialTimeline.current.remove(slideAnimationTl))
-      .add(slideAnimationTl, 'initial-slide')
-      .call(() => initialTimeline.current.remove(slideAnimationTl))
-    ;
-    const keyHandler = event => {
-      if (event.key === 'Enter' && !event.repeat) {
-        swiperRef.slides[currentSlideRef.current].querySelector('.slide-cta').click();
+      .add(slideAnimationTl, "initial-slide")
+      .call(() => initialTimeline.current.remove(slideAnimationTl));
+    const keyHandler = (event) => {
+      if (event.key === "Enter" && !event.repeat) {
+        swiperRef.slides[currentSlideRef.current]
+          .querySelector(".slide-cta")
+          .click();
       }
     };
-    window.addEventListener('keydown', keyHandler);
-  
+    window.addEventListener("keydown", keyHandler);
+
     return () => {
-      window.removeEventListener('keydown', keyHandler);
+      window.removeEventListener("keydown", keyHandler);
     };
   }, [swiperRef]);
   React.useEffect(() => {
@@ -251,31 +326,35 @@ const HomeSlider = ({className, active = false, state, actions, link}) => {
   React.useEffect(() => {
     actions.theme.checkUser();
     if (state.theme.user.logged) {
-      (state.router.link === '/' || state.router.link === '/dashboard') && actions.router.set('/dashboard', {method: 'replace'});
-    }
-    else {
-      if (!(state.router.link === '/' || state.router.link === '/contacts/')) {
+      (state.router.link === "/" || state.router.link === "/dashboard") &&
+        actions.router.set("/dashboard", { method: "replace" });
+    } else {
+      if (!(state.router.link === "/" || state.router.link === "/contacts/")) {
         actions.theme.setRedirectTo(state.router.link);
-        actions.router.set('/sign-in/', {method: 'replace'});
+        actions.router.set("/sign-in/", { method: "replace" });
       }
     }
   }, [state.theme.user.logged, link]);
   React.useEffect(() => {
-    flyingWrapperRef.current.classList.toggle('hide',link !== state.router.link)
+    flyingWrapperRef.current.classList.toggle(
+      "hide",
+      link !== state.router.link
+    );
   }, [state.router.link]);
-  
+
   return (
     <div className={className}>
-      <Header hasSubMenu={false} ref={header}/>
+      <Header hasSubMenu={false} ref={header} />
       <div ref={flyingWrapperRef} className="flying-obj-wrapper">
-        {
-          slidesObj.map((slide, slideIndex) => slide.flying_objects.desktop?.map((obj, objIndex) => {
-            return <FlyingObj
-              key={`slide-${slideIndex}-obj-${objIndex}-${state.router.link}`}
-              width={+obj.width}
-              imageUrl={obj.image.url}
-              frames={+obj.frames}
-              duration={+obj.duration}
+        {slidesObj.map((slide, slideIndex) =>
+          slide.flying_objects.desktop?.map((obj, objIndex) => {
+            return (
+              <FlyingObj
+                key={`slide-${slideIndex}-obj-${objIndex}-${state.router.link}`}
+                width={+obj.width}
+                imageUrl={obj.image.url}
+                frames={+obj.frames}
+                duration={+obj.duration}
                 initial_duration={+obj.initial_duration}
                 frame_x={+obj.frame_x}
                 frame_y={+obj.frame_y}
@@ -285,22 +364,32 @@ const HomeSlider = ({className, active = false, state, actions, link}) => {
                 loop_start_index={+obj.loop_start_index}
                 top={obj.top}
                 paused={!slideFlyingObjectsPlaying[slideIndex]}
-                left={+obj.left + 100 * slideIndex + '%'}
+                left={+obj.left + 100 * slideIndex + "%"}
                 isStart={slideIndex === 0}
                 isEnd={slideIndex === slidesObj.length - 1}
                 timelineAddCallback={(tl) => {
-                  flyingObjectsAnimation.current.add(tl, slideIndex === 0 ? 0 : (slideIndex - 1) * .25);
+                  flyingObjectsAnimation.current.add(
+                    tl,
+                    slideIndex === 0 ? 0 : (slideIndex - 1) * 0.25
+                  );
                 }}
-              />;
-            },
-          ))
-        }
+              />
+            );
+          })
+        )}
       </div>
       <div className="vertical-center">
         <Container>
           <div ref={welcomeMessage} className="welcome-text">
-            <h3 className={'title'}>{(slider_top_title ? slider_top_title : 'Welcome back {{name}}').replace('{{name}}', state.theme.user.user_fname)}</h3>
-            <h2 className={'subtitle'}>{slider_top_subtitle ? slider_top_subtitle : 'Select an option:'}</h2>
+            <h3 className={"title"}>
+              {(slider_top_title
+                ? slider_top_title
+                : "Welcome back {{name}}"
+              ).replace("{{name}}", state.theme.user.user_fname)}
+            </h3>
+            <h2 className={"subtitle"}>
+              {slider_top_subtitle ? slider_top_subtitle : "Select an option:"}
+            </h2>
           </div>
         </Container>
         <Slider
@@ -313,7 +402,7 @@ const HomeSlider = ({className, active = false, state, actions, link}) => {
             prevEl: prevBtnRef.current,
             nextEl: nextBtnRef.current,
           }}
-          pagination={{clickable: true, el: paginationRef.current}}
+          pagination={{ clickable: true, el: paginationRef.current }}
           onSwiper={swiperInit}
           keyboard
           mousewheel
@@ -322,106 +411,128 @@ const HomeSlider = ({className, active = false, state, actions, link}) => {
             slidesTransition.current = transition / 1000;
           }}
           onSetTranslate={(swiper, translate) => {
-            gsap.set(swiper.$wrapperEl, {x: translate});
+            gsap.set(swiper.$wrapperEl, { x: translate });
             gsap.to(flyingWrapperRef.current, {
               x: translate,
               duration: slidesTransition.current,
-              ease: CustomEase.create('custom', 'M0,0 C0.25,0.1 0.25,1 1,1 '),
+              ease: CustomEase.create("custom", "M0,0 C0.25,0.1 0.25,1 1,1 "),
             });
             gsap.to(flyingObjectsAnimation.current, {
               progress: -translate / (swiper.virtualSize - window.innerWidth),
               duration: slidesTransition.current,
-              ease: CustomEase.create('custom', 'M0,0 C0.25,0.1 0.25,1 1,1 '),
+              ease: CustomEase.create("custom", "M0,0 C0.25,0.1 0.25,1 1,1 "),
             });
           }}
-          onMomentumBounce={(swiper) => {
-          }}
+          onMomentumBounce={(swiper) => {}}
           onTransitionEnd={(swiper) => {
             // const {realIndex, previousIndex} = swiper;
             // if (realIndex === currentSlideRef.current) return;
             // slidesAnimation.current[realIndex].progress(0).play();
             // slidesAnimation.current[previousIndex].progress(1).paused(true).progress(0);
           }}
-          onSlideChange={({realIndex, previousIndex}) => {
+          onSlideChange={({ realIndex, previousIndex }) => {
             setTimeout(() => {
               slidesAnimation.current[realIndex].progress(0).play();
-              slidesAnimation.current[previousIndex].progress(1).paused(true).progress(0);
+              slidesAnimation.current[previousIndex]
+                .progress(1)
+                .paused(true)
+                .progress(0);
             }, 900);
             setCurrentSlide(realIndex);
-            setTimeout(() => setSlideFlyingObjectsPlaying(prevState => {
-              const newState = [...prevState];
-              newState[realIndex] = true;
-              return newState;
-            }), 600);
+            setTimeout(
+              () =>
+                setSlideFlyingObjectsPlaying((prevState) => {
+                  const newState = [...prevState];
+                  newState[realIndex] = true;
+                  return newState;
+                }),
+              600
+            );
           }}
         >
-          <div className={'swiper-arrows'} slot={'container-start'}>
+          <div className={"swiper-arrows"} slot={"container-start"}>
             <Container>
-              <span className={'prev'} ref={prevBtnRef}>
+              <span className={"prev"} ref={prevBtnRef}>
                 <svg viewBox="0 0 99 10">
-    <path fill="none" stroke="#b5d2ff" d="M99 5H0"/>
-    <path fill="none" stroke="#b5d2ff" d="M5 0L0 5 L5 10"/>
-</svg>
+                  <path fill="none" stroke="#b5d2ff" d="M99 5H0" />
+                  <path fill="none" stroke="#b5d2ff" d="M5 0L0 5 L5 10" />
+                </svg>
               </span>
-              <span ref={slidesNumbers} className={'slides-numbers'}>
-                {currentSlide + 1}<span> /</span> {slidesObj.length}</span>
-              <span className={'next'} ref={nextBtnRef}>
+              <span ref={slidesNumbers} className={"slides-numbers"}>
+                {currentSlide + 1}
+                <span> /</span> {slidesObj.length}
+              </span>
+              <span className={"next"} ref={nextBtnRef}>
                 <svg viewBox="0 0 99 10">
-    <path fill="none" stroke="#b5d2ff" d="M0 5H99"/>
-    <path fill="none" stroke="#b5d2ff" d="M94 10L99 5L94 0"/>
-</svg>
+                  <path fill="none" stroke="#b5d2ff" d="M0 5H99" />
+                  <path fill="none" stroke="#b5d2ff" d="M94 10L99 5L94 0" />
+                </svg>
               </span>
             </Container>
           </div>
-  
-          {
-            slidesObj.map((slide, slideIndex) =>
-              <SwiperSlide key={`slide-${slideIndex}`}>
-                <Container>
-                  <FlyingObj
-                    isStart={false}
-                    isEnd={false}
-                    className={'mobile-icon'}
-                    paused={!slideFlyingObjectsPlaying[slideIndex]}
-                    // ref={el => slide.flying_objects.mobile.ref = el}
-                    width={slide.flying_objects.mobile.width}
-                    imageUrl={slide.flying_objects.mobile.image.url}
-                    frames={+slide.flying_objects.mobile.frames}
-                    duration={+slide.flying_objects.mobile.duration}
-                    initial_duration={+slide.flying_objects.mobile.initial_duration}
-                    frame_x={+slide.flying_objects.mobile.frame_x}
-                    frame_y={+slide.flying_objects.mobile.frame_y}
-                    alt={slide.flying_objects.mobile.image.alt}
-                    type={slide.flying_objects.mobile.type}
-                    loop_start_index={+slide.flying_objects.mobile.loop_start_index}
+
+          {slidesObj.map((slide, slideIndex) => (
+            <SwiperSlide key={`slide-${slideIndex}`}>
+              <Container>
+                <FlyingObj
+                  isStart={false}
+                  isEnd={false}
+                  className={"mobile-icon"}
+                  paused={!slideFlyingObjectsPlaying[slideIndex]}
+                  // ref={el => slide.flying_objects.mobile.ref = el}
+                  width={slide.flying_objects.mobile.width}
+                  imageUrl={slide.flying_objects.mobile.image.url}
+                  frames={+slide.flying_objects.mobile.frames}
+                  duration={+slide.flying_objects.mobile.duration}
+                  initial_duration={
+                    +slide.flying_objects.mobile.initial_duration
+                  }
+                  frame_x={+slide.flying_objects.mobile.frame_x}
+                  frame_y={+slide.flying_objects.mobile.frame_y}
+                  alt={slide.flying_objects.mobile.image.alt}
+                  type={slide.flying_objects.mobile.type}
+                  loop_start_index={
+                    +slide.flying_objects.mobile.loop_start_index
+                  }
+                />
+                <div className="title-wrapper">
+                  <span className={"slide-number"}>{slideIndex + 1}</span>
+                  <div
+                    className={"title"}
+                    dangerouslySetInnerHTML={{ __html: slide.title }}
                   />
-                  <div className="title-wrapper">
-                    <span className={'slide-number'}>{slideIndex + 1}</span>
-                    <div className={'title'} dangerouslySetInnerHTML={{__html: slide.title}}/>
-                  </div>
-                  {media !== 'mobile' ? <Link className={'btn slide-cta'} target={slide.button.target} href={slide.button.url}>
+                </div>
+                {media !== "mobile" ? (
+                  <Link
+                    className={"btn slide-cta"}
+                    target={slide.button.target}
+                    href={slide.button.url}
+                  >
                     <span className="text">{slide.button.title}</span>
-                    <svg className={'right-arrow'} viewBox="0 0 22 10">
-                      <path fill="none" stroke="#fff" d="M0 5h22"/>
-                      <path fill="none" stroke="#fff" d="M17 10v0l5-5-5-5"/>
+                    <svg className={"right-arrow"} viewBox="0 0 22 10">
+                      <path fill="none" stroke="#fff" d="M0 5h22" />
+                      <path fill="none" stroke="#fff" d="M17 10v0l5-5-5-5" />
                     </svg>
-                  </Link> : null}
-                </Container>
-              </SwiperSlide>,
-            )
-          }
+                  </Link>
+                ) : null}
+              </Container>
+            </SwiperSlide>
+          ))}
         </Slider>
-        <div ref={paginationRef}/>
-        {media === 'mobile'
-          ? <Container className={'btn-mobile-container'}>
-            <Link className={'btn-mobile slide-cta'} target={slidesObj[currentSlide]?.button.target} href={slidesObj[currentSlide]?.button.url}>
+        <div ref={paginationRef} />
+        {media === "mobile" ? (
+          <Container className={"btn-mobile-container"}>
+            <Link
+              className={"btn-mobile slide-cta"}
+              target={slidesObj[currentSlide]?.button.target}
+              href={slidesObj[currentSlide]?.button.url}
+            >
               {slidesObj[currentSlide]?.button.title}
             </Link>
           </Container>
-          : null
-        }
+        ) : null}
       </div>
-      <Footer ref={footer}/>
+      <Footer ref={footer} />
     </div>
   );
 };
@@ -429,7 +540,6 @@ HomeSlider.prototype = {
   className: PropTypes.string,
 };
 export default styled(connect(HomeSlider))`
-
   position: relative;
   height: calc(var(--vh, 1vh) * 100);
   width: 100%;
@@ -446,7 +556,7 @@ export default styled(connect(HomeSlider))`
     z-index: 0;
     @media (max-width: 575.98px) {
       justify-content: flex-start;
-      padding-top: 13.54vh;
+      margin-top: 100px;
     }
 
     .container {
@@ -508,9 +618,10 @@ export default styled(connect(HomeSlider))`
       justify-content: flex-end;
     }
 
-    .prev, .next {
+    .prev,
+    .next {
       cursor: pointer;
-      transition: margin .4s ease, width .4s ease, opacity .4s ease;
+      transition: margin 0.4s ease, width 0.4s ease, opacity 0.4s ease;
       overflow: hidden;
       width: ${size(99)};
       position: relative;
@@ -526,7 +637,7 @@ export default styled(connect(HomeSlider))`
 
       &.swiper-button-disabled {
         cursor: not-allowed;
-        opacity: .4;
+        opacity: 0.4;
         width: ${size(50)};
       }
     }
@@ -547,7 +658,6 @@ export default styled(connect(HomeSlider))`
       }
     }
 
-
     .slides-numbers {
       color: #b5d2ff;
       font-size: ${size(12)};
@@ -566,25 +676,20 @@ export default styled(connect(HomeSlider))`
   }
 
   .swiper-pagination-bullets {
-    position: absolute;
-    bottom: ${size(80)};
-    left: 50%;
+    position: relative;
     display: flex;
     z-index: 9;
-    @media (max-width: 991.98px) {
-      bottom: ${size(70)};
-    }
-    @media (max-width: 575.98px) {
-      bottom: 26vh;
-    }
+    transform: none !important;
+    margin: 0 auto;
 
     .swiper-pagination-bullet {
       width: ${size(8)};
       height: ${size(8)};
       @media (max-width: 575.98px) {
-        width: 2.58vh;
-        height: 2.58vh;
-        margin: 0 1.23vh;
+        width: 1.58vh;
+        height: 1.58vh;
+        margin: 2rem 12px 0.5rem;
+        display: block;
       }
       border-radius: 50%;
       background-color: rgba(181, 210, 255, 0.4);
@@ -603,16 +708,15 @@ export default styled(connect(HomeSlider))`
   }
 
   .btn-mobile-container {
-    position: absolute;
-    bottom: 17vh;
     z-index: 9;
     @media (min-width: 576px) {
       display: none;
     }
 
     .btn-mobile {
-      width: 100%;
-      height: 6.89vh;
+      margin-top: 2rem;
+      display: block;
+      padding: 1.5rem;
       border-radius: 3.94vh;
       background-color: #fe412d;
       font-size: 1.97vh;
@@ -621,15 +725,25 @@ export default styled(connect(HomeSlider))`
       align-items: center;
       justify-content: center;
       color: #fff;
+
+      @media (max-width: 576px) {
+        height: auto;
+        width: 220px;
+        padding: 1.2rem;
+        border-radius: 3.94vh;
+        margin: 2rem auto;
+        font-size: 1.5rem;
+      }
     }
   }
 
   .mobile-icon {
+    max-width: 20em;
     @media (min-width: 576px) {
       display: none;
     }
     position: relative;
-    margin: 0 auto;;
+    margin: 0 auto;
     display: block;
   }
 
@@ -644,7 +758,7 @@ export default styled(connect(HomeSlider))`
       width: 0;
       height: auto;
       stroke-width: 1;
-      transition: width .4s;
+      transition: width 0.4s;
     }
   }
 
@@ -657,8 +771,8 @@ export default styled(connect(HomeSlider))`
     @media (max-width: 575.98px) {
       display: none;
     }
-    
-    &.hide{
+
+    &.hide {
       opacity: 0;
     }
   }
