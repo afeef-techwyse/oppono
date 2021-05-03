@@ -1,4 +1,5 @@
 import React from 'react';
+import {Address} from "../../components/form-components/Address";
 import Form from '../../components/form-components/Form';
 import Input from '../../components/form-components/Input';
 import {connect, css, styled} from 'frontity';
@@ -302,11 +303,12 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
           <h1 className={'form-headline-1 text-left'}>{formData.section_4?.title}</h1>
           <h2 className={'form-headline-2 primary'}>{formData.section_4?.subtitle}</h2>
         </div>
-        <Input type={'text'} name={'address'} {...formData.section_4?.address_input}/>
-        <W50>
-          <Input value={appraiser?.title} type={'text'} name={'city'} {...formData.section_4?.city_input}/>
-          <Input type={'text'} name={'postal_code'} {...formData.section_4?.postal_code_input} onChange={postalCodeOnChange}/>
-        </W50>
+        <Address
+            address={{name: 'address', ...formData.section_4?.address_input}}
+            city={{name: 'city', ...formData.section_4?.city_input}}
+            postalCode={{name: 'postal_code', ...formData.section_4?.postal_code_input}}
+            setAppraiser={postalCodeOnChange}
+        />
         <Select
           name={'property_type'}
           {...formData.section_4?.property_dropdown}/>

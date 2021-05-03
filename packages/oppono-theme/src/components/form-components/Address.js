@@ -10,7 +10,7 @@ import SelectAddress from "./SelectAddress";
 import {P} from './StyledComponent';
 import W50 from "./W50";
 
-export const Address = ({address, city, postalCode, setAppraiser}) => {
+export const Address = ({address, city, postalCode, postalCodeOnChange}) => {
   
   
   React.useEffect(() => {
@@ -58,7 +58,7 @@ export const Address = ({address, city, postalCode, setAppraiser}) => {
     <SelectAddress {...address} cacheOptions loadOptions={loadOptions} onChange={selectOption}/>
     <W50>
       <Input value={cityValue} disabled type={'text'}{...city}/>
-      <Input value={postalCodeValue} disabled type={'text'} {...postalCode}/>
+      <Input value={postalCodeValue} disabled type={'text'} {...postalCode} onChange={postalCodeOnChange}/>
     
     </W50>
   

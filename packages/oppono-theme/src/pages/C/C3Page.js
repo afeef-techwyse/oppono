@@ -1,4 +1,5 @@
 import React from 'react';
+import {Address} from "../../components/form-components/Address";
 import Form from '../../components/form-components/Form';
 import Input from '../../components/form-components/Input';
 import {connect, css, styled} from 'frontity';
@@ -329,6 +330,12 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
           <Input value={appraiser?.title} type={'text'} name={'city'} {...formData.section_4?.city_input}/>
           <Input onChange={postalCodeOnChange} type={'text'} name={'postal_code'} {...formData.section_4?.postal_code_input}/>
         </W50>
+        <Address
+            address={{name: 'address', ...formData.section_4?.address_input}}
+            city={{name: 'city', ...formData.section_4?.city_input}}
+            postalCode={{name: 'postal_code', ...formData.section_4?.postal_code_input}}
+            setAppraiser={postalCodeOnChange}
+        />
         <Select
           name={'property_type'}
           {...formData.section_4?.property_dropdown}/>

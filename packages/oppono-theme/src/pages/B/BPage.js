@@ -55,8 +55,8 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
   React.useEffect(() => {
     actions.theme.checkUser();
   }, [state.theme.user.logged]);
-  const [appraiser, setAppraiser] = React.useState([{}]);
-  const [businessAppraiser, setBusinessAppraiser] = React.useState([{}]);
+  const [[appraiser], postalCodeOnChange] = useFlowAppraisers();
+  const [[businessAppraiser], businessPostalCodeOnChange] = useFlowAppraisers();
   const getAppraiser = () => section2Values('business_address_same_as_property') === '1' ? businessAppraiser : appraiser;
   const mortgage = ((+section3Values('purchase_price')) - (+section3Values('down_payment'))) || 0;
   const firstProduct = state.theme.stepResponse.data?.data?.beloc.products[0] || {};
@@ -107,7 +107,7 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
             address={{name: 'business_address', ...formData.section_1?.address_input}}
             city={{name: 'business_city', ...formData.section_1?.city_input}}
             postalCode={{name: 'business_postal_code', ...formData.section_1?.postal_code_input}}
-            setAppraiser={setBusinessAppraiser}
+            setAppraiser={businessPostalCodeOnChange}
         />
         <Button icon={true} className={'next-step'} label={'Next'}/>
       </FormStep>
@@ -140,7 +140,7 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
                 address={{name: 'address', ...formData.section_2?.address_input}}
                 city={{name: 'city', ...formData.section_2?.city_input}}
                 postalCode={{name: 'postal_code', ...formData.section_2?.postal_code_input}}
-                setAppraiser={setAppraiser}
+                setAppraiser={postalCodeOnChange}
             />
           </>
         </FormConditionalInput>

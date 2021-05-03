@@ -1,4 +1,5 @@
 import React from 'react';
+import {Address} from "../../components/form-components/Address";
 import Form from '../../components/form-components/Form';
 import {connect, styled} from 'frontity';
 import FormStep from '../../components/form-components/FormStep';
@@ -63,31 +64,32 @@ const EPage = ({className, setCurrentTheme, actions, state, formData}) => {
           <h1 className={'form-headline-1 text-left'}>{formData.section_1?.title}</h1>
           <h2 className={'form-headline-2 primary'}>{formData.section_1?.subtitle}</h2>
         </div>
-        <Input noScroll type={'text'} name={'address'} {...formData.section_1?.address_input}/>
-        <W50>
-          <Input value={appraiser?.city} type={'text'} name={'city'} {...formData.section_1?.city_input}/>
-          <Input value={appraiser?.postalCode} type={'text'} name={'postal_code'} error={postalCodeErrorMessage} {...formData.section_1?.postal_code_input} onChange={debounce((event) => {
-            const postalCode = event.target.value;
-            if (postalCode.length < 3) {
-              actions.theme.setAppraiser({});
-              setPostalCodeErrorMessage('no appraisers found for this postal code');
-              return;
-            }
-            const data = new FormData();
-            data.append('postal_code', postalCode.trim().slice(0, 3));
-            opponoApi.post('/appraiser-lookup', data)
-              .then(response => {
-                if (response.data.length !== 1) {
-                  actions.theme.setAppraiser({});
-                  setPostalCodeErrorMessage('no appraisers found for this postal code');
-                }
-                else {
-                  actions.theme.setAppraiser({...response.data[0], city: response.data[0].title});
-                  setPostalCodeErrorMessage('');
-                }
-              });
-          }, 1000)}/>
-        </W50>
+        <Address
+            address={{name: 'address', noScroll:true, ...formData.section_1?.address_input}}
+            city={{name: 'city', ...formData.section_1?.city_input}}
+            postalCode={{name: 'postal_code', ...formData.section_1?.postal_code_input}}
+            setAppraiser={debounce((event) => {
+              const postalCode = event.target.value;
+              if (postalCode.length < 3) {
+                actions.theme.setAppraiser({});
+                setPostalCodeErrorMessage('no appraisers found for this postal code');
+                return;
+              }
+              const data = new FormData();
+              data.append('postal_code', postalCode.trim().slice(0, 3));
+              opponoApi.post('/appraiser-lookup', data)
+                  .then(response => {
+                    if (response.data.length !== 1) {
+                      actions.theme.setAppraiser({});
+                      setPostalCodeErrorMessage('no appraisers found for this postal code');
+                    }
+                    else {
+                      actions.theme.setAppraiser({...response.data[0], city: response.data[0].title});
+                      setPostalCodeErrorMessage('');
+                    }
+                  });
+            }, 1000)}
+        />
         <Select
           name={'property_type'}
           {...formData.section_1?.property_dropdown}/>

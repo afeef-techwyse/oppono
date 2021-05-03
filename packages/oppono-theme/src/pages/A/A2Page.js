@@ -1,4 +1,5 @@
 import React from "react";
+import {Address} from "../../components/form-components/Address";
 import Form from "../../components/form-components/Form";
 import Input from "../../components/form-components/Input";
 import { connect, styled } from "frontity";
@@ -112,26 +113,12 @@ const A2Page = ({ className, setCurrentTheme, state, actions, formData }) => {
               {formData.section_1?.subtitle}
             </h2>
           </div>
-          <Input
-            noScroll
-            type={"text"}
-            name={"address"}
-            {...formData.section_1?.address_input}
+          <Address
+              address={{name: 'address', noScroll:true, ...formData.section_1?.address_input}}
+              city={{name: 'city', ...formData.section_1?.city_input}}
+              postalCode={{name: 'postal_code', ...formData.section_1?.postal_code_input}}
+              setAppraiser={postalCodeOnChange}
           />
-          <W50>
-            <Input
-              value={appraiser?.title}
-              type={"text"}
-              name={"city"}
-              {...formData.section_1?.city_input}
-            />
-            <Input
-              onChange={postalCodeOnChange}
-              type={"text"}
-              name={"postal_code"}
-              {...formData.section_1?.postal_code_input}
-            />
-          </W50>
           <Select
             name={"property_type"}
             {...formData.section_1?.property_dropdown}

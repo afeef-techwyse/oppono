@@ -1,4 +1,5 @@
 import React from 'react';
+import {Address} from "../../components/form-components/Address";
 import Form from '../../components/form-components/Form';
 import Input from '../../components/form-components/Input';
 import {connect, styled} from 'frontity';
@@ -85,11 +86,12 @@ const D2Page = ({className, setCurrentTheme, state, actions, formData}) => {
           <h1 className={'form-headline-1 text-left'}>{formData.section_1?.title}</h1>
           <h2 className={'form-headline-2 primary'}>{formData.section_1?.subtitle}</h2>
         </div>
-        <Input noScroll type={'text'} name={'address'} {...formData.section_1?.address_input}/>
-        <W50>
-          <Input type={'text'} name={'city'} value={appraiser?.title} {...formData.section_1?.city_input}/>
-          <Input type={'text'} name={'postal_code'} {...formData.section_1?.postal_code_input} onChange={postalCodeOnChange}/>
-        </W50>
+        <Address
+            address={{name: 'address', noScroll:true, ...formData.section_1?.address_input}}
+            city={{name: 'city', ...formData.section_1?.city_input}}
+            postalCode={{name: 'postal_code', ...formData.section_1?.postal_code_input}}
+            setAppraiser={postalCodeOnChange}
+        />
         <Select
           name={'property_type'}
           {...formData.section_1?.property_dropdown}/>
