@@ -729,7 +729,7 @@ export default styled(connect(HomeSlider))`
 
       @media (max-width: 576px) {
         display: block;
-        height: auto;
+        height: 44px;
         width: 220px;
         padding: 1.2rem;
         border-radius: 3.94vh;
