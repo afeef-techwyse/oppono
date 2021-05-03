@@ -216,8 +216,12 @@ const ProductsSlider = ({
     page_theme,
     slider_top_subtitle,
     slider_top_title,
+    sub_header,
     slider: slidesObj = [],
   } = data.isReady && !data.isError ? state.source[data.type][data.id].acf : {};
+  React.useEffect(() => {
+    actions.theme.setSubHeader(sub_header);
+  }, [sub_header]);
   const nextBtnRef = React.useRef(null);
   const prevBtnRef = React.useRef(null);
   const paginationRef = React.useRef(null);

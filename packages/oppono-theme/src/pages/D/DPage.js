@@ -31,7 +31,12 @@ const DPage = ({className, setCurrentTheme, state, actions}) => {
   }, []);
   
   const [productsTable, productsFilter] = useProductsTable(state.theme.stepResponse);
-  console.log(productsTable);
+  React.useEffect(() => {
+    actions.theme.setSubHeader({
+      part_1:'I’m just',
+      part_2:'BROWSING'
+    });
+  }, []);
   return <div className={className}>
     <Form setCurrentTheme={setCurrentTheme}>
       <FormStep activeTheme={'gray-theme'} stepName={'d'}>

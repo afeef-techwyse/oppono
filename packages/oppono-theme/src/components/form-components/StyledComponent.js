@@ -29,16 +29,10 @@ P.F29 = styled(P.D)`
   font-size: ${size(29)};
   line-height: ${size(40)};
   font-weight: 400;
-  @media (max-width: 991.98px
-}
-
-)
-{
-  font-size: ${size(24)}
-;
-  line-height: normal
-;
-}
+  @media (max-width: 991.98px) {
+    font-size: ${size(24)};
+    line-height: normal;
+  }
 `;
 P.Dark = styled(P.D)`
   opacity: .5;
@@ -93,12 +87,12 @@ export const Wysiwyg = styled.div`
   ul {
     margin-left: ${size(46)};
   }
-
+  
   ol {
     margin-left: ${size(40)};
     margin-top: ${size(25)};
   }
-
+  
   Li {
     color: rgba(192, 182, 180, .7);
     font-size: ${size(16)};

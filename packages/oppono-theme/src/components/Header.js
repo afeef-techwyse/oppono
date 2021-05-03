@@ -187,6 +187,15 @@ const LogoLink = connect(({ state }) =>
     </>
   )
 );
+const LoginBtn = connect(({ state, menuHandler }) =>
+  state.theme.user.logged || <Link
+      onClick={() => menuHandler(false)}
+      className={"primary member-login"}
+      href={"/sign-in/"}
+  >
+    Member Login
+  </Link>
+);
 
 const Header = React.forwardRef(
   ({ className, hasSubMenu = true, hasProgress = false }, forwardRef) => {
@@ -274,13 +283,7 @@ const Header = React.forwardRef(
               >
                 Get in Touch
               </Link>
-              <Link
-                onClick={() => menuHandler(false)}
-                className={"primary member-login"}
-                href={"/sign-in/"}
-              >
-                Member Login
-              </Link>
+              <LoginBtn menuHandler={menuHandler}/>
             </div>
           </Container>
         </div>

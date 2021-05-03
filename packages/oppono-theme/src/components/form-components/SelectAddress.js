@@ -13,24 +13,59 @@ import {P} from "./StyledComponent";
 
 const DropdownIndicator = props => {
   return (
-    components.DropdownIndicator && (
-      <components.DropdownIndicator {...props}>
-        <svg style={{transition: 'transform 400ms', transform: `scaleY(${props.selectProps.menuIsOpen ? -1 : 1})`}} viewBox="0 0 15 13">
-          <path fill="#bfb6b4" d="M7.5 13L0 0h15z"/>
-        </svg>
-      </components.DropdownIndicator>
-    )
+      components.DropdownIndicator && (
+          <components.DropdownIndicator {...props}>
+            <svg style={{
+              transition: 'transform 400ms',
+              transform: `scaleY(${props.selectProps.menuIsOpen ? -1 : 1})`
+            }} viewBox="0 0 15 13">
+              <path fill="#bfb6b4" d="M7.5 13L0 0h15z"/>
+            </svg>
+          </components.DropdownIndicator>
+      )
+  );
+};
+const Input = props => {
+  return (
+      components.Input && (
+          <components.Input {...props} autoComplete={'random-string'}/>
+      )
   );
 };
 
-const Option = (props)=>{
+const getHighlightedText = (text, highlight) => {
+  const highlights = highlight.split(',');
+  if (!highlights.length) return <P.D>{text}</P.D>;
+  
+  const pieces = []
+  
+  for (let i = 0; i < highlights.length; i++) {
+    highlights[i] = highlights[i].split('-');
+    pieces.push(<>{text.slice(i ? +highlights[i - 1][1] : 0, +highlights[i][0])}</>);
+    pieces.push(<strong style={{color:'#fe412d'}}>{text.slice(highlights[i][0], highlights[i][1])}</strong>);
+  }
+  pieces.push(<>{text.slice(+highlights[highlights.length - 1][1])}</>);
+  return <P.D>{pieces.map((piece,index)=><React.Fragment key={index}>{piece}</React.Fragment>)}</P.D>
+}
+
+const Option = (props) => {
+  
   return <components.Option {...props}>
-    <P.D>{props.data.Text}</P.D>
+    {/*{<P.D>{props.data.Text}</P.D>}*/}
+    {getHighlightedText(props.data.Text,props.data.Highlight)}
     <P.Dark>{props.data.Description}</P.Dark>
   </components.Option>
 }
 
-const Select = React.forwardRef(({className, name, required, label, onChange, serverErrorMessage, ...props}, forwardedRef) => {
+const Select = React.forwardRef(({
+                                   className,
+                                   name,
+                                   required,
+                                   label,
+                                   onChange,
+                                   serverErrorMessage,
+                                   ...props
+                                 }, forwardedRef) => {
   const innerRef = React.useRef(null);
   const combinedRef = useCombinedRefs(forwardedRef, innerRef);
   const [focused, setFocused] = React.useState(false);
@@ -55,49 +90,54 @@ const Select = React.forwardRef(({className, name, required, label, onChange, se
   
   
   return (
-    <div ref={combinedRef} className={classnames('form-group', className, {focused, invalid})}>
-      <input
-        onInvalid={() => setVisited(true)}
-        ref={inputRef}
-        autoComplete="off"
-        name={name}
-        type={'text'}
-        style={{opacity: 0, height: 0, position: 'absolute', visibility: 'hidden'}}
-        value={value}
-        required={required}
-        onChange={() => {}}
-      />
-      <label error-message={serverErrorMessage || errorMessage}>
-        <div className="label-text">{label}</div>
-        <AsyncSelect cacheOptions
-          ref={selectRef}
-          {...props}
-          autofocus={true}
-          openAfterFocus={true}
-          onFocus={(e) => {
-            gsap.to(window, {
-              duration: .5,
-              scrollTo: {y: combinedRef.current, offsetY: window.innerWidth<768?200: (window.innerHeight - combinedRef.current.getBoundingClientRect().height) / 2},
-            });
-            setFocused(true);
-          }}
-          onBlur={() => {
-            setFocused(false);
-            setVisited(true);
-          }}
-          onChange={(option,state) => {
-            setValue(option.value);
-            inputRef.current.dispatchEvent(new Event('change'));
-            setInvalid(false);
-            onChange?.(option,state);
-          }}
-          className='oppono-select'
-          classNamePrefix="oppono-select"
-          components={{DropdownIndicator,Option}}
-          noOptionsMessage={()=>'Type To Search'}
+      <div ref={combinedRef} className={classnames('form-group', className, {focused, invalid})}>
+        <input
+            onInvalid={() => setVisited(true)}
+            ref={inputRef}
+            autoComplete="off"
+            name={name}
+            type={'text'}
+            style={{opacity: 0, height: 0, position: 'absolute', visibility: 'hidden'}}
+            value={value}
+            required={required}
+            onChange={() => {
+            }}
         />
-      </label>
-    </div>
+        <label error-message={serverErrorMessage || errorMessage}>
+          <div className="label-text">{label}</div>
+          <AsyncSelect
+              cacheOptions
+              ref={selectRef}
+              {...props}
+              autofocus={true}
+              openAfterFocus={true}
+              onFocus={(e) => {
+                gsap.to(window, {
+                  duration: .5,
+                  scrollTo: {
+                    y: combinedRef.current,
+                    offsetY: window.innerWidth < 768 ? 200 : (window.innerHeight - combinedRef.current.getBoundingClientRect().height) / 2
+                  },
+                });
+                setFocused(true);
+              }}
+              onBlur={() => {
+                setFocused(false);
+                setVisited(true);
+              }}
+              onChange={(option, state) => {
+                setValue(option.value);
+                inputRef.current.dispatchEvent(new Event('change'));
+                setInvalid(false);
+                onChange?.(option, state);
+              }}
+              className='oppono-select'
+              classNamePrefix="oppono-select"
+              components={{DropdownIndicator, Option, Input}}
+              noOptionsMessage={() => 'Type To Search'}
+          />
+        </label>
+      </div>
   );
 });
 
@@ -106,114 +146,127 @@ Select.propTypes = {
   placeholder: PropTypes.node,
   className: PropTypes.string,
   name: PropTypes.string.isRequired,
-  options: PropTypes.arrayOf(PropTypes.shape({
-    value: PropTypes.string,
-    label: PropTypes.string,
-  })).isRequired,
 };
 
 export default styled(Select)`
-&.focused{
+  &.focused {
     border-bottom: 1px solid rgba(191, 182, 180, 0.2);
     position: relative;
-    z-index: 9999!important;
-}
-.oppono-select{
-  border-bottom: 1px solid rgba(191, 182, 180, 0.2);
-  outline: none;
-  width: 100%;
-  &__value-container{
-    padding: 0;
-    div{
-    margin: 0!important;
-    padding: 0;
+    z-index: 9999 !important;
+  }
+  
+  .oppono-select {
+    border-bottom: 1px solid rgba(191, 182, 180, 0.2);
+    outline: none;
+    width: 100%;
+    
+    &__value-container {
+      padding: 0;
+      
+      div {
+        margin: 0 !important;
+        padding: 0;
+      }
     }
-  }
-  &__indicators{
-    svg{
-      width: ${size(15)};
-      height: ${size(13)};
+    
+    &__indicators {
+      svg {
+        width: ${size(15)};
+        height: ${size(13)};
+      }
     }
-  }
-  &__single-value,&__input{
-    color: #bfb6b4;
-    font-size: ${size(40)};
-    font-weight: 300;
-  }
-  &__control{
-    border:none!important;
-    box-shadow:none!important;
-    background: transparent;
-    height: ${size(53)};
-    padding-bottom: ${size(6)};
-    color: #bfb6b4;
-    font-size: ${size(40)};
-    font-weight: 300;
-    cursor: pointer;
-    span{
-      display: none;
+    
+    &__single-value, &__input {
+      color: #bfb6b4;
+      font-size: ${size(40)};
+      font-weight: 300;
     }
-  }
-  &__menu{
-    background: #373851;
-    z-index: 1000000000;
-    margin-top: 0;
-  }
-  &__menu-notice{
-    font-size: ${size(20)};
-  }
-  &__option{
-    color: #bfb6b4;
-    font-size: ${size(40)};
-    font-weight: 300;
-    text-align: left;
-    &--is-focused{
-      background-color: #bfb6b4;
-      ${P.Dark},${P.D}{
-      color: black;
+    
+    &__control {
+      border: none !important;
+      box-shadow: none !important;
+      background: transparent;
+      height: ${size(53)};
+      padding-bottom: ${size(6)};
+      color: #bfb6b4;
+      font-size: ${size(40)};
+      font-weight: 300;
+      cursor: pointer;
+      
+      span {
+        display: none;
+      }
+    }
+    
+    &__menu {
+      background: #373851;
+      z-index: 1000000000;
+      margin-top: 0;
+    }
+    
+    &__menu-notice {
+      font-size: ${size(20)};
+    }
+    
+    &__option {
+      color: #bfb6b4;
+      font-size: ${size(40)};
+      font-weight: 300;
+      text-align: left;
+      
+      &--is-focused {
+        background-color: #bfb6b4;
+        
+        ${P.Dark}, ${P.D} {
+          color: black;
+        }
       }
     }
   }
- }
-transition: margin-bottom 400ms;
-
-  label{
+  
+  transition: margin-bottom 400ms;
+  
+  label {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    .label-text{
+    
+    .label-text {
       color: #bfb6b4;
       font-size: ${size(16)};
       font-weight: 500;
       text-align: left;
       margin-bottom: ${size(7)};
-      .dark{
+      
+      .dark {
         color: rgba(191, 182, 180, 0.5);
       }
     }
   }
   
-&.invalid{
-    //margin-bottom: ${size(40)};
-    label{
+  &.invalid {
+      //margin-bottom: ${size(40)};
+    label {
       position: relative;
-      &:after{
-          content:url(${missing});
-          position: absolute;
-          top: calc(100% + 5px);
-          left: 0;
-          width: ${size(22)};
-          height: ${size(22)};
+      
+      &:after {
+        content: url(${missing});
+        position: absolute;
+        top: calc(100% + 5px);
+        left: 0;
+        width: ${size(22)};
+        height: ${size(22)};
       }
-      &:before{
-          content: attr(error-message);
-          position: absolute;
-          top: calc(100% + 7px);
-          left: ${size(31)};
-          color: #bfb6b4;
-          font-size: ${size(14)};
-          font-weight: 300;
+      
+      &:before {
+        content: attr(error-message);
+        position: absolute;
+        top: calc(100% + 7px);
+        left: ${size(31)};
+        color: #bfb6b4;
+        font-size: ${size(14)};
+        font-weight: 300;
       }
     }
-}
+  }
 `;
