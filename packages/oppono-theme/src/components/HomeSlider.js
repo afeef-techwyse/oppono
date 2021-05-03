@@ -708,8 +708,8 @@ export default styled(connect(HomeSlider))`
   }
 
   .btn-mobile-container {
-    z-index: 9;
-    @media (min-width: 576px) {
+    z-index: 15;
+    @media (min-width: 998px) {
       display: none;
     }
 
