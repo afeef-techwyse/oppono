@@ -25,7 +25,7 @@ export const Address = ({address, city, postalCode, postalCodeOnChange}) => {
     
     let config = {
       method: 'post',
-      url: 'http://ws1.postescanada-canadapost.ca/AddressComplete/Interactive/AutoComplete/v1.00/json3.ws',
+      url: 'https://ws1.postescanada-canadapost.ca/AddressComplete/Interactive/AutoComplete/v1.00/json3.ws',
       data: formData
     };
     const {data:{Items}} = await axios(config);
@@ -39,7 +39,7 @@ export const Address = ({address, city, postalCode, postalCodeOnChange}) => {
   
     let config = {
       method: 'post',
-      url: 'http://ws1.postescanada-canadapost.ca/AddressComplete/Interactive/RetrieveById/v1.00/json3.ws',
+      url: 'https://ws1.postescanada-canadapost.ca/AddressComplete/Interactive/RetrieveById/v1.00/json3.ws',
       data: formData
     };
     const {data:{Items}} = await axios(config);
