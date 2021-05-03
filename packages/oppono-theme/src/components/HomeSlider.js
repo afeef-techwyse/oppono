@@ -709,10 +709,6 @@ export default styled(connect(HomeSlider))`
 
   .btn-mobile-container {
     z-index: 15;
-    display: none;
-    @media only screen and (max-width: 768px) {
-      display: block;
-    }
 
     .btn-mobile {
       margin-top: 2rem;
