@@ -33,7 +33,7 @@ const FooterRight = styled.div`
       margin-left: ${size(12)};
       margin-right: ${size(12)};
       margin-top: ${size(17)};
-      font-size: ${size(10)};
+      font-size: ${size(12)};
     }
 
 		@media (max-width: 450px) {
