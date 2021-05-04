@@ -54,7 +54,7 @@ const SubHeader = styled(
   width: 100%;
   border-top: 1px solid rgba(191, 182, 180, 0.1);
   display: flex;
-  height: ${size(66)};
+  padding-bottom: 10px;
   padding-top: ${size(15)};
   @media (max-width: 575.98px) {
     justify-content: space-between;
@@ -187,14 +187,17 @@ const LogoLink = connect(({ state }) =>
     </>
   )
 );
-const LoginBtn = connect(({ state, menuHandler }) =>
-  state.theme.user.logged || <Link
-      onClick={() => menuHandler(false)}
-      className={"primary member-login"}
-      href={"/sign-in/"}
-  >
-    Member Login
-  </Link>
+const LoginBtn = connect(
+  ({ state, menuHandler }) =>
+    state.theme.user.logged || (
+      <Link
+        onClick={() => menuHandler(false)}
+        className={"primary member-login"}
+        href={"/sign-in/"}
+      >
+        Member Login
+      </Link>
+    )
 );
 
 const Header = React.forwardRef(
@@ -283,7 +286,7 @@ const Header = React.forwardRef(
               >
                 Get in Touch
               </Link>
-              <LoginBtn menuHandler={menuHandler}/>
+              <LoginBtn menuHandler={menuHandler} />
             </div>
           </Container>
         </div>
@@ -441,6 +444,10 @@ export default styled(Header)`
       flex-direction: column;
       align-items: center;
       text-transform: capitalize;
+
+      @media (max-width: 991.98px) {
+        margin-top: 25%;
+      }
 
       a {
         color: #b5d2ff;
