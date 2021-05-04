@@ -547,15 +547,12 @@ export default styled(Header)`
     }
 
     .social-icons {
+      margin-top: 1rem;
       display: flex !important;
 
       a {
         width: 2.2rem;
         margin: 0 0.8rem;
-      }
-
-      @media (max-width: 558.98px) {
-        display: none;
       }
     }
   }
