@@ -547,7 +547,7 @@ export default styled(Header)`
     }
 
     .social-icons {
-      margin-top: 1rem;
+      margin-top: 2.5rem;
       display: flex !important;
 
       a {
