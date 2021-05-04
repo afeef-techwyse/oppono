@@ -1,21 +1,15 @@
-import React from 'react';
-import {size} from '../../functions/size';
-import {styled} from 'frontity';
-import Container from '../reusable/Container';
-import Link from '../reusable/Link';
+import React from "react";
+import { size } from "../../functions/size";
+import { styled } from "frontity";
+import Container from "../reusable/Container";
+import Link from "../reusable/Link";
 
-const LastStep = ({className, children}) => {
-  return (
-    <div className={className + ' form-wide-container'}>
-      <Container>
-        {children}
-      </Container>
-    </div>
-  );
+const LastStep = ({ className, children }) => {
+  return <div className={className + " form-wide-container"}>{children}</div>;
 };
 
 export default styled(LastStep)`
-    //  padding-top: ${size(50)};
+  //  padding-top: ${size(50)};
   // @media(max-width: 991.98px){
   //   padding-top: 0;
   // }
@@ -54,7 +48,8 @@ export default styled(LastStep)`
     }
 
     &.tablet-center {
-      .form-headline-3, .form-headline-1 {
+      .form-headline-3,
+      .form-headline-1 {
         text-align: left;
         @media (max-width: 991.98px) {
           text-align: center;
@@ -103,4 +98,3 @@ export default styled(LastStep)`
     }
   }
 `;
-

@@ -581,6 +581,7 @@ export default styled(connect(HomeSlider))`
       color: #b5d2ff;
       font-size: ${size(40)};
       font-weight: 400;
+      margin-bottom: 8px;
       @media (max-width: 991.98px) {
         font-size: ${size(35)};
       }

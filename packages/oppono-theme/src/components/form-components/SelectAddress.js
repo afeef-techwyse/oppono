@@ -213,6 +213,9 @@ export default styled(Select)`
       color: #bfb6b4;
       font-size: ${size(40)};
       font-weight: 300;
+      @media (max-width: 557.98px) {
+        font-size: 2rem;
+      }
     }
 
     &__control {
@@ -251,6 +254,10 @@ export default styled(Select)`
       font-size: ${size(40)};
       font-weight: 300;
       text-align: left;
+
+      @media (max-width: 557.98px) {
+        font-size: 2rem;
+      }
 
       &--is-focused {
         background-color: #bfb6b4;

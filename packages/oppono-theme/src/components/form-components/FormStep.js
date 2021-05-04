@@ -296,44 +296,20 @@ const FormStep = ({
   React.useEffect(() => {
     if (active) {
       if (initial) {
-        gsap
-          .timeline()
-          .set(stepRef.current, {
-            autoAlpha: 1,
-            height: "auto",
-            duration: 0.5,
-            y: 0,
-          })
-          .from(stepRef.current.children, {
-            autoAlpha: 0,
-            y: 30,
-            stagger: 0.1,
-            clearProps: "all",
-          })
-          .then(() => stepRef.current?.querySelector("input")?.focus());
-      } else {
-        setTimeout(
-          () =>
-            gsap
-              .timeline()
-              .fromTo(
-                stepRef.current,
-                { autoAlpha: 0, display: "none" },
-                { autoAlpha: 1, display: "block", duration: 0.001 }
-              )
-              .fromTo(
-                stepRef.current,
-                { height: 0, y: 300 },
-                { height: "auto", duration: 0.5, y: 0 }
-              )
-              .fromTo(
-                stepRef.current.children,
-                { autoAlpha: 0, y: 30 },
-                { autoAlpha: 1, y: 0, stagger: 0.1 }
-              )
-              .then(() => stepRef.current?.querySelector("input")?.focus()),
-          1000
-        );
+        
+        gsap.timeline()
+          .set(stepRef.current, {autoAlpha: 1, height: 'auto', duration: .5, y: 0})
+          .from(stepRef.current.children, {autoAlpha: 0, y: 30, stagger: 0.1, clearProps: 'all'})
+          // .then(() => stepRef.current?.querySelector('input')?.focus());
+      }
+      else {
+        setTimeout(() =>
+            gsap.timeline()
+              .fromTo(stepRef.current, {autoAlpha: 0, display: 'none'}, {autoAlpha: 1, display: 'block', duration: .001})
+              .fromTo(stepRef.current, {height: 0, y: 300}, {height: 'auto', duration: .5, y: 0})
+              .fromTo(stepRef.current.children, {autoAlpha: 0, y: 30}, {autoAlpha: 1, y: 0, stagger: 0.1})
+              // .then(() => stepRef.current?.querySelector('input')?.focus())
+          , 1000);
       }
     } else {
       if (!initial) {
@@ -421,8 +397,6 @@ export default styled(connect(FormStep))`
     margin-bottom: ${size(82)};
     @media (max-width: 991.98px) {
       margin-bottom: ${size(55)};
-      margin-left: ${size(30)};
-      margin-right: ${size(30)};
     }
   }
   div.upload-step-wrapper {
@@ -440,6 +414,9 @@ export default styled(connect(FormStep))`
       right: 0;
       top: -5rem;
       width: 12rem;
+
+      @media (max-width: 575.98px) {
+      }
     }
   }
   &.active {
@@ -447,5 +424,10 @@ export default styled(connect(FormStep))`
   }
   button {
     margin-top: ${size(80)};
+
+    @media (max-width: 575.98px) {
+      margin-top: 3rem;
+      width: 100%;
+    }
   }
 `;

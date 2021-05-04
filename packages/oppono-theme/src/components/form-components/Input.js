@@ -278,7 +278,6 @@ export default styled(Input)`
 
   input[type="password"] {
     color: rgba(191, 182, 180, 0.2);
-    height: ${size(40)};
     &::placeholder {
       font-size: ${size(25)};
     }
