@@ -83,7 +83,10 @@ const SignInPage = ({
             name={"password"}
             {...formData.section_1?.password_input}
           />
-          <Link className={"forgot-password"} href="">
+          <Link
+            className={"forgot-password"}
+            href="https://oppono-app.com/wp-login.php"
+          >
             I forgot my password
           </Link>
           {state.theme.errors?.general_error ? (
