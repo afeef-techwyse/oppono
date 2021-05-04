@@ -95,16 +95,16 @@ const Mail = ({className, state, actions}) => {
           {/*<img className={'contact-obj'} src={contact_obj} alt={'Contact Icon'}/>*/}
           <div className="contact-row">
             <div className="col-4">
-              <Input className={'primary-input'} type={'text'} {...pageData.section_1?.name_input}/>
-              <Input className={'primary-input'} type={'text'} {...pageData.section_1?.email_input}/>
-              <Input className={'primary-input'} type={'text'} {...pageData.section_1?.phone_input}/>
+              <Input name={'name'} className={'primary-input'} type={'text'} {...pageData.section_1?.name_input}/>
+              <Input name={'email'} className={'primary-input'} type={'text'} {...pageData.section_1?.email_input}/>
+              <Input name={'phone'} className={'primary-input'} type={'text'} {...pageData.section_1?.phone_input}/>
             
             </div>
             <div className="col-auto">
               <Select className={'primary-select'}
                       name={'discuss'}
                       {...pageData.section_1?.discuss_dropdown}/>
-              <TextArea className={'primary-input'} label={'Questions?'}/>
+              <TextArea name={'questions'} className={'primary-input'} label={'Questions?'}/>
             </div>
           </div>
           <Button className={'wide'} label={'I’m ready to send'}/>

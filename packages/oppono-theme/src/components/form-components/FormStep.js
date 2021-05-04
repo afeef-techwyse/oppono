@@ -225,7 +225,7 @@ const FormStep = ({
         gsap.timeline()
           .set(stepRef.current, {autoAlpha: 1, height: 'auto', duration: .5, y: 0})
           .from(stepRef.current.children, {autoAlpha: 0, y: 30, stagger: 0.1, clearProps: 'all'})
-          .then(() => stepRef.current?.querySelector('input')?.focus());
+          // .then(() => stepRef.current?.querySelector('input')?.focus());
       }
       else {
         setTimeout(() =>
@@ -233,7 +233,7 @@ const FormStep = ({
               .fromTo(stepRef.current, {autoAlpha: 0, display: 'none'}, {autoAlpha: 1, display: 'block', duration: .001})
               .fromTo(stepRef.current, {height: 0, y: 300}, {height: 'auto', duration: .5, y: 0})
               .fromTo(stepRef.current.children, {autoAlpha: 0, y: 30}, {autoAlpha: 1, y: 0, stagger: 0.1})
-              .then(() => stepRef.current?.querySelector('input')?.focus())
+              // .then(() => stepRef.current?.querySelector('input')?.focus())
           , 1000);
       }
     }
