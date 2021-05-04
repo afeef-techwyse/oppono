@@ -239,11 +239,11 @@ const GeneralStyles = (props) => (
         text-align: center;
         //max-width: ${size(438)};
         @media (max-width: 991.98px) {
-          font-size: ${size(35)};
+          font-size: ${size(30)};
         }
         @media (max-width: 575.98px) {
-          font-size: ${size(32)};
-          line-height: ${size(40)};
+          font-size: ${size(25)};
+          line-height: 1.4;
         }
       }
 
@@ -393,6 +393,10 @@ const GeneralStyles = (props) => (
         line-height: ${size(25)};
         text-align: center;
         margin-top: ${size(14)};
+
+        @media (max-width: 575.98px) {
+          font-size: ${size(14)};
+        }
 
         a {
           color: #0e9564;

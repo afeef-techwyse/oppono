@@ -364,7 +364,7 @@ export default styled(Header)`
 
       .three-dots {
         display: flex;
-        align-items: center;
+        align-items: flex-end;
         flex-direction: column;
         margin-left: ${size(40)};
         cursor: pointer;
@@ -503,7 +503,7 @@ export default styled(Header)`
   ${StepsProgress} {
     display: none;
     @media (max-width: 575.98px) {
-      margin-bottom: ${size(40)};
+      margin-bottom: ${size(20)};
       display: block;
       .current .step-name {
         top: ${size(12)};

@@ -71,7 +71,6 @@ export default styled(Button)`
   }
 
   @media (max-width: 575.98px) {
-    width: 80%;
     max-width: unset;
     padding: 1.5rem 2.8rem;
   }

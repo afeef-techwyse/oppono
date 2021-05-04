@@ -245,6 +245,7 @@ const MapPage = ({ className, actions, state }) => {
               />
             ) : null}
           </div>
+          <div className="cf"></div>
         </div>
       </Container>
       <Footer />
@@ -298,10 +299,13 @@ export default styled(connect(MapPage))`
 
     @media (max-width: 575.98px) {
       margin: auto;
-      position: absolute;
+      position: fixed;
       top: 80px;
       left: 0;
-      height: 70%;
+      overflow: scroll;
+      padding-bottom: 8rem;
+      width: 100%;
+      z-index: 100;
     }
 
     .col-left {
@@ -456,7 +460,7 @@ export default styled(connect(MapPage))`
         height: 1px;
         display: inline-block;
         @media (max-width: 575.98px) {
-          margin: ${size(15)} 0;
+          margin: ${size(15)} auto;
         }
       }
 
@@ -467,11 +471,15 @@ export default styled(connect(MapPage))`
           margin-top: ${size(72)};
         }
         @media (max-width: 575.98px) {
-          margin-top: ${size(62)};
+          margin-top: ${size(30)};
           width: 100%;
         }
       }
     }
+  }
+
+  .cf {
+    clear: both;
   }
 
   .map {

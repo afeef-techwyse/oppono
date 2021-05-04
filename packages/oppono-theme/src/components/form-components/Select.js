@@ -166,6 +166,9 @@ export default styled(Select)`
       color: #bfb6b4;
       font-size: ${size(40)};
       font-weight: 300;
+      @media (max-width: 557.98px) {
+        font-size: 2rem;
+      }
     }
     &__control {
       border: none !important;
@@ -181,8 +184,13 @@ export default styled(Select)`
         display: none;
       }
 
-      @media (max-width: 450px) {
+      @media (max-width: 557.98px) {
         height: 3.3rem;
+        font-size: 2rem;
+
+        &:placholder {
+          font-size: 2rem;
+        }
       }
     }
     &__menu {
@@ -197,6 +205,9 @@ export default styled(Select)`
       &--is-focused {
         background-color: #bfb6b4;
         color: black;
+      }
+      @media (max-width: 557.98px) {
+        font-size: 2rem;
       }
     }
   }
