@@ -83,12 +83,12 @@ const SignInPage = ({
             name={"password"}
             {...formData.section_1?.password_input}
           />
-          <Link
-            className={"forgot-password"}
-            href="https://oppono-app.com/wp-login.php"
+          <a
+            href="https://oppono-app.com/wp-login.php?action=lostpassword"
+            className="forgot-password"
           >
             I forgot my password
-          </Link>
+          </a>
           {state.theme.errors?.general_error ? (
             <p className={"error-message"}>
               <Html2React html={state.theme.errors?.general_error.code} />
