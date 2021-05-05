@@ -130,7 +130,7 @@ const MapPage = ({ className, actions, state }) => {
         setAppraiser(response.data);
         setPostalCodeErrorMessage("");
         const { coordinates } = cities.filter(
-          (city) => city.name === response.data[0]?.title
+          (city) => city.name === response.data[0]?.fields.city
         )[0];
         polygonAPIRef.current.setPaths(coordinates);
         mapAPIRef.current.fitBounds(polygonAPIRef.current.getBounds());
