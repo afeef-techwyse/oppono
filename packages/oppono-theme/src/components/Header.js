@@ -498,7 +498,7 @@ export default styled(Header)`
 
       a {
         color: #b5d2ff;
-        font-size: ${size(60)};
+        font-size: ${size(40)};
         font-weight: 500;
         margin-bottom: ${size(19)};
         transition: opacity 300ms;
@@ -522,7 +522,7 @@ export default styled(Header)`
 
         &.member-login {
           width: auto;
-          font-size: ${size(50)};
+          font-size: ${size(35)};
           max-width: fit-content;
           padding: ${size(12)} ${size(32)};
           min-height: ${size(64)};
@@ -548,7 +548,11 @@ export default styled(Header)`
 
     .social-icons {
       margin-top: 2.5rem;
-      display: flex !important;
+      display: flex;
+
+      @media (min-width: 575.98px) {
+        display: none;
+      }
 
       a {
         width: 2.2rem;

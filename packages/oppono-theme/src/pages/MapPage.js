@@ -291,6 +291,9 @@ export default styled(connect(MapPage))`
     justify-content: space-between;
     position: relative;
     z-index: 6;
+    @media (min-width: 1800px) {
+      transform: scale(0.7);
+    }
     @media (min-width: 1400px) {
       transform: scale(0.8);
     }
