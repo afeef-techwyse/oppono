@@ -73,7 +73,11 @@ const A2Page = ({ className, setCurrentTheme, state, actions, formData }) => {
   const refNumber = React.useRef("");
   state.theme.stepResponse.data?.["reference-number"] &&
     (refNumber.current = state.theme.stepResponse.data?.["reference-number"]);
-
+  console.log(` You are applying for a ${section2Values("looking_for")} mortgage on
+              your ${section1Values("property_type")},${" "}
+              ${section1Values("property_details_1")} home which is located at${" "}
+              ${section1Values("address")}, ${section1Values("city")},${" "}
+              ${section1Values("postal_code")}`)
   return (
     <div className={className}>
       <Form setCurrentTheme={setCurrentTheme} endPoint={"/purchase"}>

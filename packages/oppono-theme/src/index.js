@@ -29,6 +29,21 @@ const appraisersMapHandler = {
 
 gsap.config({nullTargetWarn: false});
 
+const acfOptionsHandler = {
+  name: 'acfOptionsHandler',
+  pattern: 'acf-options-page',
+  func: async ({route, state, libraries}) => {
+    // 1. Get ACF option page from REST API.
+    const response = await libraries.source.api.get({
+      endpoint: `/acf/v3/options/oppono-settings`,
+    });
+    const option = await response.json();
+    
+    // 2. Add data to `source`.
+    const data = state.source.get(route);
+    Object.assign(data, {...option, isAcfOptionsPage: true});
+  },
+};
 export default {
   name: 'oppono-theme',
   roots: {
@@ -81,16 +96,23 @@ export default {
       setActiveStep: ({state}) => value => state.theme.activeStep = {...state.theme.activeStep, ...value},
       init: ({libraries, actions, state}) => {
         libraries.source.handlers.push(
-          appraisersMapHandler,
+            acfOptionsHandler,
+            appraisersMapHandler,
         );
         state.frontity.rendering === 'csr' && actions.theme.checkUser();
+      },
+      beforeSSR: async ({actions}) => {
+        // This will make Frontity wait until the ACF options
+        // page has been fetched and it is available
+        // using state.source.get("acf-options-page").
+        await actions.source.fetch('acf-options-page');
       },
       afterCSR: ({actions, state}) => {
         state.frontity.rendering === 'csr' && actions.theme.checkUser();
       },
       setUser: ({state}) => (user = {}, setCookie = true) => {
         const hours = 1;
-  
+        
         state.theme.user = {...state.theme.user, ...user};
         setCookie && cookies.setItem(userCookieKey, JSON.stringify(state.theme.user), hours * 60 * 60, '/'); //fixme just update the value
       },
@@ -113,7 +135,7 @@ export default {
     themeLoading: {
       animationStart: ({state}) => state.themeLoading.loading = true,
       animationDone: ({state}) => state.themeLoading.loading = false,
-  
+      
     },
   },
 };
