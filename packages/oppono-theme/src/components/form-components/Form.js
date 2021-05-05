@@ -54,8 +54,15 @@ const Form = ({
     });
     actions?.theme.setActiveStep({ total: stepsCounter });
   }, []);
-  return (<>
-      <Global styles={css`html{overflow-y: scroll}`}/>
+  return (
+    <>
+      <Global
+        styles={css`
+          html {
+            overflow-y: scroll;
+          }
+        `}
+      />
       <div ref={innerRef} className={classnames(className, { wide })}>
         {state.theme.activeStep.total > 1 ? <StepsProgress /> : null}
         {React.Children.map(children, (child, index) => {
@@ -96,6 +103,10 @@ export default styled(connect(Form))`
   }
   padding-top: ${size(200)};
   position: relative;
+  @media (max-width: 575.98px) {
+    padding: 0 3.3rem;
+    margin-top: 160px;
+  }
   ${StepsProgress} {
     position: fixed;
     height: 30%;

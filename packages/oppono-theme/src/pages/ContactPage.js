@@ -1,30 +1,31 @@
-import React from 'react';
-import {connect, styled} from 'frontity';
-import {size} from '../functions/size';
-import Switch from '@frontity/components/switch';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import React from "react";
+import { connect, styled } from "frontity";
+import { size } from "../functions/size";
+import Switch from "@frontity/components/switch";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 // import Chat from './contact/Chat';
-import Mail from './contact/Mail';
-import classnames from 'classnames';
+import Mail from "./contact/Mail";
+import classnames from "classnames";
 
-const ContactPage = ({className, state, actions}) => {
-    // const data = state.source.get(state.router.link);
+const ContactPage = ({ className, state, actions }) => {
+  // const data = state.source.get(state.router.link);
     // const pageData = data.isReady && !data.isError ? state.source[data.type][data.id].acf : {};
     // React.useEffect(() => {
-    //   actions.theme.setActiveTheme(pageData.section_1?.section_theme || 'gray-theme');
-    // }, []);
-    return <div className={classnames(className)}>
-      <Header/>
+    //   actions.theme.setActiveTheme(pageData.section_1?.section_theme || "gray-theme"
+    );
+  // }, []);
+    return (
+    <div className={classnames(className)}>
+      <Header />
       <Switch>
         {/*<Chat when={state.router.link.startsWith('/contact/chat/')}/>*/}
-        <Mail when={state.router.link.startsWith('/get-in-touch/')}/>
+        <Mail when={state.router.link.startsWith("/get-in-touch/")} />
       </Switch>
-      <Footer/>
-    </div>;
-  }
-;
-
+      <Footer />
+    </div>
+  );
+};
 export default styled(connect(ContactPage))`
   > div {
     min-height: calc(var(--vh, 1vh) * 100);
@@ -61,7 +62,7 @@ export default styled(connect(ContactPage))`
     }
     @media (max-width: 575.98px) {
       font-size: ${size(20)};
+      margin: 2rem 0 -3rem;
     }
   }
-
 `;

@@ -397,8 +397,6 @@ export default styled(connect(FormStep))`
     margin-bottom: ${size(82)};
     @media (max-width: 991.98px) {
       margin-bottom: ${size(55)};
-      margin-left: ${size(30)};
-      margin-right: ${size(30)};
     }
   }
   div.upload-step-wrapper {
@@ -416,6 +414,9 @@ export default styled(connect(FormStep))`
       right: 0;
       top: -5rem;
       width: 12rem;
+
+      @media (max-width: 575.98px) {
+      }
     }
   }
   &.active {
@@ -423,5 +424,10 @@ export default styled(connect(FormStep))`
   }
   button {
     margin-top: ${size(80)};
+
+    @media (max-width: 575.98px) {
+      margin-top: 3rem;
+      width: 100%;
+    }
   }
 `;

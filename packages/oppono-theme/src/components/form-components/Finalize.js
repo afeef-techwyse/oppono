@@ -154,11 +154,7 @@ export const Bottom = styled.div`
   }
 `;
 const Finalize = ({ className, children }) => {
-  return (
-    <div className={[className + " form-wide-container"]}>
-      <Container>{children}</Container>
-    </div>
-  );
+  return <div className={[className + " form-wide-container"]}>{children}</div>;
 };
 
 export default styled(Finalize)`
