@@ -29,7 +29,7 @@ export const Address = ({address, city, postalCode, postalCodeOnChange}) => {
       data: formData
     };
     const {data:{Items}} = await axios(config);
-    return Items.filter(item=>item.IsRetrievable).map(item => ({...item, label: item.Text, value: item.Id}))
+    return Items.filter(item=>item.IsRetrievable).map(item => ({...item, label: item.Text, value: item.Text}))
   }
   const selectOption = async (option, state) => {
     if (state.action !== 'select-option')return
@@ -57,8 +57,8 @@ export const Address = ({address, city, postalCode, postalCodeOnChange}) => {
   return <>
     <SelectAddress {...address} cacheOptions loadOptions={loadOptions} onChange={selectOption}/>
     <W50>
-      <Input value={cityValue} disabled type={'text'}{...city}/>
-      <Input value={postalCodeValue} disabled type={'text'} {...postalCode} onChange={postalCodeOnChange}/>
+      <Input value={cityValue} readOnly type={'text'}{...city}/>
+      <Input value={postalCodeValue} readOnly type={'text'} {...postalCode} onChange={postalCodeOnChange}/>
     
     </W50>
   
