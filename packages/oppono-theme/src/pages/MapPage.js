@@ -123,6 +123,9 @@ const MapPage = ({ className, actions, state }) => {
       if (response.data.length > 2) {
         setAppraiser([{}]);
         setPostalCodeErrorMessage("no appraisers found for this postal code");
+      } else if (response.data.length == 0) {
+        setAppraiser([{}]);
+        setPostalCodeErrorMessage("no appraisers found for this postal code");
       } else {
         setAppraiser(response.data);
         setPostalCodeErrorMessage("");
