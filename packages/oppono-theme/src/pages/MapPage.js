@@ -277,7 +277,7 @@ export default styled(connect(MapPage))`
   }
 
   .container {
-    margin-top: 80px;
+    margin-top: 50px;
   }
 
   header .container,
@@ -291,6 +291,12 @@ export default styled(connect(MapPage))`
     justify-content: space-between;
     position: relative;
     z-index: 6;
+    @media (min-width: 1400px) {
+      transform: scale(0.8);
+    }
+    @media (max-height: 850px) {
+      transform: scale(0.8);
+    }
     @media (max-width: 991.98px) {
       width: 100%;
       flex-direction: column;
@@ -489,6 +495,12 @@ export default styled(connect(MapPage))`
     top: 0;
     left: 0;
     z-index: 5;
+  }
+
+  footer {
+    @media (min-width: 575.98px) {
+      background: none !important;
+    }
   }
 
   ${Input} {
