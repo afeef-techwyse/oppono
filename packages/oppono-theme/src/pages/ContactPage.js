@@ -9,11 +9,11 @@ import Mail from './contact/Mail';
 import classnames from 'classnames';
 
 const ContactPage = ({className, state, actions}) => {
-    const data = state.source.get(state.router.link);
-    const pageData = data.isReady && !data.isError ? state.source[data.type][data.id].acf : {};
-    React.useEffect(() => {
-      actions.theme.setActiveTheme(pageData.section_1?.section_theme || 'gray-theme');
-    }, []);
+    // const data = state.source.get(state.router.link);
+    // const pageData = data.isReady && !data.isError ? state.source[data.type][data.id].acf : {};
+    // React.useEffect(() => {
+    //   actions.theme.setActiveTheme(pageData.section_1?.section_theme || 'gray-theme');
+    // }, []);
     return <div className={classnames(className)}>
       <Header/>
       <Switch>

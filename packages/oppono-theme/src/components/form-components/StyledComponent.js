@@ -99,5 +99,12 @@ export const Wysiwyg = styled.div`
     line-height: ${size(21)};
     margin-bottom: ${size(20)};
   }
+  color: #bfb6b4;
+  font-size: ${size(18)};
+  font-weight: 500;
+  line-height: ${size(24)};
+  @media (max-width: 575.98px) {
+    font-size: ${size(16)};
+  }
 
 `;
