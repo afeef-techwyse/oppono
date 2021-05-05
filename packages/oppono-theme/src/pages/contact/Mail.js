@@ -1,5 +1,5 @@
-import React from "react";
-import { connect, styled } from "frontity";
+import React from 'react';
+import {connect, styled} from 'frontity';
 import intro_ball_1 from "../../assets/images/form_1_img.png";
 import intro_ball_2 from "../../assets/images/form_2_img.png";
 import {Address} from "../../components/form-components/Address";
@@ -7,13 +7,13 @@ import Form from "../../components/form-components/Form";
 import FormStep from "../../components/form-components/FormStep";
 import LastStep from "../../components/form-components/LastStep";
 import {Wysiwyg} from "../../components/form-components/StyledComponent";
-import Container from "../../components/reusable/Container";
-import { size } from "../../functions/size";
-import contact_obj from "../../assets/images/contact-obj.png";
-import FlyingObjsContainer from "../../components/reusable/FlyingObjsContainer";
-import Input from "../../components/form-components/Input";
-import TextArea from "../../components/form-components/TextArea";
-import Button from "../../components/form-components/Button";
+import Container from '../../components/reusable/Container';
+import {size} from '../../functions/size';
+import contact_obj from '../../assets/images/contact-obj.png';
+import FlyingObjsContainer from '../../components/reusable/FlyingObjsContainer';
+import Input from '../../components/form-components/Input';
+import TextArea from '../../components/form-components/TextArea';
+import Button from '../../components/form-components/Button';
 import Link from "../../components/reusable/Link";
 import Select from "../../components/form-components/Select";
 
@@ -38,17 +38,12 @@ const Mail = ({ className, state, actions }) => {
             <Container className={'form-wide-container'}>
               <div className="d-flex">
                 <div className="title-wrapper">
-            {pageData.section_1?.title ? (
-              <h1 className={"contact-title"}>{pageData.section_1?.title}</h1>
-            ) : null}
-            {pageData.section_1?.sub_title ? (
-              <h2 className={"contact-sub-title desktop-only"}>
-                {pageData.section_1?.sub_title}
-              </h2>
-            ) : null}
+                  {pageData.section_1?.title ? <h1 className={'contact-title'}>{pageData.section_1?.title}</h1> : null}
+                  {pageData.section_1?.sub_title ?
+                      <h2 className={'contact-sub-title desktop-only'}>{pageData.section_1?.sub_title}</h2> : null}
                 </div>
                 <div className="contact-info-wrapper">
-            <Link href={"tel:" + pageData.section_1?.oppono_phone}>
+                  <Link href={'tel:' + pageData.section_1?.oppono_phone}>
                     <div className="item-wrapper">
                       <div className="icon">
                         <svg viewBox="0 0 512 512">
@@ -59,16 +54,14 @@ const Mail = ({ className, state, actions }) => {
                         </svg>
                       </div>
                       <div className="text">
-                  {pageData.section_1?.oppono_phone ? (
-                    <div>{pageData.section_1?.oppono_phone}</div>
-                  ) : null}
-                  {pageData.section_1?.oppono_phone_label ? (
-                    <p>{pageData.section_1?.oppono_phone_label}</p>
-                  ) : null}
+                        {pageData.section_1?.oppono_phone ?
+                            <div>{pageData.section_1?.oppono_phone}</div> : null}
+                        {pageData.section_1?.oppono_phone_label ?
+                            <p>{pageData.section_1?.oppono_phone_label}</p> : null}
                       </div>
                     </div>
                   </Link>
-            <Link href={"mailto:" + pageData.section_1?.oppono_email}>
+                  <Link href={'mailto:' + pageData.section_1?.oppono_email}>
                     <div className="item-wrapper">
                       <div className="icon">
                         <svg viewBox="0 0 512 512">
@@ -83,23 +76,14 @@ const Mail = ({ className, state, actions }) => {
                         </svg>
                       </div>
                       <div className="text">
-                  {pageData.section_1?.oppono_email ? (
-                    <div>{pageData.section_1?.oppono_email}</div>
-                  ) : null}
-                  {pageData.section_1?.oppono_email_label ? (
-                    <p>{pageData.section_1?.oppono_email_label}</p>
-                  ) : null}
+                        {pageData.section_1?.oppono_email ?
+                            <div>{pageData.section_1?.oppono_email}</div> : null}
+                        {pageData.section_1?.oppono_email_label ?
+                            <p>{pageData.section_1?.oppono_email_label}</p> : null}
                       </div>
                     </div>
                   </Link>
-            <Link
-              href={
-                "http://maps.google.com/?q=" +
-                pageData.section_1?.oppono_address_line_1 +
-                " " +
-                pageData.section_1?.oppono_address_line_2
-              }
-            >
+                  <Link href={'http://maps.google.com/?q=' + pageData.section_1?.oppono_address_line_1 + ' ' + pageData.section_1?.oppono_address_line_2}>
                     <div className="item-wrapper">
                       <div className="icon">
                         <svg viewBox="0 0 384 512">
@@ -110,33 +94,28 @@ const Mail = ({ className, state, actions }) => {
                         </svg>
                       </div>
                       <div className="text">
-                  {pageData.section_1?.oppono_address_line_1 ? (
-                    <div>{pageData.section_1?.oppono_address_line_1}</div>
-                  ) : null}
-                  {pageData.section_1?.oppono_address_line_2 ? (
-                    <p>{pageData.section_1?.oppono_address_line_2}</p>
-                  ) : null}
+                        {pageData.section_1?.oppono_address_line_1 ?
+                            <div>{pageData.section_1?.oppono_address_line_1}</div> : null}
+                        {pageData.section_1?.oppono_address_line_2 ?
+                            <p>{pageData.section_1?.oppono_address_line_2}</p> : null}
                       </div>
                     </div>
                   </Link>
                 </div>
-          {pageData.section_1?.sub_title ? (
-            <h2 className={"contact-sub-title mobile-only"}>
-              {pageData.section_1?.sub_title}
-            </h2>
-          ) : null}
+                {pageData.section_1?.sub_title ?
+                    <h2 className={'contact-sub-title mobile-only'}>{pageData.section_1?.sub_title}</h2> : null}
           
                 <div className="floating-obj">
-            <FlyingObjsContainer
-              childrenList={[
+                  <FlyingObjsContainer childrenList={
+                    [
                       {
                         imageUrl: contact_obj,
-                  left: "60%",
+                        left: '60%',
                         level: 1,
-                  top: "28%",
-                  type: "image",
+                        top: '28%',
+                        type: 'image',
                         width: 18,
-                  alt: "alt",
+                        alt: 'alt',
                       },
               ]}
             />
@@ -145,36 +124,16 @@ const Mail = ({ className, state, actions }) => {
               {/*<img className={'contact-obj'} src={contact_obj} alt={'Contact Icon'}/>*/}
               <div className="contact-row">
                 <div className="col-4">
-            <Input
-              name={"name"}
-              className={"primary-input"}
-              type={"text"}
-              {...pageData.section_1?.name_input}
-            />
-            <Input
-              name={"email"}
-              className={"primary-input"}
-              type={"text"}
-              {...pageData.section_1?.email_input}
-            />
-            <Input
-              name={"phone"}
-              className={"primary-input"}
-              type={"text"}
-              {...pageData.section_1?.phone_input}
-            />
+                  <Input name={'name'} className={'primary-input'} type={'text'} {...pageData.section_1?.name_input}/>
+                  <Input name={'email'} className={'primary-input'} type={'text'} {...pageData.section_1?.email_input}/>
+                  <Input name={'phone'} className={'primary-input'} type={'text'} {...pageData.section_1?.phone_input}/>
+          
                 </div>
                 <div className="col-auto">
-            <Select
-              className={"primary-select"}
-              name={"discuss"}
-              {...pageData.section_1?.discuss_dropdown}
-            />
-            <TextArea
-              name={"questions"}
-              className={"primary-input"}
-              label={"Questions?"}
-            />
+                  <Select className={'primary-select'}
+                          name={'discuss'}
+                          {...pageData.section_1?.discuss_dropdown}/>
+                  <TextArea name={'questions'} className={'primary-input'} {...pageData.section_1?.questions_input}/>
                 </div>
               </div>
               <Button icon={true} className={'next-step wide'} label={'I’m ready to send'}/>
@@ -207,17 +166,14 @@ const Mail = ({ className, state, actions }) => {
 export default styled(connect(Mail))`
   width: 100%;
   height: 100%;
-  padding-top: ${size(200)};
-  @media (max-width: 575.98px) {
-    padding-top: ${size(150)};
-  }
-
+  align-items: stretch;
   // .contact-obj {
   //   max-width: ${size(205)};
   //   display: none;
   //   margin: ${size(30)} auto 0;
   // }
   //
+  
   .contact-row {
     display: flex;
     align-items: flex-start;
