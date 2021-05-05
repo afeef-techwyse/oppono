@@ -13,7 +13,7 @@ const ContactPage = ({ className, state, actions }) => {
     // const pageData = data.isReady && !data.isError ? state.source[data.type][data.id].acf : {};
     // React.useEffect(() => {
     //   actions.theme.setActiveTheme(pageData.section_1?.section_theme || "gray-theme"
-    );
+    // );
   // }, []);
     return (
     <div className={classnames(className)}>
