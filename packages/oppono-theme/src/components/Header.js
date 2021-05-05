@@ -349,7 +349,7 @@ Header.propTypes = {
 
 export default styled(Header)`
   position: fixed !important;
-  z-index: 100;
+  z-index: 1000;
   width: 100%;
   opacity: 1;
   top: 0;
