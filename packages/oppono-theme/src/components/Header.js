@@ -410,7 +410,7 @@ export default styled(Header)`
 
       .three-dots {
         display: flex;
-        align-items: flex-end;
+        align-items: center;
         flex-direction: column;
         margin-left: ${size(40)};
         cursor: pointer;

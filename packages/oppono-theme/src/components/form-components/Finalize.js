@@ -107,6 +107,13 @@ export const Bottom = styled.div`
   padding-top: 23px;
   flex-wrap: wrap;
 
+  .form-wide-container {
+    @media (min-width: 575.98px) {
+      max-width: 80%;
+      margin: auto;
+    }
+  }
+
   > div {
     & > * {
       padding-top: 2.4rem;
