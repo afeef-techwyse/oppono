@@ -63,7 +63,7 @@ const Label = styled(
       font-weight: 300;
     }
     input {
-      border-bottom: 1px solid #bfb6b4;
+      //border-bottom: 1px solid #bfb6b4;
     }
   }
 `;
