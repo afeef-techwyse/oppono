@@ -43,13 +43,6 @@ export const Address = ({address, city, postalCode, postalCodeOnChange}) => {
       data: formData
     };
     const {data:{Items}} = await axios(config);
-    // console.log(Items.filter(({
-    //                             FieldGroup,
-    //                             FieldName
-    //                           }) => FieldGroup === 'Common' && (FieldName === 'PostalCode' || FieldName === 'City')));
-    //
-  
-    // return Items.map(item => ({...item, label: item.Text, value: item.Id}))
     setCityValue(Items[7].FormattedValue);
     setPostalCodeValue(Items[12].FormattedValue);
     
@@ -59,7 +52,6 @@ export const Address = ({address, city, postalCode, postalCodeOnChange}) => {
     <W50>
       <Input value={cityValue} readOnly type={'text'}{...city}/>
       <Input value={postalCodeValue} readOnly type={'text'} {...postalCode} onChange={postalCodeOnChange}/>
-    
     </W50>
   
   </>;
