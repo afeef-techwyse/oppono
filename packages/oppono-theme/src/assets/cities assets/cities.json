@@ -138087,5 +138087,19 @@
         "name": "Brantford",
         "value": "Brantford",
         "label": "Brantford"
+    },
+    {
+        "coordinates": [
+            [
+                {"lng":43.823246199161865, "lat":-79.47401389211441},
+                {"lng":43.84977560911878, "lat":-79.36489064734069},
+                {"lng":43.81431285331855,"lat":-79.3517812920766},
+                {"lng":43.78925732411892, "lat":-79.46491017268882}
+            ]
+        ],
+        "name": "Thornhill",
+        "value": "Thornhill",
+        "label": "Thornhill"
     }
+
 ]
