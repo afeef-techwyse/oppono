@@ -31,6 +31,7 @@ export default styled(connect(ContactPage))`
     min-height: calc(var(--vh, 1vh) * 100);
     height: 100%;
     overflow: hidden;
+    padding-bottom: ${size(150)};
   }
 
   .contact-title {
