@@ -294,19 +294,20 @@ export default styled(connect(MapPage))`
     justify-content: space-between;
     position: relative;
     z-index: 6;
-    @media (min-width: 1800px) {
-      transform: scale(0.7);
-    }
-    @media (min-width: 1400px) {
-      transform: scale(0.8);
-    }
-    @media (max-height: 850px) {
-      transform: scale(0.8);
-    }
     @media (max-width: 991.98px) {
       width: 100%;
       flex-direction: column;
       height: 90%;
+    }
+    @media (min-width: 1400px) {
+      transform: scale(0.8);
+    }
+    @media (min-width: 1800px) {
+      transform: scale(0.68);
+      margin-top: -1rem;
+    }
+    @media (max-height: 850px) {
+      transform: scale(0.8);
     }
 
     @media (max-width: 575.98px) {
@@ -497,10 +498,13 @@ export default styled(connect(MapPage))`
   .map {
     width: 100%;
     height: 100%;
-    position: absolute;
+    position: fixed !important;
     top: 0;
     left: 0;
     z-index: 5;
+    @media (max-width: 575.98px) {
+      position: absolute !important;
+    }
   }
 
   footer {
@@ -534,7 +538,7 @@ export default styled(connect(MapPage))`
       &__single-value,
       &__input,
       &__control {
-        font-size: ${size(30)};
+        font-size: ${size(25)};
       }
     }
     @media (max-width: 450px) {

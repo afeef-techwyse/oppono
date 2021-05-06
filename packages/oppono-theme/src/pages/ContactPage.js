@@ -52,7 +52,7 @@ export default styled(connect(ContactPage))`
 
   .contact-sub-title {
     color: rgba(181, 210, 255, 0.4);
-    font-size: ${size(40)};
+    font-size: ${size(35)};
     line-height: ${size(48)};
     margin-top: ${size(6)};
     font-weight: 300;

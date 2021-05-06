@@ -149,7 +149,11 @@ const SocialLinks = styled(
   })
 )`
   margin-top: 2.5rem;
-  display: flex !important;
+  display: flex;
+
+  @media (min-width: 575.98px) {
+    display: none;
+  }
 
   a {
     width: 2.2rem;

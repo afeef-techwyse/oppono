@@ -42,7 +42,7 @@ export default styled(TextArea)`
     background: transparent;
     padding: ${size(20)};
     color: #bfb6b4;
-    font-size: ${size(30)};
+    font-size: ${size(25)};
     font-weight: 200;
     resize: none;
     transition: border-color 400ms;

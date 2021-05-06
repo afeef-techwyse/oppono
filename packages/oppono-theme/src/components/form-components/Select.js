@@ -164,7 +164,7 @@ export default styled(Select)`
     &__single-value,
     &__input {
       color: #bfb6b4;
-      font-size: ${size(40)};
+      font-size: ${size(30)};
       font-weight: 200;
       @media (max-width: 557.98px) {
         font-size: 2rem;
@@ -174,10 +174,10 @@ export default styled(Select)`
       border: none !important;
       box-shadow: none !important;
       background: transparent;
-      height: ${size(53)};
+      height: ${size(43)};
       padding-bottom: ${size(6)};
       color: #bfb6b4;
-      font-size: ${size(40)};
+      font-size: ${size(25)};
       font-weight: 200;
       cursor: pointer;
       span {
@@ -199,7 +199,7 @@ export default styled(Select)`
     }
     &__option {
       color: #bfb6b4;
-      font-size: ${size(40)};
+      font-size: ${size(25)};
       font-weight: 200;
       text-align: left;
       &--is-focused {

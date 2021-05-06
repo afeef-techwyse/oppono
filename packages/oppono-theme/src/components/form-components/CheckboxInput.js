@@ -114,7 +114,7 @@ export default styled(RadioInput)`
     margin-right: ${size(20)};
     padding: 0;
     .radio-text {
-      font-size: ${size(40)};
+      font-size: ${size(25)};
       font-weight: 200;
       line-height: ${size(48)};
 

@@ -74,7 +74,7 @@ const Input = React.forwardRef(
       className,
       name,
       type,
-      value: initialValue='',
+      value: initialValue = "",
       placeholder,
       pattern,
       required,
@@ -207,11 +207,11 @@ export default styled(Input)`
     background: transparent;
     outline: none;
     border-bottom: 1px solid rgba(191, 182, 180, 0.1);
-    height: ${size(53)};
+    height: ${size(43)};
     padding: 0 0 ${size(6)};
     caret-color: #297fff;
     color: #bfb6b4;
-    font-size: ${size(40)};
+    font-size: ${size(25)};
     font-weight: 200;
     position: relative;
     @media (max-width: 575.98px) {
@@ -225,7 +225,7 @@ export default styled(Input)`
     &::placeholder {
       color: rgba(191, 182, 180);
       opacity: 0.4;
-      font-size: ${size(40)};
+      font-size: ${size(25)};
       font-weight: 200;
       text-align: left;
       @media (max-width: 575.98px) {

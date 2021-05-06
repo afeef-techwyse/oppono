@@ -418,10 +418,7 @@ export default styled(connect(FormStep))`
     max-width: ${size(720)};
     margin-right: auto;
     margin-left: auto;
-    margin-bottom: ${size(82)};
-    @media (max-width: 991.98px) {
-      margin-bottom: ${size(55)};
-    }
+    margin-bottom: 0;
   }
   div.upload-step-wrapper {
     max-width: ${size(720)}!important;
