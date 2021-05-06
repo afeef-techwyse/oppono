@@ -74,7 +74,7 @@ const Input = React.forwardRef(
       className,
       name,
       type,
-      value: initialValue,
+      value: initialValue='',
       placeholder,
       pattern,
       required,

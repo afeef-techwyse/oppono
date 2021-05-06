@@ -2,6 +2,9 @@ import React from 'react';
 import Form from '../components/form-components/Form';
 import Input from '../components/form-components/Input';
 import {connect, styled} from 'frontity';
+import {beaconScore} from "../functions/beaconScore";
+import {monthlyPayments} from "../functions/monthlyPayment";
+import {numberWithCommas} from "../functions/numberWithCommas";
 import {size} from '../functions/size';
 import RadioInput from '../components/form-components/RadioInput';
 import RadioGroup from '../components/form-components/RadioGroup';
@@ -24,21 +27,40 @@ import MegaloNum from '../components/form-components/MegaloNum';
 import useStoredFormValue from '../hooks/useStoredFormValue';
 import NeedHelp from '../components/reusable/NeedHelp';
 
-const QualifyFor = ({className, setCurrentTheme, state, actions, formData={}}) => {
+const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}}) => {
   const pageName = 'qualify-for';
-  const get3Values = useStoredFormValue(pageName);
+  const getQualifyValues = useStoredFormValue(pageName);
+  const section1Values = getQualifyValues(formData.section_1?.section_name);
   
-  const [section1Values, section2Values, section3Values, section4Values] = [get3Values(formData.section_1?.section_name), get3Values(formData.section_2?.section_name), get3Values(formData.section_3?.section_name), get3Values(formData.section_4?.section_name)];
   
   React.useEffect(() => {
     actions.theme.setSubHeader(formData.sub_header);
-    
   }, [formData]);
+  React.useEffect(() => {
+    actions.theme.setLeadId();
+    actions.theme.setStepResponse({});
+  }, []);
   const media = useMedia();
   
+  const [products, setProducts] = React.useState([]);
+  const [selectedProduct, setSelectedProduct] = React.useState(null);
+  React.useEffect(() => {
+    const newProducts = [
+      state.theme.stepResponse.data?.data?.first?.products?.[0],
+      state.theme.stepResponse.data?.data?.second?.products?.[0],
+      state.theme.stepResponse.data?.data?.heloc?.products?.[0],
+    ];
+    newProducts[0]&&(newProducts[0].typeName = 'First mortgage');
+    newProducts[1]&&(newProducts[1].typeName = 'Second mortgage');
+    newProducts[2]&&(newProducts[2].typeName = 'HELOC');
+    setProducts(newProducts);
+  }, [state.theme.stepResponse.data?.data]);
+  console.log(products);
+  const mortgage = +section1Values('home_value') || 0;
+  
   return <div className={className}>
-    <Form setCurrentTheme={setCurrentTheme}>
-      <FormStep pageName={pageName} activeTheme={formData.section_1?.section_theme} stepName={formData.section_1?.section_name}>
+    <Form setCurrentTheme={setCurrentTheme} endPoint={'/qualify-for'}>
+      <FormStep endPoint={null} pageName={pageName} activeTheme={formData.section_1?.section_theme} stepName={formData.section_1?.section_name}>
         <FlyingObjsContainer childrenList={[
           {
             imageUrl: intro_ball_2,
@@ -64,15 +86,17 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData={}}) =
         </div>
         <Input noScroll className={'big-input'} type={'number'} name={'home_value'} {...formData.section_1?.home_value_input}/>
         <Button icon={true} className={'next-step wide'} label={'Next'}/>
-  
+        
         <NeedHelp lineOne={'Need help?'} lineTwo={'Contact us'} link={'/get-in-touch/'}/>
-
+      
       </FormStep>
-      <FormStep pageName={pageName} activeTheme={formData.section_2?.section_theme} stepName={formData.section_2?.section_name}>
+      <FormStep sendSteps={[
+        formData.section_1?.section_name,
+      ]} apiStepNumber={1} pageName={pageName} activeTheme={formData.section_2?.section_theme} stepName={formData.section_2?.section_name}>
         <div className="form-text-wrapper">
           <h1 className={'form-headline-1 text-left'}>{formData.section_2?.title}</h1>
         </div>
-  
+        
         <FormRepeatableInput question={formData.section_2?.applicant_amount_label} number={4} initial={1} name={'applicants_number'}>
           <W50>
             <Input type={'text'} name={'applicant_fname_{{number}}'} {...formData.section_2?.applicant.first_name_input}/>
@@ -100,135 +124,92 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData={}}) =
         </div>
         
         {media !== 'mobile'
-          ? <ProductsTable>
-            <thead>
-            <tr>
-              <th scope={'col'}>
-              </th>
-              <th scope={'col'}>
-                <P.Dark>First mortgage</P.Dark>
-                <p>$2,200 / month</p>
-                <p className={'number'}>5.74%</p>
-                <Button className={'small next-step'} label={'I want this deal'}/>
-              </th>
-              <th scope={'col'}>
-                <P.Dark>Second mortgage</P.Dark>
-                <p>$2,325 / month</p>
-                <p className={'number'}>6.74%</p>
-                <Button className={'small bordered next-step'} label={'I want this deal'}/>
-              </th>
-              <th scope={'col'}>
-                <P.Dark>HELOC</P.Dark>
-                <p>$2,325 / month</p>
-                <p className={'number'}>7.99%</p>
-                <Button className={'small bordered next-step'} label={'I want this deal'}/>
-              </th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr className={'head'}>
-              <td scope={'row'} className={'dark'}>Fixed Rate</td>
-              <td className={'details'} data-label="Fixed Rate">5.99%</td>
-              <td className={'details'} data-label="Fixed Rate">5.99%</td>
-              <td className={'details'} data-label="Fixed Rate">18.99%</td>
-            </tr>
-            <tr className={'head'}>
-              <td scope={'row'} className={'dark'}>Lender Fee</td>
-              <td className={'details'} data-label="Lender Fee">1.49%</td>
-              <td className={'details'} data-label="Lender Fee">2.49%</td>
-              <td className={'details'} data-label="Lender Fee">2.49%</td>
-            </tr>
-            <tr className={'head last-head'}>
-              <td scope={'row'} className={'dark'}>LTV</td>
-              <td className={'details'} data-label="LTV">75%</td>
-              <td className={'details'} data-label="LTV">75%</td>
-              <td className={'details'} data-label="LTV">75%</td>
-            </tr>
-            </tbody>
-          </ProductsTable>
-          : <div className="mortgage-options-mobile">
-            <ProductsMobileOption>
-              <div className="mortgage-title">
-                <p className={'circle'}>1</p>
-                <p>First mortgage</p>
-              </div>
-              <div className="mortgage-head">
-                <p className={'number'}>5.74%</p>
-                <p>$2,200 / month</p>
-                <Button className={'small next-step'} label={'I want this deal'}/>
-              </div>
-              <div className="mortgage-body">
-                <div className={'m-row m-head'}>
-                  <p>Fixed Rate</p>
-                  <p>5.99%</p>
-                </div>
-                <div className={'m-row m-head'}>
-                  <p>Lender Fee</p>
-                  <p>1.49%</p>
-                </div>
-                <div className={'m-row m-head  m-head last-head'}>
-                  <p>LTV</p>
-                  <p>75%</p>
-                </div>
-              </div>
-            </ProductsMobileOption>
-            <ProductsMobileOption>
-              <div className="mortgage-title">
-                <p className={'circle'}>2</p>
-                <p>Second mortgage</p>
-              </div>
-              <div className="mortgage-head">
-                <p className={'number'}>6.74%</p>
-                <p>$2,325 / month</p>
-                <Button className={'small next-step'} label={'I want this deal'}/>
-              </div>
-              <div className="mortgage-body">
-                <div className={'m-row m-head'}>
-                  <p>Fixed Rate</p>
-                  <p>5.99%</p>
-                </div>
-                <div className={'m-row m-head'}>
-                  <p>Lender Fee</p>
-                  <p>1.49%</p>
-                </div>
-                <div className={'m-row m-head  m-head last-head'}>
-                  <p>LTV</p>
-                  <p>75%</p>
-                </div>
-              </div>
-            </ProductsMobileOption>
-            <ProductsMobileOption>
-              <div className="mortgage-title">
-                <p className={'circle'}>3</p>
-                <p>HELOC</p>
-              </div>
-              <div className="mortgage-head">
-                <p className={'number'}>7.99%</p>
-                <p>$2,325 / month</p>
-                <Button className={'small next-step'} label={'I want this deal'}/>
-              </div>
-              <div className="mortgage-body">
-                <div className={'m-row m-head'}>
-                  <p>Fixed Rate</p>
-                  <p>5.99%</p>
-                </div>
-                <div className={'m-row m-head'}>
-                  <p>Lender Fee</p>
-                  <p>1.49%</p>
-                </div>
-                <div className={'m-row m-head  m-head last-head'}>
-                  <p>LTV</p>
-                  <p>75%</p>
-                </div>
-              </div>
-            </ProductsMobileOption>
-          </div>
+            ? <ProductsTable>
+              <thead>
+              <tr>
+                <th scope={'col'}>
+                </th>
+                {
+                  products.map(product=>
+                    product&&<th key={product.ID} scope={'col'}>
+                      <P.Dark>{product.typeName}</P.Dark>
+                      <p>{numberWithCommas(monthlyPayments(mortgage, +product.fields.rate / 100))} / month</p>
+                      <p className={'number'}>{product.fields.rate}%</p>
+                      <Button className={'small next-step'} onClick={()=>setSelectedProduct(product)} label={'I want this deal'}/>
+                    </th>
+                  )
+                }
+              </tr>
+              </thead>
+              <tbody>
+              <tr className={'head'}>
+                <td scope={'row'} className={'dark'}>Fixed Rate</td>
+                {
+                  products.map((product,index)=>
+                      product&&
+                      <td key={product.ID} className={'details'} data-label="Fixed Rate">{index!==2?+product.fields.rate+.25+'%':'--'}</td>
+                  )
+                }
+              </tr>
+              <tr className={'head'}>
+                <td scope={'row'} className={'dark'}>Lender Fee</td>
+                {
+                  products.map(product=>
+                      product&&
+                      <td key={product.ID} className={'details'} data-label="Lender Fee">{product.fields.fee}%</td>
+                  )
+                }
+              </tr>
+              <tr className={'head last-head'}>
+                <td scope={'row'} className={'dark'}>LTV</td>
+                {
+                  products.map(product=>
+                      product&&
+                      <td key={product.ID} className={'details'} data-label="LTV">{product.fields.maximum_ltv}%</td>
+                  )
+                }
+              </tr>
+              </tbody>
+            </ProductsTable>
+            : <div className="mortgage-options-mobile">
+              {
+                products.map((product, index)=>
+                    product&&
+                    <ProductsMobileOption key={product.ID}>
+                      <div className="mortgage-title">
+                        <p className={'circle'}>{index+1}</p>
+                        <p>{product.typeName}</p>
+                      </div>
+                      <div className="mortgage-head">
+                        <p className={'number'}>{product.fields.rate}%</p>
+                        <p>{numberWithCommas(monthlyPayments(mortgage, +product.fields.rate / 100))} / month</p>
+                        <Button className={'small next-step'} onClick={()=>setSelectedProduct(product)} label={'I want this deal'}/>
+                      </div>
+                      <div className="mortgage-body">
+                        <div className={'m-row m-head'}>
+                          <p>Fixed Rate</p>
+                          <p>{index!==2?+product.fields.rate+.25+'%':'--'}</p>
+                        </div>
+                        <div className={'m-row m-head'}>
+                          <p>Lender Fee</p>
+                          <p>{product.fields.fee}%</p>
+                        </div>
+                        <div className={'m-row m-head  m-head last-head'}>
+                          <p>LTV</p>
+                          <p>{product.fields.maximum_ltv}%</p>
+                        </div>
+                      </div>
+                    </ProductsMobileOption>
+                )
+              }
+              
+            </div>
         }
       </FormStep>
       <FormStep pageName={pageName} activeTheme={formData.section_4?.section_theme} stepName={formData.section_4?.section_name}>
         <MegaloNum>
           <h1 className={'primary form-headline-1'}>{formData.section_4?.title}</h1>
-          <p className={'primary number'}>5.74</p>
+          <p className={'primary number'}>{selectedProduct?.fields.rate}</p>
         </MegaloNum>
         <FlyingObjsContainer childrenList={[
           {
@@ -250,8 +231,8 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData={}}) =
             alt: 'alt',
           }]}/>
         <div className="btn-group megalonum">
-          <Link href={'/dashboard/d/'}><Button focusable={false} className={'wide-vertical'} label={state.theme.user.logged ? 'I want this deal' : 'Sign in to get this deal'}/></Link>
-    
+          <Link href={'/dashboard/c/'}><Button focusable={false} className={'wide-vertical'} label={state.theme.user.logged ? 'I want this deal' : 'Sign in to get this deal'}/></Link>
+          
           <Link href={'/d/'}><Button focusable={false} className={'next-step bordered wide-vertical'} label={'No, let’s see the full list'}/></Link>
         </div>
         <Finalize className={'mt-0'}>
@@ -259,64 +240,58 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData={}}) =
           <Bottom>
             {media === 'mobile' ? null : <FinalizeChild order={1}/>}
             {media !== 'mobile'
-              ? <FinalizeChild order={2} className={'full m-border'}>
-                <FinalizeTable>
-                  <tbody>
-                  <tr>
-                    <P.Dark as={'td'}>Fixed Fee</P.Dark>
-                    <P.D as={'td'}>6.49%</P.D>
-                  </tr>
-                  <tr>
-                    <P.Dark as={'td'}>Lender Fee</P.Dark>
-                    <P.D as={'td'}>1.49%</P.D>
-                  </tr>
-                  <tr>
-                    <P.Dark as={'td'}>LTV</P.Dark>
-                    <P.D as={'td'}>Up to 75%</P.D>
-                  </tr>
-                  <tr>
-                    <P.Dark as={'td'}>Credit score</P.Dark>
-                    <P.D as={'td'}>680+</P.D>
-                  </tr>
-                  </tbody>
-                </FinalizeTable>
-              </FinalizeChild>
-              : <FinalizeChild className={'full'} order={1}>
-                <FinalizeTable>
-                  <tbody>
-                  <tr>
-                    <P.Dark as={'td'}>Fixed Fee</P.Dark>
-                    <P.D as={'td'}>6.49%</P.D>
-                  </tr>
-                  <tr>
-                    <P.Dark as={'td'}>Lender Fee</P.Dark>
-                    <P.D as={'td'}>1.49%</P.D>
-                  </tr>
-                  <tr>
-                    <P.Dark as={'td'}>LTV</P.Dark>
-                    <P.D as={'td'}>Up to 75%</P.D>
-                  </tr>
-                  <tr>
-                    <P.Dark as={'td'}>Credit score</P.Dark>
-                    <P.D as={'td'}>680+</P.D>
-                  </tr>
-                  </tbody>
-                </FinalizeTable>
-              </FinalizeChild>}
-      
+                ? <FinalizeChild order={2} className={'full m-border'}>
+                  <FinalizeTable>
+                    <tbody>
+                    <tr>
+                      <P.Dark as={'td'}>Fixed Fee</P.Dark>
+                      <P.D as={'td'}>{+selectedProduct?.fields.rate+.25}%</P.D>
+                    </tr>
+                    <tr>
+                      <P.Dark as={'td'}>Lender Fee</P.Dark>
+                      <P.D as={'td'}>{selectedProduct?.fields.fee}%</P.D>
+                    </tr>
+                    <tr>
+                      <P.Dark as={'td'}>LTV</P.Dark>
+                      <P.D as={'td'}>Up to {selectedProduct?.fields.maximum_ltv}%</P.D>
+                    </tr>
+                    <tr>
+                      <P.Dark as={'td'}>Credit score</P.Dark>
+                      <P.D as={'td'}>{beaconScore(selectedProduct?.fields.beacon_score)}</P.D>
+                    </tr>
+                    </tbody>
+                  </FinalizeTable>
+                </FinalizeChild>
+                : <FinalizeChild className={'full'} order={1}>
+                  <FinalizeTable>
+                    <tbody>
+                    <tr>
+                      <P.Dark as={'td'}>Fixed Fee</P.Dark>
+                      <P.D as={'td'}>{+selectedProduct?.fields.rate+.25}%</P.D>
+                    </tr>
+                    <tr>
+                      <P.Dark as={'td'}>Lender Fee</P.Dark>
+                      <P.D as={'td'}>{selectedProduct?.fields.fee}%</P.D>
+                    </tr>
+                    <tr>
+                      <P.Dark as={'td'}>LTV</P.Dark>
+                      <P.D as={'td'}>Up to {selectedProduct?.fields.maximum_ltv}%</P.D>
+                    </tr>
+                    <tr>
+                      <P.Dark as={'td'}>Credit score</P.Dark>
+                      <P.D as={'td'}>{beaconScore(selectedProduct?.fields.beacon_score)}</P.D>
+                    </tr>
+                    </tbody>
+                  </FinalizeTable>
+                </FinalizeChild>}
+            
             <FinalizeChild order={3} className={'wide m-pr-40'}>
-              <P.Border>Home must be fully Owner Occupied</P.Border>
-              <P.Border>Purchase or refinance</P.Border>
-              <P.Border>P&I 25 year amortization</P.Border>
-              <P.Border>6 month term open & interest only available</P.Border>
-              <P.Border>Mortgages over $1 MM evaluated on a case-by-case basis</P.Border>
-              <P.Border>Mortgage Payments on variable rate mortgage does not fluctuate during term</P.Border>
-              <P.Border>No income verification</P.Border>
+              {selectedProduct?.fields.specifications.map(({term_id, name}) => <P.Border key={term_id}>{name}</P.Border>)}
             </FinalizeChild>
           </Bottom>
         </Finalize>
       </FormStep>
-
+    
     </Form>
   </div>;
 };
@@ -324,22 +299,22 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData={}}) =
 export default styled(connect(QualifyFor))`
   width: 100%;
   height: 100%;
-
+  
   ${Finalize}.mt-0 {
     margin-top: 0;
-
+    
     ${Bottom} {
       @media (max-width: 575.98px) {
         margin-top: ${size(20)};
       }
     }
   }
-
+  
   .btn-group.megalonum {
     ${Link}:first-of-type {
       margin-right: ${size(55)};
     }
-
+    
     button {
       margin-top: 0;
       margin-right: 0;
