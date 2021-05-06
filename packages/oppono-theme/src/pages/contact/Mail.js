@@ -167,6 +167,7 @@ export default styled(connect(Mail))`
   width: 100%;
   height: 100%;
   align-items: stretch;
+  margin: 0 0 ${size(100)};
   // .contact-obj {
   //   max-width: ${size(205)};
   //   display: none;
