@@ -123,11 +123,14 @@ const MapPage = ({ className, actions, state }) => {
       if (response.data.length > 2) {
         setAppraiser([{}]);
         setPostalCodeErrorMessage("no appraisers found for this postal code");
+      } else if (response.data.length == 0) {
+        setAppraiser([{}]);
+        setPostalCodeErrorMessage("no appraisers found for this postal code");
       } else {
         setAppraiser(response.data);
         setPostalCodeErrorMessage("");
         const { coordinates } = cities.filter(
-          (city) => city.name === response.data[0]?.title
+          (city) => city.name === response.data[0]?.fields.city
         )[0];
         polygonAPIRef.current.setPaths(coordinates);
         mapAPIRef.current.fitBounds(polygonAPIRef.current.getBounds());
@@ -291,6 +294,9 @@ export default styled(connect(MapPage))`
     justify-content: space-between;
     position: relative;
     z-index: 6;
+    @media (min-width: 1800px) {
+      transform: scale(0.7);
+    }
     @media (min-width: 1400px) {
       transform: scale(0.8);
     }
