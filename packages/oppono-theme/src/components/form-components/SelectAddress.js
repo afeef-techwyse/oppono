@@ -107,7 +107,7 @@ const Select = React.forwardRef(
         inputRef.current.validity.valid && setErrorMessage("");
         visited && setInvalid(!inputRef.current.validity.valid);
       };
-      
+      console.log('focused',focused);
       return (
           <div
               ref={combinedRef}
@@ -134,8 +134,7 @@ const Select = React.forwardRef(
               <div className="label-text">{label}</div>
               <AsyncSelect
                   styles={{
-                    singleValue: (provided, state) => {
-                      console.log(provided,state);
+                    singleValue: () => {
                       return {display: focused ? 'none' : 'block'}
                     }
                   }}
@@ -167,7 +166,7 @@ const Select = React.forwardRef(
                     setValue(option.value);
                     inputRef.current.dispatchEvent(new Event("change"));
                     setInvalid(false);
-                    setFocused(false);
+                    document.activeElement.blur();
                     onChange?.(option, state);
                   }}
                   className="oppono-select"
