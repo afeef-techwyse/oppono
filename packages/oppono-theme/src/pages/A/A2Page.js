@@ -681,7 +681,7 @@ export default styled(connect(A2Page))`
     }
   }
   .wide-text {
-    max-width: ${size(800)};
+    max-width: 80%;
     .form-headline-3 {
       margin: 1.5rem 0;
       max-width: ${size(400)};

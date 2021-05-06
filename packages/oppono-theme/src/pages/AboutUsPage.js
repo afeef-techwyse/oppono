@@ -64,7 +64,7 @@ export default styled(connect(AboutUsPage))`
 
       @media (max-width: 575.98px) {
         font-size: 3.4rem;
-        font-weight: 500;
+        font-weight: 400;
       }
     }
 
@@ -72,7 +72,7 @@ export default styled(connect(AboutUsPage))`
       margin-top: 1rem;
       color: rgba(210, 245, 233, 0.6);
       font-size: ${size(18)};
-      font-weight: 400;
+      font-weight: 300;
       line-height: ${size(25)};
       text-align: left;
       padding: 0 ${size(55)};

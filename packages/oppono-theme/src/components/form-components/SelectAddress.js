@@ -219,7 +219,7 @@ export default styled(Select)`
     &__input {
       color: #bfb6b4;
       font-size: ${size(40)};
-      font-weight: 300;
+      font-weight: 200;
       @media (max-width: 557.98px) {
         font-size: 2rem;
       }
@@ -233,7 +233,7 @@ export default styled(Select)`
       padding-bottom: ${size(6)};
       color: #bfb6b4;
       font-size: ${size(40)};
-      font-weight: 300;
+      font-weight: 200;
       cursor: pointer;
       
       span {
@@ -259,7 +259,7 @@ export default styled(Select)`
     &__option {
       color: #bfb6b4;
       font-size: ${size(40)};
-      font-weight: 300;
+      font-weight: 200;
       text-align: left;
       
       @media (max-width: 557.98px) {
@@ -286,7 +286,7 @@ export default styled(Select)`
     .label-text {
       color: #bfb6b4;
       font-size: ${size(16)};
-      font-weight: 500;
+      font-weight: 400;
       text-align: left;
       margin-bottom: ${size(7)};
       
@@ -317,7 +317,7 @@ export default styled(Select)`
         left: ${size(31)};
         color: #bfb6b4;
         font-size: ${size(14)};
-        font-weight: 300;
+        font-weight: 200;
       }
     }
   }

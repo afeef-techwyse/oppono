@@ -55,7 +55,7 @@ const Slider = styled(Swiper)`
     .slide-number {
       color: #b5d2ff;
       font-size: ${size(10)};
-      font-weight: 700;
+      font-weight: 600;
       width: ${size(23)};
       height: ${size(23)};
       border: 1px solid rgba(181, 210, 255, 0.4);
@@ -78,7 +78,7 @@ const Slider = styled(Swiper)`
     .title {
       color: #b5d2ff;
       font-size: ${size(80)};
-      font-weight: 400;
+      font-weight: 300;
       font-style: normal;
       letter-spacing: normal;
       line-height: ${size(95)};
@@ -107,7 +107,7 @@ const Slider = styled(Swiper)`
     background-color: #fe412d;
     color: #ffffff;
     font-size: ${size(16)};
-    font-weight: 500;
+    font-weight: 400;
     text-decoration: none;
     margin-top: ${size(24)};
     cursor: pointer;
@@ -585,7 +585,7 @@ export default styled(connect(ProductsSlider))`
         top: ${size(20)};
         color: #d2f5e9;
         font-size: ${size(25)};
-        font-weight: 400;
+        font-weight: 300;
         line-height: ${size(34)};
       }
 
@@ -779,7 +779,7 @@ export default styled(connect(ProductsSlider))`
     opacity: 0.4;
     color: #d2f5e9;
     font-size: ${size(12)};
-    font-weight: 400;
+    font-weight: 300;
     letter-spacing: ${size(0.48)};
     line-height: ${size(16)};
     border-top: 1px solid #d2f5e9;
@@ -806,7 +806,7 @@ export default styled(connect(ProductsSlider))`
   .terms-text {
     color: rgba(210, 245, 233, 0.4);
     font-size: ${size(14)};
-    font-weight: 500;
+    font-weight: 400;
     text-align: center;
     margin-top: ${size(15)};
     @media (max-width: 991.98px) {

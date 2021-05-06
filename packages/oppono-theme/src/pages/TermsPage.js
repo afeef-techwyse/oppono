@@ -85,13 +85,13 @@ export default styled(connect(TermsPage))`
     }
 
     b {
-      font-weight: 500;
+      font-weight: 400;
     }
 
     p,
     li {
       font-size: 2rem;
-      font-weight: 300;
+      font-weight: 200;
       font-style: normal;
       color: rgb(191, 182, 180) !important;
       margin-top: 2rem;

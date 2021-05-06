@@ -349,7 +349,7 @@ export default styled(connect(MapPage))`
         p {
           color: #bfb6b4;
           font-size: ${size(16)};
-          font-weight: 500;
+          font-weight: 400;
           margin: 0 ${size(38)};
           @media (max-width: 575.98px) {
             margin: ${size(20)} 0;
@@ -370,7 +370,7 @@ export default styled(connect(MapPage))`
       .headline-1 {
         color: #bfb6b4;
         font-size: ${size(40)};
-        font-weight: 400;
+        font-weight: 300;
         line-height: ${size(48)};
         @media (max-width: 991.98px) {
           font-size: ${size(35)};
@@ -385,7 +385,7 @@ export default styled(connect(MapPage))`
       .headline-2 {
         color: rgba(191, 182, 180, 0.5);
         font-size: ${size(29)};
-        font-weight: 400;
+        font-weight: 300;
         line-height: ${size(40)};
         @media (max-width: 991.98px) {
           font-size: ${size(24)};
@@ -440,7 +440,7 @@ export default styled(connect(MapPage))`
       h3 {
         color: #bfb6b4;
         font-size: ${size(56)};
-        font-weight: 300;
+        font-weight: 200;
         line-height: ${size(64)};
         margin-bottom: ${size(17)};
         @media (max-width: 575.98px) {
@@ -452,17 +452,17 @@ export default styled(connect(MapPage))`
       .text {
         color: #bfb6b4;
         font-size: ${size(16)};
-        font-weight: 300;
+        font-weight: 200;
       }
       .bold {
-        font-weight: 600;
+        font-weight: 500;
         margin-top: ${size(16)};
       }
 
       .ltv {
         color: #bfb6b4;
         font-size: ${size(30)};
-        font-weight: 300;
+        font-weight: 200;
         line-height: ${size(39)};
       }
 

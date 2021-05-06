@@ -125,7 +125,7 @@ export default styled(connect(Form))`
   .error-message {
     color: red;
     font-size: ${size(16)};
-    font-weight: 500;
+    font-weight: 400;
     margin-top: ${size(50)};
     text-align: center;
     display: block;

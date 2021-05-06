@@ -71,7 +71,7 @@ const SubHeader = styled(
     a {
       opacity: 0.5;
       font-size: ${size(12)};
-      font-weight: 500;
+      font-weight: 400;
       line-height: ${size(16)};
     }
 
@@ -87,14 +87,14 @@ const SubHeader = styled(
 
   .first-title {
     font-size: ${size(12)};
-    font-weight: 500;
+    font-weight: 400;
     line-height: ${size(16)};
     opacity: 0.5;
   }
 
   .second-title {
     font-size: ${size(10)};
-    font-weight: 500;
+    font-weight: 400;
     line-height: ${size(16)};
     margin-top: ${size(2)};
     letter-spacing: ${size(0.44)};
@@ -401,7 +401,7 @@ export default styled(Header)`
       .links {
         color: #b5d2ff;
         font-size: ${size(16)};
-        font-weight: 500;
+        font-weight: 400;
         font-style: normal;
         margin-left: ${size(30)};
         text-transform: capitalize;
@@ -510,7 +510,7 @@ export default styled(Header)`
       a {
         color: #b5d2ff;
         font-size: ${size(40)};
-        font-weight: 500;
+        font-weight: 400;
         margin-bottom: ${size(19)};
         transition: opacity 300ms;
 

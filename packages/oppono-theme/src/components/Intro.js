@@ -237,7 +237,7 @@ export default styled(Intro)`
     opacity: 0;
     color: #bfb6b4;
     font-size: ${size(29)};
-    font-weight: 400;
+    font-weight: 300;
     font-style: normal;
     letter-spacing: normal;
     line-height: ${size(40)};
@@ -340,7 +340,7 @@ export default styled(Intro)`
     p {
       color: #bfb6b4;
       font-size: ${size(14)};
-      font-weight: 500;
+      font-weight: 400;
       font-style: normal;
       letter-spacing: normal;
       line-height: ${size(16)};

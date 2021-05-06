@@ -33,7 +33,7 @@ const Label = styled(
   .label-text {
     color: #bfb6b4;
     font-size: ${size(16)};
-    font-weight: 500;
+    font-weight: 400;
     text-align: left;
     margin-bottom: ${size(7)};
     .dark {
@@ -60,7 +60,7 @@ const Label = styled(
       transform: translateY(-50%);
       color: #bfb6b4;
       font-size: ${size(14)};
-      font-weight: 300;
+      font-weight: 200;
     }
     input {
       //border-bottom: 1px solid #bfb6b4;
@@ -212,7 +212,7 @@ export default styled(Input)`
     caret-color: #297fff;
     color: #bfb6b4;
     font-size: ${size(40)};
-    font-weight: 300;
+    font-weight: 200;
     position: relative;
     @media (max-width: 575.98px) {
       font-size: ${size(20)};
@@ -226,7 +226,7 @@ export default styled(Input)`
       color: rgba(191, 182, 180);
       opacity: 0.4;
       font-size: ${size(40)};
-      font-weight: 300;
+      font-weight: 200;
       text-align: left;
       @media (max-width: 575.98px) {
         font-size: ${size(20)};
@@ -271,7 +271,7 @@ export default styled(Input)`
         display: inline;
         color: rgba(191, 182, 180, 0.1);
         font-size: ${size(100)};
-        font-weight: 300;
+        font-weight: 200;
       }
     }
   }

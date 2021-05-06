@@ -10,12 +10,12 @@ import classnames from "classnames";
 
 const ContactPage = ({ className, state, actions }) => {
   // const data = state.source.get(state.router.link);
-    // const pageData = data.isReady && !data.isError ? state.source[data.type][data.id].acf : {};
-    // React.useEffect(() => {
-    //   actions.theme.setActiveTheme(pageData.section_1?.section_theme || "gray-theme"
-    // );
+  // const pageData = data.isReady && !data.isError ? state.source[data.type][data.id].acf : {};
+  // React.useEffect(() => {
+  //   actions.theme.setActiveTheme(pageData.section_1?.section_theme || "gray-theme"
+  // );
   // }, []);
-    return (
+  return (
     <div className={classnames(className)}>
       <Header />
       <Switch>
@@ -35,7 +35,7 @@ export default styled(connect(ContactPage))`
 
   .contact-title {
     color: #b5d2ff;
-    font-weight: 400;
+    font-weight: 300;
     line-height: ${size(95)};
     font-size: ${size(80)};
     max-width: ${size(800)};
@@ -54,7 +54,7 @@ export default styled(connect(ContactPage))`
     font-size: ${size(40)};
     line-height: ${size(48)};
     margin-top: ${size(6)};
-    font-weight: 400;
+    font-weight: 300;
     @media (max-width: 991.98px) {
       font-size: ${size(24)};
       line-height: normal;
