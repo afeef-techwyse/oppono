@@ -166,7 +166,7 @@ const Select = React.forwardRef(
                     setValue(option.value);
                     inputRef.current.dispatchEvent(new Event("change"));
                     setInvalid(false);
-                    document.activeElement.blur();
+                    setTimeout(()=>document.activeElement.blur(),100);
                     onChange?.(option, state);
                   }}
                   className="oppono-select"
@@ -217,6 +217,10 @@ export default styled(Select)`
     
     &__single-value,
     &__input {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      width: 100%;
+      overflow: hidden;
       color: #bfb6b4;
       font-size: ${size(40)};
       font-weight: 300;

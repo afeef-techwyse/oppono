@@ -163,6 +163,10 @@ export default styled(Select)`
     }
     &__single-value,
     &__input {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      width: 100%;
+      overflow: hidden;
       color: #bfb6b4;
       font-size: ${size(40)};
       font-weight: 300;
