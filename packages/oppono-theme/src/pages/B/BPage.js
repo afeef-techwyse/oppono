@@ -63,15 +63,6 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
   const refNumber = React.useRef('');
   state.theme.stepResponse.data?.['reference-number'] && (refNumber.current = state.theme.stepResponse.data?.['reference-number'])
   
-  const control = React.useRef(null);
-  
-  
-  React.useEffect(() => {
-    // "EG91-MA35-KW64-JT49"
-    
-    
-  }, []);
-  
   return <div className={className}>
     <Form setCurrentTheme={setCurrentTheme} endPoint={'/beloc'}>
       <FormStep apiStepNumber={1} pageName={pageName} activeTheme={formData.section_1?.section_theme} stepName={formData.section_1?.section_name}>
