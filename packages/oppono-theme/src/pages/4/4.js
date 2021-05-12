@@ -71,7 +71,7 @@ const FourPage = (props) => {
           <Input type={'text'} placeholder={'e.g. Toronto'} label={'City'} name={'city'} required={true}/>
           <Input type={'text'} placeholder={'e.g. M5H 3S4'} label={'Postal Code'} name={'postal_code'} required={true}/>
         </W50>
-        
+
         <Button icon={true} className={'next-step'} label={'Next'}/>
       </FormStep>
       <FormStep activeTheme={'gray-theme'} stepName={'b-2'}>
@@ -202,7 +202,7 @@ const FourPage = (props) => {
                   </tbody>
                 </FinalizeTable>
               </FinalizeChild>}
-  
+
             <FinalizeChild order={1}>
               <P.Dark>*Variable Rate</P.Dark>
               <P.Dark>*Payment interest based on balance</P.Dark>
@@ -238,7 +238,7 @@ const FourPage = (props) => {
                   </tbody>
                 </FinalizeTable>
               </FinalizeChild>}
-  
+
             <FinalizeChild order={2} className={'full m-border'}>
               <FinalizeTable>
                 <tbody>
@@ -269,7 +269,7 @@ const FourPage = (props) => {
       </FormStep>
       <FormStep activeTheme={'green-theme'} stepName={'a-iii-6'}>
         <div className="upload-step-wrapper">
-          <img src={upload}/>
+          <img alt="" src={upload}/>
           <h1 className={'form-headline-1 text-left'}>Let’s get this done!<br/>
             Upload your documents.</h1>
           <FormConditionalInput noScroll label={'Do you have an appraisal report?'} name={'mortgages_1'} showOn={'1'} checked={'0'}>

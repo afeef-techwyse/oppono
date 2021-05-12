@@ -11,18 +11,18 @@ import {P} from './StyledComponent';
 import W50 from "./W50";
 
 export const Address = ({address, city, postalCode, postalCodeOnChange}) => {
-  
-  
+
+
   React.useEffect(() => {
   }, []);
-  
+
   const [cityValue, setCityValue] = React.useState('');
   const [postalCodeValue, setPostalCodeValue] = React.useState('')
   const loadOptions = async inputValue => {
     const formData = new FormData();
     formData.append('key', 'TR81-PT58-MU14-XW99');
     formData.append('SearchTerm', inputValue);
-    
+
     let config = {
       method: 'post',
       url: 'https://ws1.postescanada-canadapost.ca/AddressComplete/Interactive/AutoComplete/v1.00/json3.ws',
@@ -36,7 +36,7 @@ export const Address = ({address, city, postalCode, postalCodeOnChange}) => {
     const formData = new FormData();
     formData.append('key', 'TR81-PT58-MU14-XW99');
     formData.append('Id', option.Id);
-  
+
     let config = {
       method: 'post',
       url: 'https://ws1.postescanada-canadapost.ca/AddressComplete/Interactive/RetrieveById/v1.00/json3.ws',
@@ -45,7 +45,7 @@ export const Address = ({address, city, postalCode, postalCodeOnChange}) => {
     const {data:{Items}} = await axios(config);
     setCityValue(Items[7].FormattedValue);
     setPostalCodeValue(Items[12].FormattedValue);
-    
+
   }
   return <>
     <SelectAddress {...address} cacheOptions loadOptions={loadOptions} onChange={selectOption}/>
@@ -53,6 +53,6 @@ export const Address = ({address, city, postalCode, postalCodeOnChange}) => {
       <Input value={cityValue} readOnly type={'text'}{...city}/>
       <Input value={postalCodeValue} readOnly type={'text'} {...postalCode} onChange={postalCodeOnChange}/>
     </W50>
-  
+
   </>;
 };
