@@ -201,7 +201,7 @@ export default styled(Select)`
     
     &__value-container {
       padding: 0;
-      
+      height: 100%;
       div {
         margin: 0 !important;
         padding: 0;

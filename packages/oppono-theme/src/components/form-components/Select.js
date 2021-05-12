@@ -150,6 +150,7 @@ export default styled(Select)`
     width: 100%;
     &__value-container {
       padding: 0;
+      height: 100%;
       div {
         margin: 0 !important;
         padding: 0;
