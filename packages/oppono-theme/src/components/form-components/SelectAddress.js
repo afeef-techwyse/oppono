@@ -103,80 +103,81 @@ const Select = React.forwardRef(
     const validateInput = () => {
       inputRef.current.validity.typeMismatch &&
         setErrorMessage("Please Add Valid Value");
-      inputRef.current.validity.valueMissing && setErrorMessage("Required");
-      inputRef.current.validity.valid && setErrorMessage("");
-      visited && setInvalid(!inputRef.current.validity.valid);
-    };
-    console.log("focused", focused);
-    return (
-      <div
-        ref={combinedRef}
-        className={classnames("form-group", className, { focused, invalid })}
-      >
-        <input
-          onInvalid={() => setVisited(true)}
-          ref={inputRef}
-          autoComplete="off"
-          name={name}
-          type={"text"}
-          style={{
-            opacity: 0,
-            height: 0,
-            position: "absolute",
-            visibility: "hidden",
-          }}
-          value={value}
-          required={required}
-          onChange={() => {}}
-        />
-        <label error-message={serverErrorMessage || errorMessage}>
-          <div className="label-text">{label}</div>
-          <AsyncSelect
-            styles={{
-              singleValue: () => {
-                return { display: focused ? "none" : "block" };
-              },
-            }}
-            cacheOptions
-            ref={selectRef}
-            {...props}
-            autofocus={true}
-            openAfterFocus={true}
-            onFocus={(e) => {
-              gsap.to(window, {
-                duration: 0.5,
-                scrollTo: {
-                  y: combinedRef.current,
-                  offsetY:
-                    window.innerWidth < 768
-                      ? 200
-                      : (window.innerHeight -
-                          combinedRef.current.getBoundingClientRect().height) /
-                        2,
-                },
-              });
-              setFocused(true);
-            }}
-            onBlur={() => {
-              setFocused(false);
-              setVisited(true);
-            }}
-            onChange={(option, state) => {
-              setValue(option.value);
-              inputRef.current.dispatchEvent(new Event("change"));
-              setInvalid(false);
-              document.activeElement.blur();
-              onChange?.(option, state);
-            }}
-            className="oppono-select"
-            classNamePrefix="oppono-select"
-            components={{ DropdownIndicator, Option, Input }}
-            noOptionsMessage={() => "Type To Search"}
-          />
-        </label>
-      </div>
-    );
-  }
+        inputRef.current.validity.valueMissing && setErrorMessage("Required");
+        inputRef.current.validity.valid && setErrorMessage("");
+        visited && setInvalid(!inputRef.current.validity.valid);
+      };
+      console.log('focused',focused);
+      return (
+          <div
+              ref={combinedRef}
+              className={classnames("form-group", className, {focused, invalid})}
+          >
+            <input
+                onInvalid={() => setVisited(true)}
+                ref={inputRef}
+                autoComplete="off"
+                name={name}
+                type={"text"}
+                style={{
+                  opacity: 0,
+                  height: 0,
+                  position: "absolute",
+                  visibility: "hidden",
+                }}
+                value={value}
+                required={required}
+                onChange={() => {
+                }}
+            />
+            <label error-message={serverErrorMessage || errorMessage}>
+              <div className="label-text">{label}</div>
+              <AsyncSelect
+                  styles={{
+                    singleValue: () => {
+                      return {display: focused ? 'none' : 'block'}
+                    }
+                  }}
+                  cacheOptions
+                  ref={selectRef}
+                  {...props}
+                  autofocus={true}
+                  openAfterFocus={true}
+                  onFocus={(e) => {
+                    gsap.to(window, {
+                      duration: 0.5,
+                      scrollTo: {
+                        y: combinedRef.current,
+                        offsetY:
+                            window.innerWidth < 768
+                                ? 200
+                                : (window.innerHeight -
+                                combinedRef.current.getBoundingClientRect().height) /
+                                2,
+                      },
+                    });
+                    setFocused(true);
+                  }}
+                  onBlur={() => {
+                    setFocused(false);
+                    setVisited(true);
+                  }}
+                  onChange={(option, state) => {
+                    setValue(option.value);
+                    inputRef.current.dispatchEvent(new Event("change"));
+                    setInvalid(false);
+                    setTimeout(()=>document.activeElement.blur(),100);
+                    onChange?.(option, state);
+                  }}
+                  className="oppono-select"
+                  classNamePrefix="oppono-select"
+                  components={{DropdownIndicator, Option, Input}}
+                  noOptionsMessage={() => "Type To Search"}
+              />
+            </label>
+          </div>
+      );
+    }
 );
 
 Select.propTypes = {
@@ -200,7 +201,7 @@ export default styled(Select)`
 
     &__value-container {
       padding: 0;
-
+      height: 100%;
       div {
         margin: 0 !important;
         padding: 0;
@@ -216,6 +217,10 @@ export default styled(Select)`
 
     &__single-value,
     &__input {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      width: 100%;
+      overflow: hidden;
       color: #bfb6b4;
       font-size: ${size(25)};
       font-weight: 200;

@@ -66,84 +66,47 @@ const BPage = ({ className, setCurrentTheme, state, actions, formData }) => {
   }, [state.theme.user.logged]);
   const [[appraiser], postalCodeOnChange] = useFlowAppraisers();
   const [[businessAppraiser], businessPostalCodeOnChange] = useFlowAppraisers();
-  const getAppraiser = () =>
-    section2Values("business_address_same_as_property") === "1"
-      ? businessAppraiser
-      : appraiser;
-  const mortgage =
-    +section3Values("purchase_price") - +section3Values("down_payment") || 0;
-  const firstProduct =
-    state.theme.stepResponse.data?.data?.beloc.products[0] || {};
-  const refNumber = React.useRef("");
-  state.theme.stepResponse.data?.["reference-number"] &&
-    (refNumber.current = state.theme.stepResponse.data?.["reference-number"]);
+  const getAppraiser = () => section2Values('business_address_same_as_property') === '1' ? businessAppraiser : appraiser;
+  const mortgage = ((+section3Values('purchase_price')) - (+section3Values('down_payment'))) || 0;
+  const firstProduct = state.theme.stepResponse.data?.data?.beloc.products[0] || {};
+  const refNumber = React.useRef('');
+  state.theme.stepResponse.data?.['reference-number'] && (refNumber.current = state.theme.stepResponse.data?.['reference-number'])
 
-  const control = React.useRef(null);
+  return <div className={className}>
+    <Form setCurrentTheme={setCurrentTheme} endPoint={'/beloc'}>
+      <FormStep apiStepNumber={1} pageName={pageName} activeTheme={formData.section_1?.section_theme} stepName={formData.section_1?.section_name}>
+        <FlyingObjsContainer childrenList={[
+          {
+            imageUrl: intro_ball_2,
+            left: '10%',
+            level: 1,
+            top: '55%',
+            type: 'image',
+            width: 5,
+            alt: 'alt',
+          },
+          {
+            imageUrl: intro_ball_1,
+            left: '80%',
+            level: 1,
+            top: '5%',
+            type: 'image',
+            width: 9,
+            alt: 'alt',
+          }]}/>
+        <div className="form-text-wrapper">
+          <h1 className={'form-headline-1 text-left'}>{formData.section_1?.title}</h1>
+          <h2 className={'form-headline-2 primary'}>{formData.section_1?.subtitle}</h2>
+        </div>
+        <Input noScroll type={'text'} name={'business_name'} {...formData.section_1?.legal_business_name_input}/>
+        <Select
+            name={'business_type'}
+            {...formData.section_1?.type_of_business_dropdown}/>
 
-  React.useEffect(() => {
-    // "EG91-MA35-KW64-JT49"
-  }, []);
-
-  return (
-    <div className={className}>
-      <Form setCurrentTheme={setCurrentTheme} endPoint={"/beloc"}>
-        <FormStep
-          apiStepNumber={1}
-          pageName={pageName}
-          activeTheme={formData.section_1?.section_theme}
-          stepName={formData.section_1?.section_name}
-        >
-          <FlyingObjsContainer
-            childrenList={[
-              {
-                imageUrl: intro_ball_2,
-                left: "10%",
-                level: 1,
-                top: "55%",
-                type: "image",
-                width: 5,
-                alt: "alt",
-              },
-              {
-                imageUrl: intro_ball_1,
-                left: "80%",
-                level: 1,
-                top: "5%",
-                type: "image",
-                width: 9,
-                alt: "alt",
-              },
-            ]}
-          />
-          <div className="form-text-wrapper">
-            <h1 className={"form-headline-1 text-left"}>
-              {formData.section_1?.title}
-            </h1>
-            <h2 className={"form-headline-2 primary"}>
-              {formData.section_1?.subtitle}
-            </h2>
-          </div>
-          <Input
-            noScroll
-            type={"text"}
-            name={"business_name"}
-            {...formData.section_1?.legal_business_name_input}
-          />
-          <Select
-            name={"business_type"}
-            {...formData.section_1?.type_of_business_dropdown}
-          />
-
-          <Address
-            address={{
-              name: "business_address",
-              ...formData.section_1?.address_input,
-            }}
-            city={{ name: "business_city", ...formData.section_1?.city_input }}
-            postalCode={{
-              name: "business_postal_code",
-              ...formData.section_1?.postal_code_input,
-            }}
+        <Address
+            address={{name: 'business_address', ...formData.section_1?.address_input}}
+            city={{name: 'business_city', ...formData.section_1?.city_input}}
+            postalCode={{name: 'business_postal_code', ...formData.section_1?.postal_code_input}}
             setAppraiser={businessPostalCodeOnChange}
           />
           <Button icon={true} className={"next-step"} label={"Next"} />
@@ -655,7 +618,6 @@ const BPage = ({ className, setCurrentTheme, state, actions, formData }) => {
         </FormStep>
       </Form>
     </div>
-  );
 };
 
 export default styled(connect(BPage))`

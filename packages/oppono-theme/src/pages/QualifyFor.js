@@ -42,7 +42,7 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
   }, []);
   const media = useMedia();
   
-  const [products, setProducts] = React.useState([]);
+  const [products, setProducts] = React.useState([null, null, null]);
   const [selectedProduct, setSelectedProduct] = React.useState(null);
   React.useEffect(() => {
     const newProducts = [
@@ -117,7 +117,7 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
           <Button icon={true} label={'Next'} className={'next-step'}/>
         </div>
       </FormStep>
-      <FormStep pageName={pageName} activeTheme={formData.section_3?.section_theme} stepName={formData.section_3?.section_name}>
+      <FormStep endPoint={null} pageName={pageName} activeTheme={formData.section_3?.section_theme} stepName={formData.section_3?.section_name}>
         <div className="form-text-wrapper wide-text">
           <h1 className={'form-headline-1 text-left'}>{formData.section_3?.title}</h1>
           <h2 className={'form-headline-3 primary'}>{formData.section_3?.subtitle}</h2>
@@ -135,7 +135,10 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
                       <P.Dark>{product.typeName}</P.Dark>
                       <p>{numberWithCommas(monthlyPayments(mortgage, +product.fields.rate / 100))} / month</p>
                       <p className={'number'}>{product.fields.rate}%</p>
-                      <Button className={'small next-step'} onClick={()=>setSelectedProduct(product)} label={'I want this deal'}/>
+                      <Button className={'small next-step'} onClick={()=>{
+                        setSelectedProduct(product)
+                        setTimeout(() => actions.theme.setValidateAndNextCallback(new Date().getTime()), 100);
+                      }} label={'I want this deal'}/>
                     </th>
                   )
                 }
@@ -183,7 +186,10 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
                       <div className="mortgage-head">
                         <p className={'number'}>{product.fields.rate}%</p>
                         <p>{numberWithCommas(monthlyPayments(mortgage, +product.fields.rate / 100))} / month</p>
-                        <Button className={'small next-step'} onClick={()=>setSelectedProduct(product)} label={'I want this deal'}/>
+                        <Button className={'small next-step'} onClick={()=>{
+                          setSelectedProduct(product)
+                          setTimeout(() => actions.theme.setValidateAndNextCallback(new Date().getTime()), 100);
+                        }} label={'I want this deal'}/>
                       </div>
                       <div className="mortgage-body">
                         <div className={'m-row m-head'}>

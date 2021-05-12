@@ -150,6 +150,7 @@ export default styled(Select)`
     width: 100%;
     &__value-container {
       padding: 0;
+      height: 100%;
       div {
         margin: 0 !important;
         padding: 0;
@@ -163,6 +164,10 @@ export default styled(Select)`
     }
     &__single-value,
     &__input {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      width: 100%;
+      overflow: hidden;
       color: #bfb6b4;
       font-size: ${size(30)};
       font-weight: 200;
