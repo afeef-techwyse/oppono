@@ -491,11 +491,11 @@ const BPage = ({ className, setCurrentTheme, state, actions, formData }) => {
             </Bottom>
           </Finalize>
           <div className="btn-group">
-            <Button label={"I’m good to go"} className={"next-step small"} />
             <Button
               className={"bordered reset-form small"}
               label={"No, edit the details"}
             />
+            <Button label={"I’m good to go"} className={"next-step small"} />
           </div>
         </FormStep>
         <FormStep

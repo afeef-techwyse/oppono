@@ -53,7 +53,7 @@ const SocialLinks = styled(
     return (
       <div className={className}>
         {acf?.social?.facebook && (
-          <a href={acf?.social?.facebook} className="facebook">
+          <a href={acf?.social?.facebook} className="facebook" target="_blank">
             <svg
               aria-hidden="true"
               focusable="false"
@@ -72,7 +72,7 @@ const SocialLinks = styled(
           </a>
         )}
         {acf?.social?.twitter && (
-          <a href={acf?.social?.twitter} className="twitter">
+          <a href={acf?.social?.twitter} className="twitter" target="_blank">
             <svg
               aria-hidden="true"
               focusable="false"

@@ -189,13 +189,13 @@ Select.propTypes = {
 
 export default styled(Select)`
   &.focused {
-    border-bottom: 1px solid rgba(191, 182, 180, 0.2);
+    border-bottom: 1px solid rgba(191, 182, 180, 0.5);
     position: relative;
     z-index: 9999 !important;
   }
 
   .oppono-select {
-    border-bottom: 1px solid rgba(191, 182, 180, 0.2);
+    border-bottom: 1px solid rgba(191, 182, 180, 0.5);
     outline: none;
     width: 100%;
 

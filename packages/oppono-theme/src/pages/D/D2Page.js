@@ -346,7 +346,7 @@ const D2Page = ({ className, setCurrentTheme, state, actions, formData }) => {
             <h1 className={"form-headline-1 text-left"}>
               {formData.section_4?.title}
             </h1>
-            <h2 className={"form-headline-3 primary uppercase"}>
+            <h2 className={"form-headline-3 primary "}>
               You are refinancing your {section1Values("property")},{" "}
               {section1Values("property_details_1")} home which is located at{" "}
               <br /> {section1Values("address")}, {section1Values("city")},{" "}
@@ -541,11 +541,11 @@ const D2Page = ({ className, setCurrentTheme, state, actions, formData }) => {
             </Bottom>
           </Finalize>
           <div className="btn-group">
-            <Button label={"I’m good to go"} className={"next-step small"} />
             <Button
               className={"bordered reset-form small"}
               label={"No, edit the details"}
             />
+            <Button label={"I’m good to go"} className={"next-step small"} />
           </div>
         </FormStep>
         <FormStep

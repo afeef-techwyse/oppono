@@ -386,11 +386,11 @@ const A2Page = ({ className, setCurrentTheme, state, actions, formData }) => {
             </Bottom>
           </Finalize>
           <div className="btn-group">
-            <Button label={"I’m good to go"} className={"next-step small"} />
             <Button
               className={"bordered reset-form small"}
               label={"No, edit the details"}
             />
+            <Button label={"I’m good to go"} className={"next-step small"} />
           </div>
         </FormStep>
         <FormStep
@@ -469,7 +469,7 @@ const A2Page = ({ className, setCurrentTheme, state, actions, formData }) => {
                         <FinalizeTable>
                           <tbody>
                             <tr>
-                              <P.Dark as={"td"}>Fixed Fee</P.Dark>
+                              <P.Dark as={"td"}>Fixed Rate</P.Dark>
                               <P.D as={"td"}>
                                 {(+product.fields?.rate + 0.25).toFixed?.(2)}%
                               </P.D>
@@ -498,7 +498,7 @@ const A2Page = ({ className, setCurrentTheme, state, actions, formData }) => {
                         <FinalizeTable>
                           <tbody>
                             <tr>
-                              <P.Dark as={"td"}>Fixed Fee</P.Dark>
+                              <P.Dark as={"td"}>Fixed Rate</P.Dark>
                               <P.D as={"td"}>
                                 {(+product.fields?.rate + 0.25).toFixed?.(2)}%
                               </P.D>

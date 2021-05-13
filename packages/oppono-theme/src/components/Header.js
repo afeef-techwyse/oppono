@@ -513,9 +513,9 @@ export default styled(Header)`
 
       a {
         color: #b5d2ff;
-        font-size: ${size(40)};
+        font-size: ${size(32)};
         font-weight: 400;
-        margin-bottom: ${size(19)};
+        margin-bottom: ${size(25)};
         transition: opacity 300ms;
 
         &:last-of-type {
@@ -537,7 +537,7 @@ export default styled(Header)`
 
         &.member-login {
           width: auto;
-          font-size: ${size(35)};
+          font-size: ${size(27)};
           max-width: fit-content;
           padding: ${size(12)} ${size(32)};
           min-height: ${size(64)};

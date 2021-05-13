@@ -250,7 +250,7 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
                   <FinalizeTable>
                     <tbody>
                     <tr>
-                      <P.Dark as={'td'}>Fixed Fee</P.Dark>
+                      <P.Dark as={'td'}>Fixed Rate</P.Dark>
                       <P.D as={'td'}>{+selectedProduct?.fields.rate+.25}%</P.D>
                     </tr>
                     <tr>
@@ -272,7 +272,7 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
                   <FinalizeTable>
                     <tbody>
                     <tr>
-                      <P.Dark as={'td'}>Fixed Fee</P.Dark>
+                      <P.Dark as={'td'}>Fixed Rate</P.Dark>
                       <P.D as={'td'}>{+selectedProduct?.fields.rate+.25}%</P.D>
                     </tr>
                     <tr>

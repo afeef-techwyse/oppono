@@ -379,6 +379,7 @@ export default styled(connect(Mail))`
       }
 
       .text {
+				max-width: 70%;
         display: flex;
         flex-direction: column;
         justify-content: center;

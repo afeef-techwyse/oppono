@@ -559,6 +559,7 @@ export default styled(connect(HomeSlider))`
     flex-direction: column;
     z-index: 0;
     @media (min-width: 575.98px) {
+			margin-top: 3rem;
       position: absolute;
       top: 0;
       bottom: 0;
@@ -690,7 +691,7 @@ export default styled(connect(HomeSlider))`
     display: flex;
     z-index: 9;
     transform: none !important;
-    margin: 0 auto;
+    margin: 5rem auto 0;
 
     .swiper-pagination-bullet {
       width: ${size(10)};

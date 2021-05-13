@@ -206,7 +206,7 @@ export default styled(Input)`
     border: none;
     background: transparent;
     outline: none;
-    border-bottom: 1px solid rgba(191, 182, 180, 0.1);
+    border-bottom: 1px solid rgba(191, 182, 180, 0.5);
     height: ${size(43)};
     padding: 0 0 ${size(6)};
     caret-color: #297fff;
@@ -254,7 +254,7 @@ export default styled(Input)`
       @media (max-width: 991.98px) {
         height: auto;
         font-size: ${size(26)};
-        border-bottom-color: rgba(191, 182, 180, 0.1);
+        border-bottom-color: rgba(191, 182, 180, 0.5);
       }
       &:focus {
       }
@@ -269,7 +269,7 @@ export default styled(Input)`
     &.has-cue {
       .cue {
         display: inline;
-        color: rgba(191, 182, 180, 0.1);
+        color: rgba(191, 182, 180, 0.5);
         font-size: ${size(100)};
         font-weight: 200;
       }
@@ -277,7 +277,7 @@ export default styled(Input)`
   }
 
   input[type="password"] {
-    color: rgba(191, 182, 180, 0.2);
+    color: rgba(191, 182, 180, 0.5);
     &::placeholder {
       font-size: ${size(25)};
     }

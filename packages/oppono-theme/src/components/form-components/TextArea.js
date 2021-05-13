@@ -38,7 +38,7 @@ export default styled(TextArea)`
     outline: none;
     width: 100%;
     height: ${size(163)};
-    border: 1px solid rgba(191, 182, 180, 0.2);
+    border: 1px solid rgba(191, 182, 180, 0.5);
     background: transparent;
     padding: ${size(20)};
     color: #bfb6b4;

@@ -89,7 +89,8 @@ export default styled(connect(TermsPage))`
 
     p,
     li {
-      font-size: 2rem;
+      font-size: 14px;
+			line-height: 1.5;
       font-weight: 200;
       font-style: normal;
       margin-top: 2rem;
