@@ -31,8 +31,8 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
   const pageName = 'qualify-for';
   const getQualifyValues = useStoredFormValue(pageName);
   const section1Values = getQualifyValues(formData.section_1?.section_name);
-  
-  
+
+
   React.useEffect(() => {
     actions.theme.setSubHeader(formData.sub_header);
   }, [formData]);
@@ -41,7 +41,7 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
     actions.theme.setStepResponse({});
   }, []);
   const media = useMedia();
-  
+
   const [products, setProducts] = React.useState([null, null, null]);
   const [selectedProduct, setSelectedProduct] = React.useState(null);
   React.useEffect(() => {
@@ -57,7 +57,7 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
   }, [state.theme.stepResponse.data?.data]);
   console.log(products);
   const mortgage = +section1Values('home_value') || 0;
-  
+
   return <div className={className}>
     <Form setCurrentTheme={setCurrentTheme} endPoint={'/qualify-for'}>
       <FormStep endPoint={null} pageName={pageName} activeTheme={formData.section_1?.section_theme} stepName={formData.section_1?.section_name}>
@@ -86,9 +86,9 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
         </div>
         <Input noScroll className={'big-input'} type={'number'} name={'home_value'} {...formData.section_1?.home_value_input}/>
         <Button icon={true} className={'next-step wide'} label={'Next'}/>
-        
+
         <NeedHelp lineOne={'Need help?'} lineTwo={'Contact us'} link={'/get-in-touch/'}/>
-      
+
       </FormStep>
       <FormStep sendSteps={[
         formData.section_1?.section_name,
@@ -96,7 +96,7 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
         <div className="form-text-wrapper">
           <h1 className={'form-headline-1 text-left'}>{formData.section_2?.title}</h1>
         </div>
-        
+
         <FormRepeatableInput question={formData.section_2?.applicant_amount_label} number={4} initial={1} name={'applicants_number'}>
           <W50>
             <Input type={'text'} name={'applicant_fname_{{number}}'} {...formData.section_2?.applicant.first_name_input}/>
@@ -122,7 +122,7 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
           <h1 className={'form-headline-1 text-left'}>{formData.section_3?.title}</h1>
           <h2 className={'form-headline-3 primary'}>{formData.section_3?.subtitle}</h2>
         </div>
-        
+
         {media !== 'mobile'
             ? <ProductsTable>
               <thead>
@@ -208,7 +208,7 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
                     </ProductsMobileOption>
                 )
               }
-              
+
             </div>
         }
       </FormStep>
@@ -238,7 +238,7 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
           }]}/>
         <div className="btn-group megalonum">
           <Link href={'/dashboard/c/'}><Button focusable={false} className={'wide-vertical'} label={state.theme.user.logged ? 'I want this deal' : 'Sign in to get this deal'}/></Link>
-          
+
           <Link href={'/d/'}><Button focusable={false} className={'next-step bordered wide-vertical'} label={'No, let’s see the full list'}/></Link>
         </div>
         <Finalize className={'mt-0'}>
@@ -249,6 +249,14 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
                 ? <FinalizeChild order={2} className={'full m-border'}>
                   <FinalizeTable>
                     <tbody>
+										<tr>
+                      <P.Dark as={'td'}>LTV</P.Dark>
+                      <P.D as={'td'}>Up to {selectedProduct?.fields.maximum_ltv}%</P.D>
+                    </tr>
+                    <tr>
+                      <P.Dark as={'td'}>Credit score</P.Dark>
+                      <P.D as={'td'}>{beaconScore(selectedProduct?.fields.beacon_score)}</P.D>
+                    </tr>
                     <tr>
                       <P.Dark as={'td'}>Fixed Rate</P.Dark>
                       <P.D as={'td'}>{+selectedProduct?.fields.rate+.25}%</P.D>
@@ -256,14 +264,6 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
                     <tr>
                       <P.Dark as={'td'}>Lender Fee</P.Dark>
                       <P.D as={'td'}>{selectedProduct?.fields.fee}%</P.D>
-                    </tr>
-                    <tr>
-                      <P.Dark as={'td'}>LTV</P.Dark>
-                      <P.D as={'td'}>Up to {selectedProduct?.fields.maximum_ltv}%</P.D>
-                    </tr>
-                    <tr>
-                      <P.Dark as={'td'}>Credit score</P.Dark>
-                      <P.D as={'td'}>{beaconScore(selectedProduct?.fields.beacon_score)}</P.D>
                     </tr>
                     </tbody>
                   </FinalizeTable>
@@ -271,6 +271,14 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
                 : <FinalizeChild className={'full'} order={1}>
                   <FinalizeTable>
                     <tbody>
+										<tr>
+                      <P.Dark as={'td'}>LTV</P.Dark>
+                      <P.D as={'td'}>Up to {selectedProduct?.fields.maximum_ltv}%</P.D>
+                    </tr>
+                    <tr>
+                      <P.Dark as={'td'}>Credit score</P.Dark>
+                      <P.D as={'td'}>{beaconScore(selectedProduct?.fields.beacon_score)}</P.D>
+                    </tr>
                     <tr>
                       <P.Dark as={'td'}>Fixed Rate</P.Dark>
                       <P.D as={'td'}>{+selectedProduct?.fields.rate+.25}%</P.D>
@@ -279,25 +287,17 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
                       <P.Dark as={'td'}>Lender Fee</P.Dark>
                       <P.D as={'td'}>{selectedProduct?.fields.fee}%</P.D>
                     </tr>
-                    <tr>
-                      <P.Dark as={'td'}>LTV</P.Dark>
-                      <P.D as={'td'}>Up to {selectedProduct?.fields.maximum_ltv}%</P.D>
-                    </tr>
-                    <tr>
-                      <P.Dark as={'td'}>Credit score</P.Dark>
-                      <P.D as={'td'}>{beaconScore(selectedProduct?.fields.beacon_score)}</P.D>
-                    </tr>
                     </tbody>
                   </FinalizeTable>
                 </FinalizeChild>}
-            
+
             <FinalizeChild order={3} className={'wide m-pr-40'}>
               {selectedProduct?.fields.specifications.map(({term_id, name}) => <P.Border key={term_id}>{name}</P.Border>)}
             </FinalizeChild>
           </Bottom>
         </Finalize>
       </FormStep>
-    
+
     </Form>
   </div>;
 };
@@ -305,22 +305,22 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
 export default styled(connect(QualifyFor))`
   width: 100%;
   height: 100%;
-  
+
   ${Finalize}.mt-0 {
     margin-top: 0;
-    
+
     ${Bottom} {
       @media (max-width: 575.98px) {
         margin-top: ${size(20)};
       }
     }
   }
-  
+
   .btn-group.megalonum {
     ${Link}:first-of-type {
       margin-right: ${size(55)};
     }
-    
+
     button {
       margin-top: 0;
       margin-right: 0;

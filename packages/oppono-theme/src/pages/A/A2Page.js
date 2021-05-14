@@ -468,17 +468,7 @@ const A2Page = ({ className, setCurrentTheme, state, actions, formData }) => {
                       <FinalizeChild order={2} className={"full m-border"}>
                         <FinalizeTable>
                           <tbody>
-                            <tr>
-                              <P.Dark as={"td"}>Fixed Rate</P.Dark>
-                              <P.D as={"td"}>
-                                {(+product.fields?.rate + 0.25).toFixed?.(2)}%
-                              </P.D>
-                            </tr>
-                            <tr>
-                              <P.Dark as={"td"}>Lender Fee</P.Dark>
-                              <P.D as={"td"}>{product.fields?.fee}%</P.D>
-                            </tr>
-                            <tr>
+													<tr>
                               <P.Dark as={"td"}>LTV</P.Dark>
                               <P.D as={"td"}>
                                 Up to {product.fields?.maximum_ltv}%
@@ -489,6 +479,16 @@ const A2Page = ({ className, setCurrentTheme, state, actions, formData }) => {
                               <P.D as={"td"}>
                                 {beaconScore(product.fields?.beacon_score)}
                               </P.D>
+                            </tr>
+                            <tr>
+                              <P.Dark as={"td"}>Fixed Rate</P.Dark>
+                              <P.D as={"td"}>
+                                {(+product.fields?.rate + 0.25).toFixed?.(2)}%
+                              </P.D>
+                            </tr>
+                            <tr>
+                              <P.Dark as={"td"}>Lender Fee</P.Dark>
+                              <P.D as={"td"}>{product.fields?.fee}%</P.D>
                             </tr>
                           </tbody>
                         </FinalizeTable>
@@ -497,17 +497,7 @@ const A2Page = ({ className, setCurrentTheme, state, actions, formData }) => {
                       <FinalizeChild className={"full"} order={1}>
                         <FinalizeTable>
                           <tbody>
-                            <tr>
-                              <P.Dark as={"td"}>Fixed Rate</P.Dark>
-                              <P.D as={"td"}>
-                                {(+product.fields?.rate + 0.25).toFixed?.(2)}%
-                              </P.D>
-                            </tr>
-                            <tr>
-                              <P.Dark as={"td"}>Lender Fee</P.Dark>
-                              <P.D as={"td"}>{product.fields?.fee}%</P.D>
-                            </tr>
-                            <tr>
+													<tr>
                               <P.Dark as={"td"}>LTV</P.Dark>
                               <P.D as={"td"}>
                                 Up to {product.fields?.maximum_ltv}%
@@ -518,6 +508,16 @@ const A2Page = ({ className, setCurrentTheme, state, actions, formData }) => {
                               <P.D as={"td"}>
                                 {beaconScore(product.fields?.beacon_score)}
                               </P.D>
+                            </tr>
+                            <tr>
+                              <P.Dark as={"td"}>Fixed Rate</P.Dark>
+                              <P.D as={"td"}>
+                                {(+product.fields?.rate + 0.25).toFixed?.(2)}%
+                              </P.D>
+                            </tr>
+                            <tr>
+                              <P.Dark as={"td"}>Lender Fee</P.Dark>
+                              <P.D as={"td"}>{product.fields?.fee}%</P.D>
                             </tr>
                           </tbody>
                         </FinalizeTable>

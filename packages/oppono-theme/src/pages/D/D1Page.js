@@ -443,11 +443,7 @@ const D1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
               <FinalizeChild order={2} className={"full m-border"}>
                 <FinalizeTable>
                   <tbody>
-                    <tr>
-                      <P.Dark as={"td"}>Lender Fee</P.Dark>
-                      <P.D as={"td"}>{firstProduct.fields?.fee}%</P.D>
-                    </tr>
-                    <tr>
+									<tr>
                       <P.Dark as={"td"}>LTV</P.Dark>
                       <P.D as={"td"}>
                         Up to {firstProduct.fields?.maximum_ltv}%
@@ -458,6 +454,10 @@ const D1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
                       <P.D as={"td"}>
                         {beaconScore(firstProduct.fields?.beacon_score)}
                       </P.D>
+                    </tr>
+                    <tr>
+                      <P.Dark as={"td"}>Lender Fee</P.Dark>
+                      <P.D as={"td"}>{firstProduct.fields?.fee}%</P.D>
                     </tr>
                   </tbody>
                 </FinalizeTable>
