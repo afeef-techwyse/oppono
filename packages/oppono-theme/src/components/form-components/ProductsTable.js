@@ -39,7 +39,7 @@ const ProductsTable = ({className, children, dataFilter, products}) => {
   React.useEffect(() => {
     tablePages.current = Math.ceil((elements.current.columns.length - 1) / numberPerPage);
     setCurrentTablePage(0);
-    elements.current.totalPages?.innerText && (elements.current.totalPages.innerText = tablePages.current);
+    requestAnimationFrame(()=>elements.current.totalPages?.textContent && (elements.current.totalPages.textContent = tablePages.current));
   }, [media, products]);
   
   React.useEffect(() => {
@@ -47,10 +47,10 @@ const ProductsTable = ({className, children, dataFilter, products}) => {
       if (media !== 'mobile') {
         setTimeout(()=>gsap.timeline()
             .set(elements.current.columns.map((column, columnIndex) => elements.current.table.querySelectorAll(`tr > :nth-of-type(${columnIndex + 1})`)).slice(1).flat(), {display: 'none'})
-            .set(elements.current.columns.map((column, columnIndex) => elements.current.table.querySelectorAll(`tr > :nth-of-type(${columnIndex + 1})`)).slice(1).slice(currentTablePage * numberPerPage, numberPerPage * (currentTablePage + 1)).flat(), {display: 'table-cell'}),1000)
+            .set(elements.current.columns.map((column, columnIndex) => elements.current.table.querySelectorAll(`tr > :nth-of-type(${columnIndex + 1})`)).slice(1).slice(currentTablePage * numberPerPage, numberPerPage * (currentTablePage + 1)).flat(), {display: 'table-cell'}),100)
         elements.current.prevArrow?.classList.toggle('disabled', currentTablePage <= 0);
         elements.current.nextArrow?.classList.toggle('disabled', currentTablePage >= tablePages.current - 1);
-        elements.current.currentPage?.innerText && (elements.current.currentPage.innerText = currentTablePage + 1);
+        elements.current.currentPage?.textContent && (elements.current.currentPage.textContent = currentTablePage + 1);
       }
       else {
         gsap.set(elements.current.columns.map((column, columnIndex) => elements.current.table.querySelectorAll(`tr > :nth-of-type(${columnIndex + 1})`)).slice(1).flat(), {display: 'table-cell'});
