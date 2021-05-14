@@ -160,9 +160,12 @@ export default styled(RadioInput)`
   align-items: center;
   justify-content: center;
   width: fit-content;
-  min-width: ${size(80)};
-  height: ${size(44)};
+  min-width: ${size(75)};
+  height: ${size(42)};
   margin-right: ${size(36)};
+  margin-top: ${size(20)};
+  padding-right: 1px;
+  padding-bottom: 1px;
   @media (max-width: 575.98px) {
     width: calc(50% - 1.8rem);
     height: ${size(48)};
@@ -172,7 +175,7 @@ export default styled(RadioInput)`
   }
 
   &.small-margin {
-    margin-right: ${size(20.25)};
+    margin-right: ${size(22)};
     @media (max-width: 575.98px) {
       margin-right: ${size(36)};
       width: calc(50% - 1.8rem);
@@ -189,8 +192,8 @@ export default styled(RadioInput)`
     padding: 0;
 
     .radio-text {
-      font-size: ${size(40)};
-      font-weight: 300;
+      font-size: ${size(25)};
+      font-weight: 200;
       line-height: ${size(48)};
       @media (max-width: 557.98px) {
         font-size: 2rem;
@@ -200,7 +203,7 @@ export default styled(RadioInput)`
 
   .radio-text {
     font-size: ${size(16)};
-    font-weight: 500;
+    font-weight: 400;
     line-height: ${size(23)};
     cursor: pointer;
   }

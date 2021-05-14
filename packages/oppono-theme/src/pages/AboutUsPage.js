@@ -29,7 +29,7 @@ const AboutUsPage = ({ className, libraries, state, actions }) => {
     <div className={classnames(className)}>
       <Header />
       <Container className={"about-page-wrapper"}>
-        <h1 className={"primary"}>{page.title}</h1>
+        <h1 className={"form-headline-1"}>{page.title}</h1>
         <div className="html2react">
           <Html2React html={page.copy_top} />
         </div>
@@ -58,21 +58,16 @@ export default styled(connect(AboutUsPage))`
     padding-top: ${size(130)};
 
     h1 {
-      font-size: ${size(50)};
       text-align: center;
-      margin: 2rem 1rem;
-
-      @media (max-width: 575.98px) {
-        font-size: 3.4rem;
-        font-weight: 500;
-      }
+			color: #d2f5e9!important;
+			padding-botom: 1rem;
     }
 
     .html2react {
       margin-top: 1rem;
       color: rgba(210, 245, 233, 0.6);
       font-size: ${size(18)};
-      font-weight: 400;
+      font-weight: 300;
       line-height: ${size(25)};
       text-align: left;
       padding: 0 ${size(55)};
@@ -91,6 +86,7 @@ export default styled(connect(AboutUsPage))`
 
       > p {
         margin-bottom: 1rem;
+				line-height: 1.5;
         @media (max-width: 575.98px) {
           font-size: 1.5rem;
         }

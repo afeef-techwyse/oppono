@@ -1,36 +1,36 @@
 import React from "react";
-import {styled} from "frontity";
+import { styled } from "frontity";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import gsap from "gsap";
 import AsyncSelect from "react-select/async/dist/react-select.esm";
-import {size} from "../../functions/size";
-import SelectTwo, {components} from "react-select";
+import { size } from "../../functions/size";
+import SelectTwo, { components } from "react-select";
 import useCombinedRefs from "../../hooks/useCombinedRefs";
 import missing from "../../assets/images/missing.svg";
-import {P} from "./StyledComponent";
+import { P } from "./StyledComponent";
 
 const DropdownIndicator = (props) => {
   return (
-      components.DropdownIndicator && (
-          <components.DropdownIndicator {...props}>
-            <svg
-                style={{
-                  transition: "transform 400ms",
-                  transform: `scaleY(${props.selectProps.menuIsOpen ? -1 : 1})`,
-                }}
-                viewBox="0 0 15 13"
-            >
-              <path fill="#bfb6b4" d="M7.5 13L0 0h15z"/>
-            </svg>
-          </components.DropdownIndicator>
-      )
+    components.DropdownIndicator && (
+      <components.DropdownIndicator {...props}>
+        <svg
+          style={{
+            transition: "transform 400ms",
+            transform: `scaleY(${props.selectProps.menuIsOpen ? -1 : 1})`,
+          }}
+          viewBox="0 0 15 13"
+        >
+          <path fill="#bfb6b4" d="M7.5 13L0 0h15z" />
+        </svg>
+      </components.DropdownIndicator>
+    )
   );
 };
 const Input = (props) => {
   
   return (
-      components.Input && (
+    components.Input && (
           <components.Input
               {...props}
               autoComplete={"random-string"}
@@ -38,7 +38,7 @@ const Input = (props) => {
                 props.onFocus(e);
                 requestAnimationFrame(() => e.target.select())
               }}/>
-      )
+    )
   );
 };
 
@@ -73,45 +73,45 @@ const getHighlightedText = (text, highlight) => {
 
 const Option = (props) => {
   return (
-      <components.Option {...props}>
-        {/*{<P.D>{props.data.Text}</P.D>}*/}
-        {getHighlightedText(props.data.Text, props.data.Highlight)}
-        <P.Dark>{props.data.Description}</P.Dark>
-      </components.Option>
+    <components.Option {...props}>
+      {/*{<P.D>{props.data.Text}</P.D>}*/}
+      {getHighlightedText(props.data.Text, props.data.Highlight)}
+      <P.Dark>{props.data.Description}</P.Dark>
+    </components.Option>
   );
 };
 
 const Select = React.forwardRef(
-    (
-        {
-          className,
-          name,
-          required,
-          label,
-          onChange,
-          serverErrorMessage,
-          ...props
-        },
-        forwardedRef
-    ) => {
-      const innerRef = React.useRef(null);
-      const combinedRef = useCombinedRefs(forwardedRef, innerRef);
-      const [focused, setFocused] = React.useState(false);
-      const selectRef = React.useRef(null);
-      const [value, setValue] = React.useState("");
-      const inputRef = React.useRef(null);
-      
-      const [visited, setVisited] = React.useState(false);
-      const [invalid, setInvalid] = React.useState(false);
-      const [errorMessage, setErrorMessage] = React.useState("");
+  (
+    {
+      className,
+      name,
+      required,
+      label,
+      onChange,
+      serverErrorMessage,
+      ...props
+    },
+    forwardedRef
+  ) => {
+    const innerRef = React.useRef(null);
+    const combinedRef = useCombinedRefs(forwardedRef, innerRef);
+    const [focused, setFocused] = React.useState(false);
+    const selectRef = React.useRef(null);
+    const [value, setValue] = React.useState("");
+    const inputRef = React.useRef(null);
+
+    const [visited, setVisited] = React.useState(false);
+    const [invalid, setInvalid] = React.useState(false);
+    const [errorMessage, setErrorMessage] = React.useState("");
       const [inputValue, setInputValue] = React.useState('');
-      
-      React.useEffect(() => {
-        validateInput();
-      }, [visited]);
-      
-      const validateInput = () => {
-        inputRef.current.validity.typeMismatch &&
+
+    React.useEffect(() => {
+      validateInput();
+    }, [visited]);
+
+    const validateInput = () => {
+      inputRef.current.validity.typeMismatch &&
         setErrorMessage("Please Add Valid Value");
         inputRef.current.validity.valueMissing && setErrorMessage("Required");
         inputRef.current.validity.valid && setErrorMessage("");
@@ -200,16 +200,16 @@ Select.propTypes = {
 
 export default styled(Select)`
   &.focused {
-    border-bottom: 1px solid rgba(191, 182, 180, 0.2);
+    border-bottom: 1px solid rgba(191, 182, 180, 0.5);
     position: relative;
     z-index: 9999 !important;
   }
-  
+
   .oppono-select {
-    border-bottom: 1px solid rgba(191, 182, 180, 0.2);
+    border-bottom: 1px solid rgba(191, 182, 180, 0.5);
     outline: none;
     width: 100%;
-    
+
     &__value-container {
       padding: 0;
       height: 100%;
@@ -219,14 +219,14 @@ export default styled(Select)`
         padding: 0;
       }
     }
-    
+
     &__indicators {
       svg {
         width: ${size(15)};
         height: ${size(13)};
       }
     }
-    
+
     &__single-value,
     &__input {
       white-space: nowrap;
@@ -234,57 +234,57 @@ export default styled(Select)`
       width: 100%;
       overflow: hidden;
       color: #bfb6b4;
-      font-size: ${size(40)};
-      font-weight: 300;
+      font-size: ${size(25)};
+      font-weight: 200;
       @media (max-width: 557.98px) {
         font-size: 2rem;
       }
     }
-    
+
     &__control {
       border: none !important;
       box-shadow: none !important;
       background: transparent;
-      height: ${size(53)};
+      height: ${size(43)};
       padding-bottom: ${size(6)};
       color: #bfb6b4;
-      font-size: ${size(40)};
-      font-weight: 300;
+      font-size: ${size(25)};
+      font-weight: 200;
       cursor: pointer;
-      
+
       span {
         display: none;
       }
-      
+
       @media (max-width: 450px) {
         height: 3.3rem;
         font-size: 2rem;
       }
     }
-    
+
     &__menu {
       background: #373851;
       z-index: 1000000000;
       margin-top: 0;
     }
-    
+
     &__menu-notice {
       font-size: ${size(20)};
     }
-    
+
     &__option {
       color: #bfb6b4;
-      font-size: ${size(40)};
-      font-weight: 300;
+      font-size: ${size(25)};
+      font-weight: 200;
       text-align: left;
-      
+
       @media (max-width: 557.98px) {
         font-size: 2rem;
       }
-      
+
       &--is-focused {
         background-color: #bfb6b4;
-        
+
         ${P.Dark}, ${P.D} {
           color: black;
         }
@@ -299,32 +299,32 @@ export default styled(Select)`
       }
     }
   }
-  
+
   transition: margin-bottom 400ms;
-  
+
   label {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    
+
     .label-text {
       color: #bfb6b4;
       font-size: ${size(16)};
-      font-weight: 500;
+      font-weight: 400;
       text-align: left;
       margin-bottom: ${size(7)};
-      
+
       .dark {
         color: rgba(191, 182, 180, 0.5);
       }
     }
   }
-  
+
   &.invalid {
-      //margin-bottom: ${size(40)};
+    //margin-bottom: ${size(40)};
     label {
       position: relative;
-      
+
       &:after {
         content: url(${missing});
         position: absolute;
@@ -333,7 +333,7 @@ export default styled(Select)`
         width: ${size(22)};
         height: ${size(22)};
       }
-      
+
       &:before {
         content: attr(error-message);
         position: absolute;
@@ -341,7 +341,7 @@ export default styled(Select)`
         left: ${size(31)};
         color: #bfb6b4;
         font-size: ${size(14)};
-        font-weight: 300;
+        font-weight: 200;
       }
     }
   }

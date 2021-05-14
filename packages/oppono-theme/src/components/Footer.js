@@ -25,8 +25,8 @@ const FooterRight = styled.div`
 
   a {
     color: #b5d2ff;
-    font-size: ${size(16)};
-    font-weight: 500;
+    font-size: ${size(14)};
+    font-weight: 300;
     margin-left: ${size(36)};
     display: flex;
     @media (max-width: 991.98px) {
@@ -53,7 +53,7 @@ const SocialLinks = styled(
     return (
       <div className={className}>
         {acf?.social?.facebook && (
-          <a href={acf?.social?.facebook} className="facebook">
+          <a href={acf?.social?.facebook} className="facebook" target="_blank">
             <svg
               aria-hidden="true"
               focusable="false"
@@ -72,7 +72,7 @@ const SocialLinks = styled(
           </a>
         )}
         {acf?.social?.twitter && (
-          <a href={acf?.social?.twitter} className="twitter">
+          <a href={acf?.social?.twitter} className="twitter" target="_blank">
             <svg
               aria-hidden="true"
               focusable="false"
@@ -188,6 +188,7 @@ Footer.propTypes = {
 export default styled(Footer)`
   position: fixed !important;
   bottom: 0;
+  padding-top: ${size(10)};
   padding-bottom: ${size(10)};
   width: 100%;
   z-index: 100;
@@ -233,8 +234,8 @@ export default styled(Footer)`
         h4 {
           color: #b5d2ff;
           opacity: 0.7;
-          font-size: ${size(16)};
-          font-weight: 500;
+          font-size: ${size(14)};
+          font-weight: 300;
           margin-right: ${size(18)};
         }
       }

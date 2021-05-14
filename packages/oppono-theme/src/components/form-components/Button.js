@@ -49,6 +49,7 @@ export default styled(Button)`
   outline: none;
   text-decoration: none;
   width: auto;
+  min-width: 14rem;
   max-width: fit-content;
   padding: ${size(21)} ${size(40)};
   display: flex;
@@ -59,7 +60,7 @@ export default styled(Button)`
   border: 1px solid #fe412d;
   color: #ffffff;
   font-size: ${size(16)};
-  font-weight: 500;
+  font-weight: 400;
   margin: ${size(24)} auto 0;
   cursor: pointer;
   white-space: nowrap;

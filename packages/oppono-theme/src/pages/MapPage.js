@@ -148,7 +148,7 @@ const MapPage = ({ className, actions, state }) => {
         <div className="map-wrapper">
           <div className="col-left">
             <div className="text-wrapper">
-              <h1 className={"headline-1"}>We’re proud to serve the GTA</h1>
+              <h1 className={"headline-1"}>We're proud to serve Ontario</h1>
               {/*<h2 className={'headline-2 dark'}>Looking within a specific city or region?</h2>*/}
             </div>
             <div className="inputs-group">
@@ -294,19 +294,20 @@ export default styled(connect(MapPage))`
     justify-content: space-between;
     position: relative;
     z-index: 6;
-    @media (min-width: 1800px) {
-      transform: scale(0.7);
-    }
-    @media (min-width: 1400px) {
-      transform: scale(0.8);
-    }
-    @media (max-height: 850px) {
-      transform: scale(0.8);
-    }
     @media (max-width: 991.98px) {
       width: 100%;
       flex-direction: column;
       height: 90%;
+    }
+    @media (min-width: 1400px) {
+      transform: scale(0.8);
+    }
+    @media (min-width: 1800px) {
+      transform: scale(0.68);
+      margin-top: -1rem;
+    }
+    @media (max-height: 850px) {
+      transform: scale(0.8);
     }
 
     @media (max-width: 575.98px) {
@@ -349,7 +350,7 @@ export default styled(connect(MapPage))`
         p {
           color: #bfb6b4;
           font-size: ${size(16)};
-          font-weight: 500;
+          font-weight: 400;
           margin: 0 ${size(38)};
           @media (max-width: 575.98px) {
             margin: ${size(20)} 0;
@@ -370,7 +371,7 @@ export default styled(connect(MapPage))`
       .headline-1 {
         color: #bfb6b4;
         font-size: ${size(40)};
-        font-weight: 400;
+        font-weight: 300;
         line-height: ${size(48)};
         @media (max-width: 991.98px) {
           font-size: ${size(35)};
@@ -385,7 +386,7 @@ export default styled(connect(MapPage))`
       .headline-2 {
         color: rgba(191, 182, 180, 0.5);
         font-size: ${size(29)};
-        font-weight: 400;
+        font-weight: 300;
         line-height: ${size(40)};
         @media (max-width: 991.98px) {
           font-size: ${size(24)};
@@ -440,7 +441,7 @@ export default styled(connect(MapPage))`
       h3 {
         color: #bfb6b4;
         font-size: ${size(56)};
-        font-weight: 300;
+        font-weight: 200;
         line-height: ${size(64)};
         margin-bottom: ${size(17)};
         @media (max-width: 575.98px) {
@@ -452,17 +453,17 @@ export default styled(connect(MapPage))`
       .text {
         color: #bfb6b4;
         font-size: ${size(16)};
-        font-weight: 300;
+        font-weight: 200;
       }
       .bold {
-        font-weight: 600;
+        font-weight: 500;
         margin-top: ${size(16)};
       }
 
       .ltv {
         color: #bfb6b4;
         font-size: ${size(30)};
-        font-weight: 300;
+        font-weight: 200;
         line-height: ${size(39)};
       }
 
@@ -497,10 +498,13 @@ export default styled(connect(MapPage))`
   .map {
     width: 100%;
     height: 100%;
-    position: absolute;
+    position: fixed !important;
     top: 0;
     left: 0;
     z-index: 5;
+    @media (max-width: 575.98px) {
+      position: absolute !important;
+    }
   }
 
   footer {
@@ -534,7 +538,7 @@ export default styled(connect(MapPage))`
       &__single-value,
       &__input,
       &__control {
-        font-size: ${size(30)};
+        font-size: ${size(25)};
       }
     }
     @media (max-width: 450px) {

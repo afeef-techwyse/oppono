@@ -25,19 +25,19 @@ import opponoApi from '../../opponoApi';
 
 const pageName = 'e';
 const EPage = ({className, setCurrentTheme, actions, state, formData}) => {
-  
+
   const getEValues = useStoredFormValue(pageName);
   const section1Values = getEValues(formData.section_1?.section_name);
   const appraiser = state.theme.appraiser;
   const [postalCodeErrorMessage, setPostalCodeErrorMessage] = React.useState('');
-  
+
   React.useEffect(() => {
     actions.theme.setSubHeader(formData.sub_header);
   }, [formData]);
   React.useEffect(() => {
     actions.theme.setLeadId();
   }, []);
-  
+
   return <div className={className}>
     <Form setCurrentTheme={setCurrentTheme}>
       <FormStep pageName={pageName} activeTheme={formData.section_1?.section_theme} stepName={formData.section_1?.section_name}>
@@ -90,9 +90,6 @@ const EPage = ({className, setCurrentTheme, actions, state, formData}) => {
                   });
             }, 1000)}
         />
-        <Select
-          name={'property_type'}
-          {...formData.section_1?.property_dropdown}/>
         <Button icon={true} className={'next-step'} label={'Next'}/>
       </FormStep>
       <FormStep pageName={pageName} activeTheme={formData.section_2?.section_theme} stepName={formData.section_2?.section_name}>
@@ -187,10 +184,10 @@ const EPage = ({className, setCurrentTheme, actions, state, formData}) => {
             </div>
           </Alert>
         </div>
-        
+
         <div className="btn-group">
           <Button className={'bordered prev-step'} label={'Back'}/>
-          <Button className={'next-step'} label={'I’m ready to send'}/>
+          <Button className={'next-step'} label={'end message'}/>
         </div>
       </FormStep>
       <FormStep pageName={pageName} activeTheme={formData.section_4?.section_theme} stepName={formData.section_4?.section_name}>

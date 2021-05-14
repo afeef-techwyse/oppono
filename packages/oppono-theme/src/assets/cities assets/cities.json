@@ -138100,6 +138100,20 @@
         "name": "Thornhill",
         "value": "Thornhill",
         "label": "Thornhill"
+    },
+    {
+        "coordinates": [
+            [
+                {"lng":-79.6787133,"lat":43.8192933},
+                {"lng":-79.6392727,"lat":43.7498495},
+                {"lng":-79.5348127,"lat":43.7726923},
+                {"lng":-79.5452214,"lat":43.8165073},
+                {"lng":-79.5486546,"lat":43.8469314},
+                {"lng":-79.6787133,"lat":43.8192933}
+            ]
+        ],
+        "name": "Woodbridge",
+        "value": "Woodbridge",
+        "label": "Woodbridge"
     }
-
 ]

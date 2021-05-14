@@ -1,5 +1,5 @@
-import React from 'react';
-import {connect, styled} from 'frontity';
+import React from "react";
+import { connect, styled } from "frontity";
 import intro_ball_1 from "../../assets/images/form_1_img.png";
 import intro_ball_2 from "../../assets/images/form_2_img.png";
 import { Address } from "../../components/form-components/Address";
@@ -7,13 +7,13 @@ import Form from "../../components/form-components/Form";
 import FormStep from "../../components/form-components/FormStep";
 import LastStep from "../../components/form-components/LastStep";
 import { Wysiwyg } from "../../components/form-components/StyledComponent";
-import Container from '../../components/reusable/Container';
-import {size} from '../../functions/size';
-import contact_obj from '../../assets/images/contact-obj.png';
-import FlyingObjsContainer from '../../components/reusable/FlyingObjsContainer';
-import Input from '../../components/form-components/Input';
-import TextArea from '../../components/form-components/TextArea';
-import Button from '../../components/form-components/Button';
+import Container from "../../components/reusable/Container";
+import { size } from "../../functions/size";
+import contact_obj from "../../assets/images/contact-obj.png";
+import FlyingObjsContainer from "../../components/reusable/FlyingObjsContainer";
+import Input from "../../components/form-components/Input";
+import TextArea from "../../components/form-components/TextArea";
+import Button from "../../components/form-components/Button";
 import Link from "../../components/reusable/Link";
 import Select from "../../components/form-components/Select";
 
@@ -41,12 +41,19 @@ const Mail = ({ className, state, actions }) => {
           <Container className={"form-wide-container"}>
             <div className="d-flex">
               <div className="title-wrapper">
-                  {pageData.section_1?.title ? <h1 className={'contact-title'}>{pageData.section_1?.title}</h1> : null}
-                  {pageData.section_1?.sub_title ?
-                      <h2 className={'contact-sub-title desktop-only'}>{pageData.section_1?.sub_title}</h2> : null}
+                {pageData.section_1?.title ? (
+                  <h1 className={"contact-title"}>
+                    {pageData.section_1?.title}
+                  </h1>
+                ) : null}
+                {pageData.section_1?.sub_title ? (
+                  <h2 className={"contact-sub-title desktop-only"}>
+                    {pageData.section_1?.sub_title}
+                  </h2>
+                ) : null}
               </div>
               <div className="contact-info-wrapper">
-                  <Link href={'tel:' + pageData.section_1?.oppono_phone}>
+                <Link href={"tel:" + pageData.section_1?.oppono_phone}>
                   <div className="item-wrapper">
                     <div className="icon">
                       <svg viewBox="0 0 512 512">
@@ -57,14 +64,16 @@ const Mail = ({ className, state, actions }) => {
                       </svg>
                     </div>
                     <div className="text">
-                        {pageData.section_1?.oppono_phone ?
-                            <div>{pageData.section_1?.oppono_phone}</div> : null}
-                        {pageData.section_1?.oppono_phone_label ?
-                            <p>{pageData.section_1?.oppono_phone_label}</p> : null}
+                      {pageData.section_1?.oppono_phone ? (
+                        <div>{pageData.section_1?.oppono_phone}</div>
+                      ) : null}
+                      {pageData.section_1?.oppono_phone_label ? (
+                        <p>{pageData.section_1?.oppono_phone_label}</p>
+                      ) : null}
                     </div>
                   </div>
                 </Link>
-                  <Link href={'mailto:' + pageData.section_1?.oppono_email}>
+                <Link href={"mailto:" + pageData.section_1?.oppono_email}>
                   <div className="item-wrapper">
                     <div className="icon">
                       <svg viewBox="0 0 512 512">
@@ -79,14 +88,23 @@ const Mail = ({ className, state, actions }) => {
                       </svg>
                     </div>
                     <div className="text">
-                        {pageData.section_1?.oppono_email ?
-                            <div>{pageData.section_1?.oppono_email}</div> : null}
-                        {pageData.section_1?.oppono_email_label ?
-                            <p>{pageData.section_1?.oppono_email_label}</p> : null}
+                      {pageData.section_1?.oppono_email ? (
+                        <div>{pageData.section_1?.oppono_email}</div>
+                      ) : null}
+                      {pageData.section_1?.oppono_email_label ? (
+                        <p>{pageData.section_1?.oppono_email_label}</p>
+                      ) : null}
                     </div>
                   </div>
                 </Link>
-                  <Link href={'http://maps.google.com/?q=' + pageData.section_1?.oppono_address_line_1 + ' ' + pageData.section_1?.oppono_address_line_2}>
+                <Link
+                  href={
+                    "http://maps.google.com/?q=" +
+                    pageData.section_1?.oppono_address_line_1 +
+                    " " +
+                    pageData.section_1?.oppono_address_line_2
+                  }
+                >
                   <div className="item-wrapper">
                     <div className="icon">
                       <svg viewBox="0 0 384 512">
@@ -97,28 +115,33 @@ const Mail = ({ className, state, actions }) => {
                       </svg>
                     </div>
                     <div className="text">
-                        {pageData.section_1?.oppono_address_line_1 ?
-                            <div>{pageData.section_1?.oppono_address_line_1}</div> : null}
-                        {pageData.section_1?.oppono_address_line_2 ?
-                            <p>{pageData.section_1?.oppono_address_line_2}</p> : null}
+                      {pageData.section_1?.oppono_address_line_1 ? (
+                        <div>{pageData.section_1?.oppono_address_line_1}</div>
+                      ) : null}
+                      {pageData.section_1?.oppono_address_line_2 ? (
+                        <p>{pageData.section_1?.oppono_address_line_2}</p>
+                      ) : null}
                     </div>
                   </div>
                 </Link>
               </div>
-                {pageData.section_1?.sub_title ?
-                    <h2 className={'contact-sub-title mobile-only'}>{pageData.section_1?.sub_title}</h2> : null}
+              {pageData.section_1?.sub_title ? (
+                <h2 className={"contact-sub-title mobile-only"}>
+                  {pageData.section_1?.sub_title}
+                </h2>
+              ) : null}
 
               <div className="floating-obj">
-                  <FlyingObjsContainer childrenList={
-                    [
+                <FlyingObjsContainer
+                  childrenList={[
                     {
                       imageUrl: contact_obj,
-                        left: '60%',
+                      left: "60%",
                       level: 1,
-                        top: '28%',
-                        type: 'image',
+                      top: "28%",
+                      type: "image",
                       width: 18,
-                        alt: 'alt',
+                      alt: "alt",
                     },
                   ]}
                 />
@@ -127,22 +150,42 @@ const Mail = ({ className, state, actions }) => {
             {/*<img className={'contact-obj'} src={contact_obj} alt={'Contact Icon'}/>*/}
             <div className="contact-row">
               <div className="col-4">
-                  <Input name={'name'} className={'primary-input'} type={'text'} {...pageData.section_1?.name_input}/>
-                  <Input name={'email'} className={'primary-input'} type={'text'} {...pageData.section_1?.email_input}/>
-                  <Input name={'phone'} className={'primary-input'} type={'text'} {...pageData.section_1?.phone_input}/>
-          
+                <Input
+                  name={"name"}
+                  className={"primary-input"}
+                  type={"text"}
+                  {...pageData.section_1?.name_input}
+                />
+                <Input
+                  name={"email"}
+                  className={"primary-input"}
+                  type={"text"}
+                  {...pageData.section_1?.email_input}
+                />
+                <Input
+                  name={"phone"}
+                  className={"primary-input"}
+                  type={"text"}
+                  {...pageData.section_1?.phone_input}
+                />
               </div>
               <div className="col-auto">
-                  <Select className={'primary-select'}
-                          name={'discuss'}
-                          {...pageData.section_1?.discuss_dropdown}/>
-                  <TextArea name={'questions'} className={'primary-input'} {...pageData.section_1?.questions_input}/>
+                <Select
+                  className={"primary-select"}
+                  name={"discuss"}
+                  {...pageData.section_1?.discuss_dropdown}
+                />
+                <TextArea
+                  name={"questions"}
+                  className={"primary-input"}
+                  {...pageData.section_1?.questions_input}
+                />
               </div>
             </div>
             <Button
               icon={true}
               className={"next-step wide"}
-              label={"I’m ready to send"}
+              label={"Send message"}
             />
           </Container>
         </FormStep>
@@ -197,7 +240,7 @@ export default styled(connect(Mail))`
   //   margin: ${size(30)} auto 0;
   // }
   //
-  
+
   .contact-row {
     display: flex;
     align-items: flex-start;
@@ -286,9 +329,14 @@ export default styled(connect(Mail))`
     }
   }
 
+	.title-wrapper {
+		flex: 48%;
+	}
+
   .contact-info-wrapper {
     position: relative;
-    left: ${size(50)};
+    left: ${size(100)};
+		flex: 48%;
     @media (max-width: 991.98px) {
       bottom: 0;
       left: 0;
@@ -300,7 +348,7 @@ export default styled(connect(Mail))`
       align-items: center;
       margin-bottom: ${size(15)};
       background: #10397c;
-      padding: ${size(10)} ${size(40)} ${size(10)} ${size(30)};
+      padding: 2rem 3rem 2.5rem 3rem;
       border-top: 4px solid transparent;
       transition: border-color 500ms;
       @media (max-width: 991.98px) {
@@ -311,9 +359,9 @@ export default styled(connect(Mail))`
         display: flex;
         align-items: center;
         justify-content: center;
-        background: #2c3d90;
-        width: ${size(90)};
-        height: ${size(90)};
+        background: #0a266c;
+        width: ${size(60)};
+        height: ${size(60)};
         border-radius: 50%;
         object-fit: contain;
         margin-right: ${size(30)};
@@ -323,20 +371,21 @@ export default styled(connect(Mail))`
         }
 
         svg {
-          width: 50%;
-          height: 50%;
+          width: 43%;
+          height: 43%;
           transition: color 500ms;
           color: rgba(255, 255, 255, 0.8);
         }
       }
 
       .text {
+				max-width: 70%;
         display: flex;
         flex-direction: column;
         justify-content: center;
 
         div {
-          font-size: ${size(22)};
+          font-size: ${size(16)};
           color: rgba(255, 255, 255, 0.8);
           margin-bottom: ${size(3)};
           display: block;
@@ -350,7 +399,7 @@ export default styled(connect(Mail))`
         }
 
         p {
-          font-size: ${size(16)};
+          font-size: ${size(14)};
           color: rgba(255, 255, 255, 0.8);
           transition: color 500ms;
 
@@ -361,7 +410,9 @@ export default styled(connect(Mail))`
       }
 
       &:hover {
-        border-color: #fff;
+        @media (min-width: 991.98px) {
+					border-color: #fff;
+				}
 
         .icon {
           svg {

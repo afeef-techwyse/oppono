@@ -140,12 +140,12 @@ Select.propTypes = {
 
 export default styled(Select)`
   &.focused {
-    border-bottom: 1px solid rgba(191, 182, 180, 0.2);
+    border-bottom: 1px solid rgba(191, 182, 180, 0.5);
     position: relative;
     z-index: 9999 !important;
   }
   .oppono-select {
-    border-bottom: 1px solid rgba(191, 182, 180, 0.2);
+    border-bottom: 1px solid rgba(191, 182, 180, 0.5);
     outline: none;
     width: 100%;
     &__value-container {
@@ -169,8 +169,8 @@ export default styled(Select)`
       width: 100%;
       overflow: hidden;
       color: #bfb6b4;
-      font-size: ${size(40)};
-      font-weight: 300;
+      font-size: ${size(30)};
+      font-weight: 200;
       @media (max-width: 557.98px) {
         font-size: 2rem;
       }
@@ -179,11 +179,11 @@ export default styled(Select)`
       border: none !important;
       box-shadow: none !important;
       background: transparent;
-      height: ${size(53)};
+      height: ${size(43)};
       padding-bottom: ${size(6)};
       color: #bfb6b4;
-      font-size: ${size(40)};
-      font-weight: 300;
+      font-size: ${size(25)};
+      font-weight: 200;
       cursor: pointer;
       span {
         display: none;
@@ -204,8 +204,8 @@ export default styled(Select)`
     }
     &__option {
       color: #bfb6b4;
-      font-size: ${size(40)};
-      font-weight: 300;
+      font-size: ${size(25)};
+      font-weight: 200;
       text-align: left;
       &--is-focused {
         background-color: #bfb6b4;
@@ -225,7 +225,7 @@ export default styled(Select)`
     .label-text {
       color: #bfb6b4;
       font-size: ${size(16)};
-      font-weight: 500;
+      font-weight: 400;
       text-align: left;
       margin-bottom: ${size(7)};
       .dark {
@@ -253,7 +253,7 @@ export default styled(Select)`
         left: ${size(31)};
         color: #bfb6b4;
         font-size: ${size(14)};
-        font-weight: 300;
+        font-weight: 200;
       }
     }
   }

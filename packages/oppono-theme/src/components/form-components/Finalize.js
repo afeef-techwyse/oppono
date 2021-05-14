@@ -165,5 +165,6 @@ const Finalize = ({ className, children }) => {
 };
 
 export default styled(Finalize)`
-  margin: ${size(50)} 0;
+  margin: ${size(50)} auto;
+  max-width: 80%;
 `;

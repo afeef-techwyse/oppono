@@ -33,7 +33,7 @@ const Label = styled(
   .label-text {
     color: #bfb6b4;
     font-size: ${size(16)};
-    font-weight: 500;
+    font-weight: 400;
     text-align: left;
     margin-bottom: ${size(7)};
     .dark {
@@ -60,7 +60,7 @@ const Label = styled(
       transform: translateY(-50%);
       color: #bfb6b4;
       font-size: ${size(14)};
-      font-weight: 300;
+      font-weight: 200;
     }
     input {
       //border-bottom: 1px solid #bfb6b4;
@@ -74,7 +74,7 @@ const Input = React.forwardRef(
       className,
       name,
       type,
-      value: initialValue='',
+      value: initialValue = "",
       placeholder,
       pattern,
       required,
@@ -206,13 +206,13 @@ export default styled(Input)`
     border: none;
     background: transparent;
     outline: none;
-    border-bottom: 1px solid rgba(191, 182, 180, 0.1);
-    height: ${size(53)};
+    border-bottom: 1px solid rgba(191, 182, 180, 0.5);
+    height: ${size(43)};
     padding: 0 0 ${size(6)};
     caret-color: #297fff;
     color: #bfb6b4;
-    font-size: ${size(40)};
-    font-weight: 300;
+    font-size: ${size(25)};
+    font-weight: 200;
     position: relative;
     @media (max-width: 575.98px) {
       font-size: ${size(20)};
@@ -225,8 +225,8 @@ export default styled(Input)`
     &::placeholder {
       color: rgba(191, 182, 180);
       opacity: 0.4;
-      font-size: ${size(40)};
-      font-weight: 300;
+      font-size: ${size(25)};
+      font-weight: 200;
       text-align: left;
       @media (max-width: 575.98px) {
         font-size: ${size(20)};
@@ -254,7 +254,7 @@ export default styled(Input)`
       @media (max-width: 991.98px) {
         height: auto;
         font-size: ${size(26)};
-        border-bottom-color: rgba(191, 182, 180, 0.1);
+        border-bottom-color: rgba(191, 182, 180, 0.5);
       }
       &:focus {
       }
@@ -269,15 +269,15 @@ export default styled(Input)`
     &.has-cue {
       .cue {
         display: inline;
-        color: rgba(191, 182, 180, 0.1);
+        color: rgba(191, 182, 180, 0.5);
         font-size: ${size(100)};
-        font-weight: 300;
+        font-weight: 200;
       }
     }
   }
 
   input[type="password"] {
-    color: rgba(191, 182, 180, 0.2);
+    color: rgba(191, 182, 180, 0.5);
     &::placeholder {
       font-size: ${size(25)};
     }

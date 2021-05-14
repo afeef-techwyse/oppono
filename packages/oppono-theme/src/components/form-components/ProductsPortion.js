@@ -35,7 +35,7 @@ export default styled(ProductsPortion)`
   justify-content: center;
   p {
     font-size: ${size(65)};
-    font-weight: 400;
+    font-weight: 300;
     font-style: normal;
     letter-spacing: normal;
     line-height: ${size(65)};

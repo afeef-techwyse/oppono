@@ -148,7 +148,7 @@ const GeneralStyles = (props) => (
         p {
           color: #bfb6b4;
           font-size: ${size(136)};
-          font-weight: 500;
+          font-weight: 400;
           line-height: ${size(180)};
           display: inline-block;
           position: relative;
@@ -163,7 +163,7 @@ const GeneralStyles = (props) => (
         sup {
           color: #bfb6b4;
           font-size: ${size(25)};
-          font-weight: 400;
+          font-weight: 300;
           line-height: ${size(34)};
           position: absolute;
           right: 100%;
@@ -234,7 +234,7 @@ const GeneralStyles = (props) => (
       .form-headline-1 {
         color: #bfb6b4;
         font-size: ${size(40)};
-        font-weight: 500;
+        font-weight: 400;
         line-height: ${size(48)};
         text-align: center;
         //max-width: ${size(438)};
@@ -251,7 +251,7 @@ const GeneralStyles = (props) => (
         //max-width: ${size(390)};
         color: rgba(191, 182, 180);
         font-size: ${size(29)};
-        font-weight: 400;
+        font-weight: 300;
         line-height: ${size(40)};
         margin-top: ${size(8)};
         opacity: 0.5;
@@ -267,7 +267,7 @@ const GeneralStyles = (props) => (
         //max-width: ${size(390)};
         color: rgba(191, 182, 180);
         font-size: ${size(18)};
-        font-weight: 400;
+        font-weight: 300;
         line-height: ${size(25)};
         margin-top: ${size(6)};
         opacity: 0.5;
@@ -310,7 +310,7 @@ const GeneralStyles = (props) => (
 
         .text {
           font-size: 18px;
-          font-weight: 500;
+          font-weight: 400;
           line-height: 25px;
           color: rgba(191, 182, 180, 0.5);
           margin-left: 12px;
@@ -389,7 +389,7 @@ const GeneralStyles = (props) => (
       .form-sub-text {
         color: rgba(191, 182, 180, 0.5);
         font-size: ${size(18)};
-        font-weight: 500;
+        font-weight: 400;
         line-height: ${size(25)};
         text-align: center;
         margin-top: ${size(14)};
