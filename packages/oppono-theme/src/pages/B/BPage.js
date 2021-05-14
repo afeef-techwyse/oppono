@@ -166,6 +166,8 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
         formData.section_2?.section_name,
         formData.section_3?.section_name,
       ]} apiStepNumber={4} pageName={pageName} activeTheme={formData.section_4?.section_theme} stepName={formData.section_4?.section_name}>
+        <input type={'hidden'} name={`ltv`} value={((mortgage) / +section3Values('purchase_price') * 100).toFixed?.(1)}/>
+
         <div className="form-text-wrapper">
           <h1 className={'form-headline-1 text-left'}>{formData.section_4?.title}</h1>
           <h1 className={'form-headline-2 primary'}>{formData.section_4?.subtitle}</h1>

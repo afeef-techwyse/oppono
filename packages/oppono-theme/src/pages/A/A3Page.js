@@ -161,6 +161,7 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
         formData.section_2?.section_name,
         formData.section_3?.section_name,
       ]} apiStepNumber={4} pageName={pageName} activeTheme={formData.section_4?.section_theme} stepName={formData.section_4?.section_name}>
+        <input type={'hidden'} name={`ltv`} value={((section4Values('confirm_qualify_amount') === '0' ? +section4Values('amount_wanted') : mortgage) / +section2Values('home_value') * 100).toFixed?.(1)}/>
         <FlyingObjsContainer childrenList={[
           {
             imageUrl: intro_ball_3,

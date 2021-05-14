@@ -374,6 +374,7 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   formData.section_4?.section_name,
                   formData.section_5?.section_name,
                 ]}>
+        <input type={'hidden'} name={`ltv`} value={(mortgage / +section1Values('home_value') * 100).toFixed?.(1)}/>
         <div className="form-text-wrapper">
           <h1 className={'form-headline-1 text-left'}>Just one more thing…</h1>
           <h1 className={'form-headline-2 primary'}>Who are the borrower(s)?</h1>

@@ -399,6 +399,7 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
         formData.section_5?.section_name,
         formData.section_6?.section_name,
       ]} apiStepNumber={4} pageName={pageName} activeTheme={formData.section_7?.section_theme} stepName={formData.section_7?.section_name}>
+        <input type={'hidden'} name={`ltv`} value={((section7Values('confirm_qualify_amount') === '0' ? +section7Values('amount_wanted') : mortgage) / +section1Values('home_value') * 100).toFixed?.(1)}/>
         <FlyingObjsContainer childrenList={[
           {
             imageUrl: intro_ball_3,

@@ -119,6 +119,7 @@ const D1Page = ({className, setCurrentTheme, state, actions, formData}) => {
           formData.section_2?.section_name,
           formData.section_3?.section_name,
         ]} apiStepNumber={3} pageName={pageName} activeTheme={formData.section_3?.section_theme} stepName={formData.section_3?.section_name}>
+        <input type={'hidden'} name={`ltv`} value={(mortgage / +section2Values('home_value') * 100).toFixed?.(1)}/>
         <div className="form-text-wrapper">
           <h1 className={'form-headline-1 text-left'}>{formData.section_3?.title}</h1>
           <h1 className={'form-headline-2 primary'}>{formData.section_3?.subtitle}</h1>
