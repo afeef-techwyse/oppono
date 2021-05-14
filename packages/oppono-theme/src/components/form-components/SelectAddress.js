@@ -28,39 +28,48 @@ const DropdownIndicator = (props) => {
   );
 };
 const Input = (props) => {
+  
   return (
       components.Input && (
-          <components.Input {...props} autoComplete={"random-string"}/>
+          <components.Input
+              {...props}
+              autoComplete={"random-string"}
+              onFocus={(e) => {
+                props.onFocus(e);
+                requestAnimationFrame(() => e.target.select())
+              }}/>
       )
   );
 };
 
 const getHighlightedText = (text, highlight) => {
-  const highlights = highlight.split(",");
-  if (!highlights.length) return <P.D>{text}</P.D>;
-  
-  const pieces = [];
-  
-  for (let i = 0; i < highlights.length; i++) {
-    highlights[i] = highlights[i].split("-");
-    pieces.push(
-        <>{text.slice(i ? +highlights[i - 1][1] : 0, +highlights[i][0])}</>
-    );
-    pieces.push(
-        <strong style={{color: "#fe412d"}}>
-          {text.slice(highlights[i][0], highlights[i][1])}
-        </strong>
-    );
-  }
-  pieces.push(<>{text.slice(+highlights[highlights.length - 1][1])}</>);
-  return (
-      <P.D>
-        {pieces.map((piece, index) => (
-            <React.Fragment key={index}>{piece}</React.Fragment>
-        ))}
-      </P.D>
-  );
-};
+      const highlights = highlight.split(",");
+      if (!highlights.length) return
+      <P.D>{text}</P.D>;
+      
+      const pieces = [];
+      
+      for (let i = 0; i < highlights.length; i++) {
+        highlights[i] = highlights[i].split("-");
+        pieces.push(
+            <>{text.slice(i ? +highlights[i - 1][1] : 0, +highlights[i][0])}</>
+        );
+        pieces.push(
+            <strong style={{color: "#fe412d"}}>
+              {text.slice(highlights[i][0], highlights[i][1])}
+            </strong>
+        );
+      }
+      pieces.push(<>{text.slice(+highlights[highlights.length - 1][1])}</>);
+      return (
+          <P.D>
+            {pieces.map((piece, index) => (
+                <React.Fragment key={index}>{piece}</React.Fragment>
+            ))}
+          </P.D>
+      );
+    }
+;
 
 const Option = (props) => {
   return (
@@ -95,6 +104,7 @@ const Select = React.forwardRef(
       const [visited, setVisited] = React.useState(false);
       const [invalid, setInvalid] = React.useState(false);
       const [errorMessage, setErrorMessage] = React.useState("");
+      const [inputValue, setInputValue] = React.useState('');
       
       React.useEffect(() => {
         validateInput();
@@ -107,7 +117,6 @@ const Select = React.forwardRef(
         inputRef.current.validity.valid && setErrorMessage("");
         visited && setInvalid(!inputRef.current.validity.valid);
       };
-      console.log('focused',focused);
       return (
           <div
               ref={combinedRef}
@@ -118,7 +127,7 @@ const Select = React.forwardRef(
                 ref={inputRef}
                 autoComplete="off"
                 name={name}
-                type={"text"}
+                type={"hidden"}
                 style={{
                   opacity: 0,
                   height: 0,
@@ -127,20 +136,21 @@ const Select = React.forwardRef(
                 }}
                 value={value}
                 required={required}
-                onChange={() => {
-                }}
             />
             <label error-message={serverErrorMessage || errorMessage}>
               <div className="label-text">{label}</div>
               <AsyncSelect
-                  styles={{
-                    singleValue: () => {
-                      return {display: focused ? 'none' : 'block'}
-                    }
-                  }}
+                  // styles={{
+                  //   singleValue: () => ({display: focused ? 'none' : 'block'})
+                  // }}
                   cacheOptions
+                  onMenuOpen={() => setInputValue(value)}
                   ref={selectRef}
                   {...props}
+                  inputValue={inputValue}
+                  onInputChange={(e) => {
+                    setInputValue(e)
+                  }}
                   autofocus={true}
                   openAfterFocus={true}
                   onFocus={(e) => {
@@ -164,9 +174,10 @@ const Select = React.forwardRef(
                   }}
                   onChange={(option, state) => {
                     setValue(option.value);
+                    setInputValue(option.value)
                     inputRef.current.dispatchEvent(new Event("change"));
                     setInvalid(false);
-                    setTimeout(()=>document.activeElement.blur(),100);
+                    setTimeout(() => document.activeElement.blur(), 100);
                     onChange?.(option, state);
                   }}
                   className="oppono-select"
@@ -202,6 +213,7 @@ export default styled(Select)`
     &__value-container {
       padding: 0;
       height: 100%;
+      
       div {
         margin: 0 !important;
         padding: 0;
@@ -272,6 +284,14 @@ export default styled(Select)`
       
       &--is-focused {
         background-color: #bfb6b4;
+        
+        ${P.Dark}, ${P.D} {
+          color: black;
+        }
+      }
+      
+      &--is-selected {
+        background-color: #acf0f6;
         
         ${P.Dark}, ${P.D} {
           color: black;
