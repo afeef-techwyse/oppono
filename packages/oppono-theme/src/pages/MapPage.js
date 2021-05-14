@@ -148,7 +148,7 @@ const MapPage = ({ className, actions, state }) => {
         <div className="map-wrapper">
           <div className="col-left">
             <div className="text-wrapper">
-              <h1 className={"headline-1"}>We’re proud to serve the GTA</h1>
+              <h1 className={"headline-1"}>We're proud to serve Ontario</h1>
               {/*<h2 className={'headline-2 dark'}>Looking within a specific city or region?</h2>*/}
             </div>
             <div className="inputs-group">

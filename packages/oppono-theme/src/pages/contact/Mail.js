@@ -185,7 +185,7 @@ const Mail = ({ className, state, actions }) => {
             <Button
               icon={true}
               className={"next-step wide"}
-              label={"I’m ready to send"}
+              label={"Send message"}
             />
           </Container>
         </FormStep>
@@ -348,7 +348,7 @@ export default styled(connect(Mail))`
       align-items: center;
       margin-bottom: ${size(15)};
       background: #10397c;
-      padding: ${size(10)} ${size(40)} ${size(10)} ${size(30)};
+      padding: 2rem 3rem 2.5rem 3rem;
       border-top: 4px solid transparent;
       transition: border-color 500ms;
       @media (max-width: 991.98px) {
@@ -359,9 +359,9 @@ export default styled(connect(Mail))`
         display: flex;
         align-items: center;
         justify-content: center;
-        background: #2c3d90;
-        width: ${size(90)};
-        height: ${size(90)};
+        background: #0a266c;
+        width: ${size(60)};
+        height: ${size(60)};
         border-radius: 50%;
         object-fit: contain;
         margin-right: ${size(30)};
@@ -371,8 +371,8 @@ export default styled(connect(Mail))`
         }
 
         svg {
-          width: 50%;
-          height: 50%;
+          width: 43%;
+          height: 43%;
           transition: color 500ms;
           color: rgba(255, 255, 255, 0.8);
         }
@@ -410,7 +410,9 @@ export default styled(connect(Mail))`
       }
 
       &:hover {
-        border-color: #fff;
+        @media (min-width: 991.98px) {
+					border-color: #fff;
+				}
 
         .icon {
           svg {

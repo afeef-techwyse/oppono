@@ -575,10 +575,6 @@ const C2Page = ({ className, setCurrentTheme, state, actions, formData }) => {
             setAppraiser={postalCodeOnChange}
           />
           <Select
-            name={"property_type"}
-            {...formData.section_4?.property_dropdown}
-          />
-          <Select
             name={"property_details_1"}
             {...formData.section_4?.property_details_1_dropdown}
           />

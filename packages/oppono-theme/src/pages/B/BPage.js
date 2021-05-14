@@ -166,10 +166,6 @@ const BPage = ({ className, setCurrentTheme, state, actions, formData }) => {
             </>
           </FormConditionalInput>
           <Select
-            name={"property_type"}
-            {...formData.section_2?.property_dropdown}
-          />
-          <Select
             name={"property_details_1"}
             {...formData.section_2?.property_details_1_dropdown}
           />

@@ -111,12 +111,6 @@ const FourPage = (props) => {
           {value: 'Residential', label: 'Residential'},
           {value: 'strawberry', label: 'Strawberry'},
           {value: 'vanilla', label: 'Vanilla'}]}
-                label={'What type of property?'}
-                name={'property_type_1'}/>
-        <Select options={[
-          {value: 'Residential', label: 'Residential'},
-          {value: 'strawberry', label: 'Strawberry'},
-          {value: 'vanilla', label: 'Vanilla'}]}
                 label={'Property Details'}
                 name={'property_type_2'}/>
         <Select options={[

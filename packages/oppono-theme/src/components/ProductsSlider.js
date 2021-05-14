@@ -575,7 +575,7 @@ export default styled(connect(ProductsSlider))`
     .number {
       display: inline-block;
       position: relative;
-      letter-spacing: ${size(-11)};
+      letter-spacing: -5px;
       font-size: ${size(250)};
 
       &:before {

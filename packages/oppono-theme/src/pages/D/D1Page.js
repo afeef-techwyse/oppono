@@ -125,10 +125,6 @@ const D1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
             setAppraiser={postalCodeOnChange}
           />
           <Select
-            name={"property_type"}
-            {...formData.section_1?.property_dropdown}
-          />
-          <Select
             name={"property_details_1"}
             {...formData.section_1?.property_details_1_dropdown}
           />
