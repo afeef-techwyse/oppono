@@ -187,7 +187,7 @@ const EPage = ({className, setCurrentTheme, actions, state, formData}) => {
 
         <div className="btn-group">
           <Button className={'bordered prev-step'} label={'Back'}/>
-          <Button className={'next-step'} label={'end message'}/>
+          <Button className={'next-step'} label={'Send message'}/>
         </div>
       </FormStep>
       <FormStep pageName={pageName} activeTheme={formData.section_4?.section_theme} stepName={formData.section_4?.section_name}>
@@ -218,6 +218,12 @@ export default styled(connect(EPage))`
     padding-bottom: ${size(22)};
     align-items: center;
   }
+
+	.vertical-radio {
+		label a {
+			color: #0e9564;
+		}
+	}
 
   ${RadioGroup}.request-type {
     margin-right: auto;

@@ -476,7 +476,7 @@ const A3Page = ({ state, setCurrentTheme, actions, className, formData }) => {
                     {numberWithCommas(+section2Values("home_value"))}
                   </P.D>
                   <P.D>
-                    Your LTV is{" "}
+                    Your Max LTV is{" "}
                     {(
                       ((section4Values("confirm_qualify_amount") === "0"
                         ? +section4Values("amount_wanted")
@@ -663,7 +663,7 @@ const A3Page = ({ state, setCurrentTheme, actions, className, formData }) => {
                 <Link className={"wide bordered"} href={"/dashboard"}>
                   <Button
                     className={"wide bordered"}
-                    label={"Back to Dashboard"}
+                    label={"Back to dashboard"}
                   />
                 </Link>
               </div>

@@ -133,6 +133,36 @@ const DPage = ({ className, setCurrentTheme, state, actions }) => {
                           </tr>
                         </thead>
                         <tbody>
+												<tr className={"head"}>
+                            <td scope={"row"} className={"dark"}>
+                              LTV
+                            </td>
+                            {products.map(({ ID, fields: { maximum_ltv } }) => (
+                              <td
+                                key={ID}
+                                className={"details"}
+                                data-label="LTV"
+                              >
+                                {maximum_ltv}%
+                              </td>
+                            ))}
+                          </tr>
+                          <tr className={"head last-head"}>
+                            <td scope={"row"} className={"dark"}>
+                              Credit score
+                            </td>
+                            {products.map(
+                              ({ ID, fields: { beacon_score } }) => (
+                                <td
+                                  key={ID}
+                                  className={"details"}
+                                  data-label="beacon_score"
+                                >
+                                  {beaconScore(beacon_score)}
+                                </td>
+                              )
+                            )}
+                          </tr>
                           {!hasVariable ? null : (
                             <tr className={"head"}>
                               <td scope={"row"} className={"dark"}>
@@ -162,36 +192,6 @@ const DPage = ({ className, setCurrentTheme, state, actions }) => {
                                 {fee}%
                               </td>
                             ))}
-                          </tr>
-                          <tr className={"head"}>
-                            <td scope={"row"} className={"dark"}>
-                              LTV
-                            </td>
-                            {products.map(({ ID, fields: { maximum_ltv } }) => (
-                              <td
-                                key={ID}
-                                className={"details"}
-                                data-label="LTV"
-                              >
-                                {maximum_ltv}%
-                              </td>
-                            ))}
-                          </tr>
-                          <tr className={"head last-head"}>
-                            <td scope={"row"} className={"dark"}>
-                              Credit score
-                            </td>
-                            {products.map(
-                              ({ ID, fields: { beacon_score } }) => (
-                                <td
-                                  key={ID}
-                                  className={"details"}
-                                  data-label="beacon_score"
-                                >
-                                  {beaconScore(beacon_score)}
-                                </td>
-                              )
-                            )}
                           </tr>
 
                           {productsTable[type] &&

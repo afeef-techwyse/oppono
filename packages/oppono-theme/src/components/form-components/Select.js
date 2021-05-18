@@ -182,7 +182,8 @@ export default styled(Select)`
       height: ${size(43)};
       padding-bottom: ${size(6)};
       color: #bfb6b4;
-      font-size: ${size(25)};
+      font-size: ${size(22)};
+padding-left: 8px !important;;
       font-weight: 200;
       cursor: pointer;
       span {
@@ -204,7 +205,8 @@ export default styled(Select)`
     }
     &__option {
       color: #bfb6b4;
-      font-size: ${size(25)};
+      font-size: ${size(22)};
+padding-left: 8px !important;;
       font-weight: 200;
       text-align: left;
       &--is-focused {

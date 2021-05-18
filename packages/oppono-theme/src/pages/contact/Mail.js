@@ -216,7 +216,7 @@ const Mail = ({ className, state, actions }) => {
                 <Link className={"wide bordered"} href={"/dashboard"}>
                   <Button
                     className={"wide bordered"}
-                    label={"Back to Dashboard"}
+                    label={"Back to dashboard"}
                   />
                 </Link>
               </div>

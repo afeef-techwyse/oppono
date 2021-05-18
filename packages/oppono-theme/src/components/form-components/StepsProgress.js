@@ -50,7 +50,8 @@ const StepsProgress = styled(
     .step-name {
       position: absolute;
       left: ${size(30)};
-      font-size: ${size(25)};
+      font-size: ${size(22)};
+padding-left: 8px !important;;
       top: 50%;
       transform: translateY(-50%);
       pointer-events: none;

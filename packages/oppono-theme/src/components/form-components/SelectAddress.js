@@ -28,7 +28,7 @@ const DropdownIndicator = (props) => {
   );
 };
 const Input = (props) => {
-  
+
   return (
     components.Input && (
           <components.Input
@@ -46,9 +46,9 @@ const getHighlightedText = (text, highlight) => {
       const highlights = highlight.split(",");
       if (!highlights.length) return
       <P.D>{text}</P.D>;
-      
+
       const pieces = [];
-      
+
       for (let i = 0; i < highlights.length; i++) {
         highlights[i] = highlights[i].split("-");
         pieces.push(
@@ -213,7 +213,7 @@ export default styled(Select)`
     &__value-container {
       padding: 0;
       height: 100%;
-      
+
       div {
         margin: 0 !important;
         padding: 0;
@@ -234,7 +234,8 @@ export default styled(Select)`
       width: 100%;
       overflow: hidden;
       color: #bfb6b4;
-      font-size: ${size(25)};
+      font-size: ${size(22)};
+padding-left: 8px !important;;
       font-weight: 200;
       @media (max-width: 557.98px) {
         font-size: 2rem;
@@ -248,7 +249,8 @@ export default styled(Select)`
       height: ${size(43)};
       padding-bottom: ${size(6)};
       color: #bfb6b4;
-      font-size: ${size(25)};
+      font-size: ${size(22)};
+padding-left: 8px !important;;
       font-weight: 200;
       cursor: pointer;
 
@@ -274,7 +276,8 @@ export default styled(Select)`
 
     &__option {
       color: #bfb6b4;
-      font-size: ${size(25)};
+      font-size: ${size(22)};
+padding-left: 8px !important;;
       font-weight: 200;
       text-align: left;
 
@@ -289,10 +292,10 @@ export default styled(Select)`
           color: black;
         }
       }
-      
+
       &--is-selected {
         background-color: #acf0f6;
-        
+
         ${P.Dark}, ${P.D} {
           color: black;
         }

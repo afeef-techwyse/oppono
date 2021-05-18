@@ -167,13 +167,13 @@ const A2Page = ({ className, setCurrentTheme, state, actions, formData }) => {
           <W50>
             <Input
               type={"number"}
-							currency={"true"}
+							currency={true}
               name={"purchase_price"}
               {...formData.section_2?.purchase_price_input}
             />
             <Input
               type={"number"}
-							currency={true}
+							currency
               name={"down_payment"}
               {...formData.section_2?.down_payment_input}
             />
@@ -373,7 +373,7 @@ const A2Page = ({ className, setCurrentTheme, state, actions, formData }) => {
                   {numberWithCommas(+section2Values("down_payment"))}
                 </P.Border>
                 <P.Border>
-                  Your LTV is{" "}
+                  Your Max LTV is{" "}
                   {(
                     (mortgage / +section2Values("purchase_price")) *
                     100
@@ -645,7 +645,7 @@ const A2Page = ({ className, setCurrentTheme, state, actions, formData }) => {
                 <Link className={"wide bordered"} href={"/dashboard"}>
                   <Button
                     className={"wide bordered"}
-                    label={"Back to Dashboard"}
+                    label={"Back to dashboard"}
                   />
                 </Link>
               </div>

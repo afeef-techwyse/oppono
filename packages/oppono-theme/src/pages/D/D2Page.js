@@ -425,7 +425,7 @@ const D2Page = ({ className, setCurrentTheme, state, actions, formData }) => {
                     {numberWithCommas(+section2Values("home_value") - mortgage)}
                   </P.D>
                   <P.D>
-                    Your LTV is{" "}
+                    Your Max LTV is{" "}
                     {(
                       (mortgage / +section2Values("home_value")) *
                       100
@@ -656,7 +656,7 @@ const D2Page = ({ className, setCurrentTheme, state, actions, formData }) => {
                 <Link className={"wide bordered"} href={"/dashboard"}>
                   <Button
                     className={"wide bordered"}
-                    label={"Back to Dashboard"}
+                    label={"Back to dashboard"}
                   />
                 </Link>
               </div>

@@ -112,6 +112,10 @@ export default styled(FormFilter)`
   .filter {
     width: fit-content;
     cursor: pointer;
+
+		.radio-text {
+			text-transform: capitalize;
+		}
   }
   [data-filter] {
     overflow: hidden;

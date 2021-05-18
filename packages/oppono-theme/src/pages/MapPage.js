@@ -114,7 +114,7 @@ const MapPage = ({ className, actions, state }) => {
   const postalCodeGetAppraiser = debounce((postalCode) => {
     if (postalCode.length < 3) {
       setAppraiser([{}]);
-      setPostalCodeErrorMessage("no appraisers found for this postal code");
+      setPostalCodeErrorMessage("No appraisers found for this postal code.");
       return;
     }
     const data = new FormData();
@@ -122,10 +122,10 @@ const MapPage = ({ className, actions, state }) => {
     opponoApi.post("/appraiser-lookup", data).then((response) => {
       if (response.data.length > 2) {
         setAppraiser([{}]);
-        setPostalCodeErrorMessage("no appraisers found for this postal code");
+        setPostalCodeErrorMessage("No appraisers found for this postal code.");
       } else if (response.data.length == 0) {
         setAppraiser([{}]);
-        setPostalCodeErrorMessage("no appraisers found for this postal code");
+        setPostalCodeErrorMessage("No appraisers found for this postal code.");
       } else {
         setAppraiser(response.data);
         setPostalCodeErrorMessage("");
@@ -538,7 +538,8 @@ export default styled(connect(MapPage))`
       &__single-value,
       &__input,
       &__control {
-        font-size: ${size(25)};
+        font-size: ${size(22)};
+padding-left: 8px !important;;
       }
     }
     @media (max-width: 450px) {

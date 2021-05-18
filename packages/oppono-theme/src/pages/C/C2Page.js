@@ -326,6 +326,30 @@ const C2Page = ({ className, setCurrentTheme, state, actions, formData }) => {
                       <tbody>
                         <tr className={"head"}>
                           <td scope={"row"} className={"dark"}>
+                            LTV
+                          </td>
+                          {products.map(({ ID, fields: { maximum_ltv } }) => (
+                            <td key={ID} className={"details"} data-label="LTV">
+                              {maximum_ltv}%
+                            </td>
+                          ))}
+                        </tr>
+                        <tr className={"head last-head"}>
+                          <td scope={"row"} className={"dark"}>
+                            Credit score
+                          </td>
+                          {products.map(({ ID, fields: { beacon_score } }) => (
+                            <td
+                              key={ID}
+                              className={"details"}
+                              data-label="beacon_score"
+                            >
+                              {beaconScore(beacon_score)}
+                            </td>
+                          ))}
+                        </tr>
+                        <tr className={"head"}>
+                          <td scope={"row"} className={"dark"}>
                             Fixed rate
                           </td>
                           {products.map(({ ID, fields: { rate } }) => (
@@ -349,30 +373,6 @@ const C2Page = ({ className, setCurrentTheme, state, actions, formData }) => {
                               data-label="Lender fee"
                             >
                               {fee}%
-                            </td>
-                          ))}
-                        </tr>
-                        <tr className={"head"}>
-                          <td scope={"row"} className={"dark"}>
-                            LTV
-                          </td>
-                          {products.map(({ ID, fields: { maximum_ltv } }) => (
-                            <td key={ID} className={"details"} data-label="LTV">
-                              {maximum_ltv}%
-                            </td>
-                          ))}
-                        </tr>
-                        <tr className={"head last-head"}>
-                          <td scope={"row"} className={"dark"}>
-                            Credit score
-                          </td>
-                          {products.map(({ ID, fields: { beacon_score } }) => (
-                            <td
-                              key={ID}
-                              className={"details"}
-                              data-label="beacon_score"
-                            >
-                              {beaconScore(beacon_score)}
                             </td>
                           ))}
                         </tr>
@@ -765,7 +765,7 @@ const C2Page = ({ className, setCurrentTheme, state, actions, formData }) => {
                     {numberWithCommas(+section1Values("home_value") - mortgage)}
                   </P.D>
                   <P.D>
-                    Your LTV is{" "}
+                    Your Max LTV is{" "}
                     {(
                       (mortgage / +section1Values("home_value")) *
                       100
@@ -849,11 +849,7 @@ const C2Page = ({ className, setCurrentTheme, state, actions, formData }) => {
               <FinalizeChild order={2} className={"full m-border"}>
                 <FinalizeTable>
                   <tbody>
-                    <tr>
-                      <P.Dark as={"td"}>Lender fee</P.Dark>
-                      <P.D as={"td"}>{firstProduct.fields?.fee}%</P.D>
-                    </tr>
-                    <tr>
+									<tr>
                       <P.Dark as={"td"}>LTV</P.Dark>
                       <P.D as={"td"}>
                         Up to {firstProduct.fields?.maximum_ltv}%
@@ -864,6 +860,10 @@ const C2Page = ({ className, setCurrentTheme, state, actions, formData }) => {
                       <P.D as={"td"}>
                         {beaconScore(firstProduct.fields?.beacon_score)}
                       </P.D>
+                    </tr>
+                    <tr>
+                      <P.Dark as={"td"}>Lender fee</P.Dark>
+                      <P.D as={"td"}>{firstProduct.fields?.fee}%</P.D>
                     </tr>
                   </tbody>
                 </FinalizeTable>
@@ -996,7 +996,7 @@ const C2Page = ({ className, setCurrentTheme, state, actions, formData }) => {
                 <Link className={"wide bordered"} href={"/dashboard"}>
                   <Button
                     className={"wide bordered"}
-                    label={"Back to Dashboard"}
+                    label={"Back to dashboard"}
                   />
                 </Link>
               </div>

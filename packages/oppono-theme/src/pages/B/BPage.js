@@ -425,7 +425,7 @@ const BPage = ({ className, setCurrentTheme, state, actions, formData }) => {
                     {numberWithCommas(+section3Values("purchase_price"))}
                   </P.D>
                   <P.D>
-                    Your LTV is{" "}
+                    Your Max LTV is{" "}
                     {(
                       (mortgage / +section3Values("purchase_price")) *
                       100
@@ -606,7 +606,7 @@ const BPage = ({ className, setCurrentTheme, state, actions, formData }) => {
                 <Link className={"wide bordered"} href={"/dashboard"}>
                   <Button
                     className={"wide bordered"}
-                    label={"Back to Dashboard"}
+                    label={"Back to dashboard"}
                   />
                 </Link>
               </div>

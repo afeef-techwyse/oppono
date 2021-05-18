@@ -420,7 +420,7 @@ const A1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
                   {numberWithCommas(+section2Values("home_value") - mortgage)}
                 </P.Border>
                 <P.Border>
-                  Your LTV is{" "}
+                  Your Max LTV is{" "}
                   {((mortgage / +section2Values("home_value")) * 100).toFixed?.(
                     1
                   )}
@@ -550,6 +550,30 @@ const A1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
                         </tr>
                       </thead>
                       <tbody>
+											<tr className={"head"}>
+                          <td scope={"row"} className={"dark"}>
+                            LTV
+                          </td>
+                          {products.map(({ ID, fields: { maximum_ltv } }) => (
+                            <td key={ID} className={"details"} data-label="LTV">
+                              {maximum_ltv}%
+                            </td>
+                          ))}
+                        </tr>
+                        <tr className={"head last-head"}>
+                          <td scope={"row"} className={"dark"}>
+                            Credit score
+                          </td>
+                          {products.map(({ ID, fields: { beacon_score } }) => (
+                            <td
+                              key={ID}
+                              className={"details"}
+                              data-label="beacon_score"
+                            >
+                              {beaconScore(beacon_score)}
+                            </td>
+                          ))}
+                        </tr>
                         <tr className={"head"}>
                           <td scope={"row"} className={"dark"}>
                             Fixed rate
@@ -575,30 +599,6 @@ const A1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
                               data-label="Lender fee"
                             >
                               {fee}%
-                            </td>
-                          ))}
-                        </tr>
-                        <tr className={"head"}>
-                          <td scope={"row"} className={"dark"}>
-                            LTV
-                          </td>
-                          {products.map(({ ID, fields: { maximum_ltv } }) => (
-                            <td key={ID} className={"details"} data-label="LTV">
-                              {maximum_ltv}%
-                            </td>
-                          ))}
-                        </tr>
-                        <tr className={"head last-head"}>
-                          <td scope={"row"} className={"dark"}>
-                            Credit score
-                          </td>
-                          {products.map(({ ID, fields: { beacon_score } }) => (
-                            <td
-                              key={ID}
-                              className={"details"}
-                              data-label="beacon_score"
-                            >
-                              {beaconScore(beacon_score)}
                             </td>
                           ))}
                         </tr>
@@ -677,15 +677,7 @@ const A1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
                                 />
                               </div>
                               <div className="mortgage-body">
-                                <div className={"m-row m-head"}>
-                                  <p>Fixed rate</p>
-                                  <p>{(+rate + 0.25).toFixed?.(2)}%</p>
-                                </div>
-                                <div className={"m-row m-head"}>
-                                  <p>Lender fee</p>
-                                  <p>{fee}%</p>
-                                </div>
-                                <div className={"m-row m-head  m-head"}>
+															<div className={"m-row m-head  m-head"}>
                                   <p>LTV</p>
                                   <p>{maximum_ltv}%</p>
                                 </div>
@@ -694,6 +686,14 @@ const A1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
                                 >
                                   <p>Credit score</p>
                                   <p>{beaconScore(beacon_score)}</p>
+                                </div>
+                                <div className={"m-row m-head"}>
+                                  <p>Fixed rate</p>
+                                  <p>{(+rate + 0.25).toFixed?.(2)}%</p>
+                                </div>
+                                <div className={"m-row m-head"}>
+                                  <p>Lender fee</p>
+                                  <p>{fee}%</p>
                                 </div>
                                 {specifications
                                   .slice(0, 4)
@@ -858,7 +858,7 @@ const A1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
                 <Link className={"wide bordered"} href={"/dashboard"}>
                   <Button
                     className={"wide bordered"}
-                    label={"Back to Dashboard"}
+                    label={"Back to dashboard"}
                   />
                 </Link>
               </div>

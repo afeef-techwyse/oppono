@@ -213,7 +213,8 @@ export default styled(Input)`
     padding: 0 0 ${size(6)};
     caret-color: #297fff;
     color: #bfb6b4;
-    font-size: ${size(25)};
+    font-size: ${size(22)};
+padding-left: 8px !important;;
     font-weight: 200;
     position: relative;
     @media (max-width: 575.98px) {
@@ -227,7 +228,8 @@ export default styled(Input)`
     &::placeholder {
       color: rgba(191, 182, 180);
       opacity: 0.4;
-      font-size: ${size(25)};
+      font-size: ${size(22)};
+padding-left: 8px !important;;
       font-weight: 200;
       text-align: left;
       @media (max-width: 575.98px) {
@@ -281,7 +283,8 @@ export default styled(Input)`
   input[type="password"] {
     color: rgba(191, 182, 180, 0.5);
     &::placeholder {
-      font-size: ${size(25)};
+      font-size: ${size(22)};
+padding-left: 8px !important;;
     }
   }
 

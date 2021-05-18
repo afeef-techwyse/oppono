@@ -335,6 +335,36 @@ const C3Page = ({ className, setCurrentTheme, state, actions, formData }) => {
                           </tr>
                         </thead>
                         <tbody>
+												<tr className={"head"}>
+                            <td scope={"row"} className={"dark"}>
+                              LTV
+                            </td>
+                            {products.map(({ ID, fields: { maximum_ltv } }) => (
+                              <td
+                                key={ID}
+                                className={"details"}
+                                data-label="LTV"
+                              >
+                                {maximum_ltv}%
+                              </td>
+                            ))}
+                          </tr>
+                          <tr className={"head last-head"}>
+                            <td scope={"row"} className={"dark"}>
+                              Credit score
+                            </td>
+                            {products.map(
+                              ({ ID, fields: { beacon_score } }) => (
+                                <td
+                                  key={ID}
+                                  className={"details"}
+                                  data-label="beacon_score"
+                                >
+                                  {beaconScore(beacon_score)}
+                                </td>
+                              )
+                            )}
+                          </tr>
                           {!hasVariable ? null : (
                             <tr className={"head"}>
                               <td scope={"row"} className={"dark"}>
@@ -364,36 +394,6 @@ const C3Page = ({ className, setCurrentTheme, state, actions, formData }) => {
                                 {fee}%
                               </td>
                             ))}
-                          </tr>
-                          <tr className={"head"}>
-                            <td scope={"row"} className={"dark"}>
-                              LTV
-                            </td>
-                            {products.map(({ ID, fields: { maximum_ltv } }) => (
-                              <td
-                                key={ID}
-                                className={"details"}
-                                data-label="LTV"
-                              >
-                                {maximum_ltv}%
-                              </td>
-                            ))}
-                          </tr>
-                          <tr className={"head last-head"}>
-                            <td scope={"row"} className={"dark"}>
-                              Credit score
-                            </td>
-                            {products.map(
-                              ({ ID, fields: { beacon_score } }) => (
-                                <td
-                                  key={ID}
-                                  className={"details"}
-                                  data-label="beacon_score"
-                                >
-                                  {beaconScore(beacon_score)}
-                                </td>
-                              )
-                            )}
                           </tr>
 
                           {productsTable[type] &&
@@ -485,6 +485,16 @@ const C3Page = ({ className, setCurrentTheme, state, actions, formData }) => {
                                   />
                                 </div>
                                 <div className="mortgage-body">
+																<div className={"m-row m-head  m-head"}>
+                                    <p>LTV</p>
+                                    <p>{maximum_ltv}%</p>
+                                  </div>
+                                  <div
+                                    className={"m-row m-head  m-head last-head"}
+                                  >
+                                    <p>Credit score</p>
+                                    <p>{beaconScore(beacon_score)}</p>
+                                  </div>
                                   {!hasVariable ? null : (
                                     <div className={"m-row m-head"}>
                                       <p>Fixed rate</p>
@@ -494,16 +504,6 @@ const C3Page = ({ className, setCurrentTheme, state, actions, formData }) => {
                                   <div className={"m-row m-head"}>
                                     <p>Lender fee</p>
                                     <p>{fee}%</p>
-                                  </div>
-                                  <div className={"m-row m-head  m-head"}>
-                                    <p>LTV</p>
-                                    <p>{maximum_ltv}%</p>
-                                  </div>
-                                  <div
-                                    className={"m-row m-head  m-head last-head"}
-                                  >
-                                    <p>Credit score</p>
-                                    <p>{beaconScore(beacon_score)}</p>
                                   </div>
                                   {specifications
                                     .slice(0, 4)
@@ -925,7 +925,7 @@ const C3Page = ({ className, setCurrentTheme, state, actions, formData }) => {
                     {numberWithCommas(+section1Values("home_value"))}
                   </P.D>
                   <P.D>
-                    Your LTV is{" "}
+                    Your Max LTV is{" "}
                     {(
                       ((section7Values("confirm_qualify_amount") === "0"
                         ? +section7Values("amount_wanted")
@@ -1112,7 +1112,7 @@ const C3Page = ({ className, setCurrentTheme, state, actions, formData }) => {
                 <Link className={"wide bordered"} href={"/dashboard"}>
                   <Button
                     className={"wide bordered"}
-                    label={"Back to Dashboard"}
+                    label={"Back to dashboard"}
                   />
                 </Link>
               </div>
