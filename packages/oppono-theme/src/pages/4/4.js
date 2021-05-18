@@ -237,11 +237,11 @@ const FourPage = (props) => {
               <FinalizeTable>
                 <tbody>
                 <tr>
-                  <P.Dark as={'td'}>Lender Fee</P.Dark>
+                  <P.Dark as={'td'}>Lender fee</P.Dark>
                   <P.D as={'td'}>2.00%</P.D>
                 </tr>
                 <tr>
-                  <P.Dark as={'td'}>Credit Score</P.Dark>
+                  <P.Dark as={'td'}>Credit score</P.Dark>
                   <P.D as={'td'}>680+</P.D>
                 </tr>
                 </tbody>

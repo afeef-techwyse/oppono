@@ -448,7 +448,7 @@ const A3Page = ({ state, setCurrentTheme, actions, className, formData }) => {
               )}
 
               <FinalizeChild order={1}>
-                <P.Dark>*Fixed Rate</P.Dark>
+                <P.Dark>*Fixed rate</P.Dark>
                 <P.Dark>*Payment interest based on balance</P.Dark>
                 <P.Num>{+firstProduct.fields?.rate + 0.25}%</P.Num>
                 <Button label={"I’m good to go"} className={"next-step"} />
@@ -530,11 +530,11 @@ const A3Page = ({ state, setCurrentTheme, actions, className, formData }) => {
                 <FinalizeTable>
                   <tbody>
                     <tr>
-                      <P.Dark as={"td"}>Lender Fee</P.Dark>
+                      <P.Dark as={"td"}>Lender fee</P.Dark>
                       <P.D as={"td"}>{firstProduct.fields?.fee}%</P.D>
                     </tr>
                     <tr>
-                      <P.Dark as={"td"}>Credit Score</P.Dark>
+                      <P.Dark as={"td"}>Credit score</P.Dark>
                       <P.D as={"td"}>
                         {beaconScore(firstProduct.fields?.beacon_score)}
                       </P.D>

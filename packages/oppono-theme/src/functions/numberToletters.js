@@ -1,15 +1,13 @@
 export function numberToLetters(n) {
   switch (n) {
     case 1:
-      return 'first';
+      return 'First';
     case 2:
-      return 'second';
+      return 'Second';
     case 3:
-      return 'third';
+      return 'Third';
     case 4:
-      return 'fourth';
-    
+      return 'Fourth';
+
   }
-  
-  
 }

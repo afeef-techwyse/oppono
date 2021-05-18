@@ -146,20 +146,20 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
               </thead>
               <tbody>
               <tr className={'head'}>
-                <td scope={'row'} className={'dark'}>Fixed Rate</td>
+                <td scope={'row'} className={'dark'}>Fixed rate</td>
                 {
                   products.map((product,index)=>
                       product&&
-                      <td key={product.ID} className={'details'} data-label="Fixed Rate">{index!==2?+product.fields.rate+.25+'%':'--'}</td>
+                      <td key={product.ID} className={'details'} data-label="Fixed rate">{index!==2?+product.fields.rate+.25+'%':'--'}</td>
                   )
                 }
               </tr>
               <tr className={'head'}>
-                <td scope={'row'} className={'dark'}>Lender Fee</td>
+                <td scope={'row'} className={'dark'}>Lender fee</td>
                 {
                   products.map(product=>
                       product&&
-                      <td key={product.ID} className={'details'} data-label="Lender Fee">{product.fields.fee}%</td>
+                      <td key={product.ID} className={'details'} data-label="Lender fee">{product.fields.fee}%</td>
                   )
                 }
               </tr>
@@ -193,11 +193,11 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
                       </div>
                       <div className="mortgage-body">
                         <div className={'m-row m-head'}>
-                          <p>Fixed Rate</p>
+                          <p>Fixed rate</p>
                           <p>{index!==2?+product.fields.rate+.25+'%':'--'}</p>
                         </div>
                         <div className={'m-row m-head'}>
-                          <p>Lender Fee</p>
+                          <p>Lender fee</p>
                           <p>{product.fields.fee}%</p>
                         </div>
                         <div className={'m-row m-head  m-head last-head'}>
@@ -258,11 +258,11 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
                       <P.D as={'td'}>{beaconScore(selectedProduct?.fields.beacon_score)}</P.D>
                     </tr>
                     <tr>
-                      <P.Dark as={'td'}>Fixed Rate</P.Dark>
+                      <P.Dark as={'td'}>Fixed rate</P.Dark>
                       <P.D as={'td'}>{+selectedProduct?.fields.rate+.25}%</P.D>
                     </tr>
                     <tr>
-                      <P.Dark as={'td'}>Lender Fee</P.Dark>
+                      <P.Dark as={'td'}>Lender fee</P.Dark>
                       <P.D as={'td'}>{selectedProduct?.fields.fee}%</P.D>
                     </tr>
                     </tbody>
@@ -280,11 +280,11 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
                       <P.D as={'td'}>{beaconScore(selectedProduct?.fields.beacon_score)}</P.D>
                     </tr>
                     <tr>
-                      <P.Dark as={'td'}>Fixed Rate</P.Dark>
+                      <P.Dark as={'td'}>Fixed rate</P.Dark>
                       <P.D as={'td'}>{+selectedProduct?.fields.rate+.25}%</P.D>
                     </tr>
                     <tr>
-                      <P.Dark as={'td'}>Lender Fee</P.Dark>
+                      <P.Dark as={'td'}>Lender fee</P.Dark>
                       <P.D as={'td'}>{selectedProduct?.fields.fee}%</P.D>
                     </tr>
                     </tbody>

@@ -136,13 +136,13 @@ const DPage = ({ className, setCurrentTheme, state, actions }) => {
                           {!hasVariable ? null : (
                             <tr className={"head"}>
                               <td scope={"row"} className={"dark"}>
-                                Fixed Rate
+                                Fixed rate
                               </td>
                               {products.map(({ ID, fields: { rate } }) => (
                                 <td
                                   key={ID}
                                   className={"details"}
-                                  data-label="Fixed Rate"
+                                  data-label="Fixed rate"
                                 >
                                   {(+rate + 0.25).toFixed?.(2)}%
                                 </td>
@@ -151,13 +151,13 @@ const DPage = ({ className, setCurrentTheme, state, actions }) => {
                           )}
                           <tr className={"head"}>
                             <td scope={"row"} className={"dark"}>
-                              Lender Fee
+                              Lender fee
                             </td>
                             {products.map(({ ID, fields: { fee } }) => (
                               <td
                                 key={ID}
                                 className={"details"}
-                                data-label="Lender Fee"
+                                data-label="Lender fee"
                               >
                                 {fee}%
                               </td>
@@ -179,7 +179,7 @@ const DPage = ({ className, setCurrentTheme, state, actions }) => {
                           </tr>
                           <tr className={"head last-head"}>
                             <td scope={"row"} className={"dark"}>
-                              Credit Score
+                              Credit score
                             </td>
                             {products.map(
                               ({ ID, fields: { beacon_score } }) => (
@@ -268,12 +268,12 @@ const DPage = ({ className, setCurrentTheme, state, actions }) => {
                                 <div className="mortgage-body">
                                   {!hasVariable ? null : (
                                     <div className={"m-row m-head"}>
-                                      <p>Fixed Rate</p>
+                                      <p>Fixed rate</p>
                                       <p>{(+rate + 0.25).toFixed?.(2)}%</p>
                                     </div>
                                   )}
                                   <div className={"m-row m-head"}>
-                                    <p>Lender Fee</p>
+                                    <p>Lender fee</p>
                                     <p>{fee}%</p>
                                   </div>
                                   <div className={"m-row m-head  m-head"}>
@@ -283,7 +283,7 @@ const DPage = ({ className, setCurrentTheme, state, actions }) => {
                                   <div
                                     className={"m-row m-head  m-head last-head"}
                                   >
-                                    <p>Credit Score</p>
+                                    <p>Credit score</p>
                                     <p>{beaconScore(beacon_score)}</p>
                                   </div>
                                   {specifications

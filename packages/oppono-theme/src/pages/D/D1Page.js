@@ -289,11 +289,11 @@ const D1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
               {media !== "mobile" ? (
                 <FinalizeChild>
                   <P.Num>{+firstProduct.fields?.rate + 0.25}%</P.Num>
-                  <P.Dark>*Fixed Rate</P.Dark>
+                  <P.Dark>*Fixed rate</P.Dark>
                 </FinalizeChild>
               ) : (
                 <FinalizeChild className={"full"} order={1}>
-                  <P.Dark>*Fixed Rate</P.Dark>
+                  <P.Dark>*Fixed rate</P.Dark>
                   <P.Dark>*Payment interest based on balance</P.Dark>
                   <P.Num>{+firstProduct.fields?.rate + 0.25}%</P.Num>
                 </FinalizeChild>
@@ -447,13 +447,13 @@ const D1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
                       </P.D>
                     </tr>
                     <tr>
-                      <P.Dark as={"td"}>Credit Score</P.Dark>
+                      <P.Dark as={"td"}>Credit score</P.Dark>
                       <P.D as={"td"}>
                         {beaconScore(firstProduct.fields?.beacon_score)}
                       </P.D>
                     </tr>
                     <tr>
-                      <P.Dark as={"td"}>Lender Fee</P.Dark>
+                      <P.Dark as={"td"}>Lender fee</P.Dark>
                       <P.D as={"td"}>{firstProduct.fields?.fee}%</P.D>
                     </tr>
                   </tbody>

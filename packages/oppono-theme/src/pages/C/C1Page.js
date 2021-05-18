@@ -336,14 +336,14 @@ const C1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
                       <tbody>
                         <tr className={"head"}>
                           <td scope={"row"} className={"dark"}>
-                            Fixed Rate
+                            Fixed rate
                           </td>
 
                           {products.map(({ ID, fields: { rate } }) => (
                             <td
                               key={ID}
                               className={"details"}
-                              data-label="Fixed Rate"
+                              data-label="Fixed rate"
                             >
                               {(+rate + 0.25).toFixed?.(2)}%
                             </td>
@@ -351,13 +351,13 @@ const C1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
                         </tr>
                         <tr className={"head"}>
                           <td scope={"row"} className={"dark"}>
-                            Lender Fee
+                            Lender fee
                           </td>
                           {products.map(({ ID, fields: { fee } }) => (
                             <td
                               key={ID}
                               className={"details"}
-                              data-label="Lender Fee"
+                              data-label="Lender fee"
                             >
                               {fee}%
                             </td>
@@ -375,7 +375,7 @@ const C1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
                         </tr>
                         <tr className={"head last-head"}>
                           <td scope={"row"} className={"dark"}>
-                            Credit Score
+                            Credit score
                           </td>
                           {products.map(({ ID, fields: { beacon_score } }) => (
                             <td
@@ -471,11 +471,11 @@ const C1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
                               </div>
                               <div className="mortgage-body">
                                 <div className={"m-row m-head"}>
-                                  <p>Fixed Rate</p>
+                                  <p>Fixed rate</p>
                                   <p>{(+rate + 0.25).toFixed?.(2)}%</p>
                                 </div>
                                 <div className={"m-row m-head"}>
-                                  <p>Lender Fee</p>
+                                  <p>Lender fee</p>
                                   <p>{fee}%</p>
                                 </div>
                                 <div className={"m-row m-head  m-head"}>
@@ -485,7 +485,7 @@ const C1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
                                 <div
                                   className={"m-row m-head  m-head last-head"}
                                 >
-                                  <p>Credit Score</p>
+                                  <p>Credit score</p>
                                   <p>{beaconScore(beacon_score)}</p>
                                 </div>
                                 {specifications
@@ -941,7 +941,7 @@ const C1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
                 <FinalizeTable>
                   <tbody>
                     <tr>
-                      <P.Dark as={"td"}>Lender Fee</P.Dark>
+                      <P.Dark as={"td"}>Lender fee</P.Dark>
                       <P.D as={"td"}>{firstProduct.fields?.fee}%</P.D>
                     </tr>
                     <tr>
@@ -951,7 +951,7 @@ const C1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
                       </P.D>
                     </tr>
                     <tr>
-                      <P.Dark as={"td"}>Credit Score</P.Dark>
+                      <P.Dark as={"td"}>Credit score</P.Dark>
                       <P.D as={"td"}>
                         {beaconScore(firstProduct.fields?.beacon_score)}
                       </P.D>

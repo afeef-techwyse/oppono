@@ -481,7 +481,7 @@ const ProductsSlider = ({
                             <P.D as={"span"}>%</P.D>
                           </td>
                           <td>
-                            <P.Dark>Fixed Rate</P.Dark>
+                            <P.Dark>Fixed rate</P.Dark>
                           </td>
                         </tr>
                         <tr>
@@ -497,7 +497,7 @@ const ProductsSlider = ({
                             <P.D as={"span"}>%</P.D>
                           </td>
                           <td>
-                            <P.Dark>Lender Fee</P.Dark>
+                            <P.Dark>Lender fee</P.Dark>
                           </td>
                         </tr>
                         <tr>

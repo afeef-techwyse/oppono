@@ -167,11 +167,13 @@ const A2Page = ({ className, setCurrentTheme, state, actions, formData }) => {
           <W50>
             <Input
               type={"number"}
+							currency={"true"}
               name={"purchase_price"}
               {...formData.section_2?.purchase_price_input}
             />
             <Input
               type={"number"}
+							currency={true}
               name={"down_payment"}
               {...formData.section_2?.down_payment_input}
             />
@@ -477,13 +479,13 @@ const A2Page = ({ className, setCurrentTheme, state, actions, formData }) => {
                               </P.D>
                             </tr>
                             <tr>
-                              <P.Dark as={"td"}>Fixed Rate</P.Dark>
+                              <P.Dark as={"td"}>Fixed rate</P.Dark>
                               <P.D as={"td"}>
                                 {(+product.fields?.rate + 0.25).toFixed?.(2)}%
                               </P.D>
                             </tr>
                             <tr>
-                              <P.Dark as={"td"}>Lender Fee</P.Dark>
+                              <P.Dark as={"td"}>Lender fee</P.Dark>
                               <P.D as={"td"}>{product.fields?.fee}%</P.D>
                             </tr>
                           </tbody>
@@ -506,13 +508,13 @@ const A2Page = ({ className, setCurrentTheme, state, actions, formData }) => {
                               </P.D>
                             </tr>
                             <tr>
-                              <P.Dark as={"td"}>Fixed Rate</P.Dark>
+                              <P.Dark as={"td"}>Fixed rate</P.Dark>
                               <P.D as={"td"}>
                                 {(+product.fields?.rate + 0.25).toFixed?.(2)}%
                               </P.D>
                             </tr>
                             <tr>
-                              <P.Dark as={"td"}>Lender Fee</P.Dark>
+                              <P.Dark as={"td"}>Lender fee</P.Dark>
                               <P.D as={"td"}>{product.fields?.fee}%</P.D>
                             </tr>
                           </tbody>

@@ -77,6 +77,7 @@ const Input = React.forwardRef(
       value: initialValue = "",
       placeholder,
       pattern,
+      currency,
       required,
       readOnly,
       disabled,
@@ -132,6 +133,7 @@ const Input = React.forwardRef(
       >
         <Label error={errorMessage} fieldName={name} invalid={invalid}>
           <div className="label-text">{label}</div>
+					<input className="inputMasker normal-input" data-currency={currency}/>
           <input
             defaultValue={defaultValue}
             ref={inputRef}
@@ -299,6 +301,13 @@ export default styled(Input)`
     background: #bfb6b4;
     transition: width 400ms;
   }
+
+	input.inputMasker{
+		display: none;
+		&[data-type="number"] {
+			display: block;
+		}
+	}
 `;
 
 Input.propTypes = {
@@ -309,6 +318,7 @@ Input.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   placeholder: PropTypes.string,
   required: PropTypes.bool,
+  currency: PropTypes.bool,
   readOnly: PropTypes.bool,
   disabled: PropTypes.bool,
   min: PropTypes.number,
