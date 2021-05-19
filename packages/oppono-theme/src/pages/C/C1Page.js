@@ -539,6 +539,9 @@ const C1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
               </div>
             )
           ) : null}
+          <div className="btn-group">
+            <Button className={"bordered prev-step"} label={"Back"} />
+          </div>
         </FormStep>
         <FormStep
           apiStepNumber={1}
@@ -593,7 +596,10 @@ const C1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
             name={"property_details_2"}
             {...formData.section_4?.property_details_2_dropdown}
           />
-          <Button icon={true} className={"next-step"} label={"Next"} />
+          <div className="btn-group">
+            <Button className={"bordered prev-step"} label={"Back"} />
+            <Button icon={true} label={"Next"} className={"next-step"} />
+          </div>
         </FormStep>
         <FormStep
           apiStepNumber={2}
