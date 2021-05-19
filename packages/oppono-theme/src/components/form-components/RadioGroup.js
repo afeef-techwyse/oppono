@@ -6,6 +6,7 @@ import { size } from "../../functions/size";
 
 const RadioGroup = React.forwardRef(
   ({ className, radioText, children, checked, noScroll }, forwardedRef) => {
+    console.log(checked);
     const innerRef = React.useRef(null);
     const combinedRef = useCombinedRefs(forwardedRef, innerRef);
     const [checkedValue, setCheckedValue] = React.useState(checked);
@@ -25,6 +26,7 @@ const RadioGroup = React.forwardRef(
                 setCheckedValue(child.props.value);
               },
               className: `${child.props.className}`,
+              type: 'radio',
             });
           })}
         </div>

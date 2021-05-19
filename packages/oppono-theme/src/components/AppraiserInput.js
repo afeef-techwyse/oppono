@@ -21,6 +21,6 @@ export default connect(({appraiserName, className, state, actions, ...props}) =>
     value={appraiserData?.acf.phone}
     name={'call'}
     label={appraiserData?.acf.company || 'Getting Info...'}
-    number={appraiserData?.acf.phone || '...'}
+    number={appraiserData?.acf.phone}
     {...props}/>;
 });

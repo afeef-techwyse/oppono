@@ -106,7 +106,7 @@ const EPage = ({className, setCurrentTheme, actions, state, formData}) => {
               <div className="col-right">
                 <RadioGroup className={'vertical-radio'} radioText={'*Click to call'}>
                   {appraiser?.fields?.preferred_appraisal_company.map(({post_name}, index) => {
-                    return <AppraiserInput key={index} appraiserName={post_name}/>;
+                    return <AppraiserInput key={index} appraiserName={post_name} value={post_name}/>;
                   })}
                 </RadioGroup>
                 <P.Dark>*Disclaimer - If the city you are looking for is not listed please contact your BDM directly or email us at info@oppono.com</P.Dark>
