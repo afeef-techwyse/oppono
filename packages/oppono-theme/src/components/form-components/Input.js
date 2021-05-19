@@ -77,7 +77,7 @@ const Input = React.forwardRef(
       value: initialValue = "",
       placeholder,
       pattern,
-      currency,
+      isCurrency,
       required,
       readOnly,
       disabled,
@@ -122,7 +122,7 @@ const Input = React.forwardRef(
       error && setVisited(true);
       setTimeout(() => visited && validateInput(), 0);
     }, [initialValue, error]);
-
+    console.log(isCurrency);
     return (
       <div
         ref={combinedRef}
@@ -133,7 +133,7 @@ const Input = React.forwardRef(
       >
         <Label error={errorMessage} fieldName={name} invalid={invalid}>
           <div className="label-text">{label}</div>
-					<input className="inputMasker normal-input" data-currency={currency}/>
+					<input className="inputMasker normal-input" data-currency={isCurrency}/>
           <input
             defaultValue={defaultValue}
             ref={inputRef}
@@ -321,7 +321,7 @@ Input.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   placeholder: PropTypes.string,
   required: PropTypes.bool,
-  currency: PropTypes.bool,
+  isCurrency: PropTypes.bool,
   readOnly: PropTypes.bool,
   disabled: PropTypes.bool,
   min: PropTypes.number,

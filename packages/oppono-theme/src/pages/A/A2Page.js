@@ -77,65 +77,6 @@ const A2Page = ({ className, setCurrentTheme, state, actions, formData }) => {
     <div className={className}>
       <Form setCurrentTheme={setCurrentTheme} endPoint={"/purchase"}>
         <FormStep
-          apiStepNumber={1}
-          pageName={pageName}
-          activeTheme={formData.section_1?.section_theme}
-          stepName={formData.section_1?.section_name}
-        >
-          <FlyingObjsContainer
-            childrenList={[
-              {
-                imageUrl: intro_ball_2,
-                left: "10%",
-                level: 1,
-                top: "55%",
-                type: "image",
-                width: 5,
-                alt: "alt",
-              },
-              {
-                imageUrl: intro_ball_1,
-                left: "80%",
-                level: 1,
-                top: "5%",
-                type: "image",
-                width: 9,
-                alt: "alt",
-              },
-            ]}
-          />
-          <div className="form-text-wrapper">
-            <h1 className={"form-headline-1 text-left"}>
-              {formData.section_1?.title}
-            </h1>
-            <h2 className={"form-headline-2 primary"}>
-              {formData.section_1?.subtitle}
-            </h2>
-          </div>
-          <Address
-            address={{
-              name: "address",
-              noScroll: true,
-              ...formData.section_1?.address_input,
-            }}
-            city={{ name: "city", ...formData.section_1?.city_input }}
-            postalCode={{
-              name: "postal_code",
-              ...formData.section_1?.postal_code_input,
-            }}
-            setAppraiser={postalCodeOnChange}
-          />
-          <Select
-            name={"property_details_1"}
-            {...formData.section_1?.property_details_1_dropdown}
-          />
-          <Select
-            name={"property_details_2"}
-            {...formData.section_1?.property_details_2_dropdown}
-          />
-          <Button icon={true} className={"next-step"} label={"Next"} />
-        </FormStep>
-        <FormStep
           apiStepNumber={2}
           pageName={pageName}
           activeTheme={formData.section_2?.section_theme}
@@ -167,13 +108,13 @@ const A2Page = ({ className, setCurrentTheme, state, actions, formData }) => {
           <W50>
             <Input
               type={"number"}
-							currency={true}
+							isCurrency
               name={"purchase_price"}
               {...formData.section_2?.purchase_price_input}
             />
             <Input
               type={"number"}
-							currency
+              isCurrency
               name={"down_payment"}
               {...formData.section_2?.down_payment_input}
             />
