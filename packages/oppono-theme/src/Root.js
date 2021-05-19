@@ -4,6 +4,7 @@ import Switch from '@frontity/components/switch';
 import debounce from "./functions/debounce";
 import {fixContainer} from './functions/fix-container';
 import Intro from './components/Intro';
+import NotQualifiedPage from "./pages/NotQualifiedPage";
 import Styles from './styles';
 import HomeSlider from './components/HomeSlider';
 import FormsPage from './pages/FormsPage';
@@ -104,6 +105,7 @@ const Root = ({state}) => {
         <Switch>
           <div className={'loading-page'} when={data.isFetching}/>
   
+          <NotQualifiedPage when={state.router.link.startsWith('/not-qualified/')}/>
           <AboutUsPage when={state.router.link.startsWith('/what-we-do/')}/>
           <ContactPage when={/get-in-touch/.test(page.slug)}/>
           <HomeSlider

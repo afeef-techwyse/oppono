@@ -47,8 +47,8 @@ const BPage = ({ className, setCurrentTheme, state, actions, formData }) => {
   const getBValues = useStoredFormValue(pageName);
   const section1Values = getBValues(formData.section_1?.section_name),
     section2Values = getBValues(formData.section_2?.section_name),
-    section3Values = getBValues(formData.section_4?.section_name),
-    section4Values = getBValues(formData.section_5?.section_name);
+    section3Values = getBValues(formData.section_3?.section_name),
+    section4Values = getBValues(formData.section_4?.section_name);
 
   const media = useMedia();
 
@@ -67,7 +67,7 @@ const BPage = ({ className, setCurrentTheme, state, actions, formData }) => {
   const [[appraiser], postalCodeOnChange] = useFlowAppraisers();
   const [[businessAppraiser], businessPostalCodeOnChange] = useFlowAppraisers();
   const getAppraiser = () => section2Values('business_address_same_as_property') === '1' ? businessAppraiser : appraiser;
-  const mortgage = ((+section3Values('purchase_price')) - (+section3Values('down_payment'))) || 0;
+  const mortgage = (+section3Values('down_payment')) || 0;
   const firstProduct = state.theme.stepResponse.data?.data?.beloc.products[0] || {};
   const refNumber = React.useRef('');
   state.theme.stepResponse.data?.['reference-number'] && (refNumber.current = state.theme.stepResponse.data?.['reference-number'])
@@ -215,6 +215,7 @@ const BPage = ({ className, setCurrentTheme, state, actions, formData }) => {
           pageName={pageName}
           activeTheme={formData.section_4?.section_theme}
           stepName={formData.section_4?.section_name}
+          onNext={()=>firstProduct||actions.router.set('/not-qualified')}
         >
         <input type={'hidden'} name={`ltv`} value={((mortgage) / +section3Values('purchase_price') * 100).toFixed?.(1)}/>
           <div className="form-text-wrapper">
@@ -310,7 +311,7 @@ const BPage = ({ className, setCurrentTheme, state, actions, formData }) => {
           />
           <input
             type={"hidden"}
-            name={`maximun_mortgage`}
+            name={`maximum_mortgage`}
             value={Math.round(
               (+section3Values("purchase_price") *
                 firstProduct.fields?.maximum_ltv) /
@@ -405,13 +406,6 @@ const BPage = ({ className, setCurrentTheme, state, actions, formData }) => {
                 <P.Num>
                   {(+firstProduct.fields?.rate + 0.25).toFixed?.(2)}%
                 </P.Num>
-                <Button label={"I’m good to go"} className={"next-step"} />
-              </FinalizeChild>
-              <FinalizeChild order={2} className={"wide"}>
-                <Button
-                  className={"bordered prev-step"}
-                  label={"No, edit the details"}
-                />
               </FinalizeChild>
             </Top>
             <Bottom>

@@ -265,7 +265,7 @@ const D1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
           />
           <input
             type={"hidden"}
-            name={`maximun_mortgage`}
+            name={`maximum_mortgage`}
             value={Math.round(
               (+section2Values("home_value") *
                 firstProduct.fields?.maximum_ltv) /

@@ -28,6 +28,7 @@ const FormStep = ({
   isSignIn,
   setLoading,
   apiStepNumber,
+  onNext,
 }) => {
   const stepRef = React.useRef(null);
   const stepLoading = React.useRef(false);
@@ -89,6 +90,7 @@ const FormStep = ({
                 setLoading(false);
                 return;
               }
+              onNext?.();
               nextCallback();
               if (isSignUp) {
                 const {
@@ -228,6 +230,7 @@ const FormStep = ({
                 setLoading(false);
                 actions.theme.setErrors({});
                 actions.theme.setStepResponse(response);
+                onNext?.();
                 nextCallback();
               })
               .catch((error) => {
@@ -243,6 +246,7 @@ const FormStep = ({
           }
         }
       } else {
+        onNext?.();
         nextCallback();
         stepLoading.current = false;
         setLoading(false);
@@ -394,6 +398,7 @@ FormStep.propTypes = {
   sendAllSteps: PropTypes.bool,
   isSignUp: PropTypes.bool,
   isSignIn: PropTypes.bool,
+  onNext: PropTypes.func,
 };
 
 export default styled(connect(FormStep))`
