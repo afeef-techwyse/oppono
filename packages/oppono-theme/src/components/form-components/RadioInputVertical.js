@@ -44,7 +44,7 @@ const RadioInputVertical = React.forwardRef(
           <div className="radio-text" ref={labelRef}>
             {label}
           </div>
-          <Link href={`tel:4542548`}>{number}</Link>
+          {number?<Link href={`tel:${number}`}>{number}</Link>:<h6>...</h6>}
           <input
             type={type}
             value={value}
@@ -54,18 +54,6 @@ const RadioInputVertical = React.forwardRef(
             readOnly={readOnly}
             disabled={disabled}
             onFocus={() => {
-              gsap.to(window, {
-                duration: 0.5,
-                scrollTo: {
-                  y: combinedRef.current,
-                  offsetY:
-                    window.innerWidth < 768
-                      ? 200
-                      : (window.innerHeight -
-                          combinedRef.current.getBoundingClientRect().height) /
-                        2,
-                },
-              });
               setFocused(true);
             }}
             onBlur={() => {
@@ -92,6 +80,7 @@ RadioInputVertical.propTypes = {
   disabled: PropTypes.bool,
   checked: PropTypes.bool,
   onChange: PropTypes.func,
+  
 };
 
 export default styled(RadioInputVertical)`
@@ -109,6 +98,13 @@ export default styled(RadioInputVertical)`
     line-height: ${size(24)};
     padding-bottom: ${size(2)};
     border-bottom: ${size(1)} solid rgba(191, 182, 180, 0.5);
+  }
+  h6 {
+    color: #ffffff;
+    font-size: ${size(16)};
+    font-weight: 400;
+    line-height: ${size(24)};
+    padding-bottom: ${size(2)};
   }
   input {
     position: absolute;

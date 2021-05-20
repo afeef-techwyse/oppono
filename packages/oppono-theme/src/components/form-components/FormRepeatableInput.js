@@ -47,7 +47,7 @@ const FormRepeatableInput = ({question, number = 1, initial = 1, fixedNumber, ch
         [...Array(fixedNumber || repeatingValue).keys()].map(repeat => {
 
           return <RepeatedUnit key={`childrenRepeating-${repeat}`}>
-					<h2 class="form-headline-3">Person {repeat + 1}</h2>
+					<h2 className="form-headline-3">Person {repeat + 1}</h2>
             {
               React.Children.map(children, child => {
                 if (child.type === Input) {

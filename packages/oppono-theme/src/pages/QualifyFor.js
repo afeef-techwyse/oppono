@@ -84,7 +84,7 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
           <h1 className={'form-headline-1 text-left'}>{formData.section_1?.title}</h1>
           <h2 className={'form-headline-2 primary'}>{formData.section_1?.subtitle}</h2>
         </div>
-        <Input noScroll className={'big-input'} type={'number'} name={'home_value'} {...formData.section_1?.home_value_input}/>
+        <Input noScroll className={'big-input'} isCurrency type={'number'} name={'home_value'} {...formData.section_1?.home_value_input}/>
         <Button icon={true} className={'next-step wide'} label={'Next'}/>
 
         <NeedHelp lineOne={'Need help?'} lineTwo={'Contact us'} link={'/get-in-touch/'}/>
@@ -211,6 +211,9 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
 
             </div>
         }
+        <div className="btn-group">
+          <Button className={'bordered prev-step'} label={'Back'}/>
+        </div>
       </FormStep>
       <FormStep pageName={pageName} activeTheme={formData.section_4?.section_theme} stepName={formData.section_4?.section_name}>
         <MegaloNum>
@@ -296,6 +299,9 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
             </FinalizeChild>
           </Bottom>
         </Finalize>
+        <div className="btn-group">
+          <Button className={'bordered prev-step'} label={'Back'}/>
+        </div>
       </FormStep>
 
     </Form>
@@ -316,9 +322,17 @@ export default styled(connect(QualifyFor))`
     }
   }
 
+	.form-wide-container {
+		margin-top: 4rem;
+	}
+
   .btn-group.megalonum {
+		justify-content: space-around;
+		max-width: 600px;
     ${Link}:first-of-type {
-      margin-right: ${size(55)};
+			@media (min-width: 575.98px) {
+				margin-right: ${size(55)};
+			}
     }
 
     button {

@@ -1,11 +1,13 @@
 import React from "react";
 import { connect, styled } from "frontity";
 import Footer from "../components/Footer";
+import FormStep from "../components/form-components/FormStep";
 import Header from "../components/Header";
 import mapInfo from "../assets/images/map-info-bg.png";
 import Input from "../components/form-components/Input";
 import Button from "../components/form-components/Button";
 import Container from "../components/reusable/Container";
+import Link from "../components/reusable/Link";
 import { size } from "../functions/size";
 import Select from "../components/form-components/Select";
 
@@ -28,7 +30,7 @@ function copyToClipboard(text) {
 }
 
 const sortedCities = cities.sort((a, b) => (a.name > b.name ? 1 : -1));
-const MapPage = ({ className, actions, state }) => {
+const MapPage = ({ className, actions, state, libraries }) => {
   const generateMap = ({ windowSize, name, coordinates, enc, zoom }) => {
     let link = `https://maps.googleapis.com/maps/api/staticmap?map_id=3a82b8043ec69e1&zoom=${
       zoom || 7
@@ -114,7 +116,7 @@ const MapPage = ({ className, actions, state }) => {
   const postalCodeGetAppraiser = debounce((postalCode) => {
     if (postalCode.length < 3) {
       setAppraiser([{}]);
-      setPostalCodeErrorMessage("No appraisers found for this postal code.");
+      setPostalCodeErrorMessage(true);
       return;
     }
     const data = new FormData();
@@ -122,13 +124,13 @@ const MapPage = ({ className, actions, state }) => {
     opponoApi.post("/appraiser-lookup", data).then((response) => {
       if (response.data.length > 2) {
         setAppraiser([{}]);
-        setPostalCodeErrorMessage("No appraisers found for this postal code.");
+        setPostalCodeErrorMessage(true);
       } else if (response.data.length == 0) {
         setAppraiser([{}]);
-        setPostalCodeErrorMessage("No appraisers found for this postal code.");
+        setPostalCodeErrorMessage(true);
       } else {
         setAppraiser(response.data);
-        setPostalCodeErrorMessage("");
+        setPostalCodeErrorMessage(false);
         const { coordinates } = cities.filter(
           (city) => city.name === response.data[0]?.fields.city
         )[0];
@@ -140,6 +142,9 @@ const MapPage = ({ className, actions, state }) => {
   React.useEffect(() => {
     actions.theme.setActiveTheme("gray-theme");
   }, []);
+  
+  const Html2React = libraries.html2react.Component;
+  
   return (
     <div className={classnames(className)}>
       <div className="map" ref={mapRef} />
@@ -187,7 +192,6 @@ const MapPage = ({ className, actions, state }) => {
               <Input
                 type={"text"}
                 name={"postal_code"}
-                error={postalCodeErrorMessage}
                 onChange={(e) => {
                   postal_city.current.postalCode = e.target.value;
                   postalCodeGetAppraiser(e.target.value);
@@ -196,7 +200,12 @@ const MapPage = ({ className, actions, state }) => {
                 label={"Type in your postal code"}
               />
             </div>
-
+            {postalCodeErrorMessage ? (
+                <p className={"error-message"}>
+                  No appraisers found for this postal code<br/>
+                  <Link href={'/get-in-touch'}>Please contact us</Link>
+                </p>
+            ) : null}
             {appraiser[0] ? (
               <div className="btn-group">
                 {/*<Button label={'Search'}/>*/}
@@ -556,5 +565,19 @@ padding-left: 8px !important;;
 
   ${Container}.flex {
     display: flex;
+  }
+  .error-message {
+    color: red;
+    font-size: ${size(16)};
+    font-weight: 400;
+    margin-top: ${size(50)};
+    text-align: center;
+    display: block;
+    a {
+      font-size: ${size(18)};
+      color: #bfb6b4;
+      font-weight: 700;
+      text-decoration: underline;
+    }
   }
 `;

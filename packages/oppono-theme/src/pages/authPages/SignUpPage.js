@@ -162,13 +162,11 @@ const SignUpPage = ({
               <img src={last_step} alt="flying obj" />
               <div style={{ flexBasis: "45%" }} className="text tablet-center">
                 <h1 className={"form-headline-1 primary"}>
-                  An email has been sent to your inbox, click on the link to
-                  activate your account.
+									Thanks for signing up with us.
                 </h1>
                 <p className={"form-headline-3 primary"}>
-                  Didn’t receive any email? Check your spams or{" "}
-                  <Link className={"white-color"} href={"/mail"}>
-                    Contact Us
+                  <Link className={"white-color"} href={"/dashboard"}>
+										Let's get started
                   </Link>
                   .
                 </p>

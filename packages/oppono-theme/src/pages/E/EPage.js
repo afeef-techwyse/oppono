@@ -4,6 +4,7 @@ import Form from '../../components/form-components/Form';
 import {connect, styled} from 'frontity';
 import FormStep from '../../components/form-components/FormStep';
 import RadioGroup from '../../components/form-components/RadioGroup';
+import RadioInputVertical from "../../components/form-components/RadioInputVertical";
 import FlyingObjsContainer from '../../components/reusable/FlyingObjsContainer';
 import Appraiser from '../../components/form-components/Appraiser';
 import {P} from '../../components/form-components/StyledComponent';
@@ -25,19 +26,22 @@ import opponoApi from '../../opponoApi';
 
 const pageName = 'e';
 const EPage = ({className, setCurrentTheme, actions, state, formData}) => {
-
+  
   const getEValues = useStoredFormValue(pageName);
   const section1Values = getEValues(formData.section_1?.section_name);
+  const section2Values = getEValues(formData.section_2?.section_name);
   const appraiser = state.theme.appraiser;
   const [postalCodeErrorMessage, setPostalCodeErrorMessage] = React.useState('');
-
+  
   React.useEffect(() => {
     actions.theme.setSubHeader(formData.sub_header);
   }, [formData]);
   React.useEffect(() => {
     actions.theme.setLeadId();
   }, []);
-
+  
+  const selectedAppraiser = JSON.parse(section2Values('selected-appraiser')||'{}')
+  
   return <div className={className}>
     <Form setCurrentTheme={setCurrentTheme}>
       <FormStep pageName={pageName} activeTheme={formData.section_1?.section_theme} stepName={formData.section_1?.section_name}>
@@ -65,12 +69,11 @@ const EPage = ({className, setCurrentTheme, actions, state, formData}) => {
           <h2 className={'form-headline-2 primary'}>{formData.section_1?.subtitle}</h2>
         </div>
         <Address
-            address={{name: 'address', noScroll:true, ...formData.section_1?.address_input}}
+            address={{name: 'address', noScroll: true, ...formData.section_1?.address_input}}
             city={{name: 'city', ...formData.section_1?.city_input}}
             postalCode={{name: 'postal_code', ...formData.section_1?.postal_code_input}}
-            setAppraiser={debounce((event) => {
-              const postalCode = event.target.value;
-              if (postalCode.length < 3) {
+            postalCodeOnChange={debounce((postalCode) => {
+              if (postalCode.length < 2) {
                 actions.theme.setAppraiser({});
                 setPostalCodeErrorMessage('no appraisers found for this postal code');
                 return;
@@ -79,11 +82,11 @@ const EPage = ({className, setCurrentTheme, actions, state, formData}) => {
               data.append('postal_code', postalCode.trim().slice(0, 3));
               opponoApi.post('/appraiser-lookup', data)
                   .then(response => {
+                    console.log(response);
                     if (response.data.length !== 1) {
                       actions.theme.setAppraiser({});
                       setPostalCodeErrorMessage('no appraisers found for this postal code');
-                    }
-                    else {
+                    } else {
                       actions.theme.setAppraiser({...response.data[0], city: response.data[0].title});
                       setPostalCodeErrorMessage('');
                     }
@@ -98,47 +101,59 @@ const EPage = ({className, setCurrentTheme, actions, state, formData}) => {
           <h2 className={'form-headline-2 primary'}>{formData.section_2?.subtitle}</h2>
         </div>
         {appraiser?.fields
-          ? <Appraiser wide>
-            <div className="row">
-              <div className="col-left">
-                <p className={'form-headline-1 text-left'} dangerouslySetInnerHTML={{__html: appraiser?.fields?.bdm.name}}/>
+            ? <Appraiser wide>
+              <div className="row">
+                <div className="col-left">
+                  <p className={'form-headline-1 text-left'} dangerouslySetInnerHTML={{__html: appraiser?.fields?.bdm.name}}/>
+                </div>
+                <div className="col-right">
+                  <RadioGroup className={'vertical-radio'} radioText={'*Click to call'}>
+                    {appraiser?.fields?.preferred_appraisal_company.map((appraiser, index) => {
+                      const endpoint = `/appraiser/${appraiser.post_name}`;
+                      const appraiserSource = state.source.get(endpoint);
+                      const appraiserData = state.source[appraiserSource.type]?.[appraiserSource.id];
+                      !appraiserSource.isReady && !appraiserSource.isFetching && actions.source.fetch(endpoint)
+                      return <AppraiserInput
+                          key={index} name={'selected-appraiser'}
+                          value={JSON.stringify(appraiserData?.acf || index)}
+                          label={appraiserData?.acf.company || 'Getting Info...'}
+                          number={appraiserData?.acf.phone}/>;
+                    })}
+                  </RadioGroup>
+                  <P.Dark>*Disclaimer - If the city you are looking for is not listed please contact your BDM directly
+                    or email us at info@oppono.com</P.Dark>
+                </div>
               </div>
-              <div className="col-right">
-                <RadioGroup className={'vertical-radio'} radioText={'*Click to call'}>
-                  {appraiser?.fields?.preferred_appraisal_company.map(({post_name}, index) => {
-                    return <AppraiserInput key={index} appraiserName={post_name}/>;
-                  })}
-                </RadioGroup>
-                <P.Dark>*Disclaimer - If the city you are looking for is not listed please contact your BDM directly or email us at info@oppono.com</P.Dark>
+              <div className="btn-group">
+                <Link href={'/dashboard/'}><Button focusable={false} className={'bordered'} label={'Back to the Dashboard'}/></Link>
+                <Button className={'next-step'} label={'Alert this appraiser'}/>
               </div>
-            </div>
-            <div className="btn-group">
-              <Button className={'next-step'} label={'Alert this appraiser'}/>
-              <Link href={'/dashboard/'}><Button focusable={false} className={'bordered'} label={'Back to the Dashboard'}/></Link>
-            </div>
-          </Appraiser>
-          : <Appraiser wide>
-            <div className="row">
-              <div className="col-left">
-                <p className={'form-headline-1 text-left'}>NO APPRAISERS</p>
+            </Appraiser>
+            : <Appraiser wide>
+              <div className="row">
+                <div className="col-left">
+                  <p className={'form-headline-1 text-left'}>NO APPRAISERS</p>
+                </div>
+                <div className="col-right">
+                  <P.Dark>Can not find any appraisers for
+                    the {section1Values('city')} {section1Values('postal_code')}</P.Dark>
+                </div>
               </div>
-              <div className="col-right">
-                <P.Dark>Can not find any appraisers for the {section1Values('city')} {section1Values('postal_code')}</P.Dark>
+              <div className="btn-group">
+                <Button className={'prev-step'} label={'Select other area'}/>
               </div>
-            </div>
-            <div className="btn-group">
-              <Button className={'prev-step'} label={'Select other area'}/>
-            </div>
-          </Appraiser>
+            </Appraiser>
         }
       </FormStep>
       <FormStep pageName={pageName} activeTheme={formData.section_3?.section_theme} stepName={formData.section_3?.section_name}>
         <div className="form-text-wrapper">
           <h1 className={'form-headline-1 text-left'}>{formData.section_3?.title}</h1>
           <h2 className={'form-headline-2 primary'}>{formData.section_3?.subtitle}</h2>
-          <h2 className={'form-headline-3 primary'}>From: Oppono (appraisals@oppono.com) To: Metrowide Appraisal Services Inc. (info@metrowideappraisal.com)</h2>
+          <h2 className={'form-headline-3 primary'}>From: Oppono (appraisals@oppono.com) To: {selectedAppraiser.company}
+            Services Inc. ({selectedAppraiser.email})</h2>
           <br/>
-          <h2 className={'form-headline-3 primary'}>Hi, I would like to send a mortgage appraisal request on behalf of my client. My client is requesting a:</h2>
+          <h2 className={'form-headline-3 primary'}>Hi, I would like to send a mortgage appraisal request on behalf of
+            my client. My client is requesting a:</h2>
         </div>
         <div className={'form-wide-container'}>
           <RadioGroup className={'request-type fix-filter-e'} checked={'first-mortgage'}>
@@ -184,7 +199,7 @@ const EPage = ({className, setCurrentTheme, actions, state, formData}) => {
             </div>
           </Alert>
         </div>
-
+        
         <div className="btn-group">
           <Button className={'bordered prev-step'} label={'Back'}/>
           <Button className={'next-step'} label={'Send message'}/>
@@ -200,7 +215,7 @@ const EPage = ({className, setCurrentTheme, actions, state, formData}) => {
               <Link href={'/dashboard/'}><Button focusable={false} className={'wide bordered reset-form'} label={'Back to the dashboard'}/></Link>
             </div>
           </div>
-
+        
         </LastStep>
       </FormStep>
     </Form>
@@ -210,7 +225,7 @@ const EPage = ({className, setCurrentTheme, actions, state, formData}) => {
 export default styled(connect(EPage))`
   width: 100%;
   height: 100%;
-
+  
   .fix-filter-e {
     margin-bottom: ${size(22)};
     border-bottom: ${size(1)} solid #bfb6b4;
@@ -218,13 +233,13 @@ export default styled(connect(EPage))`
     padding-bottom: ${size(22)};
     align-items: center;
   }
-
-	.vertical-radio {
-		label a {
-			color: #0e9564;
-		}
-	}
-
+  
+  .vertical-radio {
+    label a {
+      color: #0e9564;
+    }
+  }
+  
   ${RadioGroup}.request-type {
     margin-right: auto;
     margin-left: auto;

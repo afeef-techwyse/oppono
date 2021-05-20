@@ -49,6 +49,7 @@ import opponoApi from "../../opponoApi";
 import { monthlyPayments } from "../../functions/monthlyPayment";
 import { numberWithCommas } from "../../functions/numberWithCommas";
 import Link from "../../components/reusable/Link";
+import CurrencyInput from 'react-currency-input-field';
 
 const pageName = "c-1";
 const C1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
@@ -150,6 +151,7 @@ const C1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
             onChange={(e) => setStep1Valid(e.target.validity.valid)}
             className={"big-input"}
             type={"number"}
+						isCurrency
             name={"home_value"}
             {...formData.section_1?.home_value_input}
           />
@@ -539,6 +541,9 @@ const C1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
               </div>
             )
           ) : null}
+          <div className="btn-group">
+            <Button className={"bordered prev-step"} label={"Back"} />
+          </div>
         </FormStep>
         <FormStep
           apiStepNumber={1}
@@ -593,7 +598,10 @@ const C1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
             name={"property_details_2"}
             {...formData.section_4?.property_details_2_dropdown}
           />
-          <Button icon={true} className={"next-step"} label={"Next"} />
+          <div className="btn-group">
+            <Button className={"bordered prev-step"} label={"Back"} />
+            <Button icon={true} label={"Next"} className={"next-step"} />
+          </div>
         </FormStep>
         <FormStep
           apiStepNumber={2}
@@ -608,6 +616,7 @@ const C1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
           </div>
           <Input
             type={"number"}
+						isCurrency
             name={"home_value"}
             {...formData.section_5?.estimated_value_input}
             value={section1Values("home_value")}
@@ -622,6 +631,7 @@ const C1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
             <>
               <Input
                 type={"number"}
+								isCurrency
                 name={"mortgage_value_1"}
                 {...formData.section_5?.first_mortgage_amount_input}
               />
@@ -633,6 +643,7 @@ const C1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
               >
                 <Input
                   type={"number"}
+									isCurrency
                   name={"mortgage_value_2"}
                   {...formData.section_5?.second_mortgage_amount_input}
                 />
@@ -648,6 +659,7 @@ const C1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
           >
             <Input
               type={"number"}
+							isCurrency
               name={"outstanding_amount_value"}
               {...formData.section_5?.outstanding_balance_amount_input}
             />
@@ -667,12 +679,14 @@ const C1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
             >
               <Input
                 type={"number"}
+								isCurrency
                 name={"fm_amount"}
                 {...formData.section_5?.increase_mortgage_amount_input}
               />
             </FormConditionalInput>
             <Input
               type={"number"}
+							isCurrency
               name={"sm_amount"}
               {...formData.section_5?.add_mortgage_amount_input}
             />
@@ -761,7 +775,7 @@ const C1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
           />
           <input
             type={"hidden"}
-            name={`maximun_mortgage`}
+            name={`maximum_mortgage`}
             value={Math.round(
               (+section1Values("home_value") *
                 firstProduct.fields?.maximum_ltv) /
@@ -778,7 +792,7 @@ const C1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
             </h2>
             <h2 className={"form-headline-3 primary"}>
               You are requesting a home equity line of credit against your{" "}
-              {section1Values("property")},{" "}
+
               {section4Values("property_details_1")} home which is located at{" "}
               <br /> {section4Values("address")}, {section4Values("city")},{" "}
               {section4Values("postal_code")}

@@ -20,7 +20,7 @@ position: relative;
 }
 .number{
 color: #D2F5E9;
-font-size: ${size(272)};
+font-size: ${size(210)};
 letter-spacing: 0;
 text-align: center;
 line-height: 100%;
