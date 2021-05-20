@@ -5,8 +5,7 @@ import useCombinedRefs from "../../hooks/useCombinedRefs";
 import { size } from "../../functions/size";
 
 const RadioGroup = React.forwardRef(
-  ({ className, radioText, children, checked, noScroll }, forwardedRef) => {
-    console.log(checked);
+  ({ className, radioText, children, checked }, forwardedRef) => {
     const innerRef = React.useRef(null);
     const combinedRef = useCombinedRefs(forwardedRef, innerRef);
     const [checkedValue, setCheckedValue] = React.useState(checked);
@@ -20,7 +19,6 @@ const RadioGroup = React.forwardRef(
             return React.cloneElement(child, {
               ...child.props,
               checked: child.props.value === checkedValue,
-              noScroll,
               onChange: (event) => {
                 child.props.onChange?.(event);
                 setCheckedValue(child.props.value);

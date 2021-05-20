@@ -211,6 +211,9 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
 
             </div>
         }
+        <div className="btn-group">
+          <Button className={'bordered prev-step'} label={'Back'}/>
+        </div>
       </FormStep>
       <FormStep pageName={pageName} activeTheme={formData.section_4?.section_theme} stepName={formData.section_4?.section_name}>
         <MegaloNum>
@@ -296,6 +299,9 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
             </FinalizeChild>
           </Bottom>
         </Finalize>
+        <div className="btn-group">
+          <Button className={'bordered prev-step'} label={'Back'}/>
+        </div>
       </FormStep>
 
     </Form>
