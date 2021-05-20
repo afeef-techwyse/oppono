@@ -173,7 +173,7 @@ const A2Page = ({ className, setCurrentTheme, state, actions, formData }) => {
             />
             <Input
               type={"number"}
-              isCurrency
+							isCurrency
               name={"down_payment"}
               {...formData.section_2?.down_payment_input}
             />

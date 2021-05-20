@@ -277,6 +277,20 @@ const GeneralStyles = (props) => (
         }
       }
 
+      .form-headline-4 {
+        //max-width: ${size(390)};
+				color: #bfb6b4;
+				font-size: 2.2rem;
+				font-weight: 400;
+				line-height: 2.5rem;
+				margin-top: 0.6rem;
+				margin-bottom: 0.6rem;
+        @media (max-width: 575.98px) {
+          font-size: ${size(18)};
+          line-height: ${size(24)};
+        }
+      }
+
       .form-group {
         margin-top: ${size(55)};
         @media (max-width: 991.98px) {
@@ -441,6 +455,14 @@ const GeneralStyles = (props) => (
         -webkit-appearance: none;
         margin: 0;
       }
+
+			input:-webkit-autofill,
+			input:-webkit-autofill:hover,
+			input:-webkit-autofill:focus,
+			input:-webkit-autofill:active {
+				-webkit-transition-delay: 9999s;
+				transition-delay: 9999s;
+			}
 
       /* Firefox */
 

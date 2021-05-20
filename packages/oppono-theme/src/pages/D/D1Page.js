@@ -147,11 +147,13 @@ const D1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
           </div>
           <Input
             type={"number"}
+						isCurrency
             name={"home_value"}
             {...formData.section_2?.estimated_value_input}
           />
           <Input
             type={"number"}
+						isCurrency
             name={"down_payment"}
             {...formData.section_2?.down_payment_input}
           />
@@ -278,7 +280,7 @@ const D1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
               {formData.section_4?.title}
             </h1>
             <h2 className={"form-headline-3 primary "}>
-              You are refinancing your {section1Values("property")},{" "}
+              You are refinancing your
               {section1Values("property_details_1")} home which is located at{" "}
               <br /> {section1Values("address")}, {section1Values("city")},{" "}
               {section1Values("postal_code")}

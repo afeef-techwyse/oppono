@@ -156,6 +156,7 @@ const A3Page = ({ state, setCurrentTheme, actions, className, formData }) => {
           <Input
             noScroll
             type={"number"}
+						isCurrency
             name={"home_value"}
             {...formData.section_2?.estimated_value_input}
           />
@@ -169,6 +170,7 @@ const A3Page = ({ state, setCurrentTheme, actions, className, formData }) => {
             <>
               <Input
                 type={"number"}
+								isCurrency
                 name={"mortgage_value_1"}
                 {...formData.section_2?.first_mortgage_amount_input}
               />
@@ -180,6 +182,7 @@ const A3Page = ({ state, setCurrentTheme, actions, className, formData }) => {
               >
                 <Input
                   type={"number"}
+									isCurrency
                   name={"mortgage_value_2"}
                   {...formData.section_2?.second_mortgage_amount_input}
                 />
@@ -195,6 +198,7 @@ const A3Page = ({ state, setCurrentTheme, actions, className, formData }) => {
           >
             <Input
               type={"number"}
+							isCurrency
               name={"outstanding_amount_value"}
               {...formData.section_2?.outstanding_balance_amount_input}
             />
@@ -370,7 +374,7 @@ const A3Page = ({ state, setCurrentTheme, actions, className, formData }) => {
             </h2>
             <h2 className={"form-headline-3 primary"}>
               You are requesting a home equity line of credit against your{" "}
-              {section1Values("property")},{" "}
+
               {section1Values("property_details_1")} home which is located at{" "}
               <br /> {section1Values("address")}, {section1Values("city")},{" "}
               {section1Values("postal_code")}

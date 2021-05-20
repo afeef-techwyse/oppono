@@ -7,6 +7,8 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import useCombinedRefs from "../../hooks/useCombinedRefs";
 import { size } from "../../functions/size";
 import missing from "../../assets/images/missing.svg";
+import CurrencyInput from 'react-currency-input-field';
+
 
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -133,7 +135,29 @@ const Input = React.forwardRef(
       >
         <Label error={errorMessage} fieldName={name} invalid={invalid}>
           <div className="label-text">{label}</div>
-					<input className="inputMasker normal-input" data-currency={isCurrency}/>
+					<div className="currencyMasker" data-currency={isCurrency}>
+						<CurrencyInput
+							name="input-name"
+							className="normal-input currency-input"
+							prefix="$"
+							required={isCurrency}
+							decimalsLimit={2}
+							placeholder={placeholder}
+							onBlur={(e) => {
+								e.currentTarget.closest('label').querySelector('input:not(.currency-input)').value = parseFloat(e.currentTarget.value.replace(/\$|,/g, ''))
+							}}
+							onChange={(e) => {
+								e.persist();
+								visited && validateInput();
+								setValue(e.target.value);
+								onChange?.(e);
+								const selection = inputRef.current.selectionStart;
+								requestAnimationFrame(() =>
+									inputRef.current.setSelectionRange(selection, selection)
+								);
+							}}
+						/>
+					</div>
           <input
             defaultValue={defaultValue}
             ref={inputRef}
@@ -147,6 +171,7 @@ const Input = React.forwardRef(
             disabled={disabled}
             max={max}
             min={min}
+						data-currency={isCurrency}
             pattern={pattern}
             onInvalid={() => setVisited(true)}
             onFocus={(e) => {
@@ -305,11 +330,14 @@ padding-left: 8px !important;;
     transition: width 400ms;
   }
 
-	input.inputMasker{
+	.currencyMasker{
 		display: none;
-		&[data-type="number"] {
+		&[data-currency='true'] {
 			display: block;
 		}
+	}
+	.normal-input[data-currency='true'] {
+		display: none;
 	}
 `;
 

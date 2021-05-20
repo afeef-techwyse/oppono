@@ -140,6 +140,7 @@ const C2Page = ({ className, setCurrentTheme, state, actions, formData }) => {
             onChange={(e) => setStep1Valid(e.target.validity.valid)}
             className={"big-input"}
             type={"number"}
+						isCurrency
             name={"home_value"}
             {...formData.section_1?.home_value_input}
           />
@@ -693,7 +694,7 @@ const C2Page = ({ className, setCurrentTheme, state, actions, formData }) => {
             </h2>
             <h2 className={"form-headline-3 primary"}>
               You are requesting a home equity line of credit against your{" "}
-              {section1Values("property")},{" "}
+
               {section4Values("property_details_1")} home which is located at{" "}
               <br /> {section4Values("address")}, {section4Values("city")},{" "}
               {section4Values("postal_code")}

@@ -157,6 +157,7 @@ const A1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
           <Input
             noScroll
             type={"number"}
+						isCurrency
             name={"home_value"}
             {...formData.section_2?.estimated_value_input}
           />
@@ -170,6 +171,7 @@ const A1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
             <>
               <Input
                 type={"number"}
+								isCurrency
                 name={"mortgage_value_1"}
                 {...formData.section_2?.first_mortgage_amount_input}
               />
@@ -181,6 +183,7 @@ const A1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
               >
                 <Input
                   type={"number"}
+									isCurrency
                   name={"mortgage_value_2"}
                   {...formData.section_2?.second_mortgage_amount_input}
                 />
@@ -196,6 +199,7 @@ const A1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
           >
             <Input
               type={"number"}
+							isCurrency
               name={"outstanding_amount_value"}
               {...formData.section_2?.outstanding_balance_amount_input}
             />
@@ -215,12 +219,14 @@ const A1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
             >
               <Input
                 type={"number"}
+								isCurrency
                 name={"fm_amount"}
                 {...formData.section_2?.increase_mortgage_amount_input}
               />
             </FormConditionalInput>
             <Input
               type={"number"}
+							isCurrency
               name={"sm_amount"}
               {...formData.section_2?.add_mortgage_amount_input}
             />
@@ -335,7 +341,7 @@ const A1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
               {formData.section_4?.title}
             </h1>
             <h2 className={"form-headline-3 primary "}>
-              You are refinancing your {section1Values("property")},{" "}
+              You are refinancing your
               {section1Values("property_details_1")} home which is located at{" "}
               <br /> {section1Values("address")}, {section1Values("city")},{" "}
               {section1Values("postal_code")}

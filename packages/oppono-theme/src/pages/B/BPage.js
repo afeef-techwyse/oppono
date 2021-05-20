@@ -190,11 +190,13 @@ const BPage = ({ className, setCurrentTheme, state, actions, formData }) => {
           <W50>
             <Input
               type={"number"}
+							isCurrency
               name={"purchase_price"}
               {...formData.section_3?.purchase_price_input}
             />
             <Input
               type={"number"}
+							isCurrency
               name={"down_payment"}
               {...formData.section_3?.down_payment_input}
             />

@@ -576,7 +576,7 @@ export default styled(connect(ProductsSlider))`
       display: inline-block;
       position: relative;
       letter-spacing: -5px;
-      font-size: ${size(250)};
+      font-size: ${size(220)};
 
       &:before {
         content: "%";

@@ -51,6 +51,7 @@ const Mail = ({ className, state, actions }) => {
                     {pageData.section_1?.sub_title}
                   </h2>
                 ) : null}
+								{/* <img className="contact-flying-obj" src={contact_obj} alt="flying object"/> */}
               </div>
               <div className="contact-info-wrapper">
                 <Link href={"tel:" + pageData.section_1?.oppono_phone}>
@@ -132,16 +133,17 @@ const Mail = ({ className, state, actions }) => {
               ) : null}
 
               <div className="floating-obj">
-                <FlyingObjsContainer
+							<FlyingObjsContainer
+									disableFloating
                   childrenList={[
                     {
                       imageUrl: contact_obj,
-                      left: "60%",
+                      left: "20%",
                       level: 1,
                       top: "28%",
                       type: "image",
                       width: 18,
-                      alt: "alt",
+                      alt: "flying object",
                     },
                   ]}
                 />
@@ -240,6 +242,11 @@ export default styled(connect(Mail))`
   //   margin: ${size(30)} auto 0;
   // }
   //
+
+	.contact-flying-obj {
+		position: absolute;
+		max-width: 345px;
+	}
 
   .contact-row {
     display: flex;
