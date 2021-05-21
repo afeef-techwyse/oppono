@@ -17,10 +17,7 @@ import intro_ball_1 from "../../assets/images/form_1_img.png";
 import intro_ball_2 from "../../assets/images/form_2_img.png";
 import FlyingObjsContainer from "../../components/reusable/FlyingObjsContainer";
 import {
-  Li,
-  Ol,
   P,
-  Span,
   Wysiwyg,
 } from "../../components/form-components/StyledComponent";
 import Alert from "../../components/form-components/Alert";
