@@ -188,7 +188,6 @@ const A2Page = ({ className, setCurrentTheme, state, actions, formData }) => {
           sendSteps={[
             formData.section_1?.section_name,
             formData.section_2?.section_name,
-            formData.section_3?.section_name,
           ]}
           apiStepNumber={3}
           pageName={pageName}

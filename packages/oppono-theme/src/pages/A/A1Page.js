@@ -245,7 +245,6 @@ const A1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
           sendSteps={[
             formData.section_1?.section_name,
             formData.section_2?.section_name,
-            formData.section_3?.section_name,
           ]}
         >
         <input type={'hidden'} name={`ltv`} value={(mortgage / +section2Values('home_value') * 100).toFixed?.(1)}/>
