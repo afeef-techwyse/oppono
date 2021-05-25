@@ -255,6 +255,7 @@ const BPage = ({ className, setCurrentTheme, state, actions, formData }) => {
               />
               <Input
                 type={"phone"}
+isPhoneNumber
                 name={"applicant_phone_{{number}}"}
                 {...formData.section_4?.applicant.phone_input}
               />
@@ -330,8 +331,7 @@ const BPage = ({ className, setCurrentTheme, state, actions, formData }) => {
             </h2>
             <h2 className={"form-headline-3 primary"}>
               You are requesting a secured business equity line of credit
-              against your {section2Values("property")},{" "}
-              {section2Values("property_details_1")} home which is located at{" "}
+              against your {section2Values("property_details_1")?.toLowerCase()} home which is located at{" "}
               <br />{" "}
               {section2Values("business_address_same_as_property") === "1"
                 ? section1Values("business_address")
@@ -414,7 +414,7 @@ const BPage = ({ className, setCurrentTheme, state, actions, formData }) => {
               {media !== "mobile" ? (
                 <FinalizeChild order={1}>
                   <P.D>
-                    Your BELOC request is for ${numberWithCommas(mortgage)}
+                    Your BLOC request is for ${numberWithCommas(mortgage)}
                   </P.D>
                   <P.D>
                     Your property value is $
@@ -434,7 +434,7 @@ const BPage = ({ className, setCurrentTheme, state, actions, formData }) => {
                   <FinalizeTable>
                     <tbody>
                       <tr>
-                        <P.Dark as={"td"}>BELOC Request</P.Dark>
+                        <P.Dark as={"td"}>BLOC Request</P.Dark>
                         <P.D as={"td"}>${numberWithCommas(mortgage)}</P.D>
                       </tr>
                       <tr>

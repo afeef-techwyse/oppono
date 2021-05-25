@@ -115,6 +115,10 @@ export default styled(FormFilter)`
 
 		.radio-text {
 			text-transform: capitalize;
+			&[labeltype="heloc"],
+			&[labeltype="beloc"] {
+				text-transform: uppercase;
+			}
 		}
   }
   [data-filter] {

@@ -279,6 +279,7 @@ const D2Page = ({ className, setCurrentTheme, state, actions, formData }) => {
               />
               <Input
                 type={"phone"}
+isPhoneNumber
                 name={"applicant_phone_{{number}}"}
                 {...formData.section_3?.applicant.phone_input}
               />

@@ -134,7 +134,7 @@ const Mail = ({ className, state, actions }) => {
 
               <div className="floating-obj">
 							<FlyingObjsContainer
-									disableFloating
+									disableFloating={"true"}
                   childrenList={[
                     {
                       imageUrl: contact_obj,
@@ -167,7 +167,8 @@ const Mail = ({ className, state, actions }) => {
                 <Input
                   name={"phone"}
                   className={"primary-input"}
-                  type={"text"}
+                  type={"phone"}
+isPhoneNumber
                   {...pageData.section_1?.phone_input}
                 />
               </div>

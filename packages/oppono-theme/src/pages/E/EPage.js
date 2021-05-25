@@ -26,22 +26,22 @@ import opponoApi from '../../opponoApi';
 
 const pageName = 'e';
 const EPage = ({className, setCurrentTheme, actions, state, formData}) => {
-  
+
   const getEValues = useStoredFormValue(pageName);
   const section1Values = getEValues(formData.section_1?.section_name);
   const section2Values = getEValues(formData.section_2?.section_name);
   const appraiser = state.theme.appraiser;
   const [postalCodeErrorMessage, setPostalCodeErrorMessage] = React.useState('');
-  
+
   React.useEffect(() => {
     actions.theme.setSubHeader(formData.sub_header);
   }, [formData]);
   React.useEffect(() => {
     actions.theme.setLeadId();
   }, []);
-  
+
   const selectedAppraiser = JSON.parse(section2Values('selected-appraiser')||'{}')
-  
+
   return <div className={className}>
     <Form setCurrentTheme={setCurrentTheme}>
       <FormStep pageName={pageName} activeTheme={formData.section_1?.section_theme} stepName={formData.section_1?.section_name}>
@@ -149,8 +149,7 @@ const EPage = ({className, setCurrentTheme, actions, state, formData}) => {
         <div className="form-text-wrapper">
           <h1 className={'form-headline-1 text-left'}>{formData.section_3?.title}</h1>
           <h2 className={'form-headline-2 primary'}>{formData.section_3?.subtitle}</h2>
-          <h2 className={'form-headline-3 primary'}>From: Oppono (appraisals@oppono.com) To: {selectedAppraiser.company}
-            Services Inc. ({selectedAppraiser.email})</h2>
+          <h2 className={'form-headline-3 primary'}>From: Oppono (appraisals@oppono.com) To: {selectedAppraiser.company} ({selectedAppraiser.email})</h2>
           <br/>
           <h2 className={'form-headline-3 primary'}>Hi, I would like to send a mortgage appraisal request on behalf of
             my client. My client is requesting a:</h2>
@@ -199,7 +198,7 @@ const EPage = ({className, setCurrentTheme, actions, state, formData}) => {
             </div>
           </Alert>
         </div>
-        
+
         <div className="btn-group">
           <Button className={'bordered prev-step'} label={'Back'}/>
           <Button className={'next-step'} label={'Send message'}/>
@@ -215,7 +214,7 @@ const EPage = ({className, setCurrentTheme, actions, state, formData}) => {
               <Link href={'/dashboard/'}><Button focusable={false} className={'wide bordered reset-form'} label={'Back to the dashboard'}/></Link>
             </div>
           </div>
-        
+
         </LastStep>
       </FormStep>
     </Form>
@@ -225,7 +224,7 @@ const EPage = ({className, setCurrentTheme, actions, state, formData}) => {
 export default styled(connect(EPage))`
   width: 100%;
   height: 100%;
-  
+
   .fix-filter-e {
     margin-bottom: ${size(22)};
     border-bottom: ${size(1)} solid #bfb6b4;
@@ -233,13 +232,13 @@ export default styled(connect(EPage))`
     padding-bottom: ${size(22)};
     align-items: center;
   }
-  
+
   .vertical-radio {
     label a {
       color: #0e9564;
     }
   }
-  
+
   ${RadioGroup}.request-type {
     margin-right: auto;
     margin-left: auto;

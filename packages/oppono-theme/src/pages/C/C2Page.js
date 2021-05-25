@@ -658,6 +658,7 @@ const C2Page = ({ className, setCurrentTheme, state, actions, formData }) => {
               />
               <Input
                 type={"phone"}
+isPhoneNumber
                 name={"applicant_phone_{{number}}"}
                 {...formData.section_6?.applicant.phone_input}
               />

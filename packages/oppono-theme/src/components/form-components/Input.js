@@ -8,6 +8,7 @@ import useCombinedRefs from "../../hooks/useCombinedRefs";
 import { size } from "../../functions/size";
 import missing from "../../assets/images/missing.svg";
 import CurrencyInput from 'react-currency-input-field';
+import PhoneInput from 'react-phone-number-input/input'
 
 
 gsap.registerPlugin(ScrollToPlugin);
@@ -80,6 +81,7 @@ const Input = React.forwardRef(
       placeholder,
       pattern,
       isCurrency,
+      isPhoneNumber,
       required,
       readOnly,
       disabled,
@@ -124,7 +126,6 @@ const Input = React.forwardRef(
       error && setVisited(true);
       setTimeout(() => visited && validateInput(), 0);
     }, [initialValue, error]);
-    console.log(isCurrency);
     return (
       <div
         ref={combinedRef}
@@ -149,7 +150,7 @@ const Input = React.forwardRef(
 							onChange={(e) => {
 								e.persist();
 								visited && validateInput();
-								setValue(e.target.value);
+								setValue(e.target.value.replace(/\$|,/g, ''));
 								onChange?.(e);
 								const selection = inputRef.current.selectionStart;
 								requestAnimationFrame(() =>
@@ -157,6 +158,16 @@ const Input = React.forwardRef(
 								);
 							}}
 						/>
+					</div>
+					<div className="phoneMasker" data-phone={isPhoneNumber}>
+						<PhoneInput
+						type="text"
+						placeholder={placeholder}
+						name="phone"
+						className="normal-input"
+						country="US"
+						value={value}
+						onChange={setValue} />
 					</div>
           <input
             defaultValue={defaultValue}
@@ -172,6 +183,7 @@ const Input = React.forwardRef(
             max={max}
             min={min}
 						data-currency={isCurrency}
+						data-phone={isPhoneNumber}
             pattern={pattern}
             onInvalid={() => setVisited(true)}
             onFocus={(e) => {
@@ -336,7 +348,14 @@ padding-left: 8px !important;;
 			display: block;
 		}
 	}
-	.normal-input[data-currency='true'] {
+	.phoneMasker{
+		display: none;
+		&[data-phone='true'] {
+			display: block;
+		}
+	}
+	.normal-input[data-currency='true'],
+	.normal-input[data-phone='true'] {
 		display: none;
 	}
 `;
@@ -350,6 +369,7 @@ Input.propTypes = {
   placeholder: PropTypes.string,
   required: PropTypes.bool,
   isCurrency: PropTypes.bool,
+  isPhoneNumber: PropTypes.bool,
   readOnly: PropTypes.bool,
   disabled: PropTypes.bool,
   min: PropTypes.number,

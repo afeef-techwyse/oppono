@@ -142,9 +142,9 @@ const MapPage = ({ className, actions, state, libraries }) => {
   React.useEffect(() => {
     actions.theme.setActiveTheme("gray-theme");
   }, []);
-  
+
   const Html2React = libraries.html2react.Component;
-  
+
   return (
     <div className={classnames(className)}>
       <div className="map" ref={mapRef} />

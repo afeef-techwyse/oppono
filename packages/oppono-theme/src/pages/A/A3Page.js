@@ -247,6 +247,7 @@ const A3Page = ({ state, setCurrentTheme, actions, className, formData }) => {
               />
               <Input
                 type={"phone"}
+isPhoneNumber
                 name={"applicant_phone_{{number}}"}
                 {...formData.section_3?.applicant.phone_input}
               />

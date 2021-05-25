@@ -94,7 +94,7 @@ const RadioInput = React.forwardRef(
           />
         </svg>
         <label>
-          <div className="radio-text" ref={labelRef}>
+          <div className="radio-text" ref={labelRef} labeltype={label}>
             {label}
           </div>
           {noInput ? null : (
