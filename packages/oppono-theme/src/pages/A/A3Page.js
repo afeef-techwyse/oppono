@@ -65,12 +65,8 @@ const A3Page = ({ state, setCurrentTheme, actions, className, formData }) => {
   }, [state.theme.user.logged]);
   const [[appraiser], postalCodeOnChange] = useFlowAppraisers();
 
-  const mortgage =
-    (+section2Values("mortgage_value_1") || 0) +
-      (+section2Values("mortgage_value_2") || 0) +
-      +section2Values("outstanding_amount_value") ||
-    0 ||
-    0;
+  const mortgage = (+section2Values("home_value") * 0.80 || 0) -
+    (+section2Values("mortgage_value_1") || 0) || 0;
   const firstProduct =
     state.theme.stepResponse.data?.data?.heloc.products[0] || {};
   const refNumber = React.useRef("");
@@ -171,34 +167,7 @@ const A3Page = ({ state, setCurrentTheme, actions, className, formData }) => {
                 name={"mortgage_value_1"}
                 {...formData.section_2?.first_mortgage_amount_input}
               />
-              <FormConditionalInput
-                name={"have_mortgage_2"}
-                showOn={"1"}
-                checked={"0"}
-                {...formData.section_2?.second_mortgage_yes_no}
-              >
-                <Input
-                  type={"number"}
-									isCurrency
-                  name={"mortgage_value_2"}
-                  {...formData.section_2?.second_mortgage_amount_input}
-                />
-              </FormConditionalInput>
             </>
-          </FormConditionalInput>
-
-          <FormConditionalInput
-            name={"have_outstanding_amount"}
-            showOn={"1"}
-            checked={"0"}
-            {...formData.section_2?.outstanding_balance_yes_no}
-          >
-            <Input
-              type={"number"}
-							isCurrency
-              name={"outstanding_amount_value"}
-              {...formData.section_2?.outstanding_balance_amount_input}
-            />
           </FormConditionalInput>
 
           <div className="btn-group">
