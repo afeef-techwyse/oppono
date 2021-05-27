@@ -1,56 +1,44 @@
+import {connect, css, styled} from "frontity";
 import React from "react";
-import { Address } from "../../components/form-components/Address";
-import Form from "../../components/form-components/Form";
-import Input from "../../components/form-components/Input";
-import { connect, css, styled } from "frontity";
-import { beaconScore } from "../../functions/beaconScore";
-import { productTypeToFullName } from "../../functions/productTypeToFullName";
-import { size } from "../../functions/size";
-import Select from "../../components/form-components/Select";
-import RadioInput from "../../components/form-components/RadioInput";
-import RadioGroup from "../../components/form-components/RadioGroup";
-import FormStep from "../../components/form-components/FormStep";
-import Button from "../../components/form-components/Button";
-import FileInput from "../../components/form-components/FileInput";
-import W50 from "../../components/form-components/W50";
-import TextArea from "../../components/form-components/TextArea";
+import intro_ball_4 from "../../assets/images/fly-image-3.png";
+import intro_ball_3 from "../../assets/images/fly-image-4.png";
 import intro_ball_1 from "../../assets/images/form_1_img.png";
 import intro_ball_2 from "../../assets/images/form_2_img.png";
-import FlyingObjsContainer from "../../components/reusable/FlyingObjsContainer";
-import ProductsTable from "../../components/form-components/ProductsTable";
-import {
-  Li,
-  Ol,
-  P,
-  Span,
-  Wysiwyg,
-} from "../../components/form-components/StyledComponent";
-import Alert from "../../components/form-components/Alert";
-import Finalize, {
-  Bottom,
-  FinalizeChild,
-  FinalizeTable,
-  Top,
-} from "../../components/form-components/Finalize";
-import useMedia from "../../hooks/useMedia";
-import FormConditionalInput from "../../components/form-components/FormConditionalInput";
-import FormFilter from "../../components/form-components/FormFilter";
-import FormRepeatableInput from "../../components/form-components/FormRepeatableInput";
-import ProductsMobileOption from "../../components/form-components/ProductsMobileOption";
-import intro_ball_3 from "../../assets/images/fly-image-4.png";
-import intro_ball_4 from "../../assets/images/fly-image-3.png";
-import LastStep from "../../components/form-components/LastStep";
 import upload from "../../assets/images/upload.png";
+import AppraiserInput from "../../components/AppraiserInput";
+import {Address} from "../../components/form-components/Address";
+import Alert from "../../components/form-components/Alert";
 import Appraiser from "../../components/form-components/Appraiser";
+import Button from "../../components/form-components/Button";
+import FileInput from "../../components/form-components/FileInput";
+import Finalize, {Bottom, FinalizeChild, FinalizeTable, Top,} from "../../components/form-components/Finalize";
+import Form from "../../components/form-components/Form";
+import FormConditionalInput from "../../components/form-components/FormConditionalInput";
+import FormRepeatableInput from "../../components/form-components/FormRepeatableInput";
+import FormStep from "../../components/form-components/FormStep";
+import Input from "../../components/form-components/Input";
+import LastStep from "../../components/form-components/LastStep";
+import ProductsMobileOption from "../../components/form-components/ProductsMobileOption";
+import ProductsTable from "../../components/form-components/ProductsTable";
+import RadioGroup from "../../components/form-components/RadioGroup";
+import RadioInput from "../../components/form-components/RadioInput";
+import Select from "../../components/form-components/Select";
+import {P, Wysiwyg,} from "../../components/form-components/StyledComponent";
+import TextArea from "../../components/form-components/TextArea";
+import W50 from "../../components/form-components/W50";
+import CheckMark from "../../components/reusable/CheckMark";
+import FlyingObjsContainer from "../../components/reusable/FlyingObjsContainer";
+import Link from "../../components/reusable/Link";
+import {beaconScore} from "../../functions/beaconScore";
+import {monthlyPayments} from "../../functions/monthlyPayment";
+import {numberWithCommas} from "../../functions/numberWithCommas";
+import {productTypeToFullName} from "../../functions/productTypeToFullName";
+import {size} from "../../functions/size";
+import useFlowAppraisers from "../../hooks/useFlowAppraisers";
+import useMedia from "../../hooks/useMedia";
+import useProductsTable from "../../hooks/useProductsTable";
 import useStoredFormValue from "../../hooks/useStoredFormValue";
 import opponoApi from "../../opponoApi";
-import useFlowAppraisers from "../../hooks/useFlowAppraisers";
-import useProductsTable from "../../hooks/useProductsTable";
-import { monthlyPayments } from "../../functions/monthlyPayment";
-import CheckMark from "../../components/reusable/CheckMark";
-import AppraiserInput from "../../components/AppraiserInput";
-import { numberWithCommas } from "../../functions/numberWithCommas";
-import Link from "../../components/reusable/Link";
 
 const pageName = "c-3";
 const C3Page = ({ className, setCurrentTheme, state, actions, formData }) => {
@@ -71,12 +59,14 @@ const C3Page = ({ className, setCurrentTheme, state, actions, formData }) => {
   React.useEffect(() => {
     actions.theme.setLeadId();
     actions.theme.setStepResponse({});
-    opponoApi.post("/product-qualification", {type : 'HELOC'}).then((response) => {
-      const products = {
+  
+    const data = new FormData();
+    data.append('type', 'HELOC');
+    
+    opponoApi.post("/product-qualification", data).then((response) => {
+      response.data.data = {
         heloc: response.data.heloc,
       };
-
-      response.data.data = products;
       actions.theme.setStepResponse(response);
       // actions.theme.setStepResponse({data:{data:products}});
     });
