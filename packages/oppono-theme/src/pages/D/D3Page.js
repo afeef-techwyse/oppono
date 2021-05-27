@@ -74,9 +74,7 @@ const D3Page = ({ state, setCurrentTheme, actions, className, formData }) => {
       +section2Values("outstanding_amount_value") ||
     0 ||
     0;
-  const firstProduct = state.theme.stepResponse.data?.data
-    ? Object.values(state.theme.stepResponse.data?.data)[0].products[0]
-    : {};
+  const firstProduct = state.theme.stepResponse.data?.data?.heloc?.products[0] || {}
   const refNumber = React.useRef("");
   state.theme.stepResponse.data?.["reference-number"] &&
     (refNumber.current = state.theme.stepResponse.data?.["reference-number"]);
@@ -131,7 +129,7 @@ const D3Page = ({ state, setCurrentTheme, actions, className, formData }) => {
               name: "postal_code",
               ...formData.section_1?.postal_code_input,
             }}
-            setAppraiser={postalCodeOnChange}
+            postalCodeOnChange={postalCodeOnChange}
           />
           <Select
             name={"property_details_1"}
@@ -306,6 +304,7 @@ isPhoneNumber
           pageName={pageName}
           activeTheme={formData.section_4?.section_theme}
           stepName={formData.section_4?.section_name}
+          onNext={() => state.theme.stepResponse.data?.data?.heloc?.products?.length || actions.router.set('/not-qualified')}
         >
           <input type={'hidden'} name={`ltv`} value={((section4Values('confirm_qualify_amount') === '0' ? +section4Values('amount_wanted') : mortgage) / +section2Values('home_value') * 100)}/>
         <FlyingObjsContainer

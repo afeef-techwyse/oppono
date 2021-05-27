@@ -122,7 +122,7 @@ const D1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
               name: "postal_code",
               ...formData.section_1?.postal_code_input,
             }}
-            setAppraiser={postalCodeOnChange}
+            postalCodeOnChange={postalCodeOnChange}
           />
           <Select
             name={"property_details_1"}
@@ -171,6 +171,10 @@ const D1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
           pageName={pageName}
           activeTheme={formData.section_3?.section_theme}
           stepName={formData.section_3?.section_name}
+          onNext={() => (state.theme.stepResponse.data?.data
+              ? Object.values(state.theme.stepResponse.data?.data)[0].products
+              : []).length || actions.router.set('/not-qualified')}
+
         >
         <input type={'hidden'} name={`ltv`} value={(mortgage / +section2Values('home_value') * 100).toFixed?.(1)}/>
           <div className="form-text-wrapper">

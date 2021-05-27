@@ -65,12 +65,11 @@ const A3Page = ({ state, setCurrentTheme, actions, className, formData }) => {
   }, [state.theme.user.logged]);
   const [[appraiser], postalCodeOnChange] = useFlowAppraisers();
 
-  const mortgage = (+section2Values("home_value") * 0.80 || 0) -
+  const mortgage = (+section2Values("home_value") || 0) -
     (+section2Values("mortgage_value_1") || 0) || 0;
   const firstProduct =
     state.theme.stepResponse.data?.data?.heloc.products[0] || {};
   const refNumber = React.useRef("");
-  console.log(firstProduct);
   state.theme.stepResponse.data?.["reference-number"] &&
     (refNumber.current = state.theme.stepResponse.data?.["reference-number"]);
   return (
@@ -123,7 +122,7 @@ const A3Page = ({ state, setCurrentTheme, actions, className, formData }) => {
               name: "postal_code",
               ...formData.section_1?.postal_code_input,
             }}
-            setAppraiser={postalCodeOnChange}
+            postalCodeOnChange={postalCodeOnChange}
           />
           <Select
             name={"property_details_1"}
@@ -272,6 +271,8 @@ isPhoneNumber
           pageName={pageName}
           activeTheme={formData.section_4?.section_theme}
           stepName={formData.section_4?.section_name}
+          onNext={() => state.theme.stepResponse.data?.data?.heloc?.products?.length || actions.router.set('/not-qualified')}
+
         >
           <input type={'hidden'} name={`ltv`} value={((section4Values('confirm_qualify_amount') === '0' ? +section4Values('amount_wanted') : mortgage) / +section2Values('home_value') * 100).toFixed?.(1)}/>
         <FlyingObjsContainer

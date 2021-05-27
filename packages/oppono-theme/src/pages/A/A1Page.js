@@ -131,7 +131,7 @@ const A1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
               name: "postal_code",
               ...formData.section_1?.postal_code_input,
             }}
-            setAppraiser={postalCodeOnChange}
+            postalCodeOnChange={postalCodeOnChange}
           />
           <Select
             name={"property_details_1"}
@@ -246,6 +246,7 @@ const A1Page = ({ className, setCurrentTheme, state, actions, formData }) => {
             formData.section_1?.section_name,
             formData.section_2?.section_name,
           ]}
+
         >
         <input type={'hidden'} name={`ltv`} value={(mortgage / +section2Values('home_value') * 100).toFixed?.(1)}/>
 
@@ -335,6 +336,11 @@ isPhoneNumber
           pageName={pageName}
           activeTheme={formData.section_4?.section_theme}
           stepName={formData.section_4?.section_name}
+          onNext={() => {
+            const allProducts = [];
+            Object.values(state.theme.stepResponse.data?.data).map(d=>allProducts.push(...d.products));
+            allProducts.length || actions.router.set('/not-qualified');
+          }}
         >
           <div className="form-text-wrapper wide-text">
             <h1 className={"form-headline-1 text-left"}>
@@ -752,6 +758,8 @@ isPhoneNumber
               </div>
             )
           ) : null}
+          
+          
         </FormStep>
         <FormStep
           apiStepNumber={5}
