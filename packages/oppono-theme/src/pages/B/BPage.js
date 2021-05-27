@@ -107,7 +107,7 @@ const BPage = ({ className, setCurrentTheme, state, actions, formData }) => {
             address={{name: 'business_address', ...formData.section_1?.address_input}}
             city={{name: 'business_city', ...formData.section_1?.city_input}}
             postalCode={{name: 'business_postal_code', ...formData.section_1?.postal_code_input}}
-            setAppraiser={businessPostalCodeOnChange}
+            postalCodeOnChange={businessPostalCodeOnChange}
           />
           <Button icon={true} className={"next-step"} label={"Next"} />
         </FormStep>
@@ -161,7 +161,7 @@ const BPage = ({ className, setCurrentTheme, state, actions, formData }) => {
                   name: "postal_code",
                   ...formData.section_2?.postal_code_input,
                 }}
-                setAppraiser={postalCodeOnChange}
+                postalCodeOnChange={postalCodeOnChange}
               />
             </>
           </FormConditionalInput>
@@ -217,7 +217,10 @@ const BPage = ({ className, setCurrentTheme, state, actions, formData }) => {
           pageName={pageName}
           activeTheme={formData.section_4?.section_theme}
           stepName={formData.section_4?.section_name}
-          onNext={()=>firstProduct||actions.router.set('/not-qualified')}
+          onNext={()=> {
+            console.log('next',state.theme.stepResponse.data?.data?.beloc.products[0]);
+            Object.keys(state.theme.stepResponse.data?.data?.beloc.products[0]).length !== 0||actions.router.set('/not-qualified')
+          }}
         >
         <input type={'hidden'} name={`ltv`} value={((mortgage) / +section3Values('purchase_price') * 100).toFixed?.(1)}/>
           <div className="form-text-wrapper">

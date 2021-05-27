@@ -159,6 +159,7 @@ const MapPage = ({ className, actions, state, libraries }) => {
             <div className="inputs-group">
               <Select
                 onChange={({ name, coordinates, zoom, center }) => {
+                  console.log('3333333333333333333333333333333333333333');
                   postal_city.current.city = name;
                   // setMap(generateMap({windowSize, name, enc, zoom}));
                   console.log(appraisersLookup.data[name]);
