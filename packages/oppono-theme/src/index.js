@@ -57,7 +57,7 @@ export default {
       activeTheme: "blue-theme",
       selectedValues: {},
       subHeader: { part_1: "", part_2: "" },
-      activeStep: { stepName: "activeStepName", total: 1000, current: 0 },
+      activeStep: { stepName: "activeStepName",allStepsNames:[], total: 1000, current: 0 },
       user: {
         logged: false,
       },
