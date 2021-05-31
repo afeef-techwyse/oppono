@@ -435,7 +435,7 @@ isPhoneNumber
                     {numberWithCommas(+section2Values("home_value") - mortgage)}
                   </P.D>
                   <P.D>
-                    Your Max LTV is{" "}
+                    Your LTV is{" "}
                     {(
                       (mortgage / +section2Values("home_value")) *
                       100

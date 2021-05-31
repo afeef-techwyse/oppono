@@ -448,7 +448,7 @@ isPhoneNumber
                     {numberWithCommas(+section2Values("home_value"))}
                   </P.D>
                   <P.D>
-                    Your Max LTV is{" "}
+                    Your LTV is{" "}
                     {(
                       ((section4Values("confirm_qualify_amount") === "0"
                         ? +section4Values("amount_wanted")

@@ -212,7 +212,7 @@ const FourPage = (props) => {
               ? <FinalizeChild order={1}>
                 <P.D>Your HELOC request is for $300,000</P.D>
                 <P.D>Your property value is $780,000</P.D>
-                <P.D>Your Max LTV is 51.2%</P.D>
+                <P.D>Your LTV is 51.2%</P.D>
               </FinalizeChild>
               : <FinalizeChild className={'full'} order={1}>
                 <FinalizeTable>

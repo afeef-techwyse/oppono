@@ -134,7 +134,6 @@ const Mail = ({ className, state, actions }) => {
 
               <div className="floating-obj">
 							<FlyingObjsContainer
-									disableFloating={"true"}
                   childrenList={[
                     {
                       imageUrl: contact_obj,
@@ -470,6 +469,7 @@ export default styled(connect(Mail))`
         width: 100% !important;
         left: 15% !important;
         top: 0 !important;
+				transform: none !important;
       }
     }
   }

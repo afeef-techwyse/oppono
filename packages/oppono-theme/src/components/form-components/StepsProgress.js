@@ -21,30 +21,32 @@ const StepsProgress = styled(
                        style={{
                          height: horizontal
                              ? "100%"
-                             : 100 / state.theme.activeStep.total + "%",
+                             : (100 / state.theme.activeStep.total + 4) + "%",
                          width: !horizontal
                              ? "100%"
                              : 100 / state.theme.activeStep.total + "%",
-                         margin: horizontal ? '0 2px':'2px 0'
+                         margin: horizontal ? '0 2px':'0'
                        }}
                   >
-                    <div className="step-name">{state.theme.activeStep.allStepsNames[index]}</div>
+                    <div className="step-name">{state.theme.activeStep.allStepsNames[index]} <span className="checkmark"><svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg-inline--fa fa-check fa-w-14 fa-2x"><path fill="currentColor" d="M413.505 91.951L133.49 371.966l-98.995-98.995c-4.686-4.686-12.284-4.686-16.971 0L6.211 284.284c-4.686 4.686-4.686 12.284 0 16.971l118.794 118.794c4.686 4.686 12.284 4.686 16.971 0l299.813-299.813c4.686-4.686 4.686-12.284 0-16.971l-11.314-11.314c-4.686-4.686-12.284-4.686-16.97 0z" class=""></path></svg></span></div>
                   </div>
               )
             }
-          
+
           </div>
       );
     })
 )`
   position: relative;
-  width: ${({horizontal}) => (horizontal ? "" : size(2))};
+  @media screen and (min-width: 798px) {
+		width: 2px;
+	}
   height: ${({horizontal}) => (!horizontal ? "" : size(2))};
   background-color: rgba(191, 182, 180, 0.1);
-  display: flex;
+  display: flex !important;
   //align-items: stretch;
   //justify-content: stretch;
-  
+
   &:after {
     content: "";
     width: ${({horizontal}) => (horizontal ? "120%" : size(20))};
@@ -56,57 +58,88 @@ const StepsProgress = styled(
     z-index: 100;
     cursor: pointer;
   }
-  
+
   .step-indicator {
     position: relative;
     width: 100%;
     transition: transform 500ms;
-    background-color: yellow;
+    background-color: #bfb6b4;
     box-sizing: border-box;
-    
+
     .step-name {
       position: absolute;
-      left: ${size(30)};
+      left: ${size(20)};
       font-size: ${size(22)};
       padding-left: 8px !important;;
       top: 50%;
       transform: translateY(-50%);
       pointer-events: none;
-      //opacity: 0;
+			opacity: 0.5;
       transition: opacity 400ms;
-      color: yellow;
-      font-size: ${size(16)};
-      font-weight: 400;
-      text-align: center;
-      text-transform: uppercase;
+      color: #bfb6b4;
+      font-size: ${size(14)};
+      font-weight: 300;
+      text-align: left;
+      text-transform: capitalize;
       white-space: nowrap;
+			@media screen and (max-width: 798px) {
+				display: none;
+			}
     }
-    
+
+		span.checkmark {
+			position: absolute;
+			right: -30px;
+			border: 1px solid;
+			border-radius: 100%;
+			width: 18px;
+			height: 18px;
+			text-align: center;
+			opacity: 0;
+
+			svg {
+				width: 10px;
+				position: absolute;
+				color: inherit!important;
+				left: 0;
+				right: 0;
+				margin: auto;
+				top: 0;
+				bottom: 0;
+			}
+		}
+
     &.active {
-      background-color: #bfb6b4;
-      
+      background-color: #0c9564;
+
       .step-name {
-        color: #bfb6b4;
-        
+				opacity: 1;
+        color: #0c9564;
+
       }
     }
-    
+
     &.finished {
-      background-color: #1a921a;
-      
+      background-color: white;
+
       .step-name {
-        color: #1a921a;
-        
+				opacity: 1;
+        color: white;
+
+				span.checkmark {
+					opacity: 1;
+				}
+
       }
     }
-    
+
   }
-  
+
   &:hover {
     .current {
       background-color: green;
     }
-    
+
     .step-name {
       opacity: 1;
     }

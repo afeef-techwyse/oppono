@@ -61,6 +61,11 @@ export default styled(connect(AboutUsPage))`
       text-align: center;
 			color: #d2f5e9!important;
 			padding-botom: 1rem;
+			font-weight: 300;
+    line-height: 9.5rem;
+    font-size: 8rem;
+    max-width: 80rem;
+    margin: auto;
     }
 
     .html2react {

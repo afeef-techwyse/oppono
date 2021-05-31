@@ -432,7 +432,7 @@ isPhoneNumber
                   {numberWithCommas(+section2Values("home_value") - mortgage)}
                 </P.Border>
                 <P.Border>
-                  Your Max LTV is{" "}
+                  Your LTV is{" "}
                   {((mortgage / +section2Values("home_value")) * 100).toFixed?.(
                     1
                   )}
@@ -758,8 +758,8 @@ isPhoneNumber
               </div>
             )
           ) : null}
-          
-          
+
+
         </FormStep>
         <FormStep
           apiStepNumber={5}

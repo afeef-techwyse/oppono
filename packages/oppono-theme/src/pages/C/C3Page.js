@@ -59,10 +59,10 @@ const C3Page = ({ className, setCurrentTheme, state, actions, formData }) => {
   React.useEffect(() => {
     actions.theme.setLeadId();
     actions.theme.setStepResponse({});
-  
+
     const data = new FormData();
     data.append('type', 'HELOC');
-    
+
     opponoApi.post("/product-qualification", data).then((response) => {
       response.data.data = {
         heloc: response.data.heloc,
@@ -379,7 +379,7 @@ const C3Page = ({ className, setCurrentTheme, state, actions, formData }) => {
                                     </td>
                                 ))}
                               </tr>
-                  
+
                               {productsTable[type] &&
                               Object.entries(productsTable[type]).map(
                                   ([id, { name, specificationProducts }]) => (
@@ -916,7 +916,7 @@ isPhoneNumber
                     {numberWithCommas(+section1Values("home_value"))}
                   </P.D>
                   <P.D>
-                    Your Max LTV is{" "}
+                    Your LTV is{" "}
                     {(
                       ((section7Values("confirm_qualify_amount") === "0"
                         ? +section7Values("amount_wanted")
