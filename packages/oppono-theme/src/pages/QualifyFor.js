@@ -164,7 +164,7 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
                 }
               </tr>
               <tr className={'head last-head'}>
-                <td scope={'row'} className={'dark'}>LTV</td>
+                <td scope={'row'} className={'dark'}>Max LTV</td>
                 {
                   products.map(product=>
                       product&&
@@ -253,7 +253,7 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
                   <FinalizeTable>
                     <tbody>
 										<tr>
-                      <P.Dark as={'td'}>LTV</P.Dark>
+                      <P.Dark as={'td'}>Max LTV</P.Dark>
                       <P.D as={'td'}>Up to {selectedProduct?.fields.maximum_ltv}%</P.D>
                     </tr>
                     <tr>
@@ -275,7 +275,7 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
                   <FinalizeTable>
                     <tbody>
 										<tr>
-                      <P.Dark as={'td'}>LTV</P.Dark>
+                      <P.Dark as={'td'}>Max LTV</P.Dark>
                       <P.D as={'td'}>Up to {selectedProduct?.fields.maximum_ltv}%</P.D>
                     </tr>
                     <tr>

@@ -470,7 +470,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                               <FinalizeTable>
                                 <tbody>
                                 <tr>
-                                  <P.Dark as={"td"}>LTV</P.Dark>
+                                  <P.Dark as={"td"}>Max LTV</P.Dark>
                                   <P.D as={"td"}>
                                     Up to {product.fields?.maximum_ltv}%
                                   </P.D>
@@ -499,7 +499,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                               <FinalizeTable>
                                 <tbody>
                                 <tr>
-                                  <P.Dark as={"td"}>LTV</P.Dark>
+                                  <P.Dark as={"td"}>Max LTV</P.Dark>
                                   <P.D as={"td"}>
                                     Up to {product.fields?.maximum_ltv}%
                                   </P.D>

@@ -513,7 +513,7 @@ const ProductsSlider = ({
                             <P.D as={"span"}>%</P.D>
                           </td>
                           <td>
-                            <P.Dark>LTV</P.Dark>
+                            <P.Dark>Max LTV</P.Dark>
                           </td>
                         </tr>
                       </tbody>

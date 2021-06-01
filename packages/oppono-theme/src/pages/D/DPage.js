@@ -277,7 +277,7 @@ const DPage = ({ className, setCurrentTheme, state, actions }) => {
                                     <p>{fee}%</p>
                                   </div>
                                   <div className={"m-row m-head  m-head"}>
-                                    <p>LTV</p>
+                                    <p>Max LTV</p>
                                     <p>{maximum_ltv}%</p>
                                   </div>
                                   <div

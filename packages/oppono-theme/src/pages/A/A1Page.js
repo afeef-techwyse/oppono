@@ -690,7 +690,7 @@ isPhoneNumber
                               </div>
                               <div className="mortgage-body">
 															<div className={"m-row m-head  m-head"}>
-                                  <p>LTV</p>
+                                  <p>Max LTV</p>
                                   <p>{maximum_ltv}%</p>
                                 </div>
                                 <div

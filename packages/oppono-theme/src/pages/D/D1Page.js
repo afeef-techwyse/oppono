@@ -447,7 +447,7 @@ isPhoneNumber
                 <FinalizeTable>
                   <tbody>
 									<tr>
-                      <P.Dark as={"td"}>LTV</P.Dark>
+                      <P.Dark as={"td"}>Max LTV</P.Dark>
                       <P.D as={"td"}>
                         Up to {firstProduct.fields?.maximum_ltv}%
                       </P.D>

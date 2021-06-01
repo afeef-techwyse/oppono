@@ -7,7 +7,7 @@ const StepsProgress = styled(
     connect(({className, state, horizontal = false}) => {
       const [active, setActive] = React.useState(0);
       return (
-          <div className={className} style={{flexDirection:horizontal?'row':'column'}}>
+          <div className={className} data-mob={horizontal} style={{flexDirection:horizontal?'row':'column'}}>
             {
               [
                 ...Array(state.theme.activeStep.total || 0).keys(),
@@ -28,7 +28,7 @@ const StepsProgress = styled(
                          margin: horizontal ? '0 2px':'0'
                        }}
                   >
-                    <div className="step-name">{state.theme.activeStep.allStepsNames[index]} <span className="checkmark"><svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg-inline--fa fa-check fa-w-14 fa-2x"><path fill="currentColor" d="M413.505 91.951L133.49 371.966l-98.995-98.995c-4.686-4.686-12.284-4.686-16.971 0L6.211 284.284c-4.686 4.686-4.686 12.284 0 16.971l118.794 118.794c4.686 4.686 12.284 4.686 16.971 0l299.813-299.813c4.686-4.686 4.686-12.284 0-16.971l-11.314-11.314c-4.686-4.686-12.284-4.686-16.97 0z" class=""></path></svg></span></div>
+                    <div className="step-name">{state.theme.activeStep.allStepsNames[index]} <span className="checkmark"><svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" className="svg-inline--fa fa-check fa-w-14 fa-2x"><path fill="currentColor" d="M413.505 91.951L133.49 371.966l-98.995-98.995c-4.686-4.686-12.284-4.686-16.971 0L6.211 284.284c-4.686 4.686-4.686 12.284 0 16.971l118.794 118.794c4.686 4.686 12.284 4.686 16.971 0l299.813-299.813c4.686-4.686 4.686-12.284 0-16.971l-11.314-11.314c-4.686-4.686-12.284-4.686-16.97 0z" className=""></path></svg></span></div>
                   </div>
               )
             }
@@ -38,8 +38,14 @@ const StepsProgress = styled(
     })
 )`
   position: relative;
+	&[data-mob="true"] {
+		display: flex !important;
+	}
   @media screen and (min-width: 798px) {
 		width: 2px;
+		&[data-mob="true"] {
+			display: none !important;
+		}
 	}
   height: ${({horizontal}) => (!horizontal ? "" : size(2))};
   background-color: rgba(191, 182, 180, 0.1);
