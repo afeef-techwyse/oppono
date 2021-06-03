@@ -890,6 +890,7 @@ isPhoneNumber
               <FinalizeChild order={1}>
                 <P.Dark>*Fixed rate</P.Dark>
                 <P.Dark>*Payment interest based on balance</P.Dark>
+								<p className="primary form-headline-3 text-left heloc-var">{String(firstProduct.title).split(" ")[0]} HELOC</p>
                 <P.Num>{+firstProduct.fields?.rate + 0.25}%</P.Num>
                 <Button label={"I’m good to go"} className={"next-step"} />
               </FinalizeChild>
