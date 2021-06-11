@@ -11,12 +11,17 @@ export default function useProductsTable(stepResponse = {}, productsTableInitial
         const specifications = Object.entries(data).reduce((combinedSpecifications, [type, {products}]) => {
           combinedSpecifications[type] || (combinedSpecifications[type] = {});
           return products.reduce((typeSpecifications, product) =>
-              product.fields.specifications.reduce((typeSpecifications, specification) =>
-                  typeSpecifications[specification.term_id]
-                    ? (typeSpecifications[specification.term_id].specificationProducts.push(product.ID) && typeSpecifications)
-                    : (typeSpecifications[specification.term_id] = {name: specification.name, specificationProducts: [product.ID]}) && typeSpecifications
-                , typeSpecifications)
-            , combinedSpecifications[type]) && combinedSpecifications;
+                  product.fields.specifications.reduce((typeSpecifications, specification) => {
+                    const id = specification.term_id === 13?0:specification.term_id;
+                        return typeSpecifications[id]
+                            ? (typeSpecifications[id].specificationProducts.push(product.ID) && typeSpecifications)
+                            : (typeSpecifications[id] = {
+                          name: specification.name,
+                          specificationProducts: [product.ID]
+                        }) && typeSpecifications;
+                      }
+                      , typeSpecifications)
+              , combinedSpecifications[type]) && combinedSpecifications;
         }, {});
         setProductsTable(specifications);
         const filters = {'*': 'All'};
