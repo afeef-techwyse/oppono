@@ -155,12 +155,18 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   value={"first"}
                   name={"looking_for"}
                   type={"radio"}
+									onClick={() =>
+										document.querySelector('.mortgage_value_1').classList.remove('active')
+									}
               />
               <RadioInput
                   label={formData.section_2?.looking_for_yes_no.no}
                   value={"second"}
                   name={"looking_for"}
                   type={"radio"}
+									onClick={() =>
+										document.querySelector('.mortgage_value_1').classList.add('active')
+									}
               />
             </RadioGroup>
 
@@ -179,21 +185,14 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
               />
             </W50>
 
-            <FormConditionalInput
-              name={"looking_for"}
-              showOn={"second"}
-              checked={"0"}
-              {...formData.section_2?.any_mortgage_yes_no}
-            >
-              <>
-                <Input
-                  type={"number"}
-                  isCurrency
-                  name={"mortgage_value_1"}
-                  {...formData.section_2?.first_mortgage_amount_input}
-                />
-              </>
-            </FormConditionalInput>
+						<Input
+							type={"number"}
+							isCurrency
+							className={"mortgage_value_1"}
+							name={"mortgage_value_1"}
+							{...formData.section_2?.mortgage_value_1_input}
+						/>
+
 
             <div className="btn-group">
               <Button className={"bordered prev-step"} label={"Back"}/>
@@ -716,4 +715,12 @@ export default styled(connect(A2Page))`
       }
     }
   }
+
+	.mortgage_value_1 {
+		display: none;
+
+		&.active {
+			display: block;
+		}
+	}
 `;

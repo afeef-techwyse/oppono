@@ -25,6 +25,7 @@ const RadioInput = React.forwardRef(
       name,
       checked = false,
       onChange,
+      onClick,
       noScroll,
       noInput,
     },
@@ -127,6 +128,7 @@ const RadioInput = React.forwardRef(
                 setFocused(false);
               }}
               onChange={onChange}
+							onClick={onClick}
             />
           )}
         </label>
@@ -148,6 +150,7 @@ RadioInput.propTypes = {
   checked: PropTypes.bool,
   noScroll: PropTypes.bool,
   onChange: PropTypes.func,
+  onClick: PropTypes.func,
 };
 
 export default styled(RadioInput)`
