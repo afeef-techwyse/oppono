@@ -179,6 +179,22 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
               />
             </W50>
 
+            <FormConditionalInput
+              name={"looking_for"}
+              showOn={"second"}
+              checked={"0"}
+              {...formData.section_2?.any_mortgage_yes_no}
+            >
+              <>
+                <Input
+                  type={"number"}
+                  isCurrency
+                  name={"mortgage_value_1"}
+                  {...formData.section_2?.first_mortgage_amount_input}
+                />
+              </>
+            </FormConditionalInput>
+
             <div className="btn-group">
               <Button className={"bordered prev-step"} label={"Back"}/>
               <Button icon={true} className={"next-step"} label={"Next"}/>

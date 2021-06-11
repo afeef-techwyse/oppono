@@ -69,6 +69,11 @@ const SignUpPage = ({
             />
             <Input
               type={"text"}
+              name={"brokerage_name"}
+              {...formData.section_1?.brokerage_name_input}
+            />
+            <Input
+              type={"text"}
               name={"brokerage_license"}
               pattern={"^(\\d){5}$"}
               {...formData.section_1?.brokerage_license_input}
