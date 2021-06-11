@@ -188,6 +188,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 						<Input
 							type={"number"}
 							isCurrency
+							required={false}
 							className={"mortgage_value_1"}
 							name={"mortgage_value_1"}
 							{...formData.section_2?.mortgage_value_1_input}

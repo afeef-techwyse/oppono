@@ -41,7 +41,7 @@ const StepsProgress = styled(
 	&[data-mob="true"] {
 		display: flex !important;
 	}
-  @media screen and (min-width: 798px) {
+  @media screen and (min-width: 998px) {
 		width: 2px;
 		&[data-mob="true"] {
 			display: none !important;
@@ -88,7 +88,7 @@ const StepsProgress = styled(
       text-align: left;
       text-transform: capitalize;
       white-space: nowrap;
-			@media screen and (max-width: 798px) {
+			@media screen and (max-width: 998px) {
 				display: none;
 			}
     }
