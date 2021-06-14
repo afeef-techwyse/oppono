@@ -205,7 +205,7 @@ isPhoneNumber
               <h1 className={"form-headline-1 text-left"}>
                 {pageData.section_2?.title}
               </h1>
-              <p className={"form-headline-3 primary"}>
+              <p className={"form-headline-3 primary lighter"}>
                 {pageData.section_2?.subtitle}
               </p>
               <Wysiwyg
@@ -247,6 +247,8 @@ export default styled(connect(Mail))`
 		position: absolute;
 		max-width: 345px;
 	}
+
+
 
   .contact-row {
     display: flex;

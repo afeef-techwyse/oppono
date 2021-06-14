@@ -634,7 +634,7 @@ isPhoneNumber
               <h1 className={"form-headline-1 text-left"}>
                 {formData.section_7?.title}
               </h1>
-              <p className={"form-headline-3 primary"}>
+              <p className={"form-headline-3 primary lighter"}>
                 {formData.section_7?.subtitle}
               </p>
               <Wysiwyg
@@ -687,6 +687,9 @@ ${Bottom}{
     }
   }
 }
+.lighter {
+		color: #FFF !important;
+	}
 .wide-text{
   max-width: 80%;
   .form-headline-3{

@@ -577,25 +577,6 @@ const C3Page = ({ className, setCurrentTheme, state, actions, formData }) => {
               {formData.section_4?.subtitle}
             </h2>
           </div>
-          <Input
-            type={"text"}
-            name={"address"}
-            {...formData.section_4?.address_input}
-          />
-          <W50>
-            <Input
-              value={appraiser?.title}
-              type={"text"}
-              name={"city"}
-              {...formData.section_4?.city_input}
-            />
-            <Input
-              onChange={postalCodeOnChange}
-              type={"text"}
-              name={"postal_code"}
-              {...formData.section_4?.postal_code_input}
-            />
-          </W50>
           <Address
             address={{ name: "address", ...formData.section_4?.address_input }}
             city={{ name: "city", ...formData.section_4?.city_input }}
@@ -1080,7 +1061,7 @@ isPhoneNumber
               <h1 className={"form-headline-1 text-left"}>
                 {formData.section_10?.title}
               </h1>
-              <p className={"form-headline-3 primary"}>
+              <p className={"form-headline-3 primary lighter"}>
                 {formData.section_10?.subtitle}
               </p>
               <Wysiwyg
@@ -1142,4 +1123,5 @@ export default styled(connect(C3Page))`
       }
     }
   }
+
 `;

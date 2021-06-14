@@ -578,7 +578,7 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
             <h1 className={"form-headline-1 text-left"}>
               {formData.section_7?.title}
             </h1>
-            <p className={"form-headline-3 primary"}>
+            <p className={"form-headline-3 primary lighter"}>
               {formData.section_7?.subtitle}
             </p>
             <Wysiwyg
@@ -632,6 +632,8 @@ export default styled(connect(BPage))`
       }
     }
   }
+
+
 
   .wide-text {
     max-width: 80%;

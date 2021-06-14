@@ -569,7 +569,7 @@ isPhoneNumber
               <h1 className={"form-headline-1 text-left"}>
                 {formData.section_6?.title}
               </h1>
-              <p className={"form-headline-3 primary"}>
+              <p className={"form-headline-3 primary lighter"}>
                 {formData.section_6?.subtitle}
               </p>
               <Wysiwyg
@@ -622,6 +622,8 @@ export default styled(connect(D1Page))`
       }
     }
   }
+
+
   .wide-text {
     max-width: 80%;
     .form-headline-3 {

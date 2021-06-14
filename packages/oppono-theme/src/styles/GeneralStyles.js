@@ -307,6 +307,10 @@ const GeneralStyles = (props) => (
         }
       }
 
+			.lighter {
+				color: #FFF !important;
+			}
+
       .agree-checkbox {
         position: relative;
         cursor: pointer;
@@ -399,6 +403,13 @@ const GeneralStyles = (props) => (
           transform: rotate(45deg);
         }
       }
+
+			.form-wide-container {
+				@media (min-width: 1200px) {
+					max-width: 70% !important;
+					margin: auto;
+				}
+			}
 
       .form-sub-text {
         color: rgba(191, 182, 180, 0.5);

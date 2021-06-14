@@ -591,28 +591,71 @@ const C2Page = ({ className, setCurrentTheme, state, actions, formData }) => {
             <Button icon={true} label={"Next"} className={"next-step"} />
           </div>
         </FormStep>
-        <FormStep
-          apiStepNumber={2}
-          pageName={pageName}
-          activeTheme={formData.section_5?.section_theme}
-          stepName={formData.section_5?.section_name}
-        >
-          <div className="form-text-wrapper">
-            <h1 className={"form-headline-1 text-left"}>
-              {formData.section_5?.title}
-            </h1>
-          </div>
-          <input
-            type={"hidden"}
-            name={`home_value`}
-            value={section1Values("home_value")}
-          />
+				<FormStep
+						apiStepNumber={2}
+						pageName={pageName}
+						activeTheme={formData.section_5?.section_theme}
+						stepName={formData.section_5?.section_name}
+				>
+					<div className="form-text-wrapper">
+						<h1 className={"form-headline-1 text-left"}>
+							{formData.section_5?.title}
+						</h1>
+					</div>
+					<RadioGroup
+							radioText={formData.section_5?.looking_for_yes_no.label}
+							checked={"first"}
+					>
+						<RadioInput
+								label={formData.section_5?.looking_for_yes_no.yes}
+								value={"first"}
+								name={"looking_for"}
+								type={"radio"}
+								onClick={() =>
+									document.querySelector('.mortgage_value_1').classList.remove('active')
+								}
+						/>
+						<RadioInput
+								label={formData.section_5?.looking_for_yes_no.no}
+								value={"second"}
+								name={"looking_for"}
+								type={"radio"}
+								onClick={() =>
+									document.querySelector('.mortgage_value_1').classList.add('active')
+								}
+						/>
+					</RadioGroup>
 
-          <div className="btn-group">
-            <Button className={"bordered prev-step"} label={"Back"} />
-            <Button icon={true} className={"next-step"} label={"Next"} />
-          </div>
-        </FormStep>
+					<W50>
+						<Input
+								type={"number"}
+								isCurrency
+								name={"purchase_price"}
+								{...formData.section_5?.purchase_price_input}
+						/>
+						<Input
+								type={"number"}
+								isCurrency
+								name={"down_payment"}
+								{...formData.section_5?.down_payment_input}
+						/>
+					</W50>
+
+					<Input
+						type={"number"}
+						isCurrency
+						required={false}
+						className={"mortgage_value_1"}
+						name={"mortgage_value_1"}
+						{...formData.section_5?.mortgage_value_1_input}
+					/>
+
+
+					<div className="btn-group">
+						<Button className={"bordered prev-step"} label={"Back"}/>
+						<Button icon={true} className={"next-step"} label={"Next"}/>
+					</div>
+				</FormStep>
         <FormStep
           sendSteps={[
             formData.section_1?.section_name,
@@ -983,7 +1026,7 @@ isPhoneNumber
               <h1 className={"form-headline-1 text-left"}>
                 {formData.section_9?.title}
               </h1>
-              <p className={"form-headline-3 primary"}>
+              <p className={"form-headline-3 primary lighter"}>
                 {formData.section_9?.subtitle}
               </p>
               <Wysiwyg
@@ -1045,4 +1088,12 @@ export default styled(connect(C2Page))`
       }
     }
   }
+
+	.mortgage_value_1 {
+		display: none;
+
+		&.active {
+			display: block;
+		}
+	}
 `;

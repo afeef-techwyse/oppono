@@ -169,7 +169,7 @@ const SignUpPage = ({
                 <h1 className={"form-headline-1 primary"}>
 									Thanks for signing up with us.
                 </h1>
-                <p className={"form-headline-3 primary"}>
+                <p className={"form-headline-3 primary lighter"}>
                   <Link className={"white-color"} href={"/dashboard"}>
 										Let's get started
                   </Link>
@@ -266,6 +266,8 @@ export default styled(connect(SignUpPage))`
       }
     }
   }
+
+
 
   .white-color {
     color: #fff;

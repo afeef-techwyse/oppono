@@ -102,7 +102,7 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
             <Input type={'text'} name={'applicant_fname_{{number}}'} {...formData.section_2?.applicant.first_name_input}/>
             <Input type={'text'} name={'applicant_lname_{{number}}'} {...formData.section_2?.applicant.last_name_input}/>
             <Input type={'text'} pattern={'^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$'} name={'applicant_mail_{{number}}'} {...formData.section_2?.applicant.email_input}/>
-            <Input type={'phone'} name={'applicant_phone_{{number}}'} {...formData.section_2?.applicant.phone_input}/>
+            <Input type={'phone'} isPhoneNumber name={'applicant_phone_{{number}}'} {...formData.section_2?.applicant.phone_input}/>
           </W50>
           <RadioGroup radioText={formData.section_2?.applicant.score_label} checked={'<650'}>
             <RadioInput label={'<650'} value={'<650'} name={`applicant_score_{{number}}`} type={'radio'}/>

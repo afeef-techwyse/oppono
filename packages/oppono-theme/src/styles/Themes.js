@@ -344,11 +344,11 @@ const Themes = () => (
           color: #ffffff !important;
         }
 
-        color: #bfb6b4 !important;
+        color: #FFF !important;
       }
 
       .primary-border {
-        border-color: #bfb6b4 !important;
+        border-color: #FFF !important;
       }
 
       .primary-bg {
