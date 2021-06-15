@@ -45,7 +45,7 @@ export const Address = ({address, city, postalCode, postalCodeOnChange}) => {
     const {data:{Items}} = await axios(config);
     setCityValue(Items[7].FormattedValue);
     setPostalCodeValue(Items[12].FormattedValue);
-    postalCodeOnChange(Items[12].FormattedValue)
+    postalCodeOnChange({target:{value:Items[12].FormattedValue}});
   }
   return <>
     <SelectAddress {...address} cacheOptions loadOptions={loadOptions} onChange={selectOption}/>
