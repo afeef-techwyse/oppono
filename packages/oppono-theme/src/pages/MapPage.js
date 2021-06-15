@@ -234,7 +234,9 @@ const MapPage = ({className, actions, state, libraries}) => {
                             <p className="ltv">{a.fields.ltv}% LTV</p>
                             <p className="text bold">Preferred appraisal companies</p>
                             <p className="text">
-                              {console.log(a.fields.preferred_appraisal_company, typeof a.fields.preferred_appraisal_company)||a.fields.preferred_appraisal_company
+                              {console.log(a.fields.preferred_appraisal_company, typeof a.fields.preferred_appraisal_company
+                                  ?.map?.((c) =>c.post_title), a.fields.preferred_appraisal_company
+                                  ?.map?.((c) =>c.post_title) instanceof Array)||a.fields.preferred_appraisal_company
                                   ?.map?.((c) => c.post_title)
                                   ?.join(", ")}
                             </p>
