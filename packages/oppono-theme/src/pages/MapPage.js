@@ -162,7 +162,7 @@ const MapPage = ({className, actions, state, libraries}) => {
                       postal_city.current.city = name;
                       // setMap(generateMap({windowSize, name, enc, zoom}));
                       console.log('appraisersLookup------------------: ',appraisersLookup.data);
-                      setAppraiser(appraisersLookup.data[name] || [{title: name}]);
+                      setAppraiser(appraisersLookup.data[name] || [{fields: {city:name}}]);
                       polygonAPIRef.current.setPaths(coordinates);
                       mapAPIRef.current.fitBounds(
                           polygonAPIRef.current.getBounds()
@@ -183,7 +183,7 @@ const MapPage = ({className, actions, state, libraries}) => {
                     name={"city"}
                     label={"Select a city"}
                     value={cities.filter(
-                        (city) => city.name === appraiser[0]?.title
+                        (city) => city.name === appraiser[0]?.fields?.city
                     )}
                 />
                 <p>OR</p>
@@ -233,7 +233,11 @@ const MapPage = ({className, actions, state, libraries}) => {
                             <p className="text">{a.fields.city}</p>
                             <p className="ltv">{a.fields.ltv}% LTV</p>
                             <p className="text bold">Preferred appraisal companies</p>
-                            
+                            <p className="text">
+                              {[...a.fields.preferred_appraisal_company]
+                                  ?.map?.((c) => c.post_title)
+                                  .join(", ")}
+                            </p>
                           </div>
                       ) : null
                   )
