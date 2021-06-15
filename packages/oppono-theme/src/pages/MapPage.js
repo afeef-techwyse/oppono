@@ -76,9 +76,9 @@ const MapPage = ({className, actions, state, libraries}) => {
       fillOpacity: 0.2,
       map: mapAPIRef.current,
     });
-    window.google.maps.Polygon.prototype.getBounds = function () {
+    polygonAPIRef.current.getBounds = function () {
       let bounds = new window.google.maps.LatLngBounds();
-      let paths = this.getPaths();
+      let paths = polygonAPIRef.current.getPaths();
       let path;
       for (let i = 0; i < paths.getLength(); i++) {
         path = paths.getAt(i);
