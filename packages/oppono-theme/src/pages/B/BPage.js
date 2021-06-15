@@ -49,18 +49,18 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
       section2Values = getBValues(formData.section_2?.section_name),
       section3Values = getBValues(formData.section_3?.section_name),
       section4Values = getBValues(formData.section_4?.section_name);
-
+  
   const media = useMedia();
-
+  
   React.useEffect(() => {
     actions.theme.setSubHeader(formData.sub_header);
   }, [formData]);
-
+  
   React.useEffect(() => {
     actions.theme.setLeadId();
     actions.theme.setStepResponse({});
   }, []);
-
+  
   React.useEffect(() => {
     actions.theme.checkUser();
   }, [state.theme.user.logged]);
@@ -71,7 +71,7 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
   const firstProduct = state.theme.stepResponse.data?.data?.beloc.products[0] || {};
   const refNumber = React.useRef('');
   state.theme.stepResponse.data?.['reference-number'] && (refNumber.current = state.theme.stepResponse.data?.['reference-number'])
-
+  
   return <div className={className}>
     <Form setCurrentTheme={setCurrentTheme} endPoint={'/beloc'}>
       <FormStep apiStepNumber={1} pageName={pageName} activeTheme={formData.section_1?.section_theme} stepName={formData.section_1?.section_name}>
@@ -102,7 +102,7 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
         <Select
             name={'business_type'}
             {...formData.section_1?.type_of_business_dropdown}/>
-
+        
         <Address
             address={{name: 'business_address', ...formData.section_1?.address_input}}
             city={{name: 'business_city', ...formData.section_1?.city_input}}
@@ -186,7 +186,7 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
             {formData.section_3?.title}
           </h1>
         </div>
-
+        
         <W50>
           <Input
               type={"number"}
@@ -201,7 +201,7 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
               {...formData.section_3?.down_payment_input}
           />
         </W50>
-
+        
         <div className="btn-group">
           <Button className={"bordered prev-step"} label={"Back"}/>
           <Button icon={true} className={"next-step"} label={"Next"}/>
@@ -321,7 +321,7 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
                 100
             )}
         />
-
+        
         <div className="form-text-wrapper wide-text">
           <h1 className={"form-headline-1 text-left"}>
             {formData.section_5?.title}
@@ -401,7 +401,7 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
                   </FinalizeTable>
                 </FinalizeChild>
             )}
-
+            
             <FinalizeChild order={1}>
               <P.Dark>*Fixed rate</P.Dark>
               <P.Dark>*Payment interest based on balance</P.Dark>
@@ -457,7 +457,7 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
                   </FinalizeTable>
                 </FinalizeChild>
             )}
-
+            
             <FinalizeChild order={2} className={"full m-border"}>
               <FinalizeTable>
                 <tbody>
@@ -536,6 +536,7 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
                               <AppraiserInput
                                   key={index}
                                   appraiserName={post_name}
+                                  value={post_name}
                               />
                           );
                         }
@@ -616,10 +617,10 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
 export default styled(connect(BPage))`
   width: 100%;
   height: 100%;
-
+  
   ${Bottom} {
     padding-top: 0;
-
+    
     .full {
       @media (max-width: 991px) {
         flex-basis: 72%;
@@ -632,12 +633,11 @@ export default styled(connect(BPage))`
       }
     }
   }
-
-
-
+  
+  
   .wide-text {
     max-width: 80%;
-
+    
     .form-headline-3 {
       max-width: ${size(400)};
       @media (max-width: 575.98px) {

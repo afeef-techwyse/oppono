@@ -46,15 +46,15 @@ import Link from "../../components/reusable/Link";
 const pageName = "a-2";
 const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
   const getA2Values = useStoredFormValue(pageName);
-
+  
   const section1Values = getA2Values(formData.section_1?.section_name),
       section2Values = getA2Values(formData.section_2?.section_name),
       section3Values = getA2Values(formData.section_3?.section_name);
-
+  
   const media = useMedia();
   const selectedProduct = React.useRef("");
   const maxMortgage = React.useRef("");
-
+  
   React.useEffect(() => {
     actions.theme.setSubHeader(formData.sub_header);
   }, [formData]);
@@ -62,12 +62,12 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
     actions.theme.setLeadId();
     actions.theme.setStepResponse({});
   }, []);
-
+  
   React.useEffect(() => {
     actions.theme.checkUser();
   }, [state.theme.user.logged]);
   const [[appraiser], postalCodeOnChange] = useFlowAppraisers();
-
+  
   const mortgage =
       +section2Values("purchase_price") - +section2Values("down_payment") || 0;
   const refNumber = React.useRef("");
@@ -123,7 +123,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   name: "postal_code",
                   ...formData.section_1?.postal_code_input,
                 }}
-                postalCodeOnChange={postalCodeOnChange}
+                posta lCodeOnChange={postalCodeOnChange}
             />
             <Select
                 name={"property_details_1"}
@@ -155,21 +155,21 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   value={"first"}
                   name={"looking_for"}
                   type={"radio"}
-									onClick={() =>
-										document.querySelector('.mortgage_value_1').classList.remove('active')
-									}
+                  onClick={() =>
+                      document.querySelector('.mortgage_value_1').classList.remove('active')
+                  }
               />
               <RadioInput
                   label={formData.section_2?.looking_for_yes_no.no}
                   value={"second"}
                   name={"looking_for"}
                   type={"radio"}
-									onClick={() =>
-										document.querySelector('.mortgage_value_1').classList.add('active')
-									}
+                  onClick={() =>
+                      document.querySelector('.mortgage_value_1').classList.add('active')
+                  }
               />
             </RadioGroup>
-
+            
             <W50>
               <Input
                   type={"number"}
@@ -184,17 +184,17 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   {...formData.section_2?.down_payment_input}
               />
             </W50>
-
-						<Input
-							type={"number"}
-							isCurrency
-							required={false}
-							className={"mortgage_value_1"}
-							name={"mortgage_value_1"}
-							{...formData.section_2?.mortgage_value_1_input}
-						/>
-
-
+            
+            <Input
+                type={"number"}
+                isCurrency
+                required={false}
+                className={"mortgage_value_1"}
+                name={"mortgage_value_1"}
+                {...formData.section_2?.mortgage_value_1_input}
+            />
+            
+            
             <div className="btn-group">
               <Button className={"bordered prev-step"} label={"Back"}/>
               <Button icon={true} className={"next-step"} label={"Next"}/>
@@ -292,7 +292,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
               <Button icon={true} label={"Next"} className={"next-step"}/>
             </div>
           </FormStep>
-
+          
           <FormStep
               endPoint={null}
               pageName={pageName}
@@ -368,7 +368,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                       </FinalizeTable>
                     </FinalizeChild>
                 )}
-
+                
                 <FinalizeChild className={"wide"} order={1}>
                   <P.D>Summary</P.D>
                 </FinalizeChild>
@@ -433,7 +433,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
               </h3>
             </div>
             <input ref={selectedProduct} type={"hidden"} name={`product_name`}/>
-
+            
             <input ref={maxMortgage} type={"hidden"} name={`maximum_mortgage`}/>
             {section2Values("looking_for")
                 ? state.theme.stepResponse.data?.data?.[
@@ -444,7 +444,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                         <FinalizeChild order={1}>
                           <P.Circle>{index + 1}</P.Circle>
                         </FinalizeChild>
-
+                        
                         <FinalizeChild order={1}>
                           <P.Dark>*Variable Rate</P.Dark>
                           <P.Num>{product.fields?.rate}%</P.Num>
@@ -468,7 +468,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                               label={"I want this deal"}
                           />
                         </FinalizeChild>
-
+                        
                         <FinalizeChild className={"wide"} order={1}>
                           <P.Dark>*Monthly mortgage payment</P.Dark>
                           <P.Cost>
@@ -540,7 +540,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                               </FinalizeTable>
                             </FinalizeChild>
                         )}
-
+                        
                         <FinalizeChild order={3} className={"wide m-pr-40"}>
                           {product.fields?.specifications.map(
                               ({term_id, name}) => (
@@ -552,7 +552,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                     </Finalize>
                 ))
                 : null}
-
+            
             <div className="btn-group">
               <Button className={"bordered prev-step"} label={"Back"}/>
             </div>
@@ -602,6 +602,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                   <AppraiserInput
                                       key={index}
                                       appraiserName={post_name}
+                                      value={post_name}
                                   />
                               );
                             }
@@ -683,16 +684,16 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 export default styled(connect(A2Page))`
   width: 100%;
   height: 100%;
-
+  
   ${Bottom} {
     padding-top: 0;
-
+    
     .full {
       table {
         padding-top: 0;
         width: 100%;
       }
-
+      
       @media (max-width: 991px) {
         flex-basis: 72%;
         width: 72%;
@@ -704,10 +705,10 @@ export default styled(connect(A2Page))`
       }
     }
   }
-
+  
   .wide-text {
     max-width: 80%;
-
+    
     .form-headline-3 {
       margin: 1.5rem 0;
       max-width: ${size(400)};
@@ -716,13 +717,13 @@ export default styled(connect(A2Page))`
       }
     }
   }
-
-	.mortgage_value_1 {
-		display: none;
-
-		&.active {
-			display: block;
-		}
-	}
+  
+  .mortgage_value_1 {
+    display: none;
+    
+    &.active {
+      display: block;
+    }
+  }
 
 `;
