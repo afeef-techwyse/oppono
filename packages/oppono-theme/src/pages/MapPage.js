@@ -161,6 +161,7 @@ const MapPage = ({className, actions, state, libraries}) => {
                     onChange={({name, coordinates, zoom, center}) => {
                       postal_city.current.city = name;
                       // setMap(generateMap({windowSize, name, enc, zoom}));
+                      console.log('appraisersLookup------------------: ',appraisersLookup.data);
                       setAppraiser(appraisersLookup.data[name] || [{title: name}]);
                       polygonAPIRef.current.setPaths(coordinates);
                       mapAPIRef.current.fitBounds(
