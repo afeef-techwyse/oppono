@@ -73,6 +73,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
   const refNumber = React.useRef("");
   state.theme.stepResponse.data?.["reference-number"] &&
   (refNumber.current = state.theme.stepResponse.data?.["reference-number"]);
+  const [show1stMortgageInput, setShow1stMortgageInput] = React.useState(false);
   return (
       <div className={className}>
         <Form setCurrentTheme={setCurrentTheme} endPoint={"/purchase"}>
@@ -155,18 +156,15 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   value={"first"}
                   name={"looking_for"}
                   type={"radio"}
-                  onClick={() =>
-                      document.querySelector('.mortgage_value_1').classList.remove('active')
-                  }
+                  onClick={() => setShow1stMortgageInput(false)}
+
               />
               <RadioInput
                   label={formData.section_2?.looking_for_yes_no.no}
                   value={"second"}
                   name={"looking_for"}
                   type={"radio"}
-                  onClick={() =>
-                      document.querySelector('.mortgage_value_1').classList.add('active')
-                  }
+                  onClick={() => setShow1stMortgageInput(true)}
               />
             </RadioGroup>
             
@@ -185,14 +183,13 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
               />
             </W50>
             
-            <Input
+            {show1stMortgageInput&&<Input
                 type={"number"}
                 isCurrency
-                required={false}
                 className={"mortgage_value_1"}
                 name={"mortgage_value_1"}
                 {...formData.section_2?.mortgage_value_1_input}
-            />
+            />}
             
             
             <div className="btn-group">
