@@ -112,10 +112,12 @@ const SignUpPage = ({
               {...formData.section_2?.email_input}
             />
             <Input
-              type={"text"}
+              type={"phone"}
+              isPhoneNumber
               name={"phone"}
               {...formData.section_2?.phone_input}
             />
+            
 
             <Input
               type={"password"}
@@ -282,5 +284,9 @@ export default styled(connect(SignUpPage))`
       color: #0e9564;
       margin-left: ${size(3)};
     }
+  }
+
+  .phoneMasker {
+    width: 100%;
   }
 `;

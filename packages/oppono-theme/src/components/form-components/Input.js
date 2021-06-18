@@ -141,7 +141,6 @@ const Input = React.forwardRef(
 							name="input-name"
 							className="normal-input currency-input"
 							prefix="$"
-							required={required}
 							decimalsLimit={2}
 							placeholder={placeholder}
 							onBlur={(e) => {
