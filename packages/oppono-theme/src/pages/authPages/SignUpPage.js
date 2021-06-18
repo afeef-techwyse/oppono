@@ -114,7 +114,7 @@ const SignUpPage = ({
             <Input
               type={"phone"}
               isPhoneNumber
-              name={"phone"}
+              name={"broker_phone"}
               {...formData.section_2?.phone_input}
             />
             
