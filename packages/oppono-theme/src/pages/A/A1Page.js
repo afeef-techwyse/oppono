@@ -533,7 +533,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                             <p>
                                               $
                                               {numberWithCommas(
-                                                  monthlyPayments(mortgage, +rate / 100)
+                                                  monthlyPayments(mortgage, +rate)
                                               )}{" "}
                                               / month
                                             </p>
@@ -674,7 +674,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                               <p>
                                                 $
                                                 {numberWithCommas(
-                                                    monthlyPayments(mortgage, +rate / 100)
+                                                    monthlyPayments(mortgage, +rate)
                                                 )}{" "}
                                                 / month
                                               </p>

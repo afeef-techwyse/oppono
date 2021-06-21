@@ -306,7 +306,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                                       (+section1Values("home_value") *
                                                           maximum_ltv) /
                                                       100,
-                                                      +rate / 100
+                                                      +rate
                                                   )
                                               )}{" "}
                                               / month
@@ -439,7 +439,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                                         (+section1Values("home_value") *
                                                             maximum_ltv) /
                                                         100,
-                                                        +rate / 100
+                                                        +rate
                                                     )
                                                 )}{" "}
                                                 / month
