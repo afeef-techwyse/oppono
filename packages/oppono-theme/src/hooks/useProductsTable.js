@@ -8,8 +8,9 @@ export default function useProductsTable(stepResponse = {}, productsTableInitial
     try {
       const data = stepResponse.data?.data;
       if (data) {
+        console.log('data', data);
         const specifications = Object.entries(data).reduce((combinedSpecifications, [type, {products}]) => {
-          products.length && (combinedSpecifications[type] || (combinedSpecifications[type] = {}));
+          (combinedSpecifications[type] || (combinedSpecifications[type] = {}));
           return products.reduce((typeSpecifications, product) =>
                   product.fields.specifications.reduce((typeSpecifications, specification) => {
                     const id = specification.term_id === 13?0:specification.term_id;
@@ -25,7 +26,7 @@ export default function useProductsTable(stepResponse = {}, productsTableInitial
         }, {});
         setProductsTable(specifications);
         const filters = {'*': 'All'};
-        Object.entries(data).map(([type]) => filters[type] = type);
+        Object.entries(data).map(([type,{products}]) => products.length && (filters[type] = type));
         setProductsFilter(filters);
       }
     } catch (e) {

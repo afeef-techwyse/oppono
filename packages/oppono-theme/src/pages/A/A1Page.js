@@ -473,7 +473,9 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                         className={"form-wide-container"}
                         filters={productsFilter}
                     >
-                      {Object.entries(state.theme.stepResponse.data?.data).map(
+                      {Object.entries(state.theme.stepResponse.data?.data)
+                          .filter(([, {products}])=>products.length)
+                          .map(
                           ([type, {products}], index) => (
                               <ProductsTable key={type} dataFilter={type}>
                                 <thead>
@@ -634,15 +636,18 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                 )}
                                 </tbody>
                               </ProductsTable>
+                              
                           )
                       )}
                     </FormFilter>
                 ) : (
                     <div className="mortgage-options-mobile">
                       <FormFilter filters={productsFilter}>
-                        {Object.entries(state.theme.stepResponse.data?.data).map(
+                        {Object.entries(state.theme.stepResponse.data?.data)
+                            .filter(([, {products}])=>products.length)
+                            .map(
                             ([type, {products}, index]) => (
-                                <div key={type} data-filter={type}>
+                               <div key={type} data-filter={type}>
                                   {products.map(
                                       (
                                           {
