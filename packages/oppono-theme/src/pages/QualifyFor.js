@@ -324,6 +324,7 @@ export default styled(connect(QualifyFor))`
 
 	.form-wide-container {
 		margin-top: 4rem;
+    max-width: initial !important;
 	}
 
   .btn-group.megalonum {

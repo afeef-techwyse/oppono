@@ -124,7 +124,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   name: "postal_code",
                   ...formData.section_1?.postal_code_input,
                 }}
-                posta lCodeOnChange={postalCodeOnChange}
+                postalCodeOnChange={postalCodeOnChange}
             />
             <Select
                 name={"property_details_1"}
