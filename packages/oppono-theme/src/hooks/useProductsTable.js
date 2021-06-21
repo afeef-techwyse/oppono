@@ -28,7 +28,7 @@ export default function useProductsTable(stepResponse = {}, productsTableInitial
         }, {});
         setProductsTable(specifications);
         const filters = {'*': 'All'};
-        Object.entries(data).map(([type,{products}]) => products.length && (filters[type] = type));
+        Object.entries(data).map(([type,{products}]) => products?.length && (filters[type] = type));
         setProductsFilter(filters);
       }
     } catch (e) {
