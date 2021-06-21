@@ -442,6 +442,7 @@ export default styled(connect(FormStep))`
       width: 12rem;
 
       @media (max-width: 575.98px) {
+				display: none;
       }
     }
   }
