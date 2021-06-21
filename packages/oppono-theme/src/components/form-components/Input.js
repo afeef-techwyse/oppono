@@ -343,12 +343,14 @@ padding-left: 8px !important;;
 
 	.currencyMasker{
 		display: none;
+		width: 100%;
 		&[data-currency='true'] {
 			display: block;
 		}
 	}
 	.phoneMasker{
 		display: none;
+		width: 100%;
 		&[data-phone='true'] {
 			display: block;
 		}
