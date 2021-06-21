@@ -97,6 +97,8 @@ margin-bottom: ${size(15)};
   }
 }
 &.appraiser-wide{
+max-width: 72em;
+margin: auto;
 padding-top: 0;
 margin-top: 0;
 border-top:none;
