@@ -9,7 +9,7 @@ export default function useProductsTable(stepResponse = {}, productsTableInitial
       const data = stepResponse.data?.data;
       if (data) {
         const specifications = Object.entries(data).reduce((combinedSpecifications, [type, {products}]) => {
-          combinedSpecifications[type] || (combinedSpecifications[type] = {});
+          products.length && (combinedSpecifications[type] || (combinedSpecifications[type] = {}));
           return products.reduce((typeSpecifications, product) =>
                   product.fields.specifications.reduce((typeSpecifications, specification) => {
                     const id = specification.term_id === 13?0:specification.term_id;
