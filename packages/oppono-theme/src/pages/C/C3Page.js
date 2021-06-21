@@ -219,7 +219,7 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
             </div>
             {state.theme.stepResponse.data?.data ? (
                 media !== "mobile" ? Object.entries(state.theme.stepResponse.data?.data)
-                    .filter(([, {products}])=>products.length)
+                    .filter(([, {products}])=>products?.length)
                     .map(
                     ([type, {products}], index) => {
                       const hasVariable = false;
@@ -406,7 +406,7 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 ) : (
                     <div className="mortgage-options-mobile">
                       {Object.entries(state.theme.stepResponse.data?.data)
-                          .filter(([, {products}])=>products.length)
+                          .filter(([, {products}])=>products?.length)
                           .map(
                           ([type, {products}]) => {
                             const hasVariable = type === "first" || type === "second";

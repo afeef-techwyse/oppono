@@ -82,7 +82,6 @@ const EPage = ({className, setCurrentTheme, actions, state, formData}) => {
               data.append('postal_code', postalCode.trim().slice(0, 3));
               opponoApi.post('/appraiser-lookup', data)
                   .then(response => {
-                    console.log(response);
                     if (response.data.length !== 1) {
                       actions.theme.setAppraiser({});
                       setPostalCodeErrorMessage('no appraisers found for this postal code');

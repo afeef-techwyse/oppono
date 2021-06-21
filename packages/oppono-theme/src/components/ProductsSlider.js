@@ -140,7 +140,6 @@ const Slider = styled(Swiper)`
 `;
 
 const createSlideAnimation = (slide, paused = true, initial = false) => {
-  console.log(slide);
   if (!slide) return;
   const title = slide.querySelector(".title"),
     number = slide.querySelector(".number"),
@@ -249,7 +248,6 @@ const ProductsSlider = ({
       for (let i = 0; i < slides?.length; i++) {
         slidesAnimation.current[i] = createSlideAnimation(slides[i]);
       }
-      console.log("wait");
       setSwiperRef(swiper);
     }, 500);
   };
@@ -262,7 +260,6 @@ const ProductsSlider = ({
   }, []);
 
   React.useEffect(() => {
-    console.log("data.ready==========================");
     allProductsFetched.current = slidesObj.map((slide) => {
       return actions.source.fetch(
         "/" + slide.product.post_type + "/" + slide.product.post_name
@@ -271,11 +268,9 @@ const ProductsSlider = ({
   }, [data.isReady]);
 
   React.useEffect(() => {
-    console.log("swiper.ready=========================");
     if (!swiperRef) {
       return;
     }
-    console.log(slidesAnimation.current[0]);
     const nextArrow = nextBtnRef.current.querySelectorAll("svg path"),
       prevArrow = prevBtnRef.current.querySelectorAll("svg path");
     initialTimeline.current.clear();

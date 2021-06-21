@@ -474,7 +474,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                         filters={productsFilter}
                     >
                       {Object.entries(state.theme.stepResponse.data?.data)
-                          .filter(([, {products}])=>products.length)
+                          .filter(([, {products}])=>products?.length)
                           .map(
                           ([type, {products}], index) => (
                               <ProductsTable key={type} dataFilter={type}>
@@ -644,7 +644,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                     <div className="mortgage-options-mobile">
                       <FormFilter filters={productsFilter}>
                         {Object.entries(state.theme.stepResponse.data?.data)
-                            .filter(([, {products}])=>products.length)
+                            .filter(([, {products}])=>products?.length)
                             .map(
                             ([type, {products}, index]) => (
                                <div key={type} data-filter={type}>
