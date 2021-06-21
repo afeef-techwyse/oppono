@@ -10,7 +10,7 @@ export default function useProductsTable(stepResponse = {}, productsTableInitial
       if (data) {
         console.log('data', data);
         const specifications = Object.entries(data).reduce((combinedSpecifications, [type, {products}]) => {
-          console.log(type,products)
+          console.log(type,products);
           (combinedSpecifications[type] || (combinedSpecifications[type] = {}));
           products?.reduce((typeSpecifications, product) =>
                   product.fields.specifications.reduce((typeSpecifications, specification) => {
