@@ -56,9 +56,9 @@ const MapPage = ({className, actions, state, libraries}) => {
   const [postalCodeErrorMessage, setPostalCodeErrorMessage] = React.useState(
       ""
   );
-  
+
   // const geocoderAPIRef = React.useRef(null);
-  
+
   const initMap = () => {
     mapAPIRef.current = new window.google.maps.Map(mapRef.current, {
       center: {lat: 43.653226, lng: -79.3831843},
@@ -88,14 +88,14 @@ const MapPage = ({className, actions, state, libraries}) => {
       }
       return bounds;
     };
-    
+
     // geocoderAPIRef.current = new window.google.maps.Geocoder();
     // geocoderAPIRef.current.geocode({address: 'canada+toronto'}, (results, status) => {
     //   if (status === window.google.maps.GeocoderStatus.OK) {
     //   }
     // });
   };
-  
+
   React.useEffect(() => {
     actions.source.fetch("appraisers-map-lookup");
     if (!window.google) {
@@ -108,7 +108,7 @@ const MapPage = ({className, actions, state, libraries}) => {
       initMap();
     }
   }, []);
-  
+
   // const windowSize = useWindowSize();
   const [appraiser, setAppraiser] = React.useState([{}]);
   const postal_city = React.useRef({postalCode: "", city: ""});
@@ -142,9 +142,9 @@ const MapPage = ({className, actions, state, libraries}) => {
   React.useEffect(() => {
     actions.theme.setActiveTheme("gray-theme");
   }, []);
-  
+
   const Html2React = libraries.html2react.Component;
-  
+
   return (
       <div className={classnames(className)}>
         <div className="map" ref={mapRef}/>
@@ -269,7 +269,7 @@ export default styled(connect(MapPage))`
   position: relative;
   display: flex;
   align-items: center;
-  
+
   &:before {
     content: "";
     position: absolute;
@@ -280,20 +280,20 @@ export default styled(connect(MapPage))`
     background: rgba(0, 0, 0, 0.3);
     z-index: 0;
   }
-  
+
   ${Header} {
     background: none !important;
   }
-  
+
   .container {
     margin-top: 50px;
   }
-  
+
   header .container,
   footer .container {
     margin-top: 0px;
   }
-  
+
   .map-wrapper {
     display: flex;
     align-items: center;
@@ -312,47 +312,45 @@ export default styled(connect(MapPage))`
       transform: scale(0.68);
       margin-top: -1rem;
     }
-    @media (max-height: 850px) {
-      transform: scale(0.8);
-    }
-    
+
     @media (max-width: 575.98px) {
       margin: auto;
       position: fixed;
-      top: 80px;
+      top: 15%;
       left: 0;
       overflow: scroll;
       padding-bottom: 8rem;
       width: 100%;
       z-index: 100;
     }
-    
+
     .col-left {
       display: flex;
       flex-direction: column;
       max-width: ${size(660)};
       background: #161a20b8;
       padding: ${size(40)};
-      
+
       @media (max-width: 991.98px) {
         margin-bottom: ${size(50)};
       }
-      
+
       @media (max-width: 575.98px) {
         padding: 2rem;
+				background: #161a20;
       }
-      
+
       .inputs-group {
         display: flex;
         align-items: center;
-        
+
         .form-group {
           margin: 0;
           flex-grow: 1;
           flex-basis: 50%;
           width: 100%;
         }
-        
+
         p {
           color: #bfb6b4;
           font-size: ${size(16)};
@@ -362,7 +360,7 @@ export default styled(connect(MapPage))`
             margin: ${size(20)} 0;
           }
         }
-        
+
         margin-top: ${size(15)};
         @media (max-width: 991.98px) {
           margin-top: ${size(63)};
@@ -373,7 +371,7 @@ export default styled(connect(MapPage))`
           align-items: flex-start;
         }
       }
-      
+
       .headline-1 {
         color: #bfb6b4;
         font-size: ${size(40)};
@@ -388,7 +386,7 @@ export default styled(connect(MapPage))`
           text-align: center;
         }
       }
-      
+
       .headline-2 {
         color: rgba(191, 182, 180, 0.5);
         font-size: ${size(29)};
@@ -402,30 +400,30 @@ export default styled(connect(MapPage))`
           font-size: ${size(28)};
         }
       }
-      
+
       .btn-group {
         margin-top: ${size(80)};
-        
+
         button {
           width: 50%;
           max-width: unset;
           margin: 0;
-          
+
           &:first-of-type {
             margin-right: ${size(20)};
           }
         }
-        
+
         @media (max-width: 991.98px) {
           display: none;
         }
       }
     }
-    
+
     .col-right {
       display: flex;
       flex-direction: column;
-      
+
       .appraisal-block {
         padding: ${size(60)} ${size(45)} ${size(45)};
         display: flex;
@@ -438,12 +436,12 @@ export default styled(connect(MapPage))`
           padding: 2rem;
           text-align: center;
         }
-        
+
         &:first-of-type:not(:only-of-type) {
           margin-bottom: 5vh;
         }
       }
-      
+
       h3 {
         color: #bfb6b4;
         font-size: ${size(56)};
@@ -455,25 +453,25 @@ export default styled(connect(MapPage))`
           text-align: center;
         }
       }
-      
+
       .text {
         color: #bfb6b4;
         font-size: ${size(16)};
         font-weight: 200;
       }
-      
+
       .bold {
         font-weight: 500;
         margin-top: ${size(16)};
       }
-      
+
       .ltv {
         color: #bfb6b4;
         font-size: ${size(30)};
         font-weight: 200;
         line-height: ${size(39)};
       }
-      
+
       hr {
         background-color: rgba(191, 182, 180, 0.1);
         margin: ${size(20)} 0;
@@ -483,7 +481,7 @@ export default styled(connect(MapPage))`
           margin: ${size(15)} auto;
         }
       }
-      
+
       button {
         display: none;
         @media (max-width: 991.98px) {
@@ -497,11 +495,11 @@ export default styled(connect(MapPage))`
       }
     }
   }
-  
+
   .cf {
     clear: both;
   }
-  
+
   .map {
     width: 100%;
     height: 100%;
@@ -513,33 +511,33 @@ export default styled(connect(MapPage))`
       position: absolute !important;
     }
   }
-  
+
   footer {
     @media (min-width: 575.98px) {
       background: none !important;
     }
   }
-  
+
   ${Input} {
     .normal-input {
       font-size: ${size(30)};
-      
+
       &::placeholder {
         font-size: ${size(30)};
       }
     }
-    
+
     @media (max-width: 450px) {
       .normal-input {
         font-size: ${size(20)};
-        
+
         &::placeholder {
           font-size: ${size(20)};
         }
       }
     }
   }
-  
+
   ${Select} {
     .oppono-select {
       &__option,
@@ -550,7 +548,7 @@ export default styled(connect(MapPage))`
         padding-left: 8px !important;;
       }
     }
-    
+
     @media (max-width: 450px) {
       .oppono-select {
         &__option,
@@ -562,11 +560,11 @@ export default styled(connect(MapPage))`
       }
     }
   }
-  
+
   ${Container}.flex {
     display: flex;
   }
-  
+
   .error-message {
     color: red;
     font-size: ${size(16)};
@@ -574,7 +572,7 @@ export default styled(connect(MapPage))`
     margin-top: ${size(50)};
     text-align: center;
     display: block;
-    
+
     a {
       font-size: ${size(18)};
       color: #bfb6b4;
