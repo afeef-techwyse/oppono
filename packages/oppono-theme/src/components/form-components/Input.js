@@ -136,38 +136,38 @@ const Input = React.forwardRef(
       >
         <Label error={errorMessage} fieldName={name} invalid={invalid}>
           <div className="label-text">{label}</div>
-					<div className="currencyMasker" data-currency={isCurrency}>
-						<CurrencyInput
-							name="input-name"
-							className="normal-input currency-input"
-							prefix="$"
-							decimalsLimit={2}
-							placeholder={placeholder}
-							onBlur={(e) => {
-								e.currentTarget.closest('label').querySelector('input:not(.currency-input)').value = parseFloat(e.currentTarget.value.replace(/\$|,/g, ''))
-							}}
-							onChange={(e) => {
-								e.persist();
-								visited && validateInput();
-								setValue(e.target.value.replace(/\$|,/g, ''));
-								onChange?.(e);
-								const selection = inputRef.current.selectionStart;
-								requestAnimationFrame(() =>
-									inputRef.current.setSelectionRange(selection, selection)
-								);
-							}}
-						/>
-					</div>
-					<div className="phoneMasker" data-phone={isPhoneNumber}>
-						<PhoneInput
-						type="text"
-						placeholder={placeholder}
-						name="phone"
-						className="normal-input"
-						country="US"
-						value={value}
-						onChange={setValue} />
-					</div>
+          {isCurrency && <div className="currencyMasker" data-currency={isCurrency}>
+            <CurrencyInput
+                name="input-name"
+                className="normal-input currency-input"
+                prefix="$"
+                decimalsLimit={2}
+                placeholder={placeholder}
+                onBlur={(e) => {
+                  e.currentTarget.closest('label').querySelector('input:not(.currency-input)').value = parseFloat(e.currentTarget.value.replace(/\$|,/g, ''))
+                }}
+                onChange={(e) => {
+                  e.persist();
+                  visited && validateInput();
+                  setValue(e.target.value.replace(/\$|,/g, ''));
+                  onChange?.(e);
+                  const selection = inputRef.current.selectionStart;
+                  requestAnimationFrame(() =>
+                      inputRef.current.setSelectionRange(selection, selection)
+                  );
+                }}
+            />
+          </div>}
+          {isPhoneNumber && <div className="phoneMasker" data-phone={isPhoneNumber}>
+            <PhoneInput
+                type="text"
+                placeholder={placeholder}
+                name="phone"
+                className="normal-input"
+                country="US"
+                value={value}
+                onChange={setValue} />
+          </div>}
           <input
             defaultValue={defaultValue}
             ref={inputRef}

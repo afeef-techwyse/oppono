@@ -60,7 +60,9 @@ const DPage = ({ className, setCurrentTheme, state, actions }) => {
                     />
                   </Link>
                 </div>
-                {Object.entries(state.theme.stepResponse.data?.data).map(
+                {Object.entries(state.theme.stepResponse.data?.data)
+                    .filter(([, {products}])=>products?.length)
+                    .map(
                   ([type, { products }], index) => {
                     const hasVariable = type === "first" || type === "second";
                     return (
@@ -228,7 +230,9 @@ const DPage = ({ className, setCurrentTheme, state, actions }) => {
                       />
                     </Link>
                   </div>
-                  {Object.entries(state.theme.stepResponse.data?.data).map(
+                  {Object.entries(state.theme.stepResponse.data?.data)
+                      .filter(([, {products}])=>products?.length)
+                      .map(
                     ([type, { products }, index]) => {
                       const hasVariable = type === "first" || type === "second";
 

@@ -55,7 +55,6 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
     newProducts[2]&&(newProducts[2].typeName = 'HELOC');
     setProducts(newProducts);
   }, [state.theme.stepResponse.data?.data]);
-  console.log(products);
   const mortgage = +section1Values('home_value') || 0;
 
   return <div className={className}>

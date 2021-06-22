@@ -229,7 +229,9 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                         className={"form-wide-container"}
                         filters={productsFilter}
                     >
-                      {Object.entries(state.theme.stepResponse.data?.data).map(
+                      {Object.entries(state.theme.stepResponse.data?.data)
+                          .filter(([, {products}])=>products?.length)
+                          .map(
                           ([type, {products}], index) => (
                               <ProductsTable
                                   products={productsTable}
@@ -304,7 +306,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                                       (+section1Values("home_value") *
                                                           maximum_ltv) /
                                                       100,
-                                                      +rate / 100
+                                                      +rate
                                                   )
                                               )}{" "}
                                               / month
@@ -403,7 +405,9 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 ) : (
                     <div className="mortgage-options-mobile">
                       <FormFilter filters={productsFilter}>
-                        {Object.entries(state.theme.stepResponse.data?.data).map(
+                        {Object.entries(state.theme.stepResponse.data?.data)
+                            .filter(([, {products}])=>products?.length)
+                            .map(
                             ([type, {products}, index]) => (
                                 <div key={type} data-filter={type}>
                                   {products.map(
@@ -435,7 +439,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                                         (+section1Values("home_value") *
                                                             maximum_ltv) /
                                                         100,
-                                                        +rate / 100
+                                                        +rate
                                                     )
                                                 )}{" "}
                                                 / month

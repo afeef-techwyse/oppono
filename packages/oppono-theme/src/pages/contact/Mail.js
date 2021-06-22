@@ -21,7 +21,6 @@ const Mail = ({ className, state, actions }) => {
   const data = state.source.get(state.router.link);
   const pageData =
     data.isReady && !data.isError ? state.source[data.type][data.id].acf : {};
-  console.log(pageData);
   const [currentTheme, setCurrentTheme] = React.useState("gray-theme");
   const pageName = "contact";
   React.useEffect(() => {
