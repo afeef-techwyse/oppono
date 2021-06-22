@@ -406,7 +406,7 @@ const GeneralStyles = (props) => (
 
 			.form-wide-container {
 				@media (min-width: 1200px) {
-					max-width: 70% !important;
+					max-width: 72rem !important;
 					margin: auto;
 				}
 			}
