@@ -135,6 +135,7 @@ export default styled(connect(FormsPage))`
 
     @media (max-width: 575.98px) {
       padding-bottom: ${size(100)};
+			display: block;
     }
   }
 `;
