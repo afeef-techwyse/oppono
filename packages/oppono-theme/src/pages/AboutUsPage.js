@@ -66,7 +66,13 @@ export default styled(connect(AboutUsPage))`
     font-size: 8rem;
     max-width: 80rem;
     margin: auto;
+
+		@media (max-width: 768px) {
+			font-size: 3.5rem;
+    	line-height: 1.4;
     }
+    }
+
 
     .html2react {
       margin-top: 1rem;
