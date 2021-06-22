@@ -244,6 +244,7 @@ export default styled(Input)`
     border: none;
     background: transparent;
     outline: none;
+		border-radius: 0 !important;
     border-bottom: 1px solid rgba(191, 182, 180, 0.5);
     height: ${size(43)};
     padding: 0 0 ${size(6)};
