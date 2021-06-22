@@ -59,11 +59,11 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
       section4Values = getC1Values(formData.section_4?.section_name),
       section5Values = getC1Values(formData.section_5?.section_name),
       section6Values = getC1Values(formData.section_6?.section_name);
-  
+
   const [step1Valid, setStep1Valid] = React.useState(false);
-  
+
   const media = useMedia();
-  
+
   React.useEffect(() => {
     actions.theme.setSubHeader(formData.sub_header);
   }, [formData]);
@@ -75,18 +75,18 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
         first: response.data.first,
         second: response.data.second,
       };
-      
+
       response.data.data = products;
       actions.theme.setStepResponse(response);
       // actions.theme.setStepResponse({data:{data:products}});
     });
   }, []);
-  
+
   React.useEffect(() => {
     actions.theme.checkUser();
   }, [state.theme.user.logged]);
   const [[appraiser], postalCodeOnChange] = useFlowAppraisers();
-  
+
   const [productsTable, productsFilter] = useProductsTable(
       state.theme.stepResponse
   );
@@ -98,15 +98,15 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
       +section5Values("fm_amount") ||
       0 ||
       0;
-  
+
   const firstProduct = state.theme.stepResponse.data?.data
       ? Object.values(state.theme.stepResponse.data?.data)[0].products[0]
       : {};
-  
+
   const refNumber = React.useRef("");
   state.theme.stepResponse.data?.["reference-number"] &&
   (refNumber.current = state.theme.stepResponse.data?.["reference-number"]);
-  
+
   return (
       <div className={className}>
         <Form setCurrentTheme={setCurrentTheme} endPoint={"/refinance"}>
@@ -342,7 +342,7 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                   <td scope={"row"} className={"dark"}>
                                     Fixed rate
                                   </td>
-                                  
+
                                   {products.map(({ID, fields: {rate}}) => (
                                       <td
                                           key={ID}
@@ -391,7 +391,7 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                       </td>
                                   ))}
                                 </tr>
-                                
+
                                 {productsTable[type] &&
                                 Object.entries(productsTable[type]).map(
                                     ([id, {name, specificationProducts}]) => (
@@ -625,7 +625,7 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 {...formData.section_5?.estimated_value_input}
                 value={section1Values("home_value")}
             />
-            
+
             <FormConditionalInput
                 name={"have_mortgage_1"}
                 showOn={"1"}
@@ -654,7 +654,7 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 </FormConditionalInput>
               </>
             </FormConditionalInput>
-            
+
             <FormConditionalInput
                 name={"have_outstanding_amount"}
                 showOn={"1"}
@@ -668,7 +668,7 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   {...formData.section_5?.outstanding_balance_amount_input}
               />
             </FormConditionalInput>
-            
+
             <FormConditionalInput
                 name={"add_mortgage_2"}
                 showOn={"0"}
@@ -695,7 +695,7 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   {...formData.section_5?.add_mortgage_amount_input}
               />
             </FormConditionalInput>
-            
+
             <div className="btn-group">
               <Button className={"bordered prev-step"} label={"Back"}/>
               <Button icon={true} className={"next-step"} label={"Next"}/>
@@ -715,7 +715,7 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
               onNext={() => (state.theme.stepResponse.data?.data
                   ? Object.values(state.theme.stepResponse.data?.data)[0].products
                   : []).length || actions.router.set('/not-qualified')}
-          
+
           >
             <input type={'hidden'} name={`ltv`} value={(mortgage / +section1Values('home_value') * 100).toFixed?.(1)}/>
             <div className="form-text-wrapper">
@@ -791,7 +791,7 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                     100
                 )}
             />
-            
+
             <div className="form-text-wrapper wide-text">
               <h1 className={"form-headline-1 text-left"}>
                 {formData.section_7?.title}
@@ -801,7 +801,7 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
               </h2>
               <h2 className={"form-headline-3 primary"}>
                 You are requesting a home equity line of credit against your{" "}
-                
+
                 {section4Values("property_details_1")} home which is located at{" "}
                 <br/> {section4Values("address")}, {section4Values("city")},{" "}
                 {section4Values("postal_code")}
@@ -821,7 +821,7 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                       <P.Num>{firstProduct.fields?.rate}%</P.Num>
                     </FinalizeChild>
                 )}
-                
+
                 <FinalizeChild order={2}>
                   <P.Cost>${numberWithCommas(mortgage)}</P.Cost>
                   <P.Dark>*mortgage amount</P.Dark>
@@ -959,7 +959,7 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                       </FinalizeTable>
                     </FinalizeChild>
                 )}
-                
+
                 <FinalizeChild order={2} className={"full m-border"}>
                   <FinalizeTable>
                     <tbody>
@@ -1142,7 +1142,7 @@ export default styled(connect(C1Page))`
   }
 
   .wide-text {
-    max-width: 80%;
+    max-width: 85rem;
     .form-headline-3 {
       max-width: ${size(400)};
       @media (max-width: 575.98px) {

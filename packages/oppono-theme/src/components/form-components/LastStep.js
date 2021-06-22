@@ -59,7 +59,7 @@ export default styled(LastStep)`
         text-align: left;
         @media (max-width: 991.98px) {
           text-align: center;
-          max-width: 80%;
+          max-width: 85rem;
           margin-right: auto;
           margin-left: auto;
         }

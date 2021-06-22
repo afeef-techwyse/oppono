@@ -78,7 +78,7 @@ export default styled(connect(Missing404))`
 
     p {
       font-size: ${size(22)};
-      max-width: 80%;
+      max-width: 85rem;
       text-align: center;
 
       span {

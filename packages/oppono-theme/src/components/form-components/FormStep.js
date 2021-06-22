@@ -420,18 +420,18 @@ export default styled(connect(FormStep))`
     }
   }
   .form-text-wrapper {
-    max-width: ${size(720)};
+    max-width: ${size(850)};
     margin-right: auto;
     margin-left: auto;
     margin-bottom: 0;
   }
   div.upload-step-wrapper {
-    max-width: ${size(720)}!important;
+    max-width: ${size(850)}!important;
     margin-right: auto !important;
     margin-left: auto !important;
     position: relative;
     @media (max-width: 991.98px) {
-      max-width: ${size(720)}!important;
+      max-width: ${size(850)}!important;
       margin-left: ${size(32)}!important;
       margin-right: ${size(32)}!important;
     }

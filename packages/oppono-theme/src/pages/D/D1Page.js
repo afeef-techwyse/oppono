@@ -50,7 +50,7 @@ const D1Page = ({className, setCurrentTheme, state, actions, formData}) => {
       section2Values = getD1Values(formData.section_2?.section_name),
       section3Values = getD1Values(formData.section_3?.section_name);
   const media = useMedia();
-  
+
   React.useEffect(() => {
     actions.theme.setSubHeader(formData.sub_header);
   }, [formData]);
@@ -58,12 +58,12 @@ const D1Page = ({className, setCurrentTheme, state, actions, formData}) => {
     actions.theme.setLeadId();
     actions.theme.setStepResponse({});
   }, []);
-  
+
   React.useEffect(() => {
     actions.theme.checkUser();
   }, [state.theme.user.logged]);
   const [[appraiser], postalCodeOnChange] = useFlowAppraisers();
-  
+
   const mortgage =
       +section2Values("home_value") - +section2Values("down_payment") || 0;
   const firstProduct = state.theme.stepResponse.data?.data
@@ -174,7 +174,7 @@ const D1Page = ({className, setCurrentTheme, state, actions, formData}) => {
               onNext={() => (state.theme.stepResponse.data?.data
                   ? Object.values(state.theme.stepResponse.data?.data)[0].products
                   : []).length || actions.router.set('/not-qualified')}
-          
+
           >
             <input type={'hidden'} name={`ltv`} value={(mortgage / +section2Values('home_value') * 100).toFixed?.(1)}/>
             <div className="form-text-wrapper">
@@ -278,7 +278,7 @@ const D1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                     100
                 )}
             />
-            
+
             <div className="form-text-wrapper wide-text">
               <h1 className={"form-headline-1 text-left"}>
                 {formData.section_4?.title}
@@ -304,7 +304,7 @@ const D1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                       <P.Num>{+firstProduct.fields?.rate + 0.25}%</P.Num>
                     </FinalizeChild>
                 )}
-                
+
                 <FinalizeChild order={2}>
                   <P.Cost>${numberWithCommas(mortgage)}</P.Cost>
                   <P.Dark>*mortgage amount</P.Dark>
@@ -442,7 +442,7 @@ const D1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                       </FinalizeTable>
                     </FinalizeChild>
                 )}
-                
+
                 <FinalizeChild order={2} className={"full m-border"}>
                   <FinalizeTable>
                     <tbody>
@@ -609,10 +609,10 @@ const D1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 export default styled(connect(D1Page))`
   width: 100%;
   height: 100%;
-  
+
   ${Bottom} {
     padding-top: 0;
-    
+
     .full {
       @media (max-width: 991px) {
         flex-basis: 72%;
@@ -625,11 +625,11 @@ export default styled(connect(D1Page))`
       }
     }
   }
-  
-  
+
+
   .wide-text {
-    max-width: 80%;
-    
+    max-width: 85rem;
+
     .form-headline-3 {
       max-width: ${size(400)};
       @media (max-width: 575.98px) {

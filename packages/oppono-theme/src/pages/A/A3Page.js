@@ -44,14 +44,14 @@ import Link from "../../components/reusable/Link";
 const pageName = "a-3";
 const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
   const getA3Values = useStoredFormValue(pageName);
-  
+
   const section1Values = getA3Values(formData.section_1?.section_name),
       section2Values = getA3Values(formData.section_2?.section_name),
       section3Values = getA3Values(formData.section_3?.section_name),
       section4Values = getA3Values(formData.section_4?.section_name);
-  
+
   const media = useMedia();
-  
+
   React.useEffect(() => {
     actions.theme.setSubHeader(formData.sub_header);
   }, [formData]);
@@ -59,12 +59,12 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
     actions.theme.setLeadId();
     actions.theme.setStepResponse({});
   }, []);
-  
+
   React.useEffect(() => {
     actions.theme.checkUser();
   }, [state.theme.user.logged]);
   const [[appraiser], postalCodeOnChange] = useFlowAppraisers();
-  
+
   const mortgage = (+section2Values("home_value") || 0) -
       (+section2Values("mortgage_value_1") || 0) || 0;
   const firstProduct =
@@ -152,7 +152,7 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
                 name={"home_value"}
                 {...formData.section_2?.estimated_value_input}
             />
-            
+
             <FormConditionalInput
                 name={"have_mortgage_1"}
                 showOn={"1"}
@@ -168,7 +168,7 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
                 />
               </>
             </FormConditionalInput>
-            
+
             <div className="btn-group">
               <Button className={"bordered prev-step"} label={"Back"}/>
               <Button icon={true} className={"next-step"} label={"Next"}/>
@@ -272,7 +272,7 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
               activeTheme={formData.section_4?.section_theme}
               stepName={formData.section_4?.section_name}
               onNext={() => state.theme.stepResponse.data?.data?.heloc?.products?.length || actions.router.set('/not-qualified')}
-          
+
           >
             <input type={'hidden'} name={`ltv`} value={((section4Values('confirm_qualify_amount') === '0' ? +section4Values('amount_wanted') : mortgage) / +section2Values('home_value') * 100).toFixed?.(1)}/>
             <FlyingObjsContainer
@@ -308,7 +308,7 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
                 </p>
               </div>
             </div>
-            
+
             <FormConditionalInput
                 name={"confirm_qualify_amount"}
                 showOn={"0"}
@@ -322,7 +322,7 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
                   {...formData.section_4?.amount_want_input}
               />
             </FormConditionalInput>
-            
+
             <div className="btn-group">
               <Button className={"bordered prev-step"} label={"Back"}/>
               <Button icon={true} label={"Next"} className={"next-step"}/>
@@ -343,7 +343,7 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
               </h2>
               <h2 className={"form-headline-3 primary"}>
                 You are requesting a home equity line of credit against your{" "}
-                
+
                 {section1Values("property_details_1")} home which is located at{" "}
                 <br/> {section1Values("address")}, {section1Values("city")},{" "}
                 {section1Values("postal_code")}
@@ -363,7 +363,7 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
                     100
                 )}
             />
-            
+
             <Finalize>
               <Top>
                 {media !== "mobile" ? (
@@ -419,12 +419,12 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
                       </FinalizeTable>
                     </FinalizeChild>
                 )}
-                
+
                 <FinalizeChild order={1}>
                   <P.Dark>*Fixed rate</P.Dark>
                   <P.Dark>*Payment interest based on balance</P.Dark>
                   <p className="primary form-headline-3 text-left heloc-var">{String(firstProduct.title).split(" ")[0]} HELOC</p>
-                  
+
                   <P.Num>{+firstProduct.fields?.rate + 0.25}%</P.Num>
                   <Button label={"I’m good to go"} className={"next-step"}/>
                 </FinalizeChild>
@@ -500,7 +500,7 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
                       </FinalizeTable>
                     </FinalizeChild>
                 )}
-                
+
                 <FinalizeChild order={2} className={"full m-border"}>
                   <FinalizeTable>
                     <tbody>
@@ -654,10 +654,10 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
 export default styled(connect(A3Page))`
   width: 100%;
   height: 100%;
-  
+
   ${Bottom} {
     padding-top: 0;
-    
+
     .full {
       @media (max-width: 991px) {
         flex-basis: 72%;
@@ -670,11 +670,11 @@ export default styled(connect(A3Page))`
       }
     }
   }
-  
-  
+
+
   .wide-text {
-    max-width: 80%;
-    
+    max-width: 85rem;
+
     .form-headline-3 {
       max-width: ${size(400)};
       @media (max-width: 575.98px) {

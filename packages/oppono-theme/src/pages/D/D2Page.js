@@ -50,7 +50,7 @@ const D2Page = ({className, setCurrentTheme, state, actions, formData}) => {
       section2Values = getD2Values(formData.section_2?.section_name),
       section3Values = getD2Values(formData.section_3?.section_name);
   const media = useMedia();
-  
+
   React.useEffect(() => {
     actions.theme.setSubHeader(formData.sub_header);
   }, [formData]);
@@ -58,7 +58,7 @@ const D2Page = ({className, setCurrentTheme, state, actions, formData}) => {
     actions.theme.setLeadId();
     actions.theme.setStepResponse({});
   }, []);
-  
+
   React.useEffect(() => {
     actions.theme.checkUser();
   }, [state.theme.user.logged]);
@@ -71,14 +71,14 @@ const D2Page = ({className, setCurrentTheme, state, actions, formData}) => {
       +section2Values("fm_amount") ||
       0 ||
       0;
-  
+
   const firstProduct = state.theme.stepResponse.data?.data
       ? Object.values(state.theme.stepResponse.data?.data)[0].products[0]
       : {};
   const refNumber = React.useRef("");
   state.theme.stepResponse.data?.["reference-number"] &&
   (refNumber.current = state.theme.stepResponse.data?.["reference-number"]);
-  
+
   return (
       <div className={className}>
         <Form setCurrentTheme={setCurrentTheme} endPoint={"/refinance"}>
@@ -158,7 +158,7 @@ const D2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 name={"home_value"}
                 {...formData.section_2?.estimated_value_input}
             />
-            
+
             <FormConditionalInput
                 name={"have_mortgage_1"}
                 showOn={"1"}
@@ -187,7 +187,7 @@ const D2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 </FormConditionalInput>
               </>
             </FormConditionalInput>
-            
+
             <FormConditionalInput
                 name={"have_outstanding_amount"}
                 showOn={"1"}
@@ -201,7 +201,7 @@ const D2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   {...formData.section_2?.outstanding_balance_amount_input}
               />
             </FormConditionalInput>
-            
+
             <FormConditionalInput
                 name={"add_mortgage_2"}
                 showOn={"0"}
@@ -245,7 +245,7 @@ const D2Page = ({className, setCurrentTheme, state, actions, formData}) => {
               onNext={() => (state.theme.stepResponse.data?.data
                   ? Object.values(state.theme.stepResponse.data?.data)[0].products
                   : []).length || actions.router.set('/not-qualified')}
-          
+
           >
             <input type={'hidden'} name={`ltv`} value={(mortgage / +section2Values('home_value') * 100).toFixed?.(1)}/>
             <div className="form-text-wrapper">
@@ -374,7 +374,7 @@ const D2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                       <P.Num>{+firstProduct.fields?.rate + 0.25}%</P.Num>
                     </FinalizeChild>
                 )}
-                
+
                 <FinalizeChild order={2}>
                   <P.Cost>${numberWithCommas(mortgage)}</P.Cost>
                   <P.Dark>*mortgage amount</P.Dark>
@@ -515,7 +515,7 @@ const D2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                       </FinalizeTable>
                     </FinalizeChild>
                 )}
-                
+
                 <FinalizeChild order={2} className={"full m-border"}>
                   <FinalizeTable>
                     <tbody>
@@ -682,10 +682,10 @@ const D2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 export default styled(connect(D2Page))`
   width: 100%;
   height: 100%;
-  
+
   ${Bottom} {
     padding-top: 0;
-    
+
     .full {
       @media (max-width: 991px) {
         flex-basis: 72%;
@@ -698,11 +698,11 @@ export default styled(connect(D2Page))`
       }
     }
   }
-  
-  
+
+
   .wide-text {
-    max-width: 80%;
-    
+    max-width: 85rem;
+
     .form-headline-3 {
       max-width: ${size(400)};
       @media (max-width: 575.98px) {

@@ -59,9 +59,9 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
       section5Values = getC2Values(formData.section_5?.section_name),
       section6Values = getC2Values(formData.section_6?.section_name);
   const [step1Valid, setStep1Valid] = React.useState(false);
-  
+
   const media = useMedia();
-  
+
   React.useEffect(() => {
     actions.theme.setSubHeader(formData.sub_header);
   }, [formData]);
@@ -73,13 +73,13 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
         first: response.data.first,
         second: response.data.second,
       };
-      
+
       response.data.data = products;
       actions.theme.setStepResponse(response);
       // actions.theme.setStepResponse({data:{data:products}});
     });
   }, []);
-  
+
   React.useEffect(() => {
     actions.theme.checkUser();
   }, [state.theme.user.logged]);
@@ -379,7 +379,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                       </td>
                                   ))}
                                 </tr>
-                                
+
                                 {productsTable[type] &&
                                 Object.entries(productsTable[type]).map(
                                     ([id, {name, specificationProducts}]) => (
@@ -625,7 +625,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   onClick={() => setShow1stMortgageInput(true)}
               />
             </RadioGroup>
-            
+
             <W50>
               <Input
                   type={"number"}
@@ -640,7 +640,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   {...formData.section_5?.down_payment_input}
               />
             </W50>
-  
+
             {show1stMortgageInput &&<Input
                 type={"number"}
                 isCurrency
@@ -648,8 +648,8 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 name={"mortgage_value_1"}
                 {...formData.section_5?.mortgage_value_1_input}
             />}
-            
-            
+
+
             <div className="btn-group">
               <Button className={"bordered prev-step"} label={"Back"}/>
               <Button icon={true} className={"next-step"} label={"Next"}/>
@@ -719,7 +719,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                     />
                 )
             )}
-            
+
             <div className="btn-group">
               <Button className={"bordered prev-step"} label={"Back"}/>
               <Button icon={true} label={"Next"} className={"next-step"}/>
@@ -740,7 +740,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
               </h2>
               <h2 className={"form-headline-3 primary"}>
                 You are requesting a home equity line of credit against your{" "}
-                
+
                 {section4Values("property_details_1")} home which is located at{" "}
                 <br/> {section4Values("address")}, {section4Values("city")},{" "}
                 {section4Values("postal_code")}
@@ -760,7 +760,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                       <P.Num>{firstProduct.fields?.rate}%</P.Num>
                     </FinalizeChild>
                 )}
-                
+
                 <FinalizeChild order={2}>
                   <P.Cost>${numberWithCommas(mortgage)}</P.Cost>
                   <P.Dark>*mortgage amount</P.Dark>
@@ -898,7 +898,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                       </FinalizeTable>
                     </FinalizeChild>
                 )}
-                
+
                 <FinalizeChild order={2} className={"full m-border"}>
                   <FinalizeTable>
                     <tbody>
@@ -1080,7 +1080,7 @@ export default styled(connect(C2Page))`
     }
   }
   .wide-text {
-    max-width: 80%;
+    max-width: 85rem;
     .form-headline-3 {
       max-width: ${size(400)};
       @media (max-width: 575.98px) {

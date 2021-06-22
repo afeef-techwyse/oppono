@@ -227,7 +227,7 @@ export default styled(connect(EPage))`
   .fix-filter-e {
     margin-bottom: ${size(22)};
     border-bottom: ${size(1)} solid #bfb6b4;
-    max-width: 80%;
+    max-width: 85rem;
     padding-bottom: ${size(22)};
     align-items: center;
   }

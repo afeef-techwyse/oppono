@@ -245,7 +245,7 @@ export default styled(Intro)`
     max-width: ${size(495)};
     z-index: 1;
     @media (max-width: 575px) {
-      max-width: 80%;
+      max-width: 85rem;
       font-size: ${size(22)};
       line-height: ${size(34)};
     }

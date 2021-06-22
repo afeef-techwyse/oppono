@@ -49,20 +49,20 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
       section5Values = getC3Values(formData.section_5?.section_name),
       section6Values = getC3Values(formData.section_6?.section_name),
       section7Values = getC3Values(formData.section_7?.section_name);
-  
+
   const [step1Valid, setStep1Valid] = React.useState(false);
   const media = useMedia();
-  
+
   React.useEffect(() => {
     actions.theme.setSubHeader(formData.sub_header);
   }, [formData]);
   React.useEffect(() => {
     actions.theme.setLeadId();
     actions.theme.setStepResponse({});
-    
+
     const data = new FormData();
     data.append('type', 'HELOC');
-    
+
     opponoApi.post("/product-qualification", data).then((response) => {
       response.data.data = {
         heloc: response.data.heloc,
@@ -71,12 +71,12 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
       // actions.theme.setStepResponse({data:{data:products}});
     });
   }, []);
-  
+
   React.useEffect(() => {
     actions.theme.checkUser();
   }, [state.theme.user.logged]);
   const [[appraiser], postalCodeOnChange] = useFlowAppraisers();
-  
+
   const [productsTable, productsFilter] = useProductsTable(
       state.theme.stepResponse
   );
@@ -89,7 +89,7 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
   const refNumber = React.useRef("");
   state.theme.stepResponse.data?.["reference-number"] &&
   (refNumber.current = state.theme.stepResponse.data?.["reference-number"]);
-  
+
   return (
       <div className={className}>
         <Form setCurrentTheme={setCurrentTheme} endPoint={"/heloc"}>
@@ -381,7 +381,7 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                   </td>
                               ))}
                             </tr>
-                            
+
                             {productsTable[type] &&
                             Object.entries(productsTable[type]).map(
                                 ([id, {name, specificationProducts}]) => (
@@ -619,7 +619,7 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 name={`home_value`}
                 value={section1Values("home_value")}
             />
-            
+
             <FormConditionalInput
                 name={"have_mortgage_1"}
                 showOn={"1"}
@@ -648,7 +648,7 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 </FormConditionalInput>
               </>
             </FormConditionalInput>
-            
+
             <FormConditionalInput
                 name={"have_outstanding_amount"}
                 showOn={"1"}
@@ -662,7 +662,7 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   {...formData.section_5?.outstanding_balance_amount_input}
               />
             </FormConditionalInput>
-            
+
             <div className="btn-group">
               <Button className={"bordered prev-step"} label={"Back"}/>
               <Button icon={true} className={"next-step"} label={"Next"}/>
@@ -764,7 +764,7 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   },
                 ]}
             />
-            
+
             <div className="form-text-wrapper">
               <h1 className={"form-headline-1 primary"}>
                 {formData.section_7?.qualify_for}
@@ -776,7 +776,7 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 </p>
               </div>
             </div>
-            
+
             <FormConditionalInput
                 name={"confirm_qualify_amount"}
                 showOn={"0"}
@@ -789,7 +789,7 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   {...formData.section_7?.amount_want_input}
               />
             </FormConditionalInput>
-            
+
             <div className="btn-group">
               <Button className={"bordered prev-step"} label={"Back"}/>
               <Button icon={true} label={"Next"} className={"next-step"}/>
@@ -810,7 +810,7 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
               </h2>
               <h2 className={"form-headline-3 primary"}>
                 You are requesting a home equity line of credit against your{" "}
-                
+
                 {section4Values("property_details_1")} home which is located at{" "}
                 <br/> {section4Values("address")}, {section4Values("city")},{" "}
                 {section4Values("postal_code")}
@@ -871,7 +871,7 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
                       </FinalizeTable>
                     </FinalizeChild>
                 )}
-                
+
                 <FinalizeChild order={1}>
                   <P.Dark>*Fixed rate</P.Dark>
                   <P.Dark>*Payment interest based on balance</P.Dark>
@@ -951,7 +951,7 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
                       </FinalizeTable>
                     </FinalizeChild>
                 )}
-                
+
                 <FinalizeChild order={2} className={"full m-border"}>
                   <FinalizeTable>
                     <tbody>
@@ -1120,7 +1120,7 @@ export default styled(connect(C3Page))`
     }
   }
   .wide-text {
-    max-width: 80%;
+    max-width: 85rem;
     .form-headline-3 {
       max-width: ${size(400)};
       @media (max-width: 575.98px) {

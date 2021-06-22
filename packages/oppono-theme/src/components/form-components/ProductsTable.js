@@ -98,6 +98,8 @@ export default styled(ProductsTable)`
         text-align: left;
         padding-bottom: ${size(22)};
         vertical-align: bottom;
+				padding-left: ${size(10)};
+				padding-right: ${size(10)};
         &:first-of-type {
           vertical-align: middle;
         }
@@ -121,7 +123,7 @@ export default styled(ProductsTable)`
             color: rgba(191, 182, 180, 0.5);
           }
           &.number {
-            font-size: ${size(56)};
+            font-size: ${size(45)};
             font-weight: 200;
             line-height: ${size(64)};
             margin-top: ${size(4)};

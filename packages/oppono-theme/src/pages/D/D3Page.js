@@ -52,9 +52,9 @@ const D3Page = ({state, setCurrentTheme, actions, className, formData}) => {
       section2Values = getD3Values(formData.section_2?.section_name),
       section3Values = getD3Values(formData.section_3?.section_name),
       section4Values = getD3Values(formData.section_4?.section_name);
-  
+
   const media = useMedia();
-  
+
   React.useEffect(() => {
     actions.theme.setSubHeader(formData.sub_header);
   }, [formData]);
@@ -62,12 +62,12 @@ const D3Page = ({state, setCurrentTheme, actions, className, formData}) => {
     actions.theme.setLeadId();
     actions.theme.setStepResponse({});
   }, []);
-  
+
   React.useEffect(() => {
     actions.theme.checkUser();
   }, [state.theme.user.logged]);
   const [[appraiser], postalCodeOnChange] = useFlowAppraisers();
-  
+
   const mortgage =
       (+section2Values("mortgage_value_1") || 0) +
       (+section2Values("mortgage_value_2") || 0) +
@@ -78,7 +78,7 @@ const D3Page = ({state, setCurrentTheme, actions, className, formData}) => {
   const refNumber = React.useRef("");
   state.theme.stepResponse.data?.["reference-number"] &&
   (refNumber.current = state.theme.stepResponse.data?.["reference-number"]);
-  
+
   return (
       <div className={className}>
         <Form setCurrentTheme={setCurrentTheme} endPoint={"/heloc"}>
@@ -158,7 +158,7 @@ const D3Page = ({state, setCurrentTheme, actions, className, formData}) => {
                 name={"home_value"}
                 {...formData.section_2?.estimated_value_input}
             />
-            
+
             <FormConditionalInput
                 name={"have_mortgage_1"}
                 showOn={"1"}
@@ -187,7 +187,7 @@ const D3Page = ({state, setCurrentTheme, actions, className, formData}) => {
                 </FormConditionalInput>
               </>
             </FormConditionalInput>
-            
+
             <FormConditionalInput
                 name={"have_outstanding_amount"}
                 showOn={"1"}
@@ -201,7 +201,7 @@ const D3Page = ({state, setCurrentTheme, actions, className, formData}) => {
                   {...formData.section_2?.outstanding_balance_amount_input}
               />
             </FormConditionalInput>
-            
+
             <div className="btn-group">
               <Button className={"bordered prev-step"} label={"Back"}/>
               <Button icon={true} className={"next-step"} label={"Next"}/>
@@ -343,7 +343,7 @@ const D3Page = ({state, setCurrentTheme, actions, className, formData}) => {
                 </p>
               </div>
             </div>
-            
+
             <FormConditionalInput
                 name={"confirm_qualify_amount"}
                 showOn={"0"}
@@ -356,7 +356,7 @@ const D3Page = ({state, setCurrentTheme, actions, className, formData}) => {
                   {...formData.section_4?.amount_want_input}
               />
             </FormConditionalInput>
-            
+
             <div className="btn-group">
               <Button className={"bordered prev-step"} label={"Back"}/>
               <Button icon={true} label={"Next"} className={"next-step"}/>
@@ -377,7 +377,7 @@ const D3Page = ({state, setCurrentTheme, actions, className, formData}) => {
               </h2>
               <h2 className={"form-headline-3 primary"}>
                 You are requesting a home equity line of credit against your{" "}
-                
+
                 {section1Values("property_details_1")} home which is located at{" "}
                 <br/> {section1Values("address")}, {section1Values("city")},{" "}
                 {section1Values("postal_code")}
@@ -438,7 +438,7 @@ const D3Page = ({state, setCurrentTheme, actions, className, formData}) => {
                       </FinalizeTable>
                     </FinalizeChild>
                 )}
-                
+
                 <FinalizeChild order={1}>
                   <P.Dark>*Fixed rate</P.Dark>
                   <P.Dark>*Payment interest based on balance</P.Dark>
@@ -520,7 +520,7 @@ const D3Page = ({state, setCurrentTheme, actions, className, formData}) => {
                       </FinalizeTable>
                     </FinalizeChild>
                 )}
-                
+
                 <FinalizeChild order={2} className={"full m-border"}>
                   <FinalizeTable>
                     <tbody>
@@ -692,7 +692,7 @@ ${Bottom}{
 		color: #FFF !important;
 	}
 .wide-text{
-  max-width: 80%;
+  max-width: 85rem;
   .form-headline-3{
     max-width: ${size(400)};
     @media(max-width: 575.98px){

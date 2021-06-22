@@ -48,25 +48,25 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
   const section1Values = getA1Values(formData.section_1?.section_name),
       section2Values = getA1Values(formData.section_2?.section_name),
       section3Values = getA1Values(formData.section_3?.section_name);
-  
+
   const media = useMedia();
-  
+
   React.useEffect(() => {
     actions.theme.setSubHeader(formData.sub_header);
   }, [formData]);
-  
+
   React.useEffect(() => {
     actions.theme.setLeadId();
     actions.theme.setStepResponse({});
   }, []);
-  
+
   React.useEffect(() => {
     actions.theme.checkUser();
   }, [state.theme.user.logged]);
   const [[appraiser], postalCodeOnChange] = useFlowAppraisers();
   const selectedProduct = React.useRef("");
   const maxMortgage = React.useRef("");
-  
+
   const [productsTable, productsFilter] = useProductsTable(
       state.theme.stepResponse
   );
@@ -161,7 +161,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 name={"home_value"}
                 {...formData.section_2?.estimated_value_input}
             />
-            
+
             <FormConditionalInput
                 name={"have_mortgage_1"}
                 showOn={"1"}
@@ -190,7 +190,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 </FormConditionalInput>
               </>
             </FormConditionalInput>
-            
+
             <FormConditionalInput
                 name={"have_outstanding_amount"}
                 showOn={"1"}
@@ -204,7 +204,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   {...formData.section_2?.outstanding_balance_amount_input}
               />
             </FormConditionalInput>
-            
+
             <FormConditionalInput
                 name={"add_mortgage_2"}
                 showOn={"0"}
@@ -231,7 +231,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   {...formData.section_2?.add_mortgage_amount_input}
               />
             </FormConditionalInput>
-            
+
             <div className="btn-group">
               <Button className={"bordered prev-step"} label={"Back"}/>
               <Button icon={true} className={"next-step"} label={"Next"}/>
@@ -246,10 +246,10 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 formData.section_1?.section_name,
                 formData.section_2?.section_name,
               ]}
-          
+
           >
             <input type={'hidden'} name={`ltv`} value={(mortgage / +section2Values('home_value') * 100).toFixed?.(1)}/>
-            
+
             <div className="form-text-wrapper">
               <h1 className={"form-headline-1 text-left"}>
                 {formData.section_3?.title}
@@ -408,7 +408,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                       </FinalizeTable>
                     </FinalizeChild>
                 )}
-                
+
                 <FinalizeChild className={"wide"} order={1}>
                   <P.D>Summary</P.D>
                 </FinalizeChild>
@@ -457,7 +457,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
           >
             <input ref={selectedProduct} type={"hidden"} name={`product_name`}/>
             <input ref={maxMortgage} type={"hidden"} name={`maximum_mortgage`}/>
-            
+
             <div className="form-text-wrapper wide-text">
               <h1 className={"form-headline-1 text-left"}>
                 {formData.section_5?.title}
@@ -466,7 +466,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 {formData.section_5?.subtitle}
               </h2>
             </div>
-            
+
             {state.theme.stepResponse.data?.data ? (
                 media !== "mobile" ? (
                     <FormFilter
@@ -546,7 +546,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                                           maximum_ltv) /
                                                       100
                                                   );
-                                                  
+
                                                   setTimeout(
                                                       () =>
                                                           actions.theme.setValidateAndNextCallback(
@@ -616,7 +616,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                       </td>
                                   ))}
                                 </tr>
-                                
+
                                 {productsTable[type] &&
                                 Object.entries(productsTable[type]).map(
                                     ([id, {name, specificationProducts}]) => (
@@ -636,7 +636,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                 )}
                                 </tbody>
                               </ProductsTable>
-                              
+
                           )
                       )}
                     </FormFilter>
@@ -763,8 +763,8 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                     </div>
                 )
             ) : null}
-          
-          
+
+
           </FormStep>
           <FormStep
               apiStepNumber={5}
@@ -893,10 +893,10 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 export default styled(connect(A1Page))`
   width: 100%;
   height: 100%;
-  
+
   ${Bottom} {
     padding-top: 0;
-    
+
     .full {
       @media (max-width: 991px) {
         flex-basis: 72%;
@@ -909,10 +909,10 @@ export default styled(connect(A1Page))`
       }
     }
   }
-  
+
   .wide-text {
-    max-width: 80%;
-    
+    max-width: 85rem;
+
     .form-headline-3 {
       max-width: ${size(400)};
       @media (max-width: 575.98px) {
@@ -920,11 +920,11 @@ export default styled(connect(A1Page))`
       }
     }
   }
-  
+
   hr {
     max-width: 100% !important;
   }
-  
+
   .underline {
     text-decoration: underline;
   }

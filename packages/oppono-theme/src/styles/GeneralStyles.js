@@ -182,7 +182,7 @@ const GeneralStyles = (props) => (
         margin-top: ${size(40)};
         margin-bottom: ${size(40)};
         border: none;
-        max-width: 80% !important;
+        max-width: 85rem !important;
       }
 
       a {
@@ -406,7 +406,7 @@ const GeneralStyles = (props) => (
 
 			.form-wide-container {
 				@media (min-width: 1200px) {
-					max-width: 72rem !important;
+					max-width: 85rem !important;
 					margin: auto;
 				}
 			}
