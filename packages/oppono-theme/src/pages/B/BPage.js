@@ -518,8 +518,9 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
               <P.D>Select an appraiser</P.D>
               <div className="row">
                 <div className="col-left">
-                  <p
-                      className={"form-headline-1 text-left"}
+								<p class="form-headline-2 text-left">Your BDM is</p>
+									<p
+                      className={"form-headline-4 text-left"}
                       dangerouslySetInnerHTML={{
                         __html: getAppraiser()?.fields?.bdm.name,
                       }}
