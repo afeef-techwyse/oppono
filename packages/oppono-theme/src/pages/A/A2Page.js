@@ -156,7 +156,9 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   value={"first"}
                   name={"looking_for"}
                   type={"radio"}
-                  onClick={() => setShow1stMortgageInput(false)}
+                  onClick={() => {
+                    setShow1stMortgageInput(false)
+                  }}
 
               />
               <RadioInput
@@ -164,7 +166,9 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   value={"second"}
                   name={"looking_for"}
                   type={"radio"}
-                  onClick={() => setShow1stMortgageInput(true)}
+                  onClick={() => {
+                    setShow1stMortgageInput(true)
+                  }}
               />
             </RadioGroup>
             
@@ -712,14 +716,6 @@ export default styled(connect(A2Page))`
       @media (max-width: 575.98px) {
         max-width: 90%;
       }
-    }
-  }
-  
-  .mortgage_value_1 {
-    display: none;
-    
-    &.active {
-      display: block;
     }
   }
 
