@@ -151,10 +151,10 @@ const Input = React.forwardRef(
                   visited && validateInput();
                   setValue(e.target.value.replace(/\$|,/g, ''));
                   onChange?.(e);
-                  const selection = inputRef.current.selectionStart;
-                  requestAnimationFrame(() =>
-                      inputRef.current.setSelectionRange(selection, selection)
-                  );
+                  // const selection = inputRef.current.selectionStart;
+                  // requestAnimationFrame(() =>
+                  //     inputRef.current.setSelectionRange(selection, selection)
+                  // );
                 }}
             />
           </div>}
