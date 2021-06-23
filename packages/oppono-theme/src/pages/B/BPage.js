@@ -515,16 +515,16 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
                 acceptText={"PDF, JPG, or PNG"}
             />
             <Appraiser>
-              <P.D>Select an appraiser</P.D>
+						<p class="form-headline-2 text-left">Your BDM is</p>
+							<p
+									className={"form-headline-4 text-left"}
+									dangerouslySetInnerHTML={{
+										__html: getAppraiser()?.fields?.bdm.name,
+									}}
+							/>
               <div className="row">
                 <div className="col-left">
-								<p class="form-headline-2 text-left">Your BDM is</p>
-									<p
-                      className={"form-headline-4 text-left"}
-                      dangerouslySetInnerHTML={{
-                        __html: getAppraiser()?.fields?.bdm.name,
-                      }}
-                  />
+								<P.D>Select an Appraiser:</P.D>
                 </div>
                 <div className="col-right">
                   <RadioGroup
