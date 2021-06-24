@@ -162,14 +162,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 {...formData.section_2?.estimated_value_input}
             />
 
-            <FormConditionalInput
-                name={"have_mortgage_1"}
-                showOn={"1"}
-                checked={"0"}
-                {...formData.section_2?.any_mortgage_yes_no}
-            >
-              <>
-                <Input
+								<Input
                     type={"number"}
                     isCurrency
                     name={"mortgage_value_1"}
@@ -188,8 +181,6 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                       {...formData.section_2?.second_mortgage_amount_input}
                   />
                 </FormConditionalInput>
-              </>
-            </FormConditionalInput>
 
             <FormConditionalInput
                 name={"have_outstanding_amount"}
