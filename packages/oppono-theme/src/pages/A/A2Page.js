@@ -379,12 +379,12 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                     <FinalizeChild order={1}></FinalizeChild>
                 )}
                 <FinalizeChild order={3} className={"m-pr-40 full m-border"}>
-                  <P.Border>
-                    Your mortgage request is ${numberWithCommas(mortgage)}
-                  </P.Border>
-                  <P.Border>
+									<P.Border>
                     Your property value is $
                     {numberWithCommas(+section2Values("purchase_price"))}
+                  </P.Border>
+                  <P.Border>
+                    Your mortgage request is ${numberWithCommas(mortgage)}
                   </P.Border>
                 </FinalizeChild>
                 <FinalizeChild order={3} className={"wide m-pr-40"}>
@@ -582,15 +582,16 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                     acceptText={"PDF, JPG, or PNG"}
                 />
                 <Appraiser>
-                  <P.D>Select an appraiser</P.D>
-                  <div className="row">
-                    <div className="col-left">
+								<p class="form-headline-2 text-left">Your BDM is</p>
                       <p
                           className={"form-headline-1 text-left"}
                           dangerouslySetInnerHTML={{
                             __html: appraiser?.fields?.bdm.name,
                           }}
                       />
+                  <div className="row">
+                    <div className="col-left">
+										<P.D>Select an appraiser</P.D>
                     </div>
                     <div className="col-right">
                       <RadioGroup

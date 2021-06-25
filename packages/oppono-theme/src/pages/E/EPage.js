@@ -103,6 +103,7 @@ const EPage = ({className, setCurrentTheme, actions, state, formData}) => {
             ? <Appraiser wide>
               <div className="row">
                 <div className="col-left">
+									<p class="form-headline-2 text-left">Your BDM is</p>
                   <p className={'form-headline-1 text-left'} dangerouslySetInnerHTML={{__html: appraiser?.fields?.bdm.name}}/>
                 </div>
                 <div className="col-right">

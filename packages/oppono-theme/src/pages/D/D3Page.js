@@ -571,15 +571,16 @@ const D3Page = ({state, setCurrentTheme, actions, className, formData}) => {
                     acceptText={"PDF, JPG, or PNG"}
                 />
                 <Appraiser>
-                  <P.D>Select an appraiser</P.D>
-                  <div className="row">
-                    <div className="col-left">
+								<p class="form-headline-2 text-left">Your BDM is</p>
                       <p
                           className={"form-headline-1 text-left"}
                           dangerouslySetInnerHTML={{
                             __html: appraiser?.fields?.bdm.name,
                           }}
                       />
+                  <div className="row">
+                    <div className="col-left">
+										<P.D>Select an appraiser</P.D>
                     </div>
                     <div className="col-right">
                       <RadioGroup
