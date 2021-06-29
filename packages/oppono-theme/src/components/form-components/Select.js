@@ -115,6 +115,11 @@ const Select = React.forwardRef(
               setInvalid(false);
               onChange?.(event);
             }}
+						onKeyDown={(event) => {
+							if (event.key == "Enter") {
+								document.querySelector('.next-step').click()
+							}
+						}}
             className="oppono-select"
             classNamePrefix="oppono-select"
             components={{ DropdownIndicator }}

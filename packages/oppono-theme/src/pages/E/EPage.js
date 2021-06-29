@@ -83,7 +83,7 @@ const EPage = ({className, setCurrentTheme, actions, state, formData}) => {
           <h2 className={'form-headline-2 primary'}>{formData.section_2?.subtitle}</h2>
         </div>
         {appraiser?.fields
-            ? <Appraiser wide>
+            ? <Appraiser className="full-width" wide>
               <div className="row">
                 <div className="col-left">
 									<p class="form-headline-2 text-left">Your BDM is</p>
@@ -207,6 +207,10 @@ const EPage = ({className, setCurrentTheme, actions, state, formData}) => {
 export default styled(connect(EPage))`
   width: 100%;
   height: 100%;
+
+	.full-width > .container {
+		width: 100%;
+	}
 
   .fix-filter-e {
     margin-bottom: ${size(22)};

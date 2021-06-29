@@ -344,9 +344,6 @@ const D1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                         );
                       })}
                       <P.D>
-                        Your mortgage request is ${numberWithCommas(mortgage)}
-                      </P.D>
-                      <P.D>
                         You could qualify up to $
                         {numberWithCommas(
                             Math.round(
@@ -359,6 +356,9 @@ const D1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                       <P.D>
                         Your property value is $
                         {numberWithCommas(+section2Values("home_value"))}
+                      </P.D>
+											<P.D>
+                        Your mortgage request is ${numberWithCommas(mortgage)}
                       </P.D>
                       <P.D>
                         Your down payment is $

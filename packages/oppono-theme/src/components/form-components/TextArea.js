@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import classnames from "classnames";
 import { size } from "../../functions/size";
 
-const TextArea = React.forwardRef(({ className, label, name , required,placeholder}, forwardedRef) => (
+const TextArea = React.forwardRef(({ className, label, name , required, placeholder}, forwardedRef) => (
   <div className={classnames("form-group primary-input ", className)}>
     <label>
       <div className="label-text primary">{label}</div>

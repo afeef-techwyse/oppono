@@ -228,6 +228,11 @@ const Input = React.forwardRef(
               );
             }}
             onKeyUp={onKeyUp}
+						onKeyDown={(event) => {
+							if (event.key == "Enter") {
+								document.querySelector('.next-step').click()
+							}
+						}}
           />
         </Label>
       </div>
