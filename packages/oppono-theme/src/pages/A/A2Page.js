@@ -211,7 +211,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
               activeTheme={formData.section_3?.section_theme}
               stepName={formData.section_3?.section_name}
           >
-            <input type={'hidden'} name={`ltv`} value={(mortgage / (+section2Values("purchase_price")) * 100).toFixed?.(1)}/>
+            <input type={'hidden'} name={`ltv`} value={(mortgage / +section2Values("purchase_price") * 100).toFixed?.(1)}/>
             <div className="form-text-wrapper">
               <h1 className={"form-headline-1 text-left"}>
                 {formData.section_3?.title}
@@ -383,8 +383,13 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                     Your property value is $
                     {numberWithCommas(+section2Values("purchase_price"))}
                   </P.Border>
+                  {+section2Values("mortgage_value_1") > 0 ? (
+                    <P.Border>
+                    Your 1st mortgage amount is ${numberWithCommas(+section2Values("mortgage_value_1"))}
+                    </P.Border>
+                  ) : null}
                   <P.Border>
-                    Your mortgage request is ${numberWithCommas(mortgage)}
+                    Your 1st  ${numberWithCommas(mortgage)}
                   </P.Border>
                 </FinalizeChild>
                 <FinalizeChild order={3} className={"wide m-pr-40"}>
