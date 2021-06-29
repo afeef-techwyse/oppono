@@ -211,7 +211,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
               activeTheme={formData.section_3?.section_theme}
               stepName={formData.section_3?.section_name}
           >
-            <input type={'hidden'} name={`ltv`} value={((+section2Values("down_payment") / (+section2Values("purchase_price") + (+section2Values("mortgage_value_1") || 0))) * 100).toFixed?.(1)}/>
+            <input type={'hidden'} name={`ltv`} value={(mortgage / (+section2Values("purchase_price")) * 100).toFixed?.(1)}/>
             <div className="form-text-wrapper">
               <h1 className={"form-headline-1 text-left"}>
                 {formData.section_3?.title}
@@ -396,10 +396,8 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                     Your LTV is{" "}
                     {
                       (
-                        (
-                          +section2Values("down_payment") / 
-                          (+section2Values("purchase_price") + (+section2Values("mortgage_value_1") || 0))
-                        ) * 100
+                        mortgage / 
+                        +section2Values("purchase_price") * 100
                       ).toFixed?.(1)
                     }
                     %
