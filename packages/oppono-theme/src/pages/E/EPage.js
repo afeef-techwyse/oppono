@@ -20,6 +20,7 @@ import Alert from '../../components/form-components/Alert';
 import Link from '../../components/reusable/Link';
 import {size} from '../../functions/size';
 import useStoredFormValue from '../../hooks/useStoredFormValue';
+import useFlowAppraisers from "../../hooks/useFlowAppraisers";
 import AppraiserInput from '../../components/AppraiserInput';
 import debounce from '../../functions/debounce';
 import opponoApi from '../../opponoApi';
@@ -30,7 +31,6 @@ const EPage = ({className, setCurrentTheme, actions, state, formData}) => {
   const getEValues = useStoredFormValue(pageName);
   const section1Values = getEValues(formData.section_1?.section_name);
   const section2Values = getEValues(formData.section_2?.section_name);
-  const appraiser = state.theme.appraiser;
   const [postalCodeErrorMessage, setPostalCodeErrorMessage] = React.useState('');
 
   React.useEffect(() => {
@@ -39,6 +39,7 @@ const EPage = ({className, setCurrentTheme, actions, state, formData}) => {
   React.useEffect(() => {
     actions.theme.setLeadId();
   }, []);
+  const [[appraiser], postalCodeOnChange] = useFlowAppraisers();
 
   const selectedAppraiser = JSON.parse(section2Values('selected-appraiser')||'{}')
 
@@ -72,25 +73,7 @@ const EPage = ({className, setCurrentTheme, actions, state, formData}) => {
             address={{name: 'address', noScroll: true, ...formData.section_1?.address_input}}
             city={{name: 'city', ...formData.section_1?.city_input}}
             postalCode={{name: 'postal_code', ...formData.section_1?.postal_code_input}}
-            postalCodeOnChange={debounce((postalCode) => {
-              if (postalCode.length < 2) {
-                actions.theme.setAppraiser({});
-                setPostalCodeErrorMessage('no appraisers found for this postal code');
-                return;
-              }
-              const data = new FormData();
-              data.append('postal_code', postalCode.trim().slice(0, 3));
-              opponoApi.post('/appraiser-lookup', data)
-                  .then(response => {
-                    if (response.data.length !== 1) {
-                      actions.theme.setAppraiser({});
-                      setPostalCodeErrorMessage('no appraisers found for this postal code');
-                    } else {
-                      actions.theme.setAppraiser({...response.data[0], city: response.data[0].title});
-                      setPostalCodeErrorMessage('');
-                    }
-                  });
-            }, 1000)}
+            postalCodeOnChange={postalCodeOnChange}
         />
         <Button icon={true} className={'next-step'} label={'Next'}/>
       </FormStep>
