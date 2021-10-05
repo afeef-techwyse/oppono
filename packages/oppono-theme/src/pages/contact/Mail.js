@@ -32,7 +32,7 @@ const Mail = ({ className, state, actions }) => {
   }, [currentTheme]);
   return (
     <div className={className}>
-      <Form setCurrentTheme={setCurrentTheme} endPoint={"/contact"}>
+      <Form setCurrentTheme={setCurrentTheme} endPoint={"/contact"} hideStepsProgress>
         <FormStep
           pageName={pageName}
           activeTheme={pageData.section_1?.section_theme}
