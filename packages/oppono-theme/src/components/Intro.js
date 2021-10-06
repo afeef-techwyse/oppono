@@ -237,7 +237,7 @@ export default styled(Intro)`
     opacity: 0;
     color: #bfb6b4;
     font-size: ${size(29)};
-    font-weight: 400;
+    font-weight: 300;
     font-style: normal;
     letter-spacing: normal;
     line-height: ${size(40)};
@@ -245,7 +245,7 @@ export default styled(Intro)`
     max-width: ${size(495)};
     z-index: 1;
     @media (max-width: 575px) {
-      max-width: 80%;
+      max-width: 85rem;
       font-size: ${size(22)};
       line-height: ${size(34)};
     }
@@ -340,7 +340,7 @@ export default styled(Intro)`
     p {
       color: #bfb6b4;
       font-size: ${size(14)};
-      font-weight: 500;
+      font-weight: 400;
       font-style: normal;
       letter-spacing: normal;
       line-height: ${size(16)};

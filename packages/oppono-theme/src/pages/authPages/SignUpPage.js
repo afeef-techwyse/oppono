@@ -69,6 +69,11 @@ const SignUpPage = ({
             />
             <Input
               type={"text"}
+              name={"brokerage_name"}
+              {...formData.section_1?.brokerage_name_input}
+            />
+            <Input
+              type={"text"}
               name={"brokerage_license"}
               pattern={"^(\\d){5}$"}
               {...formData.section_1?.brokerage_license_input}
@@ -107,10 +112,12 @@ const SignUpPage = ({
               {...formData.section_2?.email_input}
             />
             <Input
-              type={"text"}
-              name={"phone"}
+              type={"phone"}
+              isPhoneNumber
+              name={"broker_phone"}
               {...formData.section_2?.phone_input}
             />
+            
 
             <Input
               type={"password"}
@@ -162,13 +169,11 @@ const SignUpPage = ({
               <img src={last_step} alt="flying obj" />
               <div style={{ flexBasis: "45%" }} className="text tablet-center">
                 <h1 className={"form-headline-1 primary"}>
-                  An email has been sent to your inbox, click on the link to
-                  activate your account.
+									Thanks for signing up with us.
                 </h1>
-                <p className={"form-headline-3 primary"}>
-                  Didn’t receive any email? Check your spams or{" "}
-                  <Link className={"white-color"} href={"/mail"}>
-                    Contact Us
+                <p className={"form-headline-3 primary lighter"}>
+                  <Link className={"white-color"} href={"/dashboard"}>
+										Let's get started
                   </Link>
                   .
                 </p>
@@ -264,6 +269,8 @@ export default styled(connect(SignUpPage))`
     }
   }
 
+
+
   .white-color {
     color: #fff;
   }
@@ -277,5 +284,9 @@ export default styled(connect(SignUpPage))`
       color: #0e9564;
       margin-left: ${size(3)};
     }
+  }
+
+  .phoneMasker {
+    width: 100%;
   }
 `;

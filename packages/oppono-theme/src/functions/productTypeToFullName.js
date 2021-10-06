@@ -1,7 +1,7 @@
 const names = {
-  first: 'First Mortgage',
-  second: 'Second Mortgage',
+  first: 'First mortgage',
+  second: 'Second mortgage',
   heloc: 'HELOC',
-  beloc: 'BELOC',
+  beloc: 'BLOC',
 }
 export function productTypeToFullName(type) {return names[type];}

@@ -148,7 +148,7 @@ const GeneralStyles = (props) => (
         p {
           color: #bfb6b4;
           font-size: ${size(136)};
-          font-weight: 500;
+          font-weight: 400;
           line-height: ${size(180)};
           display: inline-block;
           position: relative;
@@ -163,7 +163,7 @@ const GeneralStyles = (props) => (
         sup {
           color: #bfb6b4;
           font-size: ${size(25)};
-          font-weight: 400;
+          font-weight: 300;
           line-height: ${size(34)};
           position: absolute;
           right: 100%;
@@ -182,7 +182,7 @@ const GeneralStyles = (props) => (
         margin-top: ${size(40)};
         margin-bottom: ${size(40)};
         border: none;
-        max-width: 80% !important;
+        max-width: 85rem !important;
       }
 
       a {
@@ -234,7 +234,7 @@ const GeneralStyles = (props) => (
       .form-headline-1 {
         color: #bfb6b4;
         font-size: ${size(40)};
-        font-weight: 500;
+        font-weight: 400;
         line-height: ${size(48)};
         text-align: center;
         //max-width: ${size(438)};
@@ -251,7 +251,7 @@ const GeneralStyles = (props) => (
         //max-width: ${size(390)};
         color: rgba(191, 182, 180);
         font-size: ${size(29)};
-        font-weight: 400;
+        font-weight: 300;
         line-height: ${size(40)};
         margin-top: ${size(8)};
         opacity: 0.5;
@@ -267,12 +267,26 @@ const GeneralStyles = (props) => (
         //max-width: ${size(390)};
         color: rgba(191, 182, 180);
         font-size: ${size(18)};
-        font-weight: 400;
+        font-weight: 300;
         line-height: ${size(25)};
         margin-top: ${size(6)};
         opacity: 0.5;
         @media (max-width: 575.98px) {
           font-size: ${size(16)};
+          line-height: ${size(24)};
+        }
+      }
+
+      .form-headline-4 {
+        //max-width: ${size(390)};
+				color: #bfb6b4;
+				font-size: 2.2rem;
+				font-weight: 400;
+				line-height: 2.5rem;
+				margin-top: 0.6rem;
+				margin-bottom: 0.6rem;
+        @media (max-width: 575.98px) {
+          font-size: ${size(18)};
           line-height: ${size(24)};
         }
       }
@@ -293,6 +307,10 @@ const GeneralStyles = (props) => (
         }
       }
 
+			.lighter {
+				color: #FFF !important;
+			}
+
       .agree-checkbox {
         position: relative;
         cursor: pointer;
@@ -310,7 +328,7 @@ const GeneralStyles = (props) => (
 
         .text {
           font-size: 18px;
-          font-weight: 500;
+          font-weight: 400;
           line-height: 25px;
           color: rgba(191, 182, 180, 0.5);
           margin-left: 12px;
@@ -386,10 +404,17 @@ const GeneralStyles = (props) => (
         }
       }
 
+			.form-wide-container {
+				@media (min-width: 1200px) {
+					max-width: 85rem !important;
+					margin: auto;
+				}
+			}
+
       .form-sub-text {
         color: rgba(191, 182, 180, 0.5);
         font-size: ${size(18)};
-        font-weight: 500;
+        font-weight: 400;
         line-height: ${size(25)};
         text-align: center;
         margin-top: ${size(14)};
@@ -441,6 +466,14 @@ const GeneralStyles = (props) => (
         -webkit-appearance: none;
         margin: 0;
       }
+
+			input:-webkit-autofill,
+			input:-webkit-autofill:hover,
+			input:-webkit-autofill:focus,
+			input:-webkit-autofill:active {
+				/* -webkit-transition-delay: 9999s; */
+				/* transition-delay: 9999s; */
+			}
 
       /* Firefox */
 

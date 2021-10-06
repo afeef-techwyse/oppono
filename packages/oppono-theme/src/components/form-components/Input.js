@@ -7,6 +7,9 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import useCombinedRefs from "../../hooks/useCombinedRefs";
 import { size } from "../../functions/size";
 import missing from "../../assets/images/missing.svg";
+import CurrencyInput from 'react-currency-input-field';
+import PhoneInput from 'react-phone-number-input/input'
+
 
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -33,7 +36,7 @@ const Label = styled(
   .label-text {
     color: #bfb6b4;
     font-size: ${size(16)};
-    font-weight: 500;
+    font-weight: 400;
     text-align: left;
     margin-bottom: ${size(7)};
     .dark {
@@ -60,10 +63,10 @@ const Label = styled(
       transform: translateY(-50%);
       color: #bfb6b4;
       font-size: ${size(14)};
-      font-weight: 300;
+      font-weight: 200;
     }
     input {
-      border-bottom: 1px solid #bfb6b4;
+      //border-bottom: 1px solid #bfb6b4;
     }
   }
 `;
@@ -74,9 +77,11 @@ const Input = React.forwardRef(
       className,
       name,
       type,
-      value: initialValue,
+      value: initialValue = "",
       placeholder,
       pattern,
+      isCurrency,
+      isPhoneNumber,
       required,
       readOnly,
       disabled,
@@ -121,7 +126,6 @@ const Input = React.forwardRef(
       error && setVisited(true);
       setTimeout(() => visited && validateInput(), 0);
     }, [initialValue, error]);
-
     return (
       <div
         ref={combinedRef}
@@ -132,6 +136,38 @@ const Input = React.forwardRef(
       >
         <Label error={errorMessage} fieldName={name} invalid={invalid}>
           <div className="label-text">{label}</div>
+          {isCurrency && <div className="currencyMasker" data-currency={isCurrency}>
+            <CurrencyInput
+                name="input-name"
+                className="normal-input currency-input"
+                prefix="$"
+                decimalsLimit={2}
+                placeholder={placeholder}
+                onBlur={(e) => {
+                  e.currentTarget.closest('label').querySelector('input:not(.currency-input)').value = parseFloat(e.currentTarget.value.replace(/\$|,/g, ''))
+                }}
+                onChange={(e) => {
+                  e.persist();
+                  visited && validateInput();
+                  setValue(e.target.value.replace(/\$|,/g, ''));
+                  onChange?.(e);
+                  // const selection = inputRef.current.selectionStart;
+                  // requestAnimationFrame(() =>
+                  //     inputRef.current.setSelectionRange(selection, selection)
+                  // );
+                }}
+            />
+          </div>}
+          {isPhoneNumber && <div className="phoneMasker" data-phone={isPhoneNumber}>
+            <PhoneInput
+                type="text"
+                placeholder={placeholder}
+                name="phone"
+                className="normal-input"
+                country="US"
+                value={value}
+                onChange={setValue} />
+          </div>}
           <input
             defaultValue={defaultValue}
             ref={inputRef}
@@ -145,6 +181,8 @@ const Input = React.forwardRef(
             disabled={disabled}
             max={max}
             min={min}
+						data-currency={isCurrency}
+						data-phone={isPhoneNumber}
             pattern={pattern}
             onInvalid={() => setVisited(true)}
             onFocus={(e) => {
@@ -190,6 +228,11 @@ const Input = React.forwardRef(
               );
             }}
             onKeyUp={onKeyUp}
+						onKeyDown={(event) => {
+							if (event.key == "Enter") {
+								document.querySelector('.next-step').click()
+							}
+						}}
           />
         </Label>
       </div>
@@ -206,13 +249,15 @@ export default styled(Input)`
     border: none;
     background: transparent;
     outline: none;
-    border-bottom: 1px solid rgba(191, 182, 180, 0.1);
-    height: ${size(53)};
+		border-radius: 0 !important;
+    border-bottom: 1px solid rgba(191, 182, 180, 0.5);
+    height: ${size(43)};
     padding: 0 0 ${size(6)};
     caret-color: #297fff;
     color: #bfb6b4;
-    font-size: ${size(40)};
-    font-weight: 300;
+    font-size: ${size(22)};
+padding-left: 8px !important;;
+    font-weight: 200;
     position: relative;
     @media (max-width: 575.98px) {
       font-size: ${size(20)};
@@ -225,8 +270,9 @@ export default styled(Input)`
     &::placeholder {
       color: rgba(191, 182, 180);
       opacity: 0.4;
-      font-size: ${size(40)};
-      font-weight: 300;
+      font-size: ${size(22)};
+padding-left: 8px !important;;
+      font-weight: 200;
       text-align: left;
       @media (max-width: 575.98px) {
         font-size: ${size(20)};
@@ -254,7 +300,7 @@ export default styled(Input)`
       @media (max-width: 991.98px) {
         height: auto;
         font-size: ${size(26)};
-        border-bottom-color: rgba(191, 182, 180, 0.1);
+        border-bottom-color: rgba(191, 182, 180, 0.5);
       }
       &:focus {
       }
@@ -269,17 +315,18 @@ export default styled(Input)`
     &.has-cue {
       .cue {
         display: inline;
-        color: rgba(191, 182, 180, 0.1);
+        color: rgba(191, 182, 180, 0.5);
         font-size: ${size(100)};
-        font-weight: 300;
+        font-weight: 200;
       }
     }
   }
 
   input[type="password"] {
-    color: rgba(191, 182, 180, 0.2);
+    color: rgba(191, 182, 180, 0.5);
     &::placeholder {
-      font-size: ${size(25)};
+      font-size: ${size(22)};
+padding-left: 8px !important;;
     }
   }
 
@@ -299,6 +346,25 @@ export default styled(Input)`
     background: #bfb6b4;
     transition: width 400ms;
   }
+
+	.currencyMasker{
+		display: none;
+		width: 100%;
+		&[data-currency='true'] {
+			display: block;
+		}
+	}
+	.phoneMasker{
+		display: none;
+		width: 100%;
+		&[data-phone='true'] {
+			display: block;
+		}
+	}
+	.normal-input[data-currency='true'],
+	.normal-input[data-phone='true'] {
+		display: none;
+	}
 `;
 
 Input.propTypes = {
@@ -309,6 +375,8 @@ Input.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   placeholder: PropTypes.string,
   required: PropTypes.bool,
+  isCurrency: PropTypes.bool,
+  isPhoneNumber: PropTypes.bool,
   readOnly: PropTypes.bool,
   disabled: PropTypes.bool,
   min: PropTypes.number,

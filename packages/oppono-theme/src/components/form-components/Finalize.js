@@ -109,7 +109,7 @@ export const Bottom = styled.div`
 
   .form-wide-container {
     @media (min-width: 575.98px) {
-      max-width: 80%;
+      max-width: 85rem;
       margin: auto;
     }
   }
@@ -165,5 +165,6 @@ const Finalize = ({ className, children }) => {
 };
 
 export default styled(Finalize)`
-  margin: ${size(50)} 0;
+  margin: ${size(50)} auto;
+  max-width: 85rem;
 `;

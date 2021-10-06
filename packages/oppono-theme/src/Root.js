@@ -4,6 +4,7 @@ import Switch from '@frontity/components/switch';
 import debounce from "./functions/debounce";
 import {fixContainer} from './functions/fix-container';
 import Intro from './components/Intro';
+import NotQualifiedPage from "./pages/NotQualifiedPage";
 import Styles from './styles';
 import HomeSlider from './components/HomeSlider';
 import FormsPage from './pages/FormsPage';
@@ -42,10 +43,25 @@ const Root = ({state}) => {
       getHeightOfViewPort()
     } , 500)
     window.addEventListener('resize', debounced);
+
+    const script = document.createElement('script');
+    const content = `
+      window.onUsersnapCXLoad = function(api) {
+        api.init();
+      }
+      var script = document.createElement('script');
+      script.defer = 1;
+      script.src = 'https://widget.usersnap.com/global/load/4301456a-40b0-4e53-9edd-e491d7d737f8?onload=onUsersnapCXLoad';
+      document.getElementsByTagName('head')[0].appendChild(script);     
+    `;
+    script.appendChild(document.createTextNode(content));
+
+    document.body.appendChild(script);
+
     return () => {
+      document.body.removeChild(script);
       window.removeEventListener('resize', fixContainer);
       window.removeEventListener('resize', debounced);
-  
     }
   }, []);
   const duration = .75;
@@ -104,6 +120,7 @@ const Root = ({state}) => {
         <Switch>
           <div className={'loading-page'} when={data.isFetching}/>
   
+          <NotQualifiedPage when={state.router.link.startsWith('/not-qualified/')}/>
           <AboutUsPage when={state.router.link.startsWith('/what-we-do/')}/>
           <ContactPage when={/get-in-touch/.test(page.slug)}/>
           <HomeSlider

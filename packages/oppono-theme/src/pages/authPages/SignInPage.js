@@ -125,7 +125,7 @@ export default styled(connect(SignInPage))`
   .forgot-password {
     color: rgba(191, 182, 180, 0.5);
     font-size: ${size(18)};
-    font-weight: 500;
+    font-weight: 400;
     line-height: ${size(25)};
     margin-top: ${size(17)};
     display: block;

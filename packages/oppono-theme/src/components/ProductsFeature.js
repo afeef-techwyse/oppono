@@ -24,7 +24,7 @@ const Col = styled.div`
 const Title = styled.div`
   color: #d2f5e9;
   font-size: ${size(40)};
-  font-weight: 400;
+  font-weight: 300;
   line-height: ${size(48)};
   text-align: left;
   padding: 0 ${size(55)};
@@ -42,7 +42,7 @@ const Title = styled.div`
 const Description = styled.div`
   color: rgba(210, 245, 233, 0.6);
   font-size: ${size(18)};
-  font-weight: 400;
+  font-weight: 300;
   line-height: ${size(25)};
   text-align: left;
   padding: 0 ${size(55)};

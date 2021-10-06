@@ -112,6 +112,14 @@ export default styled(FormFilter)`
   .filter {
     width: fit-content;
     cursor: pointer;
+
+		.radio-text {
+			text-transform: capitalize;
+			&[labeltype="heloc"],
+			&[labeltype="beloc"] {
+				text-transform: uppercase;
+			}
+		}
   }
   [data-filter] {
     overflow: hidden;

@@ -30,6 +30,8 @@
     "normalize.css": "^8.0.1",
     "oppono-theme": "./packages/oppono-theme",
     "react": "^17.0.1",
+    "react-currency-input-field": "^3.3.2",
+    "react-phone-number-input": "^3.1.22",
     "react-select": "^4.3.0",
     "react-transition-group": "^4.4.1",
     "swiper": "^6.3.4"

@@ -55,7 +55,7 @@ const Slider = styled(Swiper)`
     .slide-number {
       color: #b5d2ff;
       font-size: ${size(10)};
-      font-weight: 700;
+      font-weight: 600;
       width: ${size(23)};
       height: ${size(23)};
       border: 1px solid rgba(181, 210, 255, 0.4);
@@ -81,7 +81,7 @@ const Slider = styled(Swiper)`
       font-weight: 400;
       font-style: normal;
       letter-spacing: normal;
-      line-height: ${size(95)};
+      line-height: ${size(85)};
       text-align: left;
       white-space: pre-wrap;
       @media (max-width: 991.98px) {
@@ -92,13 +92,17 @@ const Slider = styled(Swiper)`
         font-size: 2.94vh;
         line-height: 1.2;
       }
+
+      > div {
+        line-height: 1;
+      }
     }
   }
 
   .btn {
     width: auto;
     max-width: fit-content;
-    padding: 0 ${size(32)};
+    padding: 0 ${size(42)};
     height: ${size(64)};
     display: flex;
     align-items: center;
@@ -107,7 +111,7 @@ const Slider = styled(Swiper)`
     background-color: #fe412d;
     color: #ffffff;
     font-size: ${size(16)};
-    font-weight: 500;
+    font-weight: 400;
     text-decoration: none;
     margin-top: ${size(24)};
     cursor: pointer;
@@ -554,6 +558,12 @@ export default styled(connect(HomeSlider))`
     height: 100%;
     flex-direction: column;
     z-index: 0;
+    @media (min-width: 575.98px) {
+			margin-top: 3rem;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+    }
     @media (max-width: 575.98px) {
       justify-content: flex-start;
       margin-top: 100px;
@@ -593,7 +603,7 @@ export default styled(connect(HomeSlider))`
     .subtitle {
       color: rgba(181, 210, 255, 0.4);
       font-size: ${size(29)};
-      font-weight: 400;
+      font-weight: 300;
       @media (max-width: 991.98px) {
         font-size: ${size(24)};
       }
@@ -662,7 +672,7 @@ export default styled(connect(HomeSlider))`
     .slides-numbers {
       color: #b5d2ff;
       font-size: ${size(12)};
-      font-weight: 500;
+      font-weight: 400;
       font-style: normal;
       letter-spacing: normal;
       line-height: ${size(95)};
@@ -683,9 +693,13 @@ export default styled(connect(HomeSlider))`
     transform: none !important;
     margin: 0 auto;
 
+		@media (min-width: 575.98px) {
+			margin: 5rem auto 0;
+		}
+
     .swiper-pagination-bullet {
-      width: ${size(8)};
-      height: ${size(8)};
+      width: ${size(10)};
+      height: ${size(10)};
       @media (max-width: 575.98px) {
         width: 1.58vh;
         height: 1.58vh;
@@ -718,7 +732,7 @@ export default styled(connect(HomeSlider))`
       border-radius: 3.94vh;
       background-color: #fe412d;
       font-size: 1.97vh;
-      font-weight: 500;
+      font-weight: 400;
       display: flex;
       align-items: center;
       justify-content: center;

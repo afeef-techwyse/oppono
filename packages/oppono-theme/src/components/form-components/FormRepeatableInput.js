@@ -28,12 +28,12 @@ ${Input}{
 
 const FormRepeatableInput = ({question, number = 1, initial = 1, fixedNumber, children, name}) => {
   const [repeatingValue, setRepeatingValue] = React.useState(initial);
-  
+
   const onChangeHandler = (child) => (event) => {
     event.persist();
     child.props.onChange?.(event);
   };
-  
+
   return (
     <React.Fragment>
       {question
@@ -45,8 +45,9 @@ const FormRepeatableInput = ({question, number = 1, initial = 1, fixedNumber, ch
         : null}
       {
         [...Array(fixedNumber || repeatingValue).keys()].map(repeat => {
-          
+
           return <RepeatedUnit key={`childrenRepeating-${repeat}`}>
+					<h2 className="form-headline-3">Person {repeat + 1}</h2>
             {
               React.Children.map(children, child => {
                 if (child.type === Input) {

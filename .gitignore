@@ -4,3 +4,4 @@ node_modules/
 /helping_files/
 Dockerfile
 docker-compose.yml
+package-lock.json

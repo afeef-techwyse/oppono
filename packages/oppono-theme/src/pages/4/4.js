@@ -71,7 +71,7 @@ const FourPage = (props) => {
           <Input type={'text'} placeholder={'e.g. Toronto'} label={'City'} name={'city'} required={true}/>
           <Input type={'text'} placeholder={'e.g. M5H 3S4'} label={'Postal Code'} name={'postal_code'} required={true}/>
         </W50>
-        
+
         <Button icon={true} className={'next-step'} label={'Next'}/>
       </FormStep>
       <FormStep activeTheme={'gray-theme'} stepName={'b-2'}>
@@ -107,12 +107,6 @@ const FourPage = (props) => {
             </W50>
           </>
         </FormConditionalInput>
-        <Select options={[
-          {value: 'Residential', label: 'Residential'},
-          {value: 'strawberry', label: 'Strawberry'},
-          {value: 'vanilla', label: 'Vanilla'}]}
-                label={'What type of property?'}
-                name={'property_type_1'}/>
         <Select options={[
           {value: 'Residential', label: 'Residential'},
           {value: 'strawberry', label: 'Strawberry'},
@@ -202,7 +196,7 @@ const FourPage = (props) => {
                   </tbody>
                 </FinalizeTable>
               </FinalizeChild>}
-  
+
             <FinalizeChild order={1}>
               <P.Dark>*Variable Rate</P.Dark>
               <P.Dark>*Payment interest based on balance</P.Dark>
@@ -238,16 +232,16 @@ const FourPage = (props) => {
                   </tbody>
                 </FinalizeTable>
               </FinalizeChild>}
-  
+
             <FinalizeChild order={2} className={'full m-border'}>
               <FinalizeTable>
                 <tbody>
                 <tr>
-                  <P.Dark as={'td'}>Lender Fee</P.Dark>
+                  <P.Dark as={'td'}>Lender fee</P.Dark>
                   <P.D as={'td'}>2.00%</P.D>
                 </tr>
                 <tr>
-                  <P.Dark as={'td'}>Credit Score</P.Dark>
+                  <P.Dark as={'td'}>Credit score</P.Dark>
                   <P.D as={'td'}>680+</P.D>
                 </tr>
                 </tbody>
@@ -269,7 +263,7 @@ const FourPage = (props) => {
       </FormStep>
       <FormStep activeTheme={'green-theme'} stepName={'a-iii-6'}>
         <div className="upload-step-wrapper">
-          <img src={upload}/>
+          <img alt="" src={upload}/>
           <h1 className={'form-headline-1 text-left'}>Let’s get this done!<br/>
             Upload your documents.</h1>
           <FormConditionalInput noScroll label={'Do you have an appraisal report?'} name={'mortgages_1'} showOn={'1'} checked={'0'}>
@@ -318,7 +312,7 @@ const FourPage = (props) => {
             </Ol>
             <div className="btn-group">
               <Button className={'wide'} label={'Connect to Filogix'}/>
-              <Link className={'wide bordered'} href={'/dashboard'}>Back to Dashboard</Link>
+              <Link className={'wide bordered'} href={'/dashboard'}>Back to dashboard</Link>
             </div>
           </div>
         </LastStep>

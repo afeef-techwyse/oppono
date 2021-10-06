@@ -1,12 +1,14 @@
 import React from "react";
-import { connect, styled } from "frontity";
+import {connect, styled} from "frontity";
 import Footer from "../components/Footer";
+import FormStep from "../components/form-components/FormStep";
 import Header from "../components/Header";
 import mapInfo from "../assets/images/map-info-bg.png";
 import Input from "../components/form-components/Input";
 import Button from "../components/form-components/Button";
 import Container from "../components/reusable/Container";
-import { size } from "../functions/size";
+import Link from "../components/reusable/Link";
+import {size} from "../functions/size";
 import Select from "../components/form-components/Select";
 
 import cities from "../assets/cities assets/cities.json";
@@ -28,38 +30,38 @@ function copyToClipboard(text) {
 }
 
 const sortedCities = cities.sort((a, b) => (a.name > b.name ? 1 : -1));
-const MapPage = ({ className, actions, state }) => {
-  const generateMap = ({ windowSize, name, coordinates, enc, zoom }) => {
+const MapPage = ({className, actions, state, libraries}) => {
+  const generateMap = ({windowSize, name, coordinates, enc, zoom}) => {
     let link = `https://maps.googleapis.com/maps/api/staticmap?map_id=3a82b8043ec69e1&zoom=${
-      zoom || 7
+        zoom || 7
     }&key=AIzaSyD9Q58YYqhsWqlGn1p-GzPWv3iyCZ2iTss&size=${
-      windowSize?.width || 1920
+        windowSize?.width || 1920
     }x${windowSize?.height || 1080}`;
     link += name
-      ? `&center=canada+ontario+${name.replaceAll(" ", "+")}`
-      : "&center=canada+toronto";
+        ? `&center=canada+ontario+${name.replaceAll(" ", "+")}`
+        : "&center=canada+toronto";
     link += coordinates
-      ? `&path=color:0x0E9564FF|weight:2|fillcolor:0x26D69634|${coordinates
-          .map((a) => a[0].toFixed?.(3) + "," + a[1].toFixed?.(3))
-          .join("|")}`
-      : "";
+        ? `&path=color:0x0E9564FF|weight:2|fillcolor:0x26D69634|${coordinates
+            .map((a) => a[0].toFixed?.(3) + "," + a[1].toFixed?.(3))
+            .join("|")}`
+        : "";
     link += enc
-      ? `&path=color:0x0E9564FF|weight:2|fillcolor:0x26D69634|enc:${enc}`
-      : "";
+        ? `&path=color:0x0E9564FF|weight:2|fillcolor:0x26D69634|enc:${enc}`
+        : "";
     return link;
   };
   const mapRef = React.useRef(null);
   const mapAPIRef = React.useRef(null);
   const polygonAPIRef = React.useRef(null);
   const [postalCodeErrorMessage, setPostalCodeErrorMessage] = React.useState(
-    ""
+      ""
   );
 
   // const geocoderAPIRef = React.useRef(null);
 
   const initMap = () => {
     mapAPIRef.current = new window.google.maps.Map(mapRef.current, {
-      center: { lat: 43.653226, lng: -79.3831843 },
+      center: {lat: 43.653226, lng: -79.3831843},
       zoom: 9,
       disableDefaultUI: true,
       draggable: true,
@@ -74,9 +76,9 @@ const MapPage = ({ className, actions, state }) => {
       fillOpacity: 0.2,
       map: mapAPIRef.current,
     });
-    window.google.maps.Polygon.prototype.getBounds = function () {
+    polygonAPIRef.current.getBounds = function () {
       let bounds = new window.google.maps.LatLngBounds();
-      let paths = this.getPaths();
+      let paths = polygonAPIRef.current.getPaths();
       let path;
       for (let i = 0; i < paths.getLength(); i++) {
         path = paths.getAt(i);
@@ -109,12 +111,12 @@ const MapPage = ({ className, actions, state }) => {
 
   // const windowSize = useWindowSize();
   const [appraiser, setAppraiser] = React.useState([{}]);
-  const postal_city = React.useRef({ postalCode: "", city: "" });
+  const postal_city = React.useRef({postalCode: "", city: ""});
   const appraisersLookup = state.source.get("appraisers-map-lookup");
   const postalCodeGetAppraiser = debounce((postalCode) => {
     if (postalCode.length < 3) {
       setAppraiser([{}]);
-      setPostalCodeErrorMessage("no appraisers found for this postal code");
+      setPostalCodeErrorMessage(true);
       return;
     }
     const data = new FormData();
@@ -122,12 +124,15 @@ const MapPage = ({ className, actions, state }) => {
     opponoApi.post("/appraiser-lookup", data).then((response) => {
       if (response.data.length > 2) {
         setAppraiser([{}]);
-        setPostalCodeErrorMessage("no appraisers found for this postal code");
+        setPostalCodeErrorMessage(true);
+      } else if (response.data.length == 0) {
+        setAppraiser([{}]);
+        setPostalCodeErrorMessage(true);
       } else {
         setAppraiser(response.data);
-        setPostalCodeErrorMessage("");
-        const { coordinates } = cities.filter(
-          (city) => city.name === response.data[0]?.title
+        setPostalCodeErrorMessage(false);
+        const {coordinates} = cities.filter(
+            (city) => city.name === response.data[0]?.fields.city
         )[0];
         polygonAPIRef.current.setPaths(coordinates);
         mapAPIRef.current.fitBounds(polygonAPIRef.current.getBounds());
@@ -137,119 +142,123 @@ const MapPage = ({ className, actions, state }) => {
   React.useEffect(() => {
     actions.theme.setActiveTheme("gray-theme");
   }, []);
-  return (
-    <div className={classnames(className)}>
-      <div className="map" ref={mapRef} />
-      <Header hasSubMenu={false} />
-      <Container className={classnames({ flex: !appraiser[0]?.fields })}>
-        <div className="map-wrapper">
-          <div className="col-left">
-            <div className="text-wrapper">
-              <h1 className={"headline-1"}>We’re proud to serve the GTA</h1>
-              {/*<h2 className={'headline-2 dark'}>Looking within a specific city or region?</h2>*/}
-            </div>
-            <div className="inputs-group">
-              <Select
-                onChange={({ name, coordinates, zoom, center }) => {
-                  postal_city.current.city = name;
-                  // setMap(generateMap({windowSize, name, enc, zoom}));
-                  console.log(appraisersLookup.data[name]);
-                  setAppraiser([
-                    appraisersLookup.data[name] || { title: name },
-                  ]);
-                  polygonAPIRef.current.setPaths(coordinates);
-                  mapAPIRef.current.fitBounds(
-                    polygonAPIRef.current.getBounds()
-                  );
-                  // mapAPIRef.current?.setCenter(center);
-                  // mapAPIRef.current?.setZoom(zoom);
-                  // geocoderAPIRef.current.geocode({address: `canada+ontario+${name.replaceAll(' ', '+')}`}, (results, status) => {
-                  //   if (status === google.maps.GeocoderStatus.OK) {
-                  //     copyToClipboard(JSON.stringify({center:results[0].geometry.location}).slice(1,-1)+',')
-                  // //     mapAPIRef.current?.setCenter(results[0].geometry.location);
-                  // //     mapAPIRef.current?.setZoom(zoom);
-                  // //     polygonAPIRef.current.setPaths(coordinates)
-                  //   }
-                  // });
-                }}
-                noOptionsMessage={() => "No City Found"}
-                options={sortedCities}
-                name={"city"}
-                label={"Select a city"}
-                value={cities.filter(
-                  (city) => city.name === appraiser[0]?.title
-                )}
-              />
-              <p>OR</p>
-              <Input
-                type={"text"}
-                name={"postal_code"}
-                error={postalCodeErrorMessage}
-                onChange={(e) => {
-                  postal_city.current.postalCode = e.target.value;
-                  postalCodeGetAppraiser(e.target.value);
-                }}
-                placeholder={"L5H 3S4"}
-                label={"Type in your postal code"}
-              />
-            </div>
 
-            {appraiser[0] ? (
-              <div className="btn-group">
-                {/*<Button label={'Search'}/>*/}
-                <Button
-                  disabled={!appraiser[0]}
-                  label={"Find Appraisers in the Area"}
-                  onClick={() => {
-                    actions.theme.setAppraiser({
-                      ...appraiser[0],
-                      ...postal_city.current,
-                    });
-                    actions.router.set("/dashboard/e");
-                  }}
+  const Html2React = libraries.html2react.Component;
+
+  return (
+      <div className={classnames(className)}>
+        <div className="map" ref={mapRef}/>
+        <Header hasSubMenu={false}/>
+        <Container className={classnames({flex: !appraiser[0]?.fields})}>
+          <div className="map-wrapper">
+            <div className="col-left">
+              <div className="text-wrapper">
+                <h1 className={"headline-1"}>We're proud to serve Ontario</h1>
+                {/*<h2 className={'headline-2 dark'}>Looking within a specific city or region?</h2>*/}
+              </div>
+              <div className="inputs-group">
+                <Select
+                    onChange={({name, coordinates, zoom, center}) => {
+                      postal_city.current.city = name;
+                      // setMap(generateMap({windowSize, name, enc, zoom}));
+                      setAppraiser(appraisersLookup.data[name] || [{fields: {city:name}}]);
+                      polygonAPIRef.current.setPaths(coordinates);
+                      mapAPIRef.current.fitBounds(
+                          polygonAPIRef.current.getBounds()
+                      );
+                      // mapAPIRef.current?.setCenter(center);
+                      // mapAPIRef.current?.setZoom(zoom);
+                      // geocoderAPIRef.current.geocode({address: `canada+ontario+${name.replaceAll(' ', '+')}`}, (results, status) => {
+                      //   if (status === google.maps.GeocoderStatus.OK) {
+                      //     copyToClipboard(JSON.stringify({center:results[0].geometry.location}).slice(1,-1)+',')
+                      // //     mapAPIRef.current?.setCenter(results[0].geometry.location);
+                      // //     mapAPIRef.current?.setZoom(zoom);
+                      // //     polygonAPIRef.current.setPaths(coordinates)
+                      //   }
+                      // });
+                    }}
+                    noOptionsMessage={() => "No City Found"}
+                    options={sortedCities}
+                    name={"city"}
+                    label={"Select a city"}
+                    value={cities.filter(
+                        (city) => city.name === appraiser[0]?.fields?.city
+                    )}
+                />
+                <p>OR</p>
+                <Input
+                    type={"text"}
+                    name={"postal_code"}
+                    onChange={(e) => {
+                      postal_city.current.postalCode = e.target.value;
+                      postalCodeGetAppraiser(e.target.value);
+                    }}
+                    placeholder={"L5H 3S4"}
+                    label={"Type in your postal code"}
                 />
               </div>
-            ) : null}
+              {postalCodeErrorMessage ? (
+                  <p className={"error-message"}>
+                    No appraisers found for this postal code<br/>
+                    <Link href={'/get-in-touch'}>Please contact us</Link>
+                  </p>
+              ) : null}
+              {appraiser[0] ? (
+                  <div className="btn-group">
+                    {/*<Button label={'Search'}/>*/}
+                    <Button
+                        disabled={!appraiser[0]}
+                        label={"Find Appraisers in the Area"}
+                        onClick={() => {
+                          actions.theme.setAppraiser({
+                            ...appraiser[0],
+                            ...postal_city.current,
+                          });
+                          actions.router.set("/dashboard/e");
+                        }}
+                    />
+                  </div>
+              ) : null}
+            </div>
+            <div className="col-right">
+              {appraiser[0]?.fields
+                  ? appraiser.map((a) =>
+                      a.fields ? (
+                          <div key={a.ID} className="appraisal-block">
+                            <h3>{a.fields.bdm?.name}</h3>
+                            <p className="text">{a.fields.bdm?.phone}</p>
+                            <p className="text">{a.fields.bdm?.email}</p>
+                            <hr/>
+                            <p className="text">{a.fields.city}</p>
+                            <p className="ltv">{a.fields.ltv}% LTV</p>
+                            <p className="text bold">Preferred appraisal companies</p>
+                            <p className="text">
+                              {[...a.fields.preferred_appraisal_company]
+                                  ?.map?.((c) => c.post_title)
+                                  .join(", ")}
+                            </p>
+                          </div>
+                      ) : null
+                  )
+                  : null}
+              {appraiser[0]?.fields ? (
+                  <Button
+                      label={"Find Appraisers in the Area"}
+                      onClick={() => {
+                        actions.theme.setAppraiser({
+                          ...appraiser[0],
+                          ...postal_city.current,
+                        });
+                        actions.router.set("/dashboard/e");
+                      }}
+                  />
+              ) : null}
+            </div>
+            <div className="cf"></div>
           </div>
-          <div className="col-right">
-            {appraiser[0]?.fields
-              ? appraiser.map((a) =>
-                  a.fields ? (
-                    <div key={a.ID} className="appraisal-block">
-                      <h3>{a.fields.bdm?.name}</h3>
-                      <p className="text">{a.fields.bdm?.phone}</p>
-                      <p className="text">{a.fields.bdm?.email}</p>
-                      <hr />
-                      <p className="text">{a.fields.city}</p>
-                      <p className="ltv">{a.fields.ltv}% LTV</p>
-                      <p className="text bold">Preferred appraisal companies</p>
-                      <p className="text">
-                        {a.fields.preferred_appraisal_company
-                          ?.map?.((c) => c.post_title)
-                          .join(", ")}
-                      </p>
-                    </div>
-                  ) : null
-                )
-              : null}
-            {appraiser[0]?.fields ? (
-              <Button
-                label={"Find Appraisers in the Area"}
-                onClick={() => {
-                  actions.theme.setAppraiser({
-                    ...appraiser[0],
-                    ...postal_city.current,
-                  });
-                  actions.router.set("/dashboard/e");
-                }}
-              />
-            ) : null}
-          </div>
-          <div className="cf"></div>
-        </div>
-      </Container>
-      <Footer />
-    </div>
+        </Container>
+        <Footer/>
+      </div>
   );
 };
 
@@ -291,25 +300,23 @@ export default styled(connect(MapPage))`
     justify-content: space-between;
     position: relative;
     z-index: 6;
-    @media (min-width: 1800px) {
-      transform: scale(0.7);
-    }
-    @media (min-width: 1400px) {
-      transform: scale(0.8);
-    }
-    @media (max-height: 850px) {
-      transform: scale(0.8);
-    }
     @media (max-width: 991.98px) {
       width: 100%;
       flex-direction: column;
       height: 90%;
     }
+    @media (min-width: 1400px) {
+      transform: scale(0.8);
+    }
+    @media (min-width: 1800px) {
+      transform: scale(0.68);
+      margin-top: -1rem;
+    }
 
     @media (max-width: 575.98px) {
       margin: auto;
       position: fixed;
-      top: 80px;
+      top: 15%;
       left: 0;
       overflow: scroll;
       padding-bottom: 8rem;
@@ -330,6 +337,7 @@ export default styled(connect(MapPage))`
 
       @media (max-width: 575.98px) {
         padding: 2rem;
+				background: #161a20;
       }
 
       .inputs-group {
@@ -346,7 +354,7 @@ export default styled(connect(MapPage))`
         p {
           color: #bfb6b4;
           font-size: ${size(16)};
-          font-weight: 500;
+          font-weight: 400;
           margin: 0 ${size(38)};
           @media (max-width: 575.98px) {
             margin: ${size(20)} 0;
@@ -367,7 +375,7 @@ export default styled(connect(MapPage))`
       .headline-1 {
         color: #bfb6b4;
         font-size: ${size(40)};
-        font-weight: 400;
+        font-weight: 300;
         line-height: ${size(48)};
         @media (max-width: 991.98px) {
           font-size: ${size(35)};
@@ -382,7 +390,7 @@ export default styled(connect(MapPage))`
       .headline-2 {
         color: rgba(191, 182, 180, 0.5);
         font-size: ${size(29)};
-        font-weight: 400;
+        font-weight: 300;
         line-height: ${size(40)};
         @media (max-width: 991.98px) {
           font-size: ${size(24)};
@@ -437,7 +445,7 @@ export default styled(connect(MapPage))`
       h3 {
         color: #bfb6b4;
         font-size: ${size(56)};
-        font-weight: 300;
+        font-weight: 200;
         line-height: ${size(64)};
         margin-bottom: ${size(17)};
         @media (max-width: 575.98px) {
@@ -449,17 +457,18 @@ export default styled(connect(MapPage))`
       .text {
         color: #bfb6b4;
         font-size: ${size(16)};
-        font-weight: 300;
+        font-weight: 200;
       }
+
       .bold {
-        font-weight: 600;
+        font-weight: 500;
         margin-top: ${size(16)};
       }
 
       .ltv {
         color: #bfb6b4;
         font-size: ${size(30)};
-        font-weight: 300;
+        font-weight: 200;
         line-height: ${size(39)};
       }
 
@@ -494,10 +503,13 @@ export default styled(connect(MapPage))`
   .map {
     width: 100%;
     height: 100%;
-    position: absolute;
+    position: fixed !important;
     top: 0;
     left: 0;
     z-index: 5;
+    @media (max-width: 575.98px) {
+      position: absolute !important;
+    }
   }
 
   footer {
@@ -514,6 +526,7 @@ export default styled(connect(MapPage))`
         font-size: ${size(30)};
       }
     }
+
     @media (max-width: 450px) {
       .normal-input {
         font-size: ${size(20)};
@@ -531,9 +544,11 @@ export default styled(connect(MapPage))`
       &__single-value,
       &__input,
       &__control {
-        font-size: ${size(30)};
+        font-size: ${size(22)};
+        padding-left: 8px !important;;
       }
     }
+
     @media (max-width: 450px) {
       .oppono-select {
         &__option,
@@ -548,5 +563,21 @@ export default styled(connect(MapPage))`
 
   ${Container}.flex {
     display: flex;
+  }
+
+  .error-message {
+    color: red;
+    font-size: ${size(16)};
+    font-weight: 400;
+    margin-top: ${size(50)};
+    text-align: center;
+    display: block;
+
+    a {
+      font-size: ${size(18)};
+      color: #bfb6b4;
+      font-weight: 700;
+      text-decoration: underline;
+    }
   }
 `;

@@ -55,7 +55,7 @@ const Slider = styled(Swiper)`
     .slide-number {
       color: #b5d2ff;
       font-size: ${size(10)};
-      font-weight: 700;
+      font-weight: 600;
       width: ${size(23)};
       height: ${size(23)};
       border: 1px solid rgba(181, 210, 255, 0.4);
@@ -78,7 +78,7 @@ const Slider = styled(Swiper)`
     .title {
       color: #b5d2ff;
       font-size: ${size(80)};
-      font-weight: 400;
+      font-weight: 300;
       font-style: normal;
       letter-spacing: normal;
       line-height: ${size(95)};
@@ -107,7 +107,7 @@ const Slider = styled(Swiper)`
     background-color: #fe412d;
     color: #ffffff;
     font-size: ${size(16)};
-    font-weight: 500;
+    font-weight: 400;
     text-decoration: none;
     margin-top: ${size(24)};
     cursor: pointer;
@@ -140,7 +140,6 @@ const Slider = styled(Swiper)`
 `;
 
 const createSlideAnimation = (slide, paused = true, initial = false) => {
-  console.log(slide);
   if (!slide) return;
   const title = slide.querySelector(".title"),
     number = slide.querySelector(".number"),
@@ -249,7 +248,6 @@ const ProductsSlider = ({
       for (let i = 0; i < slides?.length; i++) {
         slidesAnimation.current[i] = createSlideAnimation(slides[i]);
       }
-      console.log("wait");
       setSwiperRef(swiper);
     }, 500);
   };
@@ -262,7 +260,6 @@ const ProductsSlider = ({
   }, []);
 
   React.useEffect(() => {
-    console.log("data.ready==========================");
     allProductsFetched.current = slidesObj.map((slide) => {
       return actions.source.fetch(
         "/" + slide.product.post_type + "/" + slide.product.post_name
@@ -271,11 +268,9 @@ const ProductsSlider = ({
   }, [data.isReady]);
 
   React.useEffect(() => {
-    console.log("swiper.ready=========================");
     if (!swiperRef) {
       return;
     }
-    console.log(slidesAnimation.current[0]);
     const nextArrow = nextBtnRef.current.querySelectorAll("svg path"),
       prevArrow = prevBtnRef.current.querySelectorAll("svg path");
     initialTimeline.current.clear();
@@ -481,7 +476,7 @@ const ProductsSlider = ({
                             <P.D as={"span"}>%</P.D>
                           </td>
                           <td>
-                            <P.Dark>Fixed Rate</P.Dark>
+                            <P.Dark>Fixed rate</P.Dark>
                           </td>
                         </tr>
                         <tr>
@@ -497,7 +492,7 @@ const ProductsSlider = ({
                             <P.D as={"span"}>%</P.D>
                           </td>
                           <td>
-                            <P.Dark>Lender Fee</P.Dark>
+                            <P.Dark>Lender fee</P.Dark>
                           </td>
                         </tr>
                         <tr>
@@ -513,7 +508,7 @@ const ProductsSlider = ({
                             <P.D as={"span"}>%</P.D>
                           </td>
                           <td>
-                            <P.Dark>LTV</P.Dark>
+                            <P.Dark>Max LTV</P.Dark>
                           </td>
                         </tr>
                       </tbody>
@@ -575,8 +570,8 @@ export default styled(connect(ProductsSlider))`
     .number {
       display: inline-block;
       position: relative;
-      letter-spacing: ${size(-11)};
-      font-size: ${size(250)};
+      letter-spacing: -5px;
+      font-size: ${size(220)};
 
       &:before {
         content: "%";
@@ -585,7 +580,7 @@ export default styled(connect(ProductsSlider))`
         top: ${size(20)};
         color: #d2f5e9;
         font-size: ${size(25)};
-        font-weight: 400;
+        font-weight: 300;
         line-height: ${size(34)};
       }
 
@@ -779,7 +774,7 @@ export default styled(connect(ProductsSlider))`
     opacity: 0.4;
     color: #d2f5e9;
     font-size: ${size(12)};
-    font-weight: 400;
+    font-weight: 300;
     letter-spacing: ${size(0.48)};
     line-height: ${size(16)};
     border-top: 1px solid #d2f5e9;
@@ -806,7 +801,7 @@ export default styled(connect(ProductsSlider))`
   .terms-text {
     color: rgba(210, 245, 233, 0.4);
     font-size: ${size(14)};
-    font-weight: 500;
+    font-weight: 400;
     text-align: center;
     margin-top: ${size(15)};
     @media (max-width: 991.98px) {

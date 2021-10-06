@@ -1,10 +1,10 @@
 import React from "react";
-import { connect, css, Global, styled, Head } from "frontity";
+import {connect, css, Global, styled, Head} from "frontity";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import gsap from "gsap";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-import { size } from "../../functions/size";
+import {ScrollToPlugin} from "gsap/ScrollToPlugin";
+import {size} from "../../functions/size";
 import FormStep from "./FormStep";
 import StepsProgress from "./StepsProgress";
 
@@ -25,7 +25,7 @@ const Form = ({
   const initial = React.useRef(true);
   const reversed = React.useRef(true);
   const allStepsNames = React.useRef([]);
-
+  
   const resetCallback = () => {
     reversed.current = true;
     setActiveStep(0);
@@ -39,11 +39,11 @@ const Form = ({
     reversed.current = true;
     setActiveStep((prevState) => prevState - 1);
   };
-
+  
   React.useEffect(() => {
-    gsap.to(window, { scrollTo: 0, duration: 0.2 });
+    gsap.to(window, {scrollTo: 0, duration: 0.2});
   }, [activeStep]);
-
+  
   React.useEffect(() => {
     // innerRef.current.querySelector('input:not([type=hidden]), select')?.focus();
     let stepsCounter = 0;
@@ -53,42 +53,42 @@ const Form = ({
         allStepsNames.current.push(child.props.stepName);
       }
     });
-    actions?.theme.setActiveStep({ total: stepsCounter });
+    actions?.theme.setActiveStep({total: stepsCounter, allStepsNames: allStepsNames.current});
   }, []);
   return (
-    <>
-      <Global
-        styles={css`
-          html {
-            overflow-y: scroll;
-          }
-        `}
-      />
-      <div ref={innerRef} className={classnames(className, { wide })}>
-        {state.theme.activeStep.total > 1 && !hideStepsProgress ? <StepsProgress /> : null}
-        {React.Children.map(children, (child, index) => {
-          return React.cloneElement(child, {
-            ...child.props,
-            endPoint:
-              child.props.endPoint === undefined
-                ? endPoint
-                : child.props.endPoint,
-            active: activeStep === index,
-            stepIndex: index,
-            initial: initial.current,
-            setCurrentTheme,
-            nextCallback,
-            prevCallback,
-            resetCallback,
-            setLoading,
-            allStepsNames: allStepsNames.current,
-          });
-        })}
-      </div>
-      <div className={classnames("waiting-screen", { active: loading })}>
-        Loading...
-      </div>
-    </>
+      <>
+        <Global
+            styles={css`
+              html {
+                overflow-y: scroll;
+              }
+            `}
+        />
+        <div ref={innerRef} className={classnames(className, {wide})}>
+          {state.theme.activeStep.total > 1 && !hideStepsProgress ? <StepsProgress /> : null}
+          {React.Children.map(children, (child, index) => {
+            return React.cloneElement(child, {
+              ...child.props,
+              endPoint:
+                  child.props.endPoint === undefined
+                      ? endPoint
+                      : child.props.endPoint,
+              active: activeStep === index,
+              stepIndex: index,
+              initial: initial.current,
+              setCurrentTheme,
+              nextCallback,
+              prevCallback,
+              resetCallback,
+              setLoading,
+              allStepsNames: allStepsNames.current,
+            });
+          })}
+        </div>
+        <div className={classnames("waiting-screen", {active: loading})}>
+          Loading...
+        </div>
+      </>
   );
 };
 
@@ -102,12 +102,14 @@ export default styled(connect(Form))`
   &.wide {
     max-width: 100%;
   }
+  
   padding-top: ${size(200)};
   position: relative;
   @media (max-width: 575.98px) {
     padding: 0 3.3rem;
     margin-top: 160px;
   }
+  
   ${StepsProgress} {
     position: fixed;
     height: 30%;
@@ -118,18 +120,20 @@ export default styled(connect(Form))`
     @media (max-width: 991.98px) {
       left: ${size(33)};
     }
-
+    
     @media (max-width: 575.98px) {
       display: none;
     }
   }
+  
   .error-message {
     color: red;
     font-size: ${size(16)};
-    font-weight: 500;
+    font-weight: 400;
     margin-top: ${size(50)};
     text-align: center;
     display: block;
+    
     a {
       color: inherit;
       text-decoration: underline;

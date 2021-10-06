@@ -35,7 +35,7 @@ const FormsPage = ({ className, state, actions, link }) => {
     if (
       !state.theme.user.logged &&
       !(
-        /sign-in|create-account|qualifyfor/.test(page.slug) ||
+        /sign-in|create-account|b|qualifyfor/.test(page.slug) ||
         state.router.link.startsWith("/d/")
       )
     ) {
@@ -135,6 +135,7 @@ export default styled(connect(FormsPage))`
 
     @media (max-width: 575.98px) {
       padding-bottom: ${size(100)};
+			display: block;
     }
   }
 `;

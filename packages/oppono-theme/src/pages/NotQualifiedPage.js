@@ -6,6 +6,7 @@ import mapInfo from "../assets/images/map-info-bg.png";
 import Input from "../components/form-components/Input";
 import Button from "../components/form-components/Button";
 import Container from "../components/reusable/Container";
+import Link from "../components/reusable/Link";
 import { size } from "../functions/size";
 import Select from "../components/form-components/Select";
 
@@ -14,27 +15,24 @@ import opponoApi from "../opponoApi";
 import debounce from "../functions/debounce";
 import classnames from "classnames";
 
-const TermsPage = ({ className, link, libraries, actions, state }) => {
-  const data = state.source.get(link);
-  const post = state.source[data.type][data.id];
+const NotQualifiedPage = ({ className, link, libraries, actions, state }) => {
 
-  const Html2React = libraries.html2react.Component;
   React.useEffect(() => {
     actions.theme.setActiveTheme("gray-theme");
   }, []);
   return (
     <div className={classnames(className)}>
       <Header hasSubMenu={false} />
-      <Container className={"privacy-page-wrapper"}>
-        {/*<h1 className={'primary'}>Privacy Policy</h1>*/}
-        <Html2React html={post.content.rendered} />
+      <Container className={"not-qualified-page-wrapper"}>
+        <h1 className={'primary'}>You are not qualified</h1>
+        <Link href={'/d'}>Go to all Products</Link>
       </Container>
       <Footer />
     </div>
   );
 };
 
-export default styled(connect(TermsPage))`
+export default styled(connect(NotQualifiedPage))`
   padding-top: ${size(120)};
   padding-bottom: ${size(120)};
 
@@ -53,11 +51,12 @@ export default styled(connect(TermsPage))`
     }
   }
 
-  .privacy-page-wrapper {
+  .not-qualified-page-wrapper {
     word-break: break-word;
     h1 {
       font-size: ${size(50)};
       text-align: center;
+
       @media (max-width: 575.98px) {
         font-size: ${size(34)};
       }
@@ -84,7 +83,7 @@ export default styled(connect(TermsPage))`
     }
 
     b {
-      font-weight: 400;
+      font-weight: 500;
     }
 
     p,
@@ -93,6 +92,7 @@ export default styled(connect(TermsPage))`
 			line-height: 1.5;
       font-weight: 200;
       font-style: normal;
+      color: rgb(191, 182, 180) !important;
       margin-top: 2rem;
 
       @media (max-width: 575.98px) {
@@ -101,8 +101,14 @@ export default styled(connect(TermsPage))`
     }
 
     a {
+      font-size: ${size(35)};
+      display: block;
+      text-align: center;
       color: #0e9564;
       text-decoration: underline;
+      @media (max-width: 575.98px) {
+        font-size: ${size(20)};
+      }
     }
   }
 `;

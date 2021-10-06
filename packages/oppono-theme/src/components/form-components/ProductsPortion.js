@@ -10,7 +10,7 @@ const ProductsPortion = ({ className }) => {
   return (
     <div className={className}>
       <p className={"primary"}>
-        We make lending <br /> a breeze.
+        We make lending a breeze.
         <img src={img1} alt="FlyImg" />
       </p>
       <p className={"primary opacity-5"}>
@@ -34,11 +34,11 @@ export default styled(ProductsPortion)`
   align-items: center;
   justify-content: center;
   p {
-    font-size: ${size(65)};
-    font-weight: 400;
+    font-size: ${size(35)};
+    font-weight: 300;
     font-style: normal;
     letter-spacing: normal;
-    line-height: ${size(65)};
+    line-height: ${size(45)};
     text-align: center;
     display: inline-block;
     position: relative;

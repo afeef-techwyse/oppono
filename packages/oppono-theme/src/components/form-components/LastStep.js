@@ -1,11 +1,17 @@
-import React from "react";
-import { size } from "../../functions/size";
-import { styled } from "frontity";
-import Container from "../reusable/Container";
-import Link from "../reusable/Link";
+import React from 'react';
+import {size} from '../../functions/size';
+import {styled} from 'frontity';
+import Container from '../reusable/Container';
+import Link from '../reusable/Link';
 
 const LastStep = ({ className, children }) => {
-  return <div className={className + " form-wide-container"}>{children}</div>;
+  return (
+    <div className={className + ' form-wide-container'}>
+      <Container>
+        {children}
+      </Container>
+    </div>
+  );
 };
 
 export default styled(LastStep)`
@@ -53,7 +59,7 @@ export default styled(LastStep)`
         text-align: left;
         @media (max-width: 991.98px) {
           text-align: center;
-          max-width: 80%;
+          max-width: 85rem;
           margin-right: auto;
           margin-left: auto;
         }

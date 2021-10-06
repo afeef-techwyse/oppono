@@ -21,7 +21,6 @@ const Mail = ({ className, state, actions }) => {
   const data = state.source.get(state.router.link);
   const pageData =
     data.isReady && !data.isError ? state.source[data.type][data.id].acf : {};
-  console.log(pageData);
   const [currentTheme, setCurrentTheme] = React.useState("gray-theme");
   const pageName = "contact";
   React.useEffect(() => {
@@ -51,6 +50,7 @@ const Mail = ({ className, state, actions }) => {
                     {pageData.section_1?.sub_title}
                   </h2>
                 ) : null}
+								{/* <img className="contact-flying-obj" src={contact_obj} alt="flying object"/> */}
               </div>
               <div className="contact-info-wrapper">
                 <Link href={"tel:" + pageData.section_1?.oppono_phone}>
@@ -132,16 +132,16 @@ const Mail = ({ className, state, actions }) => {
               ) : null}
 
               <div className="floating-obj">
-                <FlyingObjsContainer
+							<FlyingObjsContainer
                   childrenList={[
                     {
                       imageUrl: contact_obj,
-                      left: "60%",
+                      left: "20%",
                       level: 1,
                       top: "28%",
                       type: "image",
                       width: 18,
-                      alt: "alt",
+                      alt: "flying object",
                     },
                   ]}
                 />
@@ -165,7 +165,8 @@ const Mail = ({ className, state, actions }) => {
                 <Input
                   name={"phone"}
                   className={"primary-input"}
-                  type={"text"}
+                  type={"phone"}
+isPhoneNumber
                   {...pageData.section_1?.phone_input}
                 />
               </div>
@@ -178,14 +179,14 @@ const Mail = ({ className, state, actions }) => {
                 <TextArea
                   name={"questions"}
                   className={"primary-input"}
-                  label={"Questions?"}
+                  {...pageData.section_1?.questions_input}
                 />
               </div>
             </div>
             <Button
               icon={true}
               className={"next-step wide"}
-              label={"I’m ready to send"}
+              label={"Send message"}
             />
           </Container>
         </FormStep>
@@ -203,7 +204,7 @@ const Mail = ({ className, state, actions }) => {
               <h1 className={"form-headline-1 text-left"}>
                 {pageData.section_2?.title}
               </h1>
-              <p className={"form-headline-3 primary"}>
+              <p className={"form-headline-3 primary lighter"}>
                 {pageData.section_2?.subtitle}
               </p>
               <Wysiwyg
@@ -216,7 +217,7 @@ const Mail = ({ className, state, actions }) => {
                 <Link className={"wide bordered"} href={"/dashboard"}>
                   <Button
                     className={"wide bordered"}
-                    label={"Back to Dashboard"}
+                    label={"Back to dashboard"}
                   />
                 </Link>
               </div>
@@ -231,6 +232,8 @@ const Mail = ({ className, state, actions }) => {
 export default styled(connect(Mail))`
   width: 100%;
   height: 100%;
+  align-items: stretch;
+  margin: 0 0 ${size(100)};
 
   // .contact-obj {
   //   max-width: ${size(205)};
@@ -238,6 +241,14 @@ export default styled(connect(Mail))`
   //   margin: ${size(30)} auto 0;
   // }
   //
+
+	.contact-flying-obj {
+		position: absolute;
+		max-width: 345px;
+	}
+
+
+
   .contact-row {
     display: flex;
     align-items: flex-start;
@@ -326,9 +337,14 @@ export default styled(connect(Mail))`
     }
   }
 
+	.title-wrapper {
+		flex: 48%;
+	}
+
   .contact-info-wrapper {
     position: relative;
-    left: ${size(50)};
+    left: ${size(100)};
+		flex: 48%;
     @media (max-width: 991.98px) {
       bottom: 0;
       left: 0;
@@ -340,7 +356,7 @@ export default styled(connect(Mail))`
       align-items: center;
       margin-bottom: ${size(15)};
       background: #10397c;
-      padding: ${size(10)} ${size(40)} ${size(10)} ${size(30)};
+      padding: 2rem 3rem 2.5rem 3rem;
       border-top: 4px solid transparent;
       transition: border-color 500ms;
       @media (max-width: 991.98px) {
@@ -351,9 +367,9 @@ export default styled(connect(Mail))`
         display: flex;
         align-items: center;
         justify-content: center;
-        background: #2c3d90;
-        width: ${size(90)};
-        height: ${size(90)};
+        background: #0a266c;
+        width: ${size(60)};
+        height: ${size(60)};
         border-radius: 50%;
         object-fit: contain;
         margin-right: ${size(30)};
@@ -363,20 +379,21 @@ export default styled(connect(Mail))`
         }
 
         svg {
-          width: 50%;
-          height: 50%;
+          width: 43%;
+          height: 43%;
           transition: color 500ms;
           color: rgba(255, 255, 255, 0.8);
         }
       }
 
       .text {
+				max-width: 70%;
         display: flex;
         flex-direction: column;
         justify-content: center;
 
         div {
-          font-size: ${size(22)};
+          font-size: ${size(16)};
           color: rgba(255, 255, 255, 0.8);
           margin-bottom: ${size(3)};
           display: block;
@@ -390,7 +407,7 @@ export default styled(connect(Mail))`
         }
 
         p {
-          font-size: ${size(16)};
+          font-size: ${size(14)};
           color: rgba(255, 255, 255, 0.8);
           transition: color 500ms;
 
@@ -401,7 +418,9 @@ export default styled(connect(Mail))`
       }
 
       &:hover {
-        border-color: #fff;
+        @media (min-width: 991.98px) {
+					border-color: #fff;
+				}
 
         .icon {
           svg {
@@ -451,6 +470,7 @@ export default styled(connect(Mail))`
         width: 100% !important;
         left: 15% !important;
         top: 0 !important;
+				transform: none !important;
       }
     }
   }
