@@ -10,6 +10,7 @@ import Container from "../components/reusable/Container";
 import Link from "../components/reusable/Link";
 import {size} from "../functions/size";
 import Select from "../components/form-components/Select";
+import useAddress from '../contexts/AddressProvider'
 
 import cities from "../assets/cities assets/cities.json";
 import opponoApi from "../opponoApi";
@@ -56,6 +57,8 @@ const MapPage = ({className, actions, state, libraries}) => {
   const [postalCodeErrorMessage, setPostalCodeErrorMessage] = React.useState(
       ""
   );
+
+  const { address, handleAddressChange } = useAddress();
 
   // const geocoderAPIRef = React.useRef(null);
 
@@ -214,7 +217,9 @@ const MapPage = ({className, actions, state, libraries}) => {
                             ...appraiser[0],
                             ...postal_city.current,
                           });
-                          actions.router.set("/dashboard/e");
+
+                          handleAddressChange(postal_city.current)
+                          actions.router.set( "/dashboard/e");
                         }}
                     />
                   </div>

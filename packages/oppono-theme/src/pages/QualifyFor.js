@@ -132,7 +132,7 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
                   products.map(product=>
                     product&&<th key={product.ID} scope={'col'}>
                       <P.Dark>{product.typeName}</P.Dark>
-                      <p>{numberWithCommas(monthlyPayments(mortgage, +product.fields.rate / 100))} / month</p>
+                      <p>${numberWithCommas(monthlyPayments(mortgage, +product.fields.rate / 100))} / month</p>
                       <p className={'number'}>{product.fields.rate}%</p>
                       <Button className={'small next-step'} onClick={()=>{
                         setSelectedProduct(product)
@@ -184,7 +184,7 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
                       </div>
                       <div className="mortgage-head">
                         <p className={'number'}>{product.fields.rate}%</p>
-                        <p>{numberWithCommas(monthlyPayments(mortgage, +product.fields.rate / 100))} / month</p>
+                        <p>${numberWithCommas(monthlyPayments(mortgage, +product.fields.rate / 100))} / month</p>
                         <Button className={'small next-step'} onClick={()=>{
                           setSelectedProduct(product)
                           setTimeout(() => actions.theme.setValidateAndNextCallback(new Date().getTime()), 100);

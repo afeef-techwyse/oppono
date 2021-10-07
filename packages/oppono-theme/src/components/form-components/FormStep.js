@@ -298,8 +298,8 @@ const FormStep = ({
     state.theme.validateAndNextCallback && active && validateAndNextCallback();
   }, [state.theme.validateAndNextCallback]);
   React.useEffect(() => {
-    if (active) {
-      if (initial) {
+    if (initial) {
+      if (active) {
         gsap
           .timeline()
           .set(stepRef.current, {
@@ -314,38 +314,45 @@ const FormStep = ({
             stagger: 0.1,
             clearProps: "all",
           });
-        // .then(() => stepRef.current?.querySelector('input')?.focus());
       } else {
-        setTimeout(
-          () =>
-            gsap
-              .timeline()
-              .fromTo(
-                stepRef.current,
-                { autoAlpha: 0, display: "none" },
-                { autoAlpha: 1, display: "block", duration: 0.001 }
-              )
-              .fromTo(
-                stepRef.current,
-                { height: 0, y: 300 },
-                { height: "auto", duration: 0.5, y: 0 }
-              )
-              .fromTo(
-                stepRef.current.children,
-                { autoAlpha: 0, y: 30 },
-                { autoAlpha: 1, y: 0, stagger: 0.1 }
-              ),
-          // .then(() => stepRef.current?.querySelector('input')?.focus())
-          1000
-        );
+        gsap
+          .timeline()
+          .set(stepRef.current, {
+            autoAlpha: 0,
+            height: 0,
+            duration: 0.5,
+            y: 300,
+          })
+          .from(stepRef.current.children, {
+            autoAlpha: 0,
+            y: 30,
+            stagger: 0.1,
+          });
       }
     } else {
-      if (!initial) {
+      if (active) {
+        setTimeout(() =>
+          gsap
+            .timeline()
+            .fromTo(
+              stepRef.current,
+              { autoAlpha: 0, display: "none" },
+              { autoAlpha: 1, display: "block", duration: 0.001 }
+            )
+            .fromTo(
+              stepRef.current,
+              { height: 0, y: 300 },
+              { height: "auto", duration: 0.5, y: 0 }
+            )
+            .fromTo(
+              stepRef.current.children,
+              { autoAlpha: 0, y: 30 },
+              { autoAlpha: 1, y: 0, stagger: 0.1 }
+        ), 1000);
+      } else {
         let tl = gsap
           .timeline({ paused: true })
-          // .set(stepRef.current, {display: 'none'})
-          // .set(stepRef.current, {autoAlpha: 0})
-
+  
           .fromTo(
             stepRef.current,
             { autoAlpha: 0, display: "none" },

@@ -10,16 +10,17 @@ import StepsProgress from "./StepsProgress";
 
 gsap.registerPlugin(ScrollToPlugin);
 const Form = ({
-                className,
-                children,
-                wide,
-                actions,
-                state,
-                endPoint,
-                setCurrentTheme,
-              }) => {
+  className,
+  children,
+  wide,
+  actions,
+  state,
+  endPoint,
+  setCurrentTheme,
+  startingStep
+}) => {
   const innerRef = React.useRef(null);
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = React.useState(startingStep ? startingStep - 1 : 0);
   const [loading, setLoading] = React.useState(false);
   const initial = React.useRef(true);
   const reversed = React.useRef(true);
