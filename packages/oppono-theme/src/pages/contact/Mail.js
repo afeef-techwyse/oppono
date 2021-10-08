@@ -367,6 +367,7 @@ export default styled(connect(Mail))`
         display: flex;
         align-items: center;
         justify-content: center;
+        flex-shrink: 0;
         background: #0a266c;
         width: ${size(60)};
         height: ${size(60)};

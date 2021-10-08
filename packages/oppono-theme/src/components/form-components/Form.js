@@ -17,10 +17,11 @@ const Form = ({
   state,
   endPoint,
   setCurrentTheme,
+  startingStep,
   hideStepsProgress
 }) => {
   const innerRef = React.useRef(null);
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = React.useState(startingStep ? startingStep - 1 : 0);
   const [loading, setLoading] = React.useState(false);
   const initial = React.useRef(true);
   const reversed = React.useRef(true);

@@ -18,6 +18,7 @@ import ProductsSlider from './components/ProductsSlider';
 import AboutUsPage from './pages/AboutUsPage';
 import TermsPage from './pages/TermsPage';
 import PrivacyPage from './pages/PrivacyPage';
+import { AddressProvider } from './contexts/AddressProvider'
 
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -66,6 +67,7 @@ const Root = ({state}) => {
   }, []);
   const duration = .75;
   return <>
+  <AddressProvider>
     <Styles/>
     {data.isHome && !(isDeveloping || initialDone) ? <Intro setInitialDone={setInitialDone}/> : null}
     
@@ -142,6 +144,7 @@ const Root = ({state}) => {
     </TransitionGroup>
     
     <Overlay/>
+    </AddressProvider>
   </>;
 };
 export default connect(Root);

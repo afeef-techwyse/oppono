@@ -24,27 +24,32 @@ import useFlowAppraisers from "../../hooks/useFlowAppraisers";
 import AppraiserInput from '../../components/AppraiserInput';
 import debounce from '../../functions/debounce';
 import opponoApi from '../../opponoApi';
+import useAddress from '../../contexts/AddressProvider'
 
 const pageName = 'e';
 const EPage = ({className, setCurrentTheme, actions, state, formData}) => {
-
   const getEValues = useStoredFormValue(pageName);
   const section1Values = getEValues(formData.section_1?.section_name);
   const section2Values = getEValues(formData.section_2?.section_name);
   const [postalCodeErrorMessage, setPostalCodeErrorMessage] = React.useState('');
+  const [[appraiser], postalCodeOnChange] = useFlowAppraisers();
+
+  const { address, handleAddressChange } = useAddress();
 
   React.useEffect(() => {
     actions.theme.setSubHeader(formData.sub_header);
   }, [formData]);
   React.useEffect(() => {
     actions.theme.setLeadId();
+    if ( address.postalCode || address.city  ) {
+      postalCodeOnChange({target: {value: address.postalCode}})  
+    }
   }, []);
-  const [[appraiser], postalCodeOnChange] = useFlowAppraisers();
-
+  
   const selectedAppraiser = JSON.parse(section2Values('selected-appraiser')||'{}')
-
+  
   return <div className={className}>
-    <Form setCurrentTheme={setCurrentTheme}>
+    <Form setCurrentTheme={setCurrentTheme} startingStep={ address.postalCode || address.city ? 2 : null }>
       <FormStep pageName={pageName} activeTheme={formData.section_1?.section_theme} stepName={formData.section_1?.section_name}>
         <FlyingObjsContainer childrenList={[
           {
@@ -86,7 +91,7 @@ const EPage = ({className, setCurrentTheme, actions, state, formData}) => {
             ? <Appraiser className="full-width" wide>
               <div className="row">
                 <div className="col-left">
-									<p class="form-headline-2 text-left">Your BDM is</p>
+									<p className="form-headline-2 text-left">Your BDM is</p>
                   <p className={'form-headline-1 text-left'} dangerouslySetInnerHTML={{__html: appraiser?.fields?.bdm.name}}/>
                 </div>
                 <div className="col-right">
@@ -119,11 +124,11 @@ const EPage = ({className, setCurrentTheme, actions, state, formData}) => {
                 </div>
                 <div className="col-right">
                   <P.Dark>Can not find any appraisers for
-                    the {section1Values('city')} {section1Values('postal_code')}</P.Dark>
+                    the {address.city ? address.city : section1Values('city')} {address.postalCode ? address.postalCode : section1Values('postal_code')}</P.Dark>
                 </div>
               </div>
               <div className="btn-group">
-                <Button className={'prev-step'} label={'Select other area'}/>
+                <Button className={'prev-step'} onClick={() => handleAddressChange({})} label={'Select other area'}/>
               </div>
             </Appraiser>
         }
