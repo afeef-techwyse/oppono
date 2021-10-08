@@ -221,26 +221,30 @@ const MapPage = ({className, actions, state, libraries}) => {
               ) : null}
             </div>
             <div className="col-right">
-              {appraiser[0]?.fields
-                  ? appraiser.map((a) =>
-                      a.fields ? (
-                          <div key={a.ID} className="appraisal-block">
-                            <h3>{a.fields.bdm?.name}</h3>
-                            <p className="text">{a.fields.bdm?.phone}</p>
-                            <p className="text">{a.fields.bdm?.email}</p>
-                            <hr/>
-                            <p className="text">{a.fields.city}</p>
-                            <p className="ltv">{a.fields.ltv}% LTV</p>
-                            <p className="text bold">Preferred appraisal companies</p>
-                            <p className="text">
-                              {[...a.fields.preferred_appraisal_company]
-                                  ?.map?.((c) => c.post_title)
-                                  .join(", ")}
-                            </p>
-                          </div>
-                      ) : null
-                  )
-                  : null}
+              {appraiser[0]?.fields &&                    
+                appraiser
+                .filter((v,i,a) => a.findIndex(t=>(t.ID === v.ID))===i)
+                .map((a) =>
+                  a.fields ? (
+                      <div key={a.ID} className="appraisal-block">
+                        <h3>{a.fields.bdm?.name}</h3>
+                        <p className="text">{a.fields.bdm?.phone}</p>
+                        <p className="text">{a.fields.bdm?.email}</p>
+                        <hr/>
+                        <p className="text">{a.fields.city}</p>
+                        <p className="ltv">{a.fields.ltv}% LTV</p>
+                        <p className="text bold">Preferred appraisal companies</p>
+                        { a.fields.preferred_appraisal_company &&
+                          <p className="text">
+                            {[...a.fields.preferred_appraisal_company]
+                                ?.map?.((c) => c.post_title)
+                                .join(", ")}
+                          </p>
+                        }
+                      </div>
+                  ) : null
+                )
+              }
               {appraiser[0]?.fields ? (
                   <Button
                       label={"Find Appraisers in the Area"}
