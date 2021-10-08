@@ -17,7 +17,8 @@ const Form = ({
   state,
   endPoint,
   setCurrentTheme,
-  startingStep
+  startingStep,
+  hideStepsProgress
 }) => {
   const innerRef = React.useRef(null);
   const [activeStep, setActiveStep] = React.useState(startingStep ? startingStep - 1 : 0);
@@ -65,7 +66,7 @@ const Form = ({
             `}
         />
         <div ref={innerRef} className={classnames(className, {wide})}>
-          {state.theme.activeStep.total > 1 ? <StepsProgress/> : null}
+          {state.theme.activeStep.total > 1 && !hideStepsProgress ? <StepsProgress /> : null}
           {React.Children.map(children, (child, index) => {
             return React.cloneElement(child, {
               ...child.props,
