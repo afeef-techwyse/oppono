@@ -10,14 +10,15 @@ import StepsProgress from "./StepsProgress";
 
 gsap.registerPlugin(ScrollToPlugin);
 const Form = ({
-                className,
-                children,
-                wide,
-                actions,
-                state,
-                endPoint,
-                setCurrentTheme,
-              }) => {
+  className,
+  children,
+  wide,
+  actions,
+  state,
+  endPoint,
+  setCurrentTheme,
+  hideStepsProgress
+}) => {
   const innerRef = React.useRef(null);
   const [activeStep, setActiveStep] = React.useState(0);
   const [loading, setLoading] = React.useState(false);
@@ -64,7 +65,7 @@ const Form = ({
             `}
         />
         <div ref={innerRef} className={classnames(className, {wide})}>
-          {state.theme.activeStep.total > 1 ? <StepsProgress/> : null}
+          {state.theme.activeStep.total > 1 && !hideStepsProgress ? <StepsProgress /> : null}
           {React.Children.map(children, (child, index) => {
             return React.cloneElement(child, {
               ...child.props,
