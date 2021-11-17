@@ -42,6 +42,7 @@ import {monthlyPayments} from "../../functions/monthlyPayment";
 import AppraiserInput from "../../components/AppraiserInput";
 import {numberWithCommas} from "../../functions/numberWithCommas";
 import Link from "../../components/reusable/Link";
+import FormBlurb from "../../components/form-components/FormBlurb";
 
 const pageName = "a-2";
 const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
@@ -195,6 +196,12 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 {...formData.section_2?.mortgage_value_1_input}
             />}
 
+						
+						{show1stMortgageInput&& 
+							<FormBlurb>
+								So you’re looking for a second mortgage of <strong>$30,000</strong>. Ready to continue?
+							</FormBlurb>
+						}
 
             <div className="btn-group">
               <Button className={"bordered prev-step"} label={"Back"}/>

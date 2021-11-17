@@ -36,6 +36,9 @@ P.F29 = styled(P.D)`
 P.Dark = styled(P.D)`
   opacity: 0.5;
 `;
+P.White = styled(P.D)`
+	color: #fff;
+`;
 P.Border = styled(P.D)`
   padding-top: ${size(24)};
   padding-bottom: ${size(24)};
