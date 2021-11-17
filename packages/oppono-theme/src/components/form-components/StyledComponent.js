@@ -65,6 +65,9 @@ Span.D = styled.span`
   letter-spacing: normal;
   opacity: 1;
 `;
+Span.Lightgreen = styled.span`
+	color: #0E9564;
+`;
 Span.Green = styled(Span.D)`
   color: #239f9f;
 `;

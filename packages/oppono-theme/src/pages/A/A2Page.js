@@ -15,6 +15,8 @@ import W50 from "../../components/form-components/W50";
 import TextArea from "../../components/form-components/TextArea";
 import intro_ball_1 from "../../assets/images/form_1_img.png";
 import intro_ball_2 from "../../assets/images/form_2_img.png";
+import fly_image_8 from "../../assets/images/fly-image-8.png";
+import fly_image_6 from "../../assets/images/fly-image-6.png";
 import FlyingObjsContainer from "../../components/reusable/FlyingObjsContainer";
 import {
   Li,
@@ -28,6 +30,10 @@ import Finalize, {
   Bottom,
   FinalizeChild,
   FinalizeTable,
+	FinalizeHeading,
+	FinalizeRows,
+	FinalizeRow,
+	FinalizeCol,
   Top,
 } from "../../components/form-components/Finalize";
 import useMedia from "../../hooks/useMedia";
@@ -69,8 +75,8 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
   }, [state.theme.user.logged]);
   const [[appraiser], postalCodeOnChange] = useFlowAppraisers();
 
-  const mortgage =
-      +section2Values("purchase_price") + +section2Values("mortgage_value_1") - +section2Values("down_payment") || 0;
+  const mortgage = +section2Values("purchase_price") + +section2Values("mortgage_value_1") - +section2Values("down_payment") || 0;
+  const secondMortgage = +section2Values("purchase_price") - +section2Values("down_payment") - +section2Values("mortgage_value_1") || 0;
   const refNumber = React.useRef("");
   state.theme.stepResponse.data?.["reference-number"] &&
   (refNumber.current = state.theme.stepResponse.data?.["reference-number"]);
@@ -302,127 +308,146 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
           </FormStep>
 
           <FormStep
-              endPoint={null}
-              pageName={pageName}
-              activeTheme={formData.section_4?.section_theme}
-              stepName={formData.section_4?.section_name}
-              onNext={() =>
-                  state.theme.stepResponse.data?.data?.[section2Values("looking_for")]?.products?.length
-                  || actions.router.set('/not-qualified')}
+						endPoint={null}
+						pageName={pageName}
+						activeTheme={formData.section_4?.section_theme}
+						stepName={formData.section_4?.section_name}
+						onNext={() =>
+								state.theme.stepResponse.data?.data?.[section2Values("looking_for")]?.products?.length
+								|| actions.router.set('/not-qualified')}
           >
-            <div className="form-text-wrapper wide-text">
-              <h1 className={"form-headline-1 text-left"}>
-                {formData.section_4?.title}
-              </h1>
-              <h2 className={"form-headline-3 primary"}>
-                You are applying for a {section2Values("looking_for")} mortgage on{" "}
-                {section1Values("property_details_1")} home which is located at{" "}
-                <br/> {section1Values("address")}, {section1Values("city")},{" "}
-                {section1Values("postal_code")}
-              </h2>
-            </div>
-            <Finalize>
-              <Top>
-                {media !== "mobile" ? (
-                    <FinalizeChild order={3}>
-                      <P.D>Borrowers</P.D>
-                      {[
-                        ...Array(+section3Values("applicants_number") || 0).keys(),
-                      ].map((index, personIndex) => {
-                        const applicantFName = section3Values(
-                            `applicant_fname_${index + 1}`
-                        );
-                        const applicantLName = section3Values(
-                            `applicant_lname_${index + 1}`
-                        );
-                        const applicantScore = section3Values(
-                            `applicant_score_${index + 1}`
-                        );
-                        return (
-                            <P.Dark key={`person-desktop-${personIndex}`}>
-                              {applicantFName} {applicantLName} {applicantScore}
-                            </P.Dark>
-                        );
-                      })}
-                    </FinalizeChild>
-                ) : (
-                    <FinalizeChild className={"full m-mt-24"} order={3}>
-                      <FinalizeTable>
-                        <tbody>
-                        {[
-                          ...Array(
-                              +section3Values("applicants_number") || 0
-                          ).keys(),
-                        ].map((index, personIndex) => {
-                          const applicantFName = section3Values(
-                              `applicant_fname_${index + 1}`
-                          );
-                          const applicantLName = section3Values(
-                              `applicant_lname_${index + 1}`
-                          );
-                          const applicantScore = section3Values(
-                              `applicant_score_${index + 1}`
-                          );
-                          return (
-                              <tr key={`person-desktop-${personIndex}`}>
-                                <P.Dark as={"td"}>
-                                  {applicantFName} {applicantLName}
-                                </P.Dark>
-                                <P.D as={"td"}>{applicantScore}</P.D>
-                              </tr>
-                          );
-                        })}
-                        </tbody>
-                      </FinalizeTable>
-                    </FinalizeChild>
-                )}
+						<FlyingObjsContainer
+                childrenList={[
+                  {
+                    imageUrl: fly_image_8,
+                    left: "17%",
+                    level: 1,
+                    top: "90%",
+                    type: "image",
+                    width: 5,
+                    alt: "alt",
+                  },
+                  {
+                    imageUrl: fly_image_6,
+                    left: "80%",
+                    level: 1,
+                    top: "5%",
+                    type: "image",
+                    width: 11,
+                    alt: "alt",
+                  },
+                ]}
+            />
+						
+						<Finalize className={"smaller"}>
+							<FinalizeHeading>
+								<h1 className={"form-headline-1 text-left"}>
+									{formData.section_4?.title}
+								</h1>
+								
+								<p>
+									You are applying for a <span>{section2Values("looking_for")} mortgage purchase</span> on{" "}
+									{section1Values("property_details_1")} home which is located at{" "}
+									<br/> {section1Values("address")}, {section1Values("city")},{" "}
+									{section1Values("postal_code")}
+								</p>
+							</FinalizeHeading>
+							
+							<FinalizeRows>
+								<FinalizeRow className={"larger border"}>
+									<FinalizeCol>
+										{[
+											...Array(+section3Values("applicants_number") || 0).keys(),
+										].map((index) => {
+											const applicantFName = section3Values(
+												`applicant_fname_${index + 1}`
+												);
+											const applicantLName = section3Values(
+												`applicant_lname_${index + 1}`
+											);
+											const applicantScore = section3Values(
+												`applicant_score_${index + 1}`
+											);
+											return (
+												<>{applicantFName} {applicantLName} {applicantScore}</>
+											);
+										})}
+									</FinalizeCol>
+								</FinalizeRow>								
 
-                <FinalizeChild className={"wide"} order={1}>
-                  <P.D>Summary</P.D>
-                </FinalizeChild>
-              </Top>
-              <Bottom>
-                {media === "mobile" ? null : (
-                    <FinalizeChild order={1}></FinalizeChild>
-                )}
-                <FinalizeChild order={3} className={"m-pr-40 full m-border"}>
-									<P.Border>
-                    Your property value is $
-                    {numberWithCommas(+section2Values("purchase_price"))}
-                  </P.Border>
-                  {+section2Values("mortgage_value_1") > 0 ? (
-                    <P.Border>
-                    Your 1st mortgage amount is ${numberWithCommas(+section2Values("mortgage_value_1"))}
-                    </P.Border>
-                  ) : null}
-                  <P.Border>
-                    Your 1st  ${numberWithCommas(mortgage)}
-                  </P.Border>
-                </FinalizeChild>
-                <FinalizeChild order={3} className={"wide m-pr-40"}>
-                  <P.Border>
-                    Your down payment is $
-                    {numberWithCommas(+section2Values("down_payment"))}
-                  </P.Border>
-                  <P.Border>
-                    Your LTV is{" "}
-                    {
-                      (
-                        mortgage / 
-                        +section2Values("purchase_price") * 100
-                      ).toFixed?.(1)
-                    }
-                    %
-                  </P.Border>
-                </FinalizeChild>
-              </Bottom>
+								<FinalizeRow className={"larger"}>
+									<FinalizeCol>
+										<span>Your Info</span>
+									</FinalizeCol>
+								</FinalizeRow>								
+
+								<FinalizeRow>
+									<FinalizeCol>
+										Mortgage request
+									</FinalizeCol>
+
+									<FinalizeCol>
+										${numberWithCommas(+section2Values("purchase_price"))}
+									</FinalizeCol>
+								</FinalizeRow>
+
+								{ +section2Values("mortgage_value_1") > 0 && 
+									<FinalizeRow>
+										<FinalizeCol>
+											1st mortgage
+										</FinalizeCol>
+
+										<FinalizeCol>
+											${numberWithCommas(+section2Values("mortgage_value_1"))}
+										</FinalizeCol>
+									</FinalizeRow>								
+								}
+
+								{ secondMortgage > 0 && 
+									<FinalizeRow>
+										<FinalizeCol>
+											2nd mortgage
+										</FinalizeCol>
+
+										<FinalizeCol>
+											${numberWithCommas(secondMortgage)}
+										</FinalizeCol>
+									</FinalizeRow>								
+								}
+
+								<FinalizeRow>
+									<FinalizeCol>
+										Down payment
+									</FinalizeCol>
+
+									<FinalizeCol>
+									${numberWithCommas(+section2Values("down_payment"))}
+									</FinalizeCol>
+								</FinalizeRow>								
+								
+								<FinalizeRow>
+									<FinalizeCol>
+										LTV
+									</FinalizeCol>
+
+									<FinalizeCol>
+										{
+											(
+												mortgage / 
+												+section2Values("purchase_price") * 100
+											).toFixed?.(1)
+										}%
+									</FinalizeCol>
+								</FinalizeRow>								
+							</FinalizeRows>
             </Finalize>
-            <div className="btn-group">
+            
+						<div className="btn-group">
               <Button
-                  className={"bordered reset-form small"}
+                  className={"bordered reset-form"}
                   label={"No, edit the details"}
               />
-              <Button label={"I’m good to go"} className={"next-step small"}/>
+              <Button label={"I’m good to go"} className={"next-step"}/>
             </div>
           </FormStep>
           <FormStep

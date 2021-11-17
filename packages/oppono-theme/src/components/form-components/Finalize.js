@@ -10,6 +10,68 @@ export const FinalizeTable = styled.table`
     padding-right: ${size(15)};
   }
 `;
+
+export const FinalizeHeading = styled.div`
+	margin-bottom: 60px;
+	color: #BFB6B4;
+	font-size: 14px;
+	line-height: 1.14;
+	
+	h1 {
+		font-size: 40px;
+	line-height: 1;
+	}
+
+	span {
+		color: #0E9564;
+	}	
+`;
+
+export const FinalizeRows = styled.div`
+	overflow: hidden;
+`;
+
+export const FinalizeRow = styled.div`
+	display: flex;
+	align-items: center;
+	margin: 0 -10px 13px;
+	justify-content: space-between;
+	color: #fff;
+	font-size: 14px;
+	line-height: 1.71;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+
+	&.larger  {
+		font-size: 16px;
+		font-weight: 500;
+	}
+	
+	&.border {
+		padding-bottom: 23px;
+		margin-bottom: 22px;
+		border-bottom: 1px solid  rgba(191,182,180, 0.5)
+	}
+
+	span {
+		color: #0E9564;
+	}
+`;
+
+export const FinalizeCol = styled.div`
+	padding: 0 10px;
+		
+	&.full {
+		width: 100%;
+	}	
+
+	&.half {
+		width: 50%;
+	}	
+`;
+
 export const FinalizeChild = styled.div`
   flex: 0 1 28%;
   width: 28%;
@@ -167,4 +229,8 @@ const Finalize = ({ className, children }) => {
 export default styled(Finalize)`
   margin: ${size(50)} auto;
   max-width: 85rem;
+
+	&.smaller {
+		max-width: 645px !important;
+	}
 `;
