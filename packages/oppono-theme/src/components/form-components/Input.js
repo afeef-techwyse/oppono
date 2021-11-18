@@ -89,6 +89,7 @@ const Input = React.forwardRef(
       max,
       label,
       onChange,
+      onCurrencyChange,
       onKeyUp,
       defaultValue,
       error,
@@ -156,6 +157,9 @@ const Input = React.forwardRef(
                   //     inputRef.current.setSelectionRange(selection, selection)
                   // );
                 }}
+								onKeyUp={(e) => {
+									onKeyUp?.(e.target.value.replace(/\$|,/g, ''));
+								}}
             />
           </div>}
           {isPhoneNumber && <div className="phoneMasker" data-phone={isPhoneNumber}>

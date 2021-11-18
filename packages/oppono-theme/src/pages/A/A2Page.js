@@ -75,12 +75,24 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
   }, [state.theme.user.logged]);
   const [[appraiser], postalCodeOnChange] = useFlowAppraisers();
 
+	const [purchasePrice, setPurchasePrice] = React.useState(null)
+	const [downPayment, setDownPayment] = React.useState(null)
+	const [firstMortgageAmount, setfirstMortgageAmount] = React.useState(null)
+	
+	const calcSecondMorgage = () => +purchasePrice - +downPayment - +firstMortgageAmount || 0;
+
+	React.useEffect(() => {
+		setSecondMortgage(calcSecondMorgage())
+	}, [purchasePrice, downPayment, firstMortgageAmount])
+
   const mortgage = +section2Values("purchase_price") + +section2Values("mortgage_value_1") - +section2Values("down_payment") || 0;
-  const secondMortgage = +section2Values("purchase_price") - +section2Values("down_payment") - +section2Values("mortgage_value_1") || 0;
+  
   const refNumber = React.useRef("");
   state.theme.stepResponse.data?.["reference-number"] &&
   (refNumber.current = state.theme.stepResponse.data?.["reference-number"]);
   const [show1stMortgageInput, setShow1stMortgageInput] = React.useState(false);
+	const [secondMortgage, setSecondMortgage] = React.useState(0)
+
   return (
       <div className={className}>
         <Form setCurrentTheme={setCurrentTheme} endPoint={"/purchase"}>
@@ -185,12 +197,18 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   isCurrency
                   name={"purchase_price"}
                   {...formData.section_2?.purchase_price_input}
+									onKeyUp={(value) => {
+										setPurchasePrice(value);
+									}}
               />
               <Input
                   type={"number"}
                   isCurrency
                   name={"down_payment"}
                   {...formData.section_2?.down_payment_input}
+									onKeyUp={(value) => {
+										setDownPayment(value);
+									}}
               />
             </W50>
 
@@ -199,13 +217,16 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 isCurrency
                 className={"mortgage_value_1"}
                 name={"mortgage_value_1"}
+								onKeyUp={(value) => {
+									setfirstMortgageAmount(value);
+								}}
                 {...formData.section_2?.mortgage_value_1_input}
             />}
 
 						
-						{show1stMortgageInput&& 
+						{(show1stMortgageInput && secondMortgage > 0) && 
 							<FormBlurb>
-								So you’re looking for a second mortgage of <strong>$30,000</strong>. Ready to continue?
+								So you’re looking for a second mortgage of <strong>${numberWithCommas(secondMortgage)}</strong>. Ready to continue?
 							</FormBlurb>
 						}
 
