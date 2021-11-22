@@ -419,26 +419,23 @@ export default styled(connect(FormStep))`
   height: 0;
 
   > *:not(.form-text-wrapper):not(.form-wide-container):not(.appraiser-wide) {
-    max-width: ${size(580)};
+    max-width: ${size(860)};
     margin-right: auto;
     margin-left: auto;
-    @media (max-width: 991.98px) {
-      max-width: ${size(400)};
-    }
   }
   .form-text-wrapper {
-    max-width: ${size(850)};
+    max-width: ${size(860)};
     margin-right: auto;
     margin-left: auto;
     margin-bottom: 0;
   }
   div.upload-step-wrapper {
-    max-width: ${size(850)}!important;
+    max-width: ${size(860)}!important;
     margin-right: auto !important;
     margin-left: auto !important;
     position: relative;
     @media (max-width: 991.98px) {
-      max-width: ${size(850)}!important;
+      max-width: ${size(860)}!important;
       margin-left: ${size(32)}!important;
       margin-right: ${size(32)}!important;
     }
@@ -457,7 +454,7 @@ export default styled(connect(FormStep))`
     z-index: 5;
   }
   button {
-    margin-top: ${size(62)};
+    margin-top: ${size(80)};
 
     @media (max-width: 575.98px) {
       margin-top: 3rem;

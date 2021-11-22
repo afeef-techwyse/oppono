@@ -165,7 +165,7 @@ export default styled(RadioInput)`
   width: fit-content;
   min-width: ${size(75)};
   height: ${size(42)};
-  margin-right: ${size(36)};
+  margin-right: ${size(31)};
   margin-top: ${size(20)};
   padding-right: 1px;
   padding-bottom: 1px;
@@ -196,7 +196,6 @@ export default styled(RadioInput)`
 
     .radio-text {
       font-size: ${size(22)};
-padding-left: 8px !important;;
       font-weight: 200;
       line-height: ${size(48)};
       @media (max-width: 557.98px) {
@@ -253,8 +252,8 @@ padding-left: 8px !important;;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    padding-left: ${size(30)};
-    padding-right: ${size(30)};
+    padding-left: ${size(20)};
+    padding-right: ${size(20)};
   }
 
   &:hover {

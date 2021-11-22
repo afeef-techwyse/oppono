@@ -36,7 +36,7 @@ const Label = styled(
   .label-text {
     color: #bfb6b4;
     font-size: ${size(16)};
-    font-weight: 400;
+    font-weight: 500;
     text-align: left;
     margin-bottom: ${size(7)};
     .dark {
@@ -255,27 +255,22 @@ export default styled(Input)`
     outline: none;
 		border-radius: 0 !important;
     border-bottom: 1px solid rgba(191, 182, 180, 0.5);
-    height: ${size(43)};
+    height: ${size(45)};
     padding: 0 0 ${size(6)};
     caret-color: #297fff;
     color: #bfb6b4;
-    font-size: ${size(22)};
-padding-left: 8px !important;;
-    font-weight: 200;
+    font-size: ${size(30)};
+    font-weight: 300;
     position: relative;
     @media (max-width: 575.98px) {
       font-size: ${size(20)};
       line-height: 1.5;
       height: 3.3rem;
     }
-    &:focus {
-      //border-bottom: 1px solid #bfb6b4;
-    }
     &::placeholder {
       color: rgba(191, 182, 180);
       opacity: 0.4;
-      font-size: ${size(22)};
-padding-left: 8px !important;;
+      font-size: ${size(30)};
       font-weight: 200;
       text-align: left;
       @media (max-width: 575.98px) {
@@ -306,8 +301,6 @@ padding-left: 8px !important;;
         font-size: ${size(26)};
         border-bottom-color: rgba(191, 182, 180, 0.5);
       }
-      &:focus {
-      }
       &::placeholder {
         text-align: center;
         font-size: ${size(100)};
@@ -329,8 +322,7 @@ padding-left: 8px !important;;
   input[type="password"] {
     color: rgba(191, 182, 180, 0.5);
     &::placeholder {
-      font-size: ${size(22)};
-padding-left: 8px !important;;
+      font-size: ${size(30)};
     }
   }
 

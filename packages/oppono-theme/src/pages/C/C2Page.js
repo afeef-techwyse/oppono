@@ -962,7 +962,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                     acceptText={"PDF, JPG, or PNG"}
                 />
                 <Appraiser>
-								<p class="form-headline-2 text-left">Your BDM is</p>
+								<p className="form-headline-2 text-left">Your BDM is</p>
 									<p
                           className={"form-headline-1 text-left"}
                           dangerouslySetInnerHTML={{

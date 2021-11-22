@@ -17,54 +17,63 @@ const SubHeader = styled(
   connect(({ state, className }) => {
     return (
       <div className={classnames(className, "sub-menu")}>
-        <p className={"back"}>
-          <svg viewBox="0 0 6 8">
-            <path
-              fill="none"
-              className={"primary-stroke"}
-              stroke="#b5d2ff"
-              strokeMiterlimit="20"
-              d="M3 8V0"
-            />
-            <path
-              fill="none"
-              className={"primary-stroke"}
-              stroke="#b5d2ff"
-              strokeMiterlimit="20"
-              d="M6 3v0L3 0 0 3"
-            />
-          </svg>
-          <Link className={"primary"} href={"/"}>
-            Back To Dashboard
-          </Link>
-        </p>
+				<Container>
+					<div className="sub-menu__inner">
+						<p className={"back"}>
+							<svg viewBox="0 0 6 8">
+								<path
+									fill="none"
+									className={"primary-stroke"}
+									stroke="#b5d2ff"
+									strokeMiterlimit="20"
+									d="M3 8V0"
+								/>
+								<path
+									fill="none"
+									className={"primary-stroke"}
+									stroke="#b5d2ff"
+									strokeMiterlimit="20"
+									d="M6 3v0L3 0 0 3"
+								/>
+							</svg>
+							<Link className={"primary"} href={"/"}>
+								Back To dashboard
+							</Link>
+						</p>
 
-        <div>
-          <p className={"first-title primary"}>
-            {state.theme.subHeader.part_1}
-          </p>
-          <p className={"second-title primary"}>
-            {state.theme.subHeader.part_2}
-          </p>
-        </div>
-      </div>
+						<div>
+							<p className={"first-title"}>
+								{state.theme.subHeader.part_1}
+							</p>
+							<p className={"second-title"}>
+								{state.theme.subHeader.part_2}
+							</p>
+						</div>
+					</div>
+				</Container>
+			</div>
     );
   })
 )`
-  width: 100%;
-  border-top: 1px solid rgba(191, 182, 180, 0.1);
-  display: flex;
-  padding-bottom: 10px;
-  padding-top: ${size(15)};
-  @media (max-width: 575.98px) {
+	border-top: 1px solid rgba(191, 182, 180, 0.1);
+	padding-bottom: ${size(21)};
+	padding-top: ${size(21)};
+	
+	.sub-menu__inner{
+		width: 100%;
+		display: flex;
+	}
+  
+	@media (max-width: 575.98px) {
     justify-content: space-between;
     padding-top: ${size(10)};
   }
 
   .back {
-    margin-right: ${size(160)};
+    margin-right: ${size(100)};
     display: inline-block;
-    @media (max-width: 575.98px) {
+    
+		@media (max-width: 575.98px) {
       margin-right: 0;
     }
 
@@ -85,18 +94,20 @@ const SubHeader = styled(
     }
   }
 
+	.first-title,
+	.second-title {
+		color: #BFB6B4;
+		line-height: ${size(16)};
+		font-weight: 500;
+	}
+
   .first-title {
     font-size: ${size(12)};
-    font-weight: 400;
-    line-height: ${size(16)};
     opacity: 0.5;
   }
 
   .second-title {
     font-size: ${size(10)};
-    font-weight: 400;
-    line-height: ${size(16)};
-    margin-top: ${size(2)};
     letter-spacing: ${size(0.44)};
   }
 `;
@@ -274,24 +285,28 @@ const Header = React.forwardRef(
     };
     return (
       <header ref={forwardRef} className={className + " header"}>
-        <Container>
-          <div className="menu-content">
-            <div className="menu-left">
-              <LogoLink />
-            </div>
-            <div className="menu-right">
-              <RightPart />
-              <div onClick={() => menuHandler(true)} className={"three-dots"}>
-                <span className={"primary-bg"} />
-                <span className={"primary-bg"} />{" "}
-                <span className={"primary-bg"} />
-              </div>
-            </div>
-          </div>
-          {hasSubMenu ? <SubHeader /> : null}
-          {hasProgress ? <StepsProgress horizontal /> : null}
-        </Container>
-        <div className={classnames("floating-menu", { menuOpened })}>
+				<div className="menu-content">
+        	<Container>
+						<div className="menu-content__inner">
+							<div className="menu-left">
+								<LogoLink />
+							</div>
+							<div className="menu-right">
+								<RightPart />
+								<div onClick={() => menuHandler(true)} className={"three-dots"}>
+									<span className={"primary-bg"} />
+									<span className={"primary-bg"} />{" "}
+									<span className={"primary-bg"} />
+								</div>
+							</div>
+						</div>
+						{hasProgress ? <StepsProgress horizontal /> : null}
+        	</Container>
+				</div>
+
+				{hasSubMenu ? <SubHeader /> : null}
+        
+				<div className={classnames("floating-menu", { menuOpened })}>
           <Container>
             <svg
               onClick={() => menuHandler(false)}
@@ -376,14 +391,16 @@ export default styled(Header)`
   transition: opacity 500ms;
 
   .menu-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: ${size(74)};
+		.menu-content__inner {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			height: ${size(74)};
+		}
 
     .menu-left {
       .logo {
-        width: ${size(131)};
+        width: ${size(133)};
         @media (max-width: 575.98px) {
           display: none;
         }

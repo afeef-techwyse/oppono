@@ -12,7 +12,7 @@ export const FinalizeTable = styled.table`
 `;
 
 export const FinalizeHeading = styled.div`
-	margin-bottom: 60px;
+	margin-bottom: 55px;
 	color: #BFB6B4;
 	font-size: 14px;
 	line-height: 1.14;
@@ -54,7 +54,7 @@ export const FinalizeRows = styled.div`
 export const FinalizeRow = styled.div`
 	display: flex;
 	align-items: center;
-	margin: 0 -10px 12px;
+	margin: 0 -10px 8px;
 	justify-content: space-between;
 
 	&:last-child {
@@ -82,7 +82,7 @@ export const FinalizePercentage = styled.div`
 export const FinalizeChild = styled.div`
   flex: 0 1 28%;
   width: 28%;
-  padding: ${size(24)} ${size(10)} 0;
+  padding: ${size(18)} ${size(10)} 0;
 
   &.wide {
     flex-basis: 44%;
@@ -126,7 +126,7 @@ export const Top = styled.div`
   display: flex;
   align-items: flex-end;
   padding-bottom: ${size(23)};
-  margin: 0 ${size(-10)};
+  margin: ${size(30)} ${size(-10)} 0;
   position: relative;
   
 	@media (max-width: 575.98px) {
@@ -184,12 +184,6 @@ export const Bottom = styled.div`
     }
   }
 
-  > div {
-    & > * {
-      padding-top: 2.4rem;
-    }
-  }
-
   @media (max-width: 575.98px) {
     flex-direction: column;
     padding-top: 0;
@@ -235,10 +229,7 @@ const Finalize = ({ className, children }) => {
 };
 
 export default styled(Finalize)`
-  margin: ${size(50)} auto;
-  max-width: 85rem;
-
 	&.smaller {
-		max-width: 645px !important;
+		max-width: ${size(645)} !important;
 	}
 `;

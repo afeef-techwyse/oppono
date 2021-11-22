@@ -69,25 +69,25 @@ const StepsProgress = styled(
     position: relative;
     width: 100%;
     transition: transform 500ms;
-    background-color: #bfb6b4;
+    background-color: rgba(191, 182, 180, 0.5);
     box-sizing: border-box;
 
     .step-name {
       position: absolute;
-      left: ${size(20)};
-      font-size: ${size(22)};
-      padding-left: 8px !important;;
+      left: ${size(15)};
+      padding-left: 8px !important;
       top: 50%;
       transform: translateY(-50%);
       pointer-events: none;
 			opacity: 0.5;
       transition: opacity 400ms;
       color: #bfb6b4;
-      font-size: ${size(14)};
-      font-weight: 300;
+      font-size: ${size(12)};
+      font-weight: 400;
       text-align: left;
       text-transform: capitalize;
       white-space: nowrap;
+			
 			@media screen and (max-width: 998px) {
 				display: none;
 			}

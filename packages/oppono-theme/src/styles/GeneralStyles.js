@@ -232,11 +232,11 @@ const GeneralStyles = (props) => (
       }
 
       .form-headline-1 {
-				margin-bottom: 20px;
+				margin-bottom: 10px;
         color: #bfb6b4;
         font-weight: 400;
         font-size: ${size(40)};
-        line-height: 1;
+        line-height: 1.2;
         text-align: center;
 				
 				&:last-child { 
@@ -258,7 +258,6 @@ const GeneralStyles = (props) => (
         font-size: ${size(29)};
         font-weight: 400;
         line-height: ${size(40)};
-        opacity: 0.5;
         
 				@media (max-width: 991.98px) {
           font-size: ${size(24)};
@@ -270,26 +269,21 @@ const GeneralStyles = (props) => (
       }
 
       .form-headline-3 {
-				margin-bottom: 15px;
         color: #BFB6B4;
-        font-size: ${size(14)};
+        font-size: ${size(23)};
         font-weight: 400;
-        line-height: ${size(16)};
-
-				&:last-child { 
-					margin-bottom: 0;
-				}
+        line-height: 1.74
       }
 
       .form-headline-4 {
-        //max-width: ${size(390)};
+				margin: 15px 0;
 				color: #bfb6b4;
-				font-size: 2.2rem;
+				font-size: ${size(18)};
 				font-weight: 400;
-				line-height: 2.5rem;
-				margin-top: 0.6rem;
-				margin-bottom: 0.6rem;
-        @media (max-width: 575.98px) {
+				line-height: 1.33;
+				opacity: 0.5;
+        
+				@media (max-width: 575.98px) {
           font-size: ${size(18)};
           line-height: ${size(24)};
         }
@@ -410,7 +404,7 @@ const GeneralStyles = (props) => (
 
 			.form-wide-container {
 				@media (min-width: 1200px) {
-					max-width: 85rem !important;
+					max-width: 86rem !important;
 					margin: auto;
 				}
 			}

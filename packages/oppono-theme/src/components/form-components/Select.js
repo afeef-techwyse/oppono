@@ -145,7 +145,6 @@ Select.propTypes = {
 
 export default styled(Select)`
   &.focused {
-    border-bottom: 1px solid rgba(191, 182, 180, 0.5);
     position: relative;
     z-index: 9999 !important;
   }
@@ -184,11 +183,10 @@ export default styled(Select)`
       border: none !important;
       box-shadow: none !important;
       background: transparent;
-      height: ${size(43)};
+      height: ${size(45)};
       padding-bottom: ${size(6)};
       color: #bfb6b4;
-      font-size: ${size(22)};
-padding-left: 8px !important;;
+      font-size: ${size(30)};
       font-weight: 200;
       cursor: pointer;
       span {
@@ -210,8 +208,7 @@ padding-left: 8px !important;;
     }
     &__option {
       color: #bfb6b4;
-      font-size: ${size(22)};
-padding-left: 8px !important;;
+      font-size: ${size(30)};
       font-weight: 200;
       text-align: left;
       &--is-focused {
@@ -232,7 +229,7 @@ padding-left: 8px !important;;
     .label-text {
       color: #bfb6b4;
       font-size: ${size(16)};
-      font-weight: 400;
+      font-weight: 500;
       text-align: left;
       margin-bottom: ${size(7)};
       .dark {

@@ -27,11 +27,11 @@ P.Cost = styled.p`
   color: #bfb6b4;
   font-size: ${size(40)};
   font-weight: 200;
-  line-height: ${size(64)};
+  line-height: 1.275;
 `;
 P.F29 = styled(P.D)`
   font-size: ${size(29)};
-  line-height: ${size(40)};W
+  line-height: ${size(40)};
   font-weight: 300;
   @media (max-width: 991.98px) {
     font-size: ${size(24)};
@@ -51,21 +51,22 @@ P.White = styled(P.D)`
 	color: #fff;
 `;
 P.Border = styled(P.D)`
-  padding-top: ${size(24)};
-  padding-bottom: ${size(24)};
-  border-bottom: ${size(1)} solid rgba(191, 182, 180, 0.1);
-  font-weight: 300;
+  padding-bottom: ${size(21)};
+	margin-bottom: ${size(24)};
+  border-bottom: ${size(1)} solid rgba(191, 182, 180, 0.5);
 `;
 P.Circle = styled(P.D)`
-  width: ${size(34)};
-  height: ${size(34)};
+  width: ${size(33)};
+  height: ${size(33)};
   border: ${size(1)} solid rgba(191, 182, 180, 0.5);
-  border-radius: ${size(34)};
+  border-radius: 50%;
   margin-bottom: ${size(15)};
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: sans-serif;
+	font-size: ${size(20)};
+	font-weight: 500;
 `;
 export const Span = {};
 Span.D = styled.span`

@@ -226,7 +226,11 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 						
 						{(show1stMortgageInput && secondMortgage > 0) && 
 							<FormBlurb>
-								So you’re looking for a second mortgage of <strong>${numberWithCommas(secondMortgage)}</strong>. Ready to continue?
+								So you’re looking for a second mortgage of <strong>${numberWithCommas(secondMortgage)}</strong>.
+								
+								<br />
+								
+								Ready to continue?
 							</FormBlurb>
 						}
 
@@ -405,11 +409,11 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 							<FinalizeRows>				
 								<FinalizeRow className={"larger"}>
 									<FinalizeCol>
-										<P.D>
+										<P.Large>
 											<Span.isLightgreen>
 												<strong>Your Info</strong>
 											</Span.isLightgreen>
-										</P.D>
+										</P.Large>
 									</FinalizeCol>
 								</FinalizeRow>								
 
@@ -523,7 +527,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                         ]?.products.length
                 )}
               </h1>
-              <h2 className={"form-headline-3 primary"}>
+              <h2 className={"form-headline-3"}>
                 {formData.section_5?.subtitle}
               </h2>
               <h3 className={"form-headline-1 text-left"}>
@@ -544,8 +548,11 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                         </FinalizeChild>
 
                         <FinalizeChild order={1}>
-                          <P.Dark>*Variable Rate</P.Dark>
-                          <P.Num>{product.fields?.rate}%</P.Num>
+                          <P.Dark>
+														<strong>*Variable Rate</strong>
+													</P.Dark>
+                          
+													<P.Num>{product.fields?.rate}%</P.Num>
                           <Button
                               onClick={() => {
                                 selectedProduct.current.value = product.title;
@@ -568,8 +575,11 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                         </FinalizeChild>
 
                         <FinalizeChild className={"wide"} order={1}>
-                          <P.Dark>*Monthly mortgage payment</P.Dark>
-                          <P.Cost>
+                          <P.Dark>
+														<strong>*Monthly mortgage payment</strong>
+													</P.Dark>
+                          
+													<P.Cost>
                             $
                             {numberWithCommas(
                                 monthlyPayments(mortgage, product.fields?.rate)
@@ -584,25 +594,25 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                               <FinalizeTable>
                                 <tbody>
                                 <tr>
-                                  <P.Dark as={"td"}>Max LTV</P.Dark>
+                                  <P.White as={"td"}>Max LTV</P.White>
                                   <P.D as={"td"}>
                                     Up to {product.fields?.maximum_ltv}%
                                   </P.D>
                                 </tr>
                                 <tr>
-                                  <P.Dark as={"td"}>Credit score</P.Dark>
+                                  <P.White as={"td"}>Credit score</P.White>
                                   <P.D as={"td"}>
                                     {beaconScore(product.fields?.beacon_score)}
                                   </P.D>
                                 </tr>
                                 <tr>
-                                  <P.Dark as={"td"}>Fixed rate</P.Dark>
+                                  <P.White as={"td"}>Fixed rate</P.White>
                                   <P.D as={"td"}>
                                     {(+product.fields?.rate + 0.25).toFixed?.(2)}%
                                   </P.D>
                                 </tr>
                                 <tr>
-                                  <P.Dark as={"td"}>Lender fee</P.Dark>
+                                  <P.White as={"td"}>Lender fee</P.White>
                                   <P.D as={"td"}>{product.fields?.fee}%</P.D>
                                 </tr>
                                 </tbody>
@@ -613,25 +623,25 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                               <FinalizeTable>
                                 <tbody>
                                 <tr>
-                                  <P.Dark as={"td"}>Max LTV</P.Dark>
+                                  <P.White as={"td"}>Max LTV</P.White>
                                   <P.D as={"td"}>
                                     Up to {product.fields?.maximum_ltv}%
                                   </P.D>
                                 </tr>
                                 <tr>
-                                  <P.Dark as={"td"}>Credit score</P.Dark>
+                                  <P.White as={"td"}>Credit score</P.White>
                                   <P.D as={"td"}>
                                     {beaconScore(product.fields?.beacon_score)}
                                   </P.D>
                                 </tr>
                                 <tr>
-                                  <P.Dark as={"td"}>Fixed rate</P.Dark>
+                                  <P.White as={"td"}>Fixed rate</P.White>
                                   <P.D as={"td"}>
                                     {(+product.fields?.rate + 0.25).toFixed?.(2)}%
                                   </P.D>
                                 </tr>
                                 <tr>
-                                  <P.Dark as={"td"}>Lender fee</P.Dark>
+                                  <P.White as={"td"}>Lender fee</P.White>
                                   <P.D as={"td"}>{product.fields?.fee}%</P.D>
                                 </tr>
                                 </tbody>
@@ -679,7 +689,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                     acceptText={"PDF, JPG, or PNG"}
                 />
                 <Appraiser>
-								<p class="form-headline-2 text-left">Your BDM is</p>
+								<p className="form-headline-2 text-left">Your BDM is</p>
                       <p
                           className={"form-headline-1 text-left"}
                           dangerouslySetInnerHTML={{
@@ -807,14 +817,5 @@ export default styled(connect(A2Page))`
 
   .wide-text {
     max-width: 85rem;
-
-    .form-headline-3 {
-      margin: 1.5rem 0;
-      max-width: ${size(400)};
-      @media (max-width: 575.98px) {
-        max-width: 90%;
-      }
-    }
   }
-
 `;

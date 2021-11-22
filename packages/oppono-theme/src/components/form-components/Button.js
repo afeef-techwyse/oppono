@@ -49,7 +49,7 @@ export default styled(Button)`
   outline: none;
   text-decoration: none;
   width: auto;
-  min-width: 14rem;
+  min-width: 16rem;
   max-width: fit-content;
   padding: ${size(21)} ${size(40)};
   display: flex;

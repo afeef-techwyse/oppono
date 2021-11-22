@@ -46,9 +46,9 @@ export default styled(RadioGroup)`
   .label-text {
     color: #bfb6b4;
     font-size: ${size(16)};
-    font-weight: 400;
+    font-weight: 500;
     text-align: left;
-    margin-bottom: ${size(17)};
+    margin-bottom: ${size(15)};
     .dark {
       color: rgba(191, 182, 180, 0.5);
     }

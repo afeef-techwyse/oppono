@@ -26,7 +26,7 @@ export default styled(TextArea)`
     .label-text {
       color: #bfb6b4;
       font-size: ${size(16)};
-      font-weight: 400;
+      font-weight: 500;
       text-align: left;
       margin-bottom: ${size(20)};
       .dark {
@@ -43,7 +43,6 @@ export default styled(TextArea)`
     padding: ${size(20)};
     color: #bfb6b4;
     font-size: ${size(22)};
-padding-left: 8px !important;;
     font-weight: 200;
     resize: none;
     transition: border-color 400ms;

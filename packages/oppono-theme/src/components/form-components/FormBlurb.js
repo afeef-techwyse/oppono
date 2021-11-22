@@ -12,9 +12,8 @@ const FormBlurb = ({className, children}) => {
 };
 
 export default styled(FormBlurb)`
-	max-width: 400px;
 	text-align: center;
-	margin: 75px auto 0;
+	margin: 80px auto 0;
 	font-size: 16px;
 	line-height: 1.31;
 	color: #BFB6B4;

@@ -200,7 +200,6 @@ Select.propTypes = {
 
 export default styled(Select)`
   &.focused {
-    border-bottom: 1px solid rgba(191, 182, 180, 0.5);
     position: relative;
     z-index: 9999 !important;
   }
@@ -234,10 +233,10 @@ export default styled(Select)`
       width: 100%;
       overflow: hidden;
       color: #bfb6b4;
-      font-size: ${size(22)};
-padding-left: 8px !important;;
-      font-weight: 200;
-      @media (max-width: 557.98px) {
+      font-size: ${size(30)};
+      font-weight: 300;
+      
+			@media (max-width: 557.98px) {
         font-size: 2rem;
       }
     }
@@ -246,12 +245,10 @@ padding-left: 8px !important;;
       border: none !important;
       box-shadow: none !important;
       background: transparent;
-      height: ${size(43)};
+      height: ${size(45)};
       padding-bottom: ${size(6)};
       color: #bfb6b4;
-      font-size: ${size(22)};
-padding-left: 8px !important;;
-      font-weight: 200;
+      font-size: ${size(30)};
       cursor: pointer;
 
       span {
@@ -276,9 +273,7 @@ padding-left: 8px !important;;
 
     &__option {
       color: #bfb6b4;
-      font-size: ${size(22)};
-padding-left: 8px !important;;
-      font-weight: 200;
+      font-size: ${size(30)};
       text-align: left;
 
       @media (max-width: 557.98px) {
@@ -313,7 +308,7 @@ padding-left: 8px !important;;
     .label-text {
       color: #bfb6b4;
       font-size: ${size(16)};
-      font-weight: 400;
+      font-weight: 500;
       text-align: left;
       margin-bottom: ${size(7)};
 
