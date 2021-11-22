@@ -338,26 +338,26 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 								|| actions.router.set('/not-qualified')}
           >
 						<FlyingObjsContainer
-                childrenList={[
-                  {
-                    imageUrl: fly_image_8,
-                    left: "17%",
-                    level: 1,
-                    top: "90%",
-                    type: "image",
-                    width: 5,
-                    alt: "alt",
-                  },
-                  {
-                    imageUrl: fly_image_6,
-                    left: "80%",
-                    level: 1,
-                    top: "5%",
-                    type: "image",
-                    width: 11,
-                    alt: "alt",
-                  },
-                ]}
+							childrenList={[
+								{
+									imageUrl: fly_image_8,
+									left: "17%",
+									level: 1,
+									top: "90%",
+									type: "image",
+									width: 5,
+									alt: "alt",
+								},
+								{
+									imageUrl: fly_image_6,
+									left: "80%",
+									level: 1,
+									top: "5%",
+									type: "image",
+									width: 11,
+									alt: "alt",
+								},
+							]}
             />
 						
 						<Finalize className={"smaller"}>
@@ -380,7 +380,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 									<FinalizeCol>
 										{[
 											...Array(+section3Values("applicants_number") || 0).keys(),
-										].map((index) => {
+										].map((index, personIndex) => {
 											const applicantFName = section3Values(
 												`applicant_fname_${index + 1}`
 												);
@@ -391,36 +391,56 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 												`applicant_score_${index + 1}`
 											);
 											return (
-												<>{applicantFName} {applicantLName} {applicantScore}</>
+												<P.Large key={`person-desktop-${personIndex}`}>
+													<Span.isWhite>
+														<strong>{applicantFName} {applicantLName} {applicantScore}</strong>
+													</Span.isWhite>
+												</P.Large>
 											);
 										})}
 									</FinalizeCol>
-								</FinalizeRow>								
-
+								</FinalizeRow>				
+							</FinalizeRows>				
+							
+							<FinalizeRows>				
 								<FinalizeRow className={"larger"}>
 									<FinalizeCol>
-										<span>Your Info</span>
+										<P.D>
+											<Span.isLightgreen>
+												<strong>Your Info</strong>
+											</Span.isLightgreen>
+										</P.D>
 									</FinalizeCol>
 								</FinalizeRow>								
 
 								<FinalizeRow>
 									<FinalizeCol>
-										Mortgage request
+										<P.White>
+											Mortgage request
+										</P.White>
 									</FinalizeCol>
 
 									<FinalizeCol>
-										${numberWithCommas(+section2Values("purchase_price"))}
+										<P.White>
+											<strong>
+												${numberWithCommas(+section2Values("purchase_price"))}
+											</strong>
+										</P.White>
 									</FinalizeCol>
 								</FinalizeRow>
 
 								{ +section2Values("mortgage_value_1") > 0 && 
 									<FinalizeRow>
 										<FinalizeCol>
-											1st mortgage
+											<P.White>
+												1st mortgage
+											</P.White>
 										</FinalizeCol>
 
 										<FinalizeCol>
-											${numberWithCommas(+section2Values("mortgage_value_1"))}
+											<P.White>
+												<strong>${numberWithCommas(+section2Values("mortgage_value_1"))}</strong>
+											</P.White>
 										</FinalizeCol>
 									</FinalizeRow>								
 								}
@@ -428,37 +448,53 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 								{ secondMortgage > 0 && 
 									<FinalizeRow>
 										<FinalizeCol>
-											2nd mortgage
+											<P.White>
+												2nd mortgage
+											</P.White>
 										</FinalizeCol>
 
 										<FinalizeCol>
-											${numberWithCommas(secondMortgage)}
+											<P.White>
+												<strong>
+													${numberWithCommas(secondMortgage)}
+												</strong>
+											</P.White>
 										</FinalizeCol>
 									</FinalizeRow>								
 								}
 
 								<FinalizeRow>
 									<FinalizeCol>
-										Down payment
+										<P.White>
+											Down payment
+										</P.White>
 									</FinalizeCol>
 
 									<FinalizeCol>
-									${numberWithCommas(+section2Values("down_payment"))}
+										<P.White>
+											<strong>${numberWithCommas(+section2Values("down_payment"))}</strong>
+										</P.White>
 									</FinalizeCol>
 								</FinalizeRow>								
 								
 								<FinalizeRow>
 									<FinalizeCol>
-										LTV
+										<P.White>
+											LTV
+										</P.White>
 									</FinalizeCol>
 
 									<FinalizeCol>
-										{
-											(
-												mortgage / 
-												+section2Values("purchase_price") * 100
-											).toFixed?.(1)
-										}%
+										<P.White>
+											<strong>
+												{
+													(
+														mortgage / 
+														+section2Values("purchase_price") * 100
+													).toFixed?.(1)
+												}%
+											</strong>
+										</P.White>
 									</FinalizeCol>
 								</FinalizeRow>								
 							</FinalizeRows>

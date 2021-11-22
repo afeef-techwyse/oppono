@@ -8,14 +8,19 @@ P.D = styled.p`
   font-size: ${size(14)};
   font-weight: 400;
   line-height: ${size(24)};
-  @media (max-width: 575.98px) {
+
+	strong {
+		font-weight: 500;
+	}
+  
+	@media (max-width: 575.98px) {
     font-size: ${size(16)};
   }
 `;
 P.Num = styled.p`
   color: #bfb6b4;
   font-size: ${size(56)};
-  font-weight: 200;
+  font-weight: 300;
   line-height: ${size(64)};
 `;
 P.Cost = styled.p`
@@ -26,12 +31,18 @@ P.Cost = styled.p`
 `;
 P.F29 = styled(P.D)`
   font-size: ${size(29)};
-  line-height: ${size(40)};
+  line-height: ${size(40)};W
   font-weight: 300;
   @media (max-width: 991.98px) {
     font-size: ${size(24)};
     line-height: normal;
   }
+`;
+P.Small = styled(P.D)`
+	font-size: ${size(12)};
+`;
+P.Large = styled(P.D)`
+	font-size: ${size(16)};
 `;
 P.Dark = styled(P.D)`
   opacity: 0.5;
@@ -65,8 +76,11 @@ Span.D = styled.span`
   letter-spacing: normal;
   opacity: 1;
 `;
-Span.Lightgreen = styled.span`
+Span.isLightgreen = styled.span`
 	color: #0E9564;
+`;
+Span.isWhite = styled.span`
+	color: #ffffff;
 `;
 Span.Green = styled(Span.D)`
   color: #239f9f;

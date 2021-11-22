@@ -15,17 +15,21 @@ import W50 from "../../components/form-components/W50";
 import TextArea from "../../components/form-components/TextArea";
 import intro_ball_1 from "../../assets/images/form_1_img.png";
 import intro_ball_2 from "../../assets/images/form_2_img.png";
+import fly_image_8 from "../../assets/images/fly-image-8.png";
+import fly_image_6 from "../../assets/images/fly-image-6.png";
 import FlyingObjsContainer from "../../components/reusable/FlyingObjsContainer";
 import {
   P,
+	Span,
   Wysiwyg,
 } from "../../components/form-components/StyledComponent";
 import Alert from "../../components/form-components/Alert";
 import Finalize, {
   Bottom,
-  FinalizeChild,
-  FinalizeTable,
-  Top,
+	FinalizeRows,
+	FinalizeRow,
+	FinalizeCol,
+	FinalizePercentage,
 } from "../../components/form-components/Finalize";
 import useMedia from "../../hooks/useMedia";
 import FormConditionalInput from "../../components/form-components/FormConditionalInput";
@@ -272,7 +276,6 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
               activeTheme={formData.section_4?.section_theme}
               stepName={formData.section_4?.section_name}
               onNext={() => state.theme.stepResponse.data?.data?.heloc?.products?.length || actions.router.set('/not-qualified')}
-
           >
             <input type={'hidden'} name={`ltv`} value={((section4Values('confirm_qualify_amount') === '0' ? +section4Values('amount_wanted') : mortgage) / +section2Values('home_value') * 100).toFixed?.(1)}/>
             <FlyingObjsContainer
@@ -338,18 +341,21 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
               <h1 className={"form-headline-1 text-left"}>
                 {formData.section_5?.title}
               </h1>
-              <h2 className={"form-headline-2 primary"}>
+              
+							<h2 className={"form-headline-2"}>
                 {formData.section_5?.subtitle}
               </h2>
-              <h2 className={"form-headline-3 primary"}>
-                You are requesting a home equity line of credit against your{" "}
-
-                {section1Values("property_details_1")} home which is located at{" "}
-                <br/> {section1Values("address")}, {section1Values("city")},{" "}
-                {section1Values("postal_code")}
+              
+							<h2 className={"form-headline-3"}>
+                You are requesting a <Span.isLightgreen>home equity line of credit</Span.isLightgreen> against your {section1Values("property_details_1")} home, which is located at
               </h2>
+
+							<h2 className={"form-headline-3"}>
+								{section1Values("address")}, {section1Values("city")}, {section1Values("postal_code")}
+							</h2>
             </div>
-            <input
+            
+						<input
                 type={"hidden"}
                 name={`product_name`}
                 value={firstProduct.title}
@@ -364,12 +370,44 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
                 )}
             />
 
+						<FlyingObjsContainer
+							childrenList={[
+								{
+									imageUrl: fly_image_8,
+									left: "17%",
+									level: 1,
+									top: "90%",
+									type: "image",
+									width: 5,
+									alt: "alt",
+								},
+								{
+									imageUrl: fly_image_6,
+									left: "80%",
+									level: 1,
+									top: "5%",
+									type: "image",
+									width: 11,
+									alt: "alt",
+								},
+							]}
+            />
+
             <Finalize>
-              <Top>
-                {media !== "mobile" ? (
-                    <FinalizeChild>
-                      <P.D>Your Info</P.D>
-                      {[
+							<FinalizePercentage>
+                  <P.Num>{+firstProduct.fields?.rate + 0.25}%</P.Num>
+                  
+									<P.Small>*Fixed rate</P.Small>
+                  
+									<P.Small>*Payent interest based on balance</P.Small>
+									
+									{/* <p className="primary form-headline-3 text-left heloc-var"> {String(firstProduct.title).split(" ")[0]} HELOC</p> */}
+							</FinalizePercentage>
+
+							<FinalizeRows>
+								<FinalizeRow>
+									<FinalizeCol>
+									{[
                         ...Array(+section3Values("applicants_number") || 0).keys(),
                       ].map((index, personIndex) => {
                         const applicantFName = section3Values(
@@ -382,150 +420,139 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
                             `applicant_score_${index + 1}`
                         );
                         return (
-                            <P.D key={`person-desktop-${personIndex}`}>
-                              {applicantFName} {applicantLName} {applicantScore}
-                            </P.D>
+													<P.Large key={`person-desktop-${personIndex}`}>
+														<Span.isWhite>
+															<strong>{applicantFName} {applicantLName} {applicantScore}</strong>
+														</Span.isWhite>
+													</P.Large>
                         );
                       })}
-                    </FinalizeChild>
-                ) : (
-                    <FinalizeChild className={"full m-mt-24"} order={3}>
-                      <FinalizeTable>
-                        <tbody>
-                        {[
-                          ...Array(
-                              +section3Values("applicants_number") || 0
-                          ).keys(),
-                        ].map((index, personIndex) => {
-                          const applicantFName = section3Values(
-                              `applicant_fname_${index + 1}`
-                          );
-                          const applicantLName = section3Values(
-                              `applicant_lname_${index + 1}`
-                          );
-                          const applicantScore = section3Values(
-                              `applicant_score_${index + 1}`
-                          );
-                          return (
-                              <tr key={`person-mobile-${personIndex}`}>
-                                <P.Dark as={"td"}>
-                                  {applicantFName} {applicantLName}
-                                </P.Dark>
-                                <P.D as={"td"}> {applicantScore}</P.D>
-                              </tr>
-                          );
-                        })}
-                        </tbody>
-                      </FinalizeTable>
-                    </FinalizeChild>
-                )}
+									</FinalizeCol>								
+								</FinalizeRow>
+							</FinalizeRows>
 
-                <FinalizeChild order={1}>
-                  <P.Dark>*Fixed rate</P.Dark>
-                  <P.Dark>*Payment interest based on balance</P.Dark>
-                  <p className="primary form-headline-3 text-left heloc-var">{String(firstProduct.title).split(" ")[0]} HELOC</p>
+							<FinalizeRows>
+								<FinalizeRow>
+									<FinalizeCol>
+										<P.D>
+											<Span.isLightgreen>
+												<strong>Your Info</strong>
+											</Span.isLightgreen>
+										</P.D>
+									</FinalizeCol>								
+								</FinalizeRow>
+							
+								<FinalizeRow>
+									<FinalizeCol>
+										<P.White>HELOC request</P.White>
+									</FinalizeCol>
 
-                  <P.Num>{+firstProduct.fields?.rate + 0.25}%</P.Num>
-                  <Button label={"I’m good to go"} className={"next-step"}/>
-                </FinalizeChild>
-                <FinalizeChild order={2} className={"wide"}>
-                  <Button
-                      className={"bordered prev-step"}
-                      label={"No, edit the details"}
-                  />
-                </FinalizeChild>
-              </Top>
-              <Bottom>
-                {media !== "mobile" ? (
-                    <FinalizeChild order={1}>
-                      <P.D>
-                        Your HELOC request is for $
-                        {numberWithCommas(
-                            section4Values("confirm_qualify_amount") === "0"
-                                ? +section4Values("amount_wanted")
-                                : mortgage
-                        )}
-                      </P.D>
-                      <P.D>
-                        Your property value is $
-                        {numberWithCommas(+section2Values("home_value"))}
-                      </P.D>
-                      <P.D>
-                        Your LTV is{" "}
-                        {(
-                            ((section4Values("confirm_qualify_amount") === "0"
-                                ? +section4Values("amount_wanted")
-                                : mortgage) /
-                                +section2Values("home_value")) *
-                            100
-                        ).toFixed?.(1)}
-                        %
-                      </P.D>
-                    </FinalizeChild>
-                ) : (
-                    <FinalizeChild className={"full"} order={1}>
-                      <FinalizeTable>
-                        <tbody>
-                        <tr>
-                          <P.Dark as={"td"}>HELOC Request</P.Dark>
-                          <P.D as={"td"}>
-                            $
-                            {numberWithCommas(
-                                section4Values("confirm_qualify_amount") === "0"
-                                    ? +section4Values("amount_wanted")
-                                    : mortgage
-                            )}
-                          </P.D>
-                        </tr>
-                        <tr>
-                          <P.Dark as={"td"}>Property Value</P.Dark>
-                          <P.D as={"td"}>
-                            ${numberWithCommas(+section2Values("home_value"))}
-                          </P.D>
-                        </tr>
-                        <tr>
-                          <P.Dark as={"td"}>LTV</P.Dark>
-                          <P.D as={"td"}>
-                            {(
-                                ((section4Values("confirm_qualify_amount") === "0"
-                                    ? +section4Values("amount_wanted")
-                                    : mortgage) /
-                                    +section2Values("home_value")) *
-                                100
-                            ).toFixed?.(1)}
-                            %
-                          </P.D>
-                        </tr>
-                        </tbody>
-                      </FinalizeTable>
-                    </FinalizeChild>
-                )}
+									<FinalizeCol>
+										<P.White>
+											<strong>
+												${numberWithCommas(
+													section4Values("confirm_qualify_amount") === "0"
+															? +section4Values("amount_wanted")
+															: mortgage
+												)}
+											</strong>
+										</P.White>
+									</FinalizeCol>
+								</FinalizeRow>
 
-                <FinalizeChild order={2} className={"full m-border"}>
-                  <FinalizeTable>
-                    <tbody>
-                    <tr>
-                      <P.Dark as={"td"}>Lender fee</P.Dark>
-                      <P.D as={"td"}>{firstProduct.fields?.fee}%</P.D>
-                    </tr>
-                    <tr>
-                      <P.Dark as={"td"}>Credit score</P.Dark>
-                      <P.D as={"td"}>
-                        {beaconScore(firstProduct.fields?.beacon_score)}
-                      </P.D>
-                    </tr>
-                    </tbody>
-                  </FinalizeTable>
-                </FinalizeChild>
-                <FinalizeChild order={3} className={"wide m-pr-40"}>
-                  {firstProduct.fields?.specifications.map(
-                      ({term_id, name}) => (
-                          <P.Border key={term_id}>{name}</P.Border>
-                      )
-                  )}
-                </FinalizeChild>
-              </Bottom>
+								<FinalizeRow>
+									<FinalizeCol>
+										<P.White>
+											Property value
+										</P.White>
+									</FinalizeCol>
+									
+									<FinalizeCol>
+										<P.White>
+											<strong>${numberWithCommas(+section2Values("home_value"))}</strong>
+										</P.White>
+									</FinalizeCol>
+								</FinalizeRow>
+
+								<FinalizeRow>
+									<FinalizeCol>
+										<P.White>
+											LTV
+										</P.White>
+									</FinalizeCol>
+									
+									<FinalizeCol>
+										<P.White>
+											<strong>
+												{(
+													((section4Values("confirm_qualify_amount") === "0"
+															? +section4Values("amount_wanted")
+															: mortgage) /
+															+section2Values("home_value")) *
+													100
+												).toFixed?.(1)}%
+											</strong>
+										</P.White>
+									</FinalizeCol>
+								</FinalizeRow>
+							</FinalizeRows>	
+							
+							<FinalizeRows>
+								<FinalizeRow className={"border"}>
+									<FinalizeCol>
+										<P.D>
+											<Span.isLightgreen>
+												<strong>Product Info</strong>
+											</Span.isLightgreen>
+										</P.D>
+									</FinalizeCol>
+								</FinalizeRow>
+
+								<FinalizeRow>
+									<FinalizeCol>
+										<P.D>
+											<strong>Lender fee</strong>
+										</P.D>
+									</FinalizeCol>
+									
+									<FinalizeCol>
+										<P.D >
+											<strong>{firstProduct.fields?.fee}%</strong>
+										</P.D>
+									</FinalizeCol>
+								</FinalizeRow>
+
+								<FinalizeRow>
+									<FinalizeCol>
+										<P.D >
+											<strong>Credit score</strong>
+										</P.D>
+									</FinalizeCol>
+
+									<FinalizeCol>
+										<strong>{beaconScore(firstProduct.fields?.beacon_score)}</strong>
+									</FinalizeCol>
+								</FinalizeRow>
+
+								{firstProduct.fields?.specifications.map(
+									({term_id, name}) => (
+											<FinalizeRow key={term_id}>
+												<FinalizeCol>
+													<P.D >{name}</P.D>
+												</FinalizeCol>
+											</FinalizeRow>
+									)
+								)}
+							</FinalizeRows>
             </Finalize>
+
+						<div className="btn-group">
+              <Button
+                  className={"bordered reset-form"}
+                  label={"No, edit the details"}
+              />
+              <Button label={"I’m good to go"} className={"next-step"}/>
+            </div>
           </FormStep>
           <FormStep
               apiStepNumber={6}
@@ -672,15 +699,7 @@ export default styled(connect(A3Page))`
     }
   }
 
-
   .wide-text {
     max-width: 85rem;
-
-    .form-headline-3 {
-      max-width: ${size(400)};
-      @media (max-width: 575.98px) {
-        max-width: 90%;
-      }
-    }
   }
 `;

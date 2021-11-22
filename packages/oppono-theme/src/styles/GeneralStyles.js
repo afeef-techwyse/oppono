@@ -232,49 +232,53 @@ const GeneralStyles = (props) => (
       }
 
       .form-headline-1 {
+				margin-bottom: 20px;
         color: #bfb6b4;
-        font-size: ${size(40)};
         font-weight: 400;
-        line-height: ${size(48)};
+        font-size: ${size(40)};
+        line-height: 1;
         text-align: center;
-        //max-width: ${size(438)};
-        @media (max-width: 991.98px) {
+				
+				&:last-child { 
+					margin-bottom: 0;
+				}
+        
+				@media (max-width: 991.98px) {
           font-size: ${size(30)};
         }
-        @media (max-width: 575.98px) {
+        
+				@media (max-width: 575.98px) {
           font-size: ${size(25)};
           line-height: 1.4;
         }
       }
 
       .form-headline-2 {
-        //max-width: ${size(390)};
-        color: rgba(191, 182, 180);
+        color: #BFB6B4;
         font-size: ${size(29)};
-        font-weight: 300;
+        font-weight: 400;
         line-height: ${size(40)};
-        margin-top: ${size(8)};
         opacity: 0.5;
-        @media (max-width: 991.98px) {
+        
+				@media (max-width: 991.98px) {
           font-size: ${size(24)};
         }
-        @media (max-width: 575.98px) {
+        
+				@media (max-width: 575.98px) {
           font-size: ${size(20)};
         }
       }
 
       .form-headline-3 {
-        //max-width: ${size(390)};
-        color: rgba(191, 182, 180);
-        font-size: ${size(18)};
-        font-weight: 300;
-        line-height: ${size(25)};
-        margin-top: ${size(6)};
-        opacity: 0.5;
-        @media (max-width: 575.98px) {
-          font-size: ${size(16)};
-          line-height: ${size(24)};
-        }
+				margin-bottom: 15px;
+        color: #BFB6B4;
+        font-size: ${size(14)};
+        font-weight: 400;
+        line-height: ${size(16)};
+
+				&:last-child { 
+					margin-bottom: 0;
+				}
       }
 
       .form-headline-4 {

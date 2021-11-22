@@ -10,7 +10,7 @@ import {size} from "../../functions/size";
 import FormStep from "../../components/form-components/FormStep";
 import Button from "../../components/form-components/Button";
 import FlyingObjsContainer from "../../components/reusable/FlyingObjsContainer";
-import {Wysiwyg, P} from "../../components/form-components/StyledComponent";
+import {Wysiwyg, Span, P} from "../../components/form-components/StyledComponent";
 import Input from "../../components/form-components/Input";
 import Select from "../../components/form-components/Select";
 import W50 from "../../components/form-components/W50";
@@ -20,13 +20,10 @@ import fly_image_8 from "../../assets/images/fly-image-8.png";
 import fly_image_6 from "../../assets/images/fly-image-6.png";
 import Finalize, {
   Bottom,
-  FinalizeChild,
-  FinalizeTable,
 	FinalizeHeading,
 	FinalizeRows,
 	FinalizeRow,
 	FinalizeCol,
-  Top,
 } from "../../components/form-components/Finalize";
 import useMedia from "../../hooks/useMedia";
 import LastStep from "../../components/form-components/LastStep";
@@ -378,87 +375,118 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 							</FinalizeHeading>
 
 							<FinalizeRows>
-								<FinalizeRow className={"larger border"}>
+								<FinalizeRow>
 									<FinalizeCol>
-										{[
-											...Array(+section3Values("applicants_number") || 0).keys(),
-										].map((index) => {
-											const applicantFName = section3Values(
-													`applicant_fname_${index + 1}`
-											);
-											const applicantLName = section3Values(
-													`applicant_lname_${index + 1}`
-											);
-											const applicantScore = section3Values(
-													`applicant_score_${index + 1}`
-											);
-											return (
-												<>{applicantFName} {applicantLName} {applicantScore}</>
-											);
-										})}
-									</FinalizeCol>
+									{[
+                        ...Array(+section3Values("applicants_number") || 0).keys(),
+                      ].map((index, personIndex) => {
+                        const applicantFName = section3Values(
+                            `applicant_fname_${index + 1}`
+                        );
+                        const applicantLName = section3Values(
+                            `applicant_lname_${index + 1}`
+                        );
+                        const applicantScore = section3Values(
+                            `applicant_score_${index + 1}`
+                        );
+                        return (
+													<P.Large key={`person-desktop-${personIndex}`}>
+														<Span.isWhite>
+															<strong>{applicantFName} {applicantLName} {applicantScore}</strong>
+														</Span.isWhite>
+													</P.Large>
+                        );
+                      })}
+									</FinalizeCol>								
 								</FinalizeRow>
+							</FinalizeRows>
 
-								<FinalizeRow className={"larger"}>
+							<FinalizeRows>
+								<FinalizeRow>
 									<FinalizeCol>
-										<span>Your Info</span>
+										<P.D>
+											<Span.isLightgreen>
+												<strong>Your Info</strong>
+											</Span.isLightgreen>
+										</P.D>
 									</FinalizeCol>
 								</FinalizeRow>
 
 								<FinalizeRow>
 										<FinalizeCol>
-											Property value
+											<P.White>Property value</P.White>
 										</FinalizeCol>
 										
 										<FinalizeCol>
-											${numberWithCommas(+section2Values("home_value"))}
+											<P.White>
+												<strong>
+													${numberWithCommas(+section2Values("home_value"))}
+												</strong>
+											</P.White>
 										</FinalizeCol>
 								</FinalizeRow>
 
 								<FinalizeRow>
 									<FinalizeCol>
-										Home equity
+										<P.White>Home equity</P.White>
 									</FinalizeCol>
 									
 									<FinalizeCol>
-										${numberWithCommas(+section2Values("home_value") - mortgage)}
+										<P.White>
+											<strong>
+												${numberWithCommas(+section2Values("home_value") - mortgage)}
+											</strong>
+										</P.White>
 									</FinalizeCol>
 								</FinalizeRow>
 
 								<FinalizeRow>
 									<FinalizeCol>
-										Mortgage request
+										<P.White>Mortgage request</P.White>
 									</FinalizeCol>
 									
 									<FinalizeCol>
-										${numberWithCommas(mortgage)}
+										<P.White>
+											<strong>
+												${numberWithCommas(mortgage)}
+											</strong>
+										</P.White>
 									</FinalizeCol>
 								</FinalizeRow>
 
 								{ section2Values("mortgage_value_2") && 
 									<FinalizeRow>
 										<FinalizeCol>
-											2nd mortgage
+											<P.White>2nd mortgage</P.White>
 										</FinalizeCol>
 										
 										<FinalizeCol>
-											${numberWithCommas(section2Values("mortgage_value_2"))}
+											<P.White>
+												<strong>
+													${numberWithCommas(section2Values("mortgage_value_2"))}
+												</strong>
+											</P.White>
 										</FinalizeCol>
 									</FinalizeRow>
 								}
 								
 								<FinalizeRow>
 									<FinalizeCol>
-										LTV
+										<P.White>LTV</P.White>
 									</FinalizeCol>
 									
 									<FinalizeCol>
-										{((mortgage / +section2Values("home_value")) * 100).toFixed?.(1)}%
+										<P.White>
+											<strong>
+												{((mortgage / +section2Values("home_value")) * 100).toFixed?.(1)}%
+											</strong>
+										</P.White>
 									</FinalizeCol>
 								</FinalizeRow>
 							</FinalizeRows>
             </Finalize>
-            <div className="btn-group">
+            
+						<div className="btn-group">
               <Button
                   className={"bordered reset-form"}
                   label={"No, edit the details"}

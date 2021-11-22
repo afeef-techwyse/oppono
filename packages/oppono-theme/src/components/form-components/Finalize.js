@@ -37,7 +37,18 @@ export const FinalizeHeading = styled.div`
 `;
 
 export const FinalizeRows = styled.div`
-	overflow: hidden;
+	overflow: hidden;	
+	
+	&:not(:last-child) {
+		padding-bottom: 21px;
+		margin-bottom: 22px;
+		border-bottom: 1px solid #BFB6B4;
+	}
+
+	&.larger  {
+		font-size: 16px;
+		border-bottom-color: rgba(191,182,180, 0.5);
+	}
 `;
 
 export const FinalizeRow = styled.div`
@@ -45,27 +56,9 @@ export const FinalizeRow = styled.div`
 	align-items: center;
 	margin: 0 -10px 12px;
 	justify-content: space-between;
-	color: #fff;
-	font-size: 14px;
-	line-height: 1.71;
 
 	&:last-child {
 		margin-bottom: 0;
-	}
-
-	&.larger  {
-		font-size: 16px;
-		font-weight: 500;
-	}
-	
-	&.border {
-		padding-bottom: 21px;
-		margin-bottom: 22px;
-		border-bottom: 1px solid  rgba(191,182,180, 0.5)
-	}
-
-	span {
-		color: #0E9564;
 	}
 `;
 
@@ -79,6 +72,11 @@ export const FinalizeCol = styled.div`
 	&.half {
 		width: 50%;
 	}	
+`;
+
+export const FinalizePercentage = styled.div`
+	margin: 40px 0 60px;
+	text-align: center;
 `;
 
 export const FinalizeChild = styled.div`
@@ -130,7 +128,8 @@ export const Top = styled.div`
   padding-bottom: ${size(23)};
   margin: 0 ${size(-10)};
   position: relative;
-  @media (max-width: 575.98px) {
+  
+	@media (max-width: 575.98px) {
     padding-bottom: 0;
   }
 
