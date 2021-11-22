@@ -368,10 +368,11 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 								
 								<p>
 									You are applying for a <span>{section2Values("looking_for")} mortgage purchase</span> on{" "}
-									{section1Values("property_details_1")} home which is located at{" "}
-									<br/> {section1Values("address")}, {section1Values("city")},{" "}
-									{section1Values("postal_code")}
+									{section1Values("property_details_1")} home which is located at
 								</p>
+
+								<p>{section1Values("address")}, {section1Values("city")},{" "}
+									{section1Values("postal_code")}</p>
 							</FinalizeHeading>
 							
 							<FinalizeRows>

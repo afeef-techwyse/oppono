@@ -18,8 +18,17 @@ export const FinalizeHeading = styled.div`
 	line-height: 1.14;
 	
 	h1 {
+		margin-bottom: 20px;
 		font-size: 40px;
-	line-height: 1;
+		line-height: 1;
+	}
+
+	p {
+		margin-bottom: 15px;
+
+		&:last-child: {
+			margin-bottom: 0;
+		}
 	}
 
 	span {
@@ -34,7 +43,7 @@ export const FinalizeRows = styled.div`
 export const FinalizeRow = styled.div`
 	display: flex;
 	align-items: center;
-	margin: 0 -10px 13px;
+	margin: 0 -10px 12px;
 	justify-content: space-between;
 	color: #fff;
 	font-size: 14px;
@@ -50,7 +59,7 @@ export const FinalizeRow = styled.div`
 	}
 	
 	&.border {
-		padding-bottom: 23px;
+		padding-bottom: 21px;
 		margin-bottom: 22px;
 		border-bottom: 1px solid  rgba(191,182,180, 0.5)
 	}

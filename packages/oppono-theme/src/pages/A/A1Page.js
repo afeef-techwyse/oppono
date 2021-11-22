@@ -16,10 +16,16 @@ import Select from "../../components/form-components/Select";
 import W50 from "../../components/form-components/W50";
 import intro_ball_1 from "../../assets/images/form_1_img.png";
 import intro_ball_2 from "../../assets/images/form_2_img.png";
+import fly_image_8 from "../../assets/images/fly-image-8.png";
+import fly_image_6 from "../../assets/images/fly-image-6.png";
 import Finalize, {
   Bottom,
   FinalizeChild,
   FinalizeTable,
+	FinalizeHeading,
+	FinalizeRows,
+	FinalizeRow,
+	FinalizeCol,
   Top,
 } from "../../components/form-components/Finalize";
 import useMedia from "../../hooks/useMedia";
@@ -333,111 +339,131 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 allProducts.length || actions.router.set('/not-qualified');
               }}
           >
-            <div className="form-text-wrapper wide-text">
-              <h1 className={"form-headline-1 text-left"}>
-                {formData.section_4?.title}
-              </h1>
-              <h2 className={"form-headline-3 primary "}>
-                You are refinancing your
-                {section1Values("property_details_1")} home which is located at{" "}
-                <br/> {section1Values("address")}, {section1Values("city")},{" "}
-                {section1Values("postal_code")}
-              </h2>
-            </div>
-            <Finalize>
-              <Top>
-                {media !== "mobile" ? (
-                    <FinalizeChild order={3}>
-                      <P.D>Borrowers</P.D>
-                      {[
-                        ...Array(+section3Values("applicants_number") || 0).keys(),
-                      ].map((index, personIndex) => {
-                        const applicantFName = section3Values(
-                            `applicant_fname_${index + 1}`
-                        );
-                        const applicantLName = section3Values(
-                            `applicant_lname_${index + 1}`
-                        );
-                        const applicantScore = section3Values(
-                            `applicant_score_${index + 1}`
-                        );
-                        return (
-                            <P.Dark key={`person-desktop-${personIndex}`}>
-                              {applicantFName} {applicantLName} {applicantScore}
-                            </P.Dark>
-                        );
-                      })}
-                    </FinalizeChild>
-                ) : (
-                    <FinalizeChild className={"full m-mt-24"} order={3}>
-                      <FinalizeTable>
-                        <tbody>
-                        {[
-                          ...Array(
-                              +section3Values("applicants_number") || 0
-                          ).keys(),
-                        ].map((index, personIndex) => {
-                          const applicantFName = section3Values(
-                              `applicant_fname_${index + 1}`
-                          );
-                          const applicantLName = section3Values(
-                              `applicant_lname_${index + 1}`
-                          );
-                          const applicantScore = section3Values(
-                              `applicant_score_${index + 1}`
-                          );
-                          return (
-                              <tr key={`person-desktop-${personIndex}`}>
-                                <P.Dark as={"td"}>
-                                  {applicantFName} {applicantLName}
-                                </P.Dark>
-                                <P.D as={"td"}>{applicantScore}</P.D>
-                              </tr>
-                          );
-                        })}
-                        </tbody>
-                      </FinalizeTable>
-                    </FinalizeChild>
-                )}
+						<FlyingObjsContainer
+							childrenList={[
+								{
+									imageUrl: fly_image_8,
+									left: "17%",
+									level: 1,
+									top: "90%",
+									type: "image",
+									width: 5,
+									alt: "alt",
+								},
+								{
+									imageUrl: fly_image_6,
+									left: "80%",
+									level: 1,
+									top: "5%",
+									type: "image",
+									width: 11,
+									alt: "alt",
+								},
+							]}
+						/>
+						
+						<Finalize>	
+							<FinalizeHeading>
+								<h1 className={"form-headline-1 text-left"}>
+									{formData.section_4?.title}
+								</h1>
+								
+								<p>
+									You are applying for a <span>{section2Values("looking_for")} mortgage purchase</span> on{" "}
+									{section1Values("property_details_1")} home which is located at
+								</p>
 
-                <FinalizeChild className={"wide"} order={1}>
-                  <P.D>Summary</P.D>
-                </FinalizeChild>
-              </Top>
-              <Bottom>
-                {media === "mobile" ? null : (
-                    <FinalizeChild order={1}></FinalizeChild>
-                )}
-                <FinalizeChild order={3} className={"m-pr-40 full m-border"}>
-								<P.Border>
-                    Your property value is $
-                    {numberWithCommas(+section2Values("home_value"))}
-                  </P.Border>
-                  <P.Border>
-                    Your mortgage request is ${numberWithCommas(mortgage)}
-                  </P.Border>
-                </FinalizeChild>
-                <FinalizeChild order={3} className={"wide m-pr-40"}>
-                  <P.Border>
-										Your home equity amount is $
-                    {numberWithCommas(+section2Values("home_value") - mortgage)}
-                  </P.Border>
-                  <P.Border>
-                    Your LTV is{" "}
-                    {((mortgage / +section2Values("home_value")) * 100).toFixed?.(
-                        1
-                    )}
-                    %
-                  </P.Border>
-                </FinalizeChild>
-              </Bottom>
+								<p>{section1Values("address")}, {section1Values("city")},{" "}
+									{section1Values("postal_code")}</p>
+							</FinalizeHeading>
+
+							<FinalizeRows>
+								<FinalizeRow className={"larger border"}>
+									<FinalizeCol>
+										{[
+											...Array(+section3Values("applicants_number") || 0).keys(),
+										].map((index) => {
+											const applicantFName = section3Values(
+													`applicant_fname_${index + 1}`
+											);
+											const applicantLName = section3Values(
+													`applicant_lname_${index + 1}`
+											);
+											const applicantScore = section3Values(
+													`applicant_score_${index + 1}`
+											);
+											return (
+												<>{applicantFName} {applicantLName} {applicantScore}</>
+											);
+										})}
+									</FinalizeCol>
+								</FinalizeRow>
+
+								<FinalizeRow className={"larger"}>
+									<FinalizeCol>
+										<span>Your Info</span>
+									</FinalizeCol>
+								</FinalizeRow>
+
+								<FinalizeRow>
+										<FinalizeCol>
+											Property value
+										</FinalizeCol>
+										
+										<FinalizeCol>
+											${numberWithCommas(+section2Values("home_value"))}
+										</FinalizeCol>
+								</FinalizeRow>
+
+								<FinalizeRow>
+									<FinalizeCol>
+										Home equity
+									</FinalizeCol>
+									
+									<FinalizeCol>
+										${numberWithCommas(+section2Values("home_value") - mortgage)}
+									</FinalizeCol>
+								</FinalizeRow>
+
+								<FinalizeRow>
+									<FinalizeCol>
+										Mortgage request
+									</FinalizeCol>
+									
+									<FinalizeCol>
+										${numberWithCommas(mortgage)}
+									</FinalizeCol>
+								</FinalizeRow>
+
+								{ section2Values("mortgage_value_2") && 
+									<FinalizeRow>
+										<FinalizeCol>
+											2nd mortgage
+										</FinalizeCol>
+										
+										<FinalizeCol>
+											${numberWithCommas(section2Values("mortgage_value_2"))}
+										</FinalizeCol>
+									</FinalizeRow>
+								}
+								
+								<FinalizeRow>
+									<FinalizeCol>
+										LTV
+									</FinalizeCol>
+									
+									<FinalizeCol>
+										{((mortgage / +section2Values("home_value")) * 100).toFixed?.(1)}%
+									</FinalizeCol>
+								</FinalizeRow>
+							</FinalizeRows>
             </Finalize>
             <div className="btn-group">
               <Button
-                  className={"bordered reset-form small"}
+                  className={"bordered reset-form"}
                   label={"No, edit the details"}
               />
-              <Button label={"I’m good to go"} className={"next-step small"}/>
+              <Button label={"I’m good to go"} className={"next-step"}/>
             </div>
           </FormStep>
           <FormStep

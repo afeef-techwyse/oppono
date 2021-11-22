@@ -457,7 +457,7 @@ export default styled(connect(FormStep))`
     z-index: 5;
   }
   button {
-    margin-top: ${size(80)};
+    margin-top: ${size(62)};
 
     @media (max-width: 575.98px) {
       margin-top: 3rem;
