@@ -56,11 +56,11 @@ export default styled(RadioGroup)`
   .radio-group {
     display: flex;
     flex-wrap: wrap;
-    margin: ${size(-16)} 0 0 0;
+    margin: ${size(-25)} 0 0 0;
     //justify-content: space-between;
     //width: 40rem;
     > * {
-      margin-top: ${size(16)};
+      margin-top: ${size(25)};
     }
   }
 `;

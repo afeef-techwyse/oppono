@@ -95,16 +95,16 @@ const StepsProgress = styled(
 
 		span.checkmark {
 			position: absolute;
-			right: -30px;
+			right: -20px;
 			border: 1px solid;
 			border-radius: 100%;
-			width: 18px;
-			height: 18px;
+			width: 14px;
+			height: 14px;
 			text-align: center;
 			opacity: 0;
 
 			svg {
-				width: 10px;
+				width: 7px;
 				position: absolute;
 				color: inherit!important;
 				left: 0;

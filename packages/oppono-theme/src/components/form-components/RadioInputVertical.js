@@ -44,7 +44,7 @@ const RadioInputVertical = React.forwardRef(
           <div className="radio-text" ref={labelRef}>
             {label}
           </div>
-          {number?<Link href={`tel:${number}`}>{number}</Link>:<h6>...</h6>}
+          {number?<Link href={`tel:${number}`}><span>Tap to call</span>{number}</Link>:<h6>...</h6>}
           <input
             type={type}
             value={value}
@@ -86,7 +86,6 @@ RadioInputVertical.propTypes = {
 export default styled(RadioInputVertical)`
   .radio-text {
     font-size: ${size(14)};
-    font-weight: 300;
     line-height: ${size(24)};
     cursor: pointer;
     color: #bfb6b4;
@@ -94,12 +93,16 @@ export default styled(RadioInputVertical)`
   a {
     color: #ffffff;
     font-size: ${size(16)};
-    font-weight: 400;
-    line-height: ${size(24)};
-    padding-bottom: ${size(2)};
-    border-bottom: ${size(1)} solid rgba(191, 182, 180, 0.5);
   }
-  h6 {
+
+	a span {
+		font-size: 14px;
+    margin-right: 30px;
+    color: #BFB6B4;
+    opacity: 0.5;
+	} 
+  
+	h6 {
     color: #ffffff;
     font-size: ${size(16)};
     font-weight: 400;
@@ -120,16 +123,16 @@ export default styled(RadioInputVertical)`
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
-    max-width: ${size(520)};
-    padding-left: ${size(29)};
-    &:after {
+    padding-left: ${size(31)};
+    
+		&:after {
       content: "";
       position: absolute;
       left: 0;
-      top: 0;
-      width: ${size(21)};
-      height: ${size(21)};
-      border-radius: ${size(21)};
+      top: 3px;
+      width: ${size(19)};
+      height: ${size(19)};
+      border-radius: 50%;
       border: ${size(1)} solid rgba(191, 182, 180, 0.5);
     }
   }

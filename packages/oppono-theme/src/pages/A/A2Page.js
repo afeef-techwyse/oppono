@@ -673,7 +673,6 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
               stepName={formData.section_6?.section_name}
           >
             <div className="upload-step-wrapper">
-              <img src={upload}/>
               <h1 className={"form-headline-1 text-left"}>
                 {formData.section_6?.title}
               </h1>
@@ -690,40 +689,62 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                     acceptText={"PDF, JPG, or PNG"}
                 />
                 <Appraiser>
-								<p className="form-headline-2 text-left">Your BDM is</p>
-                      <p
-                          className={"form-headline-1 text-left"}
-                          dangerouslySetInnerHTML={{
-                            __html: appraiser?.fields?.bdm.name,
-                          }}
-                      />
                   <div className="row">
                     <div className="col-left">
-										<P.D>Select an appraiser</P.D>
+											<p className="form-headline-2 text-left">Your BDM is</p>
+											
+											<div className="appraiser">
+												<P.D>
+														<Span.isGreen>BDM contact</Span.isGreen>
+												</P.D>
+												
+												<p className="appraiser__name form-headline-3" dangerouslySetInnerHTML={{
+													__html: appraiser?.fields?.bdm.name,
+												}} />
+
+												<P.White>
+													<a href="tel:4166699274">(416) 669-9274</a>
+												</P.White>
+												
+												<P.White>
+													<a href="mailto:david.delice@oppono.com">david.delice@oppono.com</a>
+												</P.White>
+											</div>
                     </div>
-                    <div className="col-right">
-                      <RadioGroup
-                          className={"vertical-radio"}
-                          radioText={"*Click to call"}
-                      >
-                        {appraiser?.fields?.preferred_appraisal_company.map(
-                            ({post_name}, index) => {
-                              return (
-                                  <AppraiserInput
-                                      key={index}
-                                      appraiserName={post_name}
-                                      value={post_name}
-                                  />
-                              );
-                            }
-                        )}
-                      </RadioGroup>
-                      <P.Dark>
-                        *Disclaimer - If the city you are looking for is not
-                        listed please contact your BDM directly or email us at
-                        info@oppono.com
-                      </P.Dark>
-                      <Button label={"Alert"}/>
+                    
+										<div className="col-right">
+											<P.Large>Select an appraiser</P.Large>
+
+											<div className="col-right__inner">
+												<RadioGroup
+														className={"vertical-radio"}
+														radioText={"*Click to call"}
+												>
+													{appraiser?.fields?.preferred_appraisal_company.map(
+															({post_name}, index) => {
+																return (
+																		<AppraiserInput
+																				key={index}
+																				appraiserName={post_name}
+																				value={post_name}
+																		/>
+																);
+															}
+													)}
+												</RadioGroup>
+												
+												<P.Dark>
+													<strong>
+														*Disclaimer
+														
+														<br/>
+														
+														If the city you are looking for is not
+														listed please contact your BDM directly or email us at
+														info@oppono.com
+													</strong>
+												</P.Dark>
+											</div>
                     </div>
                   </div>
                 </Appraiser>

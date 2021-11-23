@@ -176,11 +176,11 @@ const GeneralStyles = (props) => (
       }
 
       hr {
-        height: ${size(1)};
-        background: rgba(191, 182, 180, 0.2);
         width: 100%;
-        margin-top: ${size(40)};
-        margin-bottom: ${size(40)};
+        height: ${size(1)};
+        background: #BFB6B4;
+        margin-top: ${size(55)};
+        margin-bottom: ${size(55)};
         border: none;
         max-width: 85rem !important;
       }
@@ -404,7 +404,7 @@ const GeneralStyles = (props) => (
 
 			.form-wide-container {
 				@media (min-width: 1200px) {
-					max-width: 86rem !important;
+					max-width: 85rem !important;
 					margin: auto;
 				}
 			}

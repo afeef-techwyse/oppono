@@ -75,6 +75,9 @@ Span.D = styled.span`
   letter-spacing: normal;
   opacity: 1;
 `;
+Span.isGreen = styled.span`
+	color: #239f9f;
+`;
 Span.isLightgreen = styled.span`
 	color: #0E9564;
 `;
