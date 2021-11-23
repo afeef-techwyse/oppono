@@ -543,11 +543,11 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                     ]?.products.map((product, index) => (
                     <Finalize key={product.ID}>
                       <Top>
-                        <FinalizeChild order={1}>
+                        <FinalizeChild className={"size-sm"} order={1}>
                           <P.Circle>{index + 1}</P.Circle>
                         </FinalizeChild>
 
-                        <FinalizeChild order={1}>
+                        <FinalizeChild className={"size-md"} order={1}>
                           <P.Dark>
 														<strong>*Variable Rate</strong>
 													</P.Dark>
@@ -574,7 +574,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                           />
                         </FinalizeChild>
 
-                        <FinalizeChild className={"wide"} order={1}>
+                        <FinalizeChild className={"size-lg"} order={1}>
                           <P.Dark>
 														<strong>*Monthly mortgage payment</strong>
 													</P.Dark>
@@ -587,10 +587,11 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                           </P.Cost>
                         </FinalizeChild>
                       </Top>
-                      <Bottom>
-                        {media === "mobile" ? null : <FinalizeChild order={1}/>}
+                      
+											<Bottom>
+                        {media === "mobile" ? null : <FinalizeChild className={"size-sm"} order={1}/>}
                         {media !== "mobile" ? (
-                            <FinalizeChild order={2} className={"full m-border"}>
+                            <FinalizeChild order={2} className={"size-md"}>
                               <FinalizeTable>
                                 <tbody>
                                 <tr>
@@ -619,7 +620,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                               </FinalizeTable>
                             </FinalizeChild>
                         ) : (
-                            <FinalizeChild className={"full"} order={1}>
+                            <FinalizeChild className={"size-md"} order={1}>
                               <FinalizeTable>
                                 <tbody>
                                 <tr>
@@ -649,7 +650,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                             </FinalizeChild>
                         )}
 
-                        <FinalizeChild order={3} className={"wide m-pr-40"}>
+                        <FinalizeChild order={3} className={"size-lg"}>
                           {product.fields?.specifications.map(
                               ({term_id, name}) => (
                                   <P.Border key={term_id}>{name}</P.Border>

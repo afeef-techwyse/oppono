@@ -6,9 +6,13 @@ import { size } from "../../functions/size";
 import { P } from "./StyledComponent";
 
 export const FinalizeTable = styled.table`
-  ${P.Dark} {
-    padding-right: ${size(15)};
+  ${P.White} {
+    padding-right: ${size(28)};
   }
+
+	td {
+		padding-bottomn: ${size(6)};
+	}
 `;
 
 export const FinalizeHeading = styled.div`
@@ -83,6 +87,21 @@ export const FinalizeChild = styled.div`
   flex: 0 1 28%;
   width: 28%;
   padding: ${size(18)} ${size(10)} 0;
+
+	&.size-sm {
+		width: 12.5%;
+		flex: 0 0 12.5%;
+	}
+
+	&.size-md {
+		width: 37.5%;
+		flex: 0 0 37.5%;
+	}
+
+	&.size-lg {
+		width: 50%;
+		flex: 0 0 50%;
+	}
 
   &.wide {
     flex-basis: 44%;

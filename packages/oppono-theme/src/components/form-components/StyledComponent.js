@@ -51,20 +51,18 @@ P.White = styled(P.D)`
 	color: #fff;
 `;
 P.Border = styled(P.D)`
-  padding-bottom: ${size(21)};
-	margin-bottom: ${size(24)};
+  padding-bottom: ${size(20)};
+	margin-bottom: ${size(20)};
   border-bottom: ${size(1)} solid rgba(191, 182, 180, 0.5);
 `;
 P.Circle = styled(P.D)`
-  width: ${size(33)};
-  height: ${size(33)};
-  border: ${size(1)} solid rgba(191, 182, 180, 0.5);
-  border-radius: 50%;
-  margin-bottom: ${size(15)};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: sans-serif;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: ${size(33)};
+	height: ${size(33)};
+	border: ${size(1)} solid rgba(191, 182, 180, 0.5);
+	border-radius: 50%;
 	font-size: ${size(20)};
 	font-weight: 500;
 `;
