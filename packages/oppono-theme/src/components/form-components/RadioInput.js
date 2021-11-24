@@ -206,8 +206,7 @@ export default styled(RadioInput)`
 
   .radio-text {
     font-size: ${size(16)};
-    font-weight: 400;
-    line-height: ${size(23)};
+    font-weight: 500;
     cursor: pointer;
   }
 

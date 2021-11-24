@@ -6,6 +6,9 @@ import gsap from "gsap";
 import { size } from "../../functions/size";
 import useMedia from "../../hooks/useMedia";
 import opponoApi from "../../opponoApi";
+import {
+  P,
+} from "../../components/form-components/StyledComponent";
 
 const FormStep = ({
   activeTheme,
@@ -423,13 +426,23 @@ export default styled(connect(FormStep))`
     margin-right: auto;
     margin-left: auto;
   }
-  .form-text-wrapper {
+  
+	.form-text-wrapper {
     max-width: ${size(860)};
     margin-right: auto;
     margin-left: auto;
-    margin-bottom: 0;
+    margin-bottom: ${size(55)};
+
+		&.is-smaller {
+			max-width: ${size(645)};
+		}
+
+		${P.D} {
+			margin-bottom: ${size(8)};
+		}
   }
-  div.upload-step-wrapper {
+  
+	div.upload-step-wrapper {
     max-width: ${size(860)}!important;
     margin-right: auto !important;
     margin-left: auto !important;

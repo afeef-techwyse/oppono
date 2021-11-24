@@ -363,22 +363,28 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 								},
 							]}
             />
-						
-						<Finalize className={"smaller"}>
-							<FinalizeHeading>
-								<h1 className={"form-headline-1 text-left"}>
-									{formData.section_4?.title}
-								</h1>
-								
-								<p>
-									You are applying for a <span>{section2Values("looking_for")} mortgage purchase</span> on{" "}
-									{section1Values("property_details_1")} home which is located at
-								</p>
 
-								<p>{section1Values("address")}, {section1Values("city")},{" "}
-									{section1Values("postal_code")}</p>
-							</FinalizeHeading>
-							
+						<div className="form-text-wrapper is-smaller">
+							<h1 className={"form-headline-1 text-left"}>
+								{formData.section_4?.title}
+							</h1>
+
+							<P.D>
+								You are applying for a {" "}
+								
+								<Span.isLightgreen>
+									<strong>{section2Values("looking_for")} mortgage purchase</strong>
+								</Span.isLightgreen	> on{" "}
+								
+								{section1Values("property_details_1")} home which is located at
+							</P.D>
+
+							<P.D>
+								<strong>{section1Values("address")}, {section1Values("city")},{" "} {section1Values("postal_code")}</strong>
+							</P.D>
+            </div>
+						
+						<Finalize className={"is-smaller"}>
 							<FinalizeRows>
 								<FinalizeRow className={"larger border"}>
 									<FinalizeCol>
@@ -527,10 +533,12 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                         ]?.products.length
                 )}
               </h1>
-              <h2 className={"form-headline-3"}>
+              
+							<h2 className={"form-headline-3 is-darker"}>
                 {formData.section_5?.subtitle}
               </h2>
-              <h3 className={"form-headline-1 text-left"}>
+              
+							<h3 className={"form-headline-2 text-left"}>
                 {formData.section_5?.choose_one}
               </h3>
             </div>
@@ -703,11 +711,11 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 												}} />
 
 												<P.White>
-													<a href="tel:4166699274">(416) 669-9274</a>
+													<a href={`tel:${appraiser?.fields?.bdm.phone}`}>{appraiser?.fields?.bdm.phone}</a>
 												</P.White>
 												
 												<P.White>
-													<a href="mailto:david.delice@oppono.com">david.delice@oppono.com</a>
+													<a href={`mailto:${appraiser?.fields?.bdm.email}`}>{appraiser?.fields?.bdm.email}</a>
 												</P.White>
 											</div>
                     </div>
@@ -772,7 +780,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   src={formData.section_7?.image.url}
                   alt={formData.section_7?.image.alt}
               />
-              <div style={{flexBasis: "60%"}} className="text">
+              <div className="text">
                 <h1 className={"form-headline-1 text-left"}>
                   {formData.section_7?.title}
                 </h1>
@@ -835,9 +843,5 @@ export default styled(connect(A2Page))`
         width: 100%;
       }
     }
-  }
-
-  .wide-text {
-    max-width: 85rem;
   }
 `;

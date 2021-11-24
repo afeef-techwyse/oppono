@@ -178,7 +178,7 @@ const GeneralStyles = (props) => (
       hr {
         width: 100%;
         height: ${size(1)};
-        background: #BFB6B4;
+        background: #bfb6b4;
         margin-top: ${size(55)};
         margin-bottom: ${size(55)};
         border: none;
@@ -230,60 +230,71 @@ const GeneralStyles = (props) => (
           }
         }
       }
+			.form-headline-1,
+			.form-headline-2,
+			.form-headline-3,
+			.form-headline-4 {
+				color: #bfb6b4;
+				font-weight: 400;
+
+				&:last-child {
+          margin-bottom: 0;
+        }
+
+				&.is-darker {
+					opacity: 0.5
+				}
+
+				&.is-bolder {
+					font-weight: 500;
+				}
+			}
 
       .form-headline-1 {
-				margin-bottom: 10px;
-        color: #bfb6b4;
-        font-weight: 400;
+        margin-bottom: ${size(5)};
         font-size: ${size(40)};
         line-height: 1.2;
-        text-align: center;
-				
-				&:last-child { 
-					margin-bottom: 0;
-				}
-        
-				@media (max-width: 991.98px) {
+
+        @media (max-width: 991.98px) {
           font-size: ${size(30)};
         }
-        
-				@media (max-width: 575.98px) {
+
+        @media (max-width: 575.98px) {
           font-size: ${size(25)};
-          line-height: 1.4;
         }
       }
 
       .form-headline-2 {
-        color: #BFB6B4;
         font-size: ${size(29)};
         font-weight: 400;
-        line-height: ${size(40)};
+        line-height: 1.38;
+        
         
 				@media (max-width: 991.98px) {
           font-size: ${size(24)};
         }
-        
-				@media (max-width: 575.98px) {
+
+        @media (max-width: 575.98px) {
           font-size: ${size(20)};
         }
       }
 
       .form-headline-3 {
-        color: #BFB6B4;
+        color: #bfb6b4;
         font-size: ${size(23)};
         font-weight: 400;
-        line-height: 1.74
+        line-height: 1.74;
+			
       }
 
       .form-headline-4 {
-				margin: 15px 0;
-				color: #bfb6b4;
-				font-size: ${size(18)};
-				font-weight: 400;
-				line-height: 1.33;
-				opacity: 0.5;
-        
-				@media (max-width: 575.98px) {
+        margin: 15px 0;
+        color: #bfb6b4;
+        font-size: ${size(18)};
+        font-weight: 400;
+        line-height: 1.33;
+
+        @media (max-width: 575.98px) {
           font-size: ${size(18)};
           line-height: ${size(24)};
         }
@@ -291,23 +302,19 @@ const GeneralStyles = (props) => (
 
       .form-group {
         margin-top: ${size(55)};
+
         @media (max-width: 991.98px) {
           margin-top: ${size(40)};
         }
+
         @media (max-width: 575.98px) {
           margin-top: ${size(55)};
         }
-
-        .label-text {
-          @media (max-width: 575.98px) {
-            line-height: ${size(24)};
-          }
-        }
       }
 
-			.lighter {
-				color: #FFF !important;
-			}
+      .lighter {
+        color: #fff !important;
+      }
 
       .agree-checkbox {
         position: relative;
@@ -402,12 +409,15 @@ const GeneralStyles = (props) => (
         }
       }
 
-			.form-wide-container {
-				@media (min-width: 1200px) {
-					max-width: 85rem !important;
-					margin: auto;
+      .form-wide-container {
+				width: 100%;
+				max-width: ${size(860)};
+				margin: auto;
+
+				&.is-smaller {
+					max-width: ${size(645)};
 				}
-			}
+      }
 
       .form-sub-text {
         color: rgba(191, 182, 180, 0.5);
@@ -465,13 +475,13 @@ const GeneralStyles = (props) => (
         margin: 0;
       }
 
-			input:-webkit-autofill,
-			input:-webkit-autofill:hover,
-			input:-webkit-autofill:focus,
-			input:-webkit-autofill:active {
-				/* -webkit-transition-delay: 9999s; */
-				/* transition-delay: 9999s; */
-			}
+      input:-webkit-autofill,
+      input:-webkit-autofill:hover,
+      input:-webkit-autofill:focus,
+      input:-webkit-autofill:active {
+        /* -webkit-transition-delay: 9999s; */
+        /* transition-delay: 9999s; */
+      }
 
       /* Firefox */
 

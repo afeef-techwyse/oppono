@@ -94,23 +94,31 @@ export const Ul = styled.ul`
   margin-left: ${size(46)};
 `;
 export const Ol = styled.ol`
-  margin-left: ${size(40)};
-  margin-top: ${size(25)};
+	margin-left: ${size(28)};
+	margin-top: ${size(25)};
 `;
 export const Li = styled.li`
-  color: rgba(192, 182, 180, 0.7);
   font-size: ${size(16)};
   line-height: ${size(21)};
-  margin-bottom: ${size(20)};
+  margin-bottom: ${size(21)};
 `;
 
 export const Wysiwyg = styled.div`
-  ul {
+	color: #bfb6b4;
+	font-size: ${size(18)};
+	line-height: ${size(24)};
+	font-weight: 500;
+	
+	@media (max-width: 575.98px) {
+		font-size: ${size(16)};
+	}
+  
+	ul {
     margin-left: ${size(46)};
   }
 
   ol {
-    margin-left: ${size(40)};
+    margin-left: ${size(28)};
     margin-top: ${size(25)};
   }
 
@@ -118,13 +126,6 @@ export const Wysiwyg = styled.div`
     color: rgba(192, 182, 180, 0.7);
     font-size: ${size(16)};
     line-height: ${size(21)};
-    margin-bottom: ${size(20)};
-  }
-  color: #bfb6b4;
-  font-size: ${size(18)};
-  font-weight: 400;
-  line-height: ${size(24)};
-  @media (max-width: 575.98px) {
-    font-size: ${size(16)};
+    margin-bottom: ${size(21)};
   }
 `;

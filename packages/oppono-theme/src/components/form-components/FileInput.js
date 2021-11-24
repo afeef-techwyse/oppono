@@ -278,7 +278,7 @@ const FileInput = React.forwardRef(
             ))}
           </div>
           <div className="add-icon">
-            <svg width="72" height="72" viewBox="0 0 72 72">
+            <svg width="50" height="50" viewBox="0 0 72 72">
               <path
                 fill="none"
                 stroke="#36808b"
@@ -342,11 +342,12 @@ export default styled(FileInput)`
   position: relative;
   border-radius: 2px;
   background-color: rgb(27, 27, 38, 0.59);
-  border: 1px dashed transparent;
+  border: 2px dashed rgba(41, 127, 255, 0.59);
   transition: border-color 400ms;
-  padding: ${size(10)};
+  padding: ${size(10)} ${size(18)};
 
   &:after {
+    content: "";
     width: 150%;
     height: 150%;
     position: absolute;
@@ -354,12 +355,11 @@ export default styled(FileInput)`
     left: 50%;
     background-color: transparent;
     transform: translate(-50%, -50%);
-    content: "";
     z-index: -1;
   }
 
   &.focused {
-    border-color: #297fff;
+    border-color: rgb(41, 127, 255);
   }
 
   &.highlight {

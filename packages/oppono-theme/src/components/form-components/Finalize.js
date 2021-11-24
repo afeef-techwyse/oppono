@@ -58,7 +58,7 @@ export const FinalizeRows = styled.div`
 export const FinalizeRow = styled.div`
 	display: flex;
 	align-items: center;
-	margin: 0 -10px 8px;
+	margin: 0 -10px 6px;
 	justify-content: space-between;
 
 	&:last-child {
@@ -248,7 +248,5 @@ const Finalize = ({ className, children }) => {
 };
 
 export default styled(Finalize)`
-	&.smaller {
-		max-width: ${size(645)} !important;
-	}
+	
 `;

@@ -639,7 +639,7 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
                   src={formData.section_7?.image.url}
                   alt={formData.section_7?.image.alt}
               />
-              <div style={{flexBasis: "60%"}} className="text">
+              <div className="text">
                 <h1 className={"form-headline-1 text-left"}>
                   {formData.section_7?.title}
                 </h1>

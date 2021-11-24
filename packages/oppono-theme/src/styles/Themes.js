@@ -338,13 +338,14 @@ const Themes = () => (
       }
 
 
-      .primary, svg {
+      .primary,
+	  svg {
         &.oppono-btn:hover {
           border-color: #fe412d !important;
           color: #ffffff !important;
         }
 
-        color: #FFF !important;
+        color: #BFB6B4 !important;
       }
 
       .primary-border {
