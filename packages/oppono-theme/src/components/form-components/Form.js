@@ -107,15 +107,15 @@ Form.propTypes = {
 };
 
 export default styled(connect(Form))`
-  &.wide {
+	position: relative;
+  padding: ${size(195)} 25px 0;
+
+	&.wide {
     max-width: 100%;
   }
 
-  padding-top: ${size(195)};
-  position: relative;
-  @media (max-width: 575.98px) {
-    padding: 0 3.3rem;
-    margin-top: 160px;
+	@media (max-width: 575.98px) {
+    padding-top: ${size(200)};
   }
 
   ${StepsProgress} {

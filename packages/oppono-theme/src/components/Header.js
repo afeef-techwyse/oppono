@@ -65,8 +65,8 @@ const SubHeader = styled(
 	}
 
 	@media (max-width: 575.98px) {
-    justify-content: space-between;
-    padding-top: ${size(10)};
+    padding-top: ${size(20)};
+    padding-bottom: ${size(40)};
   }
 
   .back {
@@ -74,7 +74,7 @@ const SubHeader = styled(
     display: inline-block;
 
 		@media (max-width: 575.98px) {
-      margin-right: 0;
+      margin-right: ${size(45)};
     }
 
     a {
@@ -289,6 +289,13 @@ const Header = React.forwardRef(
     };
     return (
       <header ref={forwardRef} className={className + " header"}>
+				{hasProgress ? (
+					<div className="header__inner">
+						<Container>
+							<StepsProgress horizontal />
+						</Container>
+					</div>
+				) : null}
 				<div className="menu-content">
         	<Container>
 						<div className="menu-content__inner">
@@ -341,7 +348,6 @@ const Header = React.forwardRef(
 								</div>
 							</div>
 						</div>
-						{hasProgress ? <StepsProgress horizontal /> : null}
         	</Container>
 				</div>
 
@@ -431,6 +437,13 @@ export default styled(Header)`
   top: 0;
   transition: opacity 500ms;
 
+	.header__inner {
+		position: absolute;
+		left: 0;
+		bottom: 20px;
+		width: 100%;
+	}
+
   .menu-content {
 		border-bottom: 1px solid #B5D2FF33;
 
@@ -438,7 +451,7 @@ export default styled(Header)`
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-			height: ${size(74)};
+			height: ${size(75)};
 		}
 
     .menu-left {
@@ -659,10 +672,10 @@ export default styled(Header)`
 
   ${StepsProgress} {
     display: none;
-    @media (max-width: 575.98px) {
-      margin-bottom: ${size(20)};
-      display: block;
-      .current .step-name {
+
+		@media (max-width: 575.98px) {
+
+			.current .step-name {
         top: ${size(12)};
         left: 50%;
         transform: translateX(-50%);

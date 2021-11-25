@@ -12,9 +12,9 @@ const Container = ({className, children}) => {
 
 export default styled(Container)`
 margin: 0 auto;
-max-width: 1920px;
+max-width: 1360px;
 width: 100%;
-padding: 0 ${size(35)};
+padding: 0 ${size(25)};
 
 @media(min-width: 991.98px){
   padding-left: ${size(55)};

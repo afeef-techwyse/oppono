@@ -256,11 +256,8 @@ const GeneralStyles = (props) => (
         line-height: 1.2;
 
         @media (max-width: 991.98px) {
-          font-size: ${size(30)};
-        }
-
-        @media (max-width: 575.98px) {
-          font-size: ${size(25)};
+          font-size: ${size(32)};
+					line-height: 1.25;
         }
       }
 

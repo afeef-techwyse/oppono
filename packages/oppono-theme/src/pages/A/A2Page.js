@@ -130,7 +130,8 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
               <h1 className={"form-headline-1 text-left"}>
                 {formData.section_1?.title}
               </h1>
-              <h2 className={"form-headline-2 primary"}>
+
+							<h2 className={"form-headline-2 is-darker"}>
                 {formData.section_1?.subtitle}
               </h2>
             </div>
@@ -256,7 +257,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
               <h1 className={"form-headline-1 text-left"}>
                 {formData.section_3?.title}
               </h1>
-              <h1 className={"form-headline-2 primary"}>
+              <h1 className={"form-headline-2 is-darker"}>
                 {formData.section_3?.subtitle}
               </h1>
             </div>
@@ -457,7 +458,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 									</FinalizeRow>
 								}
 
-								{ secondMortgage > 0 &&
+								{ section2Values("looking_for") === 'second' && secondMortgage > 0 &&
 									<FinalizeRow>
 										<FinalizeCol>
 											<P.White>

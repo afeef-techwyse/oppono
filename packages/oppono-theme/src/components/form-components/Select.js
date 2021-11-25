@@ -176,7 +176,7 @@ export default styled(Select)`
       font-size: ${size(30)};
       font-weight: 200;
       @media (max-width: 557.98px) {
-        font-size: 2rem;
+        font-size: ${size(26)};
       }
     }
     &__control {
@@ -216,7 +216,7 @@ export default styled(Select)`
         color: black;
       }
       @media (max-width: 557.98px) {
-        font-size: 2rem;
+        font-size: ${size(26)};
       }
     }
   }

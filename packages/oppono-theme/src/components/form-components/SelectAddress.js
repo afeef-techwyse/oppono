@@ -237,7 +237,7 @@ export default styled(Select)`
       font-weight: 300;
       
 			@media (max-width: 557.98px) {
-        font-size: 2rem;
+        font-size: ${size(26)};
       }
     }
 
@@ -255,9 +255,9 @@ export default styled(Select)`
         display: none;
       }
 
-      @media (max-width: 450px) {
+      @media (max-width: 557.98px) {
         height: 3.3rem;
-        font-size: 2rem;
+        font-size: ${size(26)};
       }
     }
 

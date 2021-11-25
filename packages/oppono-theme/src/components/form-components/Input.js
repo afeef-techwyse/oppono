@@ -262,20 +262,21 @@ export default styled(Input)`
     font-size: ${size(30)};
     font-weight: 300;
     position: relative;
-    @media (max-width: 575.98px) {
-      font-size: ${size(20)};
-      line-height: 1.5;
+
+		@media (max-width: 575.98px) {
+      font-size: ${size(26)};
       height: 3.3rem;
     }
-    &::placeholder {
+    
+		&::placeholder {
       color: rgba(191, 182, 180);
       opacity: 0.4;
       font-size: ${size(30)};
       font-weight: 200;
       text-align: left;
-      @media (max-width: 575.98px) {
-        font-size: ${size(20)};
-        line-height: 1.5;
+      
+			@media (max-width: 575.98px) {
+        font-size: ${size(26)};    
       }
     }
   }

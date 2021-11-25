@@ -470,7 +470,6 @@ export default styled(connect(FormStep))`
     margin-top: ${size(80)};
 
     @media (max-width: 575.98px) {
-      margin-top: 3rem;
       width: 100%;
     }
   }
