@@ -251,7 +251,7 @@ const GeneralStyles = (props) => (
 			}
 
       .form-headline-1 {
-        margin-bottom: ${size(5)};
+        margin-bottom: ${size(12)};
         font-size: ${size(40)};
         line-height: 1.2;
 
@@ -268,8 +268,8 @@ const GeneralStyles = (props) => (
         font-size: ${size(29)};
         font-weight: 400;
         line-height: 1.38;
-        
-        
+
+
 				@media (max-width: 991.98px) {
           font-size: ${size(24)};
         }
@@ -284,7 +284,7 @@ const GeneralStyles = (props) => (
         font-size: ${size(23)};
         font-weight: 400;
         line-height: 1.74;
-			
+
       }
 
       .form-headline-4 {

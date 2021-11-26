@@ -544,6 +544,7 @@ const D2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                           <P.Border key={term_id}>{name}</P.Border>
                       )
                   )}
+									<P.Border>Refinance</P.Border>
                 </FinalizeChild>
               </Bottom>
             </Finalize>

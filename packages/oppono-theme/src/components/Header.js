@@ -58,12 +58,12 @@ const SubHeader = styled(
 	border-top: 1px solid rgba(191, 182, 180, 0.1);
 	padding-bottom: ${size(21)};
 	padding-top: ${size(21)};
-	
+
 	.sub-menu__inner{
 		width: 100%;
 		display: flex;
 	}
-  
+
 	@media (max-width: 575.98px) {
     justify-content: space-between;
     padding-top: ${size(10)};
@@ -72,7 +72,7 @@ const SubHeader = styled(
   .back {
     margin-right: ${size(100)};
     display: inline-block;
-    
+
 		@media (max-width: 575.98px) {
       margin-right: 0;
     }
@@ -185,7 +185,11 @@ const RightPart = connect(({ state, actions }) =>
         className={"links primary"}
         href={"/"}
       >
-        Log Out
+				<Button
+          className={"logout primary-border"}
+          focusable={false}
+          label={"Log Out"}
+        />
       </Link>
     </>
   ) : (
@@ -292,6 +296,43 @@ const Header = React.forwardRef(
 								<LogoLink />
 							</div>
 							<div className="menu-right">
+								<div className="desktop-menu">
+								<Link
+                onClick={() => menuHandler(false)}
+                className={"primary"}
+                href="/"
+              >
+                Home
+              </Link>
+							<Link
+                onClick={() => menuHandler(false)}
+                className={"primary"}
+                href="/what-we-do/"
+              >
+                What We Do
+              </Link>
+              <Link
+                onClick={() => menuHandler(false)}
+                className={"primary"}
+                href={"/products/"}
+              >
+                Products & Rates
+              </Link>
+              <Link
+                onClick={() => menuHandler(false)}
+                className={"primary"}
+                href={"/map/"}
+              >
+                Lending Areas
+              </Link>
+              <Link
+                onClick={() => menuHandler(false)}
+                className={"primary"}
+                href={"/get-in-touch/"}
+              >
+                Get in Touch
+              </Link>
+								</div>
 								<RightPart />
 								<div onClick={() => menuHandler(true)} className={"three-dots"}>
 									<span className={"primary-bg"} />
@@ -305,7 +346,7 @@ const Header = React.forwardRef(
 				</div>
 
 				{hasSubMenu ? <SubHeader /> : null}
-        
+
 				<div className={classnames("floating-menu", { menuOpened })}>
           <Container>
             <svg
@@ -391,6 +432,8 @@ export default styled(Header)`
   transition: opacity 500ms;
 
   .menu-content {
+		border-bottom: 1px solid #B5D2FF33;
+
 		.menu-content__inner {
 			display: flex;
 			align-items: center;
@@ -424,25 +467,27 @@ export default styled(Header)`
       display: flex;
       align-items: center;
 
+			.desktop-menu {
+				a {
+					font-size: ${size(15)};
+					margin-right: ${size(35)};
+				}
+				@media (max-width: 991.98px) {
+					display: none;
+				}
+			}
+
       .links {
         color: #b5d2ff;
         font-size: ${size(16)};
         font-weight: 400;
         font-style: normal;
-        margin-left: ${size(30)};
         text-transform: capitalize;
-      }
-
-      .signup-btn {
-        margin: 0 ${size(22)};
       }
 
       ${Button} {
         margin-top: 0;
         padding: ${size(8)} ${size(22)};
-        @media (max-width: 575.98px) {
-          display: none;
-        }
       }
 
       .three-dots {
@@ -452,6 +497,10 @@ export default styled(Header)`
         margin-left: ${size(40)};
         cursor: pointer;
         width: ${size(20)};
+
+				@media (min-width: 991.98px) {
+					display: none;
+				}
 
         span {
           border-radius: 50%;
@@ -463,6 +512,11 @@ export default styled(Header)`
       }
     }
   }
+
+	button {
+		min-width: 14rem;
+		padding: 0.8rem;
+	}
 
   .floating-menu {
     position: fixed;
@@ -597,6 +651,11 @@ export default styled(Header)`
       }
     }
   }
+
+	.logout {
+		color: #BFB6B4;
+		border-color: #BFB6B4 !important;
+	}
 
   ${StepsProgress} {
     display: none;

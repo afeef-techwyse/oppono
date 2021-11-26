@@ -457,20 +457,24 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
           <div className={"swiper-arrows"} slot={"container-start"}>
             <Container>
               <span className={"prev"} ref={prevBtnRef}>
-                <svg viewBox="0 0 99 10">
-                  <path fill="none" stroke="#b5d2ff" d="M99 5H0" />
-                  <path fill="none" stroke="#b5d2ff" d="M5 0L0 5 L5 10" />
-                </svg>
+							<svg xmlns="http://www.w3.org/2000/svg" width="231.414" height="11.414" viewBox="0 0 231.414 11.414">
+								<g id="Left_Arrow" data-name="Left Arrow" transform="translate(1.414 0.707)" opacity="0.4">
+									<path id="Path_989" data-name="Path 989" d="M1446,284H1216" transform="translate(-1216 -279)" fill="none" stroke="#b5d2ff" stroke-width="2"/>
+									<path id="Path_990" data-name="Path 990" d="M1317,289.5l-5-5,5-5" transform="translate(-1312 -279.5)" fill="none" stroke="#b5d2ff" stroke-width="2"/>
+								</g>
+							</svg>
               </span>
               <span ref={slidesNumbers} className={"slides-numbers"}>
                 {currentSlide + 1}
                 <span> /</span> {slidesObj.length}
               </span>
               <span className={"next"} ref={nextBtnRef}>
-                <svg viewBox="0 0 99 10">
-                  <path fill="none" stroke="#b5d2ff" d="M0 5H99" />
-                  <path fill="none" stroke="#b5d2ff" d="M94 10L99 5L94 0" />
-                </svg>
+							<svg xmlns="http://www.w3.org/2000/svg" width="231.414" height="11.414" viewBox="0 0 231.414 11.414">
+								<g id="Right_Arrow" data-name="Right Arrow" transform="translate(-1110.287 -278.793)">
+									<path id="Path_989" data-name="Path 989" d="M1216,284h230" transform="translate(-105.713 0.5)" fill="none" stroke="#b5d2ff" stroke-width="2"/>
+									<path id="Path_990" data-name="Path 990" d="M1312,289.5l5-5-5-5" transform="translate(23.287)" fill="none" stroke="#b5d2ff" stroke-width="2"/>
+								</g>
+							</svg>
               </span>
             </Container>
           </div>
@@ -634,7 +638,7 @@ export default styled(connect(HomeSlider))`
       cursor: pointer;
       transition: margin 0.4s ease, width 0.4s ease, opacity 0.4s ease;
       overflow: hidden;
-      width: ${size(99)};
+      width: ${size(230)};
       position: relative;
       height: ${size(30)};
       display: flex;
@@ -642,14 +646,14 @@ export default styled(connect(HomeSlider))`
 
       svg {
         position: absolute;
-        width: ${size(99)};
-        height: ${size(10)};
+        width: ${size(230)};
+        height: auto;
       }
 
       &.swiper-button-disabled {
         cursor: not-allowed;
         opacity: 0.4;
-        width: ${size(50)};
+        width: ${size(20)};
       }
     }
 

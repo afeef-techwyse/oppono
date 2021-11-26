@@ -4,15 +4,15 @@ import { size } from "../../functions/size";
 
 export const P = {};
 P.D = styled.p`
-  color: #bfb6b4;
-  font-size: ${size(14)};
-  font-weight: 400;
-  line-height: ${size(24)};
+  color: #bfb6b4 !important;
+  font-size: ${size(14)} !important;
+  font-weight: 400 !important;
+  line-height: ${size(24)} !important;
 
 	strong {
 		font-weight: 500;
 	}
-  
+
 	@media (max-width: 575.98px) {
     font-size: ${size(16)};
   }
@@ -48,7 +48,7 @@ P.Dark = styled(P.D)`
   opacity: 0.5;
 `;
 P.White = styled(P.D)`
-	color: #fff;
+	color: #fff !important;
 `;
 P.Border = styled(P.D)`
   padding-bottom: ${size(20)};
@@ -108,11 +108,11 @@ export const Wysiwyg = styled.div`
 	font-size: ${size(18)};
 	line-height: ${size(24)};
 	font-weight: 500;
-	
+
 	@media (max-width: 575.98px) {
 		font-size: ${size(16)};
 	}
-  
+
 	ul {
     margin-left: ${size(46)};
   }

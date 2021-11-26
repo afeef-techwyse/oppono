@@ -47,6 +47,7 @@ import useFlowAppraisers from "../../hooks/useFlowAppraisers";
 import {monthlyPayments} from "../../functions/monthlyPayment";
 import AppraiserInput from "../../components/AppraiserInput";
 import {numberWithCommas} from "../../functions/numberWithCommas";
+import {fixCharacters} from "../../functions/fixCharacters";
 import Link from "../../components/reusable/Link";
 import FormBlurb from "../../components/form-components/FormBlurb";
 
@@ -76,9 +77,10 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
   const [[appraiser], postalCodeOnChange] = useFlowAppraisers();
 
 	const [purchasePrice, setPurchasePrice] = React.useState(null)
+	const [setResidentialStatus] = React.useState(null)
 	const [downPayment, setDownPayment] = React.useState(null)
 	const [firstMortgageAmount, setfirstMortgageAmount] = React.useState(null)
-	
+
 	const calcSecondMorgage = () => +purchasePrice - +downPayment - +firstMortgageAmount || 0;
 
 	React.useEffect(() => {
@@ -86,7 +88,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 	}, [purchasePrice, downPayment, firstMortgageAmount])
 
   const mortgage = +section2Values("purchase_price") + +section2Values("mortgage_value_1") - +section2Values("down_payment") || 0;
-  
+
   const refNumber = React.useRef("");
   state.theme.stepResponse.data?.["reference-number"] &&
   (refNumber.current = state.theme.stepResponse.data?.["reference-number"]);
@@ -223,13 +225,13 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 {...formData.section_2?.mortgage_value_1_input}
             />}
 
-						
-						{(show1stMortgageInput && secondMortgage > 0) && 
+
+						{(show1stMortgageInput && secondMortgage > 0) &&
 							<FormBlurb>
 								So you’re looking for a second mortgage of <strong>${numberWithCommas(secondMortgage)}</strong>.
-								
+
 								<br />
-								
+
 								Ready to continue?
 							</FormBlurb>
 						}
@@ -371,11 +373,11 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 
 							<P.D>
 								You are applying for a {" "}
-								
+
 								<Span.isLightgreen>
 									<strong>{section2Values("looking_for")} mortgage purchase</strong>
 								</Span.isLightgreen	> on{" "}
-								
+
 								{section1Values("property_details_1")} home which is located at
 							</P.D>
 
@@ -383,7 +385,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 								<strong>{section1Values("address")}, {section1Values("city")},{" "} {section1Values("postal_code")}</strong>
 							</P.D>
             </div>
-						
+
 						<Finalize className={"is-smaller"}>
 							<FinalizeRows>
 								<FinalizeRow className={"larger border"}>
@@ -409,10 +411,10 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 											);
 										})}
 									</FinalizeCol>
-								</FinalizeRow>				
-							</FinalizeRows>				
-							
-							<FinalizeRows>				
+								</FinalizeRow>
+							</FinalizeRows>
+
+							<FinalizeRows>
 								<FinalizeRow className={"larger"}>
 									<FinalizeCol>
 										<P.Large>
@@ -421,7 +423,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 											</Span.isLightgreen>
 										</P.Large>
 									</FinalizeCol>
-								</FinalizeRow>								
+								</FinalizeRow>
 
 								<FinalizeRow>
 									<FinalizeCol>
@@ -439,7 +441,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 									</FinalizeCol>
 								</FinalizeRow>
 
-								{ +section2Values("mortgage_value_1") > 0 && 
+								{ +section2Values("mortgage_value_1") > 0 &&
 									<FinalizeRow>
 										<FinalizeCol>
 											<P.White>
@@ -452,10 +454,10 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 												<strong>${numberWithCommas(+section2Values("mortgage_value_1"))}</strong>
 											</P.White>
 										</FinalizeCol>
-									</FinalizeRow>								
+									</FinalizeRow>
 								}
 
-								{ secondMortgage > 0 && 
+								{ secondMortgage > 0 &&
 									<FinalizeRow>
 										<FinalizeCol>
 											<P.White>
@@ -470,7 +472,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 												</strong>
 											</P.White>
 										</FinalizeCol>
-									</FinalizeRow>								
+									</FinalizeRow>
 								}
 
 								<FinalizeRow>
@@ -485,8 +487,8 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 											<strong>${numberWithCommas(+section2Values("down_payment"))}</strong>
 										</P.White>
 									</FinalizeCol>
-								</FinalizeRow>								
-								
+								</FinalizeRow>
+
 								<FinalizeRow>
 									<FinalizeCol>
 										<P.White>
@@ -499,17 +501,17 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 											<strong>
 												{
 													(
-														mortgage / 
+														mortgage /
 														+section2Values("purchase_price") * 100
 													).toFixed?.(1)
 												}%
 											</strong>
 										</P.White>
 									</FinalizeCol>
-								</FinalizeRow>								
+								</FinalizeRow>
 							</FinalizeRows>
             </Finalize>
-            
+
 						<div className="btn-group">
               <Button
                   className={"bordered reset-form"}
@@ -533,11 +535,11 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                         ]?.products.length
                 )}
               </h1>
-              
+
 							<h2 className={"form-headline-3 is-darker"}>
                 {formData.section_5?.subtitle}
               </h2>
-              
+
 							<h3 className={"form-headline-2 text-left"}>
                 {formData.section_5?.choose_one}
               </h3>
@@ -559,7 +561,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                           <P.Dark>
 														<strong>*Variable Rate</strong>
 													</P.Dark>
-                          
+
 													<P.Num>{product.fields?.rate}%</P.Num>
                           <Button
                               onClick={() => {
@@ -586,7 +588,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                           <P.Dark>
 														<strong>*Monthly mortgage payment</strong>
 													</P.Dark>
-                          
+
 													<P.Cost>
                             $
                             {numberWithCommas(
@@ -595,7 +597,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                           </P.Cost>
                         </FinalizeChild>
                       </Top>
-                      
+
 											<Bottom>
                         {media === "mobile" ? null : <FinalizeChild className={"size-sm"} order={1}/>}
                         {media !== "mobile" ? (
@@ -664,6 +666,8 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                   <P.Border key={term_id}>{name}</P.Border>
                               )
                           )}
+													<P.Border>Purchase</P.Border>
+													<P.Border> { fixCharacters(section1Values("property_details_2")) }</P.Border>
                         </FinalizeChild>
                       </Bottom>
                     </Finalize>
@@ -700,12 +704,12 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   <div className="row">
                     <div className="col-left">
 											<p className="form-headline-2 text-left">Your BDM is</p>
-											
+
 											<div className="appraiser">
 												<P.D>
 														<Span.isGreen>BDM contact</Span.isGreen>
 												</P.D>
-												
+
 												<p className="appraiser__name form-headline-3" dangerouslySetInnerHTML={{
 													__html: appraiser?.fields?.bdm.name,
 												}} />
@@ -713,13 +717,13 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 												<P.White>
 													<a href={`tel:${appraiser?.fields?.bdm.phone}`}>{appraiser?.fields?.bdm.phone}</a>
 												</P.White>
-												
+
 												<P.White>
 													<a href={`mailto:${appraiser?.fields?.bdm.email}`}>{appraiser?.fields?.bdm.email}</a>
 												</P.White>
 											</div>
                     </div>
-                    
+
 										<div className="col-right">
 											<P.Large>Select an appraiser</P.Large>
 
@@ -740,13 +744,13 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 															}
 													)}
 												</RadioGroup>
-												
+
 												<P.Dark>
 													<strong>
 														*Disclaimer
-														
+
 														<br/>
-														
+
 														If the city you are looking for is not
 														listed please contact your BDM directly or email us at
 														info@oppono.com

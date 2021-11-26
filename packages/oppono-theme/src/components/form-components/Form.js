@@ -120,10 +120,13 @@ export default styled(connect(Form))`
 
   ${StepsProgress} {
     position: fixed;
-    height: 26.1%;
-    top: 19.9%;
+    top: 19.5rem;
     left: ${size(55)};
     z-index: 100;
+
+		& > div {
+			margin: 1.7rem 0 !important;
+		}
 
     @media (max-width: 575.98px) {
       display: none;

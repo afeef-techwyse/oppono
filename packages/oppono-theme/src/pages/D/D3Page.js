@@ -543,6 +543,7 @@ const D3Page = ({state, setCurrentTheme, actions, className, formData}) => {
                           <P.Border key={term_id}>{name}</P.Border>
                       )
                   )}
+									<P.Border>Purchase</P.Border>
                 </FinalizeChild>
               </Bottom>
             </Finalize>

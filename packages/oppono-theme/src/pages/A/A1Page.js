@@ -41,6 +41,7 @@ import ProductsMobileOption from "../../components/form-components/ProductsMobil
 import FileInput from "../../components/form-components/FileInput";
 import Appraiser from "../../components/form-components/Appraiser";
 import {numberWithCommas} from "../../functions/numberWithCommas";
+import {fixCharacters} from "../../functions/fixCharacters";
 import upload from "../../assets/images/upload.png";
 import TextArea from "../../components/form-components/TextArea";
 import AppraiserInput from "../../components/AppraiserInput";
@@ -201,23 +202,10 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 
             <FormConditionalInput
                 name={"add_mortgage_2"}
-                showOn={"0"}
+                showOn={"1"}
                 checked={"0"}
                 {...formData.section_2?.add_mortgage_yes_no}
             >
-              <FormConditionalInput
-                  name={"increase_mortgage_1"}
-                  showOn={"1"}
-                  checked={"0"}
-                  {...formData.section_2?.increase_mortgage_yes_no}
-              >
-                <Input
-                    type={"number"}
-                    isCurrency
-                    name={"fm_amount"}
-                    {...formData.section_2?.increase_mortgage_amount_input}
-                />
-              </FormConditionalInput>
               <Input
                   type={"number"}
                   isCurrency
@@ -358,13 +346,13 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 								},
 							]}
 						/>
-						
-						<Finalize>	
+
+						<Finalize>
 							<FinalizeHeading>
 								<h1 className={"form-headline-1 text-left"}>
 									{formData.section_4?.title}
 								</h1>
-								
+
 								<p>
 									You are applying for a <span>{section2Values("looking_for")} mortgage purchase</span> on{" "}
 									{section1Values("property_details_1")} home which is located at
@@ -397,7 +385,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 													</P.Large>
                         );
                       })}
-									</FinalizeCol>								
+									</FinalizeCol>
 								</FinalizeRow>
 							</FinalizeRows>
 
@@ -416,7 +404,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 										<FinalizeCol>
 											<P.White>Property value</P.White>
 										</FinalizeCol>
-										
+
 										<FinalizeCol>
 											<P.White>
 												<strong>
@@ -430,7 +418,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 									<FinalizeCol>
 										<P.White>Home equity</P.White>
 									</FinalizeCol>
-									
+
 									<FinalizeCol>
 										<P.White>
 											<strong>
@@ -444,7 +432,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 									<FinalizeCol>
 										<P.White>Mortgage request</P.White>
 									</FinalizeCol>
-									
+
 									<FinalizeCol>
 										<P.White>
 											<strong>
@@ -454,12 +442,12 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 									</FinalizeCol>
 								</FinalizeRow>
 
-								{ section2Values("mortgage_value_2") && 
+								{ section2Values("mortgage_value_2") &&
 									<FinalizeRow>
 										<FinalizeCol>
 											<P.White>2nd mortgage</P.White>
 										</FinalizeCol>
-										
+
 										<FinalizeCol>
 											<P.White>
 												<strong>
@@ -469,12 +457,12 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 										</FinalizeCol>
 									</FinalizeRow>
 								}
-								
+
 								<FinalizeRow>
 									<FinalizeCol>
 										<P.White>LTV</P.White>
 									</FinalizeCol>
-									
+
 									<FinalizeCol>
 										<P.White>
 											<strong>
@@ -485,7 +473,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 								</FinalizeRow>
 							</FinalizeRows>
             </Finalize>
-            
+
 						<div className="btn-group">
               <Button
                   className={"bordered reset-form"}
@@ -610,9 +598,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                 </thead>
                                 <tbody>
                                 <tr className={"head"}>
-                                  <td scope={"row"} className={"dark"}>
-                                    LTV
-                                  </td>
+																	<P.White as={"td"}>LTV</P.White>
                                   {products.map(({ID, fields: {maximum_ltv}}) => (
                                       <td key={ID} className={"details"} data-label="LTV">
                                         {maximum_ltv}%
@@ -620,9 +606,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                   ))}
                                 </tr>
                                 <tr className={"head last-head"}>
-                                  <td scope={"row"} className={"dark"}>
-                                    Credit score
-                                  </td>
+																<P.White as={"td"}>Credit Score</P.White>
                                   {products.map(({ID, fields: {beacon_score}}) => (
                                       <td
                                           key={ID}
@@ -634,9 +618,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                   ))}
                                 </tr>
                                 <tr className={"head"}>
-                                  <td scope={"row"} className={"dark"}>
-                                    Fixed rate
-                                  </td>
+																<P.White as={"td"}>Fixed Rate</P.White>
                                   {products.map(({ID, fields: {rate}}) => (
                                       <td
                                           key={ID}
@@ -648,9 +630,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                   ))}
                                 </tr>
                                 <tr className={"head"}>
-                                  <td scope={"row"} className={"dark"}>
-                                    Lender fee
-                                  </td>
+																<P.White as={"td"}>Lender Fee</P.White>
                                   {products.map(({ID, fields: {fee}}) => (
                                       <td
                                           key={ID}
@@ -679,6 +659,20 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                         </tr>
                                     )
                                 )}
+																<tr>
+																	<td>Refinance</td>
+																	{products.map(
+																		() => <td><CheckMark/></td>
+																		)
+																	}
+																</tr>
+																<tr>
+																	<td>{ fixCharacters(section1Values("property_details_2")) }</td>
+																	{products.map(
+																		() => <td><CheckMark/></td>
+																		)
+																	}
+																</tr>
                                 </tbody>
                               </ProductsTable>
 
@@ -809,7 +803,9 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 )
             ) : null}
 
-
+            <div className="btn-group">
+              <Button className={"bordered no-top-margin prev-step"} label={"Back"}/>
+            </div>
           </FormStep>
           <FormStep
               apiStepNumber={5}
@@ -974,5 +970,7 @@ export default styled(connect(A1Page))`
   .underline {
     text-decoration: underline;
   }
-
+	.no-top-margin {
+		margin-top: -2rem;
+	}
 `;

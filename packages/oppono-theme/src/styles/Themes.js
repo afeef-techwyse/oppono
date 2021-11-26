@@ -189,6 +189,12 @@ const Themes = () => (
       }
 
 
+
+			a .logout {
+				color: #B5D2FF !important;
+				border-color: #B5D2FF !important;
+			}
+
       .primary-select {
         .label-text {
           color: #b5d2ff !important;

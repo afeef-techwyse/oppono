@@ -87,7 +87,7 @@ const StepsProgress = styled(
       text-align: left;
       text-transform: capitalize;
       white-space: nowrap;
-			
+
 			@media screen and (max-width: 998px) {
 				display: none;
 			}
@@ -102,6 +102,9 @@ const StepsProgress = styled(
 			height: 14px;
 			text-align: center;
 			opacity: 0;
+			margin: auto;
+			top: 0;
+			bottom: 0;
 
 			svg {
 				width: 7px;

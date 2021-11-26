@@ -974,6 +974,7 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
                           <P.Border key={term_id}>{name}</P.Border>
                       )
                   )}
+									<P.Border>Purchase</P.Border>
                 </FinalizeChild>
               </Bottom>
             </Finalize>

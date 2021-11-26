@@ -697,7 +697,7 @@ export default styled(connect(ProductsSlider))`
     }
 
     .prev {
-      left: 0;
+      left: 1rem;
       @media (max-width: 991.98px) {
         left: ${size(32)};
       }
@@ -708,7 +708,7 @@ export default styled(connect(ProductsSlider))`
     }
 
     .next {
-      right: 0;
+      right: 1rem;
       @media (max-width: 991.98px) {
         right: ${size(32)};
       }

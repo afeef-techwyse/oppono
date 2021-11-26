@@ -43,6 +43,7 @@ import useStoredFormValue from "../../hooks/useStoredFormValue";
 import useFlowAppraisers from "../../hooks/useFlowAppraisers";
 import AppraiserInput from "../../components/AppraiserInput";
 import {numberWithCommas} from "../../functions/numberWithCommas";
+import {fixCharacters} from "../../functions/fixCharacters";
 import Link from "../../components/reusable/Link";
 
 const pageName = "a-3";
@@ -341,11 +342,11 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
               <h1 className={"form-headline-1 text-left"}>
                 {formData.section_5?.title}
               </h1>
-              
+
 							<h2 className={"form-headline-2"}>
                 {formData.section_5?.subtitle}
               </h2>
-              
+
 							<h2 className={"form-headline-3"}>
                 You are requesting a <Span.isLightgreen>home equity line of credit</Span.isLightgreen> against your {section1Values("property_details_1")} home, which is located at
               </h2>
@@ -354,7 +355,7 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
 								{section1Values("address")}, {section1Values("city")}, {section1Values("postal_code")}
 							</h2>
             </div>
-            
+
 						<input
                 type={"hidden"}
                 name={`product_name`}
@@ -396,11 +397,11 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
             <Finalize>
 							<FinalizePercentage>
                   <P.Num>{+firstProduct.fields?.rate + 0.25}%</P.Num>
-                  
+
 									<P.Small>*Fixed rate</P.Small>
-                  
+
 									<P.Small>*Payent interest based on balance</P.Small>
-									
+
 									{/* <p className="primary form-headline-3 text-left heloc-var"> {String(firstProduct.title).split(" ")[0]} HELOC</p> */}
 							</FinalizePercentage>
 
@@ -427,7 +428,7 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
 													</P.Large>
                         );
                       })}
-									</FinalizeCol>								
+									</FinalizeCol>
 								</FinalizeRow>
 							</FinalizeRows>
 
@@ -439,9 +440,9 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
 												<strong>Your Info</strong>
 											</Span.isLightgreen>
 										</P.D>
-									</FinalizeCol>								
+									</FinalizeCol>
 								</FinalizeRow>
-							
+
 								<FinalizeRow>
 									<FinalizeCol>
 										<P.White>HELOC request</P.White>
@@ -466,7 +467,7 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
 											Property value
 										</P.White>
 									</FinalizeCol>
-									
+
 									<FinalizeCol>
 										<P.White>
 											<strong>${numberWithCommas(+section2Values("home_value"))}</strong>
@@ -480,7 +481,7 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
 											LTV
 										</P.White>
 									</FinalizeCol>
-									
+
 									<FinalizeCol>
 										<P.White>
 											<strong>
@@ -495,8 +496,8 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
 										</P.White>
 									</FinalizeCol>
 								</FinalizeRow>
-							</FinalizeRows>	
-							
+							</FinalizeRows>
+
 							<FinalizeRows>
 								<FinalizeRow className={"border"}>
 									<FinalizeCol>
@@ -514,7 +515,7 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
 											<strong>Lender fee</strong>
 										</P.D>
 									</FinalizeCol>
-									
+
 									<FinalizeCol>
 										<P.D >
 											<strong>{firstProduct.fields?.fee}%</strong>
@@ -530,7 +531,9 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
 									</FinalizeCol>
 
 									<FinalizeCol>
-										<strong>{beaconScore(firstProduct.fields?.beacon_score)}</strong>
+										<P.D>
+											<strong>{beaconScore(firstProduct.fields?.beacon_score)}</strong>
+										</P.D>
 									</FinalizeCol>
 								</FinalizeRow>
 
@@ -543,6 +546,20 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
 											</FinalizeRow>
 									)
 								)}
+								<FinalizeRow>
+									<FinalizeCol>
+										<P.D >
+											Purchase
+										</P.D>
+									</FinalizeCol>
+								</FinalizeRow>
+								<FinalizeRow>
+									<FinalizeCol>
+										<P.D >
+										{ fixCharacters(section1Values("property_details_2")) }
+										</P.D>
+									</FinalizeCol>
+								</FinalizeRow>
 							</FinalizeRows>
             </Finalize>
 
