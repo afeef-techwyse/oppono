@@ -28,7 +28,7 @@ export default styled(TextArea)`
       font-size: ${size(16)};
       font-weight: 500;
       text-align: left;
-      margin-bottom: ${size(20)};
+      margin-bottom: ${size(10)};
       .dark {
         color: rgba(191, 182, 180, 0.5);
       }
@@ -37,7 +37,7 @@ export default styled(TextArea)`
   textarea {
     outline: none;
     width: 100%;
-    height: ${size(163)};
+    height: ${size(113)};
     border: 1px solid rgba(191, 182, 180, 0.5);
     background: transparent;
     padding: ${size(20)};

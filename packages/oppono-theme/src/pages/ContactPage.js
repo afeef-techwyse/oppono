@@ -32,6 +32,8 @@ export default styled(connect(ContactPage))`
     height: 100%;
     overflow: hidden;
     padding-bottom: ${size(150)};
+    display: flex;
+    align-items: center;
   }
 
   .contact-title {
@@ -53,8 +55,8 @@ export default styled(connect(ContactPage))`
   .contact-sub-title {
     color: rgba(181, 210, 255, 0.4);
     font-size: ${size(29)};
-    line-height: 1.4;
-    margin-top: ${size(6)};
+    line-height: 1.2;
+    margin-top: ${size(10)};
     font-weight: 300;
     @media (max-width: 991.98px) {
       font-size: ${size(24)};

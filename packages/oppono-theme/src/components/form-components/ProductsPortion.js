@@ -11,11 +11,11 @@ const ProductsPortion = ({ className }) => {
     <div className={className}>
       <p className={"primary"}>
         We make lending a breeze.
-        <img src={img1} alt="FlyImg" />
+        {/* <img src={img1} alt="FlyImg" /> */}
       </p>
       <p className={"primary opacity-5"}>
         Want to join us?
-        <img src={img2} alt="FlyImg" />
+        {/* <img src={img2} alt="FlyImg" /> */}
       </p>
       <Link href={"/create-account"}>
         <Button label={"Sign up!"} />
@@ -34,7 +34,7 @@ export default styled(ProductsPortion)`
   align-items: center;
   justify-content: center;
   p {
-    font-size: ${size(35)};
+    font-size: ${size(60)};
     font-weight: 300;
     font-style: normal;
     letter-spacing: normal;
@@ -56,7 +56,7 @@ export default styled(ProductsPortion)`
       line-height: ${size(48)};
     }
     @media (max-width: 575.98px) {
-      font-size: ${size(30)};
+      font-size: ${size(40)};
       line-height: 1.2;
     }
   }

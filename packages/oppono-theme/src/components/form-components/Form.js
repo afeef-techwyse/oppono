@@ -108,7 +108,7 @@ Form.propTypes = {
 
 export default styled(connect(Form))`
 	position: relative;
-  padding: ${size(195)} 25px 0;
+  padding: ${size(145)} 25px 0;
 
 	&.wide {
     max-width: 100%;

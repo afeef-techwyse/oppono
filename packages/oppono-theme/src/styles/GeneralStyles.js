@@ -494,6 +494,39 @@ const GeneralStyles = (props) => (
         cursor: auto !important;
       }
 
+      .w-100 {
+        width: 100% !important;
+      }
+
+      .mt-0 {
+        margin-top: 0 !important;
+      }
+
+      .mt-1 {
+        margin-top: 1rem !important;
+      }
+
+      .split-inputs {
+        display: flex;
+        justify-content: space-between;
+
+        @media (max-width: 998px) {
+          flex-direction: column;
+        }
+      }
+      
+      .w-45 {
+        width: 46% !important;
+
+        @media (max-width: 998px) {
+          width: 100% !important;
+        }
+      }
+
+      .cf {
+        clear: both !important;
+      }
+
       .m-mt-24 {
         margin-top: ${size(24)} !important;
       }

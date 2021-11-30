@@ -57,7 +57,9 @@ const Mail = ({ className, state, actions }) => {
 								<Link href={"tel:" + pageData.section_1?.oppono_phone}>
 									<div className={"item-wrapper"}>
 										<div className={"icon"}>
-
+                      <svg xmlns="http://www.w3.org/2000/svg" width="25.298" height="25.298" viewBox="0 0 25.298 25.298">
+                        <path id="Icon_awesome-phone-alt" data-name="Icon awesome-phone-alt" d="M24.576,17.877l-5.534-2.372a1.186,1.186,0,0,0-1.383.341L15.208,18.84a18.314,18.314,0,0,1-8.755-8.755L9.447,7.634a1.183,1.183,0,0,0,.341-1.383L7.416.717A1.194,1.194,0,0,0,6.058.03L.919,1.216A1.186,1.186,0,0,0,0,2.372,22.924,22.924,0,0,0,22.926,25.3a1.186,1.186,0,0,0,1.156-.919l1.186-5.139A1.2,1.2,0,0,0,24.576,17.877Z" transform="translate(0 0)" fill="#b5d2ff"/>
+                      </svg>
 										</div>
 										<div className="text">
 											{pageData.section_1?.oppono_phone}
@@ -67,7 +69,9 @@ const Mail = ({ className, state, actions }) => {
 								<Link href={"mailto:" + pageData.section_1?.oppono_email}>
 									<div className={"item-wrapper"}>
 										<div className={"icon"}>
-
+                      <svg xmlns="http://www.w3.org/2000/svg" width="31.78" height="25.424" viewBox="0 0 31.78 25.424">
+                        <path id="Icon_metro-mail" data-name="Icon metro-mail" d="M33.744,7.712H8.319A3.164,3.164,0,0,0,5.157,10.89L5.141,29.958a3.177,3.177,0,0,0,3.178,3.178H33.744a3.177,3.177,0,0,0,3.178-3.178V10.89a3.177,3.177,0,0,0-3.178-3.178Zm0,6.356L21.032,22.013,8.319,14.068V10.89l12.712,7.945L33.744,10.89Z" transform="translate(-5.141 -7.712)" fill="#b5d2ff"/>
+                      </svg>
 										</div>
 										<div className="text">
 											{pageData.section_1?.oppono_email}
@@ -77,7 +81,9 @@ const Mail = ({ className, state, actions }) => {
 								<Link href="#">
 									<div className={"item-wrapper"}>
 										<div className={"icon"}>
-
+                      <svg xmlns="http://www.w3.org/2000/svg" width="25.435" height="25.435" viewBox="0 0 25.435 25.435">
+                        <path id="Icon_awesome-exclamation-circle" data-name="Icon awesome-exclamation-circle" d="M26,13.28A12.718,12.718,0,1,1,13.28.563,12.717,12.717,0,0,1,26,13.28ZM13.28,15.844A2.359,2.359,0,1,0,15.639,18.2,2.359,2.359,0,0,0,13.28,15.844Zm-2.24-8.479.38,6.974a.615.615,0,0,0,.614.582h2.489a.615.615,0,0,0,.614-.582l.38-6.974a.615.615,0,0,0-.614-.649h-3.25A.615.615,0,0,0,11.041,7.365Z" transform="translate(-0.563 -0.563)" fill="#b5d2ff"/>
+                      </svg>
 										</div>
 										<div className="text">
 											Ask a quetion
@@ -92,14 +98,13 @@ const Mail = ({ className, state, actions }) => {
 										}>
 									<div className={"item-wrapper"}>
 										<div className={"icon"}>
-
+                      <svg xmlns="http://www.w3.org/2000/svg" width="19.068" height="25.424" viewBox="0 0 19.068 25.424">
+                        <path id="Icon_awesome-map-marker-alt" data-name="Icon awesome-map-marker-alt" d="M8.554,24.911C1.339,14.452,0,13.378,0,9.534a9.534,9.534,0,0,1,19.068,0c0,3.844-1.339,4.918-8.554,15.377A1.192,1.192,0,0,1,8.554,24.911Zm.98-11.4A3.973,3.973,0,1,0,5.562,9.534,3.973,3.973,0,0,0,9.534,13.507Z" fill="#b5d2ff"/>
+                      </svg>
 										</div>
 										<div className="text">
 											{pageData.section_1?.oppono_address_line_1 ? (
 												<div>{pageData.section_1?.oppono_address_line_1}</div>
-											) : null}
-											{pageData.section_1?.oppono_address_line_2 ? (
-												<p>{pageData.section_1?.oppono_address_line_2}</p>
 											) : null}
 										</div>
 									</div>
@@ -123,45 +128,46 @@ const Mail = ({ className, state, actions }) => {
 						</div>
 						<div className="contact-form">
 							<div className="contact-row">
-									<div className="col-4">
-										<Input
-											name={"name"}
-											className={"primary-input"}
-											type={"text"}
-											{...pageData.section_1?.name_input}
-										/>
-										<Input
-											name={"email"}
-											className={"primary-input"}
-											type={"text"}
-											{...pageData.section_1?.email_input}
-										/>
-										<Input
-											name={"phone"}
-											className={"primary-input"}
-											type={"phone"}
-											isPhoneNumber
-											{...pageData.section_1?.phone_input}
-										/>
-									</div>
-									<div className="col-auto">
-										<Select
-											className={"primary-select"}
-											name={"discuss"}
-											{...pageData.section_1?.discuss_dropdown}
-										/>
-										<TextArea
-											name={"questions"}
-											className={"primary-input"}
-											{...pageData.section_1?.questions_input}
-										/>
-									</div>
-								</div>
-								<Button
-									icon={true}
-									className={"next-step wide"}
-									label={"Send message"}
-								/>
+                    <div className={"w-100"}>
+                      <Input
+                        name={"name"}
+                        className={"primary-input mt-1 w-100"}
+                        type={"text"}
+                        {...pageData.section_1?.name_input}
+                      />
+                      <div className={"split-inputs"}>
+                        <Input
+                          name={"email"}
+                          className={"primary-input w-45"}
+                          type={"text"}
+                          {...pageData.section_1?.email_input}
+                        />
+                        <Input
+                          name={"phone"}
+                          className={"primary-input w-45"}
+                          type={"phone"}
+                          isPhoneNumber
+                          {...pageData.section_1?.phone_input}
+                        />
+                      </div>
+                    <div className="cf"></div>
+                      <Select
+                        className={"primary-select w-100"}
+                        name={"discuss"}
+                        {...pageData.section_1?.discuss_dropdown}
+                      />
+                      <TextArea
+                        name={"questions"}
+                        className={"primary-input w-100"}
+                        {...pageData.section_1?.questions_input}
+                      />
+                    <Button
+                      icon={true}
+                      className={"next-step wide"}
+                      label={"Send message"}
+                    />
+                  </div>
+              </div>
 						</div>
 					</Container>
         </FormStep>
@@ -210,6 +216,10 @@ export default styled(connect(Mail))`
   align-items: stretch;
   margin: 0 0 ${size(100)};
 
+  @media (max-width: 991.98px) {
+    padding: 0;
+  }
+
   // .contact-obj {
   //   max-width: ${size(205)};
   //   display: none;
@@ -220,9 +230,22 @@ export default styled(connect(Mail))`
 	.contact-us-container {
 		max-width: 100% !important;
 		display: flex;
+    flex-direction: column;
+
+    @media (max-width: 998px) {
+      padding: 0;
+    }
 
 		.details {
-			padding-right: 10rem;
+      position: relative;
+			padding-right: 12rem;
+
+      .floating-obj {
+        position: absolute;
+        bottom: 8rem;
+        right: 2rem;
+        z-index: -1;
+      }
 
 			@media (max-width: 991.98px) {
 				padding-right: 0;
@@ -238,6 +261,7 @@ export default styled(connect(Mail))`
 
 
   .contact-row {
+    flex-direction: column;
     display: flex;
     align-items: flex-start;
     @media (max-width: 991.98px) {
@@ -251,24 +275,8 @@ export default styled(connect(Mail))`
       margin-top: 0;
     }
 
-    .col-4 {
-      flex-basis: ${size(460)};
-      width: ${size(460)};
-      margin-right: ${size(100)};
-      flex-shrink: 0;
-      @media (max-width: 991.98px) {
-        width: 100%;
-        flex-basis: 100%;
-        margin-right: 0;
-      }
-    }
-
-    .col-auto {
-      flex: 1 1 100%;
-      @media (max-width: 991.98px) {
-        width: 100%;
-        flex-basis: 100%;
-      }
+    .form-group {
+      margin-top: 3.5rem;
     }
   }
 
@@ -279,6 +287,7 @@ export default styled(connect(Mail))`
     .normal-input {
       font-size: ${size(28)};
       height: ${size(36)};
+      border-color: #B5D2FF;
 
       &::placeholder {
         font-size: ${size(28)};
@@ -295,7 +304,12 @@ export default styled(connect(Mail))`
     }
   }
 
+  .oppono-select {
+    border-color: #B5D2FF;
+  }
+
   textarea {
+    border-color: #B5D2FF;
     font-size: ${size(28)};
     @media (max-width: 575.98px) {
       font-size: 2rem;
@@ -307,7 +321,13 @@ export default styled(connect(Mail))`
   }
 
   ${Button} {
-    margin-top: ${size(78)};
+    margin: 3rem 0 0;
+    background: #fe412d;
+
+    &:hover {
+      background: none;
+    }
+
     @media (max-width: 991.98px) {
       padding: ${size(20)};
     }
@@ -329,14 +349,64 @@ export default styled(connect(Mail))`
 		flex: 48%;
 	}
 
-  .contact-info-wrapper {
-    position: relative;
-    left: ${size(100)};
-		flex: 48%;
+  .details, .contact-form {
+    width: 50%;
+
     @media (max-width: 991.98px) {
-      bottom: 0;
-      left: 0;
-      margin-top: ${size(20)};
+      width: 100%;
+      
+    &.contact-form {
+        margin-top: 5rem;
+      }
+    }
+  }
+
+  .contact-info-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;  
+    text-align: center;
+    justify-content: space-between;
+    margin-top: 3rem;
+
+    a {
+      width: 47%;
+      margin-bottom: 3rem;
+
+      @media (max-width: 991px) {
+        width: 49%;
+        margin-bottom: 1rem;
+      }
+      .item-wrapper {
+        background: #10397C80;
+        min-height: 15rem;
+        padding: 2rem 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #B5D2FF;
+        border-radius: 25px;
+
+        @media (max-width: 991px) {
+          min-height: 12rem;
+          padding: 1rem 0;
+        }
+        
+        .text {
+          color: #B5D2FF;
+          font-size: ${size(16)};
+          max-width: 18rem;
+          font-weight: 500;
+          margin-top: 0.5rem;
+
+          @media (max-width: 991.98px) {
+            max-width: 12rem;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+          }
+        }
+      }
     }
   }
 
@@ -373,6 +443,12 @@ export default styled(connect(Mail))`
         left: 15% !important;
         top: 0 !important;
 				transform: none !important;
+      }
+
+      @media (max-width: 998px) {
+        top: -7rem !important;
+        right: -2rem;
+        display: block !important;
       }
     }
   }

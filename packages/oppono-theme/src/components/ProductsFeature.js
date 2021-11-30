@@ -27,7 +27,7 @@ const Title = styled.div`
   font-weight: 300;
   line-height: ${size(48)};
   text-align: left;
-  padding: 0 ${size(55)};
+  padding-right: ${size(10)};
   @media (max-width: 991.98px) {
     font-size: ${size(28)};
     line-height: ${size(34)};
@@ -43,9 +43,9 @@ const Description = styled.div`
   color: rgba(210, 245, 233, 0.6);
   font-size: ${size(18)};
   font-weight: 300;
+  padding-right: ${size(10)};
   line-height: ${size(25)};
   text-align: left;
-  padding: 0 ${size(55)};
   margin-top: ${size(23)};
   @media (max-width: 991.98px) {
     font-size: ${size(16)};
