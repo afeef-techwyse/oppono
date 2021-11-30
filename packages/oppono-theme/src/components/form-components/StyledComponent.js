@@ -22,6 +22,13 @@ P.Num = styled.p`
   font-size: ${size(56)};
   font-weight: 300;
   line-height: ${size(64)};
+	margin-bottom: ${size(10)};
+
+	&.smaller {
+		font-size: ${size(30)};
+		margin-top: 2.5rem;
+		margin-bottom: 0;
+	}
 `;
 P.Cost = styled.p`
   color: #bfb6b4;

@@ -108,6 +108,10 @@ const GeneralStyles = (props) => (
         line-height: 1;
       }
 
+			.white {
+				color: white !important;
+			}
+
       article,
       aside,
       details,

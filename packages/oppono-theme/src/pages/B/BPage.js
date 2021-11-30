@@ -28,6 +28,11 @@ import Finalize, {
   Bottom,
   FinalizeChild,
   FinalizeTable,
+	FinalizeHeading,
+	FinalizeCol,
+	FinalizePercentage,
+	FinalizeRows,
+	FinalizeRow,
   Top,
 } from "../../components/form-components/Finalize";
 import useMedia from "../../hooks/useMedia";
@@ -40,6 +45,7 @@ import useStoredFormValue from "../../hooks/useStoredFormValue";
 import useFlowAppraisers from "../../hooks/useFlowAppraisers";
 import AppraiserInput from "../../components/AppraiserInput";
 import {numberWithCommas} from "../../functions/numberWithCommas";
+import {fixCharacters} from "../../functions/fixCharacters";
 import Link from "../../components/reusable/Link";
 
 const pageName = "b";
@@ -219,7 +225,7 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
           stepName={formData.section_4?.section_name}
           onNext={() => state.theme.stepResponse.data?.data?.beloc?.products?.length || actions.router.set('/not-qualified')}
       >
-        <input type={'hidden'} name={`ltv`} value={((mortgage) / +section3Values('purchase_price') * 100).toFixed?.(1)}/>
+        <input type={'hidden'} name={`ltv`} value={((mortgage) / +section3Values('purchase_price') * 100).toFixed?.(2)}/>
         <div className="form-text-wrapper">
           <h1 className={"form-headline-1 text-left"}>
             {formData.section_4?.title}
@@ -321,19 +327,22 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
                 100
             )}
         />
+        <Finalize className={"is-smaller"}>
+					<FinalizeHeading>
+						<h1 className={"form-headline-1 text-left"}>
+							{formData.section_5?.title}
+						</h1>
 
-        <div className="form-text-wrapper wide-text">
-          <h1 className={"form-headline-1 text-left"}>
-            {formData.section_5?.title}
-          </h1>
-          <h2 className={"form-headline-2 primary"}>
-            {formData.section_5?.subtitle}
-          </h2>
-          <h2 className={"form-headline-3 primary"}>
-            You are requesting a secured business equity line of credit
-            against your {section2Values("property_details_1")?.toLowerCase()} home which is located at{" "}
-            <br/>{" "}
-            {section2Values("business_address_same_as_property") === "1"
+						<h2 className={"form-headline-2 text-left"}>
+						{formData.section_5?.subtitle}
+						</h2>
+
+						<p>
+						You are requesting a <span>secured business equity line of credit</span> against your {section2Values("property_details_1")} home, which is located at
+						</p>
+
+						<p className="bolder">
+						{section2Values("business_address_same_as_property") === "1"
                 ? section1Values("business_address")
                 : section2Values("address")}
             ,{" "}
@@ -344,145 +353,165 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
             {section2Values("business_address_same_as_property") === "1"
                 ? section1Values("business_postal_code")
                 : section2Values("postal_code")}
-          </h2>
-        </div>
-        <Finalize>
-          <Top>
-            {media !== "mobile" ? (
-                <FinalizeChild>
-                  <P.D>Your Info</P.D>
-                  {[
-                    ...Array(+section4Values("applicants_number") || 0).keys(),
-                  ].map((index, personIndex) => {
-                    const applicantFName = section4Values(
-                        `applicant_fname_${index + 1}`
-                    );
-                    const applicantLName = section4Values(
-                        `applicant_lname_${index + 1}`
-                    );
-                    const applicantScore = section4Values(
-                        `applicant_score_${index + 1}`
-                    );
-                    return (
-                        <P.D key={`person-desktop-${personIndex}`}>
-                          {applicantFName} {applicantLName} {applicantScore}
-                        </P.D>
-                    );
-                  })}
-                </FinalizeChild>
-            ) : (
-                <FinalizeChild className={"full m-mt-24"} order={3}>
-                  <FinalizeTable>
-                    <tbody>
-                    {[
-                      ...Array(
-                          +section4Values("applicants_number") || 0
-                      ).keys(),
-                    ].map((index, personIndex) => {
-                      const applicantFName = section4Values(
-                          `applicant_fname_${index + 1}`
-                      );
-                      const applicantLName = section4Values(
-                          `applicant_lname_${index + 1}`
-                      );
-                      const applicantScore = section4Values(
-                          `applicant_score_${index + 1}`
-                      );
-                      return (
-                          <tr key={`person-mobile-${personIndex}`}>
-                            <P.Dark as={"td"}>
-                              {applicantFName} {applicantLName}
-                            </P.Dark>
-                            <P.D as={"td"}> {applicantScore}</P.D>
-                          </tr>
-                      );
-                    })}
-                    </tbody>
-                  </FinalizeTable>
-                </FinalizeChild>
-            )}
+						</p>
+					</FinalizeHeading>
+					<FinalizePercentage>
+							<P.Num>{+firstProduct.fields?.rate + 0.25}%</P.Num>
 
-            <FinalizeChild order={1}>
-              <P.Dark>*Fixed rate</P.Dark>
-              <P.Dark>*Payment interest based on balance</P.Dark>
-              <P.Num>
-                {(+firstProduct.fields?.rate + 0.25).toFixed?.(2)}%
-              </P.Num>
-            </FinalizeChild>
-          </Top>
-          <Bottom>
-            {media !== "mobile" ? (
-                <FinalizeChild order={1}>
-                  <P.D>
-                    Your BLOC request is for ${numberWithCommas(mortgage)}
-                  </P.D>
-                  <P.D>
-                    Your property value is $
-                    {numberWithCommas(+section3Values("purchase_price"))}
-                  </P.D>
-                  <P.D>
-                    Your LTV is{" "}
-                    {(
+							<P.Small className="meta">*Fixed rate</P.Small>
+
+							<P.Small className="meta">*Payent interest based on balance</P.Small>
+
+							{/* <p className="primary form-headline-3 text-left heloc-var"> {String(firstProduct.title).split(" ")[0]} HELOC</p> */}
+					</FinalizePercentage>
+					<FinalizeRows>
+						<FinalizeRow>
+							<FinalizeCol>
+							{[
+										...Array(+section3Values("applicants_number") || 0).keys(),
+									].map((index, personIndex) => {
+										const applicantFName = section3Values(
+												`applicant_fname_${index + 1}`
+										);
+										const applicantLName = section3Values(
+												`applicant_lname_${index + 1}`
+										);
+										const applicantScore = section3Values(
+												`applicant_score_${index + 1}`
+										);
+										return (
+											<P.Large key={`person-desktop-${personIndex}`}>
+												<Span.isWhite>
+													<strong>{applicantFName} {applicantLName} {applicantScore}</strong>
+												</Span.isWhite>
+											</P.Large>
+										);
+									})}
+							</FinalizeCol>
+						</FinalizeRow>
+					</FinalizeRows>
+							<FinalizeRows>
+								<FinalizeRow>
+									<FinalizeCol>
+										<P.D>
+											<Span.isLightgreen>
+												<strong>Your Info</strong>
+											</Span.isLightgreen>
+										</P.D>
+									</FinalizeCol>
+								</FinalizeRow>
+
+								<FinalizeRow>
+									<FinalizeCol>
+										<P.White>BLOC request</P.White>
+									</FinalizeCol>
+
+									<FinalizeCol>
+										<P.White>
+											<strong>
+												${numberWithCommas(mortgage)}
+											</strong>
+										</P.White>
+									</FinalizeCol>
+								</FinalizeRow>
+
+								<FinalizeRow>
+									<FinalizeCol>
+										<P.White>
+											Property value
+										</P.White>
+									</FinalizeCol>
+
+									<FinalizeCol>
+										<P.White>
+											<strong>${numberWithCommas(+section3Values("purchase_price"))}</strong>
+										</P.White>
+									</FinalizeCol>
+								</FinalizeRow>
+
+								<FinalizeRow>
+									<FinalizeCol>
+										<P.White>
+											LTV
+										</P.White>
+									</FinalizeCol>
+
+									<FinalizeCol>
+										<P.White>
+											<strong>
+											{(
                         (mortgage / +section3Values("purchase_price")) *
-                        100
-                    ).toFixed?.(1)}
-                    %
-                  </P.D>
-                </FinalizeChild>
-            ) : (
-                <FinalizeChild className={"full"} order={1}>
-                  <FinalizeTable>
-                    <tbody>
-                    <tr>
-                      <P.Dark as={"td"}>BLOC Request</P.Dark>
-                      <P.D as={"td"}>${numberWithCommas(mortgage)}</P.D>
-                    </tr>
-                    <tr>
-                      <P.Dark as={"td"}>Property Value</P.Dark>
-                      <P.D as={"td"}>
-                        ${numberWithCommas(+section3Values("purchase_price"))}
-                      </P.D>
-                    </tr>
-                    <tr>
-                      <P.Dark as={"td"}>LTV</P.Dark>
-                      <P.D as={"td"}>
-                        {(
-                            (mortgage / +section3Values("purchase_price")) *
-                            100
-                        ).toFixed?.(1)}
-                        %
-                      </P.D>
-                    </tr>
-                    </tbody>
-                  </FinalizeTable>
-                </FinalizeChild>
-            )}
+												100
+											).toFixed?.(2)}
+											%
+											</strong>
+										</P.White>
+									</FinalizeCol>
+								</FinalizeRow>
+							</FinalizeRows>
+							<FinalizeRows>
+								<FinalizeRow className={"border"}>
+									<FinalizeCol>
+										<P.D>
+											<Span.isLightgreen>
+												<strong>Product Info</strong>
+											</Span.isLightgreen>
+										</P.D>
+									</FinalizeCol>
+								</FinalizeRow>
 
-            <FinalizeChild order={2} className={"full m-border"}>
-              <FinalizeTable>
-                <tbody>
-                <tr>
-                  <P.Dark as={"td"}>Lender fee</P.Dark>
-                  <P.D as={"td"}>{firstProduct.fields?.fee}%</P.D>
-                </tr>
-                <tr>
-                  <P.Dark as={"td"}>Credit score</P.Dark>
-                  <P.D as={"td"}>
-                    {beaconScore(firstProduct.fields?.beacon_score)}
-                  </P.D>
-                </tr>
-                </tbody>
-              </FinalizeTable>
-            </FinalizeChild>
-            <FinalizeChild order={3} className={"wide m-pr-40"}>
-              {firstProduct.fields?.specifications.map(
-                  ({term_id, name}) => (
-                      <P.Border key={term_id}>{name}</P.Border>
-                  )
-              )}
-							<P.Border>Purchase</P.Border>
-            </FinalizeChild>
-          </Bottom>
+								<FinalizeRow>
+									<FinalizeCol>
+										<P.D>
+											<strong>Lender fee</strong>
+										</P.D>
+									</FinalizeCol>
+
+									<FinalizeCol>
+										<P.D >
+											<strong>{firstProduct.fields?.fee}%</strong>
+										</P.D>
+									</FinalizeCol>
+								</FinalizeRow>
+
+								<FinalizeRow>
+									<FinalizeCol>
+										<P.D >
+											<strong>Credit score</strong>
+										</P.D>
+									</FinalizeCol>
+
+									<FinalizeCol>
+										<P.D>
+											<strong>{beaconScore(firstProduct.fields?.beacon_score)}</strong>
+										</P.D>
+									</FinalizeCol>
+								</FinalizeRow>
+
+								{firstProduct.fields?.specifications.map(
+									({term_id, name}) => (
+											<FinalizeRow key={term_id}>
+												<FinalizeCol>
+													<P.D >{name}</P.D>
+												</FinalizeCol>
+											</FinalizeRow>
+									)
+								)}
+								<FinalizeRow>
+									<FinalizeCol>
+										<P.D >
+											Purchase
+										</P.D>
+									</FinalizeCol>
+								</FinalizeRow>
+								<FinalizeRow>
+									<FinalizeCol>
+										<P.D >
+										{ fixCharacters(section2Values("property_details_2")) }
+										</P.D>
+									</FinalizeCol>
+								</FinalizeRow>
+							</FinalizeRows>
         </Finalize>
         <div className="btn-group">
           <Button

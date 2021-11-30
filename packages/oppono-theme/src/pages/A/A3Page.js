@@ -26,6 +26,7 @@ import {
 import Alert from "../../components/form-components/Alert";
 import Finalize, {
   Bottom,
+	FinalizeHeading,
 	FinalizeRows,
 	FinalizeRow,
 	FinalizeCol,
@@ -278,7 +279,7 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
               stepName={formData.section_4?.section_name}
               onNext={() => state.theme.stepResponse.data?.data?.heloc?.products?.length || actions.router.set('/not-qualified')}
           >
-            <input type={'hidden'} name={`ltv`} value={((section4Values('confirm_qualify_amount') === '0' ? +section4Values('amount_wanted') : mortgage) / +section2Values('home_value') * 100).toFixed?.(1)}/>
+            <input type={'hidden'} name={`ltv`} value={((section4Values('confirm_qualify_amount') === '0' ? +section4Values('amount_wanted') : mortgage) / +section2Values('home_value') * 100).toFixed?.(2)}/>
             <FlyingObjsContainer
                 childrenList={[
                   {
@@ -338,24 +339,6 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
               activeTheme={formData.section_5?.section_theme}
               stepName={formData.section_5?.section_name}
           >
-            <div className="form-text-wrapper wide-text">
-              <h1 className={"form-headline-1 text-left"}>
-                {formData.section_5?.title}
-              </h1>
-
-							<h2 className={"form-headline-2"}>
-                {formData.section_5?.subtitle}
-              </h2>
-
-							<h2 className={"form-headline-3"}>
-                You are requesting a <Span.isLightgreen>home equity line of credit</Span.isLightgreen> against your {section1Values("property_details_1")} home, which is located at
-              </h2>
-
-							<h2 className={"form-headline-3"}>
-								{section1Values("address")}, {section1Values("city")}, {section1Values("postal_code")}
-							</h2>
-            </div>
-
 						<input
                 type={"hidden"}
                 name={`product_name`}
@@ -394,13 +377,28 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
 							]}
             />
 
-            <Finalize>
+            <Finalize className={"is-smaller"}>
+							<FinalizeHeading>
+								<h1 className={"form-headline-1 text-left"}>
+									{formData.section_5?.title}
+								</h1>
+
+								<h2 className={"form-headline-2 text-left"}>
+                {formData.section_5?.subtitle}
+              	</h2>
+
+								<p>
+								You are requesting a <span>{section2Values("looking_for")} home equity line of credit</span> against your {section1Values("property_details_1")} home, which is located at
+								</p>
+
+								<p className="bolder">{section1Values("address")}, {section1Values("city")},{" "}{section1Values("postal_code")}</p>
+							</FinalizeHeading>
 							<FinalizePercentage>
                   <P.Num>{+firstProduct.fields?.rate + 0.25}%</P.Num>
 
-									<P.Small>*Fixed rate</P.Small>
+									<P.Small className="meta">*Fixed rate</P.Small>
 
-									<P.Small>*Payent interest based on balance</P.Small>
+									<P.Small className="meta">*Payent interest based on balance</P.Small>
 
 									{/* <p className="primary form-headline-3 text-left heloc-var"> {String(firstProduct.title).split(" ")[0]} HELOC</p> */}
 							</FinalizePercentage>
@@ -491,7 +489,7 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
 															: mortgage) /
 															+section2Values("home_value")) *
 													100
-												).toFixed?.(1)}%
+												).toFixed?.(2)}%
 											</strong>
 										</P.White>
 									</FinalizeCol>

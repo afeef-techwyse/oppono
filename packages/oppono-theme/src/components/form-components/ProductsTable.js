@@ -87,7 +87,9 @@ const ProductsTable = ({ className, children, dataFilter, products }) => {
 
 export default styled(ProductsTable)`
   table {
-    max-width: 100%;
+    max-width: 86rem;
+    margin-right: auto;
+    margin-left: auto;
     display: table;
     width: 100%;
     border-collapse: collapse;
@@ -171,7 +173,6 @@ export default styled(ProductsTable)`
           line-height: ${size(24)};
           border-top: ${size(1)} solid rgba(191, 182, 180, 0.1);
           max-width: ${size(300)};
-          padding-right: ${size(100)};
           &.dark {
             color: rgba(191, 182, 180, 0.5);
             line-height: ${size(16)};
@@ -181,10 +182,13 @@ export default styled(ProductsTable)`
             font-weight: 400;
             letter-spacing: 0 ${size(62)};
             line-height: ${size(16)};
+						text-align: center;
           }
         }
         .table-checkmark {
-          width: ${size(18)};
+          width: 100%;
+					display: flex;
+					text-align: center;
           height: ${size(12)};
         }
       }
@@ -261,6 +265,7 @@ export default styled(ProductsTable)`
             &.number {
               font-size: ${size(40)};
               margin-top: ${size(9)};
+							text-align: center;
             }
             &.small {
               display: none;

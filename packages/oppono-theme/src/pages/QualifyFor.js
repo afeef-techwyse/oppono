@@ -145,7 +145,7 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
               </thead>
               <tbody>
               <tr className={'head'}>
-                <td scope={'row'} className={'dark'}>Fixed rate</td>
+                <td scope={'row'} className={'white'}><strong>Fixed rate</strong></td>
                 {
                   products.map((product,index)=>
                       product&&
@@ -154,7 +154,7 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
                 }
               </tr>
               <tr className={'head'}>
-                <td scope={'row'} className={'dark'}>Lender fee</td>
+                <td scope={'row'} className={'white'}><strong>Lender fee</strong></td>
                 {
                   products.map(product=>
                       product&&
@@ -163,7 +163,7 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
                 }
               </tr>
               <tr className={'head last-head'}>
-                <td scope={'row'} className={'dark'}>Max LTV</td>
+                <td scope={'row'} className={'white'}><strong>Max LTV</strong></td>
                 {
                   products.map(product=>
                       product&&
@@ -192,15 +192,15 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
                       </div>
                       <div className="mortgage-body">
                         <div className={'m-row m-head'}>
-                          <p>Fixed rate</p>
+                          <p className="white"><strong>Fixed rate</strong></p>
                           <p>{index!==2?+product.fields.rate+.25+'%':'--'}</p>
                         </div>
                         <div className={'m-row m-head'}>
-                          <p>Lender fee</p>
+                          <p className="white"><strong>Lender fee</strong></p>
                           <p>{product.fields.fee}%</p>
                         </div>
                         <div className={'m-row m-head  m-head last-head'}>
-                          <p>LTV</p>
+                          <p className="white"><strong>LTV</strong></p>
                           <p>{product.fields.maximum_ltv}%</p>
                         </div>
                       </div>
@@ -252,19 +252,19 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
                   <FinalizeTable>
                     <tbody>
 										<tr>
-                      <P.Dark as={'td'}>Max LTV</P.Dark>
+                      <P.White as={'td'}><strong>Max LTV</strong></P.White>
                       <P.D as={'td'}>Up to {selectedProduct?.fields.maximum_ltv}%</P.D>
                     </tr>
                     <tr>
-                      <P.Dark as={'td'}>Credit score</P.Dark>
+                      <P.White as={'td'}><strong>Credit score</strong></P.White>
                       <P.D as={'td'}>{beaconScore(selectedProduct?.fields.beacon_score)}</P.D>
                     </tr>
                     <tr>
-                      <P.Dark as={'td'}>Fixed rate</P.Dark>
+                      <P.White as={'td'}><strong>Fixed rate</strong></P.White>
                       <P.D as={'td'}>{+selectedProduct?.fields.rate+.25}%</P.D>
                     </tr>
                     <tr>
-                      <P.Dark as={'td'}>Lender fee</P.Dark>
+                      <P.White as={'td'}><strong>Lender fee</strong></P.White>
                       <P.D as={'td'}>{selectedProduct?.fields.fee}%</P.D>
                     </tr>
                     </tbody>
@@ -274,19 +274,19 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
                   <FinalizeTable>
                     <tbody>
 										<tr>
-                      <P.Dark as={'td'}>Max LTV</P.Dark>
+                      <P.White as={'td'}><strong>Max LTV</strong></P.White>
                       <P.D as={'td'}>Up to {selectedProduct?.fields.maximum_ltv}%</P.D>
                     </tr>
                     <tr>
-                      <P.Dark as={'td'}>Credit score</P.Dark>
+                      <P.White as={'td'}><strong>Credit score</strong></P.White>
                       <P.D as={'td'}>{beaconScore(selectedProduct?.fields.beacon_score)}</P.D>
                     </tr>
                     <tr>
-                      <P.Dark as={'td'}>Fixed rate</P.Dark>
+                      <P.White as={'td'}><strong>Fixed rate</strong></P.White>
                       <P.D as={'td'}>{+selectedProduct?.fields.rate+.25}%</P.D>
                     </tr>
                     <tr>
-                      <P.Dark as={'td'}>Lender fee</P.Dark>
+                      <P.White as={'td'}><strong>Lender fee</strong></P.White>
                       <P.D as={'td'}>{selectedProduct?.fields.fee}%</P.D>
                     </tr>
                     </tbody>

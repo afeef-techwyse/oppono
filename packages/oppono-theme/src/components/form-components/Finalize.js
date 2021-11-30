@@ -18,13 +18,22 @@ export const FinalizeTable = styled.table`
 export const FinalizeHeading = styled.div`
 	margin-bottom: 55px;
 	color: #BFB6B4;
-	font-size: 14px;
+	font-size: ${size(14)};
 	line-height: 1.14;
-	
+
+	.bolder {
+		font-weight: 500;
+	}
+
 	h1 {
 		margin-bottom: 20px;
-		font-size: 40px;
+		font-size: ${size(40)};
 		line-height: 1;
+	}
+
+	h2 {
+		margin-bottom: 1rem;
+    color: #BFB6B480;
 	}
 
 	p {
@@ -37,12 +46,12 @@ export const FinalizeHeading = styled.div`
 
 	span {
 		color: #0E9564;
-	}	
+	}
 `;
 
 export const FinalizeRows = styled.div`
-	overflow: hidden;	
-	
+	overflow: hidden;
+
 	&:not(:last-child) {
 		padding-bottom: 21px;
 		margin-bottom: 22px;
@@ -50,7 +59,7 @@ export const FinalizeRows = styled.div`
 	}
 
 	&.larger  {
-		font-size: 16px;
+		font-size: ${size(16)};
 		border-bottom-color: rgba(191,182,180, 0.5);
 	}
 `;
@@ -68,19 +77,30 @@ export const FinalizeRow = styled.div`
 
 export const FinalizeCol = styled.div`
 	padding: 0 10px;
-		
+
 	&.full {
 		width: 100%;
-	}	
+	}
 
 	&.half {
 		width: 50%;
-	}	
+	}
 `;
 
 export const FinalizePercentage = styled.div`
 	margin: 40px 0 60px;
 	text-align: center;
+
+	h2 {
+		margin-bottom: 1rem;
+    color: #BFB6B480;
+	}
+
+	.meta {
+		font-size: ${size(12)} !important;
+		line-height: initial !important;
+		color: #BFB6B480 !important;
+	}
 `;
 
 export const FinalizeChild = styled.div`
@@ -147,7 +167,7 @@ export const Top = styled.div`
   padding-bottom: ${size(23)};
   margin: ${size(30)} ${size(-10)} 0;
   position: relative;
-  
+
 	@media (max-width: 575.98px) {
     padding-bottom: 0;
   }
@@ -248,5 +268,5 @@ const Finalize = ({ className, children }) => {
 };
 
 export default styled(Finalize)`
-	
+
 `;

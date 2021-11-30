@@ -681,5 +681,5 @@ export default styled(Header)`
         transform: translateX(-50%);
       }
     }
-  }
+	}
 `;

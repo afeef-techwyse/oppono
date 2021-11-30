@@ -25,6 +25,10 @@ import Finalize, {
 	FinalizeRow,
 	FinalizeCol,
 } from "../../components/form-components/Finalize";
+import SelectSection, {
+	SelectScreen,
+	SelectHeading
+} from "../../components/form-components/SelectSection";
 import useMedia from "../../hooks/useMedia";
 import LastStep from "../../components/form-components/LastStep";
 import useStoredFormValue from "../../hooks/useStoredFormValue";
@@ -230,7 +234,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
               ]}
 
           >
-            <input type={'hidden'} name={`ltv`} value={(mortgage / +section2Values('home_value') * 100).toFixed?.(1)}/>
+            <input type={'hidden'} name={`ltv`} value={(mortgage / +section2Values('home_value') * 100).toFixed?.(2)}/>
 
             <div className="form-text-wrapper">
               <h1 className={"form-headline-1 text-left"}>
@@ -347,7 +351,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 							]}
 						/>
 
-						<Finalize>
+						<Finalize className={"is-smaller"}>
 							<FinalizeHeading>
 								<h1 className={"form-headline-1 text-left"}>
 									{formData.section_4?.title}
@@ -358,7 +362,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 									{section1Values("property_details_1")} home which is located at
 								</p>
 
-								<p>{section1Values("address")}, {section1Values("city")},{" "}
+								<p className="bolder">{section1Values("address")}, {section1Values("city")},{" "}
 									{section1Values("postal_code")}</p>
 							</FinalizeHeading>
 
@@ -466,7 +470,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 									<FinalizeCol>
 										<P.White>
 											<strong>
-												{((mortgage / +section2Values("home_value")) * 100).toFixed?.(1)}%
+												{((mortgage / +section2Values("home_value")) * 100).toFixed?.(2)}%
 											</strong>
 										</P.White>
 									</FinalizeCol>
@@ -491,15 +495,15 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
             <input ref={selectedProduct} type={"hidden"} name={`product_name`}/>
             <input ref={maxMortgage} type={"hidden"} name={`maximum_mortgage`}/>
 
-            <div className="form-text-wrapper wide-text">
-              <h1 className={"form-headline-1 text-left"}>
+						<SelectScreen>
+								<SelectHeading>
+								<h1 className={"form-headline-1 text-left"}>
                 {formData.section_5?.title}
               </h1>
-              <h2 className={"form-headline-3 primary"}>
+              <h2 className={"form-headline-3 text-left"}>
                 {formData.section_5?.subtitle}
               </h2>
-            </div>
-
+								</SelectHeading>
             {state.theme.stepResponse.data?.data ? (
                 media !== "mobile" ? (
                     <FormFilter
@@ -806,6 +810,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
             <div className="btn-group">
               <Button className={"bordered no-top-margin prev-step"} label={"Back"}/>
             </div>
+						</SelectScreen>
           </FormStep>
           <FormStep
               apiStepNumber={5}

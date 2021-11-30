@@ -36,6 +36,10 @@ import Finalize, {
 	FinalizeCol,
   Top,
 } from "../../components/form-components/Finalize";
+import SelectSection, {
+	SelectScreen,
+	SelectHeading
+} from "../../components/form-components/SelectSection";
 import useMedia from "../../hooks/useMedia";
 import FormConditionalInput from "../../components/form-components/FormConditionalInput";
 import FormRepeatableInput from "../../components/form-components/FormRepeatableInput";
@@ -252,7 +256,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
               activeTheme={formData.section_3?.section_theme}
               stepName={formData.section_3?.section_name}
           >
-            <input type={'hidden'} name={`ltv`} value={(mortgage / +section2Values("purchase_price") * 100).toFixed?.(1)}/>
+            <input type={'hidden'} name={`ltv`} value={(mortgage / +section2Values("purchase_price") * 100).toFixed?.(2)}/>
             <div className="form-text-wrapper">
               <h1 className={"form-headline-1 text-left"}>
                 {formData.section_3?.title}
@@ -367,27 +371,21 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 							]}
             />
 
-						<div className="form-text-wrapper is-smaller">
-							<h1 className={"form-headline-1 text-left"}>
-								{formData.section_4?.title}
-							</h1>
-
-							<P.D>
-								You are applying for a {" "}
-
-								<Span.isLightgreen>
-									<strong>{section2Values("looking_for")} mortgage purchase</strong>
-								</Span.isLightgreen	> on{" "}
-
-								{section1Values("property_details_1")} home which is located at
-							</P.D>
-
-							<P.D>
-								<strong>{section1Values("address")}, {section1Values("city")},{" "} {section1Values("postal_code")}</strong>
-							</P.D>
-            </div>
-
 						<Finalize className={"is-smaller"}>
+
+						<FinalizeHeading>
+								<h1 className={"form-headline-1 text-left"}>
+									{formData.section_4?.title}
+								</h1>
+
+								<p>
+									You are applying for a <span>{section2Values("looking_for")} mortgage purchase</span> on{" "}
+									{section1Values("property_details_1")} home which is located at
+								</p>
+
+								<p className="bolder">{section1Values("address")}, {section1Values("city")},{" "}{section1Values("postal_code")}</p>
+							</FinalizeHeading>
+
 							<FinalizeRows>
 								<FinalizeRow className={"larger border"}>
 									<FinalizeCol>
@@ -504,7 +502,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 													(
 														mortgage /
 														+section2Values("purchase_price") * 100
-													).toFixed?.(1)
+													).toFixed?.(2)
 												}%
 											</strong>
 										</P.White>
@@ -527,24 +525,23 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
               activeTheme={formData.section_5?.section_theme}
               stepName={formData.section_5?.section_name}
           >
-            <div className="form-text-wrapper wide-text">
-              <h1 className={"form-headline-1 text-left"}>
-                {formData.section_5?.title.replace(
+					<SelectScreen>
+						<SelectHeading>
+								<h1 className={"form-headline-1 text-left"}>
+								{formData.section_5?.title.replace(
                     "{{number}}",
                     state.theme.stepResponse.data?.data?.[
                         section2Values("looking_for")
                         ]?.products.length
                 )}
               </h1>
-
-							<h2 className={"form-headline-3 is-darker"}>
-                {formData.section_5?.subtitle}
+              <h2 className={"form-headline-3 text-left"}>
+							{formData.section_5?.subtitle}
               </h2>
-
-							<h3 className={"form-headline-2 text-left"}>
-                {formData.section_5?.choose_one}
+							<h3 className={"form-headline-3 text-left"}>
+							{formData.section_5?.choose_one}
               </h3>
-            </div>
+								</SelectHeading>
             <input ref={selectedProduct} type={"hidden"} name={`product_name`}/>
 
             <input ref={maxMortgage} type={"hidden"} name={`maximum_mortgage`}/>
@@ -606,25 +603,25 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                               <FinalizeTable>
                                 <tbody>
                                 <tr>
-                                  <P.White as={"td"}>Max LTV</P.White>
+                                  <P.White as={"td"}><strong>Max LTV</strong></P.White>
                                   <P.D as={"td"}>
                                     Up to {product.fields?.maximum_ltv}%
                                   </P.D>
                                 </tr>
                                 <tr>
-                                  <P.White as={"td"}>Credit score</P.White>
+                                  <P.White as={"td"}><strong>Credit score</strong></P.White>
                                   <P.D as={"td"}>
                                     {beaconScore(product.fields?.beacon_score)}
                                   </P.D>
                                 </tr>
                                 <tr>
-                                  <P.White as={"td"}>Fixed rate</P.White>
+                                  <P.White as={"td"}><strong>Fixed rate</strong></P.White>
                                   <P.D as={"td"}>
                                     {(+product.fields?.rate + 0.25).toFixed?.(2)}%
                                   </P.D>
                                 </tr>
                                 <tr>
-                                  <P.White as={"td"}>Lender fee</P.White>
+                                  <P.White as={"td"}><strong>Lender fee</strong></P.White>
                                   <P.D as={"td"}>{product.fields?.fee}%</P.D>
                                 </tr>
                                 </tbody>
@@ -635,25 +632,25 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                               <FinalizeTable>
                                 <tbody>
                                 <tr>
-                                  <P.White as={"td"}>Max LTV</P.White>
+                                  <P.White as={"td"}><strong>Max LTV</strong></P.White>
                                   <P.D as={"td"}>
                                     Up to {product.fields?.maximum_ltv}%
                                   </P.D>
                                 </tr>
                                 <tr>
-                                  <P.White as={"td"}>Credit score</P.White>
+                                  <P.White as={"td"}><strong>Credit score</strong></P.White>
                                   <P.D as={"td"}>
                                     {beaconScore(product.fields?.beacon_score)}
                                   </P.D>
                                 </tr>
                                 <tr>
-                                  <P.White as={"td"}>Fixed rate</P.White>
+                                  <P.White as={"td"}><strong>Fixed rate</strong></P.White>
                                   <P.D as={"td"}>
                                     {(+product.fields?.rate + 0.25).toFixed?.(2)}%
                                   </P.D>
                                 </tr>
                                 <tr>
-                                  <P.White as={"td"}>Lender fee</P.White>
+                                  <P.White as={"td"}><strong>Lender fee</strong></P.White>
                                   <P.D as={"td"}>{product.fields?.fee}%</P.D>
                                 </tr>
                                 </tbody>
@@ -678,6 +675,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
             <div className="btn-group">
               <Button className={"bordered prev-step"} label={"Back"}/>
             </div>
+						</SelectScreen>
           </FormStep>
           <FormStep
               apiStepNumber={5}

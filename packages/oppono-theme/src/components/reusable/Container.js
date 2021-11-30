@@ -12,7 +12,6 @@ const Container = ({className, children}) => {
 
 export default styled(Container)`
 margin: 0 auto;
-max-width: 1360px;
 width: 100%;
 padding: 0 ${size(25)};
 

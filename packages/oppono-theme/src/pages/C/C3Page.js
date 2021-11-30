@@ -11,7 +11,17 @@ import Alert from "../../components/form-components/Alert";
 import Appraiser from "../../components/form-components/Appraiser";
 import Button from "../../components/form-components/Button";
 import FileInput from "../../components/form-components/FileInput";
-import Finalize, {Bottom, FinalizeChild, FinalizeTable, Top,} from "../../components/form-components/Finalize";
+import Finalize, {
+  Bottom,
+  FinalizeChild,
+  FinalizeTable,
+	FinalizeHeading,
+	FinalizeCol,
+	FinalizePercentage,
+	FinalizeRows,
+	FinalizeRow,
+  Top,
+} from "../../components/form-components/Finalize";
 import Form from "../../components/form-components/Form";
 import FormConditionalInput from "../../components/form-components/FormConditionalInput";
 import FormRepeatableInput from "../../components/form-components/FormRepeatableInput";
@@ -23,7 +33,13 @@ import ProductsTable from "../../components/form-components/ProductsTable";
 import RadioGroup from "../../components/form-components/RadioGroup";
 import RadioInput from "../../components/form-components/RadioInput";
 import Select from "../../components/form-components/Select";
-import {P, Wysiwyg,} from "../../components/form-components/StyledComponent";
+import {
+  Li,
+  Ol,
+  P,
+  Span,
+  Wysiwyg,
+} from "../../components/form-components/StyledComponent";
 import TextArea from "../../components/form-components/TextArea";
 import W50 from "../../components/form-components/W50";
 import CheckMark from "../../components/reusable/CheckMark";
@@ -39,6 +55,7 @@ import useMedia from "../../hooks/useMedia";
 import useProductsTable from "../../hooks/useProductsTable";
 import useStoredFormValue from "../../hooks/useStoredFormValue";
 import opponoApi from "../../opponoApi";
+import {fixCharacters} from "../../functions/fixCharacters";
 
 const pageName = "c-3";
 const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
@@ -322,8 +339,8 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
                             </thead>
                             <tbody>
                             <tr className={"head"}>
-                              <td scope={"row"} className={"dark"}>
-                                LTV
+                              <td scope={"row"} className={"white"}>
+                                <strong>LTV</strong>
                               </td>
                               {products.map(({ID, fields: {maximum_ltv}}) => (
                                   <td
@@ -336,8 +353,8 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
                               ))}
                             </tr>
                             <tr className={"head last-head"}>
-                              <td scope={"row"} className={"dark"}>
-                                Credit score
+                              <td scope={"row"} className={"white"}>
+                                <strong>Credit score</strong>
                               </td>
                               {products.map(
                                   ({ID, fields: {beacon_score}}) => (
@@ -353,8 +370,8 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
                             </tr>
                             {!hasVariable ? null : (
                                 <tr className={"head"}>
-                                  <td scope={"row"} className={"dark"}>
-                                    Fixed rate
+                                  <td scope={"row"} className={"white"}>
+                                    <strong>Fixed rate</strong>
                                   </td>
                                   {products.map(({ID, fields: {rate}}) => (
                                       <td
@@ -368,8 +385,8 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                 </tr>
                             )}
                             <tr className={"head"}>
-                              <td scope={"row"} className={"dark"}>
-                                Lender fee
+                              <td scope={"row"} className={"white"}>
+                                <strong>Lender fee</strong>
                               </td>
                               {products.map(({ID, fields: {fee}}) => (
                                   <td
@@ -471,7 +488,7 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                             </div>
                                             <div className="mortgage-body">
                                               <div className={"m-row m-head  m-head"}>
-                                                <p>LTV</p>
+                                                <p className="white"><strong>LTV</strong></p>
                                                 <p>{maximum_ltv}%</p>
                                               </div>
                                               <div
@@ -482,12 +499,12 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                               </div>
                                               {!hasVariable ? null : (
                                                   <div className={"m-row m-head"}>
-                                                    <p>Fixed rate</p>
+                                                    <p className="white"><strong>Fixed rate</strong></p>
                                                     <p>{(+rate + 0.25).toFixed?.(2)}%</p>
                                                   </div>
                                               )}
                                               <div className={"m-row m-head"}>
-                                                <p>Lender fee</p>
+                                                <p className="white"><strong>Lender fee</strong></p>
                                                 <p>{fee}%</p>
                                               </div>
                                               {specifications
@@ -741,7 +758,7 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
               stepName={formData.section_7?.section_name}
               onNext={() => state.theme.stepResponse.data?.data?.heloc?.products?.length || actions.router.set('/not-qualified')}
           >
-            <input type={'hidden'} name={`ltv`} value={((section7Values('confirm_qualify_amount') === '0' ? +section7Values('amount_wanted') : mortgage) / +section1Values('home_value') * 100).toFixed?.(1)}/>
+            <input type={'hidden'} name={`ltv`} value={((section7Values('confirm_qualify_amount') === '0' ? +section7Values('amount_wanted') : mortgage) / +section1Values('home_value') * 100).toFixed?.(2)}/>
             <FlyingObjsContainer
                 childrenList={[
                   {
@@ -801,182 +818,163 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
               activeTheme={formData.section_8?.section_theme}
               stepName={formData.section_8?.section_name}
           >
-            <div className="form-text-wrapper wide-text">
-              <h1 className={"form-headline-1 text-left"}>
-                {formData.section_8?.title}
-              </h1>
-              <h2 className={"form-headline-2 primary"}>
-                {formData.section_8?.subtitle}
-              </h2>
-              <h2 className={"form-headline-3 primary"}>
-                You are requesting a home equity line of credit against your{" "}
+					<Finalize className={"is-smaller"}>
+						<FinalizeHeading>
+						<h1 className={"form-headline-1 text-left"}>
+						{formData.section_8?.title}
+						</h1>
 
-                {section4Values("property_details_1")} home which is located at{" "}
-                <br/> {section4Values("address")}, {section4Values("city")},{" "}
+						<h2 className={"form-headline-2 text-left"}>
+						{formData.section_8?.subtitle}
+						</h2>
+
+						<p>
+						You are requesting a <span> refinance a home equity line of credit</span> against your {section4Values("property_details_1")} home, which is located at
+						</p>
+
+						<p className="bolder">
+						{section4Values("address")}, {section4Values("city")},{" "}
                 {section4Values("postal_code")}
-              </h2>
-            </div>
-            <Finalize>
-              <Top>
-                {media !== "mobile" ? (
-                    <FinalizeChild>
-                      <P.D>Your Info</P.D>
-                      {[
-                        ...Array(+section2Values("applicants_number") || 0).keys(),
-                      ].map((index, personIndex) => {
-                        const applicantFName = section6Values(
-                            `applicant_fname_${index + 1}`
-                        );
-                        const applicantLName = section6Values(
-                            `applicant_lname_${index + 1}`
-                        );
-                        const applicantScore = section6Values(
-                            `applicant_score_${index + 1}`
-                        );
-                        return (
-                            <P.D key={`person-desktop-${personIndex}`}>
-                              {applicantFName} {applicantLName} {applicantScore}
-                            </P.D>
-                        );
-                      })}
-                    </FinalizeChild>
-                ) : (
-                    <FinalizeChild className={"full m-mt-24"} order={3}>
-                      <FinalizeTable>
-                        <tbody>
-                        {[
-                          ...Array(
-                              +section2Values("applicants_number") || 0
-                          ).keys(),
-                        ].map((index, personIndex) => {
-                          const applicantFName = section6Values(
-                              `applicant_fname_${index + 1}`
-                          );
-                          const applicantLName = section6Values(
-                              `applicant_lname_${index + 1}`
-                          );
-                          const applicantScore = section6Values(
-                              `applicant_score_${index + 1}`
-                          );
-                          return (
-                              <tr key={`person-mobile-${personIndex}`}>
-                                <P.Dark as={"td"}>
-                                  {applicantFName} {applicantLName}
-                                </P.Dark>
-                                <P.D as={"td"}> {applicantScore}</P.D>
-                              </tr>
-                          );
-                        })}
-                        </tbody>
-                      </FinalizeTable>
-                    </FinalizeChild>
-                )}
+						</p>
+					</FinalizeHeading>
+					<FinalizePercentage>
+							<P.Num>{+firstProduct.fields?.rate + 0.25}%</P.Num>
 
-                <FinalizeChild order={1}>
-                  <P.Dark>*Fixed rate</P.Dark>
-                  <P.Dark>*Payment interest based on balance</P.Dark>
-                  <p className="primary form-headline-3 text-left heloc-var">{String(firstProduct.title).split(" ")[0]} HELOC</p>
-                  <P.Num>{+firstProduct.fields?.rate + 0.25}%</P.Num>
-                  <Button label={"I’m good to go"} className={"next-step"}/>
-                </FinalizeChild>
-                <FinalizeChild order={2} className={"wide"}>
-                  <Button
-                      className={"bordered prev-step"}
-                      label={"No, edit the details"}
-                  />
-                </FinalizeChild>
-              </Top>
-              <Bottom>
-                {media !== "mobile" ? (
-                    <FinalizeChild order={1}>
-                      <P.D>
-                        Your HELOC request is for $
+							<P.Small className="meta">*Variable rate</P.Small>
+
+							<P.Num className="smaller">${numberWithCommas(mortgage)}</P.Num>
+							<P.Small className="meta">*Maximum mortgage amount</P.Small>
+
+							<P.Num className="smaller">$
+                    {numberWithCommas(
+                        monthlyPayments(mortgage, +firstProduct.fields?.rate / 100)
+                    )}</P.Num>
+							<P.Small className="meta">*Monthly mortgage payment</P.Small>
+
+							{/* <p className="primary form-headline-3 text-left heloc-var"> {String(firstProduct.title).split(" ")[0]} HELOC</p> */}
+					</FinalizePercentage>
+					<FinalizeRows>
+						<FinalizeRow>
+									<FinalizeCol>
+										<P.D>
+											<Span.isLightgreen>
+												<strong>Your Info</strong>
+											</Span.isLightgreen>
+										</P.D>
+									</FinalizeCol>
+								</FinalizeRow>
+
+								<FinalizeRow>
+									<FinalizeCol>
+										<P.White>Qualify up to</P.White>
+									</FinalizeCol>
+
+									<FinalizeCol>
+										<P.White>
+											<strong>$
                         {numberWithCommas(
-                            section7Values("confirm_qualify_amount") === "0"
-                                ? +section7Values("amount_wanted")
-                                : mortgage
-                        )}
-                      </P.D>
-                      <P.D>
-                        Your property value is $
-                        {numberWithCommas(+section1Values("home_value"))}
-                      </P.D>
-                      <P.D>
-                        Your LTV is{" "}
-                        {(
-                            ((section7Values("confirm_qualify_amount") === "0"
-                                ? +section7Values("amount_wanted")
-                                : mortgage) /
-                                +section1Values("home_value")) *
-                            100
-                        ).toFixed?.(1)}
-                        %
-                      </P.D>
-                    </FinalizeChild>
-                ) : (
-                    <FinalizeChild className={"full"} order={1}>
-                      <FinalizeTable>
-                        <tbody>
-                        <tr>
-                          <P.Dark as={"td"}>HELOC Request</P.Dark>
-                          <P.D as={"td"}>
-                            $
-                            {numberWithCommas(
-                                section7Values("confirm_qualify_amount") === "0"
-                                    ? +section7Values("amount_wanted")
-                                    : mortgage
-                            )}
-                          </P.D>
-                        </tr>
-                        <tr>
-                          <P.Dark as={"td"}>Property Value</P.Dark>
-                          <P.D as={"td"}>
-                            ${numberWithCommas(+section1Values("home_value"))}
-                          </P.D>
-                        </tr>
-                        <tr>
-                          <P.Dark as={"td"}>LTV</P.Dark>
-                          <P.D as={"td"}>
-                            {(
-                                ((section7Values("confirm_qualify_amount") === "0"
-                                    ? +section7Values("amount_wanted")
-                                    : mortgage) /
-                                    +section1Values("home_value")) *
+                            Math.round(
+                                (+section1Values("home_value") *
+                                    firstProduct.fields?.maximum_ltv) /
                                 100
-                            ).toFixed?.(1)}
-                            %
-                          </P.D>
-                        </tr>
-                        </tbody>
-                      </FinalizeTable>
-                    </FinalizeChild>
-                )}
+                            )
+                        )}
+											</strong>
+										</P.White>
+									</FinalizeCol>
+								</FinalizeRow>
 
-                <FinalizeChild order={2} className={"full m-border"}>
-                  <FinalizeTable>
-                    <tbody>
-                    <tr>
-                      <P.Dark as={"td"}>Lender fee</P.Dark>
-                      <P.D as={"td"}>{firstProduct.fields?.fee}%</P.D>
-                    </tr>
-                    <tr>
-                      <P.Dark as={"td"}>Credit score</P.Dark>
-                      <P.D as={"td"}>
-                        {beaconScore(firstProduct.fields?.beacon_score)}
-                      </P.D>
-                    </tr>
-                    </tbody>
-                  </FinalizeTable>
-                </FinalizeChild>
-                <FinalizeChild order={3} className={"wide m-pr-40"}>
-                  {firstProduct.fields?.specifications.map(
-                      ({term_id, name}) => (
-                          <P.Border key={term_id}>{name}</P.Border>
-                      )
-                  )}
-									<P.Border>Purchase</P.Border>
-                </FinalizeChild>
-              </Bottom>
+								<FinalizeRow>
+									<FinalizeCol>
+										<P.White>
+											Property value
+										</P.White>
+									</FinalizeCol>
+
+									<FinalizeCol>
+										<P.White>
+											<strong>${numberWithCommas(+section1Values("home_value"))}</strong>
+										</P.White>
+									</FinalizeCol>
+								</FinalizeRow>
+					</FinalizeRows>
+							<FinalizeRows>
+								<FinalizeRow className={"border"}>
+									<FinalizeCol>
+										<P.D>
+											<Span.isLightgreen>
+												<strong>Product Info</strong>
+											</Span.isLightgreen>
+										</P.D>
+									</FinalizeCol>
+								</FinalizeRow>
+
+								<FinalizeRow>
+									<FinalizeCol>
+										<P.D >
+											<strong>Max LTV</strong>
+										</P.D>
+									</FinalizeCol>
+
+									<FinalizeCol>
+										<P.D>
+											<strong>Up to {firstProduct.fields?.maximum_ltv}%</strong>
+										</P.D>
+									</FinalizeCol>
+								</FinalizeRow>
+
+								<FinalizeRow>
+									<FinalizeCol>
+										<P.D >
+											<strong>Credit score</strong>
+										</P.D>
+									</FinalizeCol>
+
+									<FinalizeCol>
+										<P.D>
+											<strong>{beaconScore(firstProduct.fields?.beacon_score)}</strong>
+										</P.D>
+									</FinalizeCol>
+								</FinalizeRow>
+
+								<FinalizeRow>
+									<FinalizeCol>
+										<P.D>
+											<strong>Lender fee</strong>
+										</P.D>
+									</FinalizeCol>
+
+									<FinalizeCol>
+										<P.D >
+											<strong>{firstProduct.fields?.fee}%</strong>
+										</P.D>
+									</FinalizeCol>
+								</FinalizeRow>
+
+								{firstProduct.fields?.specifications.map(
+									({term_id, name}) => (
+											<FinalizeRow key={term_id}>
+												<FinalizeCol>
+													<P.D >{name}</P.D>
+												</FinalizeCol>
+											</FinalizeRow>
+									)
+								)}
+								<FinalizeRow>
+									<FinalizeCol>
+										<P.D >
+											Purchase
+										</P.D>
+									</FinalizeCol>
+								</FinalizeRow>
+								<FinalizeRow>
+									<FinalizeCol>
+										<P.D >
+										{ fixCharacters(section4Values("property_details_2")) }
+										</P.D>
+									</FinalizeCol>
+								</FinalizeRow>
+							</FinalizeRows>
             </Finalize>
           </FormStep>
           <FormStep

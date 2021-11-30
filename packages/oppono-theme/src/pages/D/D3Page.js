@@ -478,7 +478,7 @@ const D3Page = ({state, setCurrentTheme, actions, className, formData}) => {
                                 : mortgage) /
                                 +section2Values("home_value")) *
                             100
-                        ).toFixed?.(1)}
+                        ).toFixed?.(2)}
                         %
                       </P.D>
                     </FinalizeChild>
@@ -512,7 +512,7 @@ const D3Page = ({state, setCurrentTheme, actions, className, formData}) => {
                                     : mortgage) /
                                     +section2Values("home_value")) *
                                 100
-                            ).toFixed?.(1)}
+                            ).toFixed?.(2)}
                             %
                           </P.D>
                         </tr>

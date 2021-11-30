@@ -247,7 +247,7 @@ const D2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   : []).length || actions.router.set('/not-qualified')}
 
           >
-            <input type={'hidden'} name={`ltv`} value={(mortgage / +section2Values('home_value') * 100).toFixed?.(1)}/>
+            <input type={'hidden'} name={`ltv`} value={(mortgage / +section2Values('home_value') * 100).toFixed?.(2)}/>
             <div className="form-text-wrapper">
               <h1 className={"form-headline-1 text-left"}>
                 {formData.section_3?.title}
@@ -439,7 +439,7 @@ const D2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                         {(
                             (mortgage / +section2Values("home_value")) *
                             100
-                        ).toFixed?.(1)}
+                        ).toFixed?.(2)}
                         %
                       </P.D>
                     </FinalizeChild>
@@ -507,7 +507,7 @@ const D2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                             {(
                                 (mortgage / +section2Values("home_value")) *
                                 100
-                            ).toFixed?.(1)}
+                            ).toFixed?.(2)}
                             %
                           </P.D>
                         </tr>
