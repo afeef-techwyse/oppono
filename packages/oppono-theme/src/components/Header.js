@@ -275,8 +275,51 @@ const LoginBtn = connect(
         className={"primary member-login"}
         href={"/sign-in/"}
       >
-        Member Login
+        I'm an oppono member
       </Link>
+    )
+);
+
+const SignupBtn = connect(
+  ({ state, menuHandler }) =>
+    state.theme.user.logged || (
+      <Link
+        onClick={() => menuHandler(false)}
+        className={"signup-btn"}
+        href={"/sign-in/"}
+      >
+        <Button
+          className={"secondary-border primary"}
+          focusable={false}
+          label={"Become a member"}
+        />
+      </Link>
+    )
+);
+
+const SignedLinks = connect(
+  ({ state, menuHandler }) =>
+    state.theme.user.logged && (
+      <>
+      <Link
+      onClick={() => menuHandler(false)}
+      className={"primary"}
+      href={"/dashboard/a/"}>
+        Submit an application
+      </Link>
+      <Link
+      onClick={() => menuHandler(false)}
+      className={"primary"}
+      href={"/dashboard/c/"}>
+        Qualify my client
+      </Link>
+      <Link
+      onClick={() => menuHandler(false)}
+      className={"primary"}
+      href={"/b/"}>
+        Business equity line
+      </Link>
+      </>
     )
 );
 
@@ -378,44 +421,48 @@ const Header = React.forwardRef(
               />
             </svg>
             <div className="links">
-              <Link
-                onClick={() => menuHandler(false)}
-                className={"primary"}
-                href="/"
-              >
-                Home
-              </Link>
 							<Link
                 onClick={() => menuHandler(false)}
                 className={"primary"}
                 href="/what-we-do/"
               >
-                What We Do
+                What we do
               </Link>
               <Link
                 onClick={() => menuHandler(false)}
                 className={"primary"}
                 href={"/products/"}
               >
-                Products & Rates
+                Products and rates
               </Link>
+              <SignedLinks />
               <Link
                 onClick={() => menuHandler(false)}
                 className={"primary"}
                 href={"/map/"}
               >
-                Lending Areas
+                Lending areas
+              </Link>
+              <Link
+                onClick={() => menuHandler(false)}
+                className={"primary"}
+                href={"/dashboard/e/"}
+              >
+                Find an appraiser
               </Link>
               <Link
                 onClick={() => menuHandler(false)}
                 className={"primary"}
                 href={"/get-in-touch/"}
               >
-                Get in Touch
+                Get in touch
               </Link>
               <LoginBtn menuHandler={menuHandler} />
-              <SocialLinks />
+              <SignupBtn menuHandler={menuHandler} />
             </div>
+            <div className="links social">
+              <SocialLinks />
+            </div> 
           </Container>
         </div>
       </header>
@@ -495,7 +542,6 @@ export default styled(Header)`
         font-size: ${size(16)};
         font-weight: 400;
         font-style: normal;
-        text-transform: capitalize;
       }
 
       ${Button} {
@@ -547,7 +593,8 @@ export default styled(Header)`
     transition: opacity 200ms, visibility 200ms;
     opacity: 0;
     visibility: hidden;
-		margin-top: 76px;
+    margin-top: 76px;
+    height: calc(100% - 76px);
 
     ${Container} {
       position: relative;
@@ -556,11 +603,8 @@ export default styled(Header)`
       align-items: center;
       justify-content: center;
       @media (max-width: 991.98px) {
-        display: block;
-        padding-top: ${size(160)};
-      }
-      @media (max-width: 575.98px) {
-        padding-top: ${size(83)};
+        flex-direction: column;
+        padding-top: 0;
       }
     }
 
@@ -602,6 +646,27 @@ export default styled(Header)`
       flex-direction: column;
       align-items: center;
       text-transform: capitalize;
+
+      &.social {
+        position: absolute;
+        bottom: 2rem;
+        left: 0;
+        width: 100%;
+      }
+
+      .signup-btn {
+        width: 100%;
+
+        button {
+          width: 100%;
+          margin-top: 0;
+          min-height: 5rem;
+        }
+      }
+
+      @media (max-width: 991px) {
+        width: 90%;
+      }
 
       a {
         color: #b5d2ff;

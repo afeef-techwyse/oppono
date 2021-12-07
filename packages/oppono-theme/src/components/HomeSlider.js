@@ -123,6 +123,11 @@ const Slider = styled(Swiper)`
       text-decoration: none;
     }
 
+    &.secondary {
+      background: none;
+      border: 1px solid #fe412d;
+    }
+
     svg {
       width: ${size(13)};
       height: ${size(13)};
@@ -510,19 +515,34 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
                     dangerouslySetInnerHTML={{ __html: slide.title }}
                   />
                 </div>
-                {media !== "mobile" ? (
-                  <Link
-                    className={"btn slide-cta"}
-                    target={slide.button.target}
-                    href={slide.button.url}
-                  >
-                    <span className="text">{slide.button.title}</span>
-                    <svg className={"right-arrow"} viewBox="0 0 22 10">
-                      <path fill="none" stroke="#fff" d="M0 5h22" />
-                      <path fill="none" stroke="#fff" d="M17 10v0l5-5-5-5" />
-                    </svg>
-                  </Link>
-                ) : null}
+                <div className="buttons">
+                  {media !== "mobile" ? (
+                    <Link
+                      className={"btn slide-cta"}
+                      target={slide.button.target}
+                      href={slide.button.url}
+                    >
+                      <span className="text">{slide.button.title}</span>
+                      <svg className={"right-arrow"} viewBox="0 0 22 10">
+                        <path fill="none" stroke="#fff" d="M0 5h22" />
+                        <path fill="none" stroke="#fff" d="M17 10v0l5-5-5-5" />
+                      </svg>
+                    </Link>
+                  ) : null}
+                  {media !== "mobile" && slide.button_2 ? (
+                    <Link
+                      className={"btn secondary slide-cta"}
+                      target={slide.button_2.target}
+                      href={slide.button_2.url}
+                    >
+                      <span className="text">{slide.button_2.title}</span>
+                      <svg className={"right-arrow"} viewBox="0 0 22 10">
+                        <path fill="none" stroke="#fff" d="M0 5h22" />
+                        <path fill="none" stroke="#fff" d="M17 10v0l5-5-5-5" />
+                      </svg>
+                    </Link>
+                  ) : null}
+                </div>
               </Container>
             </SwiperSlide>
           ))}
@@ -537,6 +557,15 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
             >
               {slidesObj[currentSlide]?.button.title}
             </Link>
+            { slidesObj[currentSlide]?.button_2 ? ( 
+            <Link
+              className={"btn-mobile secondary slide-cta"}
+              target={slidesObj[currentSlide]?.button_2.target}
+              href={slidesObj[currentSlide]?.button_2.url}
+            >
+              {slidesObj[currentSlide]?.button_2.title}
+            </Link>
+            ) : null}
           </Container>
         ) : null}
       </div>
@@ -577,6 +606,13 @@ export default styled(connect(HomeSlider))`
       @media (min-width: 992px) {
         padding-left: ${size(120)};
       }
+    }
+  }
+
+  .buttons {
+    display: flex;
+    a {
+      margin-right: 2rem;
     }
   }
 
@@ -638,11 +674,23 @@ export default styled(connect(HomeSlider))`
       cursor: pointer;
       transition: margin 0.4s ease, width 0.4s ease, opacity 0.4s ease;
       overflow: hidden;
-      width: ${size(230)};
+      width: ${size(210)};
       position: relative;
       height: ${size(30)};
       display: flex;
       align-items: center;
+      
+      svg, svg path {
+        transition: all 0.4s ease;
+      }
+
+      &:hover {
+        width: ${size(230)};
+
+        svg path {
+          stroke: #fe412d;
+        }
+      }
 
       svg {
         position: absolute;
@@ -741,6 +789,11 @@ export default styled(connect(HomeSlider))`
       align-items: center;
       justify-content: center;
       color: #fff;
+
+      &.secondary {
+        background: none;
+        border: 1px solid #fe412d;
+      }
 
       @media (max-width: 576px) {
         display: block;
