@@ -152,11 +152,10 @@ const MapPage = ({className, actions, state, libraries}) => {
       <div className={classnames(className)}>
         <div className="map" ref={mapRef}/>
         <Header hasSubMenu={false}/>
-        <Container className={classnames({flex: !appraiser[0]?.fields})}>
+        <Container className="flexcontainer">
           <div className="map-wrapper">
             <div className="col-left">
               <div className="text-wrapper">
-                <h1 className={"headline-1"}>We're proud to serve Ontario</h1>
                 {/*<h2 className={'headline-2 dark'}>Looking within a specific city or region?</h2>*/}
               </div>
               <div className="inputs-group">
@@ -206,64 +205,42 @@ const MapPage = ({className, actions, state, libraries}) => {
                     <Link href={'/get-in-touch'}>Please contact us</Link>
                   </p>
               ) : null}
-              {appraiser[0] ? (
-                  <div className="btn-group">
-                    {/*<Button label={'Search'}/>*/}
-                    <Button
-                        disabled={!appraiser[0]}
-                        label={"Find Appraisers in the Area"}
-                        onClick={() => {
-                          actions.theme.setAppraiser({
-                            ...appraiser[0],
-                            ...postal_city.current,
-                          });
-
-                          handleAddressChange(postal_city.current)
-                          actions.router.set( "/dashboard/e");
-                        }}
-                    />
-                  </div>
-              ) : null}
             </div>
             <div className="col-right">
-              {appraiser[0]?.fields &&                    
+
+
+              {appraiser[0]?.fields &&
                 appraiser
                 .filter((v,i,a) => a.findIndex(t=>(t.ID === v.ID))===i)
                 .map((a) =>
                   a.fields ? (
                       <div key={a.ID} className="appraisal-block">
-                        <h3>{a.fields.bdm?.name}</h3>
-                        <p className="text">{a.fields.bdm?.phone}</p>
-                        <p className="text">{a.fields.bdm?.email}</p>
-                        <hr/>
-                        <p className="text">{a.fields.city}</p>
-                        <p className="ltv">{a.fields.ltv}% LTV</p>
-                        <p className="text bold">Preferred appraisal companies</p>
-                        { a.fields.preferred_appraisal_company &&
-                          <p className="text">
+												<div className="appraiser-container">
+													<p className="label">Lending Area</p>
+													<p className="city">{a.fields.city}</p>
+                        	<p className="ltv">{a.fields.ltv}% LTV</p>
+												</div>
+												<div className="appraiser-container">
+													<p className="label">Preferred Appraisers</p>
+													{ a.fields.preferred_appraisal_company &&
+                          <p className="text mt-5">
                             {[...a.fields.preferred_appraisal_company]
                                 ?.map?.((c) => c.post_title)
                                 .join(", ")}
                           </p>
                         }
+												</div>
+												<div className="appraiser-container">
+													<p className="label">BDM Contact</p>
+													<p className={'name'} dangerouslySetInnerHTML={{__html: a.fields.bdm?.name}}/>
+													<p className={'phone'} dangerouslySetInnerHTML={{__html: a.fields.bdm?.phone}}/>
+													<p className={'email'} dangerouslySetInnerHTML={{__html: a.fields.bdm?.email}}/>
+												</div>
                       </div>
                   ) : null
                 )
               }
-              {appraiser[0]?.fields ? (
-                  <Button
-                      label={"Find Appraisers in the Area"}
-                      onClick={() => {
-                        actions.theme.setAppraiser({
-                          ...appraiser[0],
-                          ...postal_city.current,
-                        });
-                        actions.router.set("/dashboard/e");
-                      }}
-                  />
-              ) : null}
             </div>
-            <div className="cf"></div>
           </div>
         </Container>
         <Footer/>
@@ -294,51 +271,99 @@ export default styled(connect(MapPage))`
     background: none !important;
   }
 
-  .container {
-    margin-top: 50px;
-  }
-
   header .container,
   footer .container {
     margin-top: 0px;
   }
 
+	.appraiser-container {
+		background: #0F0F15;
+		border: 1px solid #BFB6B4;
+		border-radius: 23px;
+		padding: 2rem;
+		margin-left: 4.5rem;
+		top: -2rem;
+		max-width: 22rem;
+
+		@media (max-width: 998px) {
+			margin-top: 2rem;
+			position: relative;
+			margin-left: 0;
+			max-width: 100%;
+		}
+
+		.label {
+			font-weight: 500;
+			color: #36808B;
+			font-size: ${size(14)};
+			margin-bottom: 0.5rem;
+		}
+
+		.name {
+			font-weight: 300;
+			color: #BFB6B4;
+			font-size: ${size(23)};
+			margin-bottom: 1.5rem;
+		}
+
+		.phone {
+			font-weight: 500;
+			color: #FFF;
+			font-size: ${size(14)};
+			margin-bottom: 1rem;
+		}
+		.email {
+			font-weight: 500;
+			color: #FFF;
+			font-size: ${size(14)};
+		}
+	}
+
   .map-wrapper {
+		width: 100%;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     position: relative;
     z-index: 6;
     @media (max-width: 991.98px) {
       width: 100%;
       flex-direction: column;
-      height: 90%;
-    }
-    @media (min-width: 1400px) {
-      transform: scale(0.8);
     }
     @media (min-width: 1800px) {
-      transform: scale(0.68);
       margin-top: -1rem;
     }
 
     @media (max-width: 575.98px) {
       margin: auto;
-      position: fixed;
-      top: 15%;
       left: 0;
       overflow: scroll;
       padding-bottom: 8rem;
       width: 100%;
       z-index: 100;
+			height: 90%;
+			-ms-overflow-style: none;  /* IE and Edge */
+  		scrollbar-width: none;  /* Firefox */
+
+			&::-webkit-scrollbar {
+				display: none;
+			}
+
+			.col-left {
+				margin-top: 4rem;
+				width: 100%;
+			}
     }
 
     .col-left {
       display: flex;
       flex-direction: column;
       max-width: ${size(660)};
-      background: #161a20b8;
-      padding: ${size(40)};
+      background: #0F0F15;
+			padding: 1rem 2rem 3rem;
+			border: 1px solid #BFB6B4;
+			border-radius: 20px;
+			opacity: 0.97;
 
       @media (max-width: 991.98px) {
         margin-bottom: ${size(50)};
@@ -346,7 +371,7 @@ export default styled(connect(MapPage))`
 
       @media (max-width: 575.98px) {
         padding: 2rem;
-				background: #161a20;
+				margin-top: 0;
       }
 
       .inputs-group {
@@ -371,9 +396,6 @@ export default styled(connect(MapPage))`
         }
 
         margin-top: ${size(15)};
-        @media (max-width: 991.98px) {
-          margin-top: ${size(63)};
-        }
         @media (max-width: 575.98px) {
           margin-top: ${size(2.5)};
           flex-direction: column;
@@ -432,24 +454,20 @@ export default styled(connect(MapPage))`
     .col-right {
       display: flex;
       flex-direction: column;
+			height: 100%;
 
-      .appraisal-block {
-        padding: ${size(60)} ${size(45)} ${size(45)};
-        display: flex;
-        flex-direction: column;
-        background: url(${mapInfo});
-        background-size: cover;
-        min-width: ${size(318)};
-        max-width: 45rem;
-        @media (max-width: 575.98px) {
-          padding: 2rem;
-          text-align: center;
-        }
+			@media (max-width: 998px) {
+				margin-top: 25rem;
+				width: 100%;
+			}
 
-        &:first-of-type:not(:only-of-type) {
-          margin-bottom: 5vh;
-        }
-      }
+			.appraisal-block {
+				height: 100%;
+				width: 100%;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+			}
 
       h3 {
         color: #bfb6b4;
@@ -463,10 +481,19 @@ export default styled(connect(MapPage))`
         }
       }
 
+			.city {
+				font-size: ${size(23)};
+				color: #BFB6B4;
+			}
+
       .text {
         color: #bfb6b4;
-        font-size: ${size(16)};
+        font-size: ${size(14)};
         font-weight: 200;
+
+				@media (max-width: 998.98px) {
+					max-width: 22rem;
+				}
       }
 
       .bold {
@@ -529,6 +556,7 @@ export default styled(connect(MapPage))`
 
   ${Input} {
     .normal-input {
+			min-width: 25rem;
       font-size: ${size(30)};
 
       &::placeholder {
@@ -549,6 +577,7 @@ export default styled(connect(MapPage))`
 
   ${Select} {
     .oppono-select {
+			min-width: 25rem;
       &__option,
       &__single-value,
       &__input,
@@ -570,8 +599,23 @@ export default styled(connect(MapPage))`
     }
   }
 
-  ${Container}.flex {
+	.mt-5 {
+		margin-top: 2rem;
+	}
+
+  ${Container}.flexcontainer {
     display: flex;
+
+		&.container {
+			height: 72%;
+			margin-top: 5rem;
+			padding-top: 3rem;
+
+			@media (max-width: 998px) {
+				margin-top: 0;
+				padding-top: 0;
+			}
+		}
   }
 
   .error-message {

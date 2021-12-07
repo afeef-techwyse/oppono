@@ -116,9 +116,9 @@ const SocialLinks = styled(
   connect(({ state, className }) => {
     const { acf } = state.source.get("acf-options-page");
     return (
-      <div className={className}>
+      <div className={classnames(className,"social-menu")}>
         {acf?.social?.facebook && (
-          <a target="_blank" href={acf?.social?.facebook} className="facebook">
+          <a target="_blank" href={acf?.social?.facebook} className="facebook mobile-social-menu">
             <svg
               aria-hidden="true"
               focusable="false"
@@ -137,7 +137,7 @@ const SocialLinks = styled(
           </a>
         )}
         {acf?.social?.twitter && (
-          <a target="_blank" href={acf?.social?.twitter} className="twitter">
+          <a target="_blank" href={acf?.social?.twitter} className="twitter mobile-social-menu">
             <svg
               aria-hidden="true"
               focusable="false"
@@ -156,7 +156,7 @@ const SocialLinks = styled(
           </a>
         )}
 				{acf?.social?.linkedin && (
-          <a href={acf?.social?.linkedin} className="linkedin" target="_blank">
+          <a href={acf?.social?.linkedin} className="linkedin mobile-social-menu" target="_blank">
 					<svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="linkedin-in" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" className="svg-inline--fa fa-linkedin-in fa-w-14 fa-3x"><path fill="currentColor" d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"></path></svg>
           </a>
         )}
@@ -194,11 +194,11 @@ const RightPart = connect(({ state, actions }) =>
     </>
   ) : (
     <>
-      <Link className={"signup-btn"} href={"/create-account/"}>
+      <Link className={"signup-btn"} href={"/sign-in/"}>
         <Button
           className={"primary-border primary"}
           focusable={false}
-          label={"Sign up"}
+          label={"Sign in"}
         />
       </Link>
     </>
@@ -296,7 +296,7 @@ const Header = React.forwardRef(
 						</Container>
 					</div>
 				) : null}
-				<div className="menu-content">
+				<div className={classnames("menu-content", { menuOpened })}>
         	<Container>
 						<div className="menu-content__inner">
 							<div className="menu-left">
@@ -507,7 +507,7 @@ export default styled(Header)`
         display: flex;
         align-items: center;
         flex-direction: column;
-        margin-left: ${size(40)};
+        margin-left: ${size(28)};
         cursor: pointer;
         width: ${size(20)};
 
@@ -531,6 +531,13 @@ export default styled(Header)`
 		padding: 0.8rem;
 	}
 
+	.menuOpened {
+		.three-dots {
+			opacity: 0;
+			z-index: -1;
+		}
+	}
+
   .floating-menu {
     position: fixed;
     left: 0;
@@ -540,6 +547,7 @@ export default styled(Header)`
     transition: opacity 200ms, visibility 200ms;
     opacity: 0;
     visibility: hidden;
+		margin-top: 76px;
 
     ${Container} {
       position: relative;
@@ -565,14 +573,13 @@ export default styled(Header)`
 
     .close-menu {
       position: absolute;
+      top: -4rem;
       right: ${size(15)};
-      top: ${size(37)};
       transform: translateY(-50%);
       width: ${size(19)};
       height: ${size(19)};
       cursor: pointer;
       @media (max-width: 991.98px) {
-        right: ${size(25)};
         transform: translate(-50%, -50%);
       }
     }
@@ -595,10 +602,6 @@ export default styled(Header)`
       flex-direction: column;
       align-items: center;
       text-transform: capitalize;
-
-      @media (max-width: 991.98px) {
-        margin-top: 25%;
-      }
 
       a {
         color: #b5d2ff;
@@ -627,9 +630,9 @@ export default styled(Header)`
         &.member-login {
           width: auto;
           font-size: ${size(27)};
-          max-width: fit-content;
-          padding: ${size(12)} ${size(32)};
-          min-height: ${size(64)};
+          max-width: 100%;
+					width: 100%;
+          min-height: ${size(50)};
           display: flex;
           align-items: center;
           justify-content: center;
@@ -640,10 +643,12 @@ export default styled(Header)`
           white-space: nowrap;
           @media (max-width: 991.98px) {
             font-size: ${size(28)};
+						padding: 1rem 0;
             border-radius: ${size(32)};
           }
           @media (max-width: 575.98px) {
-            font-size: ${size(18)};
+            font-size: ${size(16)};
+						padding: 0;
             margin-bottom: ${size(20)};
           }
         }
@@ -664,6 +669,18 @@ export default styled(Header)`
       }
     }
   }
+
+	.social-menu {
+		width: 80%;
+    justify-content: space-evenly;
+	}
+
+	.mobile-social-menu {
+		justify-content: flex-end;
+    align-items: flex-end;
+    display: flex;
+    margin-bottom: 0 !important;
+	}
 
 	.logout {
 		color: #BFB6B4;

@@ -42,12 +42,12 @@ const EPage = ({className, setCurrentTheme, actions, state, formData}) => {
   React.useEffect(() => {
     actions.theme.setLeadId();
     if ( address.postalCode || address.city  ) {
-      postalCodeOnChange({target: {value: address.postalCode}})  
+      postalCodeOnChange({target: {value: address.postalCode}})
     }
   }, []);
-  
+
   const selectedAppraiser = JSON.parse(section2Values('selected-appraiser')||'{}')
-  
+
   return <div className={className}>
     <Form setCurrentTheme={setCurrentTheme} startingStep={ address.postalCode || address.city ? 2 : null }>
       <FormStep pageName={pageName} activeTheme={formData.section_1?.section_theme} stepName={formData.section_1?.section_name}>
@@ -83,19 +83,15 @@ const EPage = ({className, setCurrentTheme, actions, state, formData}) => {
         <Button icon={true} className={'next-step'} label={'Next'}/>
       </FormStep>
       <FormStep pageName={pageName} activeTheme={formData.section_2?.section_theme} stepName={formData.section_2?.section_name}>
-        <div className="form-text-wrapper">
-          <h1 className={'form-headline-1 text-left'}>{formData.section_2?.title}</h1>
-          <h2 className={'form-headline-2 primary'}>{formData.section_2?.subtitle}</h2>
-        </div>
         {appraiser?.fields
-            ? <Appraiser className="full-width" wide>
+            ? 				<Appraiser className="full-width no-top-border">
+							<div className="appraiser-heading">
+								<h1 className={'form-headline-1 text-left'}>{formData.section_2?.title}</h1>
+								<h2 className={'form-headline-2 primary'}>{formData.section_2?.subtitle}</h2>
+							</div>
               <div className="row">
                 <div className="col-left">
-									<p className="form-headline-2 text-left">Your BDM is</p>
-                  <p className={'form-headline-1 text-left'} dangerouslySetInnerHTML={{__html: appraiser?.fields?.bdm.name}}/>
-                </div>
-                <div className="col-right">
-                  <RadioGroup className={'vertical-radio'} radioText={'*Click to call'}>
+								<RadioGroup className={'vertical-radio'} radioText={'*Click to call'}>
                     {appraiser?.fields?.preferred_appraisal_company.map((appraiser, index) => {
                       const endpoint = `/appraiser/${appraiser.post_name}`;
                       const appraiserSource = state.source.get(endpoint);
@@ -108,22 +104,30 @@ const EPage = ({className, setCurrentTheme, actions, state, formData}) => {
                           number={appraiserData?.acf.phone}/>;
                     })}
                   </RadioGroup>
-                  <P.Dark>*Disclaimer - If the city you are looking for is not listed please contact your BDM directly
-                    or email us at info@oppono.com</P.Dark>
+									<P.Dark>*Disclaimer<br/>
+									If the city you are looking for is not listed please contact your BDM directly or email us at info@oppono.com</P.Dark>
+                </div>
+                <div className="col-right">
+                  <div className="appraiser-container">
+										<p className="label">BDM contact</p>
+										<p className={'name'} dangerouslySetInnerHTML={{__html: appraiser?.fields?.bdm.name}}/>
+										<p className={'phone'} dangerouslySetInnerHTML={{__html: appraiser?.fields?.bdm.phone}}/>
+										<p className={'email'} dangerouslySetInnerHTML={{__html: appraiser?.fields?.bdm.email}}/>
+									</div>
                 </div>
               </div>
-              <div className="btn-group">
-                <Link href={'/dashboard/'}><Button focusable={false} className={'bordered'} label={'Back to the Dashboard'}/></Link>
-                <Button className={'next-step'} label={'Alert this appraiser'}/>
-              </div>
+							<div className="row">
+								<div className="btn-group">
+									<Link href={'/dashboard/'}><Button focusable={false} className={'bordered'} label={'Back to the Dashboard'}/></Link>
+									<Button className={'next-step'} label={'Alert this appraiser'}/>
+								</div>
+							</div>
             </Appraiser>
             : <Appraiser wide>
               <div className="row">
                 <div className="col-left">
                   <p className={'form-headline-1 text-left'}>NO APPRAISERS</p>
-                </div>
-                <div className="col-right">
-                  <P.Dark>Can not find any appraisers for
+									<P.Dark>Can not find any appraisers for
                     the {address.city ? address.city : section1Values('city')} {address.postalCode ? address.postalCode : section1Values('postal_code')}</P.Dark>
                 </div>
               </div>
@@ -134,13 +138,12 @@ const EPage = ({className, setCurrentTheme, actions, state, formData}) => {
         }
       </FormStep>
       <FormStep pageName={pageName} activeTheme={formData.section_3?.section_theme} stepName={formData.section_3?.section_name}>
-        <div className="form-text-wrapper">
+        <div className="notification form-text-wrapper">
           <h1 className={'form-headline-1 text-left'}>{formData.section_3?.title}</h1>
           <h2 className={'form-headline-2 primary'}>{formData.section_3?.subtitle}</h2>
-          <h2 className={'form-headline-3 primary'}>From: Oppono (appraisals@oppono.com) To: {selectedAppraiser.company} ({selectedAppraiser.email})</h2>
-          <br/>
-          <h2 className={'form-headline-3 primary'}>Hi, I would like to send a mortgage appraisal request on behalf of
-            my client. My client is requesting a:</h2>
+          <p className={'form-headline-3 primary'}>From: Oppono (appraisals@oppono.com)<br/>To: {selectedAppraiser.company} ({selectedAppraiser.email})</p>
+          <p className={'form-headline-3 primary'}>Hi, I would like to send a mortgage appraisal request on behalf of
+            my client. My client is requesting a:</p>
         </div>
         <div className={'form-wide-container'}>
           <RadioGroup className={'request-type fix-filter-e'} checked={'first-mortgage'}>
@@ -213,8 +216,75 @@ export default styled(connect(EPage))`
   width: 100%;
   height: 100%;
 
+	.no-top-border {
+		border-top: none !important;
+		margin-top: 0;
+	}
+
+	.row {
+		margin-top: 4rem;
+		position: relative;
+	}
+
+	.col-left {
+		width: 90% !important;
+
+		.radio-group {
+			padding-right: 4.5rem;
+			border-right: 1px solid #BFB6B4;
+			padding-bottom: 2rem;
+		}
+
+		@media (max-width: 998px) {
+			border-bottom: 1px solid #BFB6B4;
+			margin-bottom: 4.5rem;
+			padding-bottom: 4.5rem;
+		}
+	}
+
 	.full-width > .container {
 		width: 100%;
+	}
+
+	.appraiser-container {
+		position: absolute;
+		background: #212133;
+		border: 1px solid #BFB6B4;
+		border-radius: 23px;
+		padding: 2rem;
+		margin-left: 4.5rem;
+		top: -2rem;
+
+		@media (max-width: 998px) {
+			position: relative;
+			margin-left: 0;
+		}
+
+		.label {
+			font-weight: 500;
+			color: #36808B;
+			font-size: ${size(14)};
+			margin-bottom: 0.5rem;
+		}
+
+		.name {
+			font-weight: 300;
+			color: #BFB6B4;
+			font-size: ${size(23)};
+			margin-bottom: 1.5rem;
+		}
+
+		.phone {
+			font-weight: 500;
+			color: #FFF;
+			font-size: ${size(14)};
+			margin-bottom: 1rem;
+		}
+		.email {
+			font-weight: 500;
+			color: #FFF;
+			font-size: ${size(14)};
+		}
 	}
 
   .fix-filter-e {
@@ -223,11 +293,66 @@ export default styled(connect(EPage))`
     max-width: 85rem;
     padding-bottom: ${size(22)};
     align-items: center;
+
+
   }
+
+	@media (max-width: 998px) {
+		.radio-text {
+			font-size: ${size(16)};
+		}
+
+		.radio-group {
+			padding-right: 0;
+			border-right: 0;
+
+			.radio-input {
+				padding-top: 0;
+				border-bottom: 1px solid #B5D2FF33;
+				a {
+					span {
+						display: none;
+					}
+				}
+			}
+		}
+	}
+
+	.notification {
+		margin-top: 5rem;
+
+		h2 {
+			color: #BFB6B480;
+			margin-bottom: 1.5em;
+		}
+
+		p {
+			font-size: ${size(14)};
+			color: #BFB6B4;
+			line-height: 1.3;
+		}
+	}
+
+	.radio-input {
+		padding-bottom: 1.2rem;
+		margin-top: 1.2rem !important;
+
+		@media screen (max-width: 998px) {
+			padding-bottom: 0;
+		}
+	}
+
+	.btn-group button {
+		margin-top: 2rem;
+	}
 
   .vertical-radio {
     label a {
-      color: #0e9564;
+      color: #FFF;
+			min-width: 21rem;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
     }
   }
 

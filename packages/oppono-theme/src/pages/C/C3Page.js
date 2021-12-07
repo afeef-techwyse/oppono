@@ -838,7 +838,7 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
 						</p>
 					</FinalizeHeading>
 					<FinalizePercentage>
-							<P.Num>{+firstProduct.fields?.rate + 0.25}%</P.Num>
+							<P.Num>{(+firstProduct.fields?.rate + 0.25).toFixed?.(2)}%</P.Num>
 
 							<P.Small className="meta">*Variable rate</P.Small>
 

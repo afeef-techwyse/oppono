@@ -38,7 +38,7 @@ export default styled(ProductsPortion)`
     font-weight: 300;
     font-style: normal;
     letter-spacing: normal;
-    line-height: ${size(45)};
+    line-height: ${size(65)};
     text-align: center;
     display: inline-block;
     position: relative;

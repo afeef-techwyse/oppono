@@ -83,7 +83,7 @@ const Slider = styled(Swiper)`
       letter-spacing: normal;
       line-height: ${size(85)};
       text-align: left;
-      white-space: pre-wrap;
+			max-width: ${size(1150)};
       @media (max-width: 991.98px) {
         font-size: ${size(60)};
         line-height: ${size(70)};
@@ -675,7 +675,7 @@ export default styled(connect(HomeSlider))`
 
     .slides-numbers {
       color: #b5d2ff;
-      font-size: ${size(12)};
+      font-size: ${size(20)};
       font-weight: 400;
       font-style: normal;
       letter-spacing: normal;

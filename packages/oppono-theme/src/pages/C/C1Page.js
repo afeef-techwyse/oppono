@@ -822,7 +822,7 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 								1st HELOC
 							</h2>
 
-							<P.Num>{+firstProduct.fields?.rate + 0.25}%</P.Num>
+							<P.Num>{(+firstProduct.fields?.rate + 0.25).toFixed?.(2)}%</P.Num>
 
 							<P.Small className="meta">*Fixed rate</P.Small>
 

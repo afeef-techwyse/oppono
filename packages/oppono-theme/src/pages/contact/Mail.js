@@ -9,7 +9,7 @@ import LastStep from "../../components/form-components/LastStep";
 import { Wysiwyg } from "../../components/form-components/StyledComponent";
 import Container from "../../components/reusable/Container";
 import { size } from "../../functions/size";
-import contact_obj from "../../assets/images/contact-obj.png";
+import contact_obj from "../../assets/images/company-profile.png";
 import FlyingObjsContainer from "../../components/reusable/FlyingObjsContainer";
 import Input from "../../components/form-components/Input";
 import TextArea from "../../components/form-components/TextArea";
@@ -86,7 +86,7 @@ const Mail = ({ className, state, actions }) => {
                       </svg>
 										</div>
 										<div className="text">
-											Ask a quetion
+											Ask a question
 										</div>
 									</div>
 								</Link>
@@ -230,10 +230,11 @@ export default styled(connect(Mail))`
 	.contact-us-container {
 		max-width: 100% !important;
 		display: flex;
-    flex-direction: column;
+    flex-direction: row;
 
     @media (max-width: 998px) {
       padding: 0;
+			flex-direction: column;
     }
 
 		.details {
@@ -354,7 +355,7 @@ export default styled(connect(Mail))`
 
     @media (max-width: 991.98px) {
       width: 100%;
-      
+
     &.contact-form {
         margin-top: 5rem;
       }
@@ -364,7 +365,7 @@ export default styled(connect(Mail))`
   .contact-info-wrapper {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;  
+    flex-wrap: wrap;
     text-align: center;
     justify-content: space-between;
     margin-top: 3rem;
@@ -392,7 +393,7 @@ export default styled(connect(Mail))`
           min-height: 12rem;
           padding: 1rem 0;
         }
-        
+
         .text {
           color: #B5D2FF;
           font-size: ${size(16)};

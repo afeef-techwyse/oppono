@@ -83,7 +83,6 @@ const Slider = styled(Swiper)`
       letter-spacing: normal;
       line-height: ${size(95)};
       text-align: left;
-      white-space: pre-wrap;
       @media (max-width: 991.98px) {
         font-size: ${size(60)};
         line-height: ${size(70)};

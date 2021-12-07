@@ -28,6 +28,12 @@ export default styled(Appraiser)`
 		box-shadow: 0 3px 20px rgba(0, 0, 0, 0.16);
 	}
 
+	.appraiser-heading {
+		h2 {
+			color: #BFB6B480 !important;
+		}
+	}
+
 	.appraiser p + p,
 	.appraiser__name {
 		margin-bottom: ${size(12)};
@@ -37,7 +43,7 @@ export default styled(Appraiser)`
 		}
 	}
 
-	
+
 	.appraiser a {
 		color: #fff;
 	}
@@ -62,19 +68,19 @@ export default styled(Appraiser)`
 			margin-bottom: ${size(10)};
 		}
 	}
-	
+
 	.col-left{
 		width: ${size(216)};
-		
+
 		@media(max-width: 575.98px){
 			width: 100%;
 		}
 	}
-	
+
 	.col-right{
 		flex: 1;
 		padding-top: ${size(17)};
-		
+
 		@media(max-width: 991.98px){
 			width: 100%;
 		}
@@ -91,7 +97,7 @@ export default styled(Appraiser)`
 
 		.col-right__inner {
 			border-left: 1px solid #BFB6B4;
-		}	
+		}
 
 		button{
 			margin: ${size(30)} 0 0;
@@ -101,24 +107,24 @@ export default styled(Appraiser)`
 			padding: ${size(12)} ${size(36)};
 		}
 	}
-	
+
 	.vertical-radio{
 		margin-bottom: ${size(37)};
-		
+
 		.radio-group{
 			display: flex;
 			flex-direction: column;
 		}
 	}
-	
+
 	.form-group{
 		margin-top: 0;
-		
+
 		label{
 			@media(max-width: 991.98px){
 				max-width: 100%;
 			}
-			
+
 			@media(max-width: 575.98px){
 				flex-direction: column;
 				align-items: flex-start;
@@ -132,8 +138,9 @@ export default styled(Appraiser)`
 		}
 	}
 	&.appraiser-wide{
-	max-width: 72em;
-	margin: auto;
+	max-width: 86rem;
+	margin-right: auto;
+	margin-left: auto;
 	padding-top: 0;
 	margin-top: 0;
 	border-top:none;
