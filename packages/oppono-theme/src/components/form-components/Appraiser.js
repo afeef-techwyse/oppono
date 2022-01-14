@@ -70,7 +70,7 @@ export default styled(Appraiser)`
 	}
 
 	.col-left{
-		width: ${size(216)};
+		width: 30%;
 
 		@media(max-width: 575.98px){
 			width: 100%;
@@ -80,19 +80,39 @@ export default styled(Appraiser)`
 	.col-right{
 		flex: 1;
 		padding-top: ${size(17)};
+		padding-left: 3rem;
+		position: relative;
+
+		&:before {
+			content: "";
+			border-left: 1px solid #BFB6B4;
+			position: absolute;
+			width: 100%;
+			height: 77%;
+			bottom: 0;
+			left: 0;
+		}
+
+		.greyedText {
+			color: #bfb6bf !important;
+		}
+
 
 		@media(max-width: 991.98px){
 			width: 100%;
+			padding-left: 0;
+
+			&:before {
+				display: none;
+			}
+
+			.radio-input a span {
+				display: none;
+			}
 		}
 
 		> P {
 			margin-bottom: ${size(25)};
-		}
-
-		> p,
-		.col-right__inner {
-			margin-left: ${size(55)};
-			padding-left: ${size(57)};
 		}
 
 		.col-right__inner {
@@ -128,9 +148,6 @@ export default styled(Appraiser)`
 			@media(max-width: 575.98px){
 				flex-direction: column;
 				align-items: flex-start;
-				a{
-					color: #bfb6b4;
-				}
 			}
 		}
 		.label-text{
@@ -145,7 +162,7 @@ export default styled(Appraiser)`
 	margin-top: 0;
 	border-top:none;
 	.col-left{
-		width: ${size(360)};
+		width: 30%;
 		margin-top: ${size(15)};
 		@media(max-width: 575.98px){
 			width: 100%;

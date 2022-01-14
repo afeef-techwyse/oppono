@@ -206,6 +206,43 @@ const MapPage = ({className, actions, state, libraries}) => {
                   </p>
               ) : null}
             </div>
+            <div className="col-right mobile-only">
+
+
+              {appraiser[0]?.fields &&
+                appraiser
+                .filter((v,i,a) => a.findIndex(t=>(t.ID === v.ID))===i)
+                .map((a) =>
+                  a.fields ? (
+                      <div key={a.ID} className="appraisal-block">
+												<div className="appraiser-container">
+													<p className="label">Lending Area</p>
+													<p className="city">{a.fields.city}</p>
+                        	<p className="ltv">{a.fields.ltv}% LTV</p>
+												</div>
+												<div className="appraiser-container">
+													<p className="label">Preferred Appraisers</p>
+													{ a.fields.preferred_appraisal_company &&
+                          <p className="text mt-5">
+                            {[...a.fields.preferred_appraisal_company]
+                                ?.map?.((c) => c.post_title)
+                                .join(", ")}
+                          </p>
+                        }
+												</div>
+												<div className="appraiser-container">
+													<p className="label">BDM Contact</p>
+													<p className={'name'} dangerouslySetInnerHTML={{__html: a.fields.bdm?.name}}/>
+													<p className={'phone'} dangerouslySetInnerHTML={{__html: a.fields.bdm?.phone}}/>
+													<p className={'email'} dangerouslySetInnerHTML={{__html: a.fields.bdm?.email}}/>
+												</div>
+                      </div>
+                  ) : null
+                )
+              }
+            </div>
+          </div>
+          <div className="map-wrapper desktop-only">
             <div className="col-right">
 
 
@@ -267,6 +304,24 @@ export default styled(connect(MapPage))`
     z-index: 0;
   }
 
+  .mobile-only {
+    display: none !important;
+  }
+
+  .desktop-only {
+    justify-content: flex-end !important;
+  }
+
+  @media (max-width: 998px) {
+    .mobile-only {
+      display: block !important;
+    }
+
+    .desktop-only {
+      display: none !important;
+    }
+  }
+
   ${Header} {
     background: none !important;
   }
@@ -320,12 +375,19 @@ export default styled(connect(MapPage))`
 	}
 
   .map-wrapper {
-		width: 100%;
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
     position: relative;
     z-index: 6;
+
+    &.desktop-only {
+      position: absolute;
+      right: 6rem;
+      top: 46%;
+      transform: translateY(-50%);
+    }
+
     @media (max-width: 991.98px) {
       width: 100%;
       flex-direction: column;
@@ -341,7 +403,7 @@ export default styled(connect(MapPage))`
       padding-bottom: 8rem;
       width: 100%;
       z-index: 100;
-			height: 90%;
+			height: 100%;
 			-ms-overflow-style: none;  /* IE and Edge */
   		scrollbar-width: none;  /* Firefox */
 
@@ -564,6 +626,12 @@ export default styled(connect(MapPage))`
       }
     }
 
+    .normal-input[name="postal_code"] {
+      &::placeholder {
+        color: #383838;
+      }
+    }
+
     @media (max-width: 450px) {
       .normal-input {
         font-size: ${size(20)};
@@ -604,12 +672,13 @@ export default styled(connect(MapPage))`
 	}
 
   ${Container}.flexcontainer {
-    display: flex;
 
 		&.container {
 			height: 72%;
 			margin-top: 5rem;
 			padding-top: 3rem;
+
+      justify-content: space-between;
 
 			@media (max-width: 998px) {
 				margin-top: 0;

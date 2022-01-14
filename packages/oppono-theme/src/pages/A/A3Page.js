@@ -593,18 +593,18 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
                     acceptText={"PDF, JPG, or PNG"}
                 />
                 <Appraiser>
-								<p className="form-headline-2 text-left">Your BDM is</p>
-								<p
-                          className={"form-headline-1 text-left"}
-                          dangerouslySetInnerHTML={{
-                            __html: appraiser?.fields?.bdm.name,
-                          }}
-                      />
                   <div className="row">
                     <div className="col-left">
-										<P.D>Select an appraiser</P.D>
+                      <p className="form-headline-2 text-left">Your BDM is</p>
+												<div className="appraiser-container">
+													<p className="label">BDM Contact</p>
+													<p className={'name'} dangerouslySetInnerHTML={{__html: appraiser?.fields?.bdm.name}}/>
+													<p className={'phone'} dangerouslySetInnerHTML={{__html: appraiser?.fields?.bdm.phone}}/>
+													<p className={'email'} dangerouslySetInnerHTML={{__html: appraiser?.fields?.bdm.email}}/>
+												</div>
                     </div>
                     <div className="col-right">
+                      <P.D className="greyedText">Select an appraiser</P.D>
                       <RadioGroup
                           className={"vertical-radio"}
                           radioText={"*Click to call"}
@@ -621,12 +621,11 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
                             }
                         )}
                       </RadioGroup>
-                      <P.Dark>
-                        *Disclaimer - If the city you are looking for is not
+                      <P.D className="greyedText mb-0">
+                        *Disclaimer - <br/>If the city you are looking for is not
                         listed please contact your BDM directly or email us at
                         info@oppono.com
-                      </P.Dark>
-                      <Button label={"Alert"}/>
+                      </P.D>
                     </div>
                   </div>
                 </Appraiser>

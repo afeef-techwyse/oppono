@@ -51,7 +51,7 @@ const Root = ({state}) => {
         api.init();
       }
       var script = document.createElement('script');
-      script.defer = 1;
+      script.async = 1;
       script.src = 'https://widget.usersnap.com/global/load/4301456a-40b0-4e53-9edd-e491d7d737f8?onload=onUsersnapCXLoad';
       document.getElementsByTagName('head')[0].appendChild(script);     
     `;

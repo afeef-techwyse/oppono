@@ -317,6 +317,52 @@ const GeneralStyles = (props) => (
         color: #fff !important;
       }
 
+      .mb-0 {
+        margin-bottom: 0 !important;
+      }
+
+      .appraiser-container {
+        background: #112D2B;
+        border: 1px solid #BFB6B4;
+        border-radius: 23px;
+        padding: 2rem;
+        margin-top: 3rem;
+        max-width: 22rem;
+    
+        @media (max-width: 998px) {
+          margin-top: 2rem;
+          position: relative;
+          margin-left: 0;
+          max-width: 100%;
+        }
+    
+        .label {
+          font-weight: 500;
+          color: #36808B;
+          font-size: ${size(14)};
+          margin-bottom: 0.5rem;
+        }
+    
+        .name {
+          font-weight: 300;
+          color: #BFB6B4;
+          font-size: ${size(23)};
+          margin-bottom: 1.5rem;
+        }
+    
+        .phone {
+          font-weight: 500;
+          color: #FFF;
+          font-size: ${size(14)};
+          margin-bottom: 1rem;
+        }
+        .email {
+          font-weight: 500;
+          color: #FFF;
+          font-size: ${size(14)};
+        }
+      }
+
       .agree-checkbox {
         position: relative;
         cursor: pointer;

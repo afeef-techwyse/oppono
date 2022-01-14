@@ -269,7 +269,7 @@ const FourPage = (props) => {
           <FormConditionalInput noScroll label={'Do you have an appraisal report?'} name={'mortgages_1'} showOn={'1'} checked={'0'}>
             <FileInput name='appraisal_report_file' label={'Appraisal report'} acceptText={'PDF, JPG, or PNG'}/>
             <Appraiser>
-              <P.D>Select an appraiser</P.D>
+              <P.D className="greyedText">Select an appraiser</P.D>
               <div className="row">
                 <div className="col-left">
                   <p className={'form-headline-1 text-left'}>

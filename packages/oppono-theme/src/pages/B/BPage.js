@@ -578,7 +578,6 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
                     listed please contact your BDM directly or email us at
                     info@oppono.com
                   </P.Dark>
-                  <Button label={"Alert"}/>
                 </div>
               </div>
             </Appraiser>
