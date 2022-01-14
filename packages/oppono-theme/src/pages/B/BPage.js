@@ -74,7 +74,7 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
   const [[businessAppraiser], businessPostalCodeOnChange] = useFlowAppraisers();
   const getAppraiser = () => section2Values('business_address_same_as_property') === '1' ? businessAppraiser : appraiser;
   const mortgage = (+section3Values('down_payment')) || 0;
-  const firstProduct = state.theme.stepResponse.data?.data?.beloc.products[0] || {};
+  const firstProduct = state.theme.stepResponse.data?.data?.beloc?.products[0] || {};
   const refNumber = React.useRef('');
   state.theme.stepResponse.data?.['reference-number'] && (refNumber.current = state.theme.stepResponse.data?.['reference-number'])
 
