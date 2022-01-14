@@ -115,10 +115,6 @@ export default styled(Appraiser)`
 			margin-bottom: ${size(25)};
 		}
 
-		.col-right__inner {
-			border-left: 1px solid #BFB6B4;
-		}
-
 		button{
 			margin: ${size(30)} 0 0;
 			border-radius: 0;

@@ -704,7 +704,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                     <div className="col-left">
 											<p className="form-headline-2 text-left">Your BDM is</p>
 
-											<div className="appraiser-container">
+											<div className="appraiser-container appraiser">
 												<P.D>
 														<Span.isGreen>BDM contact</Span.isGreen>
 												</P.D>
