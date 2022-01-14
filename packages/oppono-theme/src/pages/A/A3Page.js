@@ -74,7 +74,7 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
   const mortgage = (+section2Values("home_value") || 0) -
       (+section2Values("mortgage_value_1") || 0) || 0;
   const firstProduct =
-      state.theme.stepResponse.data?.data?.heloc.products[0] || {};
+      state.theme.stepResponse.data?.data?.heloc?.products[0] || {};
   const refNumber = React.useRef("");
   state.theme.stepResponse.data?.["reference-number"] &&
   (refNumber.current = state.theme.stepResponse.data?.["reference-number"]);
