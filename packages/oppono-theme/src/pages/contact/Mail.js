@@ -78,7 +78,11 @@ const Mail = ({ className, state, actions }) => {
 										</div>
 									</div>
 								</Link>
-								<Link href="#">
+								<div className="askQuestion"
+								onClick={function(e) {
+									e.preventDefault()
+									document.querySelector('.contact-form input[name="name"]').focus();
+								}}>
 									<div className={"item-wrapper"}>
 										<div className={"icon"}>
                       <svg xmlns="http://www.w3.org/2000/svg" width="25.435" height="25.435" viewBox="0 0 25.435 25.435">
@@ -89,7 +93,7 @@ const Mail = ({ className, state, actions }) => {
 											Ask a question
 										</div>
 									</div>
-								</Link>
+								</div>
 								<Link href={
 											"http://maps.google.com/?q=" +
 											pageData.section_1?.oppono_address_line_1 +
@@ -370,9 +374,10 @@ export default styled(connect(Mail))`
     justify-content: space-between;
     margin-top: 3rem;
 
-    a {
+    a, .askQuestion {
       width: 47%;
       margin-bottom: 3rem;
+			cursor: pointer;
 
       @media (max-width: 991px) {
         width: 49%;

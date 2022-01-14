@@ -785,6 +785,8 @@ export default styled(connect(ProductsSlider))`
 
     &.active {
       opacity: 1;
+			font-size: ${size(16)};
+    	font-weight: 500;
     }
 
     @media (max-width: 575.98px) {
