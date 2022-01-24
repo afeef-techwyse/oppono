@@ -98,9 +98,8 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
       state.theme.stepResponse
   );
   const mortgage =
-      (+section5Values("mortgage_value_1") || 0) +
-      (+section5Values("mortgage_value_2") || 0) +
-      (+section5Values("outstanding_amount_value") || 0) || 0;
+      (+section1Values("home_value") || 0) * 0.8 -
+      (+section5Values("mortgage_value_1") || 0) || 0;
   const firstProduct =
       state.theme.stepResponse.data?.data?.heloc?.products[0] || {};
   const refNumber = React.useRef("");
@@ -838,7 +837,7 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
 						</p>
 					</FinalizeHeading>
 					<FinalizePercentage>
-							<P.Num>{(+firstProduct.fields?.rate + 0.25).toFixed?.(2)}%</P.Num>
+							<P.Num>{(+firstProduct?.fields?.rate + 0.25).toFixed?.(2)}%</P.Num>
 
 							<P.Small className="meta">*Variable rate</P.Small>
 
@@ -847,11 +846,11 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
 
 							<P.Num className="smaller">$
                     {numberWithCommas(
-                        monthlyPayments(mortgage, +firstProduct.fields?.rate / 100)
+                        monthlyPayments(mortgage, +firstProduct?.fields?.rate / 100)
                     )}</P.Num>
 							<P.Small className="meta">*Monthly mortgage payment</P.Small>
 
-							{/* <p className="primary form-headline-3 text-left heloc-var"> {String(firstProduct.title).split(" ")[0]} HELOC</p> */}
+							{/* <p className="primary form-headline-3 text-left heloc-var"> {String(firstProduct?.title).split(" ")[0]} HELOC</p> */}
 					</FinalizePercentage>
 					<FinalizeRows>
 						<FinalizeRow>
@@ -864,6 +863,20 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
 									</FinalizeCol>
 								</FinalizeRow>
 
+                <FinalizeRow>
+                  <FinalizeCol>
+                    <P.White>
+                      Property value
+                    </P.White>
+                  </FinalizeCol>
+
+                  <FinalizeCol>
+                    <P.White>
+                      <strong>${numberWithCommas(+section1Values("home_value"))}</strong>
+                    </P.White>
+                  </FinalizeCol>
+                </FinalizeRow>
+
 								<FinalizeRow>
 									<FinalizeCol>
 										<P.White>Qualify up to</P.White>
@@ -875,7 +888,7 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
                         {numberWithCommas(
                             Math.round(
                                 (+section1Values("home_value") *
-                                    firstProduct.fields?.maximum_ltv) /
+                                    firstProduct?.fields?.maximum_ltv) /
                                 100
                             )
                         )}
@@ -883,20 +896,22 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
 										</P.White>
 									</FinalizeCol>
 								</FinalizeRow>
+                
+                
+                <FinalizeRow>
+                  <FinalizeCol>
+                    <P.White>
+                      1st mortgage
+                    </P.White>
+                  </FinalizeCol>
 
-								<FinalizeRow>
-									<FinalizeCol>
-										<P.White>
-											Property value
-										</P.White>
-									</FinalizeCol>
+                  <FinalizeCol>
+                    <P.White>
+                      <strong>${numberWithCommas(+section5Values("mortgage_value_1"))}</strong>
+                    </P.White>
+                  </FinalizeCol>
+                </FinalizeRow>
 
-									<FinalizeCol>
-										<P.White>
-											<strong>${numberWithCommas(+section1Values("home_value"))}</strong>
-										</P.White>
-									</FinalizeCol>
-								</FinalizeRow>
 					</FinalizeRows>
 							<FinalizeRows>
 								<FinalizeRow className={"border"}>
@@ -918,7 +933,7 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
 
 									<FinalizeCol>
 										<P.D>
-											<strong>Up to {firstProduct.fields?.maximum_ltv}%</strong>
+											<strong>Up to {firstProduct?.fields?.maximum_ltv}%</strong>
 										</P.D>
 									</FinalizeCol>
 								</FinalizeRow>
@@ -932,7 +947,7 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
 
 									<FinalizeCol>
 										<P.D>
-											<strong>{beaconScore(firstProduct.fields?.beacon_score)}</strong>
+											<strong>{beaconScore(firstProduct?.fields?.beacon_score)}</strong>
 										</P.D>
 									</FinalizeCol>
 								</FinalizeRow>
@@ -946,12 +961,12 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
 
 									<FinalizeCol>
 										<P.D >
-											<strong>{firstProduct.fields?.fee}%</strong>
+											<strong>{firstProduct?.fields?.fee}%</strong>
 										</P.D>
 									</FinalizeCol>
 								</FinalizeRow>
 
-								{firstProduct.fields?.specifications.map(
+								{firstProduct?.fields?.specifications.map(
 									({term_id, name}) => (
 											<FinalizeRow key={term_id}>
 												<FinalizeCol>
@@ -982,6 +997,14 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
               pageName={pageName}
               activeTheme={formData.section_9?.section_theme}
               stepName={formData.section_9?.section_name}
+              sendSteps={[
+                formData.section_4?.section_name,
+                formData.section_5?.section_name,
+                formData.section_6?.section_name,
+                formData.section_7?.section_name,
+                formData.section_8?.section_name,
+                formData.section_9?.section_name
+              ]}
           >
             <div className="upload-step-wrapper">
               <img src={upload}/>

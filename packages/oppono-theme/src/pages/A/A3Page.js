@@ -71,7 +71,7 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
   }, [state.theme.user.logged]);
   const [[appraiser], postalCodeOnChange] = useFlowAppraisers();
 
-  const mortgage = (+section2Values("home_value") || 0) -
+  const mortgage = (+section2Values("home_value") || 0) * 0.8 -
       (+section2Values("mortgage_value_1") || 0) || 0;
   const firstProduct =
       state.theme.stepResponse.data?.data?.heloc?.products[0] || {};
@@ -309,7 +309,7 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
               <div className={"biggest-number"}>
                 <p>
                   <sup>$</sup>
-                  {numberWithCommas(mortgage)}
+                  { numberWithCommas(mortgage) }
                 </p>
               </div>
             </div>
@@ -441,6 +441,20 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
 									</FinalizeCol>
 								</FinalizeRow>
 
+                <FinalizeRow>
+                  <FinalizeCol>
+                    <P.White>
+                      Property value
+                    </P.White>
+                  </FinalizeCol>
+
+                  <FinalizeCol>
+                    <P.White>
+                      <strong>${numberWithCommas(+section2Values("home_value"))}</strong>
+                    </P.White>
+                  </FinalizeCol>
+                </FinalizeRow>
+
 								<FinalizeRow>
 									<FinalizeCol>
 										<P.White>HELOC request</P.White>
@@ -459,19 +473,20 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
 									</FinalizeCol>
 								</FinalizeRow>
 
-								<FinalizeRow>
-									<FinalizeCol>
-										<P.White>
-											Property value
-										</P.White>
-									</FinalizeCol>
+                
+                <FinalizeRow>
+                  <FinalizeCol>
+                    <P.White>
+                      1st mortgage
+                    </P.White>
+                  </FinalizeCol>
 
-									<FinalizeCol>
-										<P.White>
-											<strong>${numberWithCommas(+section2Values("home_value"))}</strong>
-										</P.White>
-									</FinalizeCol>
-								</FinalizeRow>
+                  <FinalizeCol>
+                    <P.White>
+                      <strong>${numberWithCommas(+section2Values("mortgage_value_1"))}</strong>
+                    </P.White>
+                  </FinalizeCol>
+                </FinalizeRow>
 
 								<FinalizeRow>
 									<FinalizeCol>
@@ -484,9 +499,11 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
 										<P.White>
 											<strong>
 												{(
-													((section4Values("confirm_qualify_amount") === "0"
+													((
+                            (+section2Values("mortgage_value_1") + 
+                            section4Values("confirm_qualify_amount") === "0"
 															? +section4Values("amount_wanted")
-															: mortgage) /
+															: mortgage)) /
 															+section2Values("home_value")) *
 													100
 												).toFixed?.(2)}%
@@ -574,6 +591,14 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
               pageName={pageName}
               activeTheme={formData.section_6?.section_theme}
               stepName={formData.section_6?.section_name}
+              sendSteps={[
+                formData.section_1?.section_name,
+                formData.section_2?.section_name,
+                formData.section_3?.section_name,
+                formData.section_4?.section_name,
+                formData.section_5?.section_name,
+                formData.section_6?.section_name
+              ]}
           >
             <div className="upload-step-wrapper">
               <img src={upload}/>

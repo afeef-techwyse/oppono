@@ -96,21 +96,6 @@ const FormsPage = ({ className, state, actions, link }) => {
           when={page.slug === "c-iii"}
           formData={page.acf}
         />
-        <D1Page
-          setCurrentTheme={setCurrentTheme}
-          when={page.slug === "d-i"}
-          formData={page.acf}
-        />
-        <D2Page
-          setCurrentTheme={setCurrentTheme}
-          when={page.slug === "d-ii"}
-          formData={page.acf}
-        />
-        <D3Page
-          setCurrentTheme={setCurrentTheme}
-          when={page.slug === "d-iii"}
-          formData={page.acf}
-        />
         <EPage
           setCurrentTheme={setCurrentTheme}
           when={page.slug === "e"}

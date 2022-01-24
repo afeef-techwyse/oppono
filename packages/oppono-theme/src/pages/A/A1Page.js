@@ -82,8 +82,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
       (+section2Values("mortgage_value_1") || 0) +
       (+section2Values("mortgage_value_2") || 0) +
       +section2Values("outstanding_amount_value") +
-      +section2Values("sm_amount") +
-      +section2Values("fm_amount") ||
+      +section2Values("sm_amount") ||
       0 ||
       0;
   const refNumber = React.useRef("");
@@ -234,7 +233,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
               ]}
 
           >
-            <input type={'hidden'} name={`ltv`} value={(mortgage / +section2Values('home_value') * 100).toFixed?.(2)}/>
+            <input type={'hidden'} name={`ltv`} value={(( mortgage / +section2Values("home_value")) * 100).toFixed?.(2)}/>
 
             <div className="form-text-wrapper">
               <h1 className={"form-headline-1 text-left"}>
@@ -419,32 +418,19 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 								</FinalizeRow>
 
 								<FinalizeRow>
-									<FinalizeCol>
-										<P.White>Home equity</P.White>
-									</FinalizeCol>
+										<FinalizeCol>
+											<P.White>1st mortgage</P.White>
+										</FinalizeCol>
 
-									<FinalizeCol>
-										<P.White>
-											<strong>
-												${numberWithCommas(+section2Values("home_value") - mortgage)}
-											</strong>
-										</P.White>
-									</FinalizeCol>
+										<FinalizeCol>
+											<P.White>
+												<strong>
+													${numberWithCommas(+section2Values("mortgage_value_1"))}
+												</strong>
+											</P.White>
+										</FinalizeCol>
 								</FinalizeRow>
-
-								<FinalizeRow>
-									<FinalizeCol>
-										<P.White>Mortgage request</P.White>
-									</FinalizeCol>
-
-									<FinalizeCol>
-										<P.White>
-											<strong>
-												${numberWithCommas(mortgage)}
-											</strong>
-										</P.White>
-									</FinalizeCol>
-								</FinalizeRow>
+                
 
 								{ section2Values("mortgage_value_2") &&
 									<FinalizeRow>
@@ -461,6 +447,52 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 										</FinalizeCol>
 									</FinalizeRow>
 								}
+                
+								{ section2Values("outstanding_amount_value") &&
+									<FinalizeRow>
+										<FinalizeCol>
+											<P.White>Outstanding Liens</P.White>
+										</FinalizeCol>
+
+										<FinalizeCol>
+											<P.White>
+												<strong>
+													${numberWithCommas(section2Values("outstanding_amount_value"))}
+												</strong>
+											</P.White>
+										</FinalizeCol>
+									</FinalizeRow>
+								}
+                
+								{ section2Values("sm_amount") &&
+									<FinalizeRow>
+										<FinalizeCol>
+											<P.White>Additional Fund Request</P.White>
+										</FinalizeCol>
+
+										<FinalizeCol>
+											<P.White>
+												<strong>
+													${numberWithCommas(section2Values("sm_amount"))}
+												</strong>
+											</P.White>
+										</FinalizeCol>
+									</FinalizeRow>
+								}
+
+								<FinalizeRow>
+									<FinalizeCol>
+										<P.White>Home equity</P.White>
+									</FinalizeCol>
+
+									<FinalizeCol>
+										<P.White>
+											<strong>
+												${numberWithCommas(+section2Values("home_value") - mortgage)}
+											</strong>
+										</P.White>
+									</FinalizeCol>
+								</FinalizeRow>
 
 								<FinalizeRow>
 									<FinalizeCol>
@@ -817,6 +849,13 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
               pageName={pageName}
               activeTheme={formData.section_6?.section_theme}
               stepName={formData.section_6?.section_name}
+              sendSteps={[
+                formData.section_1?.section_name,
+                formData.section_2?.section_name,
+                formData.section_3?.section_name,
+                formData.section_5?.section_name,
+                formData.section_6?.section_name
+              ]}
           >
             <div className="upload-step-wrapper">
               <img src={upload}/>

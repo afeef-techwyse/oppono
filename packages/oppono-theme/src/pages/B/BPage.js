@@ -401,6 +401,20 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
 									</FinalizeCol>
 								</FinalizeRow>
 
+                <FinalizeRow>
+                  <FinalizeCol>
+                    <P.White>
+                      Property value
+                    </P.White>
+                  </FinalizeCol>
+
+                  <FinalizeCol>
+                    <P.White>
+                      <strong>${numberWithCommas(+section3Values("purchase_price"))}</strong>
+                    </P.White>
+                  </FinalizeCol>
+                </FinalizeRow>
+
 								<FinalizeRow>
 									<FinalizeCol>
 										<P.White>BLOC request</P.White>
@@ -411,20 +425,6 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
 											<strong>
 												${numberWithCommas(mortgage)}
 											</strong>
-										</P.White>
-									</FinalizeCol>
-								</FinalizeRow>
-
-								<FinalizeRow>
-									<FinalizeCol>
-										<P.White>
-											Property value
-										</P.White>
-									</FinalizeCol>
-
-									<FinalizeCol>
-										<P.White>
-											<strong>${numberWithCommas(+section3Values("purchase_price"))}</strong>
 										</P.White>
 									</FinalizeCol>
 								</FinalizeRow>
@@ -526,6 +526,14 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
           pageName={pageName}
           activeTheme={formData.section_6?.section_theme}
           stepName={formData.section_6?.section_name}
+          sendSteps={[
+            formData.section_1?.section_name,
+            formData.section_2?.section_name,
+            formData.section_3?.section_name,
+            formData.section_4?.section_name,
+            formData.section_5?.section_name,
+            formData.section_6?.section_name
+          ]}
       >
         <div className="upload-step-wrapper">
           <img src={upload}/>

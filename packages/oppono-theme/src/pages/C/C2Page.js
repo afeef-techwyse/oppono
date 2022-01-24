@@ -55,6 +55,7 @@ import CheckMark from "../../components/reusable/CheckMark";
 import {numberWithCommas} from "../../functions/numberWithCommas";
 import Link from "../../components/reusable/Link";
 import {fixCharacters} from "../../functions/fixCharacters";
+import FormBlurb from "../../components/form-components/FormBlurb";
 
 const pageName = "c-2";
 const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
@@ -67,6 +68,8 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
   const [step1Valid, setStep1Valid] = React.useState(false);
 
   const media = useMedia();
+  const selectedProduct = React.useRef("");
+  const maxMortgage = React.useRef("");
 
   React.useEffect(() => {
     actions.theme.setSubHeader(formData.sub_header);
@@ -82,7 +85,6 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 
       response.data.data = products;
       actions.theme.setStepResponse(response);
-      // actions.theme.setStepResponse({data:{data:products}});
     });
   }, []);
 
@@ -93,15 +95,30 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
   const [productsTable, productsFilter] = useProductsTable(
       state.theme.stepResponse
   );
-  const mortgage =
-      +section1Values("home_value") - +section5Values("down_payment") || 0;
+
+	const [purchasePrice, setPurchasePrice] = React.useState(null)
+	const [setResidentialStatus] = React.useState(null)
+	const [downPayment, setDownPayment] = React.useState(null)
+	const [firstMortgageAmount, setfirstMortgageAmount] = React.useState(null)
+
+	const calcSecondMorgage = () => +purchasePrice - +downPayment - +firstMortgageAmount || 0;
+  
+	React.useEffect(() => {
+		setSecondMortgage(calcSecondMorgage())
+	}, [purchasePrice, downPayment, firstMortgageAmount])
+  const mortgage = (+purchasePrice - +downPayment - (+firstMortgageAmount || 0) + (+firstMortgageAmount || 0));
+
+
+  //const mortgage = +section1Values("home_value") - +section5Values("down_payment") || 0;
   const firstProduct = state.theme.stepResponse.data?.data
-      ? Object.values(state.theme.stepResponse.data?.data)[0].products[0]
+      ? Object.values(state.theme.stepResponse.data?.data)?.[0]?.products?.[0]
       : {};
   const refNumber = React.useRef("");
   state.theme.stepResponse.data?.["reference-number"] &&
   (refNumber.current = state.theme.stepResponse.data?.["reference-number"]);
   const [show1stMortgageInput, setShow1stMortgageInput] = React.useState(false);
+  const [secondMortgage, setSecondMortgage] = React.useState(0)
+
   return (
       <div className={className}>
         <Form setCurrentTheme={setCurrentTheme} endPoint={"/purchase"}>
@@ -580,7 +597,11 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
               </h2>
             </div>
             <Address
-                address={{name: "address", ...formData.section_4?.address_input}}
+                address={{
+                  name: "address", 
+                  noScroll: true, 
+                  ...formData.section_4?.address_input
+                }}
                 city={{name: "city", ...formData.section_4?.city_input}}
                 postalCode={{
                   name: "postal_code",
@@ -621,14 +642,21 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   value={"first"}
                   name={"looking_for"}
                   type={"radio"}
-                  onClick={() => setShow1stMortgageInput(false)}
+                  onClick={() => {
+                    setShow1stMortgageInput(false)
+                    console.log("show 1st mortgage input: " + show1stMortgageInput)
+                  }}
+
               />
               <RadioInput
                   label={formData.section_5?.looking_for_yes_no.no}
                   value={"second"}
                   name={"looking_for"}
                   type={"radio"}
-                  onClick={() => setShow1stMortgageInput(true)}
+                  onClick={() => {
+                    setShow1stMortgageInput(true)
+                    console.log("show 1st mortgage input: " + show1stMortgageInput)
+                  }}
               />
             </RadioGroup>
 
@@ -638,22 +666,42 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   isCurrency
                   name={"purchase_price"}
                   {...formData.section_5?.purchase_price_input}
+									onKeyUp={(value) => {
+										setPurchasePrice(value);
+									}}
               />
               <Input
                   type={"number"}
                   isCurrency
                   name={"down_payment"}
                   {...formData.section_5?.down_payment_input}
+									onKeyUp={(value) => {
+										setDownPayment(value);
+									}}
               />
             </W50>
 
-            {show1stMortgageInput &&<Input
+            {show1stMortgageInput && <Input
                 type={"number"}
                 isCurrency
                 className={"mortgage_value_1"}
                 name={"mortgage_value_1"}
+								onKeyUp={(value) => {
+									setfirstMortgageAmount(value);
+								}}
                 {...formData.section_5?.mortgage_value_1_input}
             />}
+
+            { 
+              ( show1stMortgageInput && secondMortgage > 0 ) &&
+                <FormBlurb>
+                  So you’re looking for a second mortgage of <strong>${numberWithCommas(secondMortgage)}</strong>.
+
+                  <br />
+
+                  Ready to continue?
+                </FormBlurb>
+            }
 
 
             <div className="btn-group">
@@ -757,7 +805,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 						</p>
 					</FinalizeHeading>
 					<FinalizePercentage>
-							<P.Num>{(+firstProduct.fields?.rate + 0.25).toFixed?.(2)}%</P.Num>
+							<P.Num>{(+firstProduct?.fields?.rate + 0.25).toFixed?.(2)}%</P.Num>
 
 							<P.Small className="meta">*Variable rate</P.Small>
 
@@ -766,7 +814,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 
 							<P.Num className="smaller">$
                     {numberWithCommas(
-                        monthlyPayments(mortgage, +firstProduct.fields?.rate / 100)
+                        monthlyPayments(mortgage, +firstProduct?.fields?.rate / 100)
                     )}</P.Num>
 							<P.Small className="meta">*Monthly mortgage payment</P.Small>
 
@@ -820,7 +868,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                         {numberWithCommas(
                             Math.round(
                                 (+section1Values("home_value") *
-                                    firstProduct.fields?.maximum_ltv) /
+                                    firstProduct?.fields?.maximum_ltv) /
                                 100
                             )
                         )}
@@ -911,7 +959,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 
 									<FinalizeCol>
 										<P.D>
-											<strong>Up to {firstProduct.fields?.maximum_ltv}%</strong>
+											<strong>Up to {firstProduct?.fields?.maximum_ltv}%</strong>
 										</P.D>
 									</FinalizeCol>
 								</FinalizeRow>
@@ -925,7 +973,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 
 									<FinalizeCol>
 										<P.D>
-											<strong>{beaconScore(firstProduct.fields?.beacon_score)}</strong>
+											<strong>{beaconScore(firstProduct?.fields?.beacon_score)}</strong>
 										</P.D>
 									</FinalizeCol>
 								</FinalizeRow>
@@ -939,12 +987,12 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 
 									<FinalizeCol>
 										<P.D >
-											<strong>{firstProduct.fields?.fee}%</strong>
+											<strong>{firstProduct?.fields?.fee}%</strong>
 										</P.D>
 									</FinalizeCol>
 								</FinalizeRow>
 
-								{firstProduct.fields?.specifications.map(
+								{firstProduct?.fields?.specifications.map(
 									({term_id, name}) => (
 											<FinalizeRow key={term_id}>
 												<FinalizeCol>
@@ -982,6 +1030,13 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
               pageName={pageName}
               activeTheme={formData.section_8?.section_theme}
               stepName={formData.section_8?.section_name}
+              sendSteps={[
+                formData.section_4?.section_name,
+                formData.section_5?.section_name,
+                formData.section_6?.section_name,
+                formData.section_7?.section_name,
+                formData.section_8?.section_name
+              ]}
           >
             <div className="upload-step-wrapper">
               <img src={upload}/>

@@ -90,8 +90,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 	React.useEffect(() => {
 		setSecondMortgage(calcSecondMorgage())
 	}, [purchasePrice, downPayment, firstMortgageAmount])
-
-  const mortgage = +section2Values("purchase_price") + +section2Values("mortgage_value_1") - +section2Values("down_payment") || 0;
+  const mortgage = (+purchasePrice - +downPayment - (+firstMortgageAmount || 0) + (+firstMortgageAmount || 0));
 
   const refNumber = React.useRef("");
   state.theme.stepResponse.data?.["reference-number"] &&
@@ -230,16 +229,16 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 {...formData.section_2?.mortgage_value_1_input}
             />}
 
+            { 
+              ( show1stMortgageInput && secondMortgage > 0 ) &&
+                <FormBlurb>
+                  So you’re looking for a second mortgage of <strong>${numberWithCommas(secondMortgage)}</strong>.
 
-						{(show1stMortgageInput && secondMortgage > 0) &&
-							<FormBlurb>
-								So you’re looking for a second mortgage of <strong>${numberWithCommas(secondMortgage)}</strong>.
+                  <br />
 
-								<br />
-
-								Ready to continue?
-							</FormBlurb>
-						}
+                  Ready to continue?
+                </FormBlurb>
+            }
 
             <div className="btn-group">
               <Button className={"bordered prev-step"} label={"Back"}/>
@@ -427,7 +426,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 								<FinalizeRow>
 									<FinalizeCol>
 										<P.White>
-											Mortgage request
+											Property Value
 										</P.White>
 									</FinalizeCol>
 
@@ -499,10 +498,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 										<P.White>
 											<strong>
 												{
-													(
-														mortgage /
-														+section2Values("purchase_price") * 100
-													).toFixed?.(2)
+													(mortgage / +section2Values("purchase_price") * 100).toFixed?.(2)
 												}%
 											</strong>
 										</P.White>
@@ -682,6 +678,13 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
               pageName={pageName}
               activeTheme={formData.section_6?.section_theme}
               stepName={formData.section_6?.section_name}
+              sendSteps={[
+                formData.section_1?.section_name,
+                formData.section_2?.section_name,
+                formData.section_3?.section_name,
+                formData.section_5?.section_name,
+                formData.section_6?.section_name
+              ]}
           >
             <div className="upload-step-wrapper">
               <h1 className={"form-headline-1 text-left"}>

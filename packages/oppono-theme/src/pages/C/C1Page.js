@@ -73,6 +73,7 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
   React.useEffect(() => {
     actions.theme.setSubHeader(formData.sub_header);
   }, [formData]);
+
   React.useEffect(() => {
     actions.theme.setLeadId();
     actions.theme.setStepResponse({});
@@ -92,21 +93,23 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
     actions.theme.checkUser();
   }, [state.theme.user.logged]);
   const [[appraiser], postalCodeOnChange] = useFlowAppraisers();
+  const selectedProduct = React.useRef("");
+  const maxMortgage = React.useRef("");
 
   const [productsTable, productsFilter] = useProductsTable(
       state.theme.stepResponse
   );
+
   const mortgage =
       (+section5Values("mortgage_value_1") || 0) +
       (+section5Values("mortgage_value_2") || 0) +
       +section5Values("outstanding_amount_value") +
-      +section5Values("sm_amount") +
-      +section5Values("fm_amount") ||
+      +section5Values("sm_amount") ||
       0 ||
       0;
 
   const firstProduct = state.theme.stepResponse.data?.data
-      ? Object.values(state.theme.stepResponse.data?.data)[0].products[0]
+      ? Object.values(state.theme.stepResponse.data?.data)?.[0]?.products?.[0]
       : {};
 
   const refNumber = React.useRef("");
@@ -592,7 +595,11 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
               </h2>
             </div>
             <Address
-                address={{name: "address", ...formData.section_4?.address_input}}
+                address={{
+                  name: "address", 
+                  noScroll: true,
+                  ...formData.section_4?.address_input
+                }}
                 city={{name: "city", ...formData.section_4?.city_input}}
                 postalCode={{
                   name: "postal_code",
@@ -632,13 +639,6 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 value={section1Values("home_value")}
             />
 
-            <FormConditionalInput
-                name={"have_mortgage_1"}
-                showOn={"1"}
-                checked={"0"}
-                {...formData.section_5?.any_mortgage_yes_no}
-            >
-              <>
                 <Input
                     type={"number"}
                     isCurrency
@@ -658,8 +658,6 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                       {...formData.section_5?.second_mortgage_amount_input}
                   />
                 </FormConditionalInput>
-              </>
-            </FormConditionalInput>
 
             <FormConditionalInput
                 name={"have_outstanding_amount"}
@@ -677,23 +675,10 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 
             <FormConditionalInput
                 name={"add_mortgage_2"}
-                showOn={"0"}
+                showOn={"1"}
                 checked={"0"}
                 {...formData.section_5?.add_mortgage_yes_no}
             >
-              <FormConditionalInput
-                  name={"increase_mortgage_1"}
-                  showOn={"1"}
-                  checked={"0"}
-                  {...formData.section_5?.increase_mortgage_yes_no}
-              >
-                <Input
-                    type={"number"}
-                    isCurrency
-                    name={"fm_amount"}
-                    {...formData.section_5?.increase_mortgage_amount_input}
-                />
-              </FormConditionalInput>
               <Input
                   type={"number"}
                   isCurrency
@@ -786,14 +771,14 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
             <input
                 type={"hidden"}
                 name={`product_name`}
-                value={firstProduct.title}
+                value={firstProduct?.title}
             />
             <input
                 type={"hidden"}
                 name={`maximum_mortgage`}
                 value={Math.round(
                     (+section1Values("home_value") *
-                        firstProduct.fields?.maximum_ltv) /
+                        firstProduct?.fields?.maximum_ltv) /
                     100
                 )}
             />
@@ -822,13 +807,13 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 								1st HELOC
 							</h2>
 
-							<P.Num>{(+firstProduct.fields?.rate + 0.25).toFixed?.(2)}%</P.Num>
+							<P.Num>{(+firstProduct?.fields?.rate + 0.25).toFixed?.(2)}%</P.Num>
 
 							<P.Small className="meta">*Fixed rate</P.Small>
 
 							<P.Small className="meta">*Payent interest based on balance</P.Small>
 
-							{/* <p className="primary form-headline-3 text-left heloc-var"> {String(firstProduct.title).split(" ")[0]} HELOC</p> */}
+							{/* <p className="primary form-headline-3 text-left heloc-var"> {String(firstProduct?.title).split(" ")[0]} HELOC</p> */}
 					</FinalizePercentage>
 					<FinalizeRows>
 						<FinalizeRow>
@@ -867,36 +852,94 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 									</FinalizeCol>
 								</FinalizeRow>
 
-								<FinalizeRow>
+                <FinalizeRow>
+                  <FinalizeCol>
+                    <P.White>
+                      Property value
+                    </P.White>
+                  </FinalizeCol>
+
+                  <FinalizeCol>
+                    <P.White>
+                      <strong>${numberWithCommas(+section1Values("home_value"))}</strong>
+                    </P.White>
+                  </FinalizeCol>
+                </FinalizeRow>
+                
+                <FinalizeRow>
+                  <FinalizeCol>
+                    <P.White>
+                      1st mortgage
+                    </P.White>
+                  </FinalizeCol>
+
+                  <FinalizeCol>
+                    <P.White>
+                      <strong>${numberWithCommas(+section5Values("mortgage_value_1"))}</strong>
+                    </P.White>
+                  </FinalizeCol>
+                </FinalizeRow>
+
+								{ section5Values("mortgage_value_2") &&
+									<FinalizeRow>
+										<FinalizeCol>
+											<P.White>2nd mortgage</P.White>
+										</FinalizeCol>
+
+										<FinalizeCol>
+											<P.White>
+												<strong>
+													${numberWithCommas(section5Values("mortgage_value_2"))}
+												</strong>
+											</P.White>
+										</FinalizeCol>
+									</FinalizeRow>
+								}
+                
+                
+								{ section5Values("outstanding_amount_value") &&
+									<FinalizeRow>
+										<FinalizeCol>
+											<P.White>Outstanding Liens</P.White>
+										</FinalizeCol>
+
+										<FinalizeCol>
+											<P.White>
+												<strong>
+													${numberWithCommas(section5Values("outstanding_amount_value"))}
+												</strong>
+											</P.White>
+										</FinalizeCol>
+									</FinalizeRow>
+								}
+                
+								{ section5Values("sm_amount") &&
+									<FinalizeRow>
+										<FinalizeCol>
+											<P.White>Additional Fund Request</P.White>
+										</FinalizeCol>
+
+										<FinalizeCol>
+											<P.White>
+												<strong>
+													${numberWithCommas(section5Values("sm_amount"))}
+												</strong>
+											</P.White>
+										</FinalizeCol>
+									</FinalizeRow>
+								}
+
+
+                <FinalizeRow>
 									<FinalizeCol>
-										<P.White>HELOC request</P.White>
+										<P.White>Home equity</P.White>
 									</FinalizeCol>
 
 									<FinalizeCol>
 										<P.White>
-											<strong>$
-											{numberWithCommas(
-                            Math.round(
-                                (+section1Values("home_value") *
-                                    firstProduct.fields?.maximum_ltv) /
-                                100
-                            )
-                        )}
+											<strong>
+												${numberWithCommas(+section2Values("home_value") - mortgage)}
 											</strong>
-										</P.White>
-									</FinalizeCol>
-								</FinalizeRow>
-
-								<FinalizeRow>
-									<FinalizeCol>
-										<P.White>
-											Property value
-										</P.White>
-									</FinalizeCol>
-
-									<FinalizeCol>
-										<P.White>
-											<strong>${numberWithCommas(+section1Values("home_value"))}</strong>
 										</P.White>
 									</FinalizeCol>
 								</FinalizeRow>
@@ -941,7 +984,7 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 
 									<FinalizeCol>
 										<P.D >
-											<strong>{firstProduct.fields?.fee}%</strong>
+											<strong>{firstProduct?.fields?.fee}%</strong>
 										</P.D>
 									</FinalizeCol>
 								</FinalizeRow>
@@ -955,12 +998,12 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 
 									<FinalizeCol>
 										<P.D>
-											<strong>{beaconScore(firstProduct.fields?.beacon_score)}</strong>
+											<strong>{beaconScore(firstProduct?.fields?.beacon_score)}</strong>
 										</P.D>
 									</FinalizeCol>
 								</FinalizeRow>
 
-								{firstProduct.fields?.specifications.map(
+								{firstProduct?.fields?.specifications.map(
 									({term_id, name}) => (
 											<FinalizeRow key={term_id}>
 												<FinalizeCol>
@@ -998,6 +1041,13 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
               pageName={pageName}
               activeTheme={formData.section_8?.section_theme}
               stepName={formData.section_8?.section_name}
+              sendSteps={[
+                formData.section_4?.section_name,
+                formData.section_5?.section_name,
+                formData.section_6?.section_name,
+                formData.section_7?.section_name,
+                formData.section_8?.section_name
+              ]}
           >
             <div className="upload-step-wrapper">
               <img src={upload}/>

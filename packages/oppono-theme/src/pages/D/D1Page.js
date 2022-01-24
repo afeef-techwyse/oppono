@@ -67,7 +67,7 @@ const D1Page = ({className, setCurrentTheme, state, actions, formData}) => {
   const mortgage =
       +section2Values("home_value") - +section2Values("down_payment") || 0;
   const firstProduct = state.theme.stepResponse.data?.data
-      ? Object.values(state.theme.stepResponse.data?.data)[0].products[0]
+      ? Object.values(state.theme.stepResponse.data?.data)?.[0]?.products?.[0]
       : {};
   const refNumber = React.useRef("");
   state.theme.stepResponse.data?.["reference-number"] &&
@@ -267,14 +267,14 @@ const D1Page = ({className, setCurrentTheme, state, actions, formData}) => {
             <input
                 type={"hidden"}
                 name={`product_name`}
-                value={firstProduct.title}
+                value={firstProduct?.title}
             />
             <input
                 type={"hidden"}
                 name={`maximum_mortgage`}
                 value={Math.round(
                     (+section2Values("home_value") *
-                        firstProduct.fields?.maximum_ltv) /
+                        firstProduct?.fields?.maximum_ltv) /
                     100
                 )}
             />
@@ -294,14 +294,14 @@ const D1Page = ({className, setCurrentTheme, state, actions, formData}) => {
               <Top>
                 {media !== "mobile" ? (
                     <FinalizeChild>
-                      <P.Num>{+firstProduct.fields?.rate + 0.25}%</P.Num>
+                      <P.Num>{+firstProduct?.fields?.rate + 0.25}%</P.Num>
                       <P.Dark>*Fixed rate</P.Dark>
                     </FinalizeChild>
                 ) : (
                     <FinalizeChild className={"full"} order={1}>
                       <P.Dark>*Fixed rate</P.Dark>
                       <P.Dark>*Payment interest based on balance</P.Dark>
-                      <P.Num>{+firstProduct.fields?.rate + 0.25}%</P.Num>
+                      <P.Num>{+firstProduct?.fields?.rate + 0.25}%</P.Num>
                     </FinalizeChild>
                 )}
 
@@ -315,7 +315,7 @@ const D1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                     {numberWithCommas(
                         monthlyPayments(
                             mortgage,
-                            (+firstProduct.fields?.rate + 0.25) / 100
+                            (+firstProduct?.fields?.rate + 0.25) / 100
                         )
                     )}
                   </P.Cost>
@@ -348,7 +348,7 @@ const D1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                         {numberWithCommas(
                             Math.round(
                                 (+section2Values("home_value") *
-                                    firstProduct.fields?.maximum_ltv) /
+                                    firstProduct?.fields?.maximum_ltv) /
                                 100
                             )
                         )}
@@ -410,7 +410,7 @@ const D1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                             {numberWithCommas(
                                 Math.round(
                                     (+section2Values("home_value") *
-                                        firstProduct.fields?.maximum_ltv) /
+                                        firstProduct?.fields?.maximum_ltv) /
                                     100
                                 )
                             )}
@@ -449,24 +449,24 @@ const D1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                     <tr>
                       <P.Dark as={"td"}>Max LTV</P.Dark>
                       <P.D as={"td"}>
-                        Up to {firstProduct.fields?.maximum_ltv}%
+                        Up to {firstProduct?.fields?.maximum_ltv}%
                       </P.D>
                     </tr>
                     <tr>
                       <P.Dark as={"td"}>Credit score</P.Dark>
                       <P.D as={"td"}>
-                        {beaconScore(firstProduct.fields?.beacon_score)}
+                        {beaconScore(firstProduct?.fields?.beacon_score)}
                       </P.D>
                     </tr>
                     <tr>
                       <P.Dark as={"td"}>Lender fee</P.Dark>
-                      <P.D as={"td"}>{firstProduct.fields?.fee}%</P.D>
+                      <P.D as={"td"}>{firstProduct?.fields?.fee}%</P.D>
                     </tr>
                     </tbody>
                   </FinalizeTable>
                 </FinalizeChild>
                 <FinalizeChild order={3} className={"wide m-pr-40"}>
-                  {firstProduct.fields?.specifications.map(
+                  {firstProduct?.fields?.specifications.map(
                       ({term_id, name}) => (
                           <P.Border key={term_id}>{name}</P.Border>
                       )
