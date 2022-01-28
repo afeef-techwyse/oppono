@@ -169,25 +169,25 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 {...formData.section_2?.estimated_value_input}
             />
 
-								<Input
-                    type={"number"}
-                    isCurrency
-                    name={"mortgage_value_1"}
-                    {...formData.section_2?.first_mortgage_amount_input}
-                />
-                <FormConditionalInput
-                    name={"have_mortgage_2"}
-                    showOn={"1"}
-                    checked={"0"}
-                    {...formData.section_2?.second_mortgage_yes_no}
-                >
-                  <Input
-                      type={"number"}
-                      isCurrency
-                      name={"mortgage_value_2"}
-                      {...formData.section_2?.second_mortgage_amount_input}
-                  />
-                </FormConditionalInput>
+            <Input
+                type={"number"}
+                isCurrency
+                name={"mortgage_value_1"}
+                {...formData.section_2?.first_mortgage_amount_input}
+            />
+            <FormConditionalInput
+                name={"have_mortgage_2"}
+                showOn={"1"}
+                checked={"0"}
+                {...formData.section_2?.second_mortgage_yes_no}
+            >
+              <Input
+                  type={"number"}
+                  isCurrency
+                  name={"mortgage_value_2"}
+                  {...formData.section_2?.second_mortgage_amount_input}
+              />
+            </FormConditionalInput>
 
             <FormConditionalInput
                 name={"have_outstanding_amount"}
@@ -419,7 +419,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 
 								<FinalizeRow>
 										<FinalizeCol>
-											<P.White>1st mortgage</P.White>
+											<P.White>1st mortgage (existing)</P.White>
 										</FinalizeCol>
 
 										<FinalizeCol>
@@ -435,7 +435,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 								{ section2Values("mortgage_value_2") &&
 									<FinalizeRow>
 										<FinalizeCol>
-											<P.White>2nd mortgage</P.White>
+											<P.White>2nd mortgage (existing)</P.White>
 										</FinalizeCol>
 
 										<FinalizeCol>
@@ -451,7 +451,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 								{ section2Values("outstanding_amount_value") &&
 									<FinalizeRow>
 										<FinalizeCol>
-											<P.White>Outstanding Liens</P.White>
+											<P.White>Outstanding liens (existing)</P.White>
 										</FinalizeCol>
 
 										<FinalizeCol>
@@ -467,7 +467,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 								{ section2Values("sm_amount") &&
 									<FinalizeRow>
 										<FinalizeCol>
-											<P.White>Additional Fund Request</P.White>
+											<P.White>Additional fund (request)</P.White>
 										</FinalizeCol>
 
 										<FinalizeCol>

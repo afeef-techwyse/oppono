@@ -457,7 +457,7 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
 
 								<FinalizeRow>
 									<FinalizeCol>
-										<P.White>HELOC request</P.White>
+										<P.White>HELOC (request)</P.White>
 									</FinalizeCol>
 
 									<FinalizeCol>
@@ -477,7 +477,7 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
                 <FinalizeRow>
                   <FinalizeCol>
                     <P.White>
-                      1st mortgage
+                      1st mortgage (existing)
                     </P.White>
                   </FinalizeCol>
 
@@ -491,14 +491,15 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
 								<FinalizeRow>
 									<FinalizeCol>
 										<P.White>
-											LTV
+											LTV<br/>
+                      <small>*Your BDM will be in contact with you, to discuss your options.</small>
 										</P.White>
 									</FinalizeCol>
 
 									<FinalizeCol>
 										<P.White>
 											<strong>
-												{(
+												*{(
 													((
                             (+section2Values("mortgage_value_1") + 
                             section4Values("confirm_qualify_amount") === "0"

@@ -98,6 +98,8 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
   const [show1stMortgageInput, setShow1stMortgageInput] = React.useState(false);
 	const [secondMortgage, setSecondMortgage] = React.useState(0)
 
+  const [alternate, setAlternate] = React.useState(false);
+
   return (
       <div className={className}>
         <Form setCurrentTheme={setCurrentTheme} endPoint={"/purchase"}>
@@ -183,6 +185,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   type={"radio"}
                   onClick={() => {
                     setShow1stMortgageInput(false)
+                    setAlternate(false)
                   }}
 
               />
@@ -193,6 +196,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   type={"radio"}
                   onClick={() => {
                     setShow1stMortgageInput(true)
+                    setAlternate(true)
                   }}
               />
             </RadioGroup>
@@ -201,6 +205,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
               <Input
                   type={"number"}
                   isCurrency
+                  alternate={alternate}
                   name={"purchase_price"}
                   {...formData.section_2?.purchase_price_input}
 									onKeyUp={(value) => {
@@ -426,7 +431,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 								<FinalizeRow>
 									<FinalizeCol>
 										<P.White>
-											Property Value
+											Property value
 										</P.White>
 									</FinalizeCol>
 
@@ -442,9 +447,15 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 								{ +section2Values("mortgage_value_1") > 0 &&
 									<FinalizeRow>
 										<FinalizeCol>
+                    {secondMortgage ? (
 											<P.White>
-												1st mortgage
+												1st mortgage (existing)
 											</P.White>
+                    ) : (
+											<P.White>
+												1st mortgage (request)
+											</P.White>
+                    )}
 										</FinalizeCol>
 
 										<FinalizeCol>
@@ -459,7 +470,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 									<FinalizeRow>
 										<FinalizeCol>
 											<P.White>
-												2nd mortgage
+												2nd mortgage (requested)
 											</P.White>
 										</FinalizeCol>
 
@@ -476,7 +487,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 								<FinalizeRow>
 									<FinalizeCol>
 										<P.White>
-											Down payment
+											Home equity
 										</P.White>
 									</FinalizeCol>
 

@@ -42,6 +42,14 @@ const Label = styled(
     .dark {
       color: rgba(191, 182, 180, 0.5);
     }
+    &.hidden {
+      display: none;
+    }
+  }
+  .alternate-label-text {
+    &.hidden {
+      display: none;
+    }
   }
   &.invalid {
     &:after {
@@ -88,6 +96,8 @@ const Input = React.forwardRef(
       min,
       max,
       label,
+      alternate,
+      alternate_label,
       onChange,
       onCurrencyChange,
       onKeyUp,
@@ -136,7 +146,8 @@ const Input = React.forwardRef(
         })}
       >
         <Label error={errorMessage} fieldName={name} invalid={invalid}>
-          <div className="label-text">{label}</div>
+          <div className={`label-text ${alternate ? "hidden" : "active"}`}>{label}</div>
+          <div className={`label-text ${alternate ? "active" : "hidden"}`}>{alternate_label}</div>
           {isCurrency && <div className="currencyMasker" data-currency={isCurrency}>
             <CurrencyInput
                 name="input-name"
