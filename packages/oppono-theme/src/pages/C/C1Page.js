@@ -869,7 +869,7 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 <FinalizeRow>
                   <FinalizeCol>
                     <P.White>
-                      1st mortgage
+                      1st mortgage (existing)
                     </P.White>
                   </FinalizeCol>
 
@@ -883,7 +883,7 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 								{ section5Values("mortgage_value_2") &&
 									<FinalizeRow>
 										<FinalizeCol>
-											<P.White>2nd mortgage</P.White>
+											<P.White>2nd mortgage (existing)</P.White>
 										</FinalizeCol>
 
 										<FinalizeCol>
@@ -900,7 +900,7 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 								{ section5Values("outstanding_amount_value") &&
 									<FinalizeRow>
 										<FinalizeCol>
-											<P.White>Outstanding Liens</P.White>
+											<P.White>Outstanding liens (existing)</P.White>
 										</FinalizeCol>
 
 										<FinalizeCol>
@@ -916,7 +916,7 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 								{ section5Values("sm_amount") &&
 									<FinalizeRow>
 										<FinalizeCol>
-											<P.White>Additional Fund Request</P.White>
+											<P.White>Additional fund (request)</P.White>
 										</FinalizeCol>
 
 										<FinalizeCol>

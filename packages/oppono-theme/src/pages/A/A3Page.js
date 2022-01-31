@@ -501,11 +501,8 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
 											<strong>
 												*{(
 													((
-                            (+section2Values("mortgage_value_1") + 
-                            section4Values("confirm_qualify_amount") === "0"
-															? +section4Values("amount_wanted")
-															: mortgage)) /
-															+section2Values("home_value")) *
+                            (+section2Values("mortgage_value_1") + (section4Values("confirm_qualify_amount") === "0" ? +section4Values("amount_wanted") : mortgage) ) /
+															+section2Values("home_value"))) *
 													100
 												).toFixed?.(2)}%
 											</strong>
