@@ -891,30 +891,71 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 									</FinalizeCol>
 								</FinalizeRow>
 
+								{ +section5Values("mortgage_value_1") > 0 ? (
+									<FinalizeRow>
+										<FinalizeCol>
+                    {secondMortgage ? (
+											<P.White>
+												1st mortgage (existing)
+											</P.White>
+                    ) : (
+											<P.White>
+												1st mortgage (request)
+											</P.White>
+                    )}
+										</FinalizeCol>
+
+										<FinalizeCol>
+											<P.White>
+												<strong>${numberWithCommas(+section5Values("mortgage_value_1"))}</strong>
+											</P.White>
+										</FinalizeCol>
+									</FinalizeRow>
+                ) : (
+									<FinalizeRow>
+										<FinalizeCol>
+											<P.White>
+												1st mortgage (request)
+											</P.White>
+										</FinalizeCol>
+
+										<FinalizeCol>
+											<P.White>
+												<strong>${numberWithCommas(mortgage)}</strong>
+											</P.White>
+										</FinalizeCol>
+									</FinalizeRow>
+                )}
+
+                { section5Values("looking_for") === 'second' && secondMortgage > 0 &&
+									<FinalizeRow>
+										<FinalizeCol>
+											<P.White>
+												2nd mortgage (requested)
+											</P.White>
+										</FinalizeCol>
+
+										<FinalizeCol>
+											<P.White>
+												<strong>
+													${numberWithCommas(secondMortgage)}
+												</strong>
+											</P.White>
+										</FinalizeCol>
+									</FinalizeRow>
+								}
+                
+
 								<FinalizeRow>
 									<FinalizeCol>
 										<P.White>
-											Mortgage request
+											Home equity
 										</P.White>
 									</FinalizeCol>
 
 									<FinalizeCol>
 										<P.White>
-											<strong>${numberWithCommas(mortgage)}</strong>
-										</P.White>
-									</FinalizeCol>
-								</FinalizeRow>
-
-								<FinalizeRow>
-									<FinalizeCol>
-										<P.White>
-											Down payment
-										</P.White>
-									</FinalizeCol>
-
-									<FinalizeCol>
-										<P.White>
-											<strong>${numberWithCommas(+section1Values("home_value") - mortgage)}</strong>
+											<strong>${numberWithCommas(+section5Values("down_payment"))}</strong>
 										</P.White>
 									</FinalizeCol>
 								</FinalizeRow>
@@ -930,7 +971,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 										<P.White>
 											<strong>
 											{(
-                        (mortgage / +section1Values("home_value")) *
+                        (purchase_price / +section1Values("home_value")) *
 												100
 											).toFixed?.(2)}
 											%

@@ -861,7 +861,7 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 
                   <FinalizeCol>
                     <P.White>
-                      <strong>${numberWithCommas(+section1Values("home_value"))}</strong>
+                      <strong>${numberWithCommas(+section5Values("home_value"))}</strong>
                     </P.White>
                   </FinalizeCol>
                 </FinalizeRow>
@@ -938,7 +938,7 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 									<FinalizeCol>
 										<P.White>
 											<strong>
-												${numberWithCommas(+section2Values("home_value") - mortgage)}
+												${numberWithCommas(+section5Values("home_value") - mortgage)}
 											</strong>
 										</P.White>
 									</FinalizeCol>

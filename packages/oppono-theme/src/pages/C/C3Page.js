@@ -879,19 +879,17 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
 
 								<FinalizeRow>
 									<FinalizeCol>
-										<P.White>Qualify up to</P.White>
+										<P.White>HELOC (request)</P.White>
 									</FinalizeCol>
 
 									<FinalizeCol>
 										<P.White>
-											<strong>$
-                        {numberWithCommas(
-                            Math.round(
-                                (+section1Values("home_value") *
-                                    firstProduct?.fields?.maximum_ltv) /
-                                100
-                            )
-                        )}
+											<strong>
+												${numberWithCommas(
+													section7Values("confirm_qualify_amount") === "0"
+															? +section7Values("amount_wanted")
+															: mortgage
+												)}
 											</strong>
 										</P.White>
 									</FinalizeCol>
@@ -901,7 +899,7 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 <FinalizeRow>
                   <FinalizeCol>
                     <P.White>
-                      1st mortgage
+                      1st mortgage (existing)
                     </P.White>
                   </FinalizeCol>
 
@@ -911,6 +909,28 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
                     </P.White>
                   </FinalizeCol>
                 </FinalizeRow>
+                
+								<FinalizeRow>
+									<FinalizeCol>
+										<P.White>
+											LTV<br/>
+                      <small>*Your BDM will be in contact with you, to discuss your options.</small>
+										</P.White>
+									</FinalizeCol>
+
+									<FinalizeCol>
+										<P.White>
+											<strong>
+												*{(
+													((
+                            (+section5Values("mortgage_value_1") + (section7Values("confirm_qualify_amount") === "0" ? +section7Values("amount_wanted") : mortgage) ) /
+															+section1Values("home_value"))) *
+													100
+												).toFixed?.(2)}%
+											</strong>
+										</P.White>
+									</FinalizeCol>
+								</FinalizeRow>
 
 					</FinalizeRows>
 							<FinalizeRows>
