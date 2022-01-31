@@ -417,7 +417,7 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
 
 								<FinalizeRow>
 									<FinalizeCol>
-										<P.White>BLOC request</P.White>
+										<P.White>BLOC (request)</P.White>
 									</FinalizeCol>
 
 									<FinalizeCol>
@@ -432,14 +432,15 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
 								<FinalizeRow>
 									<FinalizeCol>
 										<P.White>
-											LTV
+											LTV<br/>
+                      <small>*Your BDM will be in contact with you, to discuss your options.</small>
 										</P.White>
 									</FinalizeCol>
 
 									<FinalizeCol>
 										<P.White>
 											<strong>
-											{(
+											*{(
                         (mortgage / +section3Values("purchase_price")) *
 												100
 											).toFixed?.(2)}

@@ -444,7 +444,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 									</FinalizeCol>
 								</FinalizeRow>
 
-								{ +section2Values("mortgage_value_1") > 0 &&
+								{ +section2Values("mortgage_value_1") > 0 ? (
 									<FinalizeRow>
 										<FinalizeCol>
                     {secondMortgage ? (
@@ -464,7 +464,21 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 											</P.White>
 										</FinalizeCol>
 									</FinalizeRow>
-								}
+                ) : (
+									<FinalizeRow>
+										<FinalizeCol>
+											<P.White>
+												1st mortgage (request)
+											</P.White>
+										</FinalizeCol>
+
+										<FinalizeCol>
+											<P.White>
+												<strong>${numberWithCommas(mortgage)}</strong>
+											</P.White>
+										</FinalizeCol>
+									</FinalizeRow>
+                )}
 
 								{ section2Values("looking_for") === 'second' && secondMortgage > 0 &&
 									<FinalizeRow>
