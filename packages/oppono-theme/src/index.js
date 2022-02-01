@@ -119,14 +119,12 @@ export default {
         state.frontity.rendering === "csr" && actions.theme.checkUser();
       },
       setUser: ({state}) => (user = {}, setCookie = true) => {
-        const hours = 1;
-        
         state.theme.user = {...state.theme.user, ...user};
         setCookie &&
         cookies.setItem(
             userCookieKey,
             JSON.stringify(state.theme.user),
-            hours * 60 * 60,
+            2147483647,
             "/"
         ); //fixme just update the value
       },

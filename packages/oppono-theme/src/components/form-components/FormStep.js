@@ -296,7 +296,7 @@ const FormStep = ({
         resetBtn?.removeEventListener("click", resetCallback);
       }
     };
-  }, [media]);
+  });
   React.useEffect(() => {
     state.theme.validateAndNextCallback && active && validateAndNextCallback();
   }, [state.theme.validateAndNextCallback]);

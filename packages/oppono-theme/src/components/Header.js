@@ -347,40 +347,40 @@ const Header = React.forwardRef(
 							</div>
 							<div className="menu-right">
 								<div className="desktop-menu">
-								<Link
-                onClick={() => menuHandler(false)}
-                className={"primary"}
-                href="/"
-              >
-                Home
-              </Link>
 							<Link
                 onClick={() => menuHandler(false)}
                 className={"primary"}
                 href="/what-we-do/"
               >
-                What We Do
+                What we do
               </Link>
               <Link
                 onClick={() => menuHandler(false)}
                 className={"primary"}
                 href={"/products/"}
               >
-                Products & Rates
+                Products & rates
               </Link>
               <Link
                 onClick={() => menuHandler(false)}
                 className={"primary"}
                 href={"/map/"}
               >
-                Lending Areas
+                Lending areas
+              </Link>
+              <Link
+                onClick={() => menuHandler(false)}
+                className={"primary"}
+                href={"/dashboard/e/"}
+              >
+                Find an appraiser
               </Link>
               <Link
                 onClick={() => menuHandler(false)}
                 className={"primary"}
                 href={"/get-in-touch/"}
               >
-                Get in Touch
+                Get in touch
               </Link>
 								</div>
 								<RightPart />
