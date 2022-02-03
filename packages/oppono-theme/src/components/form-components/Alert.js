@@ -51,7 +51,8 @@ ${P.F29}{
 margin-bottom: 15px;
 }
 .col-4{
-  width: ${size(360)};
+  width: 30%;
+  padding-right: 5rem;
   @media(max-width: 991.98px){
     width: 40%;
   }
@@ -60,7 +61,7 @@ margin-bottom: 15px;
   }
 }
 .col-6{
-  width: ${size(600)};
+  width: 70%;
   @media(max-width: 991.98px){
     width: 60%;
   }

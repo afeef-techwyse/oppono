@@ -6,6 +6,9 @@ import FormStep from '../../components/form-components/FormStep';
 import RadioGroup from '../../components/form-components/RadioGroup';
 import RadioInputVertical from "../../components/form-components/RadioInputVertical";
 import FlyingObjsContainer from '../../components/reusable/FlyingObjsContainer';
+import Finalize, {
+	FinalizeHeading,
+} from "../../components/form-components/Finalize";
 import Appraiser from '../../components/form-components/Appraiser';
 import {P} from '../../components/form-components/StyledComponent';
 import Button from '../../components/form-components/Button';
@@ -138,53 +141,59 @@ const EPage = ({className, setCurrentTheme, actions, state, formData}) => {
         }
       </FormStep>
       <FormStep pageName={pageName} activeTheme={formData.section_3?.section_theme} stepName={formData.section_3?.section_name}>
-        <div className="notification form-text-wrapper">
-          <h1 className={'form-headline-1 text-left'}>{formData.section_3?.title}</h1>
-          <h2 className={'form-headline-2 primary'}>{formData.section_3?.subtitle}</h2>
-          <p className={'form-headline-3 primary'}>From: Oppono (appraisals@oppono.com)<br/>To: {selectedAppraiser.company} ({selectedAppraiser.email})</p>
-          <p className={'form-headline-3 primary'}>Hi, I would like to send a mortgage appraisal request on behalf of
+        <FinalizeHeading>
+          <h1 className={"form-headline-1 text-left"}>
+          {formData.section_3?.title}
+          </h1>
+
+          <h2 className={"form-headline-2 text-left"}>
+          {formData.section_3?.subtitle}
+          </h2>
+
+          <p>From: Oppono (appraisals@oppono.com)<br/>To: {selectedAppraiser.company} ({selectedAppraiser.email})</p>
+          <p>Hi, I would like to send a mortgage appraisal request on behalf of
             my client. My client is requesting a:</p>
-        </div>
-        <div className={'form-wide-container'}>
+        </FinalizeHeading>
+        <div className={'form-wide-container notification-section'}>
           <RadioGroup className={'request-type fix-filter-e'} checked={'first-mortgage'}>
             <RadioInput label={'1st mortgage'} value={'first-mortgage'} name={`request_type`} type={'radio'}/>
             <RadioInput label={'2nd mortgage'} value={'second-mortgage'} name={`request_type`} type={'radio'}/>
             <RadioInput label={'HELOC'} value={'heloc'} name={`request_type`} type={'radio'}/>
           </RadioGroup>
-          <Alert>
+          <Alert className="no-padding">
             <div className="col-4">
-              <P.F29>Property details</P.F29>
+              <P.F29 className="titleText">Property details</P.F29>
               <P.D>{section1Values('address')}</P.D>
               <P.D>{section1Values('city')}, {section1Values('postal_code')}</P.D>
             </div>
             <div className="col-6">
               <W50>
-                <Input type={'number'} name={'home_value'} {...formData.section_3?.property_value_input}/>
-                <Input type={'number'} name={'amount_wanted'} {...formData.section_3?.amount_wanted_input}/>
+                <Input type={'number'} isCurrency name={'home_value'} {...formData.section_3?.property_value_input}/>
+                <Input type={'number'} isCurrency name={'amount_wanted'} {...formData.section_3?.amount_wanted_input}/>
               </W50>
             </div>
           </Alert>
-          <Alert>
+          <Alert className="no-padding">
             <div className="col-4">
-              <P.F29>Borrower details</P.F29>
+              <P.F29 className="titleText">Borrower details</P.F29>
             </div>
             <div className="col-6">
               <W50>
                 <Input type={'text'} name={'borrower_fname'} {...formData.section_3?.borrower_first_name_input}/>
                 <Input type={'text'} name={'borrower_lname'} {...formData.section_3?.borrower_last_name_input}/>
                 <Input type={'text'} pattern={'^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$'} name={'borrower_email'} {...formData.section_3?.borrower_email_input}/>
-                <Input type={'phone'} name={'borrower_phone'} {...formData.section_3?.borrower_phone_input}/>
+                <Input type={'phone'} isPhoneNumber name={'borrower_phone'} {...formData.section_3?.borrower_phone_input}/>
               </W50>
             </div>
           </Alert>
-          <Alert>
+          <Alert className="no-padding">
             <div className="col-4">
-              <P.F29>Broker details</P.F29>
+              <P.F29 className="titleText">Broker details</P.F29>
             </div>
             <div className="col-6">
               <W50>
                 <Input type={'text'} pattern={'^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$'} name={'broker_email'} {...formData.section_3?.broker_email_input}/>
-                <Input type={'phone'} name={'broker_phone'} {...formData.section_3?.broker_phone_input}/>
+                <Input type={'phone'} isPhoneNumber name={'broker_phone'} {...formData.section_3?.broker_phone_input}/>
               </W50>
             </div>
           </Alert>
@@ -198,9 +207,16 @@ const EPage = ({className, setCurrentTheme, actions, state, formData}) => {
       <FormStep pageName={pageName} activeTheme={formData.section_4?.section_theme} stepName={formData.section_4?.section_name}>
         <LastStep>
           <img src={formData.section_4?.image.url} alt={formData.section_4?.image.alt}/>
-          <div style={{flexBasis: '45%'}} className="text tablet-center">
-            <h1 className={'form-headline-1 primary'}>{formData.section_4?.title}</h1>
-            <p className={'form-headline-3 primary'}>{formData.section_4?.subtitle}</p>
+          <div className="text tablet-center">
+          <FinalizeHeading>
+            <h1 className={"form-headline-1 text-left"}>
+            {formData.section_4?.title}
+            </h1>
+
+            <p className={"form-headline-3 text-left lighter-text"}>
+            {formData.section_4?.subtitle}
+            </p>
+          </FinalizeHeading>
             <div className="btn-group">
               <Link href={'/dashboard/'}><Button focusable={false} className={'wide bordered reset-form'} label={'Back to the dashboard'}/></Link>
             </div>
@@ -220,6 +236,37 @@ export default styled(connect(EPage))`
 		border-top: none !important;
 		margin-top: 0;
 	}
+
+  .titleText {
+    font-size: ${size(29)} !important;
+    line-height: 1.3 !important;
+  }
+
+  .lighter-text {
+    color: #BFB6B480;
+  }
+
+  .no-padding {
+    margin-left: -5.5rem !important;
+    margin-right: -5.5rem !important;
+    margin-bottom: 3rem;
+
+    @media(max-width: 991.98px){
+      margin-left: -2.5rem !important;
+      margin-right: -2.5rem !important;
+    }
+  }
+
+  .notification-section {
+    .label-text {
+      font-size: ${size(14)};
+    }
+
+    .form-group {
+      margin-bottom: 5rem;
+      margin-top: 0;
+    }
+  }
 
 	.row {
 		margin-top: 4rem;
@@ -299,7 +346,7 @@ export default styled(connect(EPage))`
 
 	@media (max-width: 998px) {
 		.radio-text {
-			font-size: ${size(16)};
+			white-space: nowrap;
 		}
 
 		.radio-group {
@@ -334,7 +381,6 @@ export default styled(connect(EPage))`
 	}
 
 	.radio-input {
-		padding-bottom: 1.2rem;
 		margin-top: 1.2rem !important;
 
 		@media screen (max-width: 998px) {
