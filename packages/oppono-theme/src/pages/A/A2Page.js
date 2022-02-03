@@ -85,17 +85,18 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 	const [downPayment, setDownPayment] = React.useState(null)
 	const [firstMortgageAmount, setfirstMortgageAmount] = React.useState(null)
 
-	const calcSecondMorgage = () => +purchasePrice - +downPayment - +firstMortgageAmount || 0;
+	const calcSecondMorgage = () => +purchasePrice - +firstMortgageAmount || 0;
 
 	React.useEffect(() => {
 		setSecondMortgage(calcSecondMorgage())
-	}, [purchasePrice, downPayment, firstMortgageAmount])
-  const mortgage = (+purchasePrice - +downPayment - (+firstMortgageAmount || 0) + (+firstMortgageAmount || 0));
+	}, [purchasePrice, firstMortgageAmount])
+  const mortgage = (+ purchasePrice - +downPayment - (+firstMortgageAmount || 0) + (+firstMortgageAmount || 0));
 
   const refNumber = React.useRef("");
   state.theme.stepResponse.data?.["reference-number"] &&
   (refNumber.current = state.theme.stepResponse.data?.["reference-number"]);
   const [show1stMortgageInput, setShow1stMortgageInput] = React.useState(false);
+  const [show2ndMortgageInput, setShow2ndMortgageInput] = React.useState(true);
 	const [secondMortgage, setSecondMortgage] = React.useState(0)
 
   const [alternate, setAlternate] = React.useState(false);
@@ -185,6 +186,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   type={"radio"}
                   onClick={() => {
                     setShow1stMortgageInput(false)
+                    setShow2ndMortgageInput(true)
                     setAlternate(false)
                   }}
 
@@ -196,6 +198,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   type={"radio"}
                   onClick={() => {
                     setShow1stMortgageInput(true)
+                    setShow2ndMortgageInput(false)
                     setAlternate(true)
                   }}
               />
@@ -212,7 +215,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 										setPurchasePrice(value);
 									}}
               />
-              <Input
+              {show2ndMortgageInput&&<Input
                   type={"number"}
                   isCurrency
                   name={"down_payment"}
@@ -220,7 +223,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 									onKeyUp={(value) => {
 										setDownPayment(value);
 									}}
-              />
+              />}
             </W50>
 
             {show1stMortgageInput&&<Input
