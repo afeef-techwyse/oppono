@@ -971,7 +971,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 										<P.White>
 											<strong>
 											{(
-                        (purchase_price / +section1Values("home_value")) *
+                        (mortgage / +section1Values("home_value")) *
 												100
 											).toFixed?.(2)}
 											%
