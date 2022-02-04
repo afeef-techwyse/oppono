@@ -947,13 +947,22 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 								<FinalizeRow>
 									<FinalizeCol>
 										<P.White>
-											LTV
+											LTV {(
+                        (mortgage / +section1Values("home_value")) *
+												100) > 80  && ( 
+                          <div>
+                            <small>*Your BDM will be in contact with you, to discuss your options.</small>
+                          </div>
+                        )}
 										</P.White>
 									</FinalizeCol>
 
 									<FinalizeCol>
 										<P.White>
 											<strong>
+                      {(
+                        (mortgage / +section1Values("home_value")) *
+												100) > 80  && ( <span>*</span>)}
 											{(
                         (mortgage / +section1Values("home_value")) *
 												100

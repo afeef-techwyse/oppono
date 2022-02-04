@@ -899,7 +899,7 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 <FinalizeRow>
                   <FinalizeCol>
                     <P.White>
-                      1st mortgage (existing)
+                      Total mortgages (existing)
                     </P.White>
                   </FinalizeCol>
 
@@ -913,15 +913,31 @@ const C3Page = ({className, setCurrentTheme, state, actions, formData}) => {
 								<FinalizeRow>
 									<FinalizeCol>
 										<P.White>
-											LTV<br/>
-                      <small>*Your BDM will be in contact with you, to discuss your options.</small>
+											LTV
+                      {(
+													((
+                            (+section5Values("mortgage_value_1") + (section7Values("confirm_qualify_amount") === "0" ? +section7Values("amount_wanted") : mortgage) ) /
+															+section1Values("home_value"))) *
+													100
+												) > 80  && (
+                          <div>
+                          <small>*Your BDM will be in contact with you, to discuss your options.</small>
+                          </div>
+                        )}
 										</P.White>
 									</FinalizeCol>
 
 									<FinalizeCol>
 										<P.White>
 											<strong>
-												*{(
+                      {(
+													((
+                            (+section5Values("mortgage_value_1") + (section7Values("confirm_qualify_amount") === "0" ? +section7Values("amount_wanted") : mortgage) ) /
+															+section1Values("home_value"))) *
+													100
+												) > 80  && (
+                          <span>*</span>
+                        )} {(
 													((
                             (+section5Values("mortgage_value_1") + (section7Values("confirm_qualify_amount") === "0" ? +section7Values("amount_wanted") : mortgage) ) /
 															+section1Values("home_value"))) *

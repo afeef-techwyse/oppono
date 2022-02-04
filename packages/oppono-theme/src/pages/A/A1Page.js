@@ -496,12 +496,20 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 
 								<FinalizeRow>
 									<FinalizeCol>
-										<P.White>LTV</P.White>
+										<P.White>
+                      LTV
+                        {((mortgage / +section2Values("home_value")) * 100) > 80 && (
+                          <div>
+                            <small>*Your BDM will be in contact with you, to discuss your options.</small>
+                          </div>
+                        )}
+                    </P.White>
 									</FinalizeCol>
 
 									<FinalizeCol>
 										<P.White>
 											<strong>
+                        {((mortgage / +section2Values("home_value")) * 100) > 80  && ( <span>*</span> )}
 												{((mortgage / +section2Values("home_value")) * 100).toFixed?.(2)}%
 											</strong>
 										</P.White>
