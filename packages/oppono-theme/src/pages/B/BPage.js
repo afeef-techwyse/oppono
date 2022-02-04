@@ -432,15 +432,20 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
 								<FinalizeRow>
 									<FinalizeCol>
 										<P.White>
-											LTV<br/>
+											LTV {
+                        (mortgage / +section3Values("purchase_price") * 100) > 80 && (
+                      <div>
                       <small>*Your BDM will be in contact with you, to discuss your options.</small>
+                      </div>
+                      )}
 										</P.White>
 									</FinalizeCol>
 
 									<FinalizeCol>
 										<P.White>
 											<strong>
-											*{(
+											{(mortgage / +section3Values("purchase_price") * 100) > 80 && (<span>*</span>)}
+                      {(
                         (mortgage / +section3Values("purchase_price")) *
 												100
 											).toFixed?.(2)}
