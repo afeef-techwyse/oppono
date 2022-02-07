@@ -100,7 +100,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 	const [setResidentialStatus] = React.useState(null)
 	const [downPayment, setDownPayment] = React.useState(null)
   const [firstMortgageAmount, setfirstMortgageAmount] = React.useState(null)
-	const calcSecondMorgage = () => +purchasePrice - +firstMortgageAmount || 0;
+	const calcSecondMorgage = () => (+purchasePrice - +firstMortgageAmount || 0) * 0.8;
 
 	React.useEffect(() => {
 		setSecondMortgage(calcSecondMorgage())
@@ -699,7 +699,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
             { 
               ( show1stMortgageInput && secondMortgage > 0 ) &&
                 <FormBlurb>
-                  So you’re looking for a second mortgage of <strong>${numberWithCommas(secondMortgage)}</strong>.
+                  So you’re looking for a second mortgage up to <strong>${numberWithCommas(secondMortgage)}</strong>.
 
                   <br />
 
@@ -950,19 +950,39 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 								}
                 
 
-								<FinalizeRow>
-									<FinalizeCol>
-										<P.White>
-											Home equity
-										</P.White>
-									</FinalizeCol>
+                { section5Values("looking_for") === 'first' &&
+              <FinalizeRow>
+              <FinalizeCol>
+                <P.White>
+                  Down Payment
+                </P.White>
+              </FinalizeCol>
 
-									<FinalizeCol>
-										<P.White>
-											<strong>${numberWithCommas(+section5Values("down_payment"))}</strong>
-										</P.White>
-									</FinalizeCol>
-								</FinalizeRow>
+              <FinalizeCol>
+                <P.White>
+                  <strong>${numberWithCommas(+section5Values("down_payment"))}</strong>
+                </P.White>
+              </FinalizeCol>
+              </FinalizeRow>
+
+								}
+
+            { section5Values("looking_for") === 'second' &&
+              <FinalizeRow>
+              <FinalizeCol>
+                <P.White>
+                  Home equity
+                </P.White>
+              </FinalizeCol>
+
+              <FinalizeCol>
+                <P.White>
+                  <strong>${numberWithCommas(+section5Values("down_payment"))}</strong>
+                </P.White>
+              </FinalizeCol>
+              </FinalizeRow>
+
+								}
 
 								<FinalizeRow>
 									<FinalizeCol>
