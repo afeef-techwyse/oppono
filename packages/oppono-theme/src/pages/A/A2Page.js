@@ -199,6 +199,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   onClick={() => {
                     setShow1stMortgageInput(true)
                     setShow2ndMortgageInput(false)
+                    setDownPayment(0)
                     setAlternate(true)
                   }}
               />
