@@ -109,15 +109,17 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 
 
   //const mortgage = +section1Values("home_value") - +section5Values("down_payment") || 0;
-  const firstProduct = state.theme.stepResponse.data?.data
-      ? Object.values(state.theme.stepResponse.data?.data)?.[0]?.products?.[0]
-      : {};
+
   const refNumber = React.useRef("");
   state.theme.stepResponse.data?.["reference-number"] &&
   (refNumber.current = state.theme.stepResponse.data?.["reference-number"]);
   const [show1stMortgageInput, setShow1stMortgageInput] = React.useState(false);
   const [show2ndMortgageInput, setShow2ndMortgageInput] = React.useState(true);
   const [secondMortgage, setSecondMortgage] = React.useState(0)
+
+  const [firstProduct, setFirstProduct] = React.useState(state.theme.stepResponse.data?.data
+    ? Object.values(state.theme.stepResponse.data?.data)?.[0]?.products?.[0]
+    : {})
 
   return (
       <div className={className}>
@@ -725,7 +727,9 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
               activeTheme={formData.section_6?.section_theme}
               stepName={formData.section_6?.section_name}
               onNext={() => {
-								state.theme.stepResponse.data?.data?.[section5Values("looking_for")]?.products?.length || actions.router.set('/not-qualified')}
+								state.theme.stepResponse.data?.data?.[section5Values("looking_for")]?.products?.length || actions.router.set('/not-qualified')
+                setFirstProduct(state.theme.stepResponse.data?.data?.[section5Values("looking_for")]?.products?.[0])
+                }
               }
           >
             <input type={'hidden'} name={`ltv`} value={(mortgage / +section1Values('home_value') * 100).toFixed?.(2)}/>
