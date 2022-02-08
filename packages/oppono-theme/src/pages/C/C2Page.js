@@ -724,9 +724,9 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
               pageName={pageName}
               activeTheme={formData.section_6?.section_theme}
               stepName={formData.section_6?.section_name}
-              onNext={() => (state.theme.stepResponse.data?.data
-                  ? Object.values(state.theme.stepResponse.data?.data)[0].products
-                  : []).length || actions.router.set('/not-qualified')}
+              onNext={() => {
+								state.theme.stepResponse.data?.data?.[section5Values("looking_for")]?.products?.length || actions.router.set('/not-qualified')}
+              }
           >
             <input type={'hidden'} name={`ltv`} value={(mortgage / +section1Values('home_value') * 100).toFixed?.(2)}/>
             <div className="form-text-wrapper">
