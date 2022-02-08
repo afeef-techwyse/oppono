@@ -100,7 +100,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 	const [setResidentialStatus] = React.useState(null)
 	const [downPayment, setDownPayment] = React.useState(null)
   const [firstMortgageAmount, setfirstMortgageAmount] = React.useState(null)
-	const calcSecondMorgage = () => (+purchasePrice - +firstMortgageAmount || 0) * 0.8;
+	const calcSecondMorgage = () => (+purchasePrice * 0.8) - +firstMortgageAmount || 0;
 
 	React.useEffect(() => {
 		setSecondMortgage(calcSecondMorgage())
