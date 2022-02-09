@@ -237,14 +237,27 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
             />}
 
             { 
-              ( show1stMortgageInput && secondMortgageAmount > 0 ) &&
+              ( show1stMortgageInput && firstMortgageAmount > 0 ) &&
                 <FormBlurb>
                   So you’re looking for a second mortgage up to <strong>${numberWithCommas(secondMortgageAmount)}</strong>.
 
                   <br />
-
-                  Ready to continue?
                 </FormBlurb>
+            }
+            {show1stMortgageInput && firstMortgageAmount > 0 &&
+              <FormConditionalInput
+                  name={"confirm_qualify_amount"}
+                  showOn={"0"}
+                  checked={"0"}
+                  {...formData.section_2?.amount_like_yes_no}
+              >
+                <Input
+                    type={"number"}
+                    isCurrency
+                    name={"amount_wanted"}
+                    {...formData.section_2?.amount_want_input}
+                />
+              </FormConditionalInput>
             }
 
             <div className="btn-group">

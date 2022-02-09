@@ -56,6 +56,7 @@ import {numberWithCommas} from "../../functions/numberWithCommas";
 import Link from "../../components/reusable/Link";
 import {fixCharacters} from "../../functions/fixCharacters";
 import FormBlurb from "../../components/form-components/FormBlurb";
+import { forEach } from "lodash";
 
 const pageName = "c-2";
 const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
@@ -65,11 +66,42 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
       section4Values = getC2Values(formData.section_4?.section_name),
       section5Values = getC2Values(formData.section_5?.section_name),
       section6Values = getC2Values(formData.section_6?.section_name);
-  const [step1Valid, setStep1Valid] = React.useState([false, false, false]);
+  const [step1Valid, setStep1Valid] = React.useState([false, false]);
 
   const media = useMedia();
   const selectedProduct = React.useRef("");
   const maxMortgage = React.useRef("");
+  
+  const [trigger_qualification, triggerQualification] = React.useState(false)
+
+
+  const scoreRank = (score) => {
+    if (score == "<650") {
+      return 0;
+    } else if (score == "650-679") {
+        return 1;
+    } else if (score == "680-749") {
+        return 2;
+    } else if (score == "750-799") {
+        return 3;
+    } else if (score == "800+") {
+        return 4;
+    } else {
+        return 5;
+    }
+  }
+
+  const lowestScore = (scores) => {
+    let lowest = scores[0];
+
+    forEach( (score, idx, scores) => {
+      if (scoreRank(score) < scoreRank(lowest) ) {
+          lowest = score;
+      }
+    });
+    return lowest;
+
+  }
 
   React.useEffect(() => {
     actions.theme.setSubHeader(formData.sub_header);
@@ -77,7 +109,19 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
   React.useEffect(() => {
     actions.theme.setLeadId();
     actions.theme.setStepResponse({});
-    opponoApi.post("/product-qualification", {}).then((response) => {
+
+    const data = new FormData();
+
+    const scores = [
+      +section2Values('applicant_score_1'),
+      +section2Values('applicant_score_2'),
+      +section2Values('applicant_score_3'),
+      +section2Values('applicant_score_4'),
+    ]
+
+    data.append('beacon', lowestScore(scores));
+
+    opponoApi.post("/product-qualification", data).then((response) => {
       const products = {
         first: response.data.first,
         second: response.data.second,
@@ -86,7 +130,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
       response.data.data = products;
       actions.theme.setStepResponse(response);
     });
-  }, []);
+  }, [trigger_qualification]);
 
   React.useEffect(() => {
     actions.theme.checkUser();
@@ -162,9 +206,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
             <Input
                 noScroll
                 onChange={(e) => {
-                  let tmp = step1Valid;
-                  tmp[0] = e.target.validity.valid
-                  setStep1Valid(tmp)
+                  setStep1Valid(e.target.validity.valid)
                 }}
                 className={"big-input"}
                 type={"number"}
@@ -172,28 +214,25 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 name={"home_value"}
                 {...formData.section_1?.home_value_input}
             />
-            <div className="form-text-wrapper">
-              <h2 className={"form-headline-2 primary"}>
-                {formData.section_1?.total_debt_label}
-              </h2>
-            </div>
             <Input
                 noScroll
                 onChange={(e) => {
-                  let tmp = step1Valid;
-                  tmp[1] = e.target.validity.valid
-                  setStep1Valid(tmp)
+                  setStep1Valid(e.target.validity.valid)
                 }}
-                className={"big-input"}
                 type={"number"}
                 isCurrency
                 name={"total_debt"}
                 {...formData.section_1?.total_debt_input}
             />
+            
+            <Select
+                name={"property_details_2"}
+                {...formData.section_1?.residential_status_dropdown}
+            />
             <Button
                 css={css`
-              opacity: ${step1Valid.every(Boolean) ? 1 : 0};
-              visibility: ${step1Valid.every(Boolean) ? "visible" : "hidden"};
+              opacity: ${step1Valid ? 1 : 0};
+              visibility: ${step1Valid ? "visible" : "hidden"};
             `}
                 icon={true}
                 className={"next-step"}
@@ -205,6 +244,9 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
               pageName={pageName}
               activeTheme={formData.section_2?.section_theme}
               stepName={formData.section_2?.section_name}
+              onNext={() => {
+                triggerQualification(true)
+              }}
           >
             <div className="form-text-wrapper">
               <h1 className={"form-headline-1 text-left"}>
@@ -358,15 +400,6 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                               / month
                                             </p>
                                             <p className={"number"}>{rate}%</p>
-                                            <Button
-                                                onClick={() =>
-                                                    actions.theme.setValidateAndNextCallback(
-                                                        new Date().getTime()
-                                                    )
-                                                }
-                                                className={"small next-step"}
-                                                label={"I want this deal"}
-                                            />
                                           </th>
                                       )
                                   )}
@@ -499,15 +532,6 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                                 )}{" "}
                                                 max
                                               </p>
-                                              <Button
-                                                  onClick={() =>
-                                                      actions.theme.setValidateAndNextCallback(
-                                                          new Date().getTime()
-                                                      )
-                                                  }
-                                                  className={"small next-step"}
-                                                  label={"I want this deal"}
-                                              />
                                             </div>
                                             <div className="mortgage-body">
                                               <div className={"m-row m-head"}>
@@ -580,628 +604,16 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 )
             ) : null}
             <div className="btn-group">
-              <Button className={"bordered prev-step"} label={"Back"}/>
-            </div>
-          </FormStep>
-          <FormStep
-              apiStepNumber={1}
-              pageName={pageName}
-              activeTheme={formData.section_4?.section_theme}
-              stepName={formData.section_4?.section_name}
-          >
-            <FlyingObjsContainer
-                childrenList={[
-                  {
-                    imageUrl: intro_ball_2,
-                    left: "10%",
-                    level: 1,
-                    top: "55%",
-                    type: "image",
-                    width: 5,
-                    alt: "alt",
-                  },
-                  {
-                    imageUrl: intro_ball_1,
-                    left: "80%",
-                    level: 1,
-                    top: "5%",
-                    type: "image",
-                    width: 9,
-                    alt: "alt",
-                  },
-                ]}
-            />
-            <div className="form-text-wrapper">
-              <h1 className={"form-headline-1 text-left"}>
-                {formData.section_4?.title}
-              </h1>
-              <h2 className={"form-headline-2 primary"}>
-                {formData.section_4?.subtitle}
-              </h2>
-            </div>
-            <Address
-                address={{
-                  name: "address", 
-                  noScroll: true, 
-                  ...formData.section_4?.address_input
-                }}
-                city={{name: "city", ...formData.section_4?.city_input}}
-                postalCode={{
-                  name: "postal_code",
-                  ...formData.section_4?.postal_code_input,
-                }}
-                postalCodeOnChange={postalCodeOnChange}
-            />
-            <Select
-                name={"property_details_1"}
-                {...formData.section_4?.property_details_1_dropdown}
-            />
-            <Select
-                name={"property_details_2"}
-                {...formData.section_4?.property_details_2_dropdown}
-            />
-            <div className="btn-group">
-              <Button className={"bordered prev-step"} label={"Back"}/>
-              <Button icon={true} label={"Next"} className={"next-step"}/>
-            </div>
-          </FormStep>
-          <FormStep
-              apiStepNumber={2}
-              pageName={pageName}
-              activeTheme={formData.section_5?.section_theme}
-              stepName={formData.section_5?.section_name}
-          >
-            <div className="form-text-wrapper">
-              <h1 className={"form-headline-1 text-left"}>
-                {formData.section_5?.title}
-              </h1>
-            </div>
-            <RadioGroup
-                radioText={formData.section_5?.looking_for_yes_no.label}
-                checked={"first"}
-            >
-              <RadioInput
-                  label={formData.section_5?.looking_for_yes_no.yes}
-                  value={"first"}
-                  name={"looking_for"}
-                  type={"radio"}
-                  onClick={() => {
-                    setShow1stMortgageInput(false)
-                    setShow2ndMortgageInput(true)
-                    console.log("show 1st mortgage input: " + show1stMortgageInput)
-                  }}
-
-              />
-              <RadioInput
-                  label={formData.section_5?.looking_for_yes_no.no}
-                  value={"second"}
-                  name={"looking_for"}
-                  type={"radio"}
-                  onClick={() => {
-                    setShow1stMortgageInput(true)
-                    setShow2ndMortgageInput(false)
-                    console.log("show 1st mortgage input: " + show1stMortgageInput)
-                  }}
-              />
-            </RadioGroup>
-
-            <W50>
-              <Input
-                  type={"number"}
-                  isCurrency
-                  name={"purchase_price"}
-                  {...formData.section_5?.purchase_price_input}
-									onKeyUp={(value) => {
-										setPurchasePrice(value);
-									}}
-              />
-              {show2ndMortgageInput&&<Input
-                  type={"number"}
-                  isCurrency
-                  name={"down_payment"}
-                  {...formData.section_5?.down_payment_input}
-									onKeyUp={(value) => {
-										setDownPayment(value);
-									}}
-              />}
-            </W50>
-
-            {show1stMortgageInput && <Input
-                type={"number"}
-                isCurrency
-                className={"mortgage_value_1"}
-                name={"mortgage_value_1"}
-								onKeyUp={(value) => {
-									setfirstMortgageAmount(value);
-								}}
-                {...formData.section_5?.mortgage_value_1_input}
-            />}
-
-            
-
-            { 
-              ( show1stMortgageInput && secondMortgageAmount > 0 ) &&
-                <FormBlurb>
-                  So you’re looking for a second mortgage up to <strong>${numberWithCommas(secondMortgageAmount)}</strong>.
-
-                  <br />
-
-                  Ready to continue?
-                </FormBlurb>
-            }
-
-
-            <div className="btn-group">
-              <Button className={"bordered prev-step"} label={"Back"}/>
-              <Button icon={true} className={"next-step"} label={"Next"}/>
-            </div>
-          </FormStep>
-          <FormStep
-              sendSteps={[
-                formData.section_1?.section_name,
-                formData.section_2?.section_name,
-                formData.section_4?.section_name,
-                formData.section_5?.section_name,
-              ]}
-              apiStepNumber={3}
-              pageName={pageName}
-              activeTheme={formData.section_6?.section_theme}
-              stepName={formData.section_6?.section_name}
-              onNext={() => {
-								state.theme.stepResponse.data?.data?.[section5Values("looking_for")]?.products?.length || actions.router.set('/not-qualified')
-                setFirstProduct(state.theme.stepResponse.data?.data?.[section5Values("looking_for")]?.products?.[0])
-                }
-              }
-          >
-            <input type={'hidden'} name={`ltv`} value={(mortgage / +section5Values('purchase_price') * 100).toFixed?.(2)}/>
-            <div className="form-text-wrapper">
-              <h1 className={"form-headline-1 text-left"}>
-                Just one more thing…
-              </h1>
-              <h1 className={"form-headline-2 primary"}>
-                Who are the borrower(s)?
-              </h1>
-            </div>
-            <FormRepeatableInput
-                fixedNumber={+section2Values("applicants_number") || 1}
-            >
-              <W50>
-                <Input
-                    type={"text"}
-                    name={"applicant_fname_{{number}}"}
-                    {...formData.section_6?.applicant.first_name_input}
-                />
-                <Input
-                    type={"text"}
-                    name={"applicant_lname_{{number}}"}
-                    {...formData.section_6?.applicant.last_name_input}
-                />
-                <Input
-                    type={"text"}
-                    pattern={
-                      "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$"
-                    }
-                    name={"applicant_mail_{{number}}"}
-                    {...formData.section_6?.applicant.email_input}
-                />
-                <Input
-                    type={"phone"}
-                    isPhoneNumber
-                    name={"applicant_phone_{{number}}"}
-                    {...formData.section_6?.applicant.phone_input}
-                />
-              </W50>
-            </FormRepeatableInput>
-            {[...Array(+section2Values("applicants_number") || 1).keys()].map(
-                (i) => (
-                    <input
-                        key={i}
-                        type="hidden"
-                        name={`applicant_score_${i + 1}`}
-                        value={section2Values(`applicant_score_${i + 1}`)}
-                    />
-                )
-            )}
-
-            <div className="btn-group">
-              <Button className={"bordered prev-step"} label={"Back"}/>
-              <Button icon={true} label={"Next"} className={"next-step"}/>
-            </div>
-          </FormStep>
-          <FormStep
-              apiStepNumber={4}
-              pageName={pageName}
-              activeTheme={formData.section_7?.section_theme}
-              stepName={formData.section_7?.section_name}
-          >
-            <Finalize className={"is-smaller"}>
-						<FinalizeHeading>
-						<h1 className={"form-headline-1 text-left"}>
-						{formData.section_7?.title}
-						</h1>
-
-						<h2 className={"form-headline-2 text-left"}>
-						{formData.section_7?.subtitle}
-						</h2>
-
-						<p>
-						You are requesting a <span> home equity line of credit</span> against your {section4Values("property_details_1")} home, which is located at
-						</p>
-
-						<p className="bolder">
-						{section4Values("address")}, {section4Values("city")},{" "}
-                {section4Values("postal_code")}
-						</p>
-					</FinalizeHeading>
-					<FinalizePercentage>
-							<P.Num>{(+firstProduct?.fields?.rate + 0.25).toFixed?.(2)}%</P.Num>
-
-							<P.Small className="meta">*Variable rate</P.Small>
-
-							<P.Num className="smaller">$
-                    {numberWithCommas(
-                        monthlyPayments(mortgage, +firstProduct?.fields?.rate / 100)
-                    )}</P.Num>
-							<P.Small className="meta">*Monthly mortgage payment</P.Small>
-
-							{/* <p className="primary form-headline-3 text-left heloc-var"> {String(firstProduct.title).split(" ")[0]} HELOC</p> */}
-					</FinalizePercentage>
-					<FinalizeRows>
-						<FinalizeRow>
-							<FinalizeCol>
-							{[
-										...Array(+section2Values("applicants_number") || 0).keys(),
-									].map((index, personIndex) => {
-										const applicantFName = section6Values(
-												`applicant_fname_${index + 1}`
-										);
-										const applicantLName = section6Values(
-												`applicant_lname_${index + 1}`
-										);
-										const applicantScore = section6Values(
-												`applicant_score_${index + 1}`
-										);
-										return (
-											<P.Large key={`person-desktop-${personIndex}`}>
-												<Span.isWhite>
-													<strong>{applicantFName} {applicantLName} {applicantScore}</strong>
-												</Span.isWhite>
-											</P.Large>
-										);
-									})}
-							</FinalizeCol>
-						</FinalizeRow>
-					</FinalizeRows>
-					<FinalizeRows>
-								<FinalizeRow>
-									<FinalizeCol>
-										<P.D>
-											<Span.isLightgreen>
-												<strong>Your Info</strong>
-											</Span.isLightgreen>
-										</P.D>
-									</FinalizeCol>
-								</FinalizeRow>
-
-								<FinalizeRow>
-									<FinalizeCol>
-										<P.White>
-											Property value
-										</P.White>
-									</FinalizeCol>
-
-									<FinalizeCol>
-										<P.White>
-											<strong>${numberWithCommas(+section5Values("purchase_price"))}</strong>
-										</P.White>
-									</FinalizeCol>
-								</FinalizeRow>
-
-								{ +section5Values("mortgage_value_1") > 0 ? (
-									<FinalizeRow>
-										<FinalizeCol>
-											<P.White>
-												1st mortgage (existing)
-											</P.White>
-										</FinalizeCol>
-										<FinalizeCol>
-											<P.White>
-												<strong>${numberWithCommas(+section5Values("mortgage_value_1"))}</strong>
-											</P.White>
-										</FinalizeCol>
-									</FinalizeRow>
-                ) : (
-									<FinalizeRow>
-										<FinalizeCol>
-											<P.White>
-												1st mortgage (request)
-											</P.White>
-										</FinalizeCol>
-
-										<FinalizeCol>
-											<P.White>
-												<strong>${numberWithCommas(mortgage)}</strong>
-											</P.White>
-										</FinalizeCol>
-									</FinalizeRow>
-                )}
-
-                { section5Values("looking_for") === 'second' && secondMortgageAmount > 0 &&
-									<FinalizeRow>
-										<FinalizeCol>
-											<P.White>
-												2nd mortgage (requested)
-											</P.White>
-										</FinalizeCol>
-
-										<FinalizeCol>
-											<P.White>
-												<strong>
-													${numberWithCommas(secondMortgageAmount)}
-												</strong>
-											</P.White>
-										</FinalizeCol>
-									</FinalizeRow>
-								}
-                
-
-                { section5Values("looking_for") === 'first' &&
-              <FinalizeRow>
-                <FinalizeCol>
-                  <P.White>
-                    Down payment
-                  </P.White>
-                </FinalizeCol>
-
-                <FinalizeCol>
-                  <P.White>
-                    <strong>${numberWithCommas(+section5Values("down_payment"))}</strong>
-                  </P.White>
-                </FinalizeCol>
-              </FinalizeRow>
-								}
-
-								<FinalizeRow>
-									<FinalizeCol>
-										<P.White>
-											LTV{(
-                        (mortgage / +section5Values("purchase_price")) *
-												100) > 80  ?? (
-                          <div>
-                            <small>*Your BDM will be in contact with you, to discuss your options.</small>
-                          </div>
-                        )}
-										</P.White>
-									</FinalizeCol>
-
-									<FinalizeCol>
-										<P.White>
-											<strong>
-											{(
-                        (mortgage / +section5Values("purchase_price")) *
-												100) > 80  ?? (<span>*</span>)}
-                        {(
-                        (mortgage / +section5Values("purchase_price")) *
-												100
-											).toFixed?.(2)}
-											%
-											</strong>
-										</P.White>
-									</FinalizeCol>
-								</FinalizeRow>
-					</FinalizeRows>
-							<FinalizeRows>
-								<FinalizeRow className={"border"}>
-									<FinalizeCol>
-										<P.D>
-											<Span.isLightgreen>
-												<strong>Product Info</strong>
-											</Span.isLightgreen>
-										</P.D>
-									</FinalizeCol>
-								</FinalizeRow>
-
-								<FinalizeRow>
-									<FinalizeCol>
-										<P.D >
-											<strong>Max LTV</strong>
-										</P.D>
-									</FinalizeCol>
-
-									<FinalizeCol>
-										<P.D>
-											<strong>Up to {firstProduct?.fields?.maximum_ltv}%</strong>
-										</P.D>
-									</FinalizeCol>
-								</FinalizeRow>
-
-								<FinalizeRow>
-									<FinalizeCol>
-										<P.D >
-											<strong>Credit score</strong>
-										</P.D>
-									</FinalizeCol>
-
-									<FinalizeCol>
-										<P.D>
-											<strong>{beaconScore(firstProduct?.fields?.beacon_score)}</strong>
-										</P.D>
-									</FinalizeCol>
-								</FinalizeRow>
-
-								<FinalizeRow>
-									<FinalizeCol>
-										<P.D>
-											<strong>Lender fee</strong>
-										</P.D>
-									</FinalizeCol>
-
-									<FinalizeCol>
-										<P.D >
-											<strong>{firstProduct?.fields?.fee}%</strong>
-										</P.D>
-									</FinalizeCol>
-								</FinalizeRow>
-
-								{firstProduct?.fields?.specifications.map(
-									({term_id, name}) => (
-											<FinalizeRow key={term_id}>
-												<FinalizeCol>
-													<P.D >{name}</P.D>
-												</FinalizeCol>
-											</FinalizeRow>
-									)
-								)}
-								<FinalizeRow>
-									<FinalizeCol>
-										<P.D >
-											Purchase
-										</P.D>
-									</FinalizeCol>
-								</FinalizeRow>
-								<FinalizeRow>
-									<FinalizeCol>
-										<P.D >
-										{ fixCharacters(section4Values("property_details_2")) }
-										</P.D>
-									</FinalizeCol>
-								</FinalizeRow>
-							</FinalizeRows>
-            </Finalize>
-            <div className="btn-group">
-              <Button
-                  className={"bordered reset-form small"}
-                  label={"No, edit the details"}
-              />
-              <Button label={"I’m good to go"} className={"next-step small"}/>
-            </div>
-          </FormStep>
-          <FormStep
-              apiStepNumber={5}
-              pageName={pageName}
-              activeTheme={formData.section_8?.section_theme}
-              stepName={formData.section_8?.section_name}
-              sendSteps={[
-                formData.section_4?.section_name,
-                formData.section_5?.section_name,
-                formData.section_6?.section_name,
-                formData.section_7?.section_name,
-                formData.section_8?.section_name
-              ]}
-          >
-            <div className="upload-step-wrapper">
-              <img src={upload}/>
-              <h1 className={"form-headline-1 text-left"}>
-                {formData.section_8?.title}
-              </h1>
-              <FormConditionalInput
-                  noScroll
-                  name={"mortgages_1"}
-                  showOn={"1"}
-                  checked={"0"}
-                  {...formData.section_8?.have_appraisal_report_yes_no}
-              >
-                <FileInput
-                    name="appraisal_report_file"
-                    label={formData.section_8?.appraisal_report_upload_label}
-                    acceptText={"PDF, JPG, or PNG"}
-                />
-                <Appraiser>
-                  <div className="row">
-                    <div className="col-left">
-                      <p className="form-headline-2 text-left">Your BDM is</p>
-												<div className="appraiser-container">
-													<p className="label">BDM Contact</p>
-													<p className={'name'} dangerouslySetInnerHTML={{__html: appraiser?.fields?.bdm.name}}/>
-													<p className={'phone'} dangerouslySetInnerHTML={{__html: appraiser?.fields?.bdm.phone}}/>
-													<p className={'email'} dangerouslySetInnerHTML={{__html: appraiser?.fields?.bdm.email}}/>
-												</div>
-                    </div>
-                    <div className="col-right">
-                      <P.D className="greyedText">Select an appraiser</P.D>
-                      <RadioGroup
-                          className={"vertical-radio"}
-                          radioText={"*Click to call"}
-                      >
-                        {appraiser?.fields?.preferred_appraisal_company.map(
-                            ({post_name}, index) => {
-                              return (
-                                  <AppraiserInput
-                                      key={index}
-                                      appraiserName={post_name}
-                                      value={post_name}
-                                  />
-                              );
-                            }
-                        )}
-                      </RadioGroup>
-                      <P.D className="greyedText mb-0">
-                        *Disclaimer - <br/>If the city you are looking for is not
-                        listed please contact your BDM directly or email us at
-                        info@oppono.com
-                      </P.D>
-                    </div>
-                  </div>
-                </Appraiser>
-              </FormConditionalInput>
-              <hr/>
-              <TextArea
-                  name={"additional_notes"}
-                  {...formData.section_8?.additional_notes_input}
-              />
-              <div className="btn-group">
+              <Link className={"wide bordered"} href={"/dashboard"}>
                 <Button
-                    className={"next-step"}
-                    label={"I want my pre-approval"}
+                    className={"wide bordered"}
+                    label={"Back to dashboard"}
                 />
-              </div>
+              </Link>
             </div>
           </FormStep>
-          <FormStep
-              pageName={pageName}
-              activeTheme={formData.section_9?.section_theme}
-              stepName={formData.section_9?.section_name}
-          >
-            <LastStep>
-              <img
-                  src={formData.section_9?.image.url}
-                  alt={formData.section_9?.image.alt}
-              />
-              <div className="text">
-                <h1 className={"form-headline-1 text-left"}>
-                  {formData.section_9?.title}
-                </h1>
-                <p className={"form-headline-3 primary lighter"}>
-                  {formData.section_9?.subtitle}
-                </p>
-                <Wysiwyg
-                    dangerouslySetInnerHTML={{
-                      __html: formData.section_9?.steps.replace(
-                          "{{number}}",
-                          refNumber.current
-                      ),
-                    }}
-                />
-                <div className="btn-group">
-                  <Link
-                      className={"wide bordered"}
-                      href={"https://expert.filogix.com/expert/view/SignOn"}
-                  >
-                    <Button
-                        className={"wide filled"}
-                        label={"Connect to Filogix"}
-                    />
-                  </Link>
-                  <Link className={"wide bordered"} href={"/dashboard"}>
-                    <Button
-                        className={"wide bordered"}
-                        label={"Back to dashboard"}
-                    />
-                  </Link>
-                </div>
-              </div>
-            </LastStep>
-          </FormStep>
+
+          
         </Form>
       </div>
   );
