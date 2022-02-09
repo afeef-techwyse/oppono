@@ -81,23 +81,18 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
   const [[appraiser], postalCodeOnChange] = useFlowAppraisers();
 
 	const [purchasePrice, setPurchasePrice] = React.useState(null)
-	const [setResidentialStatus] = React.useState(null)
 	const [downPayment, setDownPayment] = React.useState(null)
 	const [firstMortgageAmount, setfirstMortgageAmount] = React.useState(null)
-
+	const [secondMortgageAmount, setSecondMortgage] = React.useState(0)
+  const [show1stMortgageInput, setShow1stMortgageInput] = React.useState(false);
+  const [show2ndMortgageInput, setShow2ndMortgageInput] = React.useState(true);
 	const calcSecondMorgage = () => (+purchasePrice *0.8) - +firstMortgageAmount || 0;
 
-	React.useEffect(() => {
-		setSecondMortgage(calcSecondMorgage())
-	}, [purchasePrice, firstMortgageAmount])
-  const mortgage = (+ purchasePrice - +downPayment - (+firstMortgageAmount || 0) + (+firstMortgageAmount || 0));
+  const mortgage = ((+firstMortgageAmount || 0) + (+secondMortgageAmount || 0))
 
   const refNumber = React.useRef("");
   state.theme.stepResponse.data?.["reference-number"] &&
   (refNumber.current = state.theme.stepResponse.data?.["reference-number"]);
-  const [show1stMortgageInput, setShow1stMortgageInput] = React.useState(false);
-  const [show2ndMortgageInput, setShow2ndMortgageInput] = React.useState(true);
-	const [secondMortgage, setSecondMortgage] = React.useState(0)
 
   const [alternate, setAlternate] = React.useState(false);
 
@@ -188,6 +183,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                     setShow1stMortgageInput(false)
                     setShow2ndMortgageInput(true)
                     setAlternate(false)
+                    setSecondMortgage(0)
                   }}
 
               />
@@ -223,6 +219,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   {...formData.section_2?.down_payment_input}
 									onKeyUp={(value) => {
 										setDownPayment(value);
+                    setSecondMortgage(0)
 									}}
               />}
             </W50>
@@ -234,14 +231,15 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 name={"mortgage_value_1"}
 								onKeyUp={(value) => {
 									setfirstMortgageAmount(value);
+		              setSecondMortgage(calcSecondMorgage())
 								}}
                 {...formData.section_2?.mortgage_value_1_input}
             />}
 
             { 
-              ( show1stMortgageInput && secondMortgage > 0 ) &&
+              ( show1stMortgageInput && secondMortgageAmount > 0 ) &&
                 <FormBlurb>
-                  So you’re looking for a second mortgage up to <strong>${numberWithCommas(secondMortgage)}</strong>.
+                  So you’re looking for a second mortgage up to <strong>${numberWithCommas(secondMortgageAmount)}</strong>.
 
                   <br />
 
@@ -451,15 +449,9 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 								{ +section2Values("mortgage_value_1") > 0 ? (
 									<FinalizeRow>
 										<FinalizeCol>
-                    {secondMortgage ? (
 											<P.White>
 												1st mortgage (existing)
 											</P.White>
-                    ) : (
-											<P.White>
-												1st mortgage (request)
-											</P.White>
-                    )}
 										</FinalizeCol>
 
 										<FinalizeCol>
@@ -484,7 +476,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 									</FinalizeRow>
                 )}
 
-								{ section2Values("looking_for") === 'second' && secondMortgage > 0 &&
+								{ section2Values("looking_for") === 'second' && secondMortgageAmount > 0 &&
 									<FinalizeRow>
 										<FinalizeCol>
 											<P.White>
@@ -495,7 +487,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 										<FinalizeCol>
 											<P.White>
 												<strong>
-													${numberWithCommas(secondMortgage)}
+													${numberWithCommas(secondMortgageAmount)}
 												</strong>
 											</P.White>
 										</FinalizeCol>
@@ -506,24 +498,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
               <FinalizeRow>
               <FinalizeCol>
                 <P.White>
-                  Down Payment
-                </P.White>
-              </FinalizeCol>
-
-              <FinalizeCol>
-                <P.White>
-                  <strong>${numberWithCommas(+section2Values("down_payment"))}</strong>
-                </P.White>
-              </FinalizeCol>
-              </FinalizeRow>
-
-								}
-
-            { section2Values("looking_for") === 'second' &&
-              <FinalizeRow>
-              <FinalizeCol>
-                <P.White>
-                  Home equity
+                  Down payment
                 </P.White>
               </FinalizeCol>
 

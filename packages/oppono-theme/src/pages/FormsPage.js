@@ -26,6 +26,7 @@ const FormsPage = ({ className, state, actions, link }) => {
   const [currentTheme, setCurrentTheme] = React.useState("gray-theme");
   const page =
     data.isReady && !data.isError ? state.source[data.type][data.id] : {};
+  console.log(page.acf)
   React.useEffect(() => {
     actions.theme.setActiveTheme(currentTheme);
   }, [currentTheme]);

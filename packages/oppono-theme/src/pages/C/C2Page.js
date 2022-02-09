@@ -65,7 +65,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
       section4Values = getC2Values(formData.section_4?.section_name),
       section5Values = getC2Values(formData.section_5?.section_name),
       section6Values = getC2Values(formData.section_6?.section_name);
-  const [step1Valid, setStep1Valid] = React.useState(false);
+  const [step1Valid, setStep1Valid] = React.useState([false, false, false]);
 
   const media = useMedia();
   const selectedProduct = React.useRef("");
@@ -97,29 +97,28 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
   );
 
 	const [purchasePrice, setPurchasePrice] = React.useState(null)
-	const [setResidentialStatus] = React.useState(null)
 	const [downPayment, setDownPayment] = React.useState(null)
   const [firstMortgageAmount, setfirstMortgageAmount] = React.useState(null)
 	const calcSecondMorgage = () => (+purchasePrice * 0.8) - +firstMortgageAmount || 0;
+  const [show1stMortgageInput, setShow1stMortgageInput] = React.useState(false);
+  const [show2ndMortgageInput, setShow2ndMortgageInput] = React.useState(true);
+  const [secondMortgageAmount, setSecondMortgage] = React.useState(0)
+
+  const mortgage = +downPayment + +firstMortgageAmount + +secondMortgageAmount
 
 	React.useEffect(() => {
 		setSecondMortgage(calcSecondMorgage())
 	}, [purchasePrice, firstMortgageAmount])
-  const mortgage = (+ purchasePrice - +downPayment - (+firstMortgageAmount || 0) + (+firstMortgageAmount || 0));
-
-
-  //const mortgage = +section1Values("home_value") - +section5Values("down_payment") || 0;
 
   const refNumber = React.useRef("");
   state.theme.stepResponse.data?.["reference-number"] &&
   (refNumber.current = state.theme.stepResponse.data?.["reference-number"]);
-  const [show1stMortgageInput, setShow1stMortgageInput] = React.useState(false);
-  const [show2ndMortgageInput, setShow2ndMortgageInput] = React.useState(true);
-  const [secondMortgage, setSecondMortgage] = React.useState(0)
 
   const [firstProduct, setFirstProduct] = React.useState(state.theme.stepResponse.data?.data
     ? Object.values(state.theme.stepResponse.data?.data)?.[0]?.products?.[0]
     : {})
+
+  console.log(formData.section_1);
 
   return (
       <div className={className}>
@@ -162,17 +161,39 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
             </div>
             <Input
                 noScroll
-                onChange={(e) => setStep1Valid(e.target.validity.valid)}
+                onChange={(e) => {
+                  let tmp = step1Valid;
+                  tmp[0] = e.target.validity.valid
+                  setStep1Valid(tmp)
+                }}
                 className={"big-input"}
                 type={"number"}
                 isCurrency
                 name={"home_value"}
                 {...formData.section_1?.home_value_input}
             />
+            <div className="form-text-wrapper">
+              <h2 className={"form-headline-2 primary"}>
+                {formData.section_1?.total_debt_label}
+              </h2>
+            </div>
+            <Input
+                noScroll
+                onChange={(e) => {
+                  let tmp = step1Valid;
+                  tmp[1] = e.target.validity.valid
+                  setStep1Valid(tmp)
+                }}
+                className={"big-input"}
+                type={"number"}
+                isCurrency
+                name={"total_debt"}
+                {...formData.section_1?.total_debt_input}
+            />
             <Button
                 css={css`
-              opacity: ${step1Valid ? 1 : 0};
-              visibility: ${step1Valid ? "visible" : "hidden"};
+              opacity: ${step1Valid.every(Boolean) ? 1 : 0};
+              visibility: ${step1Valid.every(Boolean) ? "visible" : "hidden"};
             `}
                 icon={true}
                 className={"next-step"}
@@ -699,9 +720,9 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
             
 
             { 
-              ( show1stMortgageInput && secondMortgage > 0 ) &&
+              ( show1stMortgageInput && secondMortgageAmount > 0 ) &&
                 <FormBlurb>
-                  So you’re looking for a second mortgage up to <strong>${numberWithCommas(secondMortgage)}</strong>.
+                  So you’re looking for a second mortgage up to <strong>${numberWithCommas(secondMortgageAmount)}</strong>.
 
                   <br />
 
@@ -732,7 +753,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 }
               }
           >
-            <input type={'hidden'} name={`ltv`} value={(mortgage / +section1Values('home_value') * 100).toFixed?.(2)}/>
+            <input type={'hidden'} name={`ltv`} value={(mortgage / +section5Values('purchase_price') * 100).toFixed?.(2)}/>
             <div className="form-text-wrapper">
               <h1 className={"form-headline-1 text-left"}>
                 Just one more thing…
@@ -817,9 +838,6 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 
 							<P.Small className="meta">*Variable rate</P.Small>
 
-							<P.Num className="smaller">${numberWithCommas(mortgage)}</P.Num>
-							<P.Small className="meta">*Maximum mortgage amount</P.Small>
-
 							<P.Num className="smaller">$
                     {numberWithCommas(
                         monthlyPayments(mortgage, +firstProduct?.fields?.rate / 100)
@@ -867,26 +885,6 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 
 								<FinalizeRow>
 									<FinalizeCol>
-										<P.White>Qualify up to</P.White>
-									</FinalizeCol>
-
-									<FinalizeCol>
-										<P.White>
-											<strong>$
-                        {numberWithCommas(
-                            Math.round(
-                                (+section1Values("home_value") *
-                                    firstProduct?.fields?.maximum_ltv) /
-                                100
-                            )
-                        )}
-											</strong>
-										</P.White>
-									</FinalizeCol>
-								</FinalizeRow>
-
-								<FinalizeRow>
-									<FinalizeCol>
 										<P.White>
 											Property value
 										</P.White>
@@ -894,7 +892,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 
 									<FinalizeCol>
 										<P.White>
-											<strong>${numberWithCommas(+section1Values("home_value"))}</strong>
+											<strong>${numberWithCommas(+section5Values("purchase_price"))}</strong>
 										</P.White>
 									</FinalizeCol>
 								</FinalizeRow>
@@ -902,17 +900,10 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 								{ +section5Values("mortgage_value_1") > 0 ? (
 									<FinalizeRow>
 										<FinalizeCol>
-                    {secondMortgage ? (
 											<P.White>
 												1st mortgage (existing)
 											</P.White>
-                    ) : (
-											<P.White>
-												1st mortgage (request)
-											</P.White>
-                    )}
 										</FinalizeCol>
-
 										<FinalizeCol>
 											<P.White>
 												<strong>${numberWithCommas(+section5Values("mortgage_value_1"))}</strong>
@@ -935,7 +926,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 									</FinalizeRow>
                 )}
 
-                { section5Values("looking_for") === 'second' && secondMortgage > 0 &&
+                { section5Values("looking_for") === 'second' && secondMortgageAmount > 0 &&
 									<FinalizeRow>
 										<FinalizeCol>
 											<P.White>
@@ -946,7 +937,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 										<FinalizeCol>
 											<P.White>
 												<strong>
-													${numberWithCommas(secondMortgage)}
+													${numberWithCommas(secondMortgageAmount)}
 												</strong>
 											</P.White>
 										</FinalizeCol>
@@ -956,43 +947,25 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 
                 { section5Values("looking_for") === 'first' &&
               <FinalizeRow>
-              <FinalizeCol>
-                <P.White>
-                  Down Payment
-                </P.White>
-              </FinalizeCol>
+                <FinalizeCol>
+                  <P.White>
+                    Down payment
+                  </P.White>
+                </FinalizeCol>
 
-              <FinalizeCol>
-                <P.White>
-                  <strong>${numberWithCommas(+section5Values("down_payment"))}</strong>
-                </P.White>
-              </FinalizeCol>
+                <FinalizeCol>
+                  <P.White>
+                    <strong>${numberWithCommas(+section5Values("down_payment"))}</strong>
+                  </P.White>
+                </FinalizeCol>
               </FinalizeRow>
-
-								}
-
-            { section5Values("looking_for") === 'second' &&
-              <FinalizeRow>
-              <FinalizeCol>
-                <P.White>
-                  Home equity
-                </P.White>
-              </FinalizeCol>
-
-              <FinalizeCol>
-                <P.White>
-                  <strong>${numberWithCommas(+section5Values("down_payment"))}</strong>
-                </P.White>
-              </FinalizeCol>
-              </FinalizeRow>
-
 								}
 
 								<FinalizeRow>
 									<FinalizeCol>
 										<P.White>
 											LTV{(
-                        (mortgage / +section1Values("home_value")) *
+                        (mortgage / +section5Values("purchase_price")) *
 												100) > 80  ?? (
                           <div>
                             <small>*Your BDM will be in contact with you, to discuss your options.</small>
@@ -1005,10 +978,10 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 										<P.White>
 											<strong>
 											{(
-                        (mortgage / +section1Values("home_value")) *
+                        (mortgage / +section5Values("purchase_price")) *
 												100) > 80  ?? (<span>*</span>)}
                         {(
-                        (mortgage / +section1Values("home_value")) *
+                        (mortgage / +section5Values("purchase_price")) *
 												100
 											).toFixed?.(2)}
 											%
