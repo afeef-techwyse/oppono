@@ -101,6 +101,7 @@ const Input = React.forwardRef(
       onChange,
       onCurrencyChange,
       onKeyUp,
+      onKeyDown,
       defaultValue,
       error,
       noScroll,
@@ -170,6 +171,9 @@ const Input = React.forwardRef(
                 }}
 								onKeyUp={(e) => {
 									onKeyUp?.(e.target.value.replace(/\$|,/g, ''));
+								}}
+                onKeyDown={(e) => {
+									onKeyDown?.(e.target.value.replace(/\$|,/g, ''));
 								}}
             />
           </div>}
@@ -244,6 +248,7 @@ const Input = React.forwardRef(
             }}
             onKeyUp={onKeyUp}
 						onKeyDown={(event) => {
+              onKeyDown
 							if (event.key == "Enter") {
 								document.querySelector('.next-step').click()
 							}

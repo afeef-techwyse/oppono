@@ -86,9 +86,10 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 	const [secondMortgageAmount, setSecondMortgage] = React.useState(0)
   const [show1stMortgageInput, setShow1stMortgageInput] = React.useState(false);
   const [show2ndMortgageInput, setShow2ndMortgageInput] = React.useState(true);
-	const calcSecondMorgage = () => (+purchasePrice *0.8) - +firstMortgageAmount || 0;
+  const [amountWanted, setAmountWanted] = React.useState(0);
 
-  const mortgage = ((+firstMortgageAmount || 0) + (+secondMortgageAmount || 0))
+  const mortgage = parseFloat(firstMortgageAmount) + parseFloat(amountWanted > 0 ? amountWanted : secondMortgageAmount)
+  console.log(mortgage)
 
   const refNumber = React.useRef("");
   state.theme.stepResponse.data?.["reference-number"] &&
@@ -184,6 +185,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                     setShow2ndMortgageInput(true)
                     setAlternate(false)
                     setSecondMortgage(0)
+                    setAmountWanted(0)
                   }}
 
               />
@@ -210,6 +212,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   {...formData.section_2?.purchase_price_input}
 									onKeyUp={(value) => {
 										setPurchasePrice(value);
+                    console.log(value)
 									}}
               />
               {show2ndMortgageInput&&<Input
@@ -219,7 +222,10 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   {...formData.section_2?.down_payment_input}
 									onKeyUp={(value) => {
 										setDownPayment(value);
+                    console.log(purchasePrice + " - " + value)
+                    setfirstMortgageAmount(purchasePrice - value)
                     setSecondMortgage(0)
+                    setAmountWanted(0)
 									}}
               />}
             </W50>
@@ -231,7 +237,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 name={"mortgage_value_1"}
 								onKeyUp={(value) => {
 									setfirstMortgageAmount(value);
-		              setSecondMortgage(calcSecondMorgage())
+		              setSecondMortgage((+purchasePrice *0.8) - value || 0)
 								}}
                 {...formData.section_2?.mortgage_value_1_input}
             />}
@@ -255,6 +261,9 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                     type={"number"}
                     isCurrency
                     name={"amount_wanted"}
+                    onKeyUp={(value) => {
+                      setAmountWanted(value)
+                    }}
                     {...formData.section_2?.amount_want_input}
                 />
               </FormConditionalInput>
@@ -483,7 +492,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 
 										<FinalizeCol>
 											<P.White>
-												<strong>${numberWithCommas(mortgage)}</strong>
+												<strong>${numberWithCommas(firstMortgageAmount)}</strong>
 											</P.White>
 										</FinalizeCol>
 									</FinalizeRow>
@@ -500,7 +509,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 										<FinalizeCol>
 											<P.White>
 												<strong>
-													${numberWithCommas(secondMortgageAmount)}
+													${numberWithCommas(amountWanted > 0 ? amountWanted : secondMortgageAmount)}
 												</strong>
 											</P.White>
 										</FinalizeCol>

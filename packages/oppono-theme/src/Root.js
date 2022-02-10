@@ -28,7 +28,6 @@ const Root = ({state}) => {
   const [initialDone, setInitialDone] = React.useState(false);
   const data = state.source.get(state.router.link);
   const page = data.isReady && !data.isError ? state.source[data.type][data.id] : {};
-  console.log (data)
   React.useEffect(() => {
     fixContainer();
     state.router.link !== '/' && setInitialDone(true);
