@@ -88,15 +88,15 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
   const [show2ndMortgageInput, setShow2ndMortgageInput] = React.useState(true);
   const [amountWanted, setAmountWanted] = React.useState(0);
 
-  const mortgage = parseFloat(firstMortgageAmount) + parseFloat(amountWanted > 0 ? amountWanted : secondMortgageAmount)
+  const mortgage = 
+    parseFloat(firstMortgageAmount) + 
+    parseFloat(amountWanted > 0 && section2Values('confirm_qualify_amount') == 0  ? amountWanted : secondMortgageAmount)
 
   const refNumber = React.useRef("");
   state.theme.stepResponse.data?.["reference-number"] &&
   (refNumber.current = state.theme.stepResponse.data?.["reference-number"]);
 
   const [alternate, setAlternate] = React.useState(false);
-
-  console.log(formData.section_3)
 
   return (
       <div className={className}>
@@ -213,7 +213,6 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   {...formData.section_2?.purchase_price_input}
 									onKeyUp={(value) => {
 										setPurchasePrice(value);
-                    console.log(value)
 									}}
               />
               {show2ndMortgageInput&&<Input
@@ -223,7 +222,6 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   {...formData.section_2?.down_payment_input}
 									onKeyUp={(value) => {
 										setDownPayment(value);
-                    console.log(purchasePrice + " - " + value)
                     setfirstMortgageAmount(purchasePrice - value)
                     setSecondMortgage(0)
                     setAmountWanted(0)
@@ -265,6 +263,8 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                     onKeyUp={(value) => {
                       setAmountWanted(value)
                     }}
+                    compareValueTo={secondMortgageAmount}
+                    compareValueToMessage={"Amount wanted cannot exceed the qualified amount."}
                     {...formData.section_2?.amount_want_input}
                 />
               </FormConditionalInput>
@@ -510,7 +510,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 										<FinalizeCol>
 											<P.White>
 												<strong>
-													${numberWithCommas(amountWanted > 0 ? amountWanted : secondMortgageAmount)}
+													${numberWithCommas(amountWanted > 0 && section2Values('confirm_qualify_amount') == 0 ? amountWanted : secondMortgageAmount)}
 												</strong>
 											</P.White>
 										</FinalizeCol>

@@ -105,6 +105,8 @@ const Input = React.forwardRef(
       defaultValue,
       error,
       noScroll,
+      compareValueTo,
+      compareValueToMessage
     },
     forwardedRef
   ) => {
@@ -113,6 +115,7 @@ const Input = React.forwardRef(
     const inputRef = React.useRef(null);
 
     const [value, setValue] = React.useState(initialValue ?? "");
+    const [valueToCompare, setValueToCompare] = React.useState(0);
     const [focused, setFocused] = React.useState(false);
     const [visited, setVisited] = React.useState(false);
     const [invalid, setInvalid] = React.useState(false);
@@ -126,6 +129,14 @@ const Input = React.forwardRef(
       inputRef.current.validity.valueMissing && setErrorMessage("Required");
       inputRef.current.validity.patternMismatch &&
         setErrorMessage("Incorrect Format");
+      if (compareValueTo) {
+        if (value > compareValueTo) {
+          inputRef.current.setCustomValidity(compareValueToMessage)
+          setErrorMessage(compareValueToMessage);
+        }else{
+          inputRef.current.setCustomValidity("")
+        }
+      }
       visited && setInvalid(!inputRef.current.validity.valid || error);
     };
 
@@ -138,6 +149,15 @@ const Input = React.forwardRef(
       error && setVisited(true);
       setTimeout(() => visited && validateInput(), 0);
     }, [initialValue, error]);
+
+    React.useEffect(() => {
+      if (valueToCompare > compareValueTo) {
+        setVisited(true);
+        setInvalid(true);
+      }
+      validateInput();
+    }, [valueToCompare]);
+
     return (
       <div
         ref={combinedRef}
@@ -161,6 +181,7 @@ const Input = React.forwardRef(
                 }}
                 onChange={(e) => {
                   e.persist();
+                  
                   visited && validateInput();
                   setValue(e.target.value.replace(/\$|,/g, ''));
                   onChange?.(e);
@@ -170,10 +191,13 @@ const Input = React.forwardRef(
                   // );
                 }}
 								onKeyUp={(e) => {
-									onKeyUp?.(e.target.value.replace(/\$|,/g, ''));
+                  const val = e.target.value.replace(/\$|,/g, '')
+                  setValueToCompare(val);
+									onKeyUp?.(val);
 								}}
                 onKeyDown={(e) => {
-									onKeyDown?.(e.target.value.replace(/\$|,/g, ''));
+                  const val = e.target.value.replace(/\$|,/g, '')
+									onKeyDown?.(val);
 								}}
             />
           </div>}
