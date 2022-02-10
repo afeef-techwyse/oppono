@@ -89,13 +89,14 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
   const [amountWanted, setAmountWanted] = React.useState(0);
 
   const mortgage = parseFloat(firstMortgageAmount) + parseFloat(amountWanted > 0 ? amountWanted : secondMortgageAmount)
-  console.log(mortgage)
 
   const refNumber = React.useRef("");
   state.theme.stepResponse.data?.["reference-number"] &&
   (refNumber.current = state.theme.stepResponse.data?.["reference-number"]);
 
   const [alternate, setAlternate] = React.useState(false);
+
+  console.log(formData.section_3)
 
   return (
       <div className={className}>

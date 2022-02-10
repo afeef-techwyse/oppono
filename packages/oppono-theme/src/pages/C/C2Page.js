@@ -93,14 +93,12 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 
   const lowestScore = (scores) => {
     let lowest = scores[0];
-
-    forEach( (score, idx, scores) => {
-      if (scoreRank(score) < scoreRank(lowest) ) {
-          lowest = score;
+    for (var score of scores) {
+      if (scoreRank(score) < scoreRank(lowest)) {
+        lowest = score
       }
-    });
+    }
     return lowest;
-
   }
 
   React.useEffect(() => {
@@ -112,14 +110,18 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 
     const data = new FormData();
 
-    const scores = [
-      +section2Values('applicant_score_1'),
-      +section2Values('applicant_score_2'),
-      +section2Values('applicant_score_3'),
-      +section2Values('applicant_score_4'),
-    ]
+    let scores = [];
+    [
+      ...Array(+section2Values("applicants_number") || 0).keys(),
+    ].map((index, personIndex) => {
+      const applicantScore = section2Values(
+        `applicant_score_${index + 1}`
+      );
+      scores.push(applicantScore);
+    })
 
     data.append('beacon', lowestScore(scores));
+    data.append('ltv', (totalDebt / homeValue * 100))
 
     opponoApi.post("/product-qualification", data).then((response) => {
       const products = {
@@ -135,24 +137,14 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
   React.useEffect(() => {
     actions.theme.checkUser();
   }, [state.theme.user.logged]);
-  const [[appraiser], postalCodeOnChange] = useFlowAppraisers();
   const [productsTable, productsFilter] = useProductsTable(
       state.theme.stepResponse
   );
 
-	const [purchasePrice, setPurchasePrice] = React.useState(null)
-	const [downPayment, setDownPayment] = React.useState(null)
-  const [firstMortgageAmount, setfirstMortgageAmount] = React.useState(null)
-	const calcSecondMorgage = () => (+purchasePrice * 0.8) - +firstMortgageAmount || 0;
-  const [show1stMortgageInput, setShow1stMortgageInput] = React.useState(false);
-  const [show2ndMortgageInput, setShow2ndMortgageInput] = React.useState(true);
-  const [secondMortgageAmount, setSecondMortgage] = React.useState(0)
+	const [homeValue, setHomeValue] = React.useState(0)
+	const [totalDebt, setTotalDebt] = React.useState(0)
 
-  const mortgage = +downPayment + +firstMortgageAmount + +secondMortgageAmount
 
-	React.useEffect(() => {
-		setSecondMortgage(calcSecondMorgage())
-	}, [purchasePrice, firstMortgageAmount])
 
   const refNumber = React.useRef("");
   state.theme.stepResponse.data?.["reference-number"] &&
@@ -205,6 +197,9 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
             </div>
             <Input
                 noScroll
+                onKeyUp={(value) => {
+                  setHomeValue(value)
+                }}
                 onChange={(e) => {
                   setStep1Valid(e.target.validity.valid)
                 }}
@@ -216,6 +211,9 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
             />
             <Input
                 noScroll
+                onKeyUp={(value) => {
+                  setTotalDebt(value)
+                }}
                 onChange={(e) => {
                   setStep1Valid(e.target.validity.valid)
                 }}
