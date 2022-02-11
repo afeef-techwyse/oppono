@@ -357,7 +357,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 								</h1>
 
 								<p>
-									You are applying for a <span>{section2Values("looking_for")} mortgage purchase</span> on{" "}
+									You are applying for a <span>{section2Values("looking_for")} refinance</span> on{" "}
 									{section1Values("property_details_1")} home which is located at
 								</p>
 

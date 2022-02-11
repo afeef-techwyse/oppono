@@ -72,6 +72,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
   const selectedProduct = React.useRef("");
   const maxMortgage = React.useRef("");
   
+  const [verifyProducts, setVerifyProducts] = React.useState(false)
   const [trigger_qualification, triggerQualification] = React.useState(false)
 
 
@@ -120,8 +121,11 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
       scores.push(applicantScore);
     })
 
-    data.append('beacon', lowestScore(scores));
+    data.append('type', '1st Mortgage 2nd Mortgage')
+    data.append('beacon', lowestScore(scores))
     data.append('ltv', (totalDebt / homeValue * 100))
+    console.log(section1Values('property_details_2'))
+    data.append('property_details_2', section1Values('property_details_2'))
 
     opponoApi.post("/product-qualification", data).then((response) => {
       const products = {
@@ -131,6 +135,10 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 
       response.data.data = products;
       actions.theme.setStepResponse(response);
+
+      if (verifyProducts && !products.first.products.length && !products.second.products.length) {
+        actions.router.set('/not-qualified');
+      }
     });
   }, [trigger_qualification]);
 
@@ -144,17 +152,9 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 	const [homeValue, setHomeValue] = React.useState(0)
 	const [totalDebt, setTotalDebt] = React.useState(0)
 
-
-
   const refNumber = React.useRef("");
   state.theme.stepResponse.data?.["reference-number"] &&
   (refNumber.current = state.theme.stepResponse.data?.["reference-number"]);
-
-  const [firstProduct, setFirstProduct] = React.useState(state.theme.stepResponse.data?.data
-    ? Object.values(state.theme.stepResponse.data?.data)?.[0]?.products?.[0]
-    : {})
-
-  console.log(formData.section_1);
 
   return (
       <div className={className}>
@@ -243,6 +243,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
               activeTheme={formData.section_2?.section_theme}
               stepName={formData.section_2?.section_name}
               onNext={() => {
+                setVerifyProducts(true)
                 triggerQualification(true)
               }}
           >

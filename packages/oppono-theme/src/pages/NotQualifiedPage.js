@@ -24,8 +24,11 @@ const NotQualifiedPage = ({ className, link, libraries, actions, state }) => {
     <div className={classnames(className)}>
       <Header hasSubMenu={false} />
       <Container className={"not-qualified-page-wrapper"}>
-        <h1 className={'primary'}>You are not qualified</h1>
-        <Link href={'/d'}>Go to all Products</Link>
+        <h1 className={'primary'}>Sorry, you are not qualified for any products.</h1>
+            <div className="btn-group">
+              <Link href={'/d'}><Button label="Go to all Products"/></Link>
+              <Link href={'/get-in-touch'}><Button label="Get in touch"/></Link>
+          </div>
       </Container>
       <Footer />
     </div>
@@ -105,7 +108,6 @@ export default styled(connect(NotQualifiedPage))`
       display: block;
       text-align: center;
       color: #0e9564;
-      text-decoration: underline;
       @media (max-width: 575.98px) {
         font-size: ${size(20)};
       }
