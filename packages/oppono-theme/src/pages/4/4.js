@@ -170,7 +170,7 @@ const FourPage = (props) => {
         <div className="form-text-wrapper wide-text">
           <h1 className={'form-headline-1 text-left'}>Let’s finalize this deal</h1>
           <h2 className={'form-headline-2 primary'}>Here’s a quick look at what we can offer</h2>
-          <h2 className={'form-headline-3 primary'}>You are requesting a secured business equity line of credit against your residential, <br/>detached home which is located at<br/><br/> 444 Horner
+          <h2 className={'form-headline-3 primary'}>You are requesting a secured business equity line of credit against your residential, <br/>detached home which is located at:<br/><br/> 444 Horner
             Ave,
             Toronto, M5H 3S4</h2>
         </div>

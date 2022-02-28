@@ -104,7 +104,8 @@ const EPage = ({className, setCurrentTheme, actions, state, formData}) => {
                           key={index} name={'selected-appraiser'}
                           value={JSON.stringify(appraiserData?.acf || index)}
                           label={appraiserData?.acf.company || 'Getting Info...'}
-                          number={appraiserData?.acf.phone}/>;
+                          number={appraiserData?.acf.phone}
+                          email={appraiserData?.acf.email}/>;
                     })}
                   </RadioGroup>
 									<P.Dark>*Disclaimer<br/>
@@ -122,7 +123,6 @@ const EPage = ({className, setCurrentTheme, actions, state, formData}) => {
 							<div className="row">
 								<div className="btn-group">
 									<Link href={'/dashboard/'}><Button focusable={false} className={'bordered'} label={'Back to the Dashboard'}/></Link>
-									<Button className={'next-step'} label={'Alert this appraiser'}/>
 								</div>
 							</div>
             </Appraiser>
@@ -139,90 +139,6 @@ const EPage = ({className, setCurrentTheme, actions, state, formData}) => {
               </div>
             </Appraiser>
         }
-      </FormStep>
-      <FormStep pageName={pageName} activeTheme={formData.section_3?.section_theme} stepName={formData.section_3?.section_name}>
-        <FinalizeHeading>
-          <h1 className={"form-headline-1 text-left"}>
-          {formData.section_3?.title}
-          </h1>
-
-          <h2 className={"form-headline-2 text-left"}>
-          {formData.section_3?.subtitle}
-          </h2>
-
-          <p>From: Oppono (appraisals@oppono.com)<br/>To: {selectedAppraiser.company} ({selectedAppraiser.email})</p>
-          <p>Hi, I would like to send a mortgage appraisal request on behalf of
-            my client. My client is requesting a:</p>
-        </FinalizeHeading>
-        <div className={'form-wide-container notification-section'}>
-          <RadioGroup className={'request-type fix-filter-e'} checked={'first-mortgage'}>
-            <RadioInput label={'1st mortgage'} value={'first-mortgage'} name={`request_type`} type={'radio'}/>
-            <RadioInput label={'2nd mortgage'} value={'second-mortgage'} name={`request_type`} type={'radio'}/>
-            <RadioInput label={'HELOC'} value={'heloc'} name={`request_type`} type={'radio'}/>
-          </RadioGroup>
-          <Alert className="no-padding">
-            <div className="col-4">
-              <P.F29 className="titleText">Property details</P.F29>
-              <P.D>{section1Values('address')}</P.D>
-              <P.D>{section1Values('city')}, {section1Values('postal_code')}</P.D>
-            </div>
-            <div className="col-6">
-              <W50>
-                <Input type={'number'} isCurrency name={'home_value'} {...formData.section_3?.property_value_input}/>
-                <Input type={'number'} isCurrency name={'amount_wanted'} {...formData.section_3?.amount_wanted_input}/>
-              </W50>
-            </div>
-          </Alert>
-          <Alert className="no-padding">
-            <div className="col-4">
-              <P.F29 className="titleText">Borrower details</P.F29>
-            </div>
-            <div className="col-6">
-              <W50>
-                <Input type={'text'} name={'borrower_fname'} {...formData.section_3?.borrower_first_name_input}/>
-                <Input type={'text'} name={'borrower_lname'} {...formData.section_3?.borrower_last_name_input}/>
-                <Input type={'text'} pattern={'^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$'} name={'borrower_email'} {...formData.section_3?.borrower_email_input}/>
-                <Input type={'phone'} isPhoneNumber name={'borrower_phone'} {...formData.section_3?.borrower_phone_input}/>
-              </W50>
-            </div>
-          </Alert>
-          <Alert className="no-padding">
-            <div className="col-4">
-              <P.F29 className="titleText">Broker details</P.F29>
-            </div>
-            <div className="col-6">
-              <W50>
-                <Input type={'text'} pattern={'^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$'} name={'broker_email'} {...formData.section_3?.broker_email_input}/>
-                <Input type={'phone'} isPhoneNumber name={'broker_phone'} {...formData.section_3?.broker_phone_input}/>
-              </W50>
-            </div>
-          </Alert>
-        </div>
-
-        <div className="btn-group">
-          <Button className={'bordered prev-step'} label={'Back'}/>
-          <Button className={'next-step'} label={'Send message'}/>
-        </div>
-      </FormStep>
-      <FormStep pageName={pageName} activeTheme={formData.section_4?.section_theme} stepName={formData.section_4?.section_name}>
-        <LastStep>
-          <img src={formData.section_4?.image.url} alt={formData.section_4?.image.alt}/>
-          <div className="text tablet-center">
-          <FinalizeHeading>
-            <h1 className={"form-headline-1 text-left"}>
-            {formData.section_4?.title}
-            </h1>
-
-            <p className={"form-headline-3 text-left lighter-text"}>
-            {formData.section_4?.subtitle}
-            </p>
-          </FinalizeHeading>
-            <div className="btn-group">
-              <Link href={'/dashboard/'}><Button focusable={false} className={'wide bordered reset-form'} label={'Back to the dashboard'}/></Link>
-            </div>
-          </div>
-
-        </LastStep>
       </FormStep>
     </Form>
   </div>;

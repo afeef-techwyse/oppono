@@ -35,7 +35,7 @@ const FormsPage = ({ className, state, actions, link }) => {
     if (
       !state.theme.user.logged &&
       !(
-        /sign-in|create-account|b|qualifyfor/.test(page.slug) ||
+        /sign-in|create-account|b|qualifyfor|c-ii/.test(page.slug) ||
         state.router.link.startsWith("/d/")
       )
     ) {

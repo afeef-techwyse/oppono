@@ -62,19 +62,13 @@ const pageName = "c-2";
 const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
   const getC2Values = useStoredFormValue(pageName);
   const section1Values = getC2Values(formData.section_1?.section_name),
-      section2Values = getC2Values(formData.section_2?.section_name),
-      section4Values = getC2Values(formData.section_4?.section_name),
-      section5Values = getC2Values(formData.section_5?.section_name),
-      section6Values = getC2Values(formData.section_6?.section_name);
+      section2Values = getC2Values(formData.section_2?.section_name);
   const [step1Valid, setStep1Valid] = React.useState([false, false]);
 
   const media = useMedia();
-  const selectedProduct = React.useRef("");
-  const maxMortgage = React.useRef("");
   
   const [verifyProducts, setVerifyProducts] = React.useState(false)
   const [trigger_qualification, triggerQualification] = React.useState(false)
-
 
   const scoreRank = (score) => {
     if (score == "<650") {

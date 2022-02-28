@@ -358,7 +358,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 
 								<p>
 									You are applying for a <span>{section2Values("looking_for")} refinance</span> on{" "}
-									{section1Values("property_details_1")} home which is located at
+									{section1Values("property_details_1")} home which is located at:
 								</p>
 
 								<p className="bolder">{section1Values("address")}, {section1Values("city")},{" "}
@@ -512,6 +512,14 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                         {((mortgage / +section2Values("home_value")) * 100) > 80  && ( <span>*</span> )}
 												{((mortgage / +section2Values("home_value")) * 100).toFixed?.(2)}%
 											</strong>
+										</P.White>
+									</FinalizeCol>
+								</FinalizeRow>
+								<FinalizeRow>
+									<FinalizeCol>
+										<P.White>
+                      <br/>
+                      <small>Loan amounts over $1 million may be subject to a 0.25% interest rate increase.</small>
 										</P.White>
 									</FinalizeCol>
 								</FinalizeRow>
@@ -966,6 +974,15 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                     <Button
                         className={"wide filled"}
                         label={"Connect to Filogix"}
+                    />
+                  </Link>
+                  <Link
+                      className={"wide bordered"}
+                      href={"https://expert.filogix.com/expert/view/SignOn"}
+                  >
+                    <Button
+                        className={"wide filled"}
+                        label={"Connect to Velocity"}
                     />
                   </Link>
                   <Link className={"wide bordered"} href={"/dashboard"}>

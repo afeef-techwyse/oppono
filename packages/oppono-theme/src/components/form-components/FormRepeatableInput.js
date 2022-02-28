@@ -44,10 +44,10 @@ const FormRepeatableInput = ({question, number = 1, initial = 1, fixedNumber, ch
         </RadioGroup>
         : null}
       {
-        [...Array(fixedNumber || repeatingValue).keys()].map(repeat => {
+        [...Array(fixedNumber || repeatingValue).keys()].map((repeat, index) => {
 
           return <RepeatedUnit key={`childrenRepeating-${repeat}`}>
-					<h2 className="form-headline-3">Person {repeat + 1}</h2>
+					<h2 className="form-headline-3">Applicant {repeat + 1}</h2>
             {
               React.Children.map(children, child => {
                 if (child.type === Input) {
@@ -82,9 +82,11 @@ const FormRepeatableInput = ({question, number = 1, initial = 1, fixedNumber, ch
                       children: React.Children.map(child.props.children, inputChild => {
                           return React.cloneElement(inputChild, {
                             ...inputChild.props,
+                            
                             onChange: onChangeHandler(inputChild),
                             name: inputChild.props.name?.replace(find, repeat + 1),
                             label: inputChild.props.label?.replace(find, numberToLetters(repeat + 1)),
+                            required: index == 0 && (inputChild.props.label == "First name" || inputChild.props.label == "Last name") ? "required" : ""
                           });
                         },
                       ),

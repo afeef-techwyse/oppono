@@ -87,6 +87,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
   const [show1stMortgageInput, setShow1stMortgageInput] = React.useState(false);
   const [show2ndMortgageInput, setShow2ndMortgageInput] = React.useState(true);
   const [amountWanted, setAmountWanted] = React.useState(0);
+  const [product_name, setProductName] = React.useState("");
 
   const mortgage = 
     parseFloat(firstMortgageAmount) + 
@@ -249,6 +250,8 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                   <br />
                 </FormBlurb>
             }
+            
+            <input type={'hidden'} name={`mortgage_value_2`} value={secondMortgageAmount}/>
             {show1stMortgageInput && firstMortgageAmount > 0 &&
               <FormConditionalInput
                   name={"confirm_qualify_amount"}
@@ -409,7 +412,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 
 								<p>
 									You are applying for a <span>{section2Values("looking_for")} mortgage purchase</span> on{" "}
-									{section1Values("property_details_1")} home which is located at
+									{section1Values("property_details_1")} home which is located at:
 								</p>
 
 								<p className="bolder">{section1Values("address")}, {section1Values("city")},{" "}{section1Values("postal_code")}</p>
@@ -455,9 +458,15 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 
 								<FinalizeRow>
 									<FinalizeCol>
+								{ +section2Values("mortgage_value_1") > 0 ? (
 										<P.White>
 											Property value
 										</P.White>
+                ) : (
+                  <P.White>
+                    Purchase price
+                  </P.White>
+                )}
 									</FinalizeCol>
 
 									<FinalizeCol>
@@ -534,7 +543,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 
 								}
 
-								<FinalizeRow>
+<FinalizeRow>
 									<FinalizeCol>
 										<P.White>
 											LTV {
@@ -561,7 +570,16 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 										</P.White>
 									</FinalizeCol>
 								</FinalizeRow>
+								<FinalizeRow>
+									<FinalizeCol>
+										<P.White>
+                      <br/>
+                      <small>Loan amounts over $1 million may be subject to a 0.25% interest rate increase.</small>
+										</P.White>
+									</FinalizeCol>
+								</FinalizeRow>
 							</FinalizeRows>
+
             </Finalize>
 
 						<div className="btn-group">
@@ -595,7 +613,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 							{formData.section_5?.choose_one}
               </h3>
 								</SelectHeading>
-            <input ref={selectedProduct} type={"hidden"} name={`product_name`}/>
+            <input ref={selectedProduct} type={"hidden"} name={`product_name`} value={product_name} />
 
             <input ref={maxMortgage} type={"hidden"} name={`maximum_mortgage`}/>
             {section2Values("looking_for")
@@ -616,6 +634,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 													<P.Num>{product.fields?.rate}%</P.Num>
                           <Button
                               onClick={() => {
+                                setProductName(product.title)
                                 selectedProduct.current.value = product.title;
                                 maxMortgage.current.value = Math.round(
                                     (+section2Values("purchase_price") *
@@ -711,7 +730,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                             </FinalizeChild>
                         )}
 
-                        <FinalizeChild order={3} className={"size-lg"}>
+                        <FinalizeChild order={3} className={"size-lg align-self-start"}>
                           {product.fields?.specifications.map(
                               ({term_id, name}) => (
                                   <P.Border key={term_id}>{name}</P.Border>
@@ -868,6 +887,15 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                         label={"Connect to Filogix"}
                     />
                   </Link>
+                  <Link
+                      className={"wide bordered"}
+                      href={"https://expert.filogix.com/expert/view/SignOn"}
+                  >
+                    <Button
+                        className={"wide filled"}
+                        label={"Connect to Velocity"}
+                    />
+                  </Link>
                   <Link className={"wide bordered"} href={"/dashboard"}>
                     <Button
                         className={"wide bordered"}
@@ -906,5 +934,8 @@ export default styled(connect(A2Page))`
         width: 100%;
       }
     }
+  }
+  .align-self-start {
+    align-self: flex-start;
   }
 `;

@@ -338,7 +338,7 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
 						</h2>
 
 						<p>
-						You are requesting a <span>secured business equity line of credit</span> against your {section2Values("property_details_1")} home, which is located at
+						You are requesting a <span>secured business equity line of credit</span> against your {section2Values("property_details_1")} home, which is located at:
 						</p>
 
 						<p className="bolder">
@@ -451,6 +451,14 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
 											).toFixed?.(2)}
 											%
 											</strong>
+										</P.White>
+									</FinalizeCol>
+								</FinalizeRow>
+								<FinalizeRow>
+									<FinalizeCol>
+										<P.White>
+                      <br/>
+                      <small>Loan amounts over $1 million may be subject to a 0.25% interest rate increase.</small>
 										</P.White>
 									</FinalizeCol>
 								</FinalizeRow>

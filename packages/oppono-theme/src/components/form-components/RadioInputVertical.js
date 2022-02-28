@@ -24,6 +24,7 @@ const RadioInputVertical = React.forwardRef(
       disabled,
       label,
       number,
+      email,
       name,
       checked = false,
       onChange,
@@ -44,7 +45,10 @@ const RadioInputVertical = React.forwardRef(
           <div className="radio-text" ref={labelRef}>
             {label}
           </div>
-          {number?<Link href={`tel:${number}`}><span>Tap to call</span>{number}</Link>:<h6>...</h6>}
+          <div className="appraiser-info-container">
+          {number?<Link href={`tel:${number}`}><span>Tap to call</span>{number}</Link>:<h6>...</h6>}<br/>
+          {email?<Link href={`mailto:${email}`}><span>Tap to email</span>{email}</Link>:<h6>...</h6>}
+          </div>
           <input
             type={type}
             value={value}

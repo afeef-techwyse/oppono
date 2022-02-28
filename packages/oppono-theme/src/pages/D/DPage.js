@@ -43,7 +43,7 @@ const DPage = ({ className, setCurrentTheme, state, actions }) => {
         <FormStep activeTheme={"gray-theme"} stepName={"d"}>
           <div className="form-text-wrapper">
             <h1 className={"form-headline-1 text-left"}>
-              These are the products you qualify for!
+            These are the mortgage products we offer!
             </h1>
           </div>
           {state.theme.stepResponse.data?.data ? (
@@ -53,10 +53,10 @@ const DPage = ({ className, setCurrentTheme, state, actions }) => {
                 filters={productsFilter}
               >
                 <div className={"want-deal"} data-filter={"*"}>
-                  <Link href={"/qualifyfor/"}>
+                  <Link href={"/dashboard/a/"}>
                     <Button
                       className={"small next-step"}
-                      label={"See if I qualify"}
+                      label={"See what your client qualifies for"}
                     />
                   </Link>
                 </div>

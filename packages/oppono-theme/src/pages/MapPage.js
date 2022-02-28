@@ -215,9 +215,10 @@ const MapPage = ({className, actions, state, libraries}) => {
                 .map((a) =>
                   a.fields ? (
                       <div key={a.ID} className="appraisal-block">
+                        { console.table(a) }
 												<div className="appraiser-container">
 													<p className="label">Lending Area</p>
-													<p className="city">{a.fields.city}</p>
+													<p className="city">{a.title}</p>
                         	<p className="ltv">{a.fields.ltv}% LTV</p>
 												</div>
 												<div className="appraiser-container">
@@ -254,7 +255,7 @@ const MapPage = ({className, actions, state, libraries}) => {
                       <div key={a.ID} className="appraisal-block">
 												<div className="appraiser-container">
 													<p className="label">Lending Area</p>
-													<p className="city">{a.fields.city}</p>
+													<p className="city">{a.title}</p>
                         	<p className="ltv">{a.fields.ltv}% LTV</p>
 												</div>
 												<div className="appraiser-container">
@@ -386,6 +387,10 @@ export default styled(connect(MapPage))`
       right: 6rem;
       top: 46%;
       transform: translateY(-50%);
+
+      .col-right {
+        flex-direction: row;
+      }
     }
 
     @media (max-width: 991.98px) {

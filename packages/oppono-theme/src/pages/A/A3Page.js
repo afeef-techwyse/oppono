@@ -388,7 +388,7 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
               	</h2>
 
 								<p>
-								You are requesting a <span>{section2Values("looking_for")} home equity line of credit</span> against your {section1Values("property_details_1")} home, which is located at
+								You are requesting a <span>{section2Values("looking_for")} home equity line of credit</span> against your {section1Values("property_details_1")} home, which is located at:
 								</p>
 
 								<p className="bolder">{section1Values("address")}, {section1Values("city")},{" "}{section1Values("postal_code")}</p>
@@ -521,6 +521,14 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
 													100
 												).toFixed?.(2)}%
 											</strong>
+										</P.White>
+									</FinalizeCol>
+								</FinalizeRow>
+								<FinalizeRow>
+									<FinalizeCol>
+										<P.White>
+                      <br/>
+                      <small>Loan amounts over $1 million may be subject to a 0.25% interest rate increase.</small>
 										</P.White>
 									</FinalizeCol>
 								</FinalizeRow>
@@ -714,6 +722,15 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
                     <Button
                         className={"wide filled"}
                         label={"Connect to Filogix"}
+                    />
+                  </Link>
+                  <Link
+                      className={"wide bordered"}
+                      href={"https://expert.filogix.com/expert/view/SignOn"}
+                  >
+                    <Button
+                        className={"wide filled"}
+                        label={"Connect to Velocity"}
                     />
                   </Link>
                   <Link className={"wide bordered"} href={"/dashboard"}>
