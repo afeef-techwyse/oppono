@@ -241,7 +241,7 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
         <div className="btn-group megalonum">
           <Link href={'/dashboard/c/'}><Button focusable={false} className={'wide-vertical'} label={state.theme.user.logged ? 'I want this deal' : 'Sign in to get this deal'}/></Link>
 
-          <Link href={'/d/'}><Button focusable={false} className={'next-step bordered wide-vertical'} label={'No, let’s see the full list'}/></Link>
+          <Link href={'/d/'} ><Button focusable={false} className={'next-step bordered wide-vertical'} label={'No, let’s see the full list'}/></Link>
         </div>
         <Finalize className={'mt-0'}>
           <Top/>

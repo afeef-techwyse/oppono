@@ -14,9 +14,17 @@ import opponoApi from "../../opponoApi";
 import CheckMark from "../../components/reusable/CheckMark";
 import { size } from "../../functions/size";
 import Link from "../../components/reusable/Link";
+import Header from "../../components/Header";
 
-const DPage = ({ className, setCurrentTheme, state, actions }) => {
+import classnames from "classnames";
+
+const DPage = ({ className, state, actions }) => {
   const media = useMedia();
+  
+  const [currentTheme, setCurrentTheme] = React.useState("gray-theme");
+  React.useEffect(() => {
+    actions.theme.setActiveTheme(currentTheme);
+  }, [currentTheme]);
 
   React.useEffect(() => {
     actions.theme.setLeadId();
@@ -38,6 +46,10 @@ const DPage = ({ className, setCurrentTheme, state, actions }) => {
     });
   }, []);
   return (
+    
+  <div className={classnames(className)}>
+    <Header hasProgress={state.theme.activeStep.total > 1} />
+
     <div className={className}>
       <Form setCurrentTheme={setCurrentTheme}>
         <FormStep activeTheme={"gray-theme"} stepName={"d"}>
@@ -345,6 +357,7 @@ const DPage = ({ className, setCurrentTheme, state, actions }) => {
         </FormStep>
       </Form>
     </div>
+  </div>
   );
 };
 

@@ -11,6 +11,7 @@ import FormsPage from './pages/FormsPage';
 import ContactPage from './pages/ContactPage';
 import MapPage from './pages/MapPage';
 import Missing404 from './pages/Missing404';
+import DPage from './pages/D/DPage';
 import {Transition, TransitionGroup} from 'react-transition-group';
 import {gsap} from 'gsap';
 import ScrollToPlugin from 'gsap/ScrollToPlugin';
@@ -132,16 +133,21 @@ const Root = ({state}) => {
           />
           <FormsPage
             link={data.link}
-            when={page.template === 'page-templates/form-template.php' || state.router.link.startsWith('/d/')}/>
+            when={page.template === 'page-templates/form-template.php'}/>
           <ProductsSlider link={data.link} active={true} when={state.router.link.startsWith('/products/')}/>
           <MapPage when={state.router.link.startsWith('/map/')}/>
           <TermsPage link={data.link} when={state.router.link.startsWith('/terms/')}/>
           <PrivacyPage link={data.link} when={state.router.link.startsWith('/privacy-policy/')}/>
-          <Missing404 when={data.is404}/>
         </Switch>
       </Transition>
     
     </TransitionGroup>
+
+    
+    <Switch>
+      <DPage link={data.link} when={state.router.link.startsWith('/d/')}/>
+      <Missing404 when={data.is404}/>
+    </Switch>
     
     <Overlay/>
     </AddressProvider>

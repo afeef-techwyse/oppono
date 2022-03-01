@@ -15,10 +15,6 @@ import BPage from "./B/BPage";
 import C2Page from "./C/C2Page";
 import C3Page from "./C/C3Page";
 import DPage from "./D/DPage";
-import QualifyFor from "./QualifyFor";
-import D1Page from "./D/D1Page";
-import D2Page from "./D/D2Page";
-import D3Page from "./D/D3Page";
 import classnames from "classnames";
 
 const FormsPage = ({ className, state, actions, link }) => {
@@ -47,10 +43,6 @@ const FormsPage = ({ className, state, actions, link }) => {
     <div className={classnames(className)}>
       <Header hasProgress={state.theme.activeStep.total > 1} />
       <Switch>
-        <DPage
-          setCurrentTheme={setCurrentTheme}
-          when={state.router.link.startsWith("/d/")}
-        />
         <SignInPage
           setCurrentTheme={setCurrentTheme}
           when={page.slug === "sign-in"}
@@ -99,11 +91,6 @@ const FormsPage = ({ className, state, actions, link }) => {
         <EPage
           setCurrentTheme={setCurrentTheme}
           when={page.slug === "e"}
-          formData={page.acf}
-        />
-        <QualifyFor
-          setCurrentTheme={setCurrentTheme}
-          when={state.router.link.startsWith("/qualifyfor/")}
           formData={page.acf}
         />
       </Switch>
