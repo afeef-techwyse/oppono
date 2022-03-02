@@ -803,7 +803,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                     </div>
 
 										<div className="col-right">
-											<P.Large>Select an appraiser</P.Large>
+											<P.Large>Here is a list of our top appraisers servicing the area.</P.Large>
 
 											<div className="col-right__inner">
 												<RadioGroup
