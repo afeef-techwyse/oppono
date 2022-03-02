@@ -13,7 +13,6 @@ import Footer from "../components/Footer";
 
 const Themes = () => (
   <>
-  {console.table(BGGreen)}
     <img src={BGGreen} alt="bg-holder" className="bg-holder green" />
     <img src={BGDarkGreen} alt="bg-holder" className="bg-holder dark-green" />
     <img src={BGBlue} alt="bg-holder" className="bg-holder blue" />
@@ -23,6 +22,7 @@ const Themes = () => (
     <Global
       styles={css`
     :root {
+      ${console.log(BGGray)}
       --oppono-bg-image: url(${BGGray}) !important;
     }
 

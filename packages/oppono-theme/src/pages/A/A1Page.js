@@ -985,6 +985,8 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                         label={"Connect to Velocity"}
                     />
                   </Link>
+                </div>
+                <div className="btn-group">
                   <Link className={"wide bordered"} href={"/dashboard"}>
                     <Button
                         className={"wide bordered"}

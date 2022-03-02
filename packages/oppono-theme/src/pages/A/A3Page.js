@@ -733,6 +733,8 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
                         label={"Connect to Velocity"}
                     />
                   </Link>
+                </div>
+                <div className="btn-group">
                   <Link className={"wide bordered"} href={"/dashboard"}>
                     <Button
                         className={"wide bordered"}

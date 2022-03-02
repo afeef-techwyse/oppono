@@ -215,7 +215,6 @@ const MapPage = ({className, actions, state, libraries}) => {
                 .map((a) =>
                   a.fields ? (
                       <div key={a.ID} className="appraisal-block">
-                        { console.table(a) }
 												<div className="appraiser-container">
 													<p className="label">Lending Area</p>
 													<p className="city">{a.title}</p>

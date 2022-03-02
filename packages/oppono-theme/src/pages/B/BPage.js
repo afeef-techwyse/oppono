@@ -643,6 +643,26 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
                 }}
             />
             <div className="btn-group">
+              <Link
+                  className={"wide bordered"}
+                  href={"https://expert.filogix.com/expert/view/SignOn"}
+              >
+                <Button
+                    className={"wide filled"}
+                    label={"Connect to Filogix"}
+                />
+              </Link>
+              <Link
+                  className={"wide bordered velocity"}
+                  href={"https://velocity.newton.ca/members/login"}
+              >
+                <Button
+                    className={"wide filled"}
+                    label={"Connect to Velocity"}
+                />
+              </Link>
+            </div>
+            <div className="btn-group">
               <Link className={"wide bordered"} href={"/dashboard"}>
                 <Button
                     className={"wide bordered"}
