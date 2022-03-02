@@ -118,7 +118,6 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
     data.append('type', '1st Mortgage 2nd Mortgage')
     data.append('beacon', lowestScore(scores))
     data.append('ltv', (totalDebt / homeValue * 100))
-    console.log(section1Values('property_details_2'))
     data.append('property_details_2', section1Values('property_details_2'))
 
     opponoApi.post("/product-qualification", data).then((response) => {

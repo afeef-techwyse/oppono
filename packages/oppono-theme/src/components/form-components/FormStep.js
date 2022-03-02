@@ -44,7 +44,6 @@ const FormStep = ({
       .reduce((combinedFormData, formData) => {
         return formData
           ? [...formData.entries()].reduce((formData, entry) => {
-              console.log(entry)
               formData.append(...entry);
               return formData;
             }, combinedFormData)
@@ -205,7 +204,6 @@ const FormStep = ({
             const config = {};
             sendSteps.push(stepName);
             const combinedFormData = combineFormData(sendSteps);
-            console.log(combinedFormData)
 
             if (state.theme.user.logged) {
               combinedFormData.append("token", `${state.theme.user.token}`);

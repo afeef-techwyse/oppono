@@ -15,7 +15,6 @@ export default function useFlowAppraisers() {
     data.append('postal_code', postalCode.trim().slice(0, 3));
     opponoApi.post('/appraiser-lookup', data)
       .then(response => {
-        console.log(response)
         response.data.length > 2
                 ? setAppraiser([{}])
                 : setAppraiser(response.data);

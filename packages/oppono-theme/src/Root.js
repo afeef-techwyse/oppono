@@ -117,7 +117,6 @@ const Root = ({state}) => {
             yPercent: -100,
           });
           requestAnimationFrame(() => node.classList.add('animation'));
-          console.log("onexit");
         }}
       >
         <Switch>

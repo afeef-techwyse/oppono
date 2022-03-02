@@ -13,6 +13,7 @@ import Footer from "../components/Footer";
 
 const Themes = () => (
   <>
+  {console.table(BGGreen)}
     <img src={BGGreen} alt="bg-holder" className="bg-holder green" />
     <img src={BGDarkGreen} alt="bg-holder" className="bg-holder dark-green" />
     <img src={BGBlue} alt="bg-holder" className="bg-holder blue" />
