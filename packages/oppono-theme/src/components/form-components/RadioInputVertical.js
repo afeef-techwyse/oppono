@@ -95,6 +95,12 @@ export default styled(RadioInputVertical)`
     color: #bfb6b4;
   }
   &.noRadio {
+    margin-bottom: 2.5rem; 
+    @media (max-width: 998px) {
+      margin-bottom: 0;
+      border-bottom: 1px solid #B5D2FF33;
+      padding-top: 0;
+    }
     label {
       padding-left: 0;
       &::after {
@@ -107,7 +113,7 @@ export default styled(RadioInputVertical)`
     .appraiser-info-container {
       width: 50%;
       
-      @media (max-width: 775px) {
+      @media (max-width: 998px) {
         margin: 1.5rem 0 2rem;
       }
     }
@@ -115,6 +121,7 @@ export default styled(RadioInputVertical)`
   a {
     color: #ffffff;
     font-size: ${size(16)};
+    white-space: nowrap;
   }
 
 	a span {
