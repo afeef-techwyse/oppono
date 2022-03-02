@@ -122,6 +122,7 @@ export default styled(RadioInputVertical)`
     margin-right: 30px;
     color: #BFB6B4;
     opacity: 0.5;
+    white-space: nowrap;
 	} 
   
 	h6 {
