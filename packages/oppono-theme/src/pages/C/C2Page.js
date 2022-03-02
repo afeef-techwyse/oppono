@@ -597,7 +597,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 )
             ) : null}
             <div className="btn-group">
-              <Link className={"wide bordered"} href={"/dashboard"}>
+              <Link className={"wide bordered"} href={state.theme.user.logged ? "/dashboard" : "/" }>
                 <Button
                     className={"wide bordered"}
                     label={"Back to dashboard"}

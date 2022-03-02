@@ -519,7 +519,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 									<FinalizeCol>
 										<P.White>
                       <br/>
-                      <small>Loan amounts over $1 million may be subject to a 0.25% interest rate increase.</small>
+                      <small className="loan-amount-statement">*Loan amounts over $1 million may be subject to a 0.25% interest rate increase.</small>
 										</P.White>
 									</FinalizeCol>
 								</FinalizeRow>
@@ -977,8 +977,8 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                     />
                   </Link>
                   <Link
-                      className={"wide bordered"}
-                      href={"https://expert.filogix.com/expert/view/SignOn"}
+                      className={"wide bordered velocity"}
+                      href={"https://velocity.newton.ca/members/login"}
                   >
                     <Button
                         className={"wide filled"}
@@ -1041,4 +1041,17 @@ export default styled(connect(A1Page))`
 	.no-top-margin {
 		margin-top: -2rem;
 	}
+
+  .loan-amount-statement {
+    font-style: italic;
+  }
+  a.velocity {
+    button {
+      background-color: rgb(71 47 146);
+      border-color: #221645 !important;
+      &:hover { 
+        border-color: #221645;
+      }
+    }
+  }
 `;

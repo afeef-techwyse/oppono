@@ -574,7 +574,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 									<FinalizeCol>
 										<P.White>
                       <br/>
-                      <small>Loan amounts over $1 million may be subject to a 0.25% interest rate increase.</small>
+                      <small className="loan-amount-statement">*Loan amounts over $1 million may be subject to a 0.25% interest rate increase.</small>
 										</P.White>
 									</FinalizeCol>
 								</FinalizeRow>
@@ -654,7 +654,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                           />
                         </FinalizeChild>
 
-                        <FinalizeChild className={"size-lg"} order={1}>
+                        <FinalizeChild className={"size-lg align-self-start"} order={1}>
                           <P.Dark>
 														<strong>*Monthly mortgage payment</strong>
 													</P.Dark>
@@ -730,7 +730,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                             </FinalizeChild>
                         )}
 
-                        <FinalizeChild order={3} className={"size-lg align-self-start"}>
+                        <FinalizeChild order={3} className={"size-lg"}>
                           {product.fields?.specifications.map(
                               ({term_id, name}) => (
                                   <P.Border key={term_id}>{name}</P.Border>
@@ -888,14 +888,16 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                     />
                   </Link>
                   <Link
-                      className={"wide bordered"}
-                      href={"https://expert.filogix.com/expert/view/SignOn"}
+                      className={"wide bordered velocity"}
+                      href={"https://velocity.newton.ca/members/login"}
                   >
                     <Button
                         className={"wide filled"}
                         label={"Connect to Velocity"}
                     />
                   </Link>
+                </div>
+                <div className="btn-group">
                   <Link className={"wide bordered"} href={"/dashboard"}>
                     <Button
                         className={"wide bordered"}
@@ -937,5 +939,19 @@ export default styled(connect(A2Page))`
   }
   .align-self-start {
     align-self: flex-start;
+  }
+
+  .loan-amount-statement {
+    font-style: italic;
+  }
+
+  a.velocity {
+    button {
+      background-color: rgb(71 47 146);
+      border-color: #221645 !important;
+      &:hover { 
+        border-color: #221645;
+      }
+    }
   }
 `;

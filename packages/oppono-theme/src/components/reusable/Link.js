@@ -20,7 +20,7 @@ export default styled(connect(Link))`
 }
 `;
 
-function Link({onClick: click, libraries, actions, state, children, href, target, className = ''}) {
+function Link({onClick: click, libraries, actions, state, children, href, download = false, target, className = ''}) {
   const newHref = !!href ? href : '#';
   const isInternal = newHref.startsWith(state.source.api.replace('/wp-json', '')) || newHref.startsWith('/') || newHref.startsWith('#') || newHref.startsWith('tel:') || newHref.startsWith('mailto:') || newHref.startsWith(state.frontity.url);
   let pathname = isInternal && !newHref.startsWith('tel:') && !newHref.startsWith('mailto:') ? libraries.source.normalize(newHref) : newHref;
@@ -45,6 +45,7 @@ function Link({onClick: click, libraries, actions, state, children, href, target
     <a
       onFocus={() => actions.source.fetch(pathname)}
       onMouseEnter={() => actions.source.fetch(pathname)}
+      download={download}
       href={pathname} target={target ? target : (isInternal ? undefined : '_blank')} className={`${current ? 'current ' : ''}${className}`} onClick={onClick}>
       {children}
     </a>

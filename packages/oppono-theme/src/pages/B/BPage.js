@@ -458,7 +458,7 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
 									<FinalizeCol>
 										<P.White>
                       <br/>
-                      <small>Loan amounts over $1 million may be subject to a 0.25% interest rate increase.</small>
+                      <small className="loan-amount-statement">*Loan amounts over $1 million may be subject to a 0.25% interest rate increase.</small>
 										</P.White>
 									</FinalizeCol>
 								</FinalizeRow>
@@ -685,6 +685,20 @@ export default styled(connect(BPage))`
       max-width: ${size(400)};
       @media (max-width: 575.98px) {
         max-width: 90%;
+      }
+    }
+  }
+
+  .loan-amount-statement {
+    font-style: italic;
+  }
+  
+  a.velocity {
+    button {
+      background-color: rgb(71 47 146);
+      border-color: #221645 !important;
+      &:hover { 
+        border-color: #221645;
       }
     }
   }

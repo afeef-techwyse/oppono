@@ -528,7 +528,7 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
 									<FinalizeCol>
 										<P.White>
                       <br/>
-                      <small>Loan amounts over $1 million may be subject to a 0.25% interest rate increase.</small>
+                      <small className="loan-amount-statement">*Loan amounts over $1 million may be subject to a 0.25% interest rate increase.</small>
 										</P.White>
 									</FinalizeCol>
 								</FinalizeRow>
@@ -725,8 +725,8 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
                     />
                   </Link>
                   <Link
-                      className={"wide bordered"}
-                      href={"https://expert.filogix.com/expert/view/SignOn"}
+                      className={"wide bordered velocity"}
+                      href={"https://velocity.newton.ca/members/login"}
                   >
                     <Button
                         className={"wide filled"}
@@ -770,5 +770,18 @@ export default styled(connect(A3Page))`
 
   .wide-text {
     max-width: 85rem;
+  }
+
+  .loan-amount-statement {
+    font-style: italic;
+  }
+  a.velocity {
+    button {
+      background-color: rgb(71 47 146);
+      border-color: #221645 !important;
+      &:hover { 
+        border-color: #221645;
+      }
+    }
   }
 `;
