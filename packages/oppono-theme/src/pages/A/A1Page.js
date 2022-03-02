@@ -902,7 +902,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 												</div>
                     </div>
                     <div className="col-right">
-                      <P.D className="greyedText">Select an appraiser</P.D>
+                      <P.D className="greyedText">Here is a list of our top appraisers servicing the area.</P.D>
                       <RadioGroup
                           className={"vertical-radio"}
                           radioText={"*Click to call"}
@@ -914,6 +914,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                       key={index}
                                       appraiserName={post_name}
                                       value={post_name}
+                                      className={"noRadio"}
                                   />
                               );
                             }

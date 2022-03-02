@@ -94,6 +94,24 @@ export default styled(RadioInputVertical)`
     cursor: pointer;
     color: #bfb6b4;
   }
+  &.noRadio {
+    label {
+      padding-left: 0;
+      &::after {
+        display: none;
+      }
+    }
+    .radio-text {
+      width: 50%;
+    }
+    .appraiser-info-container {
+      width: 50%;
+      
+      @media (max-width: 775px) {
+        margin: 1.5rem 0 2rem;
+      }
+    }
+  }
   a {
     color: #ffffff;
     font-size: ${size(16)};

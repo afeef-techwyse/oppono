@@ -105,7 +105,8 @@ const EPage = ({className, setCurrentTheme, actions, state, formData}) => {
                           value={JSON.stringify(appraiserData?.acf || index)}
                           label={appraiserData?.acf.company || 'Getting Info...'}
                           number={appraiserData?.acf.phone}
-                          email={appraiserData?.acf.email}/>;
+                          email={appraiserData?.acf.email}
+                          className={"noRadio"}/>;
                     })}
                   </RadioGroup>
 									<P.Dark>*Disclaimer<br/>

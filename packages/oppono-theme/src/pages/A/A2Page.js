@@ -817,6 +817,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 																				key={index}
 																				appraiserName={post_name}
 																				value={post_name}
+                                        className={"noRadio"}
 																		/>
 																);
 															}

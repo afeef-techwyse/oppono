@@ -590,6 +590,7 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
                                   key={index}
                                   appraiserName={post_name}
                                   value={post_name}
+                                  className={"noRadio"}
                               />
                           );
                         }
