@@ -12,10 +12,12 @@ const settings = {
       'url': frontEndSiteUrl,
       'title': 'Oppono',
       'description': '',
+      'options': {
+        publicPath: `/static/`
+      }
     },
   },
   'packages': [
-
     {
       
       'name': '@frontity/wp-source',

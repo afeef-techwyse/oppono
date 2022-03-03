@@ -11,6 +11,7 @@ import Header from "../components/Header";
 import { Top } from "../components/form-components/Finalize";
 import Footer from "../components/Footer";
 
+
 const Themes = () => (
   <>
     <img src={BGGreen} alt="bg-holder" className="bg-holder green" />
