@@ -613,7 +613,7 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
           <div className="btn-group">
             <Button
                 className={"next-step"}
-                label={"I want my pre-approval"}
+                label={"I want my broker pre-approval"}
             />
           </div>
         </div>
