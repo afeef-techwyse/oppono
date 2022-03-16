@@ -1,3 +1,4 @@
+// const wpSiteUrl = 'https://codesign82.com/oppono';
 // const wpSiteUrl = 'https://master-7rqtwti-oer23r2mz66wc.ca-1.platformsh.site';
 const wpSiteUrl = 'https://oppono-app.com';
 const frontEndSiteUrl = 'https://oppono-app-staging.vercel.app';
@@ -11,10 +12,12 @@ const settings = {
       'url': frontEndSiteUrl,
       'title': 'Oppono',
       'description': '',
+      'options': {
+        publicPath: `/static/`
+      }
     },
   },
   'packages': [
-
     {
       
       'name': '@frontity/wp-source',

@@ -11,6 +11,7 @@ import Header from "../components/Header";
 import { Top } from "../components/form-components/Finalize";
 import Footer from "../components/Footer";
 
+
 const Themes = () => (
   <>
     <img src={BGGreen} alt="bg-holder" className="bg-holder green" />
@@ -22,7 +23,6 @@ const Themes = () => (
     <Global
       styles={css`
     :root {
-      ${console.log(BGGray)}
       --oppono-bg-image: url(${BGGray}) !important;
     }
 

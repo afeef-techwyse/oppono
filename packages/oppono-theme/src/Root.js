@@ -1,11 +1,9 @@
 import React from 'react';
 import {connect, styled} from 'frontity';
-import Switch from '@frontity/components/switch';
+//import Switch from '@frontity/components/switch';
 import debounce from "./functions/debounce";
 import {fixContainer} from './functions/fix-container';
-import Intro from './components/Intro';
 import NotQualifiedPage from "./pages/NotQualifiedPage";
-import Styles from './styles';
 import HomeSlider from './components/HomeSlider';
 import FormsPage from './pages/FormsPage';
 import ContactPage from './pages/ContactPage';
@@ -20,6 +18,21 @@ import AboutUsPage from './pages/AboutUsPage';
 import TermsPage from './pages/TermsPage';
 import PrivacyPage from './pages/PrivacyPage';
 import { AddressProvider } from './contexts/AddressProvider'
+import dynamic from 'next/dynamic';
+
+const Intro = dynamic(import('./components/Intro'), {
+  ssr: false
+})
+
+const Styles = dynamic(import('./styles'), {
+  ssr: false
+})
+
+const Switch = dynamic(import('@frontity/components/switch'), {
+  ssr: false
+})
+
+
 
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -66,6 +79,7 @@ const Root = ({state}) => {
     }
   }, []);
   const duration = .75;
+
   return <>
   <AddressProvider>
     <Styles/>

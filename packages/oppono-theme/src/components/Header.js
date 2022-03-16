@@ -13,6 +13,7 @@ import {
 } from "../functions/prevent_allowPageScroll";
 import StepsProgress from "./form-components/StepsProgress";
 
+
 const SubHeader = styled(
   connect(({ state, className }) => {
     return (

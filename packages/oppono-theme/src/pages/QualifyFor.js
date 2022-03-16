@@ -149,7 +149,7 @@ const QualifyFor = ({className, setCurrentTheme, state, actions, formData = {}})
                 {
                   products.map((product,index)=>
                       product&&
-                      <td key={product.ID} className={'details'} data-label="Fixed rate">{index!==2?+product.fields.rate+.25+'%':'--'}</td>
+                      <td key={product.ID} className={'details'} data-label="Fixed rate">{index!==2?+product.fields.rate+'%':'--'}</td>
                   )
                 }
               </tr>

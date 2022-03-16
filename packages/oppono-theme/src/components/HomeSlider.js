@@ -464,8 +464,8 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
               <span className={"prev"} ref={prevBtnRef}>
 							<svg xmlns="http://www.w3.org/2000/svg" width="231.414" height="11.414" viewBox="0 0 231.414 11.414">
 								<g id="Left_Arrow" data-name="Left Arrow" transform="translate(1.414 0.707)" opacity="0.4">
-									<path id="Path_989" data-name="Path 989" d="M1446,284H1216" transform="translate(-1216 -279)" fill="none" stroke="#b5d2ff" stroke-width="2"/>
-									<path id="Path_990" data-name="Path 990" d="M1317,289.5l-5-5,5-5" transform="translate(-1312 -279.5)" fill="none" stroke="#b5d2ff" stroke-width="2"/>
+									<path id="Path_989" data-name="Path 989" d="M1446,284H1216" transform="translate(-1216 -279)" fill="none" stroke="#b5d2ff" strokeWidth="2"/>
+									<path id="Path_990" data-name="Path 990" d="M1317,289.5l-5-5,5-5" transform="translate(-1312 -279.5)" fill="none" stroke="#b5d2ff" strokeWidth="2"/>
 								</g>
 							</svg>
               </span>
@@ -476,8 +476,8 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
               <span className={"next"} ref={nextBtnRef}>
 							<svg xmlns="http://www.w3.org/2000/svg" width="231.414" height="11.414" viewBox="0 0 231.414 11.414">
 								<g id="Right_Arrow" data-name="Right Arrow" transform="translate(-1110.287 -278.793)">
-									<path id="Path_989" data-name="Path 989" d="M1216,284h230" transform="translate(-105.713 0.5)" fill="none" stroke="#b5d2ff" stroke-width="2"/>
-									<path id="Path_990" data-name="Path 990" d="M1312,289.5l5-5-5-5" transform="translate(23.287)" fill="none" stroke="#b5d2ff" stroke-width="2"/>
+									<path id="Path_989" data-name="Path 989" d="M1216,284h230" transform="translate(-105.713 0.5)" fill="none" stroke="#b5d2ff" strokeWidth="2"/>
+									<path id="Path_990" data-name="Path 990" d="M1312,289.5l5-5-5-5" transform="translate(23.287)" fill="none" stroke="#b5d2ff" strokeWidth="2"/>
 								</g>
 							</svg>
               </span>
