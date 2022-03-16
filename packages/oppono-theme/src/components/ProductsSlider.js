@@ -468,7 +468,7 @@ const ProductsSlider = ({
                               as={"span"}
                               className={"animate-number"}
                               data-to-fixed={2}
-                              data-number={0.25 + +product?.acf?.rate}
+                              data-number={0.5 + +product?.acf?.rate}
                             >
                               0
                             </P.D>
