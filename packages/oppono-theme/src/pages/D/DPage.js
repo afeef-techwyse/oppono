@@ -137,7 +137,7 @@ const DPage = ({ className, state, actions }) => {
                             {products.map(({ ID, title, fields: { rate } }) => (
                               <th scope={"col"} key={ID}>
                                 <p className={"number"}>
-                                  {(+rate + (hasVariable ? 0 : 0.25)).toFixed?.(
+                                  {(+rate + (hasVariable ? 0 : 0.5)).toFixed?.(
                                     2
                                   )}
                                   %
@@ -188,7 +188,7 @@ const DPage = ({ className, state, actions }) => {
                                   className={"details"}
                                   data-label="Fixed rate"
                                 >
-                                  {(+rate + 0.25).toFixed?.(2)}%
+                                  {(+rate + 0.5).toFixed?.(2)}%
                                 </td>
                               ))}
                             </tr>
@@ -276,7 +276,7 @@ const DPage = ({ className, state, actions }) => {
                                 <div className="mortgage-head">
                                   <p className={"number"}>
                                     {(
-                                      +rate + (hasVariable ? 0 : 0.25)
+                                      +rate + (hasVariable ? 0 : 0.5)
                                     ).toFixed?.(2)}
                                     %
                                   </p>
@@ -285,7 +285,7 @@ const DPage = ({ className, state, actions }) => {
                                   {!hasVariable ? null : (
                                     <div className={"m-row m-head"}>
                                       <p>Fixed rate</p>
-                                      <p>{(+rate + 0.25).toFixed?.(2)}%</p>
+                                      <p>{(+rate + 0.5).toFixed?.(2)}%</p>
                                     </div>
                                   )}
                                   <div className={"m-row m-head"}>

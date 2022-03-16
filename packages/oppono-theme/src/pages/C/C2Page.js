@@ -432,7 +432,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                           className={"details"}
                                           data-label="Fixed rate"
                                       >
-                                        {(+rate + 0.25).toFixed?.(2)}%
+                                        {(+rate + 0.5).toFixed?.(2)}%
                                       </td>
                                   ))}
                                 </tr>
@@ -528,7 +528,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                             <div className="mortgage-body">
                                               <div className={"m-row m-head"}>
                                                 <p className="white"><strong>Fixed rate</strong></p>
-                                                <p>{(+rate + 0.25).toFixed?.(2)}%</p>
+                                                <p>{(+rate + 0.5).toFixed?.(2)}%</p>
                                               </div>
                                               <div className={"m-row m-head"}>
                                                 <p className="white"><strong>Lender fee</strong></p>
