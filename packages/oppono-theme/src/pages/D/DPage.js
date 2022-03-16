@@ -76,7 +76,7 @@ const DPage = ({ className, state, actions }) => {
                     .filter(([, {products}])=>products?.length)
                     .map(
                   ([type, { products }], index) => {
-                    const hasVariable = type === "first" || type === "second";
+                    const hasVariable = true;
                     return (
                       <ProductsTable
                         key={type}
@@ -137,7 +137,7 @@ const DPage = ({ className, state, actions }) => {
                             {products.map(({ ID, title, fields: { rate } }) => (
                               <th scope={"col"} key={ID}>
                                 <p className={"number"}>
-                                  {(+rate + (hasVariable ? 0 : 0.25)).toFixed?.(
+                                  {(+rate).toFixed?.(
                                     2
                                   )}
                                   %
@@ -276,7 +276,7 @@ const DPage = ({ className, state, actions }) => {
                                 <div className="mortgage-head">
                                   <p className={"number"}>
                                     {(
-                                      +rate + (hasVariable ? 0 : 0.25)
+                                      +rate
                                     ).toFixed?.(2)}
                                     %
                                   </p>
