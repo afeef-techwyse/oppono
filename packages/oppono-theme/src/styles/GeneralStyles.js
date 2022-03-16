@@ -222,7 +222,7 @@ const GeneralStyles = (props) => (
           justify-content: center;
           align-items: center;
           button {
-            margin-top: 30px;
+            margin-top: 30px !important;
 
             &:first-of-type {
               margin-right: 0;

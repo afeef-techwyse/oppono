@@ -28,7 +28,7 @@ const SignInPage = ({
 
   return (
     <div className={className}>
-      <Form setCurrentTheme={setCurrentTheme}>
+      <Form setCurrentTheme={setCurrentTheme} className="login">
         <FormStep
           endPoint={"/signin"}
           pageName={pageName}
@@ -111,6 +111,14 @@ export default styled(connect(SignInPage))`
     display: flex;
     justify-content: center;
     padding-bottom: 0 !important;
+
+    .login {
+      padding-top: ${size(130)};
+    
+      button {
+        margin-top: ${size(30)};
+      }
+    }
   }
 
   .form-text-wrapper {

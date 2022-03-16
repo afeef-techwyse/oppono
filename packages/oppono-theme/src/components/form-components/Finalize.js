@@ -111,16 +111,28 @@ export const FinalizeChild = styled.div`
 	&.size-sm {
 		width: 12.5%;
 		flex: 0 0 12.5%;
+
+    @media (max-width: 575.98px) {
+      width: 100%;
+    }
 	}
 
 	&.size-md {
 		width: 37.5%;
 		flex: 0 0 37.5%;
+
+    @media (max-width: 575.98px) {
+      width: 100%;
+    }
 	}
 
 	&.size-lg {
 		width: 50%;
 		flex: 0 0 50%;
+
+    @media (max-width: 575.98px) {
+      width: 100%;
+    }
 	}
 
   &.wide {

@@ -563,7 +563,9 @@ export default styled(connect(ProductsSlider))`
     width: 100%;
     overflow-x: hidden;
     padding-top: ${size(25)};
-    // padding-bottom: ${size(140)};
+    margin-top: ${size(120)};
+    margin-bottom: ${size(50)};
+    padding-bottom: ${size(20)};
   }
 
   ${MegaloNum} {
