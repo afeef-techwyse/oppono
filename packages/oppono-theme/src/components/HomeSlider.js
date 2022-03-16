@@ -54,15 +54,15 @@ const Slider = styled(Swiper)`
 
     .slide-number {
       color: #b5d2ff;
-      font-size: ${size(10)};
+      font-size: ${size(40)};
       font-weight: 600;
-      width: ${size(23)};
-      height: ${size(23)};
+      width: ${size(63)};
+      height: ${size(63)};
       border: 1px solid rgba(181, 210, 255, 0.4);
       border-radius: 50%;
       position: absolute;
-      left: ${size(-35)};
-      top: ${size(30)};
+      left: ${size(-85)};
+      top: ${size(10)};
       display: flex;
       align-items: center;
       justify-content: center;
