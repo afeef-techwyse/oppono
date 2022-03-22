@@ -5,5 +5,12 @@
             "src": "package.json",
             "use": "@frontity/now"
         }
+    ],
+    "redirects": [
+        { 
+          "source": "/oppo-catalogue",
+          "destination": "/products", 
+          "permanent": true
+        }
     ]
 }
