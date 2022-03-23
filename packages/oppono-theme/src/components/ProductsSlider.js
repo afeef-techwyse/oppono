@@ -320,7 +320,7 @@ const ProductsSlider = ({
   const SignUpLink = connect(({ state }) =>
     state.theme.user.logged ? (
       <Link href={"/d/"} className={"cta-btn"}>
-        <Button className={"wide"} label={"See All Products"} />
+        <Button className={"wide"} label={"See all products"} />
       </Link>
     ) : (
       <Link href={"/create-account/"} className={"cta-btn"}>
