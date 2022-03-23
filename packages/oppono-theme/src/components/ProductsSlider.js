@@ -533,7 +533,7 @@ const ProductsSlider = ({
         <div className="btn-group">
           <SignUpLink />
           <a className={"cta-btn"} href={state.source[data.type][data.id].acf?.products_pdf?.url} target="_blank">
-            <Button className={"wide bordered"} label={"Download Product List"} />
+            <Button className={"wide bordered"} label={"Download product list"} />
           </a>
         </div>
         <div className="terms-text">

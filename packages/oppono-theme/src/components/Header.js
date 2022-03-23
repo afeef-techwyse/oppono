@@ -38,7 +38,7 @@ const SubHeader = styled(
 								/>
 							</svg>
 							<Link className={"primary"} href={"/"}>
-								Back To dashboard
+								Back to dashboard
 							</Link>
 						</p>
 
