@@ -11,6 +11,11 @@
           "source": "/oppo-catalogue",
           "destination": "/products", 
           "permanent": true
+        },
+        { 
+          "source": "/oppo-catalogue/",
+          "destination": "/products", 
+          "permanent": true
         }
     ]
 }
