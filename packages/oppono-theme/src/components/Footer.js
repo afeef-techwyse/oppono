@@ -175,8 +175,8 @@ const Footer = React.forwardRef(({ className }, forwardRef) => {
             <Link className={"primary"} href="/privacy-policy/">
               Privacy Policy
             </Link>
-            <Link className={"primary"} href="/get-in-touch/">
-              Get In Touch
+            <Link className={"primary disabled"}>
+              License # 11887/12558
             </Link>
             <SocialLinks />
           </FooterRight>
@@ -200,6 +200,9 @@ export default styled(Footer)`
   @media (max-width: 991.98px) {
     padding-top: ${size(15)};
     padding-bottom: ${size(15)};
+  }
+  .disabled {
+    pointer-events: none !important;
   }
   .footer-content {
     display: flex;
