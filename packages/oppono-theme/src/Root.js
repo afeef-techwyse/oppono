@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactGA from 'react-ga';
 import {connect, styled} from 'frontity';
 //import Switch from '@frontity/components/switch';
 import debounce from "./functions/debounce";
@@ -35,6 +36,7 @@ const Switch = dynamic(import('@frontity/components/switch'), {
 
 
 gsap.registerPlugin(ScrollToPlugin);
+ReactGA.initialize("UA-83199720-1");
 
 const isDeveloping = false;
 
@@ -84,7 +86,8 @@ const Root = ({state}) => {
   <AddressProvider>
     <Styles/>
     {data.isHome && !(isDeveloping || initialDone) ? <Intro setInitialDone={setInitialDone}/> : null}
-    
+    {console.log(data.link)}
+    {ReactGA.pageview(data.link)}
     <TransitionGroup>
       <Transition
         key={state.router.link}
