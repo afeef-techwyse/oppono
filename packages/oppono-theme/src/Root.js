@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactGA from 'react-ga';
-import {connect, styled} from 'frontity';
+import {connect, styled, Head } from 'frontity';
+import LinkedInTag  from 'react-linkedin-insight';
+
 //import Switch from '@frontity/components/switch';
 import debounce from "./functions/debounce";
 import {fixContainer} from './functions/fix-container';
@@ -20,6 +22,7 @@ import TermsPage from './pages/TermsPage';
 import PrivacyPage from './pages/PrivacyPage';
 import { AddressProvider } from './contexts/AddressProvider'
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 
 const Intro = dynamic(import('./components/Intro'), {
   ssr: false
@@ -38,9 +41,11 @@ const Switch = dynamic(import('@frontity/components/switch'), {
 gsap.registerPlugin(ScrollToPlugin);
 ReactGA.initialize("UA-83199720-1");
 
+LinkedInTag.init(1529258)
+
 const isDeveloping = false;
 
-const Root = ({state}) => {
+const Root = ({state, libraries}) => {
   const [initialDone, setInitialDone] = React.useState(false);
   const data = state.source.get(state.router.link);
   const page = data.isReady && !data.isError ? state.source[data.type][data.id] : {};
@@ -82,12 +87,41 @@ const Root = ({state}) => {
   }, []);
   const duration = .75;
 
+  const Html2React = libraries.html2react.Component;
+
   return <>
   <AddressProvider>
     <Styles/>
+    <Head>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=AW-658146634"></script>
+      <script>{
+        `window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'AW-658146634');`}
+      </script>
+      <script>{`
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '600138813929975');
+      fbq('track', 'PageView');
+      `}
+      </script>
+      <noscript>
+        {`<img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=600138813929975&ev=PageView&noscript=1"
+      />`}
+      </noscript>
+      
+      {ReactGA.pageview(data.link)}
+    </Head>
     {data.isHome && !(isDeveloping || initialDone) ? <Intro setInitialDone={setInitialDone}/> : null}
-    {console.log(data.link)}
-    {ReactGA.pageview(data.link)}
     <TransitionGroup>
       <Transition
         key={state.router.link}
@@ -164,7 +198,6 @@ const Root = ({state}) => {
       <DPage link={data.link} when={state.router.link.startsWith('/d/')}/>
       <Missing404 when={data.is404}/>
     </Switch>
-    
     <Overlay/>
     </AddressProvider>
   </>;
