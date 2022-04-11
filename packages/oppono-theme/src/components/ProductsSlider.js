@@ -680,6 +680,7 @@ export default styled(connect(ProductsSlider))`
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
+      overflow: hidden;
       @media (max-width: 575.98px) {
         width: ${size(25)};
         top: 30%;

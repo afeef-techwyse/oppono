@@ -200,6 +200,7 @@ export default styled(Footer)`
   @media (max-width: 991.98px) {
     padding-top: ${size(15)};
     padding-bottom: ${size(15)};
+    position: relative !important;
   }
   .disabled {
     pointer-events: none !important;

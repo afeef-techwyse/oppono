@@ -290,6 +290,7 @@ export default styled(Input)`
 
   .normal-input {
     width: 100%;
+    line-height: 1.35;
     border: none;
     background: transparent;
     outline: none;

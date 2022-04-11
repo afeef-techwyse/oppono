@@ -308,17 +308,17 @@ const SignedLinks = connect(
       href={"/dashboard/a/"}>
         Submit an application
       </Link>
+            <Link
+      onClick={() => menuHandler(false)}
+      className={"primary"}
+      href={"/b/"}>
+        Business equity line
+      </Link>
       <Link
       onClick={() => menuHandler(false)}
       className={"primary"}
       href={"/dashboard/c/"}>
         Qualify my client
-      </Link>
-      <Link
-      onClick={() => menuHandler(false)}
-      className={"primary"}
-      href={"/b/"}>
-        Business equity line
       </Link>
       </>
     )
@@ -365,16 +365,16 @@ const Header = React.forwardRef(
               <Link
                 onClick={() => menuHandler(false)}
                 className={"primary"}
-                href={"/map/"}
+                href={"/dashboard/e/"}
               >
-                Lending areas
+                Find an appraiser
               </Link>
               <Link
                 onClick={() => menuHandler(false)}
                 className={"primary"}
-                href={"/dashboard/e/"}
+                href={"/map/"}
               >
-                Find an appraiser
+                Lending areas
               </Link>
               <Link
                 onClick={() => menuHandler(false)}
@@ -434,7 +434,7 @@ const Header = React.forwardRef(
                 className={"primary"}
                 href={"/products/"}
               >
-                Products and rates
+                Products & rates
               </Link>
               <SignedLinks />
               <Link
@@ -511,6 +511,7 @@ export default styled(Header)`
       }
 
       .mobile-logo {
+        filter: grayscale(1);
         @media (min-width: 576px) {
           display: none;
         }
@@ -646,7 +647,6 @@ export default styled(Header)`
       display: flex;
       flex-direction: column;
       align-items: center;
-      text-transform: capitalize;
 
       &.social {
         position: absolute;

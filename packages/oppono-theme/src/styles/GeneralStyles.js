@@ -26,6 +26,10 @@ const GeneralStyles = (props) => (
         height: calc(var(--vh, 1vh) * 100);
       }
 
+      .vertical-center {
+        overflow: hidden !important;
+      }
+
       html,
       body,
       div,
@@ -382,7 +386,7 @@ const GeneralStyles = (props) => (
           font-size: 18px;
           font-weight: 400;
           line-height: 25px;
-          color: rgba(191, 182, 180, 0.5);
+          color: rgb(191 182 180);
           margin-left: 12px;
           @media (max-width: 575.98px) {
             font-size: ${size(16)};
@@ -409,7 +413,7 @@ const GeneralStyles = (props) => (
         .checkmark {
           width: 22px;
           height: 22px;
-          border: 1px solid rgba(191, 182, 180, 0.2);
+          border: 1px solid rgb(191 182 180);
           transition: border-color 400ms;
           display: inline-block;
           position: relative;
