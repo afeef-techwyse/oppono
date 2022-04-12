@@ -580,7 +580,10 @@ export default styled(connect(HomeSlider))`
   position: relative;
   height: calc(var(--vh, 1vh) * 100);
   width: 100%;
-  overflow: scroll;
+  
+  @media (max-width: 798px) {
+    overflow: scroll;
+  }
 
   .vertical-center {
     position: relative;
@@ -619,9 +622,9 @@ export default styled(connect(HomeSlider))`
   .welcome-text {
     z-index: 4;
     position: relative;
-    margin-bottom: ${size(45)};
+    margin-bottom: ${size(15)};
     @media (max-width: 991.98px) {
-      margin-bottom: ${size(128)};
+      margin-bottom: ${size(28)};
     }
     @media (max-width: 575.98px) {
       margin-bottom: 5.2vh;
