@@ -80777,5 +80777,18 @@
         "name": "Niagara Falls",
         "value": "Niagara Falls",
         "label": "Niagara Falls"
+    },
+    {
+        "coordinates": [
+            [
+                {"lat":43.84891927816462, "lng":-79.69574368372525},
+                {"lat":43.90633336220006, "lng":-79.72990429461228},
+                {"lat":43.863154218357955, "lng":-79.77745449167612},
+                {"lat":43.839014706890765, "lng":-79.7058717040385}
+            ]
+        ],
+        "name": "Bolton",
+        "value": "Bolton",
+        "label": "Bolton"
     }
 ]

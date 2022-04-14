@@ -339,6 +339,7 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
               activeTheme={formData.section_5?.section_theme}
               stepName={formData.section_5?.section_name}
           >
+            { console.log(firstProduct.title)}
 						<input
                 type={"hidden"}
                 name={`product_name`}
