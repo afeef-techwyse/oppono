@@ -10,6 +10,7 @@ const Button = React.forwardRef(
       label,
       href,
       icon = false,
+      value,
       onClick,
       focusable = true,
       disabled = false,

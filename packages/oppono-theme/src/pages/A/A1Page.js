@@ -566,8 +566,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
               activeTheme={formData.section_5?.section_theme}
               stepName={formData.section_5?.section_name}
           >
-            <input ref={selectedProduct} type={"hidden"} name={`product_name`}/>
-            <input ref={maxMortgage} type={"hidden"} name={`maximum_mortgage`}/>
+              
 
 						<SelectScreen>
 								<SelectHeading>
@@ -904,6 +903,8 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
               <h1 className={"form-headline-1 text-left"}>
                 {formData.section_6?.title}
               </h1>
+              <input ref={selectedProduct} type={"hidden"} name={`product_name`} value={selectedProduct.current.value} />
+              <input ref={maxMortgage} type={"hidden"} name={`maximum_mortgage`} value={maxMortgage.current.value} />
               <FormConditionalInput
                   noScroll
                   name={"mortgages_1"}

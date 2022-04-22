@@ -78,6 +78,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
   React.useEffect(() => {
     actions.theme.checkUser();
   }, [state.theme.user.logged]);
+
   const [[appraiser], postalCodeOnChange] = useFlowAppraisers();
 
 	const [purchasePrice, setPurchasePrice] = React.useState(null)
@@ -87,7 +88,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
   const [show1stMortgageInput, setShow1stMortgageInput] = React.useState(false);
   const [show2ndMortgageInput, setShow2ndMortgageInput] = React.useState(true);
   const [amountWanted, setAmountWanted] = React.useState(0);
-  const [product_name, setProductName] = React.useState("");
+
 
   const mortgage = 
     parseFloat(firstMortgageAmount) + 
@@ -613,9 +614,6 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 							{formData.section_5?.choose_one}
               </h3>
 								</SelectHeading>
-            <input ref={selectedProduct} type={"hidden"} name={`product_name`} value={product_name} />
-
-            <input ref={maxMortgage} type={"hidden"} name={`maximum_mortgage`}/>
             {section2Values("looking_for")
                 ? state.theme.stepResponse.data?.data?.[
                     section2Values("looking_for")
@@ -634,8 +632,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 													<P.Num>{product.fields?.rate}%</P.Num>
                           <Button
                               onClick={() => {
-                                setProductName(product.title)
-                                selectedProduct.current.value = product.title;
+                                selectedProduct.current.value = product.title
                                 maxMortgage.current.value = Math.round(
                                     (+section2Values("purchase_price") *
                                         product.fields?.maximum_ltv) /
@@ -766,6 +763,8 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
               <h1 className={"form-headline-1 text-left"}>
                 {formData.section_6?.title}
               </h1>
+              <input ref={selectedProduct} type={"hidden"} name={`product_name`} value={selectedProduct.current.value} />
+              <input ref={maxMortgage} type={"hidden"} name={`maximum_mortgage`} value={maxMortgage.current.value} />
               <FormConditionalInput
                   noScroll
                   name={"mortgages_1"}
