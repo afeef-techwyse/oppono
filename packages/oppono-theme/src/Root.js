@@ -79,6 +79,24 @@ const Root = ({state, libraries}) => {
 
     document.body.appendChild(script);
 
+    const pardotscript = document.createElement('script');
+    const pardotcontent = `
+      piAId = '699973';
+      piCId = '1102';
+      piHostname = 'pi.pardot.com';
+      (function() {
+                      function async_load(){
+                                      var s = document.createElement('script'); s.type = 'text/javascript';
+                                      s.src = ('https:' == document.location.protocol ? 'https://pi' : 'http://cdn') + '.pardot.com/pd.js';
+                                      var c = document.getElementsByTagName('script')[0]; c.parentNode.insertBefore(s, c);
+                      }
+                      if(window.attachEvent) { window.attachEvent('onload', async_load); }
+                      else { window.addEventListener('load', async_load, false); }
+      })();`;
+    
+    pardotscript.appendChild(document.createTextNode(pardotcontent));
+    document.body.appendChild(pardotscript);
+
     return () => {
       document.body.removeChild(script);
       window.removeEventListener('resize', fixContainer);
