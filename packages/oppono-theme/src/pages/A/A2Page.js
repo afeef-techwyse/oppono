@@ -659,7 +659,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 													<P.Cost>
                             $
                             {numberWithCommas(
-                                monthlyPayments(mortgage, product.fields?.rate)
+                                monthlyPayments((amountWanted > 0 || secondMortgageAmount > 0) ? (mortgage - firstMortgageAmount) : firstMortgageAmount, product.fields?.rate)
                             )}
                           </P.Cost>
                         </FinalizeChild>

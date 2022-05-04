@@ -91,12 +91,6 @@ const MapPage = ({className, actions, state, libraries}) => {
       }
       return bounds;
     };
-
-    // geocoderAPIRef.current = new window.google.maps.Geocoder();
-    // geocoderAPIRef.current.geocode({address: 'canada+toronto'}, (results, status) => {
-    //   if (status === window.google.maps.GeocoderStatus.OK) {
-    //   }
-    // });
   };
 
   React.useEffect(() => {
@@ -160,24 +154,13 @@ const MapPage = ({className, actions, state, libraries}) => {
               </div>
               <div className="inputs-group">
                 <Select
-                    onChange={({name, coordinates, zoom, center}) => {
+                    onChange={({name, coordinates}) => {
                       postal_city.current.city = name;
-                      // setMap(generateMap({windowSize, name, enc, zoom}));
                       setAppraiser(appraisersLookup.data[name] || [{fields: {city:name}}]);
                       polygonAPIRef.current.setPaths(coordinates);
                       mapAPIRef.current.fitBounds(
                           polygonAPIRef.current.getBounds()
                       );
-                      // mapAPIRef.current?.setCenter(center);
-                      // mapAPIRef.current?.setZoom(zoom);
-                      // geocoderAPIRef.current.geocode({address: `canada+ontario+${name.replaceAll(' ', '+')}`}, (results, status) => {
-                      //   if (status === google.maps.GeocoderStatus.OK) {
-                      //     copyToClipboard(JSON.stringify({center:results[0].geometry.location}).slice(1,-1)+',')
-                      // //     mapAPIRef.current?.setCenter(results[0].geometry.location);
-                      // //     mapAPIRef.current?.setZoom(zoom);
-                      // //     polygonAPIRef.current.setPaths(coordinates)
-                      //   }
-                      // });
                     }}
                     noOptionsMessage={() => "No City Found"}
                     options={sortedCities}
