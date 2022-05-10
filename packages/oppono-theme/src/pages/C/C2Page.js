@@ -230,7 +230,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 label={"Next"}
             />
           </FormStep>
-          <FormStep
+          <FormStep 
               endPoint={null}
               pageName={pageName}
               activeTheme={formData.section_2?.section_theme}
@@ -373,11 +373,8 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                             <p>
                                               $
                                               {numberWithCommas(
-                                                  (+section1Values("home_value") *
-                                                      maximum_ltv) /
-                                                  100
+                                                  (homeValue * maximum_ltv / 100 ) - +section1Values("total_debt")
                                               )}{" "}
-                                              max
                                             </p>
                                             <p>
                                               $
