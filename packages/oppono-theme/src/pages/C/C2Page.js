@@ -380,9 +380,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                               $
                                               {numberWithCommas(
                                                   monthlyPayments(
-                                                      (+section1Values("home_value") *
-                                                          maximum_ltv) /
-                                                      100,
+                                                    (homeValue * maximum_ltv / 100) - +section1Values("total_debt"),
                                                       +rate
                                                   )
                                               )}{" "}
