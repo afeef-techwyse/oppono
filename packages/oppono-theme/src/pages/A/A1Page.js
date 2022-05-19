@@ -233,6 +233,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
               ]}
 
           >
+            <input type={"hidden"} name={`home_equity`} value={+section2Values("home_value") - mortgage} />
             <input type={'hidden'} name={`ltv`} value={(( mortgage / +section2Values("home_value")) * 100).toFixed?.(2)}/>
 
             <div className="form-text-wrapper">
