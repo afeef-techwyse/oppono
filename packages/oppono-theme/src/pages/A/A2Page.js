@@ -252,6 +252,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 </FormBlurb>
             }
             
+            <input type={'hidden'} name={`mortgage_request`} value={show1stMortgageInput ? 0 : firstMortgageAmount}/>
             <input type={'hidden'} name={`mortgage_value_2`} value={secondMortgageAmount}/>
             {show1stMortgageInput && firstMortgageAmount > 0 &&
               <FormConditionalInput
