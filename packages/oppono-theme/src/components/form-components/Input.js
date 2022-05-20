@@ -337,7 +337,7 @@ export default styled(Input)`
       height: ${size(131)};
       font-size: ${size(100)};
       text-align: center;
-      border-bottom-color: transparent;
+      border-bottom: 1px solid rgba(191, 182, 180, 0.5);
       @media (max-width: 991.98px) {
         height: auto;
         font-size: ${size(26)};
