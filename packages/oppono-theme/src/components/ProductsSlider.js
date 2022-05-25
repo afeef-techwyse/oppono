@@ -242,10 +242,14 @@ const ProductsSlider = ({
     const params = new URLSearchParams(window.location.search);
     const vsref = params.get('_vsrefdom');
     const source = params.get('source');
-    actions.theme.setReference({
-      ref: vsref,
-      source: source
-    })
+
+    if (vsref && source) {
+      actions.theme.setReference({
+        ref: vsref,
+        source: source
+      })
+    }
+
   });
 
   React.useEffect(() => {
