@@ -7,6 +7,7 @@ import {gsap} from "gsap";
 axios.defaults.headers.post["Content-Type"] = "multipart/form-data";
 
 const userCookieKey = "104ab42f11";
+const refCookieKey = "vsrefdom";
 
 const appraisersMapHandler = {
   name: "appraisersMapHandler",
@@ -69,6 +70,7 @@ export default {
       stepResponse: {},
       validateAndNextCallback: 0,
       redirectTo: "",
+      reference: ""
     },
     source: {
       postTypes: [
@@ -146,6 +148,20 @@ export default {
       },
       setValidateAndNextCallback: ({state}) => (value) =>
           (state.theme.validateAndNextCallback = value),
+      setReference: ({state}) => (reference = {}, setCookie = true) => {
+        state.theme.reference = {...state.theme.reference, ...reference};
+        setCookie &&
+        cookies.setItem(
+          refCookieKey,
+          JSON.stringify(state.theme.reference),
+          3600,
+          "/"
+        )
+      },
+      checkReference: ({actions}) => {
+        const ref = cookies.getItem(refCookieKey);
+        actions.theme.setReference({...JSON.parse(ref)}, false);
+      }
     },
     themeLoading: {
       animationStart: ({state}) => (state.themeLoading.loading = true),

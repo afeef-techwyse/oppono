@@ -79,6 +79,13 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
     actions.theme.checkUser();
   }, [state.theme.user.logged]);
 
+  const [vsRef, setVsRef] = React.useState( state.theme.reference);
+  React.useEffect(() => {
+    actions.theme.checkReference();
+    setVsRef(state.theme.reference);
+    console.log(state.theme.reference)
+  }, []);
+
   const [[appraiser], postalCodeOnChange] = useFlowAppraisers();
 
 	const [purchasePrice, setPurchasePrice] = React.useState(null)
@@ -162,6 +169,8 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 {...formData.section_1?.property_details_2_dropdown}
             />
             <Button icon={true} className={"next-step"} label={"Next"}/>
+            <input type="hidden" name="vsrefdom" value={vsRef?.ref} />
+            <input type="hidden" name="vssource" value={vsRef?.source} />
           </FormStep>
           <FormStep
               apiStepNumber={2}

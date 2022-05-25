@@ -71,6 +71,14 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
   React.useEffect(() => {
     actions.theme.checkUser();
   }, [state.theme.user.logged]);
+
+  const [vsRef, setVsRef] = React.useState( state.theme.reference);
+  React.useEffect(() => {
+    actions.theme.checkReference();
+    setVsRef(state.theme.reference);
+    console.log(state.theme.reference)
+  }, []);
+
   const [[appraiser], postalCodeOnChange] = useFlowAppraisers();
   const selectedProduct = React.useRef("");
   const maxMortgage = React.useRef("");
@@ -148,6 +156,8 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 name={"property_details_2"}
                 {...formData.section_1?.property_details_2_dropdown}
             />
+            <input type="hidden" name="vsrefdom" value={vsRef?.ref} />
+            <input type="hidden" name="vssource" value={vsRef?.source} />
             <Button icon={true} className={"next-step"} label={"Next"}/>
           </FormStep>
           <FormStep

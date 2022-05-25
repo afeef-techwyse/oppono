@@ -69,6 +69,14 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
   React.useEffect(() => {
     actions.theme.checkUser();
   }, [state.theme.user.logged]);
+
+  const [vsRef, setVsRef] = React.useState( state.theme.reference);
+  React.useEffect(() => {
+    actions.theme.checkReference();
+    setVsRef(state.theme.reference);
+    console.log(state.theme.reference)
+  }, []);
+
   const [[appraiser], postalCodeOnChange] = useFlowAppraisers();
 
   const mortgage = (+section2Values("home_value") || 0) * 0.8 -
@@ -138,6 +146,8 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
                 name={"property_details_2"}
                 {...formData.section_1?.property_details_2_dropdown}
             />
+            <input type="hidden" name="vsrefdom" value={vsRef?.ref} />
+            <input type="hidden" name="vssource" value={vsRef?.source} />
             <Button icon={true} className={"next-step"} label={"Next"}/>
           </FormStep>
           <FormStep

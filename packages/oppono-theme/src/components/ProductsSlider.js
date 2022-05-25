@@ -238,6 +238,17 @@ const ProductsSlider = ({
   const allProductsFetched = React.useRef([]);
 
   React.useEffect(() => {
+    console.log(window.location.search);
+    const params = new URLSearchParams(window.location.search);
+    const vsref = params.get('_vsrefdom');
+    const source = params.get('source');
+    actions.theme.setReference({
+      ref: vsref,
+      source: source
+    })
+  });
+
+  React.useEffect(() => {
     actions.theme.setActiveTheme(page_theme);
   }, [page_theme]);
   const swiperInit = async (swiper) => {
