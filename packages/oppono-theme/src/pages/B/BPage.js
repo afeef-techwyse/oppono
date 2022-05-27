@@ -433,7 +433,7 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
 									<FinalizeCol>
 										<P.White>
 											LTV {
-                        (mortgage / +section3Values("purchase_price") * 100) > 80 && (
+                        (mortgage / +section3Values("purchase_price") * 100) > 75 && (
                       <div>
                       <small>*Your BDM will be in contact with you, to discuss your options.</small>
                       </div>
@@ -444,7 +444,7 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
 									<FinalizeCol>
 										<P.White>
 											<strong>
-											{(mortgage / +section3Values("purchase_price") * 100) > 80 && (<span>*</span>)}
+											{(mortgage / +section3Values("purchase_price") * 100) > 75 && (<span>*</span>)}
                       {(
                         (mortgage / +section3Values("purchase_price")) *
 												100
@@ -459,6 +459,14 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
 										<P.White>
                       <br/>
                       <small className="loan-amount-statement">*Loan amounts over $1 million may be subject to a 0.25% interest rate increase.</small>
+										</P.White>
+									</FinalizeCol>
+								</FinalizeRow>
+                <FinalizeRow>
+									<FinalizeCol>
+										<P.White>
+                      <br/>
+                        <span> <strong>Effective May 25, 2022,</strong> Oppono’s <strong>maximum LTV</strong> on all products will be <strong>75%</strong> for applicants with a <strong>700+ beacon score</strong>. In cases where the borrower has a <strong>beacon score of 699</strong> or below, we will consider a <strong>max of 65%</strong>. For more information, contact your BDM.</span>
 										</P.White>
 									</FinalizeCol>
 								</FinalizeRow>

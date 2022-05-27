@@ -247,7 +247,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 name={"mortgage_value_1"}
 								onKeyUp={(value) => {
 									setfirstMortgageAmount(value);
-		              setSecondMortgage((+purchasePrice *0.8) - value || 0)
+		              setSecondMortgage((+purchasePrice *0.75) - value || 0)
 								}}
                 {...formData.section_2?.mortgage_value_1_input}
             />}
@@ -558,7 +558,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 									<FinalizeCol>
 										<P.White>
 											LTV {
-                        mortgage / +section2Values("purchase_price") * 100 > 80 && (
+                        mortgage / +section2Values("purchase_price") * 100 > 75 && (
                           <div>
                             <small>*Your BDM will be in contact with you, to discuss your options.</small>
                           </div>
@@ -571,7 +571,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 										<P.White>
 											<strong>
                         {
-                          mortgage / +section2Values("purchase_price") * 100 > 80 && (
+                          mortgage / +section2Values("purchase_price") * 100 > 75 && (
                           <span>*</span>
                         )}
 												{
@@ -586,6 +586,14 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 										<P.White>
                       <br/>
                       <small className="loan-amount-statement">*Loan amounts over $1 million may be subject to a 0.25% interest rate increase.</small>
+										</P.White>
+									</FinalizeCol>
+								</FinalizeRow>
+                <FinalizeRow>
+									<FinalizeCol>
+										<P.White>
+                      <br/>
+                        <span> <strong>Effective May 25, 2022,</strong> Oppono’s <strong>maximum LTV</strong> on all products will be <strong>75%</strong> for applicants with a <strong>700+ beacon score</strong>. In cases where the borrower has a <strong>beacon score of 699</strong> or below, we will consider a <strong>max of 65%</strong>. For more information, contact your BDM.</span>
 										</P.White>
 									</FinalizeCol>
 								</FinalizeRow>
