@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import Container from "./reusable/Container";
 import { size } from "../functions/size";
 import Link from "./reusable/Link";
+import ControlledPopup from "./ControlledPopup";
 
 const FooterRight = styled.div`
   display: flex;
@@ -116,6 +117,7 @@ const Footer = React.forwardRef(({ className }, forwardRef) => {
   return (
     <footer ref={forwardRef} className={className + " footer"}>
       <Container>
+        <ControlledPopup/>
         <div className="footer-content">
           <div className="footer-left">
             <div className="guid select">

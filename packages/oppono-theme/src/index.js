@@ -8,6 +8,7 @@ axios.defaults.headers.post["Content-Type"] = "multipart/form-data";
 
 const userCookieKey = "104ab42f11";
 const refCookieKey = "vsrefdom";
+const popupCookieKey = "oppnotice";
 
 const appraisersMapHandler = {
   name: "appraisersMapHandler",
@@ -70,7 +71,8 @@ export default {
       stepResponse: {},
       validateAndNextCallback: 0,
       redirectTo: "",
-      reference: ""
+      reference: "",
+      popup: true
     },
     source: {
       postTypes: [
@@ -161,6 +163,20 @@ export default {
       checkReference: ({actions}) => {
         const ref = cookies.getItem(refCookieKey);
         actions.theme.setReference({...JSON.parse(ref)}, false);
+      },
+      setPopup: ({state}) => (popup = {}, setCookie = true) => {
+        state.theme.popup = popup;
+        setCookie &&
+        cookies.setItem(
+          popupCookieKey,
+          JSON.stringify(state.theme.popup),
+          2147483647,
+          "/"
+        )
+      },
+      checkPopup: ({actions}) => {
+        const ref = cookies.getItem(popupCookieKey);
+        actions.theme.setPopup(ref, false);
       }
     },
     themeLoading: {

@@ -94,7 +94,7 @@ const FormsPage = ({ className, state, actions, link }) => {
           formData={page.acf}
         />
       </Switch>
-      <Footer />
+      <Footer actions={actions} state={state} />
     </div>
   );
 };

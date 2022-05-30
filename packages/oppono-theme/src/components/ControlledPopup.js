@@ -1,30 +1,81 @@
-import { connect, styled } from 'frontity';
 import React, { useState } from 'react';
 import Popup from 'reactjs-popup';
-import 'reactjs-popup/dist/index.css';
+import styled from 'styled-components';
+import { cookies } from '../functions/cookies';
 
-export const ControlledPopup = React.forwardRef(({className}) => {
-  const [open, setOpen] = useState(true);
-  const closeModal = () => setOpen(false);
-  return (
-    <div className={className}>
-      <Popup className={"opp-popup"} open={open} closeOnDocumentClick onClose={closeModal} >
+const ControlledPopup = React.forwardRef(({state, actions}, forwardedRef) => {
+  
+    const [open, setOpen] = useState(false);
+    const closeModal = () => {
+        cookies.setItem(
+            "opppopup",
+            true,
+            2147483647,
+            "/"
+        );
+        setOpen(false);
+    }
+
+    React.useEffect(() => {
+        const ref = cookies.getItem("opppopup");
+        setOpen(ref ? false : true);
+    }, []);
+
+
+    return (
+        <StyledPopup open={open} closeOnDocumentClick onClose={closeModal}>
         <div className="modal">
-        <a className="close" onClick={closeModal}>
+            <a className="close" onClick={closeModal}>
             &times;
-        </a>
-            <p>Please be advised that Oppono has made the following changes to our underwriting policy.
-                <br/>
-                Effective May 25, 2022, Oppono’s maximum LTV on all products will be 75% for applicants with a 700+ beacon score. In cases where the borrower has a beacon score of 699 or below, we will consider a max of 65%.
-                <br/>
+            </a>
+            <div className={"modal-content"}>
+                Please be advised that Oppono has made the following changes to our underwriting policy.<br/><br/>
+                Effective May 25, 2022, Oppono’s maximum LTV on all products will be 75% for applicants with a 700+ beacon score. In cases where the borrower has a beacon score of 699 or below, we will consider a max of 65%.<br/><br/>
                 We appreciate your understanding. If you require further information, please contact your BDM.
-            </p>
+            </div>
         </div>
-      </Popup>
-    </div>
-  )
+        </StyledPopup>
+    )
 });
 
-export default styled(Popup)`
-background: #fff;
+React.useEffect
+
+const StyledPopup = styled(Popup)`
+  // use your custom style for ".popup-overlay"
+  &-overlay {
+    ...;
+  }
+  // use your custom style for ".popup-content"
+  &-content {
+    ...;
+    background: #fff;
+    max-width: 80%;
+
+    .modal-content {
+        margin: 10% auto; /* 15% from the top and centered */
+        padding: 10px;
+        font-size: 2em;
+        max-width: 80%; /* Could be more or less, depending on screen size */
+        position: relative;
+      }
+
+    /* The Close Button */
+        .close {
+            color: #222;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+  }
 `;
+
+export default ControlledPopup;

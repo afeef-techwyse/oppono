@@ -24,6 +24,8 @@ import { AddressProvider } from './contexts/AddressProvider'
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 
+import ControlledPopup from './components/ControlledPopup';
+
 const Intro = dynamic(import('./components/Intro'), {
   ssr: false
 })
