@@ -38,6 +38,7 @@
     "react-phone-number-input": "^3.1.22",
     "react-select": "^4.3.0",
     "react-transition-group": "^4.4.1",
+    "reactjs-popup": "^2.0.5",
     "swiper": "^6.3.4"
   },
   "devDependencies": {

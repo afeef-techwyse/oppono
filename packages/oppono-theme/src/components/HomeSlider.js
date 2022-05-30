@@ -10,6 +10,8 @@ import SplitText from "gsap/SplitText";
 import DrawSVGPlugin from "gsap/DrawSVGPlugin";
 import CustomEase from "gsap/CustomEase";
 
+import { ControlledPopup } from "./ControlledPopup";
+
 import SwiperCore, {
   A11y,
   Keyboard,
@@ -354,6 +356,8 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
   return (
     <div className={className}>
       <Header hasSubMenu={false} ref={header} />
+      
+      <ControlledPopup/>
       <div ref={flyingWrapperRef} className="flying-obj-wrapper">
         {slidesObj.map((slide, slideIndex) =>
           slide.flying_objects.desktop?.map((obj, objIndex) => {
