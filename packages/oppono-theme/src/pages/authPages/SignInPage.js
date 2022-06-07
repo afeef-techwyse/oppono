@@ -84,7 +84,7 @@ const SignInPage = ({
             {...formData.section_1?.password_input}
           />
           <a
-            href="https://oppono-app.com/wp-login.php?action=lostpassword"
+            href="https://staging-5em2ouy-oer23r2mz66wc.ca-1.platformsh.site/wp-login.php?action=lostpassword"
             className="forgot-password"
           >
             I forgot my password
