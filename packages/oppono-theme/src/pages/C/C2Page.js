@@ -70,26 +70,10 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
   const [verifyProducts, setVerifyProducts] = React.useState(false)
   const [trigger_qualification, triggerQualification] = React.useState(false)
 
-  const scoreRank = (score) => {
-    if (score == "<650") {
-      return 0;
-    } else if (score == "650-679") {
-        return 1;
-    } else if (score == "680-749") {
-        return 2;
-    } else if (score == "750-799") {
-        return 3;
-    } else if (score == "800+") {
-        return 4;
-    } else {
-        return 5;
-    }
-  }
-
   const lowestScore = (scores) => {
     let lowest = scores[0];
     for (var score of scores) {
-      if (scoreRank(score) < scoreRank(lowest)) {
+      if (score < lowest) {
         lowest = score
       }
     }
@@ -251,41 +235,11 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 initial={1}
                 name={"applicants_number"}
             >
-              <RadioGroup
-                  radioText={formData.section_2?.applicant.score_label}
-                  checked={"<650"}
-              >
-                <RadioInput
-                    label={"<650"}
-                    value={"<650"}
-                    name={`applicant_score_{{number}}`}
-                    type={"radio"}
-                />
-                <RadioInput
-                    label={"650-679"}
-                    value={"650-679"}
-                    name={`applicant_score_{{number}}`}
-                    type={"radio"}
-                />
-                <RadioInput
-                    label={"680-749"}
-                    value={"680-749"}
-                    name={`applicant_score_{{number}}`}
-                    type={"radio"}
-                />
-                <RadioInput
-                    label={"750-799"}
-                    value={"750-799"}
-                    name={`applicant_score_{{number}}`}
-                    type={"radio"}
-                />
-                <RadioInput
-                    label={"800+"}
-                    value={"800+"}
-                    name={`applicant_score_{{number}}`}
-                    type={"radio"}
-                />
-              </RadioGroup>
+            <Input
+                  type={"text"}
+                  name={"applicant_score_{{number}}"}
+                  {...formData.section_3?.applicant.score_label}
+              />
             </FormRepeatableInput>
             <div className="btn-group">
               <Button className={"bordered prev-step"} label={"Back"}/>

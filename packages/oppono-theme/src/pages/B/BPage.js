@@ -266,41 +266,11 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
                 {...formData.section_4?.applicant.phone_input}
             />
           </W50>
-          <RadioGroup
-              radioText={formData.section_4?.applicant.score_label}
-              checked={"<650"}
-          >
-            <RadioInput
-                label={"<650"}
-                value={"<650"}
-                name={`applicant_score_{{number}}`}
-                type={"radio"}
+          <Input
+                type={"text"}
+                name={"applicant_score_{{number}}"}
+                {...formData.section_3?.applicant.score_label}
             />
-            <RadioInput
-                label={"650-679"}
-                value={"650-679"}
-                name={`applicant_score_{{number}}`}
-                type={"radio"}
-            />
-            <RadioInput
-                label={"680-749"}
-                value={"680-749"}
-                name={`applicant_score_{{number}}`}
-                type={"radio"}
-            />
-            <RadioInput
-                label={"750-799"}
-                value={"750-799"}
-                name={`applicant_score_{{number}}`}
-                type={"radio"}
-            />
-            <RadioInput
-                label={"800+"}
-                value={"800+"}
-                name={`applicant_score_{{number}}`}
-                type={"radio"}
-            />
-          </RadioGroup>
         </FormRepeatableInput>
         <div className="btn-group">
           <Button className={"bordered prev-step"} label={"Back"}/>
@@ -466,8 +436,12 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
 									<FinalizeCol>
 										<P.White>
                       <br/>
-                        <span> <strong>Effective May 25, 2022,</strong> Oppono’s <strong>maximum LTV</strong> on all products will be <strong>75%</strong> for applicants with a <strong>700+ beacon score</strong>. In cases where the borrower has a <strong>beacon score of 699</strong> or below, we will consider a <strong>max of 65%</strong>. For more information, contact your BDM.</span>
-										</P.White>
+                      <span>
+                        Please be advised that Oppono has made the following changes to our underwriting policy. <br/><br/>
+ Effective June 1, 2022, Oppono’s maximum LTV on most products will be 70% for applicants with a 700+ beacon score. For borrowers that have a 750+ beacon score, we will consider a maximum LTV of 75%. In cases where the borrower has a beacon score of 699 or below, we will consider a maximum LTV of 65%.<br/><br/>
+ We appreciate your understanding. If you require further information, please contact your BDM.
+                        </span>
+                    </P.White>
 									</FinalizeCol>
 								</FinalizeRow>
 							</FinalizeRows>

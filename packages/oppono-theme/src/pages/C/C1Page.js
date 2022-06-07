@@ -191,41 +191,11 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 initial={1}
                 name={"applicants_number"}
             >
-              <RadioGroup
-                  radioText={formData.section_2?.applicant.score_label}
-                  checked={"<650"}
-              >
-                <RadioInput
-                    label={"<650"}
-                    value={"<650"}
-                    name={`applicant_score_{{number}}`}
-                    type={"radio"}
+              <Input
+                    type={"text"}
+                    name={"applicant_score_{{number}}"}
+                    {...formData.section_3?.applicant.score_label}
                 />
-                <RadioInput
-                    label={"650-679"}
-                    value={"650-679"}
-                    name={`applicant_score_{{number}}`}
-                    type={"radio"}
-                />
-                <RadioInput
-                    label={"680-749"}
-                    value={"680-749"}
-                    name={`applicant_score_{{number}}`}
-                    type={"radio"}
-                />
-                <RadioInput
-                    label={"750-799"}
-                    value={"750-799"}
-                    name={`applicant_score_{{number}}`}
-                    type={"radio"}
-                />
-                <RadioInput
-                    label={"800+"}
-                    value={"800+"}
-                    name={`applicant_score_{{number}}`}
-                    type={"radio"}
-                />
-              </RadioGroup>
             </FormRepeatableInput>
             <div className="btn-group">
               <Button className={"bordered prev-step"} label={"Back"}/>
