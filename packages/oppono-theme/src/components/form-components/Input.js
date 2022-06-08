@@ -288,6 +288,10 @@ export default styled(Input)`
   position: relative;
   transition: margin-bottom 400ms;
 
+  .inline-block {
+    display: inline-block;
+  }
+
   .normal-input {
     width: 100%;
     line-height: 1.35;

@@ -48,20 +48,22 @@ const StyledPopup = styled(Popup)`
   // use your custom style for ".popup-content"
   &-content {
     ...;
-    background: #fff;
+    background: #10397cee;
+    border: 1px solid #B5D2FF;
     max-width: 80%;
+    color: #fff;
 
     .modal-content {
-        margin: 10% auto; /* 15% from the top and centered */
+        margin: 5% auto; /* 15% from the top and centered */
         padding: 10px;
-        font-size: 2em;
-        max-width: 80%; /* Could be more or less, depending on screen size */
+        font-size: 1.5em;
+        max-width: 85%; /* Could be more or less, depending on screen size */
         position: relative;
       }
 
     /* The Close Button */
         .close {
-            color: #222;
+            color: #fff;
             font-size: 28px;
             font-weight: bold;
             position: absolute;
