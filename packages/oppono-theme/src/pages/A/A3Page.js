@@ -239,7 +239,7 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
               <Input
                     type={"text"}
                     name={"applicant_score_{{number}}"}
-                    {...formData.section_3?.applicant.score_label}
+                    label={formData.section_3?.applicant.score_label}
                 />
             </FormRepeatableInput>
             <div className="btn-group">
