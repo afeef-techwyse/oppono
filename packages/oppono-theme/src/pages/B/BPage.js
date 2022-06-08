@@ -269,7 +269,7 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
           <Input
                 type={"text"}
                 name={"applicant_score_{{number}}"}
-                label={formData.section_3?.applicant.score_label}
+                label={formData.section_3?.applicant?.score_label}
             />
         </FormRepeatableInput>
         <div className="btn-group">
