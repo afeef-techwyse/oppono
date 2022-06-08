@@ -266,11 +266,13 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
                 {...formData.section_4?.applicant.phone_input}
             />
           </W50>
-          <Input
-                type={"text"}
-                name={"applicant_score_{{number}}"}
-                label={formData.section_4?.applicant?.score_label}
-            />
+              <W50>
+              <Input
+                    type={"text"}
+                    name={"applicant_score_{{number}}"}
+                    label={formData.section_4?.applicant.score_label}
+                /><div></div>
+                </W50>
         </FormRepeatableInput>
         <div className="btn-group">
           <Button className={"bordered prev-step"} label={"Back"}/>

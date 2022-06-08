@@ -235,11 +235,13 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 initial={1}
                 name={"applicants_number"}
             >
+            <W50>
             <Input
                   type={"text"}
                   name={"applicant_score_{{number}}"}
                   label={formData.section_2?.applicant.score_label}
-              />
+              /><div></div>
+              </W50>
             </FormRepeatableInput>
             <div className="btn-group">
               <Button className={"bordered prev-step"} label={"Back"}/>

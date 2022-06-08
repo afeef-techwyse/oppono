@@ -236,11 +236,13 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
                     {...formData.section_3?.applicant.phone_input}
                 />
               </W50>
+              <W50>
               <Input
                     type={"text"}
                     name={"applicant_score_{{number}}"}
                     label={formData.section_3?.applicant.score_label}
-                />
+                /><div></div>
+                </W50>
             </FormRepeatableInput>
             <div className="btn-group">
               <Button className={"bordered prev-step"} label={"Back"}/>
