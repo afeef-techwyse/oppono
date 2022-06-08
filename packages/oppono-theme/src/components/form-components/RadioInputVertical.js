@@ -47,7 +47,7 @@ const RadioInputVertical = React.forwardRef(
           </div>
           <div className="appraiser-info-container">
           {number?<Link href={`tel:${number}`}><span>Tap to call</span>{number}</Link>:<h6>...</h6>}<br/>
-          {email?<Link href={`mailto:${email}`}><span>Tap to email</span>{email}</Link>:<h6>...</h6>}
+          {email?<Link href={`mailto:${email}`}><span className={"tap-adjust"}>Tap to email</span>{email}</Link>:<h6>...</h6>}
           </div>
           <input
             type={type}
@@ -93,6 +93,11 @@ export default styled(RadioInputVertical)`
     line-height: ${size(24)};
     cursor: pointer;
     color: #bfb6b4;
+  }
+  .tap-adjust {
+    @media(min-width: 992px) {
+      margin-right: 17px;
+    }
   }
   &.noRadio {
     margin-bottom: 2.5rem; 

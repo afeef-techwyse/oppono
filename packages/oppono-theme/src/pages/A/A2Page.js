@@ -96,7 +96,6 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
   const [show2ndMortgageInput, setShow2ndMortgageInput] = React.useState(true);
   const [amountWanted, setAmountWanted] = React.useState(0);
 
-
   const mortgage = 
     parseFloat(firstMortgageAmount) + 
     parseFloat(amountWanted > 0 && section2Values('confirm_qualify_amount') == 0  ? amountWanted : secondMortgageAmount)
