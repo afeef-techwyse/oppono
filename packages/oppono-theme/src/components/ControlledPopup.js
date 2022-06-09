@@ -50,6 +50,7 @@ const StyledPopup = styled(Popup)`
     ...;
     background: #10397cee;
     border: 1px solid #B5D2FF;
+    border-radius: 10px;
     max-width: 80%;
     color: #fff;
 
