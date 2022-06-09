@@ -51,7 +51,6 @@ export default styled(Button)`
   text-decoration: none;
   width: auto;
   min-width: 16rem;
-  max-width: fit-content;
   padding: ${size(21)} ${size(40)};
   display: flex;
   align-items: center;
