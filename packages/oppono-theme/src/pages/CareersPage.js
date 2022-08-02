@@ -116,7 +116,9 @@ const CareersPage = ({ className, libraries, state, actions }) => {
           </div>
           <div className="image">
             <div className={"image-container"}>
+              <a href={page.image_link} target="_blank">
                 <img src={page.image_top.url} alt={page.image_top.alt} />
+                </a>
             </div>
           </div>
         </div>
@@ -265,6 +267,9 @@ export default styled(connect(CareersPage))`
       > p {
         margin-bottom: 1rem;
 				line-height: 1.5;
+        text-align: justify;
+        display: inline-block;
+        width: 100%;
         @media (max-width: 575.98px) {
           font-size: 1.5rem;
         }
@@ -272,6 +277,7 @@ export default styled(connect(CareersPage))`
 
       ul {
         margin-left: 4rem;
+        margin-bottom: 1rem;
       }
     }
   }

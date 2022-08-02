@@ -171,8 +171,11 @@ const Footer = React.forwardRef(({ className }, forwardRef) => {
             </div>
           </div>
           <FooterRight className={"footer-right"}>
+            <Link className={"primary"} href="/careers/">
+              Careers
+            </Link>
             <Link className={"primary"} href="/terms/">
-              Terms & Conditions
+              T&C
             </Link>
             <Link className={"primary"} href="/privacy-policy/">
               Privacy Policy
