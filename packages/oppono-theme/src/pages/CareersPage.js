@@ -185,11 +185,13 @@ export default styled(connect(CareersPage))`
 
     @media (max-width: 480px) {
       flex-direction: column;
+      margin-right: auto;
       & > div {
         width: 100% !important;
       }
 
       .image-container {
+        margin-right: auto !important;
         max-width: 25% !important;
       }
     }
@@ -204,7 +206,6 @@ export default styled(connect(CareersPage))`
 
     .image-container {
       max-width: 50%;
-      margin-right: auto;
       margin-left: auto;
       position: relative;
       display: flex;
@@ -267,7 +268,6 @@ export default styled(connect(CareersPage))`
       > p {
         margin-bottom: 1rem;
 				line-height: 1.5;
-        text-align: justify;
         display: inline-block;
         width: 100%;
         @media (max-width: 575.98px) {
