@@ -799,7 +799,7 @@ export default styled(connect(ProductsSlider))`
     letter-spacing: ${size(0.48)};
     line-height: ${size(16)};
     border-top: 1px solid #d2f5e9;
-    flex: 1 1 25%;
+    flex: 1 1 20%;
 
     &:hover {
       opacity: 1;
