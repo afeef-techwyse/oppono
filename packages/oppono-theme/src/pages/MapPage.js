@@ -35,7 +35,7 @@ const MapPage = ({className, actions, state, libraries}) => {
   const generateMap = ({windowSize, name, coordinates, enc, zoom}) => {
     let link = `https://maps.googleapis.com/maps/api/staticmap?map_id=3a82b8043ec69e1&zoom=${
         zoom || 7
-    }&key=AIzaSyD9Q58YYqhsWqlGn1p-GzPWv3iyCZ2iTss&size=${
+    }&key=AIzaSyAQAH4EYrsNqXGeVZaBf4nUNADQd7UkuLM&size=${
         windowSize?.width || 1920
     }x${windowSize?.height || 1080}`;
     link += name
