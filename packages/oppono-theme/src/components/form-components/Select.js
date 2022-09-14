@@ -62,6 +62,26 @@ const Select = React.forwardRef(
       visited && setInvalid(!inputRef.current.validity.valid);
     };
 
+  const getFocusedOption = () => {
+    return selectRef.current.select.state.focusedOption;
+  }
+
+  const isMenuOpenCheck = () => {
+    return selectRef.current.state.menuIsOpen;
+  }
+
+  const onUserInteracted = () => {
+    Promise.resolve().then(() => {
+      const focusedOption = getFocusedOption();
+      if (isMenuOpenCheck()) {
+        setValue(focusedOption.value);
+        inputRef.current.dispatchEvent(new Event("change"));
+        setInvalid(false);
+        onChange?.(focusedOption);
+      }
+    });
+  }
+
     return (
       <div
         ref={combinedRef}
@@ -88,6 +108,7 @@ const Select = React.forwardRef(
           <SelectTwo
             ref={selectRef}
             {...props}
+            openMenuOnFocus={true}
             autofocus={true}
             openAfterFocus={true}
             onFocus={(e) => {
@@ -117,12 +138,14 @@ const Select = React.forwardRef(
             }}
 						onKeyDown={(event) => {
 							if (event.key == "Enter") {
+                onUserInteracted(event)
 								document.querySelector('.next-step').click()
 							}
 						}}
             className="oppono-select"
             classNamePrefix="oppono-select"
             components={{ DropdownIndicator }}
+            
           />
         </label>
       </div>
