@@ -287,11 +287,13 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                     {...formData.section_3?.applicant.phone_input}
                 />
               </W50>
+              <W50>
               <Input
                     type={"text"}
                     name={"applicant_score_{{number}}"}
                     label={formData.section_3?.applicant.score_label}
-                />
+                /><div></div>
+                </W50>
             </FormRepeatableInput>
             <div className="btn-group">
               <Button className={"bordered prev-step"} label={"Back"}/>
@@ -536,9 +538,9 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 										<P.White>
                       <br/>
                         <span>
-                        Please be advised that Oppono has made the following changes to our underwriting policy. <br/><br/>
- Effective June 1, 2022, Oppono’s maximum LTV on most products will be 70% for applicants with a 700+ beacon score. For borrowers that have a 750+ beacon score, we will consider a maximum LTV of 75%. In cases where the borrower has a beacon score of 699 or below, we will consider a maximum LTV of 65%.<br/><br/>
- We appreciate your understanding. If you require further information, please contact your BDM.
+                        Please be advised that Oppono has made the following change to our underwriting policy.<br/><br/>
+                Effective immediately, Oppono’s maximum LTV on all products will be 75%.<br/><br/>
+                We appreciate your understanding. If you require further information, please contact your BDM.
                         </span>
 										</P.White>
 									</FinalizeCol>

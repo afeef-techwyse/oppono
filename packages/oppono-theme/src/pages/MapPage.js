@@ -35,7 +35,7 @@ const MapPage = ({className, actions, state, libraries}) => {
   const generateMap = ({windowSize, name, coordinates, enc, zoom}) => {
     let link = `https://maps.googleapis.com/maps/api/staticmap?map_id=3a82b8043ec69e1&zoom=${
         zoom || 7
-    }&key=AIzaSyD9Q58YYqhsWqlGn1p-GzPWv3iyCZ2iTss&size=${
+    }&key=AIzaSyAQAH4EYrsNqXGeVZaBf4nUNADQd7UkuLM&size=${
         windowSize?.width || 1920
     }x${windowSize?.height || 1080}`;
     link += name
@@ -68,7 +68,7 @@ const MapPage = ({className, actions, state, libraries}) => {
       zoom: 9,
       disableDefaultUI: true,
       draggable: true,
-      mapId: "3a82b8043ec69e1",
+      mapId: "fc06fa36f5d8b58",
     });
     polygonAPIRef.current = new window.google.maps.Polygon({
       // paths: triangleCoords,
@@ -98,7 +98,7 @@ const MapPage = ({className, actions, state, libraries}) => {
     if (!window.google) {
       const scriptElement = document.createElement("script");
       scriptElement.type = "text/javascript";
-      scriptElement.src = `https://maps.google.com/maps/api/js?key=AIzaSyD9Q58YYqhsWqlGn1p-GzPWv3iyCZ2iTss&map_ids=3a82b8043ec69e1`;
+      scriptElement.src = `https://maps.google.com/maps/api/js?key=AIzaSyAQAH4EYrsNqXGeVZaBf4nUNADQd7UkuLM&map_ids=fc06fa36f5d8b58`;
       document.body.appendChild(scriptElement);
       scriptElement.addEventListener("load", initMap);
     } else {
