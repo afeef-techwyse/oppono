@@ -482,7 +482,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 									<FinalizeCol>
 										<P.White>
                       LTV
-                        {((mortgage / +section2Values("home_value")) * 100) > 75 && (
+                        {((mortgage / +section2Values("home_value")) * 100) > state.env.MAX_LTV && (
                           <div>
                             <small>*Your BDM will be in contact with you, to discuss your options.</small>
                           </div>
@@ -493,7 +493,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 									<FinalizeCol>
 										<P.White>
 											<strong>
-                        {((mortgage / +section2Values("home_value")) * 100) > 75  && ( <span>*</span> )}
+                        {((mortgage / +section2Values("home_value")) * 100) > state.env.MAX_LTV  && ( <span>*</span> )}
 												{((mortgage / +section2Values("home_value")) * 100).toFixed?.(2)}%
 											</strong>
 										</P.White>
@@ -539,7 +539,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                       <br/>
                         <span>
                         Please be advised that Oppono has made the following change to our underwriting policy.<br/><br/>
-                Effective immediately, Oppono’s maximum LTV on all products will be 75%.<br/><br/>
+                        Effective immediately, Oppono's maximum LTV on most products will be 75%. For borrowers with credit scores above 700, the maximum LTV will be {state.env.MAX_LTV}%.<br/><br/>
                 We appreciate your understanding. If you require further information, please contact your BDM.
                         </span>
 										</P.White>
