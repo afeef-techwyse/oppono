@@ -201,6 +201,7 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
       : [];
   const { page_theme, slider_top_subtitle, slider_top_title } =
     data.isReady && !data.isError ? state.source[data.type][data.id].acf : {};
+
   const media = useMedia();
   const nextBtnRef = React.useRef(null);
   const prevBtnRef = React.useRef(null);

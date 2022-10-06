@@ -699,7 +699,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                           className={"details"}
                                           data-label="Fixed rate"
                                       >
-                                        {(+rate + 0.5).toFixed?.(2)}%
+                                        {(+rate + state.env.FIXED_RATE).toFixed?.(2)}%
                                       </td>
                                   ))}
                                 </tr>
@@ -819,7 +819,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                               </div>
                                               <div className={"m-row m-head"}>
                                                 <p>Fixed rate</p>
-                                                <p>{(+rate + 0.5).toFixed?.(2)}%</p>
+                                                <p>{(+rate + state.env.FIXED_RATE).toFixed?.(2)}%</p>
                                               </div>
                                               <div className={"m-row m-head"}>
                                                 <p>Lender fee</p>

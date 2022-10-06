@@ -377,7 +377,7 @@ const A3Page = ({state, setCurrentTheme, actions, className, formData}) => {
 								<p className="bolder">{section1Values("address")}, {section1Values("city")},{" "}{section1Values("postal_code")}</p>
 							</FinalizeHeading>
 							<FinalizePercentage>
-									<P.Num>{(+firstProduct.fields?.rate + 0.5).toFixed?.(2)}%</P.Num>
+									<P.Num>{(+firstProduct.fields?.rate + state.env.FIXED_RATE).toFixed?.(2)}%</P.Num>
 
 									<P.Small className="meta">*Fixed rate</P.Small>
 

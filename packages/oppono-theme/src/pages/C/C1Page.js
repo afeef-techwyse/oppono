@@ -328,7 +328,7 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                           className={"details"}
                                           data-label="Fixed rate"
                                       >
-                                        {(+rate + 0.5).toFixed?.(2)}%
+                                        {(+rate + state.env.FIXED_RATE).toFixed?.(2)}%
                                       </td>
                                   ))}
                                 </tr>
@@ -457,7 +457,7 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                             <div className="mortgage-body">
                                               <div className={"m-row m-head"}>
                                                 <p className="white"><strong>Fixed rate</strong></p>
-                                                <p>{(+rate + 0.5).toFixed?.(2)}%</p>
+                                                <p>{(+rate + state.env.FIXED_RATE).toFixed?.(2)}%</p>
                                               </div>
                                               <div className={"m-row m-head"}>
                                                 <p className="white"><strong>Lender fee</strong></p>
@@ -777,7 +777,7 @@ const C1Page = ({className, setCurrentTheme, state, actions, formData}) => {
 								1st HELOC
 							</h2>
 
-							<P.Num>{(+firstProduct?.fields?.rate + 0.5).toFixed?.(2)}%</P.Num>
+							<P.Num>{(+firstProduct?.fields?.rate + state.env.FIXED_RATE).toFixed?.(2)}%</P.Num>
 
 							<P.Small className="meta">*Fixed rate</P.Small>
 
