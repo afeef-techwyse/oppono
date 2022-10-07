@@ -1,3 +1,5 @@
+import { config } from "dotenv";
+config();
 // const wpSiteUrl = 'https://codesign82.com/oppono';
 // const wpSiteUrl = 'https://master-7rqtwti-oer23r2mz66wc.ca-1.platformsh.site';
 const wpSiteUrl = 'https://oppono-app.com';
@@ -8,6 +10,10 @@ const frontEndSiteUrl = 'https://oppono-app-staging.vercel.app';
 const settings = {
   'name': 'oppono-frontity',
   'state': {
+    env: {
+        FIXED_RATE: process.env.FIXED_RATE,
+        MAX_LTV:process.env.MAX_LTV
+    },
     'frontity': {
       'url': frontEndSiteUrl,
       'title': 'Oppono',

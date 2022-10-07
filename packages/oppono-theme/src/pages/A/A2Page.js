@@ -246,7 +246,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                 name={"mortgage_value_1"}
 								onKeyUp={(value) => {
 									setfirstMortgageAmount(value);
-		              setSecondMortgage((+purchasePrice *0.75) - value || 0)
+		              setSecondMortgage((+purchasePrice *(state.env.MAX_LTV/100)) - value || 0)
 								}}
                 {...formData.section_2?.mortgage_value_1_input}
             />}
@@ -529,7 +529,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 									<FinalizeCol>
 										<P.White>
 											LTV {
-                        mortgage / +section2Values("purchase_price") * 100 > 75 && (
+                        mortgage / +section2Values("purchase_price") * 100 > state.env.MAX_LTV && (
                           <div>
                             <small>*Your BDM will be in contact with you, to discuss your options.</small>
                           </div>
@@ -542,7 +542,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
 										<P.White>
 											<strong>
                         {
-                          mortgage / +section2Values("purchase_price") * 100 > 75 && (
+                          mortgage / +section2Values("purchase_price") * 100 > state.env.MAX_LTV && (
                           <span>*</span>
                         )}
 												{
@@ -566,7 +566,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                       <br/>
                       <span>
                       Please be advised that Oppono has made the following change to our underwriting policy.<br/><br/>
-                Effective immediately, Oppono’s maximum LTV on all products will be 75%.<br/><br/>
+                      Effective immediately, Oppono's maximum LTV on most products will be 75%. For borrowers with credit scores above 700, the maximum LTV will be {state.env.MAX_LTV}%.<br/><br/>
                 We appreciate your understanding. If you require further information, please contact your BDM.
                         </span>
                     </P.White>
@@ -679,7 +679,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                 <tr>
                                   <P.White as={"td"}><strong>Fixed rate</strong></P.White>
                                   <P.D as={"td"}>
-                                    {(+product.fields?.rate + 0.5).toFixed?.(2)}%
+                                    {(+product.fields?.rate + state.env.FIXED_RATE).toFixed?.(2)}%
                                   </P.D>
                                 </tr>
                                 <tr>
@@ -708,7 +708,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                 <tr>
                                   <P.White as={"td"}><strong>Fixed rate</strong></P.White>
                                   <P.D as={"td"}>
-                                    {(+product.fields?.rate + 0.5).toFixed?.(2)}%
+                                    {(+product.fields?.rate + state.env.FIXED_RATE).toFixed?.(2)}%
                                   </P.D>
                                 </tr>
                                 <tr>

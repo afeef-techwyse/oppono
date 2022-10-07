@@ -328,7 +328,7 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
 						</p>
 					</FinalizeHeading>
 					<FinalizePercentage>
-							<P.Num>{(+firstProduct.fields?.rate + 0.5).toFixed?.(2)}%</P.Num>
+							<P.Num>{(+firstProduct.fields?.rate + state.env.FIXED_RATE).toFixed?.(2)}%</P.Num>
 
 							<P.Small className="meta">*Fixed rate</P.Small>
 
@@ -405,7 +405,7 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
 									<FinalizeCol>
 										<P.White>
 											LTV {
-                        (mortgage / +section3Values("purchase_price") * 100) > 75 && (
+                        (mortgage / +section3Values("purchase_price") * 100) > state.env.MAX_LTV && (
                       <div>
                       <small>*Your BDM will be in contact with you, to discuss your options.</small>
                       </div>
@@ -416,7 +416,7 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
 									<FinalizeCol>
 										<P.White>
 											<strong>
-											{(mortgage / +section3Values("purchase_price") * 100) > 75 && (<span>*</span>)}
+											{(mortgage / +section3Values("purchase_price") * 100) > state.env.MAX_LTV && (<span>*</span>)}
                       {(
                         (mortgage / +section3Values("purchase_price")) *
 												100
@@ -440,7 +440,7 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
                       <br/>
                       <span>
                       Please be advised that Oppono has made the following change to our underwriting policy.<br/><br/>
-                Effective immediately, Oppono’s maximum LTV on all products will be 75%.<br/><br/>
+                      Effective immediately, Oppono's maximum LTV on most products will be 75%. For borrowers with credit scores above 700, the maximum LTV will be {state.env.MAX_LTV}%.<br/><br/>
                 We appreciate your understanding. If you require further information, please contact your BDM.
                         </span>
                     </P.White>
