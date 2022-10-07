@@ -10,10 +10,6 @@ const frontEndSiteUrl = 'https://oppono-app-staging.vercel.app';
 const settings = {
   'name': 'oppono-frontity',
   'state': {
-    env: {
-        FIXED_RATE: process.env.FIXED_RATE,
-        MAX_LTV:process.env.MAX_LTV
-    },
     'frontity': {
       'url': frontEndSiteUrl,
       'title': 'Oppono',
