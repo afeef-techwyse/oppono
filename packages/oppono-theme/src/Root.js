@@ -19,6 +19,7 @@ import ScrollToPlugin from 'gsap/ScrollToPlugin';
 import ProductsSlider from './components/ProductsSlider';
 import AboutUsPage from './pages/AboutUsPage';
 import CareersPage from './pages/CareersPage';
+import VideosPage from './pages/VideosPage';
 import TermsPage from './pages/TermsPage';
 import PrivacyPage from './pages/PrivacyPage';
 import { AddressProvider } from './contexts/AddressProvider'
@@ -197,6 +198,7 @@ const Root = ({state, libraries}) => {
           <NotQualifiedPage when={state.router.link.startsWith('/not-qualified/')}/>
           <AboutUsPage when={state.router.link.startsWith('/what-we-do/')}/>
           <CareersPage when={state.router.link.startsWith('/careers/')}/>
+          <VideosPage when={state.router.link.startsWith('/videos/')}/>
           <ContactPage when={/get-in-touch/.test(page.slug)}/>
           <HomeSlider
             link={data.link}
