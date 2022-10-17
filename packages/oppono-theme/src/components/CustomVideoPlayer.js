@@ -8,7 +8,7 @@ const CustomVideoPlayer = ({ url, previewUrl }) => {
   const [playing, setPlaying] = useState(false);
 
   return !playing ? (
-    <div style={{ position: "relative", width: "100%", height: "100%",maxWidth:"600px",margin:"0 auto"}}>
+    <div style={{ position: "relative", width: "100%", height: "100%"}}>
       <img style={{width:"100%"}} src={previewUrl} />
       <img
         onClick={() => setPlaying(true)}
@@ -30,7 +30,7 @@ const CustomVideoPlayer = ({ url, previewUrl }) => {
       maxWidth="600px"
       height="100%"
       playing={playing}
-      style={{aspectRatio:'16 / 9',maxWidth:"600px",margin:"0 auto"}}
+      style={{aspectRatio:'16 / 9'}}
       url={url}
       controls={true}
     />
