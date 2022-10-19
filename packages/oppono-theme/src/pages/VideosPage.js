@@ -55,7 +55,7 @@ const VideosPage = ({ className, libraries, state, actions }) => {
       <Header />
       <Container className={"careers-page-wrapper"}>
         <h1 className={"form-headline-1"}>Videos</h1>
-        {page?.videos?.map((video, index) => {
+        {page?.videos?.length > 0 && page?.videos?.map((video, index) => {
           return (
             <div key={index} className={"careers-page-header"}>
               <h2> {video.title} </h2>
