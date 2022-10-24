@@ -53,13 +53,12 @@ const VideosPage = ({ className, libraries, state, actions }) => {
   return (
     <div className={classnames(className)}>
       <Header />
-      <Container className={"careers-page-wrapper"}>
+      <Container className={"videos-page-wrapper"}>
         <h1 className={"form-headline-1"}>Videos</h1>
         {page?.videos?.length > 0 && page?.videos?.map((video, index) => {
           return (
-            <div key={index} className={"careers-page-header"}>
+            <div key={index} className={"videos-page-header"}>
               <h2> {video.title} </h2>
-              <p className={"html2react"}> {video.description} </p>
               <CustomVideoPlayer
                 url={video.video_url}
                 previewUrl={video.video_thumbnail}
@@ -73,7 +72,7 @@ const VideosPage = ({ className, libraries, state, actions }) => {
   );
 };
 export default styled(connect(VideosPage))`
-  .careers-page-header {
+  .videos-page-header {
     padding-bottom: 0rem !important;
     .details {
       width: 75%;
@@ -83,12 +82,12 @@ export default styled(connect(VideosPage))`
       display: flex;
     }
   }
-  .careers-page-body {
+  .videos-page-body {
     margin-top: 5rem !important;
     padding-bottom: 10rem !important;
   }
-  .careers-page-header,
-  .careers-page-body {
+  .videos-page-header,
+  .videos-page-body {
     max-width: 86rem;
     margin-left: auto;
     margin-right: auto;
@@ -148,7 +147,7 @@ export default styled(connect(VideosPage))`
     }
   }
 
-  .careers-page-wrapper {
+  .videos-page-wrapper {
     padding-top: ${size(180)};
     padding-bottom: ${size(20)};
     overflow: hidden;
