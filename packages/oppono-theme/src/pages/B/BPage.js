@@ -440,7 +440,7 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
                       <br/>
                       <span>
                       Please be advised that Oppono has made the following change to our underwriting policy.<br/><br/>
-                      Effective immediately, Oppono's maximum LTV on most products will be 75%. For borrowers with credit scores above 700, the maximum LTV will be {80}%.<br/><br/>
+                      Effective immediately, Oppono's maximum LTV on most products will be 75%. For borrowers with credit scores above 680, the maximum LTV will be {80}%.<br/><br/>
                 We appreciate your understanding. If you require further information, please contact your BDM.
                         </span>
                     </P.White>
