@@ -3,7 +3,7 @@ import {connect, styled} from 'frontity';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import {size} from '../functions/size';
-import MegaloNum_1 from '../assets/images/flying-1.png';
+import MegaloNum_1 from '../assets/images/fly-image-6.png';
 import MegaloNum_2 from '../assets/images/last-step.png';
 import FlyingObj from '../components/reusable/FlyingObj';
 import classnames from 'classnames';
