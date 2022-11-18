@@ -59,6 +59,7 @@ const VideosPage = ({ className, libraries, state, actions }) => {
           return (
             <div key={index} className={"videos-page-header"}>
               <h2> {video.title} </h2>
+              <p className={"form-headline-4"}> {video.description} </p>
               <CustomVideoPlayer
                 url={video.video_url}
                 previewUrl={video.video_thumbnail}

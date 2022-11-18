@@ -178,7 +178,7 @@ const Footer = React.forwardRef(({ className }, forwardRef) => {
               T&C
             </Link>
             <Link className={"primary"} href="/privacy-policy/">
-              Privacy Policy
+              Privacy
             </Link>
             <Link className={"primary disabled"}>
               License # 11887/12558

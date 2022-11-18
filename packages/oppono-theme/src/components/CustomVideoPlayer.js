@@ -10,19 +10,32 @@ const CustomVideoPlayer = ({ url, previewUrl }) => {
   return !playing ? (
     <div style={{ position: "relative", width: "100%", height: "100%"}}>
       <img style={{width:"100%"}} src={previewUrl} />
+      <div 
+      style={{
+        background: "black",
+        padding: "15px",
+        position: "absolute",
+        width: "60px",
+        height: "60px",
+        borderRadius: "100%",
+        top: "0",
+        left: "0",
+        right: "0",
+        bottom: "0",
+        margin: "auto"
+      }}>
       <img
         onClick={() => setPlaying(true)}
         style={{
-          position: "absolute",
-          width: "35px",
-          top: "50%",
-          transform: "translateY(-50%) translateX(-50%)",
-          left: "50%",
+          marginLeft: "5px",
+          width: "25px",
+          height: "auto",
           cursor: "pointer",
           zIndex: 1,
         }}
         src={play}
       />
+      </div>
     </div>
   ) : (
     <ReactPlayer
