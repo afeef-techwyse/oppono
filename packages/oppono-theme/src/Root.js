@@ -10,6 +10,7 @@ import NotQualifiedPage from "./pages/NotQualifiedPage";
 import HomeSlider from './components/HomeSlider';
 import FormsPage from './pages/FormsPage';
 import ContactPage from './pages/ContactPage';
+import TradeshowPage from './pages/TradeshowPage';
 import MapPage from './pages/MapPage';
 import Missing404 from './pages/Missing404';
 import DPage from './pages/D/DPage';
@@ -200,6 +201,7 @@ const Root = ({state, libraries}) => {
           <CareersPage when={state.router.link.startsWith('/careers/')}/>
           <VideosPage when={state.router.link.startsWith('/videos/')}/>
           <ContactPage when={/get-in-touch/.test(page.slug)}/>
+          <TradeshowPage when={/tradeshow/.test(page.slug)}/>
           <HomeSlider
             link={data.link}
             active={!data.isHome || isDeveloping || initialDone}
