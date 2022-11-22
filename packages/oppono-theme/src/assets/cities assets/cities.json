@@ -82060,5 +82060,1094 @@
         "name": "Comber",
         "value": "Comber",
         "label": "Comber"
-    }
+    },
+    {
+        "coordinates" : [
+          [
+            {"lat":42.230538, "lng": -82.551955}
+          ]
+        ],
+        "name": "Comber",
+        "value": "Comber",
+        "label": "Comber",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":42.03787, "lng": -82.739638}
+          ]
+        ],
+        "name": "Kingsville",
+        "value": "Kingsville",
+        "label": "Kingsville",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":42.053163, "lng": -82.599887}
+          ]
+        ],
+        "name": "Lemington",
+        "value": "Lemington",
+        "label": "Lemington",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":42.404802, "lng": -82.191038}
+          ]
+        ],
+        "name": "Chatham",
+        "value": "Chatham",
+        "label": "Chatham",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":44.104724, "lng": -78.944259}
+          ]
+        ],
+        "name": "Scugog",
+        "value": "Scugog",
+        "label": "Scugog",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":43.836337, "lng": -79.874484}
+          ]
+        ],
+        "name": "Caledon East",
+        "value": "Caledon East",
+        "label": "Caledon East",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":43.851762, "lng": -79.527284}
+          ]
+        ],
+        "name": "Maple",
+        "value": "Maple",
+        "label": "Maple",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":43.902189, "lng": -79.6527}
+          ]
+        ],
+        "name": "Nobleton",
+        "value": "Nobleton",
+        "label": "Nobleton",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":43.969934, "lng": -79.247934}
+          ]
+        ],
+        "name": "Stouffville",
+        "value": "Stouffville",
+        "label": "Stouffville",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":43.970586, "lng": -79.244284}
+          ]
+        ],
+        "name": "Whitchurch",
+        "value": "Whitchurch",
+        "label": "Whitchurch",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":43.695679, "lng": -79.450354}
+          ]
+        ],
+        "name": "York",
+        "value": "York",
+        "label": "York",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":44.226689, "lng": -79.453512}
+          ]
+        ],
+        "name": "Keswick",
+        "value": "Keswick",
+        "label": "Keswick",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":43.928715, "lng": -79.528208}
+          ]
+        ],
+        "name": "King",
+        "value": "King",
+        "label": "King",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":43.899079, "lng": -80.315305}
+          ]
+        ],
+        "name": "East Luther Grand Valley",
+        "value": "East Luther Grand Valley",
+        "label": "East Luther Grand Valley",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":44.079119, "lng": -80.201173}
+          ]
+        ],
+        "name": "Shelbourne",
+        "value": "Shelbourne",
+        "label": "Shelbourne",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":44.079119, "lng": -80.201173}
+          ]
+        ],
+        "name": "Shelburne",
+        "value": "Shelburne",
+        "label": "Shelburne",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":44.079119, "lng": -80.201173}
+          ]
+        ],
+        "name": "Town of Shelburne",
+        "value": "Town of Shelburne",
+        "label": "Town of Shelburne",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":44.540457, "lng": -78.546369}
+          ]
+        ],
+        "name": "Bobcaygeon",
+        "value": "Bobcaygeon",
+        "label": "Bobcaygeon",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":44.099685, "lng": -77.578191}
+          ]
+        ],
+        "name": "Trenton",
+        "value": "Trenton",
+        "label": "Trenton",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":44.277038, "lng": -76.718292}
+          ]
+        ],
+        "name": "Odessa",
+        "value": "Odessa",
+        "label": "Odessa",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":44.199661, "lng": -78.468767}
+          ]
+        ],
+        "name": "Cavan Monaghan",
+        "value": "Cavan Monaghan",
+        "label": "Cavan Monaghan",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":44.533747, "lng": -78.900648}
+          ]
+        ],
+        "name": "Kwartha Lakes",
+        "value": "Kwartha Lakes",
+        "label": "Kwartha Lakes",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":44.356574, "lng": -78.740754}
+          ]
+        ],
+        "name": "Lindsay",
+        "value": "Lindsay",
+        "label": "Lindsay",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":51.253775, "lng": -85.323214}
+          ]
+        ],
+        "name": "Monaghan",
+        "value": "Monaghan",
+        "label": "Monaghan",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":45.030398, "lng": -74.890559}
+          ]
+        ],
+        "name": "Long Sault",
+        "value": "Long Sault",
+        "label": "Long Sault",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":45.021276, "lng": -74.730345}
+          ]
+        ],
+        "name": "Cornwall",
+        "value": "Cornwall",
+        "label": "Cornwall",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":44.308249, "lng": -77.796258}
+          ]
+        ],
+        "name": "Trent Hill",
+        "value": "Trent Hill",
+        "label": "Trent Hill",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":44.494854, "lng": -81.369563}
+          ]
+        ],
+        "name": "Southampton",
+        "value": "Southampton",
+        "label": "Southampton",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":44.051739, "lng": -80.927281}
+          ]
+        ],
+        "name": "Ayton",
+        "value": "Ayton",
+        "label": "Ayton",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":44.540491, "lng": -80.408095}
+          ]
+        ],
+        "name": "Blue Mountains",
+        "value": "Blue Mountains",
+        "label": "Blue Mountains",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":44.167665, "lng": -80.393568}
+          ]
+        ],
+        "name": "Dundalk",
+        "value": "Dundalk",
+        "label": "Dundalk",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":43.742835, "lng": -81.713894}
+          ]
+        ],
+        "name": "Goderich",
+        "value": "Goderich",
+        "label": "Goderich",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":44.26185, "lng": -80.550429}
+          ]
+        ],
+        "name": "Grey Highlands",
+        "value": "Grey Highlands",
+        "label": "Grey Highlands",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":44.569031, "lng": -80.94056}
+          ]
+        ],
+        "name": "Owensound",
+        "value": "Owensound",
+        "label": "Owensound",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":44.927177, "lng": -78.725375}
+          ]
+        ],
+        "name": "Minden",
+        "value": "Minden",
+        "label": "Minden",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":44.190886, "lng": -79.940655}
+          ]
+        ],
+        "name": "Adjala-Tosorontio",
+        "value": "Adjala-Tosorontio",
+        "label": "Adjala-Tosorontio",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":44.153951, "lng": -79.869154}
+          ]
+        ],
+        "name": "Alliston",
+        "value": "Alliston",
+        "label": "Alliston",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":43.860353, "lng": -80.06873}
+          ]
+        ],
+        "name": "Alton",
+        "value": "Alton",
+        "label": "Alton",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":44.325551, "lng": -79.888455}
+          ]
+        ],
+        "name": "Angus",
+        "value": "Angus",
+        "label": "Angus",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":44.709942, "lng": -79.643778}
+          ]
+        ],
+        "name": "Coldwater",
+        "value": "Coldwater",
+        "label": "Coldwater",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":44.58363, "lng": -79.866075}
+          ]
+        ],
+        "name": "Elmvale",
+        "value": "Elmvale",
+        "label": "Elmvale",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":44.101065, "lng": -79.441781}
+          ]
+        ],
+        "name": "Gwillimbury",
+        "value": "Gwillimbury",
+        "label": "Gwillimbury",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":44.749516, "lng": -79.892192}
+          ]
+        ],
+        "name": "Midland",
+        "value": "Midland",
+        "label": "Midland",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":44.15293, "lng": -79.868586}
+          ]
+        ],
+        "name": "New Tecumseth",
+        "value": "New Tecumseth",
+        "label": "New Tecumseth",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":44.314686, "lng": -79.202733}
+          ]
+        ],
+        "name": "Pefferlaw",
+        "value": "Pefferlaw",
+        "label": "Pefferlaw",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":44.600452, "lng": -79.203959}
+          ]
+        ],
+        "name": "Ramara",
+        "value": "Ramara",
+        "label": "Ramara",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":44.750658, "lng": -79.517286}
+          ]
+        ],
+        "name": "Severn",
+        "value": "Severn",
+        "label": "Severn",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":44.447119, "lng": -79.73023}
+          ]
+        ],
+        "name": "Springwater",
+        "value": "Springwater",
+        "label": "Springwater",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":44.418412, "lng": -80.09573}
+          ]
+        ],
+        "name": "Stayner",
+        "value": "Stayner",
+        "label": "Stayner",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":44.418335, "lng": -80.09599}
+          ]
+        ],
+        "name": "Stayner",
+        "value": "Stayner",
+        "label": "Stayner",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":44.022484, "lng": -79.805595}
+          ]
+        ],
+        "name": "Tottenham",
+        "value": "Tottenham",
+        "label": "Tottenham",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":44.520742, "lng": -80.016067}
+          ]
+        ],
+        "name": "Wasaga Beach",
+        "value": "Wasaga Beach",
+        "label": "Wasaga Beach",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":44.26283, "lng": -79.066313}
+          ]
+        ],
+        "name": "Sunderland",
+        "value": "Sunderland",
+        "label": "Sunderland",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":42.833673, "lng": -79.931837}
+          ]
+        ],
+        "name": "Selkirk",
+        "value": "Selkirk",
+        "label": "Selkirk",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":44.201335, "lng": -77.595823}
+          ]
+        ],
+        "name": "Frankford",
+        "value": "Frankford",
+        "label": "Frankford",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":42.741924, "lng": -80.577671}
+          ]
+        ],
+        "name": "Langton",
+        "value": "Langton",
+        "label": "Langton",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":44.42937, "lng": -79.15347}
+          ]
+        ],
+        "name": "Beaverton",
+        "value": "Beaverton",
+        "label": "Beaverton",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":44.024452, "lng": -78.215564}
+          ]
+        ],
+        "name": "Hamilton Township",
+        "value": "Hamilton Township",
+        "label": "Hamilton Township",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":43.064753, "lng": -79.955075}
+          ]
+        ],
+        "name": "Caledonia",
+        "value": "Caledonia",
+        "label": "Caledonia",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":42.950355, "lng": -79.855812}
+          ]
+        ],
+        "name": "Cayuga",
+        "value": "Cayuga",
+        "label": "Cayuga",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":42.903537, "lng": -79.617004}
+          ]
+        ],
+        "name": "Dunnville",
+        "value": "Dunnville",
+        "label": "Dunnville",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":42.884898, "lng": -80.1107}
+          ]
+        ],
+        "name": "Jarvis",
+        "value": "Jarvis",
+        "label": "Jarvis",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":43.157095, "lng": -79.476013}
+          ]
+        ],
+        "name": "Beamsville",
+        "value": "Beamsville",
+        "label": "Beamsville",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":43.045335, "lng": -79.285449}
+          ]
+        ],
+        "name": "Fonthill",
+        "value": "Fonthill",
+        "label": "Fonthill",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":42.901776, "lng": -78.972174}
+          ]
+        ],
+        "name": "Fort Erie",
+        "value": "Fort Erie",
+        "label": "Fort Erie",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":42.947894, "lng": -79.869086}
+          ]
+        ],
+        "name": "Haldimand County",
+        "value": "Haldimand County",
+        "label": "Haldimand County",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":43.09986, "lng": -79.546404}
+          ]
+        ],
+        "name": "Smithville",
+        "value": "Smithville",
+        "label": "Smithville",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":43.123609, "lng": -79.19893}
+          ]
+        ],
+        "name": "Thorold",
+        "value": "Thorold",
+        "label": "Thorold",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":42.992158, "lng": -79.248255}
+          ]
+        ],
+        "name": "Welland",
+        "value": "Welland",
+        "label": "Welland",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":42.865888, "lng": -80.733317}
+          ]
+        ],
+        "name": "Tillsonburg",
+        "value": "Tillsonburg",
+        "label": "Tillsonburg",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":42.883614, "lng": -79.057431}
+          ]
+        ],
+        "name": "Ridgeway",
+        "value": "Ridgeway",
+        "label": "Ridgeway",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":43.19402, "lng": -80.3845}
+          ]
+        ],
+        "name": "Paris",
+        "value": "Paris",
+        "label": "Paris",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":42.881322, "lng": -81.087541}
+          ]
+        ],
+        "name": "Belmont",
+        "value": "Belmont",
+        "label": "Belmont",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":42.567758, "lng": -81.682118}
+          ]
+        ],
+        "name": "Rodney",
+        "value": "Rodney",
+        "label": "Rodney",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":42.777721, "lng": -81.182653}
+          ]
+        ],
+        "name": "St Thomas",
+        "value": "St Thomas",
+        "label": "St Thomas",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":44.117061, "lng": -80.548266}
+          ]
+        ],
+        "name": "Southgate",
+        "value": "Southgate",
+        "label": "Southgate",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":42.948499, "lng": -81.435808}
+          ]
+        ],
+        "name": "Komoka",
+        "value": "Komoka",
+        "label": "Komoka",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":43.038163, "lng": -80.884049}
+          ]
+        ],
+        "name": "Ingersoll",
+        "value": "Ingersoll",
+        "label": "Ingersoll",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":42.926483, "lng": -80.603382}
+          ]
+        ],
+        "name": "Otterville",
+        "value": "Otterville",
+        "label": "Otterville",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":43.131497, "lng": -80.747165}
+          ]
+        ],
+        "name": "Woodstock",
+        "value": "Woodstock",
+        "label": "Woodstock",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":43.683715, "lng": -80.430543}
+          ]
+        ],
+        "name": "Elora",
+        "value": "Elora",
+        "label": "Elora",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":43.775802, "lng": -80.06871}
+          ]
+        ],
+        "name": "Erin",
+        "value": "Erin",
+        "label": "Erin",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":43.705952, "lng": -80.377834}
+          ]
+        ],
+        "name": "Fergus",
+        "value": "Fergus",
+        "label": "Fergus",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":43.981093, "lng": -80.735865}
+          ]
+        ],
+        "name": "MOUNT FOREST",
+        "value": "MOUNT FOREST",
+        "label": "MOUNT FOREST",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":43.217779, "lng": -79.987283}
+          ]
+        ],
+        "name": "Ancaster",
+        "value": "Ancaster",
+        "label": "Ancaster",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":43.227218, "lng": -79.719559}
+          ]
+        ],
+        "name": "Stoney Creek",
+        "value": "Stoney Creek",
+        "label": "Stoney Creek",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":42.958516, "lng": -80.792467}
+          ]
+        ],
+        "name": "Mount Elgin",
+        "value": "Mount Elgin",
+        "label": "Mount Elgin",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":43.733417, "lng": -80.95147}
+          ]
+        ],
+        "name": "Listowel",
+        "value": "Listowel",
+        "label": "Listowel",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":43.370001, "lng": -80.982229}
+          ]
+        ],
+        "name": "Stratford",
+        "value": "Stratford",
+        "label": "Stratford",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":43.469173, "lng": -80.409416}
+          ]
+        ],
+        "name": "Breslau",
+        "value": "Breslau",
+        "label": "Breslau",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":45.334905, "lng": -75.724101}
+          ]
+        ],
+        "name": "Nepean",
+        "value": "Nepean",
+        "label": "Nepean",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":45.455802, "lng": -75.504733}
+          ]
+        ],
+        "name": "Orléans",
+        "value": "Orléans",
+        "label": "Orléans",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":45.258513, "lng": -75.920777}
+          ]
+        ],
+        "name": "Stittsville",
+        "value": "Stittsville",
+        "label": "Stittsville",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":45.259265, "lng": -75.357609}
+          ]
+        ],
+        "name": "Russell",
+        "value": "Russell",
+        "label": "Russell",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":45.016388, "lng": -75.645947}
+          ]
+        ],
+        "name": "Kemptville",
+        "value": "Kemptville",
+        "label": "Kemptville",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":44.223329, "lng": -76.650818}
+          ]
+        ],
+        "name": "Ameherstview",
+        "value": "Ameherstview",
+        "label": "Ameherstview",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":45.447342, "lng": -75.594287}
+          ]
+        ],
+        "name": "Gloucester",
+        "value": "Gloucester",
+        "label": "Gloucester",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":45.259287, "lng": -75.568644}
+          ]
+        ],
+        "name": "Greely",
+        "value": "Greely",
+        "label": "Greely",
+        "zoomed": true
+      },
+      {
+        "coordinates" : [
+          [
+            {"lat":45.308819, "lng": -75.898683}
+          ]
+        ],
+        "name": "Kanata",
+        "value": "Kanata",
+        "label": "Kanata",
+        "zoomed": true
+      }
 ]

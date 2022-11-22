@@ -154,13 +154,20 @@ const MapPage = ({className, actions, state, libraries}) => {
               </div>
               <div className="inputs-group">
                 <Select
-                    onChange={({name, coordinates}) => {
+                    onChange={({name, zoomed, coordinates}) => {
                       postal_city.current.city = name;
                       setAppraiser(appraisersLookup.data[name] || [{fields: {city:name}}]);
                       polygonAPIRef.current.setPaths(coordinates);
-                      mapAPIRef.current.fitBounds(
+                      if (zoomed == true) {
+                        mapAPIRef.current.fitBounds(
                           polygonAPIRef.current.getBounds()
-                      );
+                        );  
+                        mapAPIRef.current.setZoom(14);
+                      } else {
+                        mapAPIRef.current.fitBounds(
+                          polygonAPIRef.current.getBounds()
+                        );
+                      }
                     }}
                     noOptionsMessage={() => "No City Found"}
                     options={sortedCities}
