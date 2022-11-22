@@ -11,7 +11,7 @@
     "npm": ">=6.0.0"
   },
   "scripts": {
-    "dev": "frontity dev",
+    "dev": "NODE_OPTIONS=--openssl-legacy-provider frontity dev",
     "build": "frontity build",
     "serve": "frontity serve"
   },
@@ -25,6 +25,7 @@
     "@next-tools/dynamic": "^0.0.11",
     "axios": "^0.21.1",
     "classnames": "^2.2.6",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.0.3",
     "frontity": "^1.14.1",
     "gsap": "npm:@gsap/shockingly@^3.6.1",
