@@ -96,7 +96,7 @@ const Tradeshow = ({ className, state, actions }) => {
                     <Button
                       icon={true}
                       className={"next-step wide"}
-                      label={"Send message"}
+                      label={"Sign Up"}
                     />
                   </div>
               </div>
@@ -108,34 +108,34 @@ const Tradeshow = ({ className, state, actions }) => {
           activeTheme={pageData.section_2?.section_theme}
           stepName={pageData.section_2?.section_name}
         >
-          <LastStep>
-            <img
-              src={pageData.section_2?.image.url}
-              alt={pageData.section_2?.image.alt}
-            />
-            <div style={{ flexBasis: "55%" }} className="text">
-              <h1 className={"form-headline-1 text-left"}>
-                {pageData.section_2?.title}
-              </h1>
-              <p className={"form-headline-3 primary lighter"}>
-                {pageData.section_2?.subtitle}
-              </p>
-              <Wysiwyg
-                dangerouslySetInnerHTML={{ __html: pageData.section_2?.steps }}
-              />
-              <div className="btn-group">
-                {/*<Link className={'wide bordered'} href={'https://expert.filogix.com/expert/view/SignOn'}>*/}
-                {/*  <Button className={'wide filled'} label={'Connect to Filogix'}/>*/}
-                {/*</Link>*/}
-                <Link className={"wide bordered"} href={"/dashboard"}>
-                  <Button
-                    className={"wide bordered"}
-                    label={"Back to dashboard"}
-                  />
-                </Link>
+
+<Container className={"contact-us-container"}>
+						<div className="details">
+							<div className="title-wrapper">
+								{pageData.section_1?.title ? (
+									<h1 className={"contact-title"}>
+										{pageData.section_1?.title}
+									</h1>
+								) : null}
+								{pageData.section_1?.sub_title ? (
+									<h2 className={"contact-sub-title desktop-only"}>
+										{pageData.section_1?.sub_title}
+									</h2>
+								) : null}
+								{/* <img className="contact-flying-obj" src={contact_obj} alt="flying object"/> */}
+							</div>
+						</div>
+						<div className="contact-form">
+							<div className="contact-row">
+                <h1 className={"form-headline-1 text-left"}>
+                  {pageData.section_2?.title}
+                </h1>
+                <p className={"form-headline-3 primary lighter"}>
+                  {pageData.section_2?.subtitle}
+                </p>
               </div>
-            </div>
-          </LastStep>
+						</div>
+					</Container>
         </FormStep>
       </Form>
     </div>
