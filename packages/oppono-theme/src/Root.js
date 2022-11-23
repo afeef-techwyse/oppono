@@ -200,8 +200,8 @@ const Root = ({state, libraries}) => {
           <AboutUsPage when={state.router.link.startsWith('/what-we-do/')}/>
           <CareersPage when={state.router.link.startsWith('/careers/')}/>
           <VideosPage when={state.router.link.startsWith('/videos/')}/>
+          <TradeshowPage when={state.router.link.startsWith('/signup/')}/>
           <ContactPage when={/get-in-touch/.test(page.slug)}/>
-          <TradeshowPage when={/signup/.test(page.slug)}/>
           <HomeSlider
             link={data.link}
             active={!data.isHome || isDeveloping || initialDone}
