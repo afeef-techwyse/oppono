@@ -20,7 +20,7 @@ const TradeshowPage = ({ className, state, actions }) => {
       <Header />
       <Switch>
         {/*<Chat when={state.router.link.startsWith('/contact/chat/')}/>*/}
-        <Tradeshow when={state.router.link.startsWith("/tradeshow/")} />
+        <Tradeshow when={state.router.link.startsWith("/signup/")} />
       </Switch>
       <Footer />
     </div>
