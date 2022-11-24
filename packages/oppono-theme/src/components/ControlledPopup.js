@@ -18,7 +18,9 @@ const ControlledPopup = React.forwardRef(({state, actions}, forwardedRef) => {
 
     React.useEffect(() => {
         const ref = cookies.getItem("opppopup");
-        setOpen(ref ? false : true);
+        if (!state?.router.link.startsWith("/signup/")) {
+            setOpen(ref ? false : true);
+        }
     }, []);
 
 

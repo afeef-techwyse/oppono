@@ -113,11 +113,11 @@ const SocialLinks = styled(
     display: none;
   }
 `;
-const Footer = React.forwardRef(({ className }, forwardRef) => {
+const Footer = React.forwardRef(({ state, className }, forwardRef) => {
   return (
     <footer ref={forwardRef} className={className + " footer"}>
       <Container>
-        <ControlledPopup/>
+        <ControlledPopup state={state} />
         <div className="footer-content">
           <div className="footer-left">
             <div className="guid select">
