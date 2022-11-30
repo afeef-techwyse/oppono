@@ -123,6 +123,10 @@ const Root = ({state, libraries}) => {
         gtag('js', new Date());
         gtag('config', 'AW-658146634');`}
       </script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-2PJQZGRWJ8"></script> 
+      <script>{`
+      window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-2PJQZGRWJ8'); 
+      `}</script>
       <script>{`
       !function(f,b,e,v,n,t,s)
       {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
