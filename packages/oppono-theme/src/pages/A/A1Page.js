@@ -819,7 +819,7 @@ const A1Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                               </div>
                                               <div className={"m-row m-head"}>
                                                 <p>Fixed rate</p>
-                                                <p>{(+rate + 1.25).toFixed?.(2)}%</p>
+                                                <p>{(+rate + 0.75).toFixed?.(2)}%</p>
                                               </div>
                                               <div className={"m-row m-head"}>
                                                 <p>Lender fee</p>

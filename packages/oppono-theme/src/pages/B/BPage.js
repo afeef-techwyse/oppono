@@ -328,7 +328,7 @@ const BPage = ({className, setCurrentTheme, state, actions, formData}) => {
 						</p>
 					</FinalizeHeading>
 					<FinalizePercentage>
-							<P.Num>{(+firstProduct.fields?.rate + 1.25).toFixed?.(2)}%</P.Num>
+							<P.Num>{(+firstProduct.fields?.rate + 0.75).toFixed?.(2)}%</P.Num>
 
 							<P.Small className="meta">*Fixed rate</P.Small>
 
