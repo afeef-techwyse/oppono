@@ -679,7 +679,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                 <tr>
                                   <P.White as={"td"}><strong>Fixed rate</strong></P.White>
                                   <P.D as={"td"}>
-                                    {(+product.fields?.rate + 1.25).toFixed?.(2)}%
+                                    {(+product.fields?.rate + 0.75).toFixed?.(2)}%
                                   </P.D>
                                 </tr>
                                 <tr>
@@ -708,7 +708,7 @@ const A2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                 <tr>
                                   <P.White as={"td"}><strong>Fixed rate</strong></P.White>
                                   <P.D as={"td"}>
-                                    {(+product.fields?.rate + 1.25).toFixed?.(2)}%
+                                    {(+product.fields?.rate + 0.75).toFixed?.(2)}%
                                   </P.D>
                                 </tr>
                                 <tr>
