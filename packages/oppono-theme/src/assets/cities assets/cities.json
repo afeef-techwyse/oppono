@@ -82052,16 +82052,6 @@
         "label": "Stoney Creek"
     },
     {
-        "coordinates": [
-            [
-                
-            ]
-        ],
-        "name": "Comber",
-        "value": "Comber",
-        "label": "Comber"
-    },
-    {
         "coordinates" : [
           [
             {"lat":42.230538, "lng": -82.551955}
