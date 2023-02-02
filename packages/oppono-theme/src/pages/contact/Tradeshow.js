@@ -217,6 +217,7 @@ export default styled(connect(Tradeshow))`
     //&:first-of-type{
     //  margin-top: 0;
     //}
+    padding: 5px; 
     .normal-input {
       font-size: ${size(28)};
       height: ${size(36)};

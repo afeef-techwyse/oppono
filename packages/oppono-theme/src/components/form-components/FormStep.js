@@ -6,9 +6,7 @@ import gsap from "gsap";
 import { size } from "../../functions/size";
 import useMedia from "../../hooks/useMedia";
 import opponoApi from "../../opponoApi";
-import {
-  P,
-} from "../../components/form-components/StyledComponent";
+import { P } from "../../components/form-components/StyledComponent";
 
 const FormStep = ({
   activeTheme,
@@ -65,6 +63,11 @@ const FormStep = ({
       actions.theme.setSelectedValues({
         [`${pageName}-${stepName}`]: formData,
       });
+      if (window.location.pathname == "/signup/") {
+        settimeout(function () {
+          window.location.href("/signup/");
+        }, 5000);
+      }
       if (endPoint) {
         if (sendAllSteps) {
           //fixme remove this
@@ -334,28 +337,31 @@ const FormStep = ({
       }
     } else {
       if (active) {
-        setTimeout(() =>
-          gsap
-            .timeline()
-            .fromTo(
-              stepRef.current,
-              { autoAlpha: 0, display: "none" },
-              { autoAlpha: 1, display: "block", duration: 0.001 }
-            )
-            .fromTo(
-              stepRef.current,
-              { height: 0, y: 300 },
-              { height: "auto", duration: 0.5, y: 0 }
-            )
-            .fromTo(
-              stepRef.current.children,
-              { autoAlpha: 0, y: 30 },
-              { autoAlpha: 1, y: 0, stagger: 0.1 }
-        ), 1000);
+        setTimeout(
+          () =>
+            gsap
+              .timeline()
+              .fromTo(
+                stepRef.current,
+                { autoAlpha: 0, display: "none" },
+                { autoAlpha: 1, display: "block", duration: 0.001 }
+              )
+              .fromTo(
+                stepRef.current,
+                { height: 0, y: 300 },
+                { height: "auto", duration: 0.5, y: 0 }
+              )
+              .fromTo(
+                stepRef.current.children,
+                { autoAlpha: 0, y: 30 },
+                { autoAlpha: 1, y: 0, stagger: 0.1 }
+              ),
+          1000
+        );
       } else {
         let tl = gsap
           .timeline({ paused: true })
-  
+
           .fromTo(
             stepRef.current,
             { autoAlpha: 0, display: "none" },
@@ -426,23 +432,23 @@ export default styled(connect(FormStep))`
     margin-right: auto;
     margin-left: auto;
   }
-  
-	.form-text-wrapper {
+
+  .form-text-wrapper {
     max-width: ${size(860)};
     margin-right: auto;
     margin-left: auto;
     margin-bottom: ${size(55)};
 
-		&.is-smaller {
-			max-width: ${size(645)};
-		}
+    &.is-smaller {
+      max-width: ${size(645)};
+    }
 
-		${P.D} {
-			margin-bottom: ${size(8)};
-		}
+    ${P.D} {
+      margin-bottom: ${size(8)};
+    }
   }
-  
-	div.upload-step-wrapper {
+
+  div.upload-step-wrapper {
     max-width: ${size(860)}!important;
     margin-right: auto !important;
     margin-left: auto !important;
@@ -459,7 +465,7 @@ export default styled(connect(FormStep))`
       width: 12rem;
 
       @media (max-width: 575.98px) {
-				display: none;
+        display: none;
       }
     }
   }
