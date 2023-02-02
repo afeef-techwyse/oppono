@@ -64,9 +64,9 @@ const FormStep = ({
         [`${pageName}-${stepName}`]: formData,
       });
       if (window.location.pathname == "/signup/") {
-        settimeout(function () {
-          window.location.href("/signup/");
-        }, 5000);
+        setTimeout(function () {
+          window.location.href = '/signup/';
+        }, 7000);
       }
       if (endPoint) {
         if (sendAllSteps) {
