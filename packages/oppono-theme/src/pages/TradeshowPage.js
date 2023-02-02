@@ -25,7 +25,7 @@ const TradeshowPage = ({ className, state, actions }) => {
       <Footer state={state} />
     </div>
   );
-};
+}; 
 export default styled(connect(TradeshowPage))`
   > div {
     min-height: calc(var(--vh, 1vh) * 100);
