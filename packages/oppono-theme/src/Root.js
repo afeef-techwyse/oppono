@@ -116,6 +116,7 @@ const Root = ({state, libraries}) => {
   <AddressProvider>
     <Styles/>
     <Head>
+      
       <script async src="https://www.googletagmanager.com/gtag/js?id=AW-658146634"></script>
       <script>{
         `window.dataLayer = window.dataLayer || [];
@@ -123,7 +124,8 @@ const Root = ({state, libraries}) => {
         gtag('js', new Date());
         gtag('config', 'AW-658146634');`}
       </script>
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-2PJQZGRWJ8"></script> 
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-2PJQZGRWJ8"></script>
+      <script>{` function gtag_report_conversion(url) { var callback = function () { if (typeof(url) != 'undefined') { window.location = url; } }; gtag('event', 'conversion', { 'send_to': 'AW-658146634/kb3QCNrJysoBEMqK6rkC', 'event_callback': callback }); return false; } `}</script> 
       <script>{`
       window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-2PJQZGRWJ8'); 
       `}</script>
