@@ -112,22 +112,38 @@ const Root = ({state, libraries}) => {
 
   const Html2React = libraries.html2react.Component;
 
-  return <>
-  <AddressProvider>
-    <Styles/>
-    <Head>
-      <script async src="https://www.googletagmanager.com/gtag/js?id=AW-658146634"></script>
-      <script>{
-        `window.dataLayer = window.dataLayer || [];
+  return (
+    <>
+      <AddressProvider>
+        <Styles />
+        <Head>
+          <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=AW-658146634"
+          ></script>
+
+          <script>{`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NDZJKJK');`}</script>
+
+          <script>
+            {`window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', 'AW-658146634');`}
-      </script>
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-2PJQZGRWJ8"></script> 
-      <script>{`
+          </script>
+          <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-2PJQZGRWJ8"
+          ></script>
+          <script>{` function gtag_report_conversion(url) { var callback = function () { if (typeof(url) != 'undefined') { window.location = url; } }; gtag('event', 'conversion', { 'send_to': 'AW-658146634/kb3QCNrJysoBEMqK6rkC', 'event_callback': callback }); return false; } `}</script>
+          <script>{`
       window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-2PJQZGRWJ8'); 
       `}</script>
-      <script>{`
+          <script>
+            {`
       !function(f,b,e,v,n,t,s)
       {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
       n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -139,98 +155,112 @@ const Root = ({state, libraries}) => {
       fbq('init', '600138813929975');
       fbq('track', 'PageView');
       `}
-      </script>
-      <noscript>
-        {`<img height="1" width="1" style="display:none"
+          </script>
+          <noscript>
+            {`<img height="1" width="1" style="display:none"
       src="https://www.facebook.com/tr?id=600138813929975&ev=PageView&noscript=1"
       />`}
-      </noscript>
-      
-      {ReactGA.pageview(data.link)}
-    </Head>
-    {data.isHome && !(isDeveloping || initialDone) ? <Intro setInitialDone={setInitialDone}/> : null}
-    <TransitionGroup>
-      <Transition
-        key={state.router.link}
-        timeout={duration * 1000}
-        
-        onEnter={node => {
-          gsap.killTweensOf(node);
-          gsap.set(node, {
-            position: 'fixed',
-            yPercent: 100,
-            top: 0,
-            left: 0,
-            width: '100vw',
-            zIndex: 1,
-            scrollTo: 0,
-          });
-          gsap.to(node, {
-            duration,
-            ease: 'power2.in',
-            yPercent: 0,
-            onComplete: () => {
-              gsap.set(node, {clearProps: 'all'});
-              node.classList.remove('animation');
-            },
-          });
-          requestAnimationFrame(() => node.classList.add('animation'));
-        }}
-        
-        onExit={node => {
-          gsap.killTweensOf(node);
-          gsap.set(node, {
-            position: 'fixed',
-            yPercent: 0,
-            top: 0,
-            left: 0,
-            zIndex: 10,
-            width: '100vw',
-            height: 'calc(var(--vh, 1vh) * 100)',
-            overflow: 'hidden',
-          });
-          gsap.to(node, {
-            duration,
-            ease: 'power2.in',
-            yPercent: -100,
-          });
-          requestAnimationFrame(() => node.classList.add('animation'));
-        }}
-      >
-        <Switch>
-          <div className={'loading-page'} when={data.isFetching}/>
-  
-          <NotQualifiedPage when={state.router.link.startsWith('/not-qualified/')}/>
-          <AboutUsPage when={state.router.link.startsWith('/what-we-do/')}/>
-          <CareersPage when={state.router.link.startsWith('/careers/')}/>
-          <VideosPage when={state.router.link.startsWith('/videos/')}/>
-          <TradeshowPage when={state.router.link.startsWith('/signup/')}/>
-          <ContactPage when={/get-in-touch/.test(page.slug)}/>
-          <HomeSlider
-            link={data.link}
-            active={!data.isHome || isDeveloping || initialDone}
-            when={page.template === 'page-templates/slider-template.php'}
-          />
-          <FormsPage
-            link={data.link}
-            when={page.template === 'page-templates/form-template.php'}/>
-          <ProductsSlider link={data.link} active={true} when={state.router.link.startsWith('/products/')}/>
-          <MapPage when={state.router.link.startsWith('/map/')}/>
-          <TermsPage link={data.link} when={state.router.link.startsWith('/terms/')}/>
-          <PrivacyPage link={data.link} when={state.router.link.startsWith('/privacy-policy/')}/>
-        </Switch>
-      </Transition>
-    
-    </TransitionGroup>
+          </noscript>
 
-    
-    <Switch>
-      <DPage link={data.link} when={state.router.link.startsWith('/d/')}/>
-      <Missing404 when={data.is404}/>
-    </Switch>
-    <Overlay/>
-    </AddressProvider>
-  </>;
+          {ReactGA.pageview(data.link)}
+        </Head>
+        {data.isHome && !(isDeveloping || initialDone) ? (
+          <Intro setInitialDone={setInitialDone} />
+        ) : null}
+        <TransitionGroup>
+          <Transition
+            key={state.router.link}
+            timeout={duration * 1000}
+            onEnter={(node) => {
+              gsap.killTweensOf(node);
+              gsap.set(node, {
+                position: "fixed",
+                yPercent: 100,
+                top: 0,
+                left: 0,
+                width: "100vw",
+                zIndex: 1,
+                scrollTo: 0,
+              });
+              gsap.to(node, {
+                duration,
+                ease: "power2.in",
+                yPercent: 0,
+                onComplete: () => {
+                  gsap.set(node, { clearProps: "all" });
+                  node.classList.remove("animation");
+                },
+              });
+              requestAnimationFrame(() => node.classList.add("animation"));
+            }}
+            onExit={(node) => {
+              gsap.killTweensOf(node);
+              gsap.set(node, {
+                position: "fixed",
+                yPercent: 0,
+                top: 0,
+                left: 0,
+                zIndex: 10,
+                width: "100vw",
+                height: "calc(var(--vh, 1vh) * 100)",
+                overflow: "hidden",
+              });
+              gsap.to(node, {
+                duration,
+                ease: "power2.in",
+                yPercent: -100,
+              });
+              requestAnimationFrame(() => node.classList.add("animation"));
+            }}
+          >
+            <Switch>
+              <div className={"loading-page"} when={data.isFetching} />
+
+              <NotQualifiedPage
+                when={state.router.link.startsWith("/not-qualified/")}
+              />
+              <AboutUsPage
+                when={state.router.link.startsWith("/what-we-do/")}
+              />
+              <CareersPage when={state.router.link.startsWith("/careers/")} />
+              <VideosPage when={state.router.link.startsWith("/videos/")} />
+              <TradeshowPage when={state.router.link.startsWith("/signup/")} />
+              <ContactPage when={/get-in-touch/.test(page.slug)} />
+              <HomeSlider
+                link={data.link}
+                active={!data.isHome || isDeveloping || initialDone}
+                when={page.template === "page-templates/slider-template.php"}
+              />
+              <FormsPage
+                link={data.link}
+                when={page.template === "page-templates/form-template.php"}
+              />
+              <ProductsSlider
+                link={data.link}
+                active={true}
+                when={state.router.link.startsWith("/products/")}
+              />
+              <MapPage when={state.router.link.startsWith("/map/")} />
+              <TermsPage
+                link={data.link}
+                when={state.router.link.startsWith("/terms/")}
+              />
+              <PrivacyPage
+                link={data.link}
+                when={state.router.link.startsWith("/privacy-policy/")}
+              />
+            </Switch>
+          </Transition>
+        </TransitionGroup>
+
+        <Switch>
+          <DPage link={data.link} when={state.router.link.startsWith("/d/")} />
+          <Missing404 when={data.is404} />
+        </Switch>
+        <Overlay />
+      </AddressProvider>
+    </>
+  );
 };
 export default connect(Root);
 

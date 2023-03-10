@@ -524,6 +524,7 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
                       className={"btn slide-cta"}
                       target={slide.button.target}
                       href={slide.button.url}
+                      onClick={() => {gtag_report_conversion('https://expert.filogix.com/expert/view/SignOn?locale=en_ca')}}
                     >
                       <span className="text">{slide.button.title}</span>
                       <svg className={"right-arrow"} viewBox="0 0 22 10">
@@ -537,6 +538,7 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
                       className={"btn secondary slide-cta"}
                       target={slide.button_2.target}
                       href={slide.button_2.url}
+                      onClick={()  =>{gtag_report_conversion('https://velocity.newton.ca/members/login')}}
                     >
                       <span className="text">{slide.button_2.title}</span>
                       <svg className={"right-arrow"} viewBox="0 0 22 10">
