@@ -487,7 +487,9 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
             </Container>
           </div>
 
-          {slidesObj.map((slide, slideIndex) => (
+          {slidesObj.map((slide, slideIndex) => {
+
+            return (
             <SwiperSlide key={`slide-${slideIndex}`}>
               <Container>
                 <FlyingObj
@@ -524,7 +526,7 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
                       className={"btn slide-cta"}
                       target={slide.button.target}
                       href={slide.button.url}
-                      onClick={() => {gtag_report_conversion('https://expert.filogix.com/expert/view/SignOn?locale=en_ca')}}
+                      onClick={() => slideIndex === 0? gtag_report_conversion('https://expert.filogix.com/expert/view/SignOn?locale=en_ca'): {}}
                     >
                       <span className="text">{slide.button.title}</span>
                       <svg className={"right-arrow"} viewBox="0 0 22 10">
@@ -538,7 +540,7 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
                       className={"btn secondary slide-cta"}
                       target={slide.button_2.target}
                       href={slide.button_2.url}
-                      onClick={()  =>{gtag_report_conversion('https://velocity.newton.ca/members/login')}}
+                      onClick={()  => slideIndex === 0? gtag_report_conversion('https://velocity.newton.ca/members/login'): {}}
                     >
                       <span className="text">{slide.button_2.title}</span>
                       <svg className={"right-arrow"} viewBox="0 0 22 10">
@@ -550,7 +552,7 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
                 </div>
               </Container>
             </SwiperSlide>
-          ))}
+          )})}
         </Slider>
         <div ref={paginationRef} />
         {media === "mobile" ? (
@@ -559,6 +561,7 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
               className={"btn-mobile slide-cta"}
               target={slidesObj[currentSlide]?.button.target}
               href={slidesObj[currentSlide]?.button.url}
+              onClick={() => slideIndex === 0? gtag_report_conversion('https://expert.filogix.com/expert/view/SignOn?locale=en_ca'): {}}
             >
               {slidesObj[currentSlide]?.button.title}
             </Link>
@@ -567,6 +570,7 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
               className={"btn-mobile secondary slide-cta"}
               target={slidesObj[currentSlide]?.button_2.target}
               href={slidesObj[currentSlide]?.button_2.url}
+              onClick={()  => slideIndex === 0? gtag_report_conversion('https://velocity.newton.ca/members/login'): {}}
             >
               {slidesObj[currentSlide]?.button_2.title}
             </Link>
