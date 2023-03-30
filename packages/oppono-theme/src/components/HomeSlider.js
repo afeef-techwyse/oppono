@@ -353,6 +353,16 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
     );
   }, [state.router.link]);
 
+  const handleClick2 = (e) => {
+    e.preventDefault(); // prevent default behavior
+    gtag_report_conversion('https://velocity.newton.ca/members/login')
+  }
+
+  const handleClick1 = (e) => {
+    e.preventDefault(); // prevent default behavior
+    gtag_report_conversion('https://expert.filogix.com/expert/view/SignOn?locale=en_ca')
+  }
+
   return (
     <div className={className}>
       <Header hasSubMenu={false} ref={header} />
@@ -526,7 +536,7 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
                       className={"btn slide-cta"}
                       target={slide.button.target}
                       href={slide.button.url}
-                      onClick={() => slideIndex === 0? gtag_report_conversion('https://expert.filogix.com/expert/view/SignOn?locale=en_ca'): {}}
+                      onClick={(e) => slideIndex === 0? handleClick1(e): {}}
                     >
                       <span className="text">{slide.button.title}</span>
                       <svg className={"right-arrow"} viewBox="0 0 22 10">
@@ -540,7 +550,7 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
                       className={"btn secondary slide-cta"}
                       target={slide.button_2.target}
                       href={slide.button_2.url}
-                      onClick={()  => slideIndex === 0? gtag_report_conversion('https://velocity.newton.ca/members/login'): {}}
+                      onClick={(e)  => slideIndex === 0? handleClick2(e) : {}}
                     >
                       <span className="text">{slide.button_2.title}</span>
                       <svg className={"right-arrow"} viewBox="0 0 22 10">
@@ -561,7 +571,7 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
               className={"btn-mobile slide-cta"}
               target={slidesObj[currentSlide]?.button.target}
               href={slidesObj[currentSlide]?.button.url}
-              onClick={() => slideIndex === 0? gtag_report_conversion('https://expert.filogix.com/expert/view/SignOn?locale=en_ca'): {}}
+              onClick={() => slideIndex === 0? handleClick1(): {}}
             >
               {slidesObj[currentSlide]?.button.title}
             </Link>
@@ -570,7 +580,7 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
               className={"btn-mobile secondary slide-cta"}
               target={slidesObj[currentSlide]?.button_2.target}
               href={slidesObj[currentSlide]?.button_2.url}
-              onClick={()  => slideIndex === 0? gtag_report_conversion('https://velocity.newton.ca/members/login'): {}}
+              onClick={()  => slideIndex === 0? handleClick2(): {}}
             >
               {slidesObj[currentSlide]?.button_2.title}
             </Link>

@@ -454,6 +454,7 @@ const ProductsSlider = ({
             {slidesObj.map((slide, slideIndex) => {
               const product =
                 state.source[slide.product.post_type]?.[slide.product.ID];
+                console.log(product)
               return (
                 <SwiperSlide key={`slide-${slideIndex}`}>
                   <Container>
@@ -483,7 +484,7 @@ const ProductsSlider = ({
                               as={"span"}
                               className={"animate-number"}
                               data-to-fixed={2}
-                              data-number={0.75 + +product?.acf?.rate}
+                              data-number={product?.slug === '2nd-heloc-750-75'?product?.acf?.rate : 0.75 + +product?.acf?.rate}
                             >
                               0
                             </P.D>
