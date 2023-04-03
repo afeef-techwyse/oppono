@@ -466,7 +466,7 @@ const ProductsSlider = ({
                       <p
                         animate-number
                         className={"number"}
-                        data-number={parseFloat(product?.acf?.rate) + (product?.acf?.type == "HELOC" || product?.acf?.type == "BELOC" ? 0.75 : 0)}
+                        data-number={product?.slug === '2nd-heloc-750-75'? parseFloat(product?.acf?.rate) : parseFloat(product?.acf?.rate) + (product?.acf?.type == "HELOC" || product?.acf?.type == "BELOC" ? 0.75 : 0)}
                         data-to-fixed={2}
                       >
                         0.00
