@@ -466,9 +466,10 @@ const ProductsSlider = ({
                       <p
                         animate-number
                         className={"number"}
-                        data-number={product?.slug === '2nd-heloc-750-75'? parseFloat(product?.acf?.rate) : parseFloat(product?.acf?.rate) + (product?.acf?.type == "HELOC" || product?.acf?.type == "BELOC" ? 0.75 : 0)}
+                        data-number={product?.slug === '6-month-1st-750-75' ? 7.24 : product?.slug === '2nd-750-75' ? 9.99 :product?.slug === '2nd-heloc-750-75' ? 10.99:parseFloat(product?.acf?.rate) }
                         data-to-fixed={2}
                       >
+                        {/* product?.slug === '2nd-heloc-750-75'? parseFloat(product?.acf?.rate) : parseFloat(product?.acf?.rate) + (product?.acf?.type == "HELOC" || product?.acf?.type == "BELOC" ? 0.75 : 0) */}
                         0.00
                       </p>
                       <div
@@ -484,7 +485,7 @@ const ProductsSlider = ({
                               as={"span"}
                               className={"animate-number"}
                               data-to-fixed={2}
-                              data-number={product?.slug === '2nd-heloc-750-75'?product?.acf?.rate : 0.75 + +product?.acf?.rate}
+                              data-number={product?.slug === '6-month-1st-750-75' ? 7.74 : product?.slug === '2nd-750-75' ? 10.49 :product?.slug === '2nd-heloc-750-75' ? 10.99:product?.acf?.rate }
                             >
                               0
                             </P.D>
