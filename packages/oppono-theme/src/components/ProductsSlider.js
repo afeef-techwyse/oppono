@@ -227,10 +227,8 @@ const ProductsSlider = ({
   const slidesNumbers = React.useRef(null);
   const [swiperRef, setSwiperRef] = React.useState(null);
   const [thumbsSwiper, setThumbsSwiper] = React.useState(0);
-  const [
-    slideFlyingObjectsPlaying,
-    setSlideFlyingObjectsPlaying,
-  ] = React.useState([]);
+  const [slideFlyingObjectsPlaying, setSlideFlyingObjectsPlaying] =
+    React.useState([]);
   const slidesAnimation = React.useRef({});
   const slidesTransition = React.useRef(0);
   const initialTimeline = React.useRef(gsap.timeline({ paused: false }));
@@ -240,16 +238,15 @@ const ProductsSlider = ({
   React.useEffect(() => {
     console.log(window.location.search);
     const params = new URLSearchParams(window.location.search);
-    const vsref = params.get('_vsrefdom');
-    const source = params.get('source');
+    const vsref = params.get("_vsrefdom");
+    const source = params.get("source");
 
     if (vsref && source) {
       actions.theme.setReference({
         ref: vsref,
-        source: source
-      })
+        source: source,
+      });
     }
-
   });
 
   React.useEffect(() => {
@@ -274,7 +271,7 @@ const ProductsSlider = ({
   }, []);
 
   React.useEffect(() => {
-    allProductsFetched.current = slidesObj.map((slide) => {
+    allProductsFetched.current = slidesObj?.map((slide) => {
       return actions.source.fetch(
         "/" + slide.product.post_type + "/" + slide.product.post_name
       );
@@ -352,8 +349,8 @@ const ProductsSlider = ({
       <Header />
       <div className={"product-slider"}>
         <div ref={flyingWrapperRef} className="flying-obj-wrapper">
-          {slidesObj.map((slide, slideIndex) =>
-            slide.flying_objects.desktop?.map((obj, objIndex) => {
+          {slidesObj?.map((slide, slideIndex) =>
+            slide?.flying_objects?.desktop?.map((obj, objIndex) => {
               return (
                 <FlyingObj
                   // ref={el => obj.ref = el}
@@ -451,10 +448,9 @@ const ProductsSlider = ({
               </span>
             </Container>
 
-            {slidesObj.map((slide, slideIndex) => {
+            {slidesObj?.map((slide, slideIndex) => {
               const product =
                 state.source[slide.product.post_type]?.[slide.product.ID];
-                console.log(product)
               return (
                 <SwiperSlide key={`slide-${slideIndex}`}>
                   <Container>
@@ -466,7 +462,11 @@ const ProductsSlider = ({
                       <p
                         animate-number
                         className={"number"}
-                        data-number={product?.slug === '6-month-1st-750-75' ? 7.24 : product?.slug === '2nd-750-75' ? 9.99 :product?.slug === '2nd-heloc-750-75' ? 10.99:parseFloat(product?.acf?.rate) }
+                        data-number={parseFloat(
+                          product?.acf?.variable_rate === "0"
+                            ? product?.acf?.rate
+                            : product?.acf?.variable_rate
+                        )}
                         data-to-fixed={2}
                       >
                         {/* product?.slug === '2nd-heloc-750-75'? parseFloat(product?.acf?.rate) : parseFloat(product?.acf?.rate) + (product?.acf?.type == "HELOC" || product?.acf?.type == "BELOC" ? 0.75 : 0) */}
@@ -474,7 +474,12 @@ const ProductsSlider = ({
                       </p>
                       <div
                         className={"form-headline-1 subtitle"}
-                        dangerouslySetInnerHTML={{ __html: slide.subtitle }}
+                        dangerouslySetInnerHTML={{
+                          __html:
+                            product?.acf?.variable_rate === "0"
+                              ? "fixed rate"
+                              : slide.subtitle,
+                        }}
                       />
                     </MegaloNum>
                     <table>
@@ -485,14 +490,16 @@ const ProductsSlider = ({
                               as={"span"}
                               className={"animate-number"}
                               data-to-fixed={2}
-                              data-number={product?.slug === '6-month-1st-750-75' ? 7.74 : product?.slug === '2nd-750-75' ? 10.49 :product?.slug === '2nd-heloc-750-75' ? 10.99:product?.acf?.rate }
+                              data-number={product?.acf?.rate}
                             >
                               0
                             </P.D>
                             <P.D as={"span"}>%</P.D>
                           </td>
                           <td>
-                            <P.White><strong>Fixed rate</strong></P.White>
+                            <P.White>
+                              <strong>Fixed rate</strong>
+                            </P.White>
                           </td>
                         </tr>
                         <tr>
@@ -508,7 +515,9 @@ const ProductsSlider = ({
                             <P.D as={"span"}>%</P.D>
                           </td>
                           <td>
-                            <P.White><strong>Lender fee</strong></P.White>
+                            <P.White>
+                              <strong>Lender fee</strong>
+                            </P.White>
                           </td>
                         </tr>
                         <tr>
@@ -524,7 +533,9 @@ const ProductsSlider = ({
                             <P.D as={"span"}>%</P.D>
                           </td>
                           <td>
-                            <P.White><strong>Max LTV</strong></P.White>
+                            <P.White>
+                              <strong>Max LTV</strong>
+                            </P.White>
                           </td>
                         </tr>
                       </tbody>
@@ -536,7 +547,7 @@ const ProductsSlider = ({
           </Slider>
         )}
         <Container className={"thumbs-container"}>
-          {slidesObj.map((slide, i) => (
+          {slidesObj?.map((slide, i) => (
             <div
               key={`thumb-${i}`}
               onClick={() => swiperRef.slideToLoop(i, 1500, true)}
@@ -549,8 +560,15 @@ const ProductsSlider = ({
         </Container>
         <div className="btn-group">
           <SignUpLink />
-          <a className={"cta-btn"} href={state.source[data.type][data.id].acf?.products_pdf?.url} target="_blank">
-            <Button className={"wide bordered"} label={"Download product list"} />
+          <a
+            className={"cta-btn"}
+            href={state.source[data.type][data.id].acf?.products_pdf?.url}
+            target="_blank"
+          >
+            <Button
+              className={"wide bordered"}
+              label={"Download product list"}
+            />
           </a>
         </div>
         <div className="terms-text">
@@ -809,8 +827,8 @@ export default styled(connect(ProductsSlider))`
 
     &.active {
       opacity: 1;
-			font-size: ${size(16)};
-    	font-weight: 500;
+      font-size: ${size(16)};
+      font-weight: 500;
     }
 
     @media (max-width: 575.98px) {

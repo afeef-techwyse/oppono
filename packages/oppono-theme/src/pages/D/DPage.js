@@ -76,6 +76,7 @@ const DPage = ({ className, state, actions }) => {
                     .filter(([, {products}])=>products?.length)
                     .map(
                   ([type, { products }], index) => {
+                    
                     const hasVariable = type === "first" || type === "second";
                     return (
                       <ProductsTable
@@ -134,16 +135,17 @@ const DPage = ({ className, state, actions }) => {
                                 </span>
                               </div>
                             </th>
-                            {products.map(({ ID, title, fields: { rate } }) => (
+                            {products.map(({ ID, title, fields: { rate,variable_rate } }) => {
+                              return(
                               <th scope={"col"} key={ID}>
                                 <p className={"number"}>
-                                  {(+rate + (hasVariable ? 0 : 0.75)).toFixed?.(
+                                  {(variable_rate === '0'? +rate: +variable_rate).toFixed?.(
                                     2
                                   )}
                                   %
                                 </p>
                               </th>
-                            ))}
+                            )})}
                           </tr>
                         </thead>
                         <tbody>
@@ -188,7 +190,7 @@ const DPage = ({ className, state, actions }) => {
                                   className={"details"}
                                   data-label="Fixed rate"
                                 >
-                                  {(+rate + 0.75).toFixed?.(2)}%
+                                  {(+rate).toFixed?.(2)}%
                                 </td>
                               ))}
                             </tr>

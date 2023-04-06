@@ -324,7 +324,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                     </div>
                                   </th>
                                   {products.map(
-                                      ({ID, fields: {rate, maximum_ltv}}) => (
+                                      ({ID, fields: {rate,variable_rate, maximum_ltv}}) => (
                                           <th scope={"col"} key={ID}>
                                             <p>
                                               $
@@ -337,12 +337,12 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                               {numberWithCommas(
                                                   monthlyPayments(
                                                     (homeValue * maximum_ltv / 100) - +section1Values("total_debt"),
-                                                      +rate
+                                                      +variable_rate
                                                   )
                                               )}{" "}
                                               / month
                                             </p>
-                                            <p className={"number"}>{rate}%</p>
+                                            <p className={"number"}>{variable_rate}%</p>
                                           </th>
                                       )
                                   )}
@@ -383,7 +383,7 @@ const C2Page = ({className, setCurrentTheme, state, actions, formData}) => {
                                           className={"details"}
                                           data-label="Fixed rate"
                                       >
-                                        {(+rate + 0.75).toFixed?.(2)}%
+                                        {(+rate).toFixed?.(2)}%
                                       </td>
                                   ))}
                                 </tr>
