@@ -477,8 +477,8 @@ const ProductsSlider = ({
                         dangerouslySetInnerHTML={{
                           __html:
                             product?.acf?.variable_rate === "0"
-                              ? "fixed rate"
-                              : slide.subtitle,
+                              ? "Fixed Rate"
+                              :  slideIndex === 0 ? "Variable Rate (6 months)": "Variable Rate",
                         }}
                       />
                     </MegaloNum>
