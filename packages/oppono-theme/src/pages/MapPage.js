@@ -245,7 +245,7 @@ const MapPage = ({className, actions, state, libraries}) => {
 												<div className="appraiser-container">
 													<p className="label">Lending Area</p>
 													<p className="city">{a.title}</p>
-                        	<p className="ltv">{a.fields.ltv} LTV</p>
+                        	<p className="ltv">{a.fields.ltv?.includes('%') ? a.fields.ltv : a.fields.ltv + '%'  } LTV</p>
 												</div>
 												<div className="appraiser-container">
 													<p className="label">Preferred Appraisers</p>
