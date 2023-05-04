@@ -451,6 +451,7 @@ const ProductsSlider = ({
             {slidesObj?.map((slide, slideIndex) => {
               const product =
                 state.source[slide.product.post_type]?.[slide.product.ID];
+              console.log(product)
               return (
                 <SwiperSlide key={`slide-${slideIndex}`}>
                   <Container>
@@ -547,16 +548,19 @@ const ProductsSlider = ({
           </Slider>
         )}
         <Container className={"thumbs-container"}>
-          {slidesObj?.map((slide, i) => (
+          {slidesObj?.map((slide, i) => {
+            const product =
+            state.source[slide.product.post_type]?.[slide.product.ID];
+            return(
             <div
               key={`thumb-${i}`}
               onClick={() => swiperRef.slideToLoop(i, 1500, true)}
               className={classnames("swiper-slide-thumb", {
                 active: i === swiperRef?.realIndex,
               })}
-              dangerouslySetInnerHTML={{ __html: slide.pagination_title }}
+              dangerouslySetInnerHTML={{ __html: product?.acf?.slider_title }}
             />
-          ))}
+          )})}
         </Container>
         <div className="btn-group">
           <SignUpLink />
