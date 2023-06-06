@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import ReactGA from 'react-ga';
 import {connect, styled, Head } from 'frontity';
 import LinkedInTag  from 'react-linkedin-insight';
@@ -27,6 +27,8 @@ import { AddressProvider } from './contexts/AddressProvider'
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 
+
+
 import ControlledPopup from './components/ControlledPopup';
 
 const Intro = dynamic(import('./components/Intro'), {
@@ -48,14 +50,23 @@ ReactGA.initialize("UA-83199720-1");
 
 LinkedInTag.init(1529258)
 
+
 const isDeveloping = false;
 
 const Root = ({state, libraries}) => {
   const [initialDone, setInitialDone] = React.useState(false);
   const data = state.source.get(state.router.link);
   const page = data.isReady && !data.isError ? state.source[data.type][data.id] : {};
+
+
+  
+
   React.useEffect(() => {
     fixContainer();
+
+    if (typeof window !== 'undefined') {
+      import('../src/assets/google-review/grw.min.js');
+    }
     state.router.link !== '/' && setInitialDone(true);
     window.addEventListener('resize', fixContainer);
     function getHeightOfViewPort() {
@@ -117,6 +128,9 @@ const Root = ({state, libraries}) => {
       <AddressProvider>
         <Styles />
         <Head>
+          <link rel="stylesheet" href="/static/fonts/google-review/grw-styles.css" />
+          <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQAH4EYrsNqXGeVZaBf4nUNADQd7UkuLM&libraries=places"></script>
+          <script src="/static/fonts/google-review/grw.min.js"></script>
           <script
             async
             src="https://www.googletagmanager.com/gtag/js?id=AW-658146634"

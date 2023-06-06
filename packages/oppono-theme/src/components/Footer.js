@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { connect, styled } from "frontity";
 import PropTypes from "prop-types";
 import Container from "./reusable/Container";
@@ -114,13 +114,27 @@ const SocialLinks = styled(
   }
 `;
 const Footer = React.forwardRef(({ state, className }, forwardRef) => {
+  useEffect(() => {
+    setTimeout(() => {
+      $GrwJS.init({
+        target:'#review_widget',
+        placeid:'ChIJNUfSf8fU1IkRXaUk9dBZaac', //Google place ID
+        theme:'dark', //dark or light
+        numOfWords: 20, //max number of words for each review. default:20,
+        horizontal:true, //display reviews in a horizontal slider if true; otherwise, display reviews vertically; true as default 
+        autoScroll:true, //automatically scroll the reivew horizontally; horizontal has to be set to true; false as default
+        scrollInterval:8 //an interval on how often to scroll the review horizontally; default: 8s
+      });
+    }, 3000);
+  }, [])
+
   return (
     <footer ref={forwardRef} className={className + " footer"}>
       <Container>
         <ControlledPopup state={state} />
         <div className="footer-content">
           <div className="footer-left">
-            <div className="guid select">
+            {/* <div className="guid select">
               <h4 className={"primary"}>Select</h4>
               <svg viewBox="0 0 63 20">
                 <path
@@ -168,8 +182,9 @@ const Footer = React.forwardRef(({ state, className }, forwardRef) => {
                   d="M31.124 19a1.5 1.5 0 0 1-1.5-1.5v-15a1.5 1.5 0 0 1 1.5-1.5h20a1.5 1.5 0 0 1 1.5 1.5v15a1.5 1.5 0 0 1-1.5 1.5z"
                 />
               </svg>
-            </div>
+            </div> */}
           </div>
+          <div id="review_widget"></div>
           <FooterRight className={"footer-right"}>
             <Link className={"primary"} href="/careers/">
               Careers
@@ -180,9 +195,7 @@ const Footer = React.forwardRef(({ state, className }, forwardRef) => {
             <Link className={"primary"} href="/privacy-policy/">
               Privacy
             </Link>
-            <Link className={"primary disabled"}>
-              License # 11887/12558
-            </Link>
+            <Link className={"primary disabled"}>License # 11887/12558</Link>
             <SocialLinks />
           </FooterRight>
         </div>
@@ -211,11 +224,13 @@ export default styled(Footer)`
     pointer-events: none !important;
   }
   .footer-content {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
     @media (max-width: 991.98px) {
       justify-content: center;
+      flex-direction: column;
     }
 
     .footer-left {
