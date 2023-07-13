@@ -376,14 +376,14 @@ const Header = React.forwardRef(
               >
                 Lending areas
               </Link>
-              <Link
+              <a
                 onClick={() => menuHandler(false)}
                 className={"primary"}
                 target={`_blank`}
                 href={"https://oppono-app.com/wp-content/uploads/2023/07/oppono-broker-catalogue-greater-vancouver-2023.pdf"}
               >
                 Now in Vancouver
-              </Link>
+              </a>
               <Link
                 onClick={() => menuHandler(false)}
                 className={"primary"}
@@ -459,7 +459,7 @@ const Header = React.forwardRef(
               >
                 Lending areas
               </Link>
-              <Link
+              <a
                 onClick={() => menuHandler(false)}
                 className={"primary"}
                 target={`_blank`}
@@ -467,7 +467,7 @@ const Header = React.forwardRef(
               >
                 
                 Now in Vancouver
-              </Link>
+              </a>
               <Link
                 onClick={() => menuHandler(false)}
                 className={"primary"}
