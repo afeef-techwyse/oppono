@@ -379,6 +379,14 @@ const Header = React.forwardRef(
               <Link
                 onClick={() => menuHandler(false)}
                 className={"primary"}
+                target={`_blank`}
+                href={"https://oppono-app.com/wp-content/uploads/2023/07/Oppono-Broker-Catalogue-Greater-Vancouver-2023-1.pdf"}
+              >
+                Now in Vancouver
+              </Link>
+              <Link
+                onClick={() => menuHandler(false)}
+                className={"primary"}
                 href={"/get-in-touch/"}
               >
                 Get in touch
@@ -440,6 +448,13 @@ const Header = React.forwardRef(
               <Link
                 onClick={() => menuHandler(false)}
                 className={"primary"}
+                href={"/dashboard/e/"}
+              >
+                Find an appraiser
+              </Link>
+              <Link
+                onClick={() => menuHandler(false)}
+                className={"primary"}
                 href={"/map/"}
               >
                 Lending areas
@@ -447,9 +462,10 @@ const Header = React.forwardRef(
               <Link
                 onClick={() => menuHandler(false)}
                 className={"primary"}
-                href={"/dashboard/e/"}
+                target={`_blank`}
+                href={"https://oppono-app.com/wp-content/uploads/2023/07/Oppono-Broker-Catalogue-Greater-Vancouver-2023-1.pdf"}
               >
-                Find an appraiser
+                Now in Vancouver
               </Link>
               <Link
                 onClick={() => menuHandler(false)}
