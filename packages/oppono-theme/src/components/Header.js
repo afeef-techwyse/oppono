@@ -380,7 +380,7 @@ const Header = React.forwardRef(
                 onClick={() => menuHandler(false)}
                 className={"primary"}
                 target={`_blank`}
-                href={"https://oppono-app.com/wp-content/uploads/2023/07/Oppono-Broker-Catalogue-Greater-Vancouver-2023-1.pdf"}
+                href={"https://oppono-app.com/wp-content/uploads/2023/07/oppono-broker-catalogue-greater-vancouver-2023.pdf"}
               >
                 Now in Vancouver
               </Link>
@@ -463,8 +463,9 @@ const Header = React.forwardRef(
                 onClick={() => menuHandler(false)}
                 className={"primary"}
                 target={`_blank`}
-                href={"https://oppono-app.com/wp-content/uploads/2023/07/Oppono-Broker-Catalogue-Greater-Vancouver-2023-1.pdf"}
+                href={"https://oppono-app.com/wp-content/uploads/2023/07/oppono-broker-catalogue-greater-vancouver-2023.pdf"}
               >
+                
                 Now in Vancouver
               </Link>
               <Link
