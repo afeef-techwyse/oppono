@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import { connect, styled } from "frontity";
 import PropTypes from "prop-types";
 import Container from "./reusable/Container";
@@ -114,19 +114,19 @@ const SocialLinks = styled(
   }
 `;
 const Footer = React.forwardRef(({ state, className }, forwardRef) => {
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     $GrwJS.init({
-  //       target:'#review_widget',
-  //       placeid:'ChIJNUfSf8fU1IkRXaUk9dBZaac', //Google place ID
-  //       theme:'dark', //dark or light
-  //       numOfWords: 20, //max number of words for each review. default:20,
-  //       horizontal:true, //display reviews in a horizontal slider if true; otherwise, display reviews vertically; true as default 
-  //       autoScroll:true, //automatically scroll the reivew horizontally; horizontal has to be set to true; false as default
-  //       scrollInterval:8 //an interval on how often to scroll the review horizontally; default: 8s
-  //     });
-  //   }, 3000);
-  // }, [])
+  useEffect(() => {
+    setTimeout(() => {
+      $GrwJS.init({
+        target:'#review_widget',
+        placeid:'ChIJNUfSf8fU1IkRXaUk9dBZaac', //Google place ID
+        theme:'dark', //dark or light
+        numOfWords: 20, //max number of words for each review. default:20,
+        horizontal:true, //display reviews in a horizontal slider if true; otherwise, display reviews vertically; true as default 
+        autoScroll:true, //automatically scroll the reivew horizontally; horizontal has to be set to true; false as default
+        scrollInterval:8 //an interval on how often to scroll the review horizontally; default: 8s
+      });
+    }, 3000);
+  }, [])
 
   return (
     <footer ref={forwardRef} className={className + " footer"}>
@@ -184,7 +184,7 @@ const Footer = React.forwardRef(({ state, className }, forwardRef) => {
               </svg>
             </div> */}
           </div>
-          {/* <div id="review_widget"></div> */}
+          <div id="review_widget"></div>
           <FooterRight className={"footer-right"}>
             <Link className={"primary"} href="/careers/">
               Careers
@@ -215,11 +215,6 @@ export default styled(Footer)`
   padding-bottom: ${size(10)};
   width: 100%;
   z-index: 100;
-  @media (max-width: 991.98px) {
-    padding-top: ${size(15)};
-    padding-bottom: ${size(15)};
-    position: relative !important;
-  }
   .disabled {
     pointer-events: none !important;
   }
