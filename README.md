@@ -1,6 +1,6 @@
 # oppono-frontity
 
-This project was bootstrapped with [Frontity](https://frontity.org/).
+This project was bootstrapped with [Frontity](https://frontity.org/)
 
 #### Table of Contents
 
