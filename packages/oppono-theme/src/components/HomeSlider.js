@@ -363,6 +363,10 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
     gtag_report_conversion('https://expert.filogix.com/expert/view/SignOn?locale=en_ca')
   }
 
+  const handleClick3 = (url) => {
+    gtag_report_conversion(url)
+  }
+
   return (
     <div className={className}>
       <Header hasSubMenu={false} ref={header} />
@@ -559,14 +563,14 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
                       </svg>
                     </Link>
                   ) : null}
-                  {media !== "mobile" && slide.button_2 ? (
+                  {media !== "mobile" && slide.button_3 ? (
                     <Link
                       className={"btn secondary slide-cta small"}
-                      target="_blank"
-                      href="https://app.finmo.ca/login"
-                      // onClick={(e)  => slideIndex === 0? handleClick2(e) : {}}
+                      target={slide.button_3.target}
+                      href={slide.button_3.url}
+                      onClick={(e)  => slideIndex === 0? handleClick3(slide.button_3.url) : {}}
                     >
-                      <span className="text">Finmo</span>
+                      <span className="text">{slide.button_3.title}</span>
                       <svg className={"right-arrow"} viewBox="0 0 22 10">
                         <path fill="none" stroke="#fff" d="M0 5h22" />
                         <path fill="none" stroke="#fff" d="M17 10v0l5-5-5-5" />
@@ -599,14 +603,14 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
               {slidesObj[currentSlide]?.button_2.title}
             </Link>
             ) : null}
-            { slidesObj[currentSlide]?.button_2 ? ( 
+            { slidesObj[currentSlide]?.button_3 ? ( 
             <Link
               className={"btn-mobile secondary slide-cta"}
-              target="_blank"
-              href="https://app.finmo.ca/login"
-              // onClick={()  => slideIndex === 0? handleClick2(): {}}
+              target={slidesObj[currentSlide]?.button_3.target}
+              href={slidesObj[currentSlide]?.button_3.url}
+              onClick={()  => slideIndex === 0? handleClick3(slidesObj[currentSlide]?.button_3.url): {}}
             >
-              Finmo
+              {slidesObj[currentSlide]?.button_3.title}
             </Link>
             ) : null}
             
