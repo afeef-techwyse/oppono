@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import { connect, styled } from "frontity";
 import PropTypes from "prop-types";
 import Container from "./reusable/Container";
@@ -215,11 +215,6 @@ export default styled(Footer)`
   padding-bottom: ${size(10)};
   width: 100%;
   z-index: 100;
-  @media (max-width: 991.98px) {
-    padding-top: ${size(15)};
-    padding-bottom: ${size(15)};
-    position: relative !important;
-  }
   .disabled {
     pointer-events: none !important;
   }

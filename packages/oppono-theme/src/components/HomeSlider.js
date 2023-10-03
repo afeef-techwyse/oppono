@@ -363,6 +363,10 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
     gtag_report_conversion('https://expert.filogix.com/expert/view/SignOn?locale=en_ca')
   }
 
+  const handleClick3 = (url) => {
+    gtag_report_conversion(url)
+  }
+
   return (
     <div className={className}>
       <Header hasSubMenu={false} ref={header} />
@@ -533,7 +537,7 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
                 <div className="buttons">
                   {media !== "mobile" ? (
                     <Link
-                      className={"btn slide-cta"}
+                      className={"btn slide-cta small"}
                       target={slide.button.target}
                       href={slide.button.url}
                       onClick={(e) => slideIndex === 0? handleClick1(e): {}}
@@ -547,12 +551,26 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
                   ) : null}
                   {media !== "mobile" && slide.button_2 ? (
                     <Link
-                      className={"btn secondary slide-cta"}
+                      className={"btn secondary slide-cta small"}
                       target={slide.button_2.target}
                       href={slide.button_2.url}
                       onClick={(e)  => slideIndex === 0? handleClick2(e) : {}}
                     >
                       <span className="text">{slide.button_2.title}</span>
+                      <svg className={"right-arrow"} viewBox="0 0 22 10">
+                        <path fill="none" stroke="#fff" d="M0 5h22" />
+                        <path fill="none" stroke="#fff" d="M17 10v0l5-5-5-5" />
+                      </svg>
+                    </Link>
+                  ) : null}
+                  {media !== "mobile" && slide.button_3 ? (
+                    <Link
+                      className={"btn secondary slide-cta small"}
+                      target={slide.button_3.target}
+                      href={slide.button_3.url}
+                      onClick={(e)  => slideIndex === 0? handleClick3(slide.button_3.url) : {}}
+                    >
+                      <span className="text">{slide.button_3.title}</span>
                       <svg className={"right-arrow"} viewBox="0 0 22 10">
                         <path fill="none" stroke="#fff" d="M0 5h22" />
                         <path fill="none" stroke="#fff" d="M17 10v0l5-5-5-5" />
@@ -585,6 +603,17 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
               {slidesObj[currentSlide]?.button_2.title}
             </Link>
             ) : null}
+            { slidesObj[currentSlide]?.button_3 ? ( 
+            <Link
+              className={"btn-mobile secondary slide-cta"}
+              target={slidesObj[currentSlide]?.button_3.target}
+              href={slidesObj[currentSlide]?.button_3.url}
+              onClick={()  => slideIndex === 0? handleClick3(slidesObj[currentSlide]?.button_3.url): {}}
+            >
+              {slidesObj[currentSlide]?.button_3.title}
+            </Link>
+            ) : null}
+            
           </Container>
         ) : null}
       </div>
@@ -846,6 +875,11 @@ export default styled(connect(HomeSlider))`
       .right-arrow {
         width: ${size(22)};
       }
+    }
+    &.small {
+      height:5.4rem;
+      padding-right:3.2rem;
+      padding-left: 3.2rem;
     }
 
     .right-arrow {
