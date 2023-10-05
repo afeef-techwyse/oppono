@@ -184,7 +184,6 @@ div.grw-review-content .rm-link{
 }
 .grw-theme-light .poweredByGoogle{
 	margin:auto;
-    background-image: url(/static/images/google-reviews.png);
     background-image: url(${GoogleReviewsIcon});
 	background-repeat:no-repeat;
     background-size: contain;
@@ -193,7 +192,6 @@ div.grw-review-content .rm-link{
 }
 .grw-theme-dark .poweredByGoogle{
 	margin:auto;
-    background-image: url(/static/images/google-reviews.png);
     background-image: url(${GoogleReviewsIcon});
 	background-repeat:no-repeat;
     background-size: contain;
