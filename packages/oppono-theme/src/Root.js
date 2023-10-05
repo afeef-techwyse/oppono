@@ -128,9 +128,9 @@ const Root = ({state, libraries}) => {
       <AddressProvider>
         <Styles />
         <Head>
-          <link rel="stylesheet" href="/static/fonts/google-review/grw-styles.css" />
-          <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQAH4EYrsNqXGeVZaBf4nUNADQd7UkuLM&libraries=places"></script>
-          <script src="/static/fonts/google-review/grw.min.js"></script>
+          {/* <link rel="stylesheet" href="/static/fonts/google-review/grw-styles.css" /> */}
+          <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAffvY0HHSyZqDhKlNf8BtaMYy3OYy0UeA&libraries=places"></script>
+          {/* <script src="/static/fonts/google-review/grw.min.js"></script> */}
           <script
             async
             src="https://www.googletagmanager.com/gtag/js?id=AW-658146634"

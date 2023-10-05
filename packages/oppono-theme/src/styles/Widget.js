@@ -1,6 +1,6 @@
 import React from 'react';
 import { css, Global } from 'frontity';
-import '../assets/google-review/google-reviews.png'
+import GoogleReviewsIcon from '../assets/google-review/google-reviews.png';
 
 
 const WidgetStyle = () => <Global styles={css`
@@ -185,6 +185,7 @@ div.grw-review-content .rm-link{
 .grw-theme-light .poweredByGoogle{
 	margin:auto;
     background-image: url(/static/images/google-reviews.png);
+    background-image: url(${GoogleReviewsIcon});
 	background-repeat:no-repeat;
     background-size: contain;
 	width:90px;
@@ -193,6 +194,7 @@ div.grw-review-content .rm-link{
 .grw-theme-dark .poweredByGoogle{
 	margin:auto;
     background-image: url(/static/images/google-reviews.png);
+    background-image: url(${GoogleReviewsIcon});
 	background-repeat:no-repeat;
     background-size: contain;
 	width:90px;

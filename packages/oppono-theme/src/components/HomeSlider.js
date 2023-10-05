@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import useStateWithRef from "../hooks/useStateWithRef";
-import classnames from "classnames";
+// import classnames from "classnames";
 
 import { connect, styled } from "frontity";
 
@@ -551,7 +551,7 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
                   ) : null}
                   {media !== "mobile" && slide.button_2 ? (
                     <Link
-                      className={"btn secondary slide-cta small"}
+                      className={"btn secondary slide-cta small color2"}
                       target={slide.button_2.target}
                       href={slide.button_2.url}
                       onClick={(e)  => slideIndex === 0? handleClick2(e) : {}}
@@ -565,7 +565,7 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
                   ) : null}
                   {media !== "mobile" && slide.button_3 ? (
                     <Link
-                      className={"btn secondary slide-cta small"}
+                      className={"btn secondary slide-cta small color3"}
                       target={slide.button_3.target}
                       href={slide.button_3.url}
                       onClick={(e)  => slideIndex === 0? handleClick3(slide.button_3.url) : {}}
@@ -595,7 +595,7 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
             </Link>
             { slidesObj[currentSlide]?.button_2 ? ( 
             <Link
-              className={"btn-mobile secondary slide-cta"}
+              className={"btn-mobile secondary slide-cta color2"}
               target={slidesObj[currentSlide]?.button_2.target}
               href={slidesObj[currentSlide]?.button_2.url}
               onClick={()  => slideIndex === 0? handleClick2(): {}}
@@ -605,7 +605,7 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
             ) : null}
             { slidesObj[currentSlide]?.button_3 ? ( 
             <Link
-              className={"btn-mobile secondary slide-cta"}
+              className={"btn-mobile secondary slide-cta color3"}
               target={slidesObj[currentSlide]?.button_3.target}
               href={slidesObj[currentSlide]?.button_3.url}
               onClick={()  => slideIndex === 0? handleClick3(slidesObj[currentSlide]?.button_3.url): {}}
@@ -880,6 +880,15 @@ export default styled(connect(HomeSlider))`
       height:5.4rem;
       padding-right:3.2rem;
       padding-left: 3.2rem;
+    }
+
+    &.color3 {
+      background-color: #0276bb!important;
+      border-color: #0276bb!important;
+    }
+    &.color2 {
+      background-color: #472f92!important;
+      border-color: #472f92!important;
     }
 
     .right-arrow {
