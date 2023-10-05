@@ -363,7 +363,8 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
     gtag_report_conversion('https://expert.filogix.com/expert/view/SignOn?locale=en_ca')
   }
 
-  const handleClick3 = (url) => {
+  const handleClick3 = (e,url) => {
+    e.preventDefault(); // prevent default behavior
     gtag_report_conversion(url)
   }
 
@@ -568,7 +569,7 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
                       className={"btn secondary slide-cta small color3"}
                       target={slide.button_3.target}
                       href={slide.button_3.url}
-                      onClick={(e)  => slideIndex === 0? handleClick3(slide.button_3.url) : {}}
+                      onClick={(e)  => slideIndex === 0? handleClick3(e, slide.button_3.url) : {}}
                     >
                       <span className="text">{slide.button_3.title}</span>
                       <svg className={"right-arrow"} viewBox="0 0 22 10">
@@ -595,7 +596,7 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
             </Link>
             { slidesObj[currentSlide]?.button_2 ? ( 
             <Link
-              className={"btn-mobile secondary slide-cta color2"}
+              className={"btn-mobile slide-cta color2"}
               target={slidesObj[currentSlide]?.button_2.target}
               href={slidesObj[currentSlide]?.button_2.url}
               onClick={()  => slideIndex === 0? handleClick2(): {}}
@@ -605,7 +606,7 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
             ) : null}
             { slidesObj[currentSlide]?.button_3 ? ( 
             <Link
-              className={"btn-mobile secondary slide-cta color3"}
+              className={"btn-mobile slide-cta color3"}
               target={slidesObj[currentSlide]?.button_3.target}
               href={slidesObj[currentSlide]?.button_3.url}
               onClick={()  => slideIndex === 0? handleClick3(slidesObj[currentSlide]?.button_3.url): {}}
