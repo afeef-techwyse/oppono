@@ -184,7 +184,7 @@ const Footer = React.forwardRef(({ state, className }, forwardRef) => {
               </svg>
             </div> */}
           </div>
-          <div id="review_widget"></div>
+          <div id="review_widget"></div> 
           <FooterRight className={"footer-right"}>
             <Link className={"primary"} href="/careers/">
               Careers
