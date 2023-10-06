@@ -217,9 +217,6 @@ position: fixed !important;
   padding-bottom: ${size(10)};
   width: 100%;
   z-index: 100;
-  @media(max-width: 575px) {
-    position: relative !important;
-  }
   .disabled {
     pointer-events: none !important;
   }
