@@ -127,6 +127,10 @@ div.grw-review-content .rm-link{
         min-width: 320px;
         margin:0 15px
     }
+    @media (max-width: 370px) {
+        min-width: 280px;
+        width: 280px;
+    }
 }
 .grw-slider .grw-reviews-wrapper{
 	width: 9999px;
@@ -142,6 +146,9 @@ div.grw-review-content .rm-link{
 	overflow: hidden;
     @media (max-width: 1024px) {
         width: 320px;
+    }
+    @media (max-width: 370px) {
+        width: 280px;
     }
 }
 .grw-slider .grw-slider-nav{
