@@ -149,14 +149,20 @@ const createSlideAnimation = (slide, paused = true) => {
     if (!slide) return;
     const slideAnimationTl = gsap.timeline({ paused }).timeScale(2),
         title = slide.querySelector(".title"),
-        btn = slide.querySelector(".btn"),
+        btn = [...slide.querySelectorAll(".btn")],
         slideNumber = slide.querySelector(".slide-number"),
-        btnText = btn?.querySelector(".text"),
-        btnEnter = btn?.querySelectorAll(".enter-arrow path");
+        btnText = btn[0]?.querySelector(".text"),
+        btnEnter = btn[0]?.querySelectorAll(".enter-arrow path"),
+        btnText1 = btn[1]?.querySelector(".text"),
+        btnEnter1 = btn[1]?.querySelectorAll(".enter-arrow path"),
+        btnText2 = btn[2]?.querySelector(".text"),
+        btnEnter2 = btn[2]?.querySelectorAll(".enter-arrow path");
     let splitted = false;
     if (title.classList.contains("splitted")) splitted = true;
     const titleWords = !splitted && new SplitText(title, { type: "words" }),
-        btnChars = !splitted && new SplitText(btnText, { type: "chars" });
+        btnChars = !splitted && new SplitText(btnText, { type: "chars" }),
+        btnChars1 = !splitted && new SplitText(btnText1, { type: "chars" }),
+        btnChars2 = !splitted && new SplitText(btnText2, { type: "chars" });
 
     title.classList.add("splitted");
     btnText?.classList.add("splitted");
@@ -168,9 +174,9 @@ const createSlideAnimation = (slide, paused = true) => {
             { autoAlpha: 1, y: 0, stagger: 0.06 }
         )
 
-        .fromTo(btn, { autoAlpha: 0, y: 10 }, { autoAlpha: 1, y: 0 }, "-=.4")
+        .fromTo(btn[0], { autoAlpha: 0, y: 10 }, { autoAlpha: 1, y: 0 }, "-=.4")
+        .fromTo(btn[0], { width: 0 }, { width: "auto", ease: "power2.in" }, "-=.3")
 
-        .fromTo(btn, { width: 0 }, { width: "auto", ease: "power2.in" }, "-=.3")
         .fromTo(
             slideNumber,
             { autoAlpha: 0, scale: 0 },
@@ -186,6 +192,38 @@ const createSlideAnimation = (slide, paused = true) => {
         )
         .fromTo(
             btnEnter,
+            { drawSVG: 0 },
+            { drawSVG: "100%", stagger: 0.3 },
+            "-=.1"
+        )
+
+        .fromTo(btn[1], { autoAlpha: 0, y: 10 }, { autoAlpha: 1, y: 0 }, "-=.4")
+        .fromTo(btn[1], { width: 0 }, { width: "auto", ease: "power2.in" }, "-=.3")
+
+        .fromTo(
+            splitted ? btnText1?.children : btnChars1.chars,
+            { autoAlpha: 0, y: 10 },
+            { autoAlpha: 1, y: 0, stagger: 0.05, duration: 0.3 },
+            "-=.1"
+        )
+        .fromTo(
+            btnEnter1,
+            { drawSVG: 0 },
+            { drawSVG: "100%", stagger: 0.3 },
+            "-=.1"
+        )
+
+        .fromTo(btn[2], { autoAlpha: 0, y: 10 }, { autoAlpha: 1, y: 0 }, "-=.4")
+        .fromTo(btn[2], { width: 0 }, { width: "auto", ease: "power2.in" }, "-=.3")
+
+        .fromTo(
+            splitted ? btnText2?.children : btnChars2.chars,
+            { autoAlpha: 0, y: 10 },
+            { autoAlpha: 1, y: 0, stagger: 0.05, duration: 0.3 },
+            "-=.1"
+        )
+        .fromTo(
+            btnEnter2,
             { drawSVG: 0 },
             { drawSVG: "100%", stagger: 0.3 },
             "-=.1"
@@ -507,27 +545,7 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
                         return (
                             <SwiperSlide key={`slide-${slideIndex}`}>
                                 <Container>
-                                    <FlyingObj
-                                        isStart={false}
-                                        isEnd={false}
-                                        className={"mobile-icon"}
-                                        paused={!slideFlyingObjectsPlaying[slideIndex]}
-                                        // ref={el => slide.flying_objects.mobile.ref = el}
-                                        width={slide.flying_objects.mobile.width}
-                                        imageUrl={slide.flying_objects.mobile.image.url}
-                                        frames={+slide.flying_objects.mobile.frames}
-                                        duration={+slide.flying_objects.mobile.duration}
-                                        initial_duration={
-                                            +slide.flying_objects.mobile.initial_duration
-                                        }
-                                        frame_x={+slide.flying_objects.mobile.frame_x}
-                                        frame_y={+slide.flying_objects.mobile.frame_y}
-                                        alt={slide.flying_objects.mobile.image.alt}
-                                        type={slide.flying_objects.mobile.type}
-                                        loop_start_index={
-                                            +slide.flying_objects.mobile.loop_start_index
-                                        }
-                                    />
+
                                     <div className="title-wrapper">
                                         <span className={"slide-number"}>{slideIndex + 1}</span>
                                         <div
@@ -552,7 +570,7 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
                                         ) : null}
                                         {media !== "mobile" && slide.button_2 ? (
                                             <Link
-                                                className={"btn secondary slide-cta small color2"}
+                                                className={"btn slide-cta small secondary color2"}
                                                 target={slide.button_2.target}
                                                 href={slide.button_2.url}
                                                 onClick={(e) => slideIndex === 0 ? handleClick2(e) : {}}
@@ -566,7 +584,7 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
                                         ) : null}
                                         {media !== "mobile" && slide.button_3 ? (
                                             <Link
-                                                className={"btn secondary slide-cta small color3"}
+                                                className={"btn slide-cta secondary small color3"}
                                                 target={slide.button_3.target}
                                                 href={slide.button_3.url}
                                                 onClick={(e) => slideIndex === 0 ? handleClick3(e, slide.button_3.url) : {}}
