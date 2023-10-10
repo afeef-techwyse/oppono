@@ -405,7 +405,6 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
         e.preventDefault(); // prevent default behavior
         gtag_report_conversion(url)
     }
-
     return (
         <div className={className}>
             <Header hasSubMenu={false} ref={header} />
@@ -672,6 +671,7 @@ export default styled(connect(HomeSlider))`
     @media (max-width: 575.98px) {
       justify-content: flex-start;
       margin-top: 100px;
+      height: auto;
     }
 
     .container {

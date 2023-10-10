@@ -114,20 +114,20 @@ const SocialLinks = styled(
   }
 `;
 const Footer = React.forwardRef(({ state, className }, forwardRef) => {
-    if(window.location.pathname === '/'){
-      useEffect(() => {
-          setTimeout(() => {
-              $GrwJS.init({
-                  target: '#review_widget',
-                  placeid: 'ChIJNUfSf8fU1IkRXaUk9dBZaac', //Google place ID
-                  theme: 'dark', //dark or light
-                  numOfWords: 20, //max number of words for each review. default:20,
-                  horizontal: true, //display reviews in a horizontal slider if true; otherwise, display reviews vertically; true as default 
-                  autoScroll: true, //automatically scroll the reivew horizontally; horizontal has to be set to true; false as default
-                  scrollInterval: 8 //an interval on how often to scroll the review horizontally; default: 8s
-              });
-          }, 3000);
-      }, [])
+    if (window.location.pathname === '/') {
+        useEffect(() => {
+            setTimeout(() => {
+                $GrwJS.init({
+                    target: '#review_widget',
+                    placeid: 'ChIJNUfSf8fU1IkRXaUk9dBZaac', //Google place ID
+                    theme: 'dark', //dark or light
+                    numOfWords: 20, //max number of words for each review. default:20,
+                    horizontal: true, //display reviews in a horizontal slider if true; otherwise, display reviews vertically; true as default 
+                    autoScroll: true, //automatically scroll the reivew horizontally; horizontal has to be set to true; false as default
+                    scrollInterval: 8 //an interval on how often to scroll the review horizontally; default: 8s
+                });
+            }, 3000);
+        }, [])
     }
 
     return (
@@ -217,6 +217,11 @@ position: fixed !important;
   padding-bottom: ${size(10)};
   width: 100%;
   z-index: 100;
+
+  @media(max-width: 575px) {
+    position: relative !important;
+  }
+
   .disabled {
     pointer-events: none !important;
   }
