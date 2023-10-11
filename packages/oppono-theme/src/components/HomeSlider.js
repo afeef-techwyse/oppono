@@ -544,7 +544,27 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
                         return (
                             <SwiperSlide key={`slide-${slideIndex}`}>
                                 <Container>
-
+                                    <FlyingObj
+                                        isStart={false}
+                                        isEnd={false}
+                                        className={"mobile-icon"}
+                                        paused={!slideFlyingObjectsPlaying[slideIndex]}
+                                        // ref={el => slide.flying_objects.mobile.ref = el}
+                                        width={slide.flying_objects.mobile.width}
+                                        imageUrl={slide.flying_objects.mobile.image.url}
+                                        frames={+slide.flying_objects.mobile.frames}
+                                        duration={+slide.flying_objects.mobile.duration}
+                                        initial_duration={
+                                            +slide.flying_objects.mobile.initial_duration
+                                        }
+                                        frame_x={+slide.flying_objects.mobile.frame_x}
+                                        frame_y={+slide.flying_objects.mobile.frame_y}
+                                        alt={slide.flying_objects.mobile.image.alt}
+                                        type={slide.flying_objects.mobile.type}
+                                        loop_start_index={
+                                            +slide.flying_objects.mobile.loop_start_index
+                                        }
+                                    />
                                     <div className="title-wrapper">
                                         <span className={"slide-number"}>{slideIndex + 1}</span>
                                         <div
