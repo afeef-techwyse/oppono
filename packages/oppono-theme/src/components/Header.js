@@ -324,6 +324,24 @@ const SignedLinks = connect(
         )
 );
 
+const BrokerCatalogueLink = connect(
+    ({ state, menuHandler }) => {
+        const { acf } = state.source.get("acf-options-page");
+        let vancouverBrokerCatalogueUrl = acf?.metro_vancouver_broker_catalogue
+        if(vancouverBrokerCatalogueUrl)
+        return (
+            <a
+                onClick={() => menuHandler(false)}
+                className={"primary"}
+                target={`_blank`}
+                href={vancouverBrokerCatalogueUrl}
+            >
+                Now in Vancouver
+            </a>
+        )
+    }
+);
+
 const Header = React.forwardRef(
     ({ className, hasSubMenu = true, hasProgress = false }, forwardRef) => {
         const [menuOpened, setMenuOpened] = React.useState(false);
@@ -376,14 +394,7 @@ const Header = React.forwardRef(
                                     >
                                         Lending areas
                                     </Link>
-                                    <a
-                                        onClick={() => menuHandler(false)}
-                                        className={"primary"}
-                                        target={`_blank`}
-                                        href={"https://oppono-app.com/wp-content/uploads/2023/08/oppono-broker-catalogue-greater-vancouver-2023.pdf"}
-                                    >
-                                        Now in Vancouver
-                                    </a>
+                                    <BrokerCatalogueLink />
                                     <Link
                                         onClick={() => menuHandler(false)}
                                         className={"primary"}
@@ -459,15 +470,7 @@ const Header = React.forwardRef(
                             >
                                 Lending areas
                             </Link>
-                            <a
-                                onClick={() => menuHandler(false)}
-                                className={"primary"}
-                                target={`_blank`}
-                                href={"https://oppono-app.com/wp-content/uploads/2023/08/oppono-broker-catalogue-greater-vancouver-2023.pdf"}
-                            >
-
-                                Now in Vancouver
-                            </a>
+                            <BrokerCatalogueLink />
                             <Link
                                 onClick={() => menuHandler(false)}
                                 className={"primary"}
