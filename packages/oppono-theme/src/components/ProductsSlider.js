@@ -451,7 +451,7 @@ const ProductsSlider = ({
             {slidesObj?.map((slide, slideIndex) => {
               const product =
                 state.source[slide.product.post_type]?.[slide.product.ID];
-              console.log(product)
+
               return (
                 <SwiperSlide key={`slide-${slideIndex}`}>
                   <Container>
@@ -477,7 +477,7 @@ const ProductsSlider = ({
                         className={"form-headline-1 subtitle"}
                         dangerouslySetInnerHTML={{
                           __html:
-                            product?.acf?.variable_rate === "0"
+                            product?.acf?.slider_title === "HELOC"
                               ? "Fixed Rate"
                               :  slideIndex === 0 ? "Variable Rate (6 months)": "Variable Rate",
                         }}
