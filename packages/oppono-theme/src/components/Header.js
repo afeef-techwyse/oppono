@@ -336,7 +336,7 @@ const BrokerCatalogueLink = connect(
                 target={`_blank`}
                 href={vancouverBrokerCatalogueUrl}
             >
-                Now in Vancouver
+                Vancouver
             </a>
         )
     }
