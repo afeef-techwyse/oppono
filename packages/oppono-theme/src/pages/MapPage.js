@@ -1,5 +1,5 @@
 import React from "react";
-import {connect, styled} from "frontity";
+import { connect, styled } from "frontity";
 import Footer from "../components/Footer";
 import FormStep from "../components/form-components/FormStep";
 import Header from "../components/Header";
@@ -8,7 +8,7 @@ import Input from "../components/form-components/Input";
 import Button from "../components/form-components/Button";
 import Container from "../components/reusable/Container";
 import Link from "../components/reusable/Link";
-import {size} from "../functions/size";
+import { size } from "../functions/size";
 import Select from "../components/form-components/Select";
 import useAddress from '../contexts/AddressProvider'
 
@@ -18,261 +18,259 @@ import debounce from "../functions/debounce";
 import classnames from "classnames";
 
 function copyToClipboard(text) {
-  var dummy = document.createElement("textarea");
-  // to avoid breaking orgain page when copying more words
-  // cant copy when adding below this code
-  // dummy.style.display = 'none'
-  document.body.appendChild(dummy);
-  //Be careful if you use texarea. setAttribute('value', value), which works with "input" does not work with "textarea". – Eduard
-  dummy.value = text;
-  dummy.select();
-  document.execCommand("copy");
-  document.body.removeChild(dummy);
+    var dummy = document.createElement("textarea");
+    // to avoid breaking orgain page when copying more words
+    // cant copy when adding below this code
+    // dummy.style.display = 'none'
+    document.body.appendChild(dummy);
+    //Be careful if you use texarea. setAttribute('value', value), which works with "input" does not work with "textarea". – Eduard
+    dummy.value = text;
+    dummy.select();
+    document.execCommand("copy");
+    document.body.removeChild(dummy);
 }
 
 const sortedCities = cities.sort((a, b) => (a.name > b.name ? 1 : -1));
-const MapPage = ({className, actions, state, libraries}) => {
-  const generateMap = ({windowSize, name, coordinates, enc, zoom}) => {
-    let link = `https://maps.googleapis.com/maps/api/staticmap?map_id=3a82b8043ec69e1&zoom=${
-        zoom || 7
-    }&key=AIzaSyAQAH4EYrsNqXGeVZaBf4nUNADQd7UkuLM&size=${
-        windowSize?.width || 1920
-    }x${windowSize?.height || 1080}`;
-    link += name
-        ? `&center=canada+ontario+${name.replaceAll(" ", "+")}`
-        : "&center=canada+toronto";
-    link += coordinates
-        ? `&path=color:0x0E9564FF|weight:2|fillcolor:0x26D69634|${coordinates
-            .map((a) => a[0].toFixed?.(3) + "," + a[1].toFixed?.(3))
-            .join("|")}`
-        : "";
-    link += enc
-        ? `&path=color:0x0E9564FF|weight:2|fillcolor:0x26D69634|enc:${enc}`
-        : "";
-    return link;
-  };
-  const mapRef = React.useRef(null);
-  const mapAPIRef = React.useRef(null);
-  const polygonAPIRef = React.useRef(null);
-  const [postalCodeErrorMessage, setPostalCodeErrorMessage] = React.useState(
-      ""
-  );
-
-  const { address, handleAddressChange } = useAddress();
-
-  // const geocoderAPIRef = React.useRef(null);
-
-  const initMap = () => {
-    mapAPIRef.current = new window.google.maps.Map(mapRef.current, {
-      center: {lat: 43.653226, lng: -79.3831843},
-      zoom: 9,
-      disableDefaultUI: true,
-      draggable: true,
-      mapId: "fc06fa36f5d8b58",
-    });
-    polygonAPIRef.current = new window.google.maps.Polygon({
-      // paths: triangleCoords,
-      strokeColor: "#0E9564",
-      strokeOpacity: 1,
-      strokeWeight: 2,
-      fillColor: "#26D696",
-      fillOpacity: 0.2,
-      map: mapAPIRef.current,
-    });
-    polygonAPIRef.current.getBounds = function () {
-      let bounds = new window.google.maps.LatLngBounds();
-      let paths = polygonAPIRef.current.getPaths();
-      let path;
-      for (let i = 0; i < paths.getLength(); i++) {
-        path = paths.getAt(i);
-        for (let ii = 0; ii < path.getLength(); ii++) {
-          bounds.extend(path.getAt(ii));
-        }
-      }
-      return bounds;
+const MapPage = ({ className, actions, state, libraries }) => {
+    const generateMap = ({ windowSize, name, coordinates, enc, zoom }) => {
+        let link = `https://maps.googleapis.com/maps/api/staticmap?map_id=3a82b8043ec69e1&zoom=${zoom || 7
+            }&key=AIzaSyAQAH4EYrsNqXGeVZaBf4nUNADQd7UkuLM&size=${windowSize?.width || 1920
+            }x${windowSize?.height || 1080}`;
+        link += name
+            ? `&center=canada+ontario+${name.replaceAll(" ", "+")}`
+            : "&center=canada+toronto";
+        link += coordinates
+            ? `&path=color:0x0E9564FF|weight:2|fillcolor:0x26D69634|${coordinates
+                .map((a) => a[0].toFixed?.(3) + "," + a[1].toFixed?.(3))
+                .join("|")}`
+            : "";
+        link += enc
+            ? `&path=color:0x0E9564FF|weight:2|fillcolor:0x26D69634|enc:${enc}`
+            : "";
+        return link;
     };
-  };
+    const mapRef = React.useRef(null);
+    const mapAPIRef = React.useRef(null);
+    const polygonAPIRef = React.useRef(null);
+    const [postalCodeErrorMessage, setPostalCodeErrorMessage] = React.useState(
+        ""
+    );
 
-  React.useEffect(() => {
-    actions.source.fetch("appraisers-map-lookup");
-    if (!window.google) {
-      const scriptElement = document.createElement("script");
-      scriptElement.type = "text/javascript";
-      scriptElement.src = `https://maps.google.com/maps/api/js?key=AIzaSyAQAH4EYrsNqXGeVZaBf4nUNADQd7UkuLM&map_ids=fc06fa36f5d8b58`;
-      document.body.appendChild(scriptElement);
-      scriptElement.addEventListener("load", initMap);
-    } else {
-      initMap();
-    }
-  }, []);
+    const { address, handleAddressChange } = useAddress();
 
-  // const windowSize = useWindowSize();
-  const [appraiser, setAppraiser] = React.useState([{}]);
-  const postal_city = React.useRef({postalCode: "", city: ""});
-  const appraisersLookup = state.source.get("appraisers-map-lookup");
-  const postalCodeGetAppraiser = debounce((postalCode) => {
-    if (postalCode.length < 3) {
-      setAppraiser([{}]);
-      setPostalCodeErrorMessage(true);
-      return;
-    }
-    const data = new FormData();
-    data.append("postal_code", postalCode.trim().slice(0, 3));
-    opponoApi.post("/appraiser-lookup", data).then((response) => {
-      if (response.data.length > 2) {
-        setAppraiser([{}]);
-        setPostalCodeErrorMessage(true);
-      } else if (response.data.length == 0) {
-        setAppraiser([{}]);
-        setPostalCodeErrorMessage(true);
-      } else {
-        setAppraiser(response.data);
-        setPostalCodeErrorMessage(false);
-        const {coordinates} = cities.filter(
-            (city) => city.name === response.data[0]?.fields.city
-        )[0];
-        polygonAPIRef.current.setPaths(coordinates);
-        mapAPIRef.current.fitBounds(polygonAPIRef.current.getBounds());
-      }
-    });
-  }, 1000);
-  React.useEffect(() => {
-    actions.theme.setActiveTheme("gray-theme");
-  }, []);
+    // const geocoderAPIRef = React.useRef(null);
 
-  const Html2React = libraries.html2react.Component;
+    const initMap = () => {
+        mapAPIRef.current = new window.google.maps.Map(mapRef.current, {
+            center: { lat: 43.653226, lng: -79.3831843 },
+            zoom: 9,
+            disableDefaultUI: true,
+            draggable: true,
+            mapId: "fc06fa36f5d8b58",
+        });
+        polygonAPIRef.current = new window.google.maps.Polygon({
+            // paths: triangleCoords,
+            strokeColor: "#0E9564",
+            strokeOpacity: 1,
+            strokeWeight: 2,
+            fillColor: "#26D696",
+            fillOpacity: 0.2,
+            map: mapAPIRef.current,
+        });
+        polygonAPIRef.current.getBounds = function () {
+            let bounds = new window.google.maps.LatLngBounds();
+            let paths = polygonAPIRef.current.getPaths();
+            let path;
+            for (let i = 0; i < paths.getLength(); i++) {
+                path = paths.getAt(i);
+                for (let ii = 0; ii < path.getLength(); ii++) {
+                    bounds.extend(path.getAt(ii));
+                }
+            }
+            return bounds;
+        };
+    };
 
-  return (
-      <div className={classnames(className)}>
-        <div className="map" ref={mapRef}/>
-        <Header hasSubMenu={false}/>
-        <Container className="flexcontainer">
-          <div className="map-wrapper">
-            <div className="col-left">
-              <div className="text-wrapper">
-                {/*<h2 className={'headline-2 dark'}>Looking within a specific city or region?</h2>*/}
-              </div>
-              <div className="inputs-group">
-                <Select
-                    onChange={({name, zoomed, coordinates}) => {
-                      postal_city.current.city = name;
-                      setAppraiser(appraisersLookup.data[name] || [{fields: {city:name}}]);
-                      polygonAPIRef.current.setPaths(coordinates);
-                      if (zoomed == true) {
-                        mapAPIRef.current.fitBounds(
-                          polygonAPIRef.current.getBounds()
-                        );  
-                        mapAPIRef.current.setZoom(14);
-                      } else {
-                        mapAPIRef.current.fitBounds(
-                          polygonAPIRef.current.getBounds()
-                        );
-                      }
-                    }}
-                    noOptionsMessage={() => "No City Found"}
-                    options={sortedCities}
-                    name={"city"}
-                    label={"Select a city"}
-                    value={cities.filter(
-                        (city) => city.name === appraiser[0]?.fields?.city
-                    )}
-                />
-                <p>OR</p>
-                <Input
-                    type={"text"}
-                    name={"postal_code"}
-                    onChange={(e) => {
-                      postal_city.current.postalCode = e.target.value;
-                      postalCodeGetAppraiser(e.target.value);
-                    }}
-                    placeholder={"L5H 3S4"}
-                    label={"Type in your postal code"}
-                />
-              </div>
-              {postalCodeErrorMessage ? (
-                  <p className={"error-message"}>
-                    No appraisers found for this postal code<br/>
-                    <Link href={'/get-in-touch'}>Please contact us</Link>
-                  </p>
-              ) : null}
-            </div>
-            <div className="col-right mobile-only">
+    React.useEffect(() => {
+        actions.source.fetch("appraisers-map-lookup");
+        if (!window.google) {
+            const scriptElement = document.createElement("script");
+            scriptElement.type = "text/javascript";
+            scriptElement.src = `https://maps.google.com/maps/api/js?key=AIzaSyAQAH4EYrsNqXGeVZaBf4nUNADQd7UkuLM&map_ids=fc06fa36f5d8b58`;
+            document.body.appendChild(scriptElement);
+            scriptElement.addEventListener("load", initMap);
+        } else {
+            initMap();
+        }
+    }, []);
+
+    // const windowSize = useWindowSize();
+    const [appraiser, setAppraiser] = React.useState([{}]);
+    const postal_city = React.useRef({ postalCode: "", city: "" });
+    const appraisersLookup = state.source.get("appraisers-map-lookup");
+    const postalCodeGetAppraiser = debounce((postalCode) => {
+        if (postalCode.length < 3) {
+            setAppraiser([{}]);
+            setPostalCodeErrorMessage(true);
+            return;
+        }
+        const data = new FormData();
+        data.append("postal_code", postalCode.trim().slice(0, 3));
+        opponoApi.post("/appraiser-lookup", data).then((response) => {
+            if (response.data.length > 2) {
+                setAppraiser([{}]);
+                setPostalCodeErrorMessage(true);
+            } else if (response.data.length == 0) {
+                setAppraiser([{}]);
+                setPostalCodeErrorMessage(true);
+            } else {
+                setAppraiser(response.data);
+                setPostalCodeErrorMessage(false);
+                const { coordinates } = cities.filter(
+                    (city) => city.name === response.data[0]?.fields.city
+                )[0];
+                polygonAPIRef.current.setPaths(coordinates);
+                mapAPIRef.current.fitBounds(polygonAPIRef.current.getBounds());
+            }
+        });
+    }, 1000);
+    React.useEffect(() => {
+        actions.theme.setActiveTheme("gray-theme");
+    }, []);
+
+    const Html2React = libraries.html2react.Component;
+
+    return (
+        <div className={classnames(className)}>
+            <div className="map" ref={mapRef} />
+            <Header hasSubMenu={false} />
+            <Container className="flexcontainer">
+                <div className="map-wrapper">
+                    <div className="col-left">
+                        <div className="text-wrapper">
+                            {/*<h2 className={'headline-2 dark'}>Looking within a specific city or region?</h2>*/}
+                        </div>
+                        <div className="inputs-group">
+                            <Select
+                                onChange={({ name, zoomed, coordinates }) => {
+                                    postal_city.current.city = name;
+                                    setAppraiser(appraisersLookup.data[name] || [{ fields: { city: name } }]);
+                                    polygonAPIRef.current.setPaths(coordinates);
+                                    if (zoomed == true) {
+                                        mapAPIRef.current.fitBounds(
+                                            polygonAPIRef.current.getBounds()
+                                        );
+                                        mapAPIRef.current.setZoom(14);
+                                    } else {
+                                        mapAPIRef.current.fitBounds(
+                                            polygonAPIRef.current.getBounds()
+                                        );
+                                    }
+                                }}
+                                noOptionsMessage={() => "No City Found"}
+                                options={sortedCities}
+                                name={"city"}
+                                label={"Select a city"}
+                                value={cities.filter(
+                                    (city) => city.name === appraiser[0]?.fields?.city
+                                )}
+                            />
+                            <p>OR</p>
+                            <Input
+                                type={"text"}
+                                name={"postal_code"}
+                                onChange={(e) => {
+                                    postal_city.current.postalCode = e.target.value;
+                                    postalCodeGetAppraiser(e.target.value);
+                                }}
+                                placeholder={"L5H 3S4"}
+                                label={"Type in your postal code"}
+                            />
+                        </div>
+                        {postalCodeErrorMessage ? (
+                            <p className={"error-message"}>
+                                No appraisers found for this postal code<br />
+                                <Link href={'/get-in-touch'}>Please contact us</Link>
+                            </p>
+                        ) : null}
+                    </div>
+                    <div className="col-right mobile-only">
 
 
-              {appraiser[0]?.fields &&
-                appraiser
-                .filter((v,i,a) => a.findIndex(t=>(t.ID === v.ID))===i)
-                .map((a) =>
-                  a.fields ? (
-                      <div key={a.ID} className="appraisal-block">
-												<div className="appraiser-container">
-													<p className="label">Lending Area</p>
-													<p className="city">{a.title}</p>
-                        	<p className="ltv">{a.fields.ltv}% LTV</p>
-												</div>
-												<div className="appraiser-container">
-													<p className="label">Preferred Appraisers</p>
-													{ a.fields.preferred_appraisal_company &&
-                          <p className="text mt-5">
-                            {[...a.fields.preferred_appraisal_company]
-                                ?.map?.((c) => c.post_title)
-                                .join(", ")}
-                          </p>
+                        {appraiser[0]?.fields &&
+                            appraiser
+                                .filter((v, i, a) => a.findIndex(t => (t.ID === v.ID)) === i)
+                                .map((a) =>
+                                    a.fields ? (
+                                        <div key={a.ID} className="appraisal-block">
+                                            <div className="appraiser-container">
+                                                <p className="label">Lending Area</p>
+                                                <p className="city">{a.title}</p>
+                                                <p className="ltv">{a.fields.ltv}% LTV</p>
+                                            </div>
+                                            <div className="appraiser-container">
+                                                <p className="label">Preferred Appraisers</p>
+                                                {a.fields.preferred_appraisal_company &&
+                                                    <p className="text mt-5">
+                                                        {[...a.fields.preferred_appraisal_company]
+                                                            ?.map?.((c) => c.post_title)
+                                                            .join(", ")}
+                                                    </p>
+                                                }
+                                            </div>
+                                            <div className="appraiser-container">
+                                                <p className="label">BDM Contact</p>
+                                                <p className={'name'} dangerouslySetInnerHTML={{ __html: a.fields.bdm?.name }} />
+                                                <p className={'phone'} dangerouslySetInnerHTML={{ __html: a.fields.bdm?.phone }} />
+                                                <p className={'email'} dangerouslySetInnerHTML={{ __html: a.fields.bdm?.email }} />
+                                            </div>
+                                        </div>
+                                    ) : null
+                                )
                         }
-												</div>
-												<div className="appraiser-container">
-													<p className="label">BDM Contact</p>
-													<p className={'name'} dangerouslySetInnerHTML={{__html: a.fields.bdm?.name}}/>
-													<p className={'phone'} dangerouslySetInnerHTML={{__html: a.fields.bdm?.phone}}/>
-													<p className={'email'} dangerouslySetInnerHTML={{__html: a.fields.bdm?.email}}/>
-												</div>
-                      </div>
-                  ) : null
-                )
-              }
-            </div>
-          </div>
-          <div className="map-wrapper desktop-only">
-            <div className="col-right">
+                    </div>
+                </div>
+                <div className="map-wrapper desktop-only">
+                    <div className="col-right">
 
 
-              {appraiser[0]?.fields &&
-                appraiser
-                .filter((v,i,a) => a.findIndex(t=>(t.ID === v.ID))===i)
-                .map((a) =>
-                  a.fields ? (
-                      <div key={a.ID} className="appraisal-block">
-												<div className="appraiser-container">
-													<p className="label">Lending Area</p>
-													<p className="city">{a.title}</p>
-                        	<p className="ltv">{a.fields.ltv?.includes('%') ? a.fields.ltv : a.fields.ltv + '%'  } LTV</p>
-												</div>
-												<div className="appraiser-container">
-													<p className="label">Preferred Appraisers</p>
-													{ a.fields.preferred_appraisal_company &&
-                          <p className="text mt-5">
-                            {[...a.fields.preferred_appraisal_company]
-                                ?.map?.((c) => c.post_title)
-                                .join(", ")}
-                          </p>
+                        {appraiser[0]?.fields &&
+                            appraiser
+                                .filter((v, i, a) => a.findIndex(t => (t.ID === v.ID)) === i)
+                                .map((a) =>
+                                    a.fields ? (
+                                        <div key={a.ID} className="appraisal-block">
+                                            <div className="appraiser-container">
+                                                <p className="label">Lending Area</p>
+                                                <p className="city">{a.title}</p>
+                                                <p className="ltv">{a.fields.ltv?.includes('%') ? a.fields.ltv : a.fields.ltv + '%'} LTV</p>
+                                            </div>
+                                            <div className="appraiser-container">
+                                                <p className="label">Preferred Appraisers</p>
+                                                {a.fields.preferred_appraisal_company &&
+                                                    <p className="text mt-5">
+                                                        {[...a.fields.preferred_appraisal_company]
+                                                            ?.map?.((c) => c.post_title)
+                                                            .join(", ")}
+                                                    </p>
+                                                }
+                                            </div>
+                                            <div className="appraiser-container">
+                                                <p className="label">BDM Contact</p>
+                                                <p className={'name'} dangerouslySetInnerHTML={{ __html: a.fields.bdm?.name }} />
+                                                <p className={'phone'} dangerouslySetInnerHTML={{ __html: a.fields.bdm?.phone }} />
+                                                <p className={'email'} dangerouslySetInnerHTML={{ __html: a.fields.bdm?.email }} />
+                                            </div>
+                                        </div>
+                                    ) : null
+                                )
                         }
-												</div>
-												<div className="appraiser-container">
-													<p className="label">BDM Contact</p>
-													<p className={'name'} dangerouslySetInnerHTML={{__html: a.fields.bdm?.name}}/>
-													<p className={'phone'} dangerouslySetInnerHTML={{__html: a.fields.bdm?.phone}}/>
-													<p className={'email'} dangerouslySetInnerHTML={{__html: a.fields.bdm?.email}}/>
-												</div>
-                      </div>
-                  ) : null
-                )
-              }
-            </div>
-          </div>
-        </Container>
-        <Footer/>
-      </div>
-  );
+                    </div>
+                </div>
+            </Container>
+            <Footer />
+        </div>
+    );
 };
 
 export default styled(connect(MapPage))`
