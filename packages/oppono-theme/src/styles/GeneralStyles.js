@@ -211,6 +211,7 @@ const GeneralStyles = (props) => (
       .btn-group {
         display: flex;
         justify-content: center;
+        gap: 10px;
 
         button {
           margin-right: 0;
@@ -222,7 +223,7 @@ const GeneralStyles = (props) => (
           justify-content: center;
           align-items: center;
           button {
-            margin-top: 30px !important;
+            margin-top: 0px !important;
 
             &:first-of-type {
               margin-right: 0;

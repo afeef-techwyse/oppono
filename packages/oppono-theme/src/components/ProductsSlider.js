@@ -997,6 +997,10 @@ export default styled(connect(ProductsSlider))`
 
     &:first-of-type {
         margin-right: 20px;
+
+        @media(max-width: 575px) {
+            margin-right: 0;
+        }
     }
   }
 
