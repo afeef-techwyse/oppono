@@ -17,20 +17,20 @@
   },
   "prettier": {},
   "dependencies": {
-    "@frontity/core": "^1.15.0",
+    "@frontity/core": "^1.9.1",
     "@frontity/head-tags": "^1.1.1",
     "@frontity/html2react": "^1.7.0",
     "@frontity/tiny-router": "^1.4.4",
     "@frontity/wp-source": "^1.11.7",
     "@next-tools/dynamic": "^0.0.11",
-    "axios": "^0.21.1",
+    "axios": "^1.6.2",
     "classnames": "^2.2.6",
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.3",
     "frontity": "^1.14.1",
     "gsap": "npm:@gsap/shockingly@^3.6.1",
     "lodash": "^4.17.20",
-    "next": "^12.1.0",
+    "next": "^14.0.4",
     "normalize.css": "^8.0.1",
     "oppono-theme": "./packages/oppono-theme",
     "react": "^17.0.1",
@@ -46,7 +46,7 @@
     "swiper": "^6.3.4"
   },
   "devDependencies": {
-    "@svgr/cli": "^5.4.0",
+    "@svgr/cli": "^8.1.0",
     "prop-types": "^15.7.2"
   }
 }
