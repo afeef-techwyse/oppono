@@ -7,12 +7,12 @@
     "frontity"
   ],
   "engines": {
-    "node": ">=10.0.0",
-    "npm": ">=6.0.0"
+    "node": ">=10.19.0",
+    "npm": ">=7.10.0"
   },
   "scripts": {
     "dev": "frontity dev",
-    "build": "NODE_OPTIONS=--openssl-legacy-provider frontity build",
+    "build": "node -v && frontity build && node -v",
     "serve": "frontity serve"
   },
   "prettier": {},
