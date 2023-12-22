@@ -5,8 +5,8 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 const GeneralStyles = (props) => (
-  <Global
-    styles={css`
+    <Global
+        styles={css`
       * {
         box-sizing: border-box;
         font-style: normal;
@@ -211,14 +211,11 @@ const GeneralStyles = (props) => (
       .btn-group {
         display: flex;
         justify-content: center;
+        gap: 10px;
 
         button {
           margin-right: 0;
           margin-left: 0;
-        }
-
-        button:first-of-type {
-          margin-right: ${size(55)};
         }
 
         @media (max-width: 575px) {
@@ -226,7 +223,7 @@ const GeneralStyles = (props) => (
           justify-content: center;
           align-items: center;
           button {
-            margin-top: 30px !important;
+            margin-top: 0px !important;
 
             &:first-of-type {
               margin-right: 0;
@@ -586,6 +583,6 @@ const GeneralStyles = (props) => (
         opacity: 0 !important;
       }
     `}
-  />
+    />
 );
 export default GeneralStyles;

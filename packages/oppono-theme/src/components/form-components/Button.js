@@ -4,46 +4,46 @@ import PropTypes from "prop-types";
 import { size } from "../../functions/size";
 
 const Button = React.forwardRef(
-  (
-    {
-      className,
-      label,
-      href,
-      icon = false,
-      value,
-      onClick,
-      focusable = true,
-      disabled = false,
-    },
-    forwardedRef
-  ) => {
-    return (
-      <button
-        tabIndex={focusable ? null : -1}
-        className={`oppono-btn ${className}`}
-        type={"button"}
-        onClick={onClick}
-        disabled={disabled}
-        aria-disabled={disabled}
-      >
-        <span className="text">{label}</span>
-        {icon ? (
-          <svg className={"right-arrow"} viewBox="0 0 22 10">
-            <path fill="none" stroke="#fff" d="M0 5h22" />
-            <path fill="none" stroke="#fff" d="M17 10v0l5-5-5-5" />
-          </svg>
-        ) : null}
-      </button>
-    );
-  }
+    (
+        {
+            className,
+            label,
+            href,
+            icon = false,
+            value,
+            onClick,
+            focusable = true,
+            disabled = false,
+        },
+        forwardedRef
+    ) => {
+        return (
+            <button
+                tabIndex={focusable ? null : -1}
+                className={`oppono-btn ${className}`}
+                type={"button"}
+                onClick={onClick}
+                disabled={disabled}
+                aria-disabled={disabled}
+            >
+                <span className="text">{label}</span>
+                {icon ? (
+                    <svg className={"right-arrow"} viewBox="0 0 22 10">
+                        <path fill="none" stroke="#fff" d="M0 5h22" />
+                        <path fill="none" stroke="#fff" d="M17 10v0l5-5-5-5" />
+                    </svg>
+                ) : null}
+            </button>
+        );
+    }
 );
 
 Button.propTypes = {
-  label: PropTypes.node,
-  className: PropTypes.string,
-  href: PropTypes.string,
-  icon: PropTypes.bool,
-  onClick: PropTypes.func,
+    label: PropTypes.node,
+    className: PropTypes.string,
+    href: PropTypes.string,
+    icon: PropTypes.bool,
+    onClick: PropTypes.func,
 };
 
 export default styled(Button)`
@@ -61,7 +61,7 @@ export default styled(Button)`
   color: #ffffff;
   font-size: ${size(16)};
   font-weight: 400;
-  margin: ${size(24)} auto 0;
+  margin: 0 auto 0;
   cursor: pointer;
   white-space: nowrap;
   transition: background-color 400ms, border-color 400ms, color 400ms,
