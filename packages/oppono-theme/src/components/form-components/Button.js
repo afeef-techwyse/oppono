@@ -61,7 +61,7 @@ export default styled(Button)`
   color: #ffffff;
   font-size: ${size(16)};
   font-weight: 400;
-  margin: ${size(24)} auto 0;
+  margin: 0 auto 0;
   cursor: pointer;
   white-space: nowrap;
   transition: background-color 400ms, border-color 400ms, color 400ms,
