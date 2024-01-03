@@ -33,6 +33,89 @@ import Footer from "./Footer";
 SwiperCore.use([Navigation, Pagination, Keyboard, A11y, Controller, Thumbs]);
 gsap.registerPlugin(SplitText, DrawSVGPlugin, CustomEase);
 
+const Buttons = styled(Swiper)`
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+
+    @media(max-width: 575px) {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+}
+
+p.text {
+    text-align: center;
+    color: #d2f5e9!important;
+    font-size: 18px;
+    margin: 40px 0;
+
+    @media(max-width: 575px) {
+        margin: 20px 0;
+    }
+}
+
+.btn {
+    width: auto;
+    max-width: fit-content;
+    padding: 0 ${size(32)};
+    height: ${size(64)};
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    border-radius: ${size(32)};
+    background-color: #fe412d;
+    color: #ffffff;
+    font-size: ${size(16)};
+    font-weight: 400;
+    text-decoration: none;
+    margin-top: 0 !important;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: .2s;
+    margin-left: 0 !important;
+
+    @media(max-width: 575px) {
+        margin-top: 0;
+    }
+
+    &.color2 {
+        background-color: #472f92;
+    }
+    &.color3 {
+        background-color: #0276bb;
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+      text-decoration: none;
+
+      svg {
+        width: 20px !important;
+      }
+    }
+
+    svg {
+      width: 0px !important;
+      transition: .2s;
+      width: ${size(13)};
+      height: ${size(13)};
+      margin-left: ${size(8)};
+    }
+
+    @media (max-width: 991.98px) {
+      margin-left: ${size(32)};
+      height: ${size(56)};
+    }
+    @media (max-width: 575.98px) {
+      display: none;
+    }
+  }
+`
+
 const Slider = styled(Swiper)`
   z-index: 5;
   width: 100%;
@@ -332,13 +415,13 @@ const ProductsSlider = ({
     const SignUpLink = connect(({ state }) =>
         state.theme.user.logged ? (
             <Link href={"/d/"} className={"cta-btn"}>
-                <Button className={"wide"} label={"See all products"} />
+                <Button className={"wide"} label={"View online"} />
             </Link>
         ) : (
             <Link href={"/create-account/"} className={"cta-btn"}>
                 <Button
                     className={"wide"}
-                    label={"Sign up to check all products & rates"}
+                    label={"View online"}
                 />
             </Link>
         )
@@ -451,7 +534,7 @@ const ProductsSlider = ({
                         {slidesObj?.map((slide, slideIndex) => {
                             const product =
                                 state.source[slide.product.post_type]?.[slide.product.ID];
-
+                            console.log(product)
                             return (
                                 <SwiperSlide key={`slide-${slideIndex}`}>
                                     <Container>
@@ -477,7 +560,7 @@ const ProductsSlider = ({
                                                 className={"form-headline-1 subtitle"}
                                                 dangerouslySetInnerHTML={{
                                                     __html:
-                                                        product?.acf?.slider_title === "HELOC"
+                                                      product?.acf?.slider_title === "HELOC"
                                                             ? "Fixed Rate"
                                                             : slideIndex === 0 ? "Variable Rate (6 months)" : "Variable Rate",
                                                 }}
@@ -563,6 +646,45 @@ const ProductsSlider = ({
                         )
                     })}
                 </Container>
+                <Buttons>
+                    <p class="text">Submit an application through...</p>
+                    <div className="buttons">
+                        <Link
+                            className={"btn slide-cta small secondary color"}
+                            target={"_blank"}
+                            href={"https://expert.filogix.com/expert/view/SignOn?locale=en_ca"}
+                        >
+                            <span className="text">Filogix</span>
+                            <svg className={"right-arrow"} viewBox="0 0 22 10">
+                                <path fill="none" stroke="#fff" d="M0 5h22" />
+                                <path fill="none" stroke="#fff" d="M17 10v0l5-5-5-5" />
+                            </svg>
+                        </Link>
+                        <Link
+                            className={"btn slide-cta small secondary color2"}
+                            target={"_blank"}
+                            href={"https://velocity.newton.ca/members/login"}
+                        >
+                            <span className="text">Velocity</span>
+                            <svg className={"right-arrow"} viewBox="0 0 22 10">
+                                <path fill="none" stroke="#fff" d="M0 5h22" />
+                                <path fill="none" stroke="#fff" d="M17 10v0l5-5-5-5" />
+                            </svg>
+                        </Link>
+                        <Link
+                            className={"btn slide-cta small secondary color3"}
+                            target={"_blank"}
+                            href={"https://app.finmo.ca/login"}
+                        >
+                            <span className="text">Finmo</span>
+                            <svg className={"right-arrow"} viewBox="0 0 22 10">
+                                <path fill="none" stroke="#fff" d="M0 5h22" />
+                                <path fill="none" stroke="#fff" d="M17 10v0l5-5-5-5" />
+                            </svg>
+                        </Link>
+                    </div>
+                    <p class="text">See all our products</p>
+                </Buttons>
                 <div className="btn-group">
                     <SignUpLink />
                     <a
@@ -872,6 +994,14 @@ export default styled(connect(ProductsSlider))`
   .cta-btn {
     position: relative;
     z-index: 1;
+
+    &:first-of-type {
+        margin-right: 20px;
+
+        @media(max-width: 575px) {
+            margin-right: 0;
+        }
+    }
   }
 
   @media (max-width: 575.98px) {
