@@ -39,38 +39,36 @@ const ProductFeaturesContainer = styled.div`
 `;
 
 const VideosPage = ({ className, libraries, state, actions }) => {
-  const data = state.source.get("/videos/");
-  const page =
-    data.isReady && !data.isError ? state.source[data.type][data.id].acf : {};
+    const data = state.source.get("/videos/");
+    const page =
+        data.isReady && !data.isError ? state.source[data.type][data.id].acf : {};
 
-  React.useEffect(() => {
-    actions.theme.setActiveTheme("dark-green-theme");
-    actions.theme.setSubHeader({});
-  }, []);
+    React.useEffect(() => {
+        actions.theme.setActiveTheme("dark-green-theme");
+        actions.theme.setSubHeader({});
+    }, []);
 
-  console.log(page);
-
-  return (
-    <div className={classnames(className)}>
-      <Header />
-      <Container className={"videos-page-wrapper"}>
-        <h1 className={"form-headline-1"}>Videos</h1>
-        {page?.videos?.length > 0 && page?.videos?.map((video, index) => {
-          return (
-            <div key={index} className={"videos-page-header"}>
-              <h2> {video.title} </h2>
-              <p className={"form-headline-4"}> {video.description} </p>
-              <CustomVideoPlayer
-                url={video.video_url}
-                previewUrl={video.video_thumbnail}
-              />
-            </div>
-          );
-        })}
-      </Container>
-      <Footer />
-    </div>
-  );
+    return (
+        <div className={classnames(className)}>
+            <Header />
+            <Container className={"videos-page-wrapper"}>
+                <h1 className={"form-headline-1"}>Videos</h1>
+                {page?.videos?.length > 0 && page?.videos?.map((video, index) => {
+                    return (
+                        <div key={index} className={"videos-page-header"}>
+                            <h2> {video.title} </h2>
+                            <p className={"form-headline-4"}> {video.description} </p>
+                            <CustomVideoPlayer
+                                url={video.video_url}
+                                previewUrl={video.video_thumbnail}
+                            />
+                        </div>
+                    );
+                })}
+            </Container>
+            <Footer />
+        </div>
+    );
 };
 export default styled(connect(VideosPage))`
   .videos-page-header {

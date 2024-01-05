@@ -60,86 +60,86 @@ const AspectRation = styled.picture`
 
 
 const CareersPage = ({ className, libraries, state, actions }) => {
-  const imageRef = React.useRef(null);
-  const data = state.source.get("/careers/");
-  const page =
-    data.isReady && !data.isError ? state.source[data.type][data.id].acf : {};
+    const imageRef = React.useRef(null);
+    const data = state.source.get("/careers/");
+    const page =
+        data.isReady && !data.isError ? state.source[data.type][data.id].acf : {};
 
-  const Html2React = libraries.html2react.Component;
-  React.useEffect(() => {
-    actions.theme.setActiveTheme("dark-green-theme");
-    actions.theme.setSubHeader({});
-  }, []);
+    const Html2React = libraries.html2react.Component;
+    React.useEffect(() => {
+        actions.theme.setActiveTheme("dark-green-theme");
+        actions.theme.setSubHeader({});
+    }, []);
 
-  function random(min, max) {
-    const delta = max - min;
-    return (direction = 1) => (min + delta * Math.random()) * direction;
-  }
-
-  const randomX = random(30, 60);
-  const randomY = random(30, 60);
-  const randomTime = random(9, 14);
-
-  React.useEffect(() => {
-    function moveX(target, direction) {
-      target.current &&
-        gsap.to(target.current, {
-          duration: randomTime(),
-          x: randomX(direction),
-          ease: "sine.inOut",
-          onComplete: moveX,
-          onCompleteParams: [target, direction * -1],
-        });
+    function random(min, max) {
+        const delta = max - min;
+        return (direction = 1) => (min + delta * Math.random()) * direction;
     }
-    function moveY(target, direction) {
-      target.current &&
-        gsap.to(target.current, {
-          duration: randomTime(),
-          y: randomY(direction),
-          ease: "sine.inOut",
-          onComplete: moveY,
-          onCompleteParams: [target, direction * -1],
-        });
-    }
-  }, []);
-  
-  return (
-    <div className={classnames(className)}>
-      <Header />
-      <Container className={"careers-page-wrapper"}>
-          <h1 className={"form-headline-1"}>{page.title}</h1>
-      <div className={"careers-page-header"}>
-          <div className={"details"}>
-            <div className="html2react">
-              <Html2React html={page.copy_top} />
-            </div>
-          </div>
-          <div className="image">
-            <div className={"image-container"}>
-              <a href={page.image_link} target="_blank">
-                <img src={page.image_top.url} alt={page.image_top.alt} />
-                </a>
-            </div>
-          </div>
+
+    const randomX = random(30, 60);
+    const randomY = random(30, 60);
+    const randomTime = random(9, 14);
+
+    React.useEffect(() => {
+        function moveX(target, direction) {
+            target.current &&
+                gsap.to(target.current, {
+                    duration: randomTime(),
+                    x: randomX(direction),
+                    ease: "sine.inOut",
+                    onComplete: moveX,
+                    onCompleteParams: [target, direction * -1],
+                });
+        }
+        function moveY(target, direction) {
+            target.current &&
+                gsap.to(target.current, {
+                    duration: randomTime(),
+                    y: randomY(direction),
+                    ease: "sine.inOut",
+                    onComplete: moveY,
+                    onCompleteParams: [target, direction * -1],
+                });
+        }
+    }, []);
+
+    return (
+        <div className={classnames(className)}>
+            <Header />
+            <Container className={"careers-page-wrapper"}>
+                <h1 className={"form-headline-1"}>{page.title}</h1>
+                <div className={"careers-page-header"}>
+                    <div className={"details"}>
+                        <div className="html2react">
+                            <Html2React html={page.copy_top} />
+                        </div>
+                    </div>
+                    <div className="image">
+                        <div className={"image-container"}>
+                            <a href={page.image_link} target="_blank">
+                                <img src={page.image_top.url} alt={page.image_top.alt} />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+
+                    <a href={page.button.url} target="_blank">
+                        <Button label={page.button.title} />
+                    </a>
+                </div>
+                <div className={"careers-page-body"}>
+                    <div className={"details"}>
+                        <div className="html2react">
+                            <Html2React html={page.copy_bottom} />
+                        </div>
+                    </div>
+                </div>
+            </Container>
+            <Footer />
         </div>
-        
-        <div>
-          {console.log(page)}
-          <a href={page.button.url} target="_blank">
-            <Button label={page.button.title} />
-          </a>
-        </div>
-        <div className={"careers-page-body"}>
-          <div className={"details"}>
-            <div className="html2react">
-              <Html2React html={page.copy_bottom} />
-            </div>
-          </div>
-        </div>
-      </Container>
-      <Footer />
-    </div>
-  );
+    );
 };
 export default styled(connect(CareersPage))`
   .careers-page-header {

@@ -5,7 +5,7 @@
  * @license The MIT License (MIT)
  * @author Leo Lee
  */
- !(function (e, r, t) {
+!(function (e, r, t) {
     "use strict";
     var i = {};
     (i.helpers = {
@@ -71,14 +71,14 @@
             if (t) {
                 if ("" === e.placeid || !google) return;
                 var a;
-   
+
                 new google.maps.places.PlacesService(document.querySelector(e.target)).getDetails({ placeId: e.placeid }, function (r, a) {
                     if (a === google.maps.places.PlacesServiceStatus.OK) {
                         var l = i.helpers.createElem("div", { class: "grw-wrapper" });
                         t.appendChild(l);
                         var n = i.helpers.createElem("div", { class: "google-reviews grw-theme-" + e.theme });
                         l.appendChild(n);
-                        // console.log(r, e)
+
                         var s = i.buildWidgetHeader(r),
                             d = i.buildReviews(r, e),
                             c = i.buildWidgetFooter(),
@@ -137,15 +137,15 @@
             }
             return r.horizontal
                 ? (l.appendChild(s),
-                  l.appendChild(n),
-                  i.helpers.initSlider(l),
-                  !0 === r.autoScroll &&
-                      setInterval(function () {
-                          var e,
-                              r = n.querySelector(".grw-slide-current").nextSibling;
-                          null == r && (r = n.firstChild), r.click();
-                      }, 1e3 * r.scrollInterval),
-                  l)
+                    l.appendChild(n),
+                    i.helpers.initSlider(l),
+                    !0 === r.autoScroll &&
+                    setInterval(function () {
+                        var e,
+                            r = n.querySelector(".grw-slide-current").nextSibling;
+                        null == r && (r = n.firstChild), r.click();
+                    }, 1e3 * r.scrollInterval),
+                    l)
                 : s;
         }),
         (i.buildWidgetFooter = function () {
