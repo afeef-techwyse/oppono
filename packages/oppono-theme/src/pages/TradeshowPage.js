@@ -9,23 +9,23 @@ import classnames from "classnames";
 import Tradeshow from "./contact/Tradeshow";
 
 const TradeshowPage = ({ className, state, actions }) => {
-  // const data = state.source.get(state.router.link);
-  // const pageData = data.isReady && !data.isError ? state.source[data.type][data.id].acf : {};
-  // React.useEffect(() => {
-  //   actions.theme.setActiveTheme(pageData.section_1?.section_theme || "gray-theme"
-  // );
-  // }, []);
-  return (
-    <div className={classnames(className)}>
-      <Header />
-      <Switch>
-        {/*<Chat when={state.router.link.startsWith('/contact/chat/')}/>*/}
-        <Tradeshow when={state.router.link.startsWith("/signup/")} />
-      </Switch>
-      <Footer state={state} />
-    </div>
-  );
-}; 
+    // const data = state.source.get(state.router.link);
+    // const pageData = data.isReady && !data.isError ? state.source[data.type][data.id].acf : {};
+    // React.useEffect(() => {
+    //   actions.theme.setActiveTheme(pageData.section_1?.section_theme || "gray-theme"
+    // );
+    // }, []);
+    return (
+        <div className={classnames(className)}>
+            <Header state={state} />
+            <Switch>
+                {/*<Chat when={state.router.link.startsWith('/contact/chat/')}/>*/}
+                <Tradeshow when={state.router.link.startsWith("/signup/")} />
+            </Switch>
+            <Footer state={state} />
+        </div>
+    );
+};
 export default styled(connect(TradeshowPage))`
   > div {
     min-height: calc(var(--vh, 1vh) * 100);

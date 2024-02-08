@@ -50,7 +50,7 @@ const VideosPage = ({ className, libraries, state, actions }) => {
 
     return (
         <div className={classnames(className)}>
-            <Header />
+            <Header state={state} />
             <Container className={"videos-page-wrapper"}>
                 <h1 className={"form-headline-1"}>Videos</h1>
                 {page?.videos?.length > 0 && page?.videos?.map((video, index) => {

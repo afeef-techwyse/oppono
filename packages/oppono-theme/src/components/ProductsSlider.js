@@ -429,7 +429,7 @@ const ProductsSlider = ({
 
     return (
         <div className={classnames(page_theme, className)}>
-            <Header />
+            <Header state={state} />
             <div className={"product-slider"}>
                 <div ref={flyingWrapperRef} className="flying-obj-wrapper">
                     {slidesObj?.map((slide, slideIndex) =>

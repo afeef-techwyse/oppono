@@ -15,23 +15,23 @@ import debounce from "../functions/debounce";
 import classnames from "classnames";
 
 const TermsPage = ({ className, link, libraries, actions, state }) => {
-  const data = state.source.get(link);
-  const post = state.source[data.type][data.id];
+    const data = state.source.get(link);
+    const post = state.source[data.type][data.id];
 
-  const Html2React = libraries.html2react.Component;
-  React.useEffect(() => {
-    actions.theme.setActiveTheme("gray-theme");
-  }, []);
-  return (
-    <div className={classnames(className)}>
-      <Header hasSubMenu={false} />
-      <Container className={"terms-page-wrapper"}>
-        {/*<h1 className={'primary'}>Terms And Conditions</h1>*/}
-        <Html2React html={post.content.rendered} />
-      </Container>
-      <Footer />
-    </div>
-  );
+    const Html2React = libraries.html2react.Component;
+    React.useEffect(() => {
+        actions.theme.setActiveTheme("gray-theme");
+    }, []);
+    return (
+        <div className={classnames(className)}>
+            <Header state={state} hasSubMenu={false} />
+            <Container className={"terms-page-wrapper"}>
+                {/*<h1 className={'primary'}>Terms And Conditions</h1>*/}
+                <Html2React html={post.content.rendered} />
+            </Container>
+            <Footer />
+        </div>
+    );
 };
 
 export default styled(connect(TermsPage))`

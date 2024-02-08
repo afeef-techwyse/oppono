@@ -143,7 +143,7 @@ const MapPage = ({ className, actions, state, libraries }) => {
     return (
         <div className={classnames(className)}>
             <div className="map" ref={mapRef} />
-            <Header hasSubMenu={false} />
+            <Header state={state} hasSubMenu={false} />
             <Container className="flexcontainer">
                 <div className="map-wrapper">
                     <div className="col-left">

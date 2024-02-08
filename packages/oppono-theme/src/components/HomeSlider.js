@@ -407,7 +407,7 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
     }
     return (
         <div className={className}>
-            <Header hasSubMenu={false} ref={header} />
+            <Header hasSubMenu={false} ref={header} state={state} />
 
             <div ref={flyingWrapperRef} className="flying-obj-wrapper">
                 {slidesObj.map((slide, slideIndex) =>

@@ -17,22 +17,22 @@ import classnames from "classnames";
 
 const NotQualifiedPage = ({ className, link, libraries, actions, state }) => {
 
-  React.useEffect(() => {
-    actions.theme.setActiveTheme("gray-theme");
-  }, []);
-  return (
-    <div className={classnames(className)}>
-      <Header hasSubMenu={false} />
-      <Container className={"not-qualified-page-wrapper"}>
-        <h1 className={'primary'}>Sorry, you are not qualified for any products.</h1>
-            <div className="btn-group">
-              <Link href={'/d'}><Button label="Go to all Products"/></Link>
-              <Link href={'/get-in-touch'}><Button label="Get in touch"/></Link>
-          </div>
-      </Container>
-      <Footer />
-    </div>
-  );
+    React.useEffect(() => {
+        actions.theme.setActiveTheme("gray-theme");
+    }, []);
+    return (
+        <div className={classnames(className)}>
+            <Header state={state} hasSubMenu={false} />
+            <Container className={"not-qualified-page-wrapper"}>
+                <h1 className={'primary'}>Sorry, you are not qualified for any products.</h1>
+                <div className="btn-group">
+                    <Link href={'/d'}><Button label="Go to all Products" /></Link>
+                    <Link href={'/get-in-touch'}><Button label="Get in touch" /></Link>
+                </div>
+            </Container>
+            <Footer />
+        </div>
+    );
 };
 
 export default styled(connect(NotQualifiedPage))`

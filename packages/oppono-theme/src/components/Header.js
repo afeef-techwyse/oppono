@@ -1,3 +1,4 @@
+
 import React from "react";
 import { connect, styled } from "frontity";
 import PropTypes from "prop-types";
@@ -12,7 +13,6 @@ import {
     preventPageScroll,
 } from "../functions/prevent_allowPageScroll";
 import StepsProgress from "./form-components/StepsProgress";
-
 
 const SubHeader = styled(
     connect(({ state, className }) => {
@@ -177,7 +177,6 @@ const SocialLinks = styled(
     margin: 0 0.8rem;
   }
 `;
-
 const RightPart = connect(({ state, actions }) =>
     state.theme.user.logged ? (
         <>
@@ -328,22 +327,22 @@ const BrokerCatalogueLink = connect(
     ({ state, menuHandler }) => {
         const { acf } = state.source.get("acf-options-page");
         let vancouverBrokerCatalogueUrl = acf?.metro_vancouver_broker_catalogue
-        if(vancouverBrokerCatalogueUrl)
-        return (
-            <a
-                onClick={() => menuHandler(false)}
-                className={"primary"}
-                target={`_blank`}
-                href={vancouverBrokerCatalogueUrl}
-            >
-                Vancouver
-            </a>
-        )
+        if (vancouverBrokerCatalogueUrl)
+            return (
+                <a
+                    onClick={() => menuHandler(false)}
+                    className={"primary"}
+                    target={`_blank`}
+                    href={vancouverBrokerCatalogueUrl}
+                >
+                    Vancouver
+                </a>
+            )
     }
 );
 
 const Header = React.forwardRef(
-    ({ className, hasSubMenu = true, hasProgress = false }, forwardRef) => {
+    ({ className, hasSubMenu = true, hasProgress = false, state, }, forwardRef) => {
         const [menuOpened, setMenuOpened] = React.useState(false);
         const menuHandler = (value) => {
             setMenuOpened(value);
@@ -373,13 +372,15 @@ const Header = React.forwardRef(
                                     >
                                         What we do
                                     </Link>
-                                    <Link
-                                        onClick={() => menuHandler(false)}
-                                        className={"primary"}
-                                        href={"/products/"}
-                                    >
-                                        Products & rates
-                                    </Link>
+                                    {state.theme.user.logged ? (
+                                        <Link
+                                            onClick={() => menuHandler(false)}
+                                            className={"primary"}
+                                            href={"/products/"}
+                                        >
+                                            Products & rates
+                                        </Link>
+                                    ) : null}
                                     <Link
                                         onClick={() => menuHandler(false)}
                                         className={"primary"}
@@ -448,13 +449,15 @@ const Header = React.forwardRef(
                             >
                                 What we do
                             </Link>
-                            <Link
-                                onClick={() => menuHandler(false)}
-                                className={"primary"}
-                                href={"/products/"}
-                            >
-                                Products & rates
-                            </Link>
+                            {state.theme.user.logged ? (
+                                <Link
+                                    onClick={() => menuHandler(false)}
+                                    className={"primary"}
+                                    href={"/products/"}
+                                >
+                                    Products & rates
+                                </Link>
+                            ) : null}
                             <SignedLinks />
                             <Link
                                 onClick={() => menuHandler(false)}

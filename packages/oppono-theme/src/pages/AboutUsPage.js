@@ -59,92 +59,92 @@ const AspectRation = styled.picture`
 
 
 const AboutUsPage = ({ className, libraries, state, actions }) => {
-  const imageRef = React.useRef(null);
-  const data = state.source.get("/what-we-do/");
-  const page =
-    data.isReady && !data.isError ? state.source[data.type][data.id].acf : {};
-  const Html2React = libraries.html2react.Component;
-  React.useEffect(() => {
-    actions.theme.setActiveTheme("dark-green-theme");
-    actions.theme.setSubHeader({});
-  }, []);
+    const imageRef = React.useRef(null);
+    const data = state.source.get("/what-we-do/");
+    const page =
+        data.isReady && !data.isError ? state.source[data.type][data.id].acf : {};
+    const Html2React = libraries.html2react.Component;
+    React.useEffect(() => {
+        actions.theme.setActiveTheme("dark-green-theme");
+        actions.theme.setSubHeader({});
+    }, []);
 
-  function random(min, max) {
-    const delta = max - min;
-    return (direction = 1) => (min + delta * Math.random()) * direction;
-  }
-
-  const randomX = random(30, 60);
-  const randomY = random(30, 60);
-  const randomTime = random(9, 14);
-
-  React.useEffect(() => {
-    function moveX(target, direction) {
-      target.current &&
-        gsap.to(target.current, {
-          duration: randomTime(),
-          x: randomX(direction),
-          ease: "sine.inOut",
-          onComplete: moveX,
-          onCompleteParams: [target, direction * -1],
-        });
-    }
-    function moveY(target, direction) {
-      target.current &&
-        gsap.to(target.current, {
-          duration: randomTime(),
-          y: randomY(direction),
-          ease: "sine.inOut",
-          onComplete: moveY,
-          onCompleteParams: [target, direction * -1],
-        });
+    function random(min, max) {
+        const delta = max - min;
+        return (direction = 1) => (min + delta * Math.random()) * direction;
     }
 
-    moveX(imageRef, Math.random() < 0.5 ? -1 : 1);
-    moveY(imageRef, Math.random() < 0.5 ? -1 : 1);
-  }, []);
-  
-  return (
-    <div className={classnames(className)}>
-      <Header />
-      <Container className={"about-page-wrapper"}>
-        <div className={"about-page-header"}>
-          <div className={"details"}>
-            <h1 className={"form-headline-1"}>{page.title}</h1>
-            <AspectRation ratio={1} className={"mobile-only"}>
-              <img ref={imageRef} src={page.image_top.url} alt={page.image_top.alt} />
-            </AspectRation>
-            <div className="html2react">
-              <Html2React html={page.copy_top} />
-            </div>
-          </div>
-          <div className="image">
-            <div className={"image-container"}>
-              <AspectRation ratio={1} className={"desktop-only"}>
-                <img ref={imageRef} src={page.image_top.url} alt={page.image_top.alt} />
-              </AspectRation>
-            </div>
-          </div>
+    const randomX = random(30, 60);
+    const randomY = random(30, 60);
+    const randomTime = random(9, 14);
+
+    React.useEffect(() => {
+        function moveX(target, direction) {
+            target.current &&
+                gsap.to(target.current, {
+                    duration: randomTime(),
+                    x: randomX(direction),
+                    ease: "sine.inOut",
+                    onComplete: moveX,
+                    onCompleteParams: [target, direction * -1],
+                });
+        }
+        function moveY(target, direction) {
+            target.current &&
+                gsap.to(target.current, {
+                    duration: randomTime(),
+                    y: randomY(direction),
+                    ease: "sine.inOut",
+                    onComplete: moveY,
+                    onCompleteParams: [target, direction * -1],
+                });
+        }
+
+        moveX(imageRef, Math.random() < 0.5 ? -1 : 1);
+        moveY(imageRef, Math.random() < 0.5 ? -1 : 1);
+    }, []);
+
+    return (
+        <div className={classnames(className)}>
+            <Header state={state} />
+            <Container className={"about-page-wrapper"}>
+                <div className={"about-page-header"}>
+                    <div className={"details"}>
+                        <h1 className={"form-headline-1"}>{page.title}</h1>
+                        <AspectRation ratio={1} className={"mobile-only"}>
+                            <img ref={imageRef} src={page.image_top.url} alt={page.image_top.alt} />
+                        </AspectRation>
+                        <div className="html2react">
+                            <Html2React html={page.copy_top} />
+                        </div>
+                    </div>
+                    <div className="image">
+                        <div className={"image-container"}>
+                            <AspectRation ratio={1} className={"desktop-only"}>
+                                <img ref={imageRef} src={page.image_top.url} alt={page.image_top.alt} />
+                            </AspectRation>
+                        </div>
+                    </div>
+                </div>
+                <ProductFeaturesContainer>
+                    {page.cards.map((card, index) => (
+                        <ProductsFeature
+                            key={index}
+                            title={card.title}
+                            description={card.description}
+                            imageUrl={card.image.url}
+                            alt={card.image.alt}
+                        />
+                    ))}
+                </ProductFeaturesContainer>
+                <div className="html2react bottom-copy">
+                    <Html2React html={page.copy_bottom} />
+                </div>
+                <ProductsPortion />
+            </Container>
+            <Footer />
         </div>
-        <ProductFeaturesContainer>
-          {page.cards.map((card, index) => (
-            <ProductsFeature
-              key={index}
-              title={card.title}
-              description={card.description}
-              imageUrl={card.image.url}
-              alt={card.image.alt}
-            />
-          ))}
-        </ProductFeaturesContainer>
-        <div className="html2react bottom-copy">
-          <Html2React html={page.copy_bottom} />
-        </div>
-        <ProductsPortion />
-      </Container>
-      <Footer />
-    </div>
-  );
+    );
 };
 export default styled(connect(AboutUsPage))`
   .about-page-header {

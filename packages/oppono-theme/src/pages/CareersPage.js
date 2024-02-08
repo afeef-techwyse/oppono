@@ -105,7 +105,7 @@ const CareersPage = ({ className, libraries, state, actions }) => {
 
     return (
         <div className={classnames(className)}>
-            <Header />
+            <Header state={state} />
             <Container className={"careers-page-wrapper"}>
                 <h1 className={"form-headline-1"}>{page.title}</h1>
                 <div className={"careers-page-header"}>
