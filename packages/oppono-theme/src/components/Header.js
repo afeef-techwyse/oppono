@@ -327,16 +327,29 @@ const BrokerCatalogueLink = connect(
     ({ state, menuHandler }) => {
         const { acf } = state.source.get("acf-options-page");
         let vancouverBrokerCatalogueUrl = acf?.metro_vancouver_broker_catalogue
+        let vancouverBrokerCatalogueUrlLogged = acf?.metro_vancouver_broker_catalogue_logged_user
+
         if (vancouverBrokerCatalogueUrl)
             return (
-                <a
-                    onClick={() => menuHandler(false)}
-                    className={"primary"}
-                    target={`_blank`}
-                    href={vancouverBrokerCatalogueUrl}
-                >
-                    Vancouver
-                </a>
+                state.theme.user.logged ? (
+                    <a
+                        onClick={() => menuHandler(false)}
+                        className={"primary"}
+                        target={`_blank`}
+                        href={vancouverBrokerCatalogueUrlLogged}
+                    >
+                        Vancouver
+                    </a>
+                )
+                    :
+                    <a
+                        onClick={() => menuHandler(false)}
+                        className={"primary"}
+                        target={`_blank`}
+                        href={vancouverBrokerCatalogueUrl}
+                    >
+                        Vancouver
+                    </a>
             )
     }
 );
@@ -380,7 +393,16 @@ const Header = React.forwardRef(
                                         >
                                             Products & rates
                                         </Link>
-                                    ) : null}
+                                    )
+                                        :
+                                        <Link
+                                            onClick={() => menuHandler(false)}
+                                            className={"primary"}
+                                            href={"/sign-in/"}
+                                        >
+                                            Products & rates
+                                        </Link>
+                                    }
                                     <Link
                                         onClick={() => menuHandler(false)}
                                         className={"primary"}
@@ -457,7 +479,16 @@ const Header = React.forwardRef(
                                 >
                                     Products & rates
                                 </Link>
-                            ) : null}
+                            )
+                                :
+                                <Link
+                                    onClick={() => menuHandler(false)}
+                                    className={"primary"}
+                                    href={"/sign-in/"}
+                                >
+                                    Products & rates
+                                </Link>
+                            }
                             <SignedLinks />
                             <Link
                                 onClick={() => menuHandler(false)}
