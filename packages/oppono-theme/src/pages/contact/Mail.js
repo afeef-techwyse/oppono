@@ -18,200 +18,204 @@ import Link from "../../components/reusable/Link";
 import Select from "../../components/form-components/Select";
 
 const Mail = ({ className, state, actions }) => {
-  const data = state.source.get(state.router.link);
-  const pageData =
-    data.isReady && !data.isError ? state.source[data.type][data.id].acf : {};
-  const [currentTheme, setCurrentTheme] = React.useState("gray-theme");
-  const pageName = "contact";
-  React.useEffect(() => {
-    actions.theme.setSubHeader(pageData.sub_header);
-  }, [pageData]);
-  React.useEffect(() => {
-    actions.theme.setActiveTheme(currentTheme);
-  }, [currentTheme]);
-  return (
-    <div className={className}>
-      <Form setCurrentTheme={setCurrentTheme} endPoint={"/contact"} hideStepsProgress>
-        <FormStep
-          pageName={pageName}
-          activeTheme={pageData.section_1?.section_theme}
-          stepName={pageData.section_1?.section_name}
-        >
+    const data = state.source.get(state.router.link);
+    const pageData =
+        data.isReady && !data.isError ? state.source[data.type][data.id].acf : {};
+    const [currentTheme, setCurrentTheme] = React.useState("gray-theme");
+    const pageName = "contact";
+    React.useEffect(() => {
+        actions.theme.setSubHeader(pageData.sub_header);
+    }, [pageData]);
+    React.useEffect(() => {
+        actions.theme.setActiveTheme(currentTheme);
+    }, [currentTheme]);
+    return (
+        <div className={className}>
+            <Form setCurrentTheme={setCurrentTheme} endPoint={"/contact"} hideStepsProgress>
+                <FormStep
+                    pageName={pageName}
+                    activeTheme={pageData.section_1?.section_theme}
+                    stepName={pageData.section_1?.section_name}
+                >
 
-					<Container className={"contact-us-container"}>
-						<div className="details">
-							<div className="title-wrapper">
-								{pageData.section_1?.title ? (
-									<h1 className={"contact-title"}>
-										{pageData.section_1?.title}
-									</h1>
-								) : null}
-								{pageData.section_1?.sub_title ? (
-									<h2 className={"contact-sub-title desktop-only"}>
-										{pageData.section_1?.sub_title}
-									</h2>
-								) : null}
-								{/* <img className="contact-flying-obj" src={contact_obj} alt="flying object"/> */}
-							</div>
-							<div className="contact-info-wrapper">
-								<Link href={"tel:" + pageData.section_1?.oppono_phone}>
-									<div className={"item-wrapper"}>
-										<div className={"icon"}>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="25.298" height="25.298" viewBox="0 0 25.298 25.298">
-                        <path id="Icon_awesome-phone-alt" data-name="Icon awesome-phone-alt" d="M24.576,17.877l-5.534-2.372a1.186,1.186,0,0,0-1.383.341L15.208,18.84a18.314,18.314,0,0,1-8.755-8.755L9.447,7.634a1.183,1.183,0,0,0,.341-1.383L7.416.717A1.194,1.194,0,0,0,6.058.03L.919,1.216A1.186,1.186,0,0,0,0,2.372,22.924,22.924,0,0,0,22.926,25.3a1.186,1.186,0,0,0,1.156-.919l1.186-5.139A1.2,1.2,0,0,0,24.576,17.877Z" transform="translate(0 0)" fill="#b5d2ff"/>
-                      </svg>
-										</div>
-										<div className="text">
-											{pageData.section_1?.oppono_phone}
-										</div>
-									</div>
-								</Link>
-								<Link href={"mailto:" + pageData.section_1?.oppono_email}>
-									<div className={"item-wrapper"}>
-										<div className={"icon"}>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="31.78" height="25.424" viewBox="0 0 31.78 25.424">
-                        <path id="Icon_metro-mail" data-name="Icon metro-mail" d="M33.744,7.712H8.319A3.164,3.164,0,0,0,5.157,10.89L5.141,29.958a3.177,3.177,0,0,0,3.178,3.178H33.744a3.177,3.177,0,0,0,3.178-3.178V10.89a3.177,3.177,0,0,0-3.178-3.178Zm0,6.356L21.032,22.013,8.319,14.068V10.89l12.712,7.945L33.744,10.89Z" transform="translate(-5.141 -7.712)" fill="#b5d2ff"/>
-                      </svg>
-										</div>
-										<div className="text">
-											{pageData.section_1?.oppono_email}
-										</div>
-									</div>
-								</Link>
-								<div className="askQuestion"
-								onClick={function(e) {
-									e.preventDefault()
-									document.querySelector('.contact-form input[name="name"]').focus();
-								}}>
-									<div className={"item-wrapper"}>
-										<div className={"icon"}>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="25.435" height="25.435" viewBox="0 0 25.435 25.435">
-                        <path id="Icon_awesome-exclamation-circle" data-name="Icon awesome-exclamation-circle" d="M26,13.28A12.718,12.718,0,1,1,13.28.563,12.717,12.717,0,0,1,26,13.28ZM13.28,15.844A2.359,2.359,0,1,0,15.639,18.2,2.359,2.359,0,0,0,13.28,15.844Zm-2.24-8.479.38,6.974a.615.615,0,0,0,.614.582h2.489a.615.615,0,0,0,.614-.582l.38-6.974a.615.615,0,0,0-.614-.649h-3.25A.615.615,0,0,0,11.041,7.365Z" transform="translate(-0.563 -0.563)" fill="#b5d2ff"/>
-                      </svg>
-										</div>
-										<div className="text">
-											Ask a question
-										</div>
-									</div>
-								</div>
-								<Link href={
-											"http://maps.google.com/?q=" +
-											pageData.section_1?.oppono_address_line_1 +
-											" " +
-											pageData.section_1?.oppono_address_line_2
-										}>
-									<div className={"item-wrapper"}>
-										<div className={"icon"}>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="19.068" height="25.424" viewBox="0 0 19.068 25.424">
-                        <path id="Icon_awesome-map-marker-alt" data-name="Icon awesome-map-marker-alt" d="M8.554,24.911C1.339,14.452,0,13.378,0,9.534a9.534,9.534,0,0,1,19.068,0c0,3.844-1.339,4.918-8.554,15.377A1.192,1.192,0,0,1,8.554,24.911Zm.98-11.4A3.973,3.973,0,1,0,5.562,9.534,3.973,3.973,0,0,0,9.534,13.507Z" fill="#b5d2ff"/>
-                      </svg>
-										</div>
-										<div className="text">
-											{pageData.section_1?.oppono_address_line_1 ? (
-												<div>{pageData.section_1?.oppono_address_line_1}</div>
-											) : null}
-										</div>
-									</div>
-								</Link>
-							</div>
-							<div className="floating-obj">
-								<FlyingObjsContainer
-										childrenList={[
-											{
-												imageUrl: contact_obj,
-												left: "20%",
-												level: 1,
-												top: "28%",
-												type: "image",
-												width: 18,
-												alt: "flying object",
-											},
-										]}
-									/>
-								</div>
-						</div>
-						<div className="contact-form">
-							<div className="contact-row">
-                    <div className={"w-100"}>
-                      <Input
-                        name={"name"}
-                        className={"primary-input mt-1 w-100"}
-                        type={"text"}
-                        {...pageData.section_1?.name_input}
-                      />
-                      <div className={"split-inputs"}>
-                        <Input
-                          name={"email"}
-                          className={"primary-input w-45"}
-                          type={"text"}
-                          {...pageData.section_1?.email_input}
+                    <Container className={"contact-us-container"}>
+                        <div className="details">
+                            <div className="title-wrapper">
+                                {pageData.section_1?.title ? (
+                                    <h1 className={"contact-title"}>
+                                        {pageData.section_1?.title}
+                                    </h1>
+                                ) : null}
+                                {pageData.section_1?.sub_title ? (
+                                    <h2 className={"contact-sub-title desktop-only"}>
+                                        {pageData.section_1?.sub_title}
+                                    </h2>
+                                ) : null}
+                                {/* <img className="contact-flying-obj" src={contact_obj} alt="flying object"/> */}
+                            </div>
+                            <div className="contact-info-wrapper">
+                                <Link href={"tel:" + pageData.section_1?.oppono_phone}>
+                                    <div className={"item-wrapper"}>
+                                        <div className={"icon"}>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="25.298" height="25.298" viewBox="0 0 25.298 25.298">
+                                                <path id="Icon_awesome-phone-alt" data-name="Icon awesome-phone-alt" d="M24.576,17.877l-5.534-2.372a1.186,1.186,0,0,0-1.383.341L15.208,18.84a18.314,18.314,0,0,1-8.755-8.755L9.447,7.634a1.183,1.183,0,0,0,.341-1.383L7.416.717A1.194,1.194,0,0,0,6.058.03L.919,1.216A1.186,1.186,0,0,0,0,2.372,22.924,22.924,0,0,0,22.926,25.3a1.186,1.186,0,0,0,1.156-.919l1.186-5.139A1.2,1.2,0,0,0,24.576,17.877Z" transform="translate(0 0)" fill="#b5d2ff" />
+                                            </svg>
+                                        </div>
+                                        <div className="text">
+                                            {pageData.section_1?.oppono_phone}
+                                        </div>
+                                        <div className="text">
+                                            {pageData.section_1?.oppono_phone_2}
+                                        </div>
+
+                                    </div>
+                                </Link>
+                                <Link href={"mailto:" + pageData.section_1?.oppono_email}>
+                                    <div className={"item-wrapper"}>
+                                        <div className={"icon"}>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="31.78" height="25.424" viewBox="0 0 31.78 25.424">
+                                                <path id="Icon_metro-mail" data-name="Icon metro-mail" d="M33.744,7.712H8.319A3.164,3.164,0,0,0,5.157,10.89L5.141,29.958a3.177,3.177,0,0,0,3.178,3.178H33.744a3.177,3.177,0,0,0,3.178-3.178V10.89a3.177,3.177,0,0,0-3.178-3.178Zm0,6.356L21.032,22.013,8.319,14.068V10.89l12.712,7.945L33.744,10.89Z" transform="translate(-5.141 -7.712)" fill="#b5d2ff" />
+                                            </svg>
+                                        </div>
+                                        <div className="text">
+                                            {pageData.section_1?.oppono_email}
+                                        </div>
+                                    </div>
+                                </Link>
+                                <div className="askQuestion"
+                                    onClick={function (e) {
+                                        e.preventDefault()
+                                        document.querySelector('.contact-form input[name="name"]').focus();
+                                    }}>
+                                    <div className={"item-wrapper"}>
+                                        <div className={"icon"}>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="25.435" height="25.435" viewBox="0 0 25.435 25.435">
+                                                <path id="Icon_awesome-exclamation-circle" data-name="Icon awesome-exclamation-circle" d="M26,13.28A12.718,12.718,0,1,1,13.28.563,12.717,12.717,0,0,1,26,13.28ZM13.28,15.844A2.359,2.359,0,1,0,15.639,18.2,2.359,2.359,0,0,0,13.28,15.844Zm-2.24-8.479.38,6.974a.615.615,0,0,0,.614.582h2.489a.615.615,0,0,0,.614-.582l.38-6.974a.615.615,0,0,0-.614-.649h-3.25A.615.615,0,0,0,11.041,7.365Z" transform="translate(-0.563 -0.563)" fill="#b5d2ff" />
+                                            </svg>
+                                        </div>
+                                        <div className="text">
+                                            Ask a question
+                                        </div>
+                                    </div>
+                                </div>
+                                <Link href={
+                                    "http://maps.google.com/?q=" +
+                                    pageData.section_1?.oppono_address_line_1 +
+                                    " " +
+                                    pageData.section_1?.oppono_address_line_2
+                                }>
+                                    <div className={"item-wrapper"}>
+                                        <div className={"icon"}>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="19.068" height="25.424" viewBox="0 0 19.068 25.424">
+                                                <path id="Icon_awesome-map-marker-alt" data-name="Icon awesome-map-marker-alt" d="M8.554,24.911C1.339,14.452,0,13.378,0,9.534a9.534,9.534,0,0,1,19.068,0c0,3.844-1.339,4.918-8.554,15.377A1.192,1.192,0,0,1,8.554,24.911Zm.98-11.4A3.973,3.973,0,1,0,5.562,9.534,3.973,3.973,0,0,0,9.534,13.507Z" fill="#b5d2ff" />
+                                            </svg>
+                                        </div>
+                                        <div className="text">
+                                            {pageData.section_1?.oppono_address_line_1 ? (
+                                                <div>{pageData.section_1?.oppono_address_line_1}</div>
+                                            ) : null}
+                                        </div>
+                                    </div>
+                                </Link>
+                            </div>
+                            <div className="floating-obj">
+                                <FlyingObjsContainer
+                                    childrenList={[
+                                        {
+                                            imageUrl: contact_obj,
+                                            left: "20%",
+                                            level: 1,
+                                            top: "28%",
+                                            type: "image",
+                                            width: 18,
+                                            alt: "flying object",
+                                        },
+                                    ]}
+                                />
+                            </div>
+                        </div>
+                        <div className="contact-form">
+                            <div className="contact-row">
+                                <div className={"w-100"}>
+                                    <Input
+                                        name={"name"}
+                                        className={"primary-input mt-1 w-100"}
+                                        type={"text"}
+                                        {...pageData.section_1?.name_input}
+                                    />
+                                    <div className={"split-inputs"}>
+                                        <Input
+                                            name={"email"}
+                                            className={"primary-input w-45"}
+                                            type={"text"}
+                                            {...pageData.section_1?.email_input}
+                                        />
+                                        <Input
+                                            name={"phone"}
+                                            className={"primary-input w-45"}
+                                            type={"phone"}
+                                            isPhoneNumber
+                                            {...pageData.section_1?.phone_input}
+                                        />
+                                    </div>
+                                    <div className="cf"></div>
+                                    <Select
+                                        className={"primary-select w-100"}
+                                        name={"discuss"}
+                                        {...pageData.section_1?.discuss_dropdown}
+                                    />
+                                    <TextArea
+                                        name={"questions"}
+                                        className={"primary-input w-100"}
+                                        {...pageData.section_1?.questions_input}
+                                    />
+                                    <Button
+                                        icon={true}
+                                        className={"next-step wide"}
+                                        label={"Send message"}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </Container>
+                </FormStep>
+                <FormStep
+                    pageName={pageName}
+                    activeTheme={pageData.section_2?.section_theme}
+                    stepName={pageData.section_2?.section_name}
+                >
+                    <LastStep>
+                        <img
+                            src={pageData.section_2?.image.url}
+                            alt={pageData.section_2?.image.alt}
                         />
-                        <Input
-                          name={"phone"}
-                          className={"primary-input w-45"}
-                          type={"phone"}
-                          isPhoneNumber
-                          {...pageData.section_1?.phone_input}
-                        />
-                      </div>
-                    <div className="cf"></div>
-                      <Select
-                        className={"primary-select w-100"}
-                        name={"discuss"}
-                        {...pageData.section_1?.discuss_dropdown}
-                      />
-                      <TextArea
-                        name={"questions"}
-                        className={"primary-input w-100"}
-                        {...pageData.section_1?.questions_input}
-                      />
-                    <Button
-                      icon={true}
-                      className={"next-step wide"}
-                      label={"Send message"}
-                    />
-                  </div>
-              </div>
-						</div>
-					</Container>
-        </FormStep>
-        <FormStep
-          pageName={pageName}
-          activeTheme={pageData.section_2?.section_theme}
-          stepName={pageData.section_2?.section_name}
-        >
-          <LastStep>
-            <img
-              src={pageData.section_2?.image.url}
-              alt={pageData.section_2?.image.alt}
-            />
-            <div style={{ flexBasis: "55%" }} className="text">
-              <h1 className={"form-headline-1 text-left"}>
-                {pageData.section_2?.title}
-              </h1>
-              <p className={"form-headline-3 primary lighter"}>
-                {pageData.section_2?.subtitle}
-              </p>
-              <Wysiwyg
-                dangerouslySetInnerHTML={{ __html: pageData.section_2?.steps }}
-              />
-              <div className="btn-group">
-                {/*<Link className={'wide bordered'} href={'https://expert.filogix.com/expert/view/SignOn'}>*/}
-                {/*  <Button className={'wide filled'} label={'Connect to Filogix'}/>*/}
-                {/*</Link>*/}
-                <Link className={"wide bordered"} href={"/dashboard"}>
-                  <Button
-                    className={"wide bordered"}
-                    label={"Back to dashboard"}
-                  />
-                </Link>
-              </div>
-            </div>
-          </LastStep>
-        </FormStep>
-      </Form>
-    </div>
-  );
+                        <div style={{ flexBasis: "55%" }} className="text">
+                            <h1 className={"form-headline-1 text-left"}>
+                                {pageData.section_2?.title}
+                            </h1>
+                            <p className={"form-headline-3 primary lighter"}>
+                                {pageData.section_2?.subtitle}
+                            </p>
+                            <Wysiwyg
+                                dangerouslySetInnerHTML={{ __html: pageData.section_2?.steps }}
+                            />
+                            <div className="btn-group">
+                                {/*<Link className={'wide bordered'} href={'https://expert.filogix.com/expert/view/SignOn'}>*/}
+                                {/*  <Button className={'wide filled'} label={'Connect to Filogix'}/>*/}
+                                {/*</Link>*/}
+                                <Link className={"wide bordered"} href={"/dashboard"}>
+                                    <Button
+                                        className={"wide bordered"}
+                                        label={"Back to dashboard"}
+                                    />
+                                </Link>
+                            </div>
+                        </div>
+                    </LastStep>
+                </FormStep>
+            </Form>
+        </div>
+    );
 };
 
 export default styled(connect(Mail))`
