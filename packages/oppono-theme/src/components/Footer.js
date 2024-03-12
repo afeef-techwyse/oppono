@@ -5,6 +5,7 @@ import Container from "./reusable/Container";
 import { size } from "../functions/size";
 import Link from "./reusable/Link";
 import ControlledPopup from "./ControlledPopup";
+import awardsImage from "../assets/images/awards.png";
 
 const FooterRight = styled.div`
   display: flex;
@@ -187,6 +188,7 @@ const Footer = React.forwardRef(({ state, className }, forwardRef) => {
             </div> */}
                     </div>
                     <div id="review_widget"></div>
+                    <img src={awardsImage} class="awards-image desktop"></img>
                     <FooterRight className={"footer-right"}>
                         <Link className={"primary"} href="/careers/">
                             Careers
@@ -211,6 +213,26 @@ Footer.propTypes = {
 };
 
 export default styled(Footer)`
+&.homepage {
+    .awards-image {
+        display: block;
+        position: fixed;
+        bottom: 50px;
+        right: 50px;
+        width: 100px;
+
+        @media(max-width: 991.98px) {
+            position: relative;
+            bottom: 0;
+            right: 0;
+        }
+    }
+}
+.awards-image {
+    display: none;
+}
+
+
 position: fixed !important;
   bottom: 0;
   padding-top: ${size(10)};

@@ -12,11 +12,10 @@ const WidgetStyle = () => <Global styles={css`
     position:absolute;
 	bottom:0;
 	left:50px;
-    @media (max-width: 1024px) {
+    @media (max-width: 991.98px) {
         position: relative;
-        max-width:350px;
         left:0;
-        margin-bottom: 20px;
+        margin-bottom: 0px;
     }
 }
 
@@ -123,10 +122,7 @@ div.grw-review-content .rm-link{
     min-width: 450px;
 	margin-left:30px;
 	overflow: hidden;
-    @media (max-width: 1024px) {
-        min-width: 320px;
-        margin:0 15px
-    }
+    
     @media (max-width: 370px) {
         min-width: 280px;
         width: 280px;
@@ -144,9 +140,7 @@ div.grw-review-content .rm-link{
 	width: 450px;
 	position: relative;
 	overflow: hidden;
-    @media (max-width: 1024px) {
-        width: 320px;
-    }
+    
     @media (max-width: 370px) {
         width: 280px;
     }
@@ -171,10 +165,10 @@ div.grw-review-content .rm-link{
     display:flex;
     flex-direction:row-reverse;
 	padding:0px;
-    @media (max-width: 1024px) {
+    @media (max-width: 991.98px) {
         flex-direction:column;
     }
-    @media (min-width: 1024px) {
+    @media (min-width: 991.98px) {
         align-items: center;
     justify-content: center;
     }
@@ -236,8 +230,8 @@ div.grw-review-content .rm-link{
 	color:#fff;
 }
 .grw-business-footer {
-    @media (max-width: 1024px) {
-        margin-top: 20px;
+    @media (max-width: 991.98px) {
+        margin-top: 0px;
     }
 }
 

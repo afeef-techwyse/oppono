@@ -656,7 +656,7 @@ const HomeSlider = ({ className, active = false, state, actions, link }) => {
                     </Container>
                 ) : null}
             </div>
-            <Footer ref={footer} />
+            <Footer ref={footer} className="homepage" />
         </div>
     );
 };
@@ -682,7 +682,7 @@ export default styled(connect(HomeSlider))`
     height: 100%;
     flex-direction: column;
     z-index: 0;
-    @media (min-width: 575.98px) {
+    @media (min-width: 991.98px) {
 			margin-top: 3rem;
       position: absolute;
       top: 0;

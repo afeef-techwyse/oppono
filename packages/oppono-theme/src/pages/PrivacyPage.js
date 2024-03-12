@@ -24,7 +24,7 @@ const TermsPage = ({ className, link, libraries, actions, state }) => {
     }, []);
     return (
         <div className={classnames(className)}>
-            <Header state={state} hasSubMenu={false} />
+            <Header state={state} hasSubMenu={false} className="small" />
             <Container className={"privacy-page-wrapper"}>
                 {/*<h1 className={'primary'}>Privacy Policy</h1>*/}
                 <Html2React html={post.content.rendered} />
@@ -37,7 +37,7 @@ const TermsPage = ({ className, link, libraries, actions, state }) => {
 export default styled(connect(TermsPage))`
   padding-top: ${size(120)};
   padding-bottom: ${size(120)};
-
+  flex-wrap: wrap;
   min-height: calc(var(--vh, 1vh) * 100);
   position: relative;
   display: flex;
@@ -45,9 +45,13 @@ export default styled(connect(TermsPage))`
   align-items: center;
 
   .container {
-    max-width: 75%;
+    max-width: 85%;
     margin: 0 auto;
     color: rgb(191, 182, 180) !important;
+    @media (max-width: 1200px) {
+        max-width: 100%;
+      }
+
     @media (max-width: 575px) {
       max-width: 97%;
     }
