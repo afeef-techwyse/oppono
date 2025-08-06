@@ -1,0 +1,17 @@
+stages:
+  - deploy
+
+deploy_to_ec2:
+  stage: deploy
+  only:
+    - main
+  script:
+    - mkdir -p ~/.ssh
+    - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh-keyscan -H "$EC2_HOST" >> ~/.ssh/known_hosts
+
+    - ssh $EC2_USER@$EC2_HOST << 'EOF'
+        cd $EC2_PATH
+        git pull origin main
+      EOF
